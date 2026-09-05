@@ -173,7 +173,7 @@ introduced. Current normative schemas, version constants and commands are unchan
 [worked design cases](../research/0053-project-attribute-design-cases.md) are expected
 outcomes for future tests, not claims of implemented support.
 
-Execute [TC-1303](task-1303-validate-project-defined-requirement-attributes.yaml) for
+Execute [TC-1303](closed/task-1303-validate-project-defined-requirement-attributes.yaml) for
 contracts/model/schema validation first. Then
 [TC-1304](task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
 formatting/trace independently of

@@ -14,7 +14,7 @@ def read(path):
         if not match or match[1] in values:
             raise ValueError('invalid or duplicate version declaration: ' + line)
         values[match[1]] = match[2]
-    required = {'WORK_SOURCE', 'WORK_SET', 'WORK_ARTIFACT', 'WORK_ANALYSIS', 'WORK_VERSION', 'WORK_CONTRACT', 'SARIF_VERSION', 'SOURCE_CUSTOM', 'SOURCE_YAML', 'SUITE_VERSION', 'REQUIREMENT_ARTIFACT', 'IMPORT_FORMAT', 'LINK_ARTIFACT', 'PLAN_ARTIFACT', 'PLAN_SOURCE', 'VERIFICATION_ARTIFACT'} | {tool+suffix for tool in ['VALIDATE','FORMAT','TRACE','MIGRATE','COMPILE','LINK','PLAN','VERIFY'] for suffix in ['_VERSION','_CONTRACT']}
+    required = {'SOURCE_ATTRIBUTES','ATTRIBUTE_SCHEMA','VALIDATE_ATTRIBUTE_CONTRACT','WORK_SOURCE', 'WORK_SET', 'WORK_ARTIFACT', 'WORK_ANALYSIS', 'WORK_VERSION', 'WORK_CONTRACT', 'SARIF_VERSION', 'SOURCE_CUSTOM', 'SOURCE_YAML', 'SUITE_VERSION', 'REQUIREMENT_ARTIFACT', 'IMPORT_FORMAT', 'LINK_ARTIFACT', 'PLAN_ARTIFACT', 'PLAN_SOURCE', 'VERIFICATION_ARTIFACT'} | {tool+suffix for tool in ['VALIDATE','FORMAT','TRACE','MIGRATE','COMPILE','LINK','PLAN','VERIFY'] for suffix in ['_VERSION','_CONTRACT']}
     if not required <= values.keys():
         raise ValueError('missing declarations: '+str(sorted(required-values.keys())))
     return values

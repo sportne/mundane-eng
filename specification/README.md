@@ -70,3 +70,5 @@ explicit contract update and applicable compatibility notes.
 - [Work items 0.1](0018-work-items-0.1.md)
 
 - [YAML work items 0.2](0019-work-items-yaml-0.2.md)
+
+- [Project attributes and YAML 0.4](0020-project-attributes-yaml-0.4.md)

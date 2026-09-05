@@ -307,3 +307,10 @@ work-yaml-verify: native-work
 	scripts/check-work-yaml.sh
 
 verify: work-yaml-verify
+
+.PHONY: attribute-validate-verify
+attribute-validate-verify: native-validator
+	scripts/check-attribute-schema.sh
+	python3 scripts/check-attributes.py
+
+verify: attribute-validate-verify

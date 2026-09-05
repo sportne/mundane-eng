@@ -74,7 +74,7 @@ public final class SemanticArtifact {
     }
 
     public static boolean operational(Interpreter.Diagnostic diagnostic) {
-        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files");
+        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files") || diagnostic.code().equals("attribute-schema-unavailable");
     }
 
     private static Map<String, Object> values(Interpreter.Requirement r) {

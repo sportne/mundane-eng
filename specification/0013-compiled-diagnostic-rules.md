@@ -52,3 +52,10 @@ new rule identifier. Source contracts remain the authority for validity.
 | yaml-schema | A YAML key, collection, scalar type or required structural element violates the requirements profile. |
 | yaml-syntax | YAML parsing fails. |
 | yaml-version | The root format identifier is unsupported. |
+
+## Project attribute source rules
+
+YAML 0.4 adds attribute-schema-unavailable (input), attribute-schema-invalid,
+attribute-schema-duplicate, attribute-schema-required, attribute-schema-mismatch,
+attribute-unknown, attribute-value and attribute-required (source). These are errors;
+[0020](0020-project-attributes-yaml-0.4.md) defines their locations and suppression.

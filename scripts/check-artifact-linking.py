@@ -15,7 +15,7 @@ ISOLATED=ROOT/'build/artifact-only-classes'
 if ISOLATED.exists():shutil.rmtree(ISOLATED)
 ISOLATED.mkdir(parents=True)
 # Compile only the serialized linker boundary; unrelated source adapters are not dependencies.
-subprocess.run(['javac','--release','21','-d',str(ISOLATED)]+[str(p) for p in sorted((ROOT/'src/main/java/engineering/artifacts').glob('*.java'))]+[str(ROOT/'build/maintained/generated/mundanereq/Versions.java')],check=True)
+subprocess.run(['javac','--release','21','-d',str(ISOLATED)]+[str(p) for p in sorted(list((ROOT/'src/main/java/engineering/artifacts').glob('*.java'))+list((ROOT/'src/main/java/mundane').rglob('*.java')))]+[str(ROOT/'build/maintained/generated/mundanereq/Versions.java')],check=True)
 COMMANDS=[['java','-cp',str(ISOLATED),'engineering.artifacts.LinkMain'],[str(NATIVE)]]
 
 

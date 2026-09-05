@@ -39,7 +39,7 @@ public final class Sarif {
         Map<String,Object> run = object("tool",object("driver",object("name","mundanereq-validate","version",Versions.VALIDATE_VERSION,
                         "rules",rules.stream().map(id->object("id",id,"defaultConfiguration",object("level","error"))).toList())),
                 "columnKind","unicodeCodePoints", "results", results, "invocations", List.of(invocation),
-                "properties",object("sourceContract",format.contract,"commandContract",Versions.VALIDATE_CONTRACT,
+                "properties",object("sourceContract",format.contract,"commandContract",format==SourceFormat.YAML_04?Versions.VALIDATE_ATTRIBUTE_CONTRACT:Versions.VALIDATE_CONTRACT,
                         "sourceSetValid",result.valid(),"syntaxComplete",result.syntaxComplete()));
         return JsonOutput.encode(object("$schema","https://docs.oasis-open.org/sarif/sarif/v2.1.0/errata01/os/schemas/sarif-schema-2.1.0.json",
                 "version",Versions.SARIF_VERSION,"runs",List.of(run)));

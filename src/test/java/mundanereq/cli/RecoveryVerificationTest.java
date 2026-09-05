@@ -41,7 +41,7 @@ public final class RecoveryVerificationTest {
         require(ids(parse(bad.replace("  Shall respond.", "  requirement FAKE\n  title: Fake\n  statement:\n    Shall fake.\n  end requirement")+"\n"+good)).equals(Set.of("GOOD")), "body lookalike excluded");
         for (SourceFormat format : SourceFormat.values()) {
             var broken = Interpreter.interpretSources(List.of(new Interpreter.Source("broken",new byte[]{(byte)0xff}),
-                    source("neighbor", format==SourceFormat.CUSTOM_02 ? good : "{\"format\":\"mundanereq-yaml-0.3\",\"requirements\":[{\"id\":\"GOOD\",\"title\":\"Good\",\"statement\":\"Shall respond.\",\"decomposes\":[\"ABSENT\"]}]}\n")), format);
+                    source("neighbor", format==SourceFormat.CUSTOM_02 ? good : "{\"format\":\""+format.contract+"\",\"requirements\":[{\"id\":\"GOOD\",\"title\":\"Good\",\"statement\":\"Shall respond.\",\"decomposes\":[\"ABSENT\"]}]}\n")), format);
             require(!broken.syntaxComplete() && broken.diagnostics().size()==1 && broken.diagnostics().getFirst().code().equals("invalid-utf8"), "decode failure prevents cascades");
         }
         var semantic = parse(record("A").replace("end requirement", "decomposes: ABSENT\nend requirement"));

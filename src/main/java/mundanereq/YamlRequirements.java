@@ -28,15 +28,18 @@ final class YamlRequirements {
     private final String file;
     private final List<Interpreter.Diagnostic> diagnostics;
     private final int initialCount;
+    private final SourceFormat format;
+    private final AttributeSchema schema;
 
-    private YamlRequirements(String file, List<Interpreter.Diagnostic> diagnostics) {
+    private YamlRequirements(String file, List<Interpreter.Diagnostic> diagnostics,SourceFormat format,AttributeSchema schema) {
+        this.format=format;this.schema=schema;
         this.file = file;
         this.diagnostics = diagnostics;
         initialCount = diagnostics.size();
     }
 
-    static List<Interpreter.ParsedRequirement> parse(Interpreter.Source source, List<Interpreter.Diagnostic> diagnostics) {
-        return new YamlRequirements(source.file(), diagnostics).read(new String(source.bytes(), StandardCharsets.UTF_8));
+    static List<Interpreter.ParsedRequirement> parse(Interpreter.Source source, List<Interpreter.Diagnostic> diagnostics,SourceFormat format,AttributeSchema schema) {
+        return new YamlRequirements(source.file(), diagnostics,format,schema).read(new String(source.bytes(), StandardCharsets.UTF_8));
     }
 
     private List<Interpreter.ParsedRequirement> read(String text) {
@@ -46,9 +49,19 @@ final class YamlRequirements {
         try {
             int depth = 0;
             int documents = 0;
+            var containers=new java.util.ArrayDeque<int[]>();
             // Inspect events before composition: aliases/tags and excessive nesting never construct a graph.
             for (Event event : new Parse(settings).parseString(text)) {
                 String failure = null;
+                if(event instanceof ScalarEvent||event instanceof CollectionStartEvent) {
+                    if(!containers.isEmpty()) {
+                        int[] parent=containers.peek();
+                        if(format==SourceFormat.YAML_04&&parent[0]==1&&parent[1]%2==0&&event instanceof ScalarEvent scalar&&scalar.getValue().equals("<<"))failure="merge keys are prohibited";
+                        parent[1]++;
+                    }
+                    if(event instanceof CollectionStartEvent)containers.push(new int[]{event instanceof MappingStartEvent?1:0,0});
+                }
+                if(event instanceof CollectionEndEvent)containers.pop();
                 if (event instanceof DocumentStartEvent start) {
                     if (++documents > 1 || start.getSpecVersion().isPresent() || !start.getTags().isEmpty()) {
                         failure = "exactly one document and no directives are permitted";
@@ -77,10 +90,17 @@ final class YamlRequirements {
                 return records;
             }
             Node root = composed.get();
-            Map<String, Node> doc = mapping(root, Set.of("format", "requirements"), Set.of("format", "requirements"));
+            Map<String, Node> doc = mapping(root, format==SourceFormat.YAML_04?Set.of("format","requirements","attributeSchema"):Set.of("format", "requirements"), Set.of("format", "requirements"));
             String format = scalar(doc.get("format"), false, false);
-            if (format != null && !SourceFormat.YAML_03.contract.equals(format)) {
-                error(doc.get("format"), "yaml-version", "expected " + SourceFormat.YAML_03.contract);
+            if (format != null && !this.format.contract.equals(format)) {
+                error(doc.get("format"), "yaml-version", "expected " + this.format.contract);
+            }
+            if(this.format==SourceFormat.YAML_04) {
+                if(schema==null&&doc.containsKey("attributeSchema"))error(doc.get("attributeSchema"),"attribute-schema-required","supply the explicit --attribute-schema option");
+                if(schema!=null) {
+                    String selected=scalar(doc.get("attributeSchema"),false,true);
+                    if(!schema.name().equals(selected))error(doc.getOrDefault("attributeSchema",root),"attribute-schema-mismatch","document must name the explicitly selected schema "+schema.name());
+                }
             }
             List<Node> nodes = sequence(doc.get("requirements"));
             if (nodes.size() > 10000) {
@@ -92,7 +112,7 @@ final class YamlRequirements {
             for (Node node : nodes) {
                 int startErrors = diagnostics.size();
                 Map<String, Node> item = mapping(node,
-                        Set.of("id", "title", "statement", "allocation", "source", "rationale", "decomposes"),
+                        this.format==SourceFormat.YAML_04?Set.of("id","title","statement","allocation","source","rationale","decomposes","attributes"):Set.of("id", "title", "statement", "allocation", "source", "rationale", "decomposes"),
                         Set.of("id", "title", "statement"));
                 String id = id(item.get("id"));
                 String title = scalar(item.get("title"), false, true);
@@ -122,12 +142,15 @@ final class YamlRequirements {
                         locations.add(new Interpreter.RelationshipLocation(value, mark.getLine() + 1, mark.getColumn() + 1));
                     }
                 }
+                Map<String,String> attributes=new LinkedHashMap<>();
+                Map<String,Interpreter.AttributeLocation> attributeLocations=new LinkedHashMap<>();
+                if(this.format==SourceFormat.YAML_04)readAttributes(node,item.get("attributes"),attributes,attributeLocations);
                 if (diagnostics.size() == startErrors) {
                     var mark = item.get("id").getStartMark().orElseThrow();
                     records.add(new Interpreter.ParsedRequirement(
-                            new Interpreter.Requirement(id, title, allocation, statement, rationale, origin, targets),
+                            new Interpreter.Requirement(id, title, allocation, statement, rationale, origin, targets,attributes),
                             new Interpreter.Location(file, mark.getLine() + 1, mark.getColumn() + 1), locations,
-                            new Interpreter.RequirementOrigin(id, span(node), fieldSpans(item), referenceSpans)));
+                            new Interpreter.RequirementOrigin(id, span(node), fieldSpans(item), referenceSpans,attributeLocations)));
                 }
             }
         } catch (LimitReached ignored) {
@@ -139,6 +162,31 @@ final class YamlRequirements {
         }
         return records;
     }
+
+    private void readAttributes(Node record,Node node,Map<String,String> values,Map<String,Interpreter.AttributeLocation> locations) {
+        if(schema==null) {if(node!=null)error(node,"attribute-schema-required","attributes require an explicitly selected project schema");return;}
+        Map<String,Object> declarations=mundane.attributes.AttributeRules.map(schema.definition().get("attributes"),"/attributes");
+        Set<String> present=new HashSet<>();
+        if(node!=null) {
+            if(!(node instanceof MappingNode mapping)||mapping.getValue().isEmpty()) {error(node,"attribute-value","attributes must be a nonempty mapping; omit it when absent");return;}
+            for(NodeTuple tuple:((MappingNode)node).getValue()) {
+                Node key=tuple.getKeyNode(),value=tuple.getValueNode();
+                if(!(key instanceof ScalarNode name)||!Tag.STR.equals(key.getTag())) {error(key,"attribute-unknown","attribute names must be strings");continue;}
+                String n=name.getValue();
+                if(!present.add(n)) {error(key,"yaml-duplicate-key","duplicate attribute "+n);continue;}
+                if(!declarations.containsKey(n)) {error(key,"attribute-unknown","undeclared attribute "+n);continue;}
+                try {
+                    if(!(value instanceof ScalarNode text)||!Tag.STR.equals(value.getTag())||text.isPlain())throw new IllegalArgumentException("attribute values must be quoted or block strings");
+                    String v=mundane.attributes.AttributeRules.text(text.getValue(),n);
+                    var declaration=mundane.attributes.AttributeRules.map(declarations.get(n),n);
+                    if(declaration.get("type").equals("enum")&&!((List<?>)declaration.get("values")).contains(v))throw new IllegalArgumentException("value is not an exact enum member");
+                    values.put(n,v);locations.put(n,new Interpreter.AttributeLocation(span(key),span(value)));
+                }catch(IllegalArgumentException e){error(value,"attribute-value",e.getMessage());}
+            }
+        }
+        for(var declaration:declarations.entrySet())if(Boolean.TRUE.equals(mundanereqValue(declaration.getValue(),"required"))&&!present.contains(declaration.getKey()))error(record,"attribute-required","missing required attribute "+declaration.getKey());
+    }
+    private static Object mundanereqValue(Object declaration,String key) {return mundane.attributes.AttributeRules.map(declaration,"").get(key);}
 
     private SourceSpan span(Node node) {
         var start = node.getStartMark().orElseThrow();

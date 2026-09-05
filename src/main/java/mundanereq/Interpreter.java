@@ -54,8 +54,12 @@ public final class Interpreter {
             List<ContentBlock> statement,
             List<ContentBlock> rationale,
             String source,
-            Set<String> decomposes) {
+            Set<String> decomposes, Map<String,String> attributes) {
+        public Requirement(String id,String title,String allocation,List<ContentBlock> statement,List<ContentBlock> rationale,String source,Set<String> decomposes) {
+            this(id,title,allocation,statement,rationale,source,decomposes,Map.of());
+        }
         public Requirement {
+            attributes=Map.copyOf(attributes);
             statement = List.copyOf(statement);
             rationale = rationale == null ? null : List.copyOf(rationale);
             decomposes = Set.copyOf(decomposes);
@@ -64,14 +68,18 @@ public final class Interpreter {
 
     /** Retained syntax provenance; independent from semantic requirement values. */
     public record RequirementOrigin(String id, SourceSpan record,
-            Map<String, List<SourceSpan>> fields, Map<String, SourceSpan> references) {
+            Map<String, List<SourceSpan>> fields, Map<String, SourceSpan> references, Map<String,AttributeLocation> attributes) {
+        public RequirementOrigin(String id,SourceSpan record,Map<String,List<SourceSpan>> fields,Map<String,SourceSpan> references) {this(id,record,fields,references,Map.of());}
         public RequirementOrigin {
+            attributes=Map.copyOf(attributes);
             Map<String, List<SourceSpan>> copied = new HashMap<>();
             fields.forEach((key, value) -> copied.put(key, List.copyOf(value)));
             fields = Map.copyOf(copied);
             references = Map.copyOf(references);
         }
     }
+
+    public record AttributeLocation(SourceSpan name,SourceSpan value) {}
 
     record ParsedRequirement(
             Requirement requirement, Location location, List<RelationshipLocation> relationshipLocations,
@@ -108,7 +116,10 @@ public final class Interpreter {
             List<Diagnostic> diagnostics,
             int fileCount,
             List<RequirementOrigin> origins,
-            boolean syntaxComplete) {
+            boolean syntaxComplete, AttributeSchema attributeSchema) {
+        public Result(List<Requirement> requirements,Map<String,Requirement> byId,Map<String,Set<String>> outgoing,List<Diagnostic> diagnostics,int fileCount,List<RequirementOrigin> origins,boolean syntaxComplete) {
+            this(requirements,byId,outgoing,diagnostics,fileCount,origins,syntaxComplete,null);
+        }
         public Result(List<Requirement> requirements, Map<String, Requirement> byId,
                 Map<String, Set<String>> outgoing, List<Diagnostic> diagnostics, int fileCount,
                 List<RequirementOrigin> origins) {
@@ -187,7 +198,7 @@ public final class Interpreter {
             try {
                 var attributes = Files.readAttributes(file, BasicFileAttributes.class, LinkOption.NOFOLLOW_LINKS);
                 byte[] bytes;
-                if (format == SourceFormat.YAML_03) {
+                if (format != SourceFormat.CUSTOM_02) {
                     try (var input = Files.newInputStream(file)) {
                         bytes = input.readNBytes(YamlRequirements.MAX_BYTES + 1);
                     }
@@ -256,7 +267,9 @@ public final class Interpreter {
         return interpretSources(inputSources, SourceFormat.CUSTOM_02);
     }
 
-    public static Result interpretSources(List<Source> inputSources, SourceFormat format) {
+    public static Result interpretSources(List<Source> inputSources, SourceFormat format) {return interpretSources(inputSources,format,null);}
+    public static Result interpretSources(List<Source> inputSources, SourceFormat format,AttributeSchema schema) {
+        if(schema!=null&&!schema.valid())return new Result(List.of(),Map.of(),Map.of(),schema.diagnostics(),inputSources.size(),List.of(),false,schema);
         if (inputSources.isEmpty()) {
             return emptyResult(
                     List.of(diagnostic(".", 1, 1, "no-source-files", "no " + format.suffix + " source files were selected")),
@@ -269,15 +282,15 @@ public final class Interpreter {
         List<Diagnostic> diagnostics = new ArrayList<>();
 
         for (Source source : sources) {
-            if (format == SourceFormat.YAML_03 && source.bytes().length > YamlRequirements.MAX_BYTES) {
+            if (format != SourceFormat.CUSTOM_02 && source.bytes().length > YamlRequirements.MAX_BYTES) {
                 diagnostics.add(diagnostic(source.file(), 1, 1, "yaml-limit", "source exceeds 8 MiB"));
                 continue;
             }
             Decoded decoded = decode(source);
             diagnostics.addAll(decoded.diagnostics());
             if (decoded.document() == null) continue;
-            if (format == SourceFormat.YAML_03) {
-                parsedRequirements.addAll(YamlRequirements.parse(source, diagnostics));
+            if (format != SourceFormat.CUSTOM_02) {
+                parsedRequirements.addAll(YamlRequirements.parse(source, diagnostics,format,schema));
                 continue;
             }
             parsedRequirements.addAll(new Parser(decoded.document()).parse(diagnostics));
@@ -325,7 +338,7 @@ public final class Interpreter {
         }
         sortDiagnostics(diagnostics);
         return new Result(requirements, byId, outgoing, diagnostics, sources.size(),
-                parsedRequirements.stream().map(ParsedRequirement::origin).toList(), !incomplete);
+                parsedRequirements.stream().map(ParsedRequirement::origin).toList(), !incomplete,schema);
     }
 
     private static Decoded decode(Source source) {

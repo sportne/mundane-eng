@@ -24,7 +24,7 @@ public final class ValidatorMain {
 
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments);
+            SourceInvocation selected = SourceInvocation.parse(arguments,true);
             return CommandOutput.finish(out, err, runSelected(selected.arguments(), out, err, selected.format()));
         } catch (IllegalArgumentException exception) {
             err.println(exception.getMessage());
@@ -33,9 +33,10 @@ public final class ValidatorMain {
     }
 
     private static int runSelected(String[] arguments, PrintStream out, PrintStream err, SourceFormat sourceFormat) {
+        AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3");
+            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {
@@ -81,15 +82,18 @@ public final class ValidatorMain {
             for (Path input:inputs) if (!input.toAbsolutePath().normalize().startsWith(root)) {
                 throw new IllegalArgumentException("input is outside --root: "+input);
             }
+            mundanereq.AttributeSchema schema=attributes.schema()==null?null:mundanereq.AttributeSchema.read(attributes.schema(),root);
             Interpreter.Selection selected=Interpreter.selectInputs(inputs,sourceFormat);
-            Interpreter.Result result=selected.valid() ? Interpreter.interpretSources(selected.sources(),sourceFormat)
+            Interpreter.Result result=selected.valid() ? Interpreter.interpretSources(selected.sources(),sourceFormat,schema)
                     : new Interpreter.Result(List.of(),java.util.Map.of(),java.util.Map.of(),selected.diagnostics(),selected.sources().size());
             int status=result.diagnostics().stream().anyMatch(ValidatorMain::isOperational) ? 2 : result.valid() ? 0 : 1;
             out.writeBytes(Sarif.emit(root,selected.sources(),result,sourceFormat,status));
             return status;
         }
         if (root!=null) throw new IllegalArgumentException("--root requires --output=sarif");
-        Interpreter.Result result = Interpreter.interpretInputs(inputs, sourceFormat);
+        mundanereq.AttributeSchema schema=attributes.schema()==null?null:mundanereq.AttributeSchema.read(attributes.schema(),null);
+        Interpreter.Selection selection=Interpreter.selectInputs(inputs,sourceFormat);
+        Interpreter.Result result=selection.valid()?Interpreter.interpretSources(selection.sources(),sourceFormat,schema):new Interpreter.Result(List.of(),java.util.Map.of(),java.util.Map.of(),selection.diagnostics(),selection.sources().size());
         if (!result.diagnostics().isEmpty()) {
             result.diagnostics().forEach(diagnostic -> err.println(render(diagnostic)));
             return result.diagnostics().stream().anyMatch(ValidatorMain::isOperational) ? 2 : 1;
@@ -107,7 +111,7 @@ public final class ValidatorMain {
     }
 
     private static boolean isOperational(Interpreter.Diagnostic diagnostic) {
-        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files");
+        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files") || diagnostic.code().equals("attribute-schema-unavailable");
     }
 
     private static String render(Interpreter.Diagnostic diagnostic) {

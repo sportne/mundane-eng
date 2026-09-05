@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Project attribute declaration 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "name",
+    "attributes"
+  ],
+  "properties": {
+    "format": {
+      "const": "mundanereq-attribute-schema-0.1"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$"
+    },
+    "attributes": {
+      "type": "object",
+      "minProperties": 1,
+      "maxProperties": 128,
+      "propertyNames": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 64,
+        "pattern": "^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$",
+        "allOf": [
+          {
+            "not": {
+              "enum": [
+                "id",
+                "title",
+                "allocation",
+                "statement",
+                "rationale",
+                "source",
+                "decomposes",
+                "format",
+                "requirements",
+                "attributes",
+                "attribute-schema"
+              ]
+            }
+          },
+          {
+            "not": {
+              "pattern": "^(mreq-|mundane-)"
+            }
+          }
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "type",
+          "required",
+          "description"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "text",
+              "enum"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "not": {
+              "pattern": "[\\x00-\\x1f\\x7f-\\x9f]"
+            }
+          },
+          "values": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 256,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "not": {
+                "pattern": "[\\x00-\\x1f\\x7f-\\x9f]"
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "type": {
+                  "const": "enum"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "values"
+              ]
+            },
+            "else": {
+              "not": {
+                "required": [
+                  "values"
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

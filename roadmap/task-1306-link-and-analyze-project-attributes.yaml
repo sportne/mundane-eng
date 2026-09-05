@@ -65,3 +65,10 @@ body: |2+
   - [TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml)
   - [Attribute design](../research/0052-project-attribute-schema-decision.md)
   - [Worked cases](../research/0053-project-attribute-design-cases.md)
+
+  ## Planning refinement
+
+  TC-1601–1609 introduced a work-item consumer after this card was written. Include
+  strict import and typed-link regression coverage for work items referencing
+  requirement output 0.2, without introducing attribute-based graph inference or
+  adding requirement source-parser dependencies to work-item analysis.

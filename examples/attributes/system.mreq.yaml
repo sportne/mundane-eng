@@ -1,0 +1,15 @@
+format: "mundanereq-yaml-0.4"
+attributeSchema: "logger-metadata"
+requirements:
+  - id: "SYS-001"
+    title: "Record measurements"
+    statement: "The logger shall record temperature measurements."
+    # Classification is descriptive, not an assessment result.
+    attributes:
+      discipline: "software"
+      owner-team: "Logger firmware"
+  - id: "SYS-002"
+    title: "Supply power"
+    statement: "The power supply shall power the logger."
+    attributes:
+      discipline: "electronics"
