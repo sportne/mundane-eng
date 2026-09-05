@@ -80,7 +80,7 @@ with tempfile.TemporaryDirectory(prefix='work-mutations-') as tmp:
         folder=root/name;folder.mkdir();java=folder/f'{cls}.java';java.write_text(text.replace(old,new))
         javac=subprocess.run(['javac','--release','21','-Xlint:all','-Werror','-cp',str(CLASSES),'-d',str(folder),str(java)],capture_output=True,timeout=30)
         assert javac.returncode==0,(name,javac.stderr)
-        command=['java','-cp',str(folder)+':'+str(CLASSES),'engineering.work.WorkMain']
+        command=['java','-cp',str(folder)+':'+str(CLASSES)+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar'),'engineering.work.WorkMain']
         actual=signature(*run(root,args,command));assert actual!=expected,(name,'survived')
         results.append({'mutation':name,'compiled':True,'baseline':baseline,'mutant':actual,'killed':True})
     results=json.loads(json.dumps(results))

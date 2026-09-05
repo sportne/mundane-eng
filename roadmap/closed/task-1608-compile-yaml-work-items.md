@@ -3,7 +3,7 @@
 ```json
 {
   "format": "mundane-work-source-0.1",
-  "status": "Planned",
+  "status": "Complete",
   "dependencies": [
     "TC-1607"
   ],
@@ -50,5 +50,11 @@ The design enables source implementation; implementation enables migration. Stop
 
 ## References
 
-- [Roadmap](0001-initial-roadmap.md)
-- [Previous source decision](../research/0055-work-item-source-decision.md)
+- [Roadmap](../0001-initial-roadmap.md)
+- [Previous source decision](../../research/0055-work-item-source-decision.md)
+
+## Completion evidence
+
+[Research 0061](../../research/0061-work-item-yaml-compiler-verification.md) records
+JVM/native profile and legacy compatibility checks, source points, schema validation,
+parser-free consumers, seeded regressions and killed mutations.

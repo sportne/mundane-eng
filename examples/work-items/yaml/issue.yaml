@@ -1,0 +1,7 @@
+format: mundane-work-yaml-0.2
+id: ISSUE-YAML
+kind: issue
+title: Review the migration example
+status: Open
+body: |
+  This is an illustrative issue, not a reported repository defect.

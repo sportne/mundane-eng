@@ -1,0 +1,19 @@
+# Work-item-specific YAML, independent of requirements syntax.
+format: mundane-work-yaml-0.2
+id: TC-YAML
+kind: task
+title: Review preformatted narrative
+status: Ready
+dependencies: []
+relations:
+  - relation: addresses
+    scope: work
+    kind: work-item
+    target: ISSUE-YAML
+body: |-
+  ## Question
+
+  Preserve this text as one string:
+      Input -> Compiler -> Artifact
+  # This is content, not a YAML comment.
+  status: Complete is also ordinary content here.

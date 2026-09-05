@@ -30,7 +30,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 
 ## Snapshot provenance
 
-- Work artifact: build/work-example.json; SHA-256 95973fd3046a4d99f5e282fb8112adfe7dffa3980e6368ea10487c5a1bfd6ea8
+- Work artifact: build/work-example.json; SHA-256 12fea10d11d0541f51239e1590b7cffef5b50d19ccce3da448beacc01b605af1
 - Import declaration: [examples/work-items/imports.json](./examples/work-items/imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
 - Card selection: [examples/work-items/work-items.json](./examples/work-items/work-items.json#L1); SHA-256 933c9191b6dbd7b2f57bc5fada24b7f702b76985697f3f9bd5156ad4164fe26e
 - Source: [examples/work-items/issue.work.md](./examples/work-items/issue.work.md#L1); SHA-256 3ad9e49b6d55fb188fb0bafd37c8d7988fcef7a2356ea6851d2de575c099c09d

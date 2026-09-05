@@ -1,6 +1,8 @@
 # Work-item source, compilation and analysis 0.1
 
-Status: Maintained experimental contract, implemented through TC-1603–1606.
+Status: Maintained legacy source/output contract, implemented through TC-1603–1606.
+New authoring uses [YAML work items 0.2](0019-work-items-yaml-0.2.md); this
+contract remains the compatibility definition for Markdown source and old artifacts.
 
 Source: `mundane-work-source-0.1`; selection: `mundane-work-set-0.1`;
 compiled: `mundane-work-items-0.1`; analysis: `mundane-work-analysis-0.1`.

@@ -275,7 +275,7 @@ verify: workflow-corpus-verify
 
 .PHONY: native-work work-verify
 native-work: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
 	$(BUILD_ROOT)/mundane-work --version
 
 work-verify: native-work
@@ -299,3 +299,9 @@ work-regression-verify: native-work
 	python3 experiments/0034-work-items/regressions.py
 
 verify: work-regression-verify
+
+.PHONY: work-yaml-verify
+work-yaml-verify: native-work
+	scripts/check-work-yaml.sh
+
+verify: work-yaml-verify

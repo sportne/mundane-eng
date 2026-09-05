@@ -9,7 +9,7 @@ import tempfile
 
 ROOT=Path(__file__).resolve().parents[1]
 NATIVE=str(Path(sys.argv[1]).resolve())
-COMMANDS=[['java','-cp',str(ROOT/'build/maintained/classes'),'engineering.work.WorkMain'],[NATIVE]]
+COMMANDS=[['java','-cp',str(ROOT/'build/maintained/classes')+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar'),'engineering.work.WorkMain'],[NATIVE]]
 
 def invoke(root,args,status=0):
     runs=[subprocess.run(c+args,cwd=root,capture_output=True,timeout=30) for c in COMMANDS]
