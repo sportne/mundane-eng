@@ -218,3 +218,9 @@ linking, prerequisite analysis and generated index. The repository now uses thos
 tools for its own cards. [Research 0059](../research/0059-work-item-backlog-verification.md)
 records migration and clean verification; current status remains in source cards
 and their derived view.
+
+## YAML work-item continuation
+
+TC-1607 -> TC-1608 -> TC-1609 replaces the source-carrier decision with a YAML
+specification/schema, compiler support, then checked backlog migration. The completed
+TC-1601–1606 evidence remains historical. This chain is independent of TC-1303–1308.

@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Mundane work-item YAML 0.2 decoded structure",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "id",
+    "kind",
+    "title",
+    "status",
+    "body"
+  ],
+  "properties": {
+    "format": {
+      "const": "mundane-work-yaml-0.2"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "kind": {
+      "enum": [
+        "task",
+        "issue"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "type": "string"
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dependencies": {
+      "type": "array",
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "maxItems": 1000,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "relation",
+          "scope",
+          "kind",
+          "target"
+        ],
+        "properties": {
+          "relation": {
+            "enum": [
+              "addresses",
+              "relates-to",
+              "supersedes",
+              "evidence"
+            ]
+          },
+          "scope": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "kind": {
+            "enum": [
+              "work-item",
+              "requirement",
+              "verification-plan",
+              "verification-activity",
+              "resource"
+            ]
+          },
+          "target": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "relation": {
+                  "const": "evidence"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "scope": {
+                  "type": "null"
+                },
+                "kind": {
+                  "const": "resource"
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "scope": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+                },
+                "target": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+                },
+                "kind": {
+                  "enum": [
+                    "work-item",
+                    "requirement",
+                    "verification-plan",
+                    "verification-activity"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "relation": {
+                  "const": "supersedes"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "kind": {
+                  "const": "work-item"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "planning": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "stage": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "unlocks": {
+          "type": "string"
+        },
+        "statusNote": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "task"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "enum": [
+              "Ready",
+              "Planned",
+              "Conditional",
+              "In progress",
+              "Complete",
+              "Superseded"
+            ]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "status": {
+            "enum": [
+              "Open",
+              "Closed",
+              "Superseded"
+            ]
+          },
+          "dependencies": {
+            "maxItems": 0
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+# Task TC-1608: Compile YAML Work Items
+
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Planned",
+  "dependencies": [
+    "TC-1607"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "16",
+    "type": "Implementation",
+    "condition": "TC-1607",
+    "unlocks": "TC-1609",
+    "statusNote": ""
+  }
+}
+```
+
+## Question
+
+The structured Markdown carrier splits facts between a heading and JSON. A YAML document can expose the full record while retaining readable multiline prose.
+
+## Outcome
+
+Compile the selected YAML source profile through the existing work-item semantics and serialized consumers.
+
+## Work
+
+- Implement bounded node validation with source marks, duplicate-key detection and explicit profile selection.
+- Keep legacy source/artifact reading; propagate YAML locations through analysis/views and native builds.
+
+## Acceptance evidence
+
+- Public JVM/native fixtures cover literals, normalization, invalid YAML/schema/domain input and unchanged graph meanings.
+- Legacy source and serialized artifact checks, parser-free consumers and output failures remain covered.
+
+## Out of scope
+
+No new work-item lifecycle, inferred prose relationships, requirement attributes, remote tracker, general artifact serialization rule or narrative-section metamodel.
+
+## Compatibility and affected components
+
+Human-authored IDs and source remain authoritative. Requirements and verification plans keep their independent formats. Affected components: work-item specification/schema, compiler, serialized validation, fixtures, native build and backlog authoring helpers. Preserve existing graph meanings and historical evidence.
+
+## Completion decision
+
+The design enables source implementation; implementation enables migration. Stop or revise if migration loses narrative strings, breaks explicit IDs or requires generated source authority. Diagnose unsupported formats explicitly. No future stability promise is implied.
+
+## References
+
+- [Roadmap](0001-initial-roadmap.md)
+- [Previous source decision](../research/0055-work-item-source-decision.md)

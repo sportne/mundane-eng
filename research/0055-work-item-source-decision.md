@@ -2,6 +2,9 @@
 
 Date: 2026-09-05. TC-1602.
 
+Historical source-carrier decision, replaced by [Research 0060](0060-work-item-yaml-decision.md)
+under TC-1607. The original implementation evidence remains valid for source 0.1.
+
 Select a Markdown heading plus one strict JSON metadata block, followed by opaque
 Markdown prose. The heading alone owns ID/kind/title; metadata alone owns status
 and typed relationships. JSON is selected for nested links and explicit arrays
