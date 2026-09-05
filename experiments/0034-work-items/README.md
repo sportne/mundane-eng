@@ -18,3 +18,7 @@ or requirements attribute support is supplied by this compiler.
 TC-1604 adds strict typed imports and graph analysis. The analysis golden and
 public tests cover requirement/plan/activity/work-item scopes, prerequisites,
 supersession, invalid references/pins and execution without source-parser classes.
+
+TC-1605 adds a deterministic Markdown view with revalidated findings and escaped
+source-linked navigation. `golden/view.txt` stores expected Markdown bytes using
+the analysis root as link base; it is not a standalone file-relative web page.

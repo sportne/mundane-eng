@@ -167,7 +167,8 @@ It escapes authored text for Markdown/HTML safety; it does not render opaque bod
 Markdown as executable HTML. Links are root-relative paths encoded for Markdown;
 consumers should place output at the invocation root or supply that root as link base.
 Sources are not reread: output describes the compiled snapshots, not live file state.
-Reject incomplete/unknown/tampered analysis before rendering. Exit 0/1/2 has the same
+Reject incomplete/unknown/tampered analysis before rendering with
+invalid-work-analysis (or the underlying invalid embedded artifact/graph code). Exit 0/1/2 has the same
 boundary; generated content is marked derived, never a second status authority.
 
 Use independently declared current work source/output/analysis/CLI versions. No

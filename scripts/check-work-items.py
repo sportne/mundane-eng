@@ -142,3 +142,34 @@ raw=subprocess.check_output(COMMANDS[1]+['compile','--root','.','examples/work-i
 analysis=invoke(ROOT,['analyze','--root','.','--imports','examples/work-items/imports.json','build/work-example.json'])
 assert analysis==json.loads((ROOT/'experiments/0034-work-items/golden/analysis.json').read_text())
 print('PASS deterministic work analysis golden')
+
+# Rendering verifies the serialized findings before emitting any Markdown.
+with tempfile.TemporaryDirectory(prefix='work-view-') as directory:
+    root=Path(directory);source=root/'analysis.json'
+    source.write_text(json.dumps(analysis))
+    args=['view','--root','.','analysis.json']
+    def view(value,status=0):
+        source.write_text(json.dumps(value));results=[subprocess.run(c+args,cwd=root,capture_output=True,timeout=30) for c in COMMANDS]
+        assert all(r.returncode==status for r in results),[(r.returncode,r.stderr) for r in results]
+        assert results[0].stdout==results[1].stdout
+        if status:assert results[0].stdout==b''
+        return results[0].stdout
+    rendered=view(analysis)
+    assert rendered==(ROOT/'experiments/0034-work-items/golden/view.txt').read_bytes()
+    assert b'Derived work-item index' in rendered and b'[ISSUE-1]' in rendered and b'## Reverse navigation' in rendered
+    source.unlink();assert view(analysis)==rendered
+    for change in [lambda a:a.update(format='future'),lambda a:a.update(complete=False),lambda a:a.update(edges=[]),lambda a:a['findings'][0].update(status='Closed'),lambda a:a.update(resources=[{'path':'fake.md','sha256':'0'*64}]),lambda a:a['workArtifact']['artifact']['items'][0]['values'].update(status='bogus')]:
+        value=copy.deepcopy(analysis);change(value);view(value,1)
+    view([],1)
+    hostile=copy.deepcopy(analysis);hostile['workArtifact']['artifact']['items'][0]['values']['title']='<script>alert(1)</script> | [click](javascript:bad)'
+    safe=view(hostile);assert b'<script>' not in safe and b'javascript:bad)' in safe and b'&#60;script&#62;' in safe and b'&#124;' in safe and b'&#91;click&#93;' in safe
+    source.write_text(json.dumps(analysis))
+    for command in COMMANDS:
+        p=subprocess.Popen(command+args,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        # Small views may fit a pipe before it closes; force a larger valid title.
+        p.communicate(timeout=30);assert p.returncode==0
+        large=copy.deepcopy(analysis);large['workArtifact']['artifact']['items'][0]['values']['title']='X'*200000
+        source.write_text(json.dumps(large));p=subprocess.Popen(command+args,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        assert p.stdout.read(1);p.stdout.close();assert p.wait(timeout=30) in (2,-13);p.stderr.close()
+        source.write_text(json.dumps(analysis))
+print('PASS derived view: exact golden/rebuild, tampered-analysis rejection, hostile text escaping, parser-independent source links and actual broken output')

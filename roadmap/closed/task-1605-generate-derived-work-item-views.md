@@ -1,6 +1,6 @@
 # Task TC-1605: Generate Derived Work Item Views
 
-Status: Ready
+Status: Complete
 
 Roadmap stage: 16
 
@@ -49,6 +49,10 @@ conditional prerequisites as authored policy rather than pretend they are execut
 
 ## References
 
-- [Roadmap](0001-initial-roadmap.md)
-- [Ownership decision](../research/0037-requirement-and-assertion-ownership.md)
-- [Local imports](../specification/0014-local-artifact-imports-0.1.md)
+- [Roadmap](../0001-initial-roadmap.md)
+- [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
+- [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
+
+## Completion evidence
+
+Completed 2026-09-05. [Research 0058](../../research/0058-work-item-view-verification.md) records deterministic source-linked Markdown, recomputed findings, escaped/reverse navigation, golden/rebuild checks, tampered-input rejection and actual JVM/native output failures. TC-1606 is Ready.

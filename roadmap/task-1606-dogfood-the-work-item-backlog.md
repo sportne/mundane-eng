@@ -1,6 +1,6 @@
 # Task TC-1606: Dogfood the Work Item Backlog
 
-Status: Planned
+Status: Ready
 
 Roadmap stage: 16
 

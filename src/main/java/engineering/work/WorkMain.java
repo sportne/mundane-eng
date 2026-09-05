@@ -14,10 +14,10 @@ public final class WorkMain {
     public static int run(String[] args,PrintStream out,PrintStream err) {
         int status=0;
         try {
-            if(args.length==1&&args[0].equals("--help"))out.println("Usage: mundane-work compile --root DIRECTORY MANIFEST; analyze --root DIRECTORY --imports MANIFEST ARTIFACT");
+            if(args.length==1&&args[0].equals("--help"))out.println("Usage: mundane-work compile --root DIRECTORY MANIFEST; analyze --root DIRECTORY --imports MANIFEST ARTIFACT; view --root DIRECTORY ANALYSIS");
             else if(args.length==1&&args[0].equals("--version"))out.println("mundane-work "+Versions.WORK_VERSION+"; "+Versions.WORK_CONTRACT+"; "+Versions.WORK_SOURCE+"; "+Versions.WORK_ARTIFACT+"; "+Versions.WORK_ANALYSIS);
             else {
-                if(args.length<1||!java.util.Set.of("compile","analyze").contains(args[0]))throw new IllegalArgumentException("expected compile or analyze");
+                if(args.length<1||!java.util.Set.of("compile","analyze","view").contains(args[0]))throw new IllegalArgumentException("expected compile, analyze or view");
                 Map<String,String> opts=new TreeMap<>();String input=null;boolean ended=false;
                 for(int i=1;i<args.length;i++) {
                     String arg=args[i];if(!ended&&arg.equals("--")){ended=true;continue;}
@@ -30,10 +30,18 @@ public final class WorkMain {
                 Path root=Path.of(opts.get("--root")).toAbsolutePath().normalize();if(!Files.isDirectory(root))throw new IllegalArgumentException("root is not a directory");
                 var paths=new Snapshots(root);String file=paths.argument(Path.of(input));
                 if(args[0].equals("analyze")&&!opts.containsKey("--imports"))throw new IllegalArgumentException("analyze requires --imports");
-                WorkResult result=args[0].equals("compile")?WorkCompiler.compile(root,file):WorkAnalyzer.analyze(root,file,paths.argument(Path.of(opts.get("--imports"))));
-                out.writeBytes(Json.bytes(result.output()));status=result.status();
+                if(args[0].equals("view")) {
+                    var snapshot=paths.read(file);
+                    try {
+                        String view=WorkView.render(Checks.map(Snapshots.json(snapshot)));paths.recheck();out.writeBytes(view.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                    } catch(IllegalArgumentException e) {throw new Problem("invalid-work-analysis",e.getMessage(),file);}
+                } else {
+                    WorkResult result=args[0].equals("compile")?WorkCompiler.compile(root,file):WorkAnalyzer.analyze(root,file,paths.argument(Path.of(opts.get("--imports"))));
+                    out.writeBytes(Json.bytes(result.output()));status=result.status();
+                }
             }
-        } catch(IllegalArgumentException e) {err.println("invocation-failed: "+e.getMessage());status=2;}
+        } catch(Problem p) {err.println(p.code+": "+p.getMessage());status=p.operational()?2:1;}
+          catch(IllegalArgumentException e) {err.println("invocation-failed: "+e.getMessage());status=2;}
         return Command.finish(out,err,status);
     }
 }

@@ -1,0 +1,37 @@
+# Derived work-item index
+
+Generated from authoritative source cards and explicit compiled inputs. Do not edit
+status or relationships here; regenerate this view. Source links use the analysis
+root as their base. Completion and closure are authored claims, not satisfaction.
+
+Items: 2.
+
+| ID | Kind | Title | Status | Dependencies | Unfinished prerequisites |
+| --- | --- | --- | --- | --- | --- |
+| [ISSUE-1](./examples/work-items/issue.work.md#L1) | issue | Alarm behavior is unclear | Open | — | — |
+| [TC-EXAMPLE](./examples/work-items/task.work.md#L1) | task | Review the alarm | Ready | — | — |
+
+## Planning qualifications
+
+These annotations remain authored policy; prerequisite completion does not evaluate them.
+
+- ISSUE-1 — type: Problem report
+- TC-EXAMPLE — stage: 16; type: Review
+
+## Authored relationships
+
+| From | Relation | To | Declaration location |
+| --- | --- | --- | --- |
+| work:work-item:ISSUE-1 | relates-to | work:work-item:TC-EXAMPLE | [work:examples/work-items/issue.work.md](./examples/work-items/issue.work.md#L4) |
+
+## Reverse navigation
+
+- work:work-item:TC-EXAMPLE: [work:work-item:ISSUE-1 (relates-to)](./examples/work-items/issue.work.md#L4)
+
+## Snapshot provenance
+
+- Work artifact: build/work-example.json; SHA-256 95973fd3046a4d99f5e282fb8112adfe7dffa3980e6368ea10487c5a1bfd6ea8
+- Import declaration: [examples/work-items/imports.json](./examples/work-items/imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
+- Card selection: [examples/work-items/work-items.json](./examples/work-items/work-items.json#L1); SHA-256 933c9191b6dbd7b2f57bc5fada24b7f702b76985697f3f9bd5156ad4164fe26e
+- Source: [examples/work-items/issue.work.md](./examples/work-items/issue.work.md#L1); SHA-256 3ad9e49b6d55fb188fb0bafd37c8d7988fcef7a2356ea6851d2de575c099c09d
+- Source: [examples/work-items/task.work.md](./examples/work-items/task.work.md#L1); SHA-256 cf38605b07494fc4c6b7fea42b0c0681a18c15ccd9c3f1d9afdb54ec3bd208dd
