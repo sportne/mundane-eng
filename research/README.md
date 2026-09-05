@@ -105,3 +105,5 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 - [Research 0053: Project attribute worked design cases](0053-project-attribute-design-cases.md)
 
 - [Research 0054: Work-item ownership](0054-work-item-ownership.md)
+
+- [Research 0055: Work-item source decision](0055-work-item-source-decision.md)

@@ -66,3 +66,5 @@ explicit contract update and applicable compatibility notes.
 - [Diagnostic recovery and incomplete interpretation](0016-diagnostic-recovery.md)
 
 - [SARIF validation output](0017-sarif-validation-output.md)
+
+- [Work items 0.1](0018-work-items-0.1.md)

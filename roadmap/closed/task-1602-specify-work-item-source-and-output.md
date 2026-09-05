@@ -1,6 +1,6 @@
 # Task TC-1602: Specify Work Item Source and Output
 
-Status: Ready
+Status: Complete
 
 Roadmap stage: 16
 
@@ -49,6 +49,10 @@ conditional prerequisites as authored policy rather than pretend they are execut
 
 ## References
 
-- [Roadmap](0001-initial-roadmap.md)
-- [Ownership decision](../research/0037-requirement-and-assertion-ownership.md)
-- [Local imports](../specification/0014-local-artifact-imports-0.1.md)
+- [Roadmap](../0001-initial-roadmap.md)
+- [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
+- [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
+
+## Completion evidence
+
+Completed 2026-09-05. [Research 0055](../../research/0055-work-item-source-decision.md) and [Specification 0018](../../specification/0018-work-items-0.1.md) select structured Markdown, explicit JSON metadata, serialized contracts, bounds, diagnostics and preservation mapping. Two source examples have syntax-checked JSON metadata. Implementation follows TC-1603.
