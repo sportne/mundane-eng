@@ -4,7 +4,7 @@ Status: Completed
 
 Result date: 2026-08-23
 
-Roadmap task: [TC-0103](../roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.md)
+Roadmap task: [TC-0103](../roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.yaml)
 
 ## Question
 

@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0705](../../roadmap/closed/task-0705-obtain-independent-conformance-evidence.md)
+Roadmap task: [TC-0705](../../roadmap/closed/task-0705-obtain-independent-conformance-evidence.yaml)
 
 ## Question
 

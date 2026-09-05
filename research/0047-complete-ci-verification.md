@@ -1,6 +1,6 @@
 # Research 0047: Complete CI verification
 
-Date: 2026-09-05. Task: [TC-1503](../roadmap/closed/task-1503-align-ci-with-authoritative-verification.md).
+Date: 2026-09-05. Task: [TC-1503](../roadmap/closed/task-1503-align-ci-with-authoritative-verification.yaml).
 
 ## Present problem and change
 

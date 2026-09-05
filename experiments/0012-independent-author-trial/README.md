@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0702](../../roadmap/closed/task-0702-run-the-independent-interpretation-proxy-trial.md)
+Roadmap task: [TC-0702](../../roadmap/closed/task-0702-run-the-independent-interpretation-proxy-trial.yaml)
 
 ## Result
 

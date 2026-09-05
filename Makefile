@@ -289,6 +289,7 @@ work-index: native-work
 
 work-backlog-verify: native-work
 	python3 experiments/0034-work-items/migrate.py
+	python3 experiments/0035-work-yaml/migrate.py
 	python3 scripts/work-backlog.py
 	python3 scripts/check-planning-docs.py
 
@@ -297,6 +298,7 @@ verify: work-backlog-verify
 .PHONY: work-regression-verify
 work-regression-verify: native-work
 	python3 experiments/0034-work-items/regressions.py
+	python3 experiments/0035-work-yaml/regressions.py
 
 verify: work-regression-verify
 

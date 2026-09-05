@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0802](../../roadmap/closed/task-0802-model-verification-planning-and-evidence.md)
+Roadmap task: [TC-0802](../../roadmap/closed/task-0802-model-verification-planning-and-evidence.yaml)
 
 ## Question
 

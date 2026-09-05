@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0801](../../roadmap/closed/task-0801-test-identity-continuity.md)
+Roadmap task: [TC-0801](../../roadmap/closed/task-0801-test-identity-continuity.yaml)
 
 ## Question
 

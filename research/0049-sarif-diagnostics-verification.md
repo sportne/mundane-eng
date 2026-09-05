@@ -1,6 +1,6 @@
 # Research 0049: SARIF validation diagnostics
 
-Task: [TC-1504](../roadmap/closed/task-1504-emit-sarif-validation-diagnostics.md).
+Task: [TC-1504](../roadmap/closed/task-1504-emit-sarif-validation-diagnostics.yaml).
 
 The written [command decision](../specification/0017-sarif-validation-output.md)
 selected OASIS SARIF 2.1.0 Errata 01, an explicit output selector/root, stable

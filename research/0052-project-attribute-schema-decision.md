@@ -1,6 +1,6 @@
 # Research 0052: Project attribute schema decision
 
-Date: 2026-09-05. Task: [TC-1302](../roadmap/closed/task-1302-decide-project-attribute-schemas.md).
+Date: 2026-09-05. Task: [TC-1302](../roadmap/closed/task-1302-decide-project-attribute-schemas.yaml).
 
 Status: Selected design for future implementation. Current commands, normative
 schemas, source contracts and version declarations are unchanged. All new syntax,
@@ -350,12 +350,12 @@ any other engineering artifact's format.
 
 ## 10. Successor work
 
-- [TC-1303](../roadmap/task-1303-validate-project-defined-requirement-attributes.md): normative source/declaration contracts, model, schema validation and diagnostics.
-- [TC-1304](../roadmap/task-1304-preserve-attributes-in-formatting-and-trace.md): safe formatting and trace integration.
-- [TC-1305](../roadmap/task-1305-compile-project-attribute-artifacts.md): versioned compiled values, definitions and source provenance.
-- [TC-1306](../roadmap/task-1306-link-and-analyze-project-attributes.md): serialized validation, scoped imports and explicit comparison semantics.
-- [TC-1307](../roadmap/task-1307-display-project-attributes-in-derived-reports.md): existing report display and bounded unsupported interchange handling.
-- [TC-1308](../roadmap/task-1308-verify-and-document-project-attribute-workflows.md): integrated examples, compatibility, generation/mutation and migration documentation.
+- [TC-1303](../roadmap/task-1303-validate-project-defined-requirement-attributes.yaml): normative source/declaration contracts, model, schema validation and diagnostics.
+- [TC-1304](../roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml): safe formatting and trace integration.
+- [TC-1305](../roadmap/task-1305-compile-project-attribute-artifacts.yaml): versioned compiled values, definitions and source provenance.
+- [TC-1306](../roadmap/task-1306-link-and-analyze-project-attributes.yaml): serialized validation, scoped imports and explicit comparison semantics.
+- [TC-1307](../roadmap/task-1307-display-project-attributes-in-derived-reports.yaml): existing report display and bounded unsupported interchange handling.
+- [TC-1308](../roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml): integrated examples, compatibility, generation/mutation and migration documentation.
 
 Each implementation owns its regression tests; TC-1308 extends integration rather
 than postponing correctness checks. Editor diagnostics/formatting integration and

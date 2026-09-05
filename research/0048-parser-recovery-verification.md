@@ -1,6 +1,6 @@
 # Research 0048: Bounded parser recovery
 
-Task: [TC-1403](../roadmap/closed/task-1403-recover-parser-diagnostics-safely.md).
+Task: [TC-1403](../roadmap/closed/task-1403-recover-parser-diagnostics-safely.yaml).
 
 The [before capture](../experiments/0031-parser-recovery/results/before-custom.json)
 confirms the file-level failure: one malformed title hides valid BEFORE and later

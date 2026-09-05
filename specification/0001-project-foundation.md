@@ -127,7 +127,7 @@ contract](0006-provisional-0.2-contract.md).
   and cycle policy. No reusable policy language or fourth tool is selected.
   [Decision](../research/0029-trace-policy-decision.md)
 - **Views:** authored ordering and composition remain conditional on a concrete
-  delivery or review workflow. [Task](../roadmap/task-0807-test-authored-views-and-specifications.md)
+  delivery or review workflow. [Task](../roadmap/task-0807-test-authored-views-and-specifications.yaml)
 - **Mathematics:** LaTeX remains an opaque, explicitly delimited source block.
   A constrained profile requires a concrete analyzer or renderer need.
 

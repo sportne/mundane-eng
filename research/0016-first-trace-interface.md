@@ -4,7 +4,7 @@ Status: Decided
 
 Decision date: 2026-08-29
 
-Roadmap task: [TC-0501](../roadmap/closed/task-0501-define-the-first-trace-interface.md)
+Roadmap task: [TC-0501](../roadmap/closed/task-0501-define-the-first-trace-interface.yaml)
 
 ## Question
 

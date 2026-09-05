@@ -1,0 +1,70 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-0103"
+kind: "task"
+title: "Audit the 0.2 Conformance Baseline"
+status: "Complete"
+dependencies:
+  - "TC-0101"
+  - "TC-0102"
+relations: []
+planning:
+  condition: "TC-0101 and TC-0102"
+  stage: "1"
+  statusNote: ""
+  type: "Conformance review"
+  unlocks: "TC-0104"
+body: |2+
+
+  ## Question
+
+  Does the maintained 0.2 corpus cover the contract well enough to protect the first implementation refactoring?
+
+  ## Outcome
+
+  A written audit maps normative rule areas to positive or negative evidence and records deliberate coverage gaps.
+
+  ## Work
+
+  - Map physical source, discovery, record grammar, fields, prose, math, comments, identity, and relationships to fixtures or tests.
+  - Confirm comments remain absent from semantic inventories and ReqIF output.
+  - Identify accidental probe CLI behavior that is not part of language conformance.
+  - Classify uncovered cases as required before refactoring, useful later, or intentionally outside the fixture suite.
+  - Update conformance documentation where expected behavior is implicit.
+
+  ## Acceptance evidence
+
+  - The audit is committed as a research or conformance record.
+  - Every normative rule area has evidence or an explicit gap disposition.
+  - No experimental inventory or diagnostic wording is accidentally declared normative.
+  - Both contract versions remain reproducible from their existing tags.
+
+  ## Out of scope
+
+  - Attempting exhaustive combinatorial grammar testing.
+  - Defining the future tool CLI.
+  - Promoting the probe to maintained architecture.
+
+  ## Completion decision
+
+  Proceed only if the audit finds no unresolved ambiguity that could make two conforming implementations assign different semantic values.
+
+  ## Result
+
+  [Research 0010](../../research/0010-source-0.2-conformance-audit.md) maps every
+  normative rule area to fixtures, probe tests, adjacent-consumer evidence, or
+  an explicit gap disposition. It confirms comments are absent from both the
+  semantic inventory and derived ReqIF and separates normative interpretation
+  from accidental probe CLI, inventory, diagnostic-string, and Java API
+  behavior.
+
+  No unresolved semantic ambiguity was found. The audit identifies a required
+  preservation set for TC-0204, seven useful cross-implementation cases that do
+  not block extraction, and concerns intentionally outside source conformance.
+  The original 0.1 and 0.2 annotated contract tags remain unchanged and
+  reproducible.
+
+  ## References
+
+  - [TC-0102](task-0102-correct-reference-parser-conformance.yaml)
+  - [0.2 trial contract](../../specification/0006-provisional-0.2-contract.md)
+  - [Source-comment experiment](../../experiments/0007-source-comments/README.md)

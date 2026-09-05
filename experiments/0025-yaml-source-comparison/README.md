@@ -2,7 +2,7 @@
 
 Status: Complete bounded comparison; candidate syntax is nonnormative
 
-Task: [TC-1105](../../roadmap/closed/task-1105-compare-yaml-and-custom-requirement-source.md)
+Task: [TC-1105](../../roadmap/closed/task-1105-compare-yaml-and-custom-requirement-source.yaml)
 
 Decision: [Adopt a constrained YAML target through successor work](../../research/0033-yaml-source-representation-decision.md)
 

@@ -1,0 +1,67 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1305"
+kind: "task"
+title: "Compile Project Attribute Artifacts"
+status: "Planned"
+dependencies:
+  - "TC-1302"
+  - "TC-1303"
+relations: []
+planning:
+  condition: "TC-1302, TC-1303"
+  stage: "13"
+  statusNote: ""
+  type: "Implementation"
+  unlocks: "TC-1306"
+body: |2+
+
+  ## Question
+
+  Current compiled requirements contain seven fixed values. Emitting project
+  attributes as ignorable metadata would let existing consumers silently discard
+  values or interpret them without their declaration.
+
+  ## Outcome
+
+  Versioned compiled requirements preserve explicit attribute values, the typed
+  schema snapshot and source provenance, with strict incomplete-output behavior.
+
+  ## Work
+
+  - Publish the output 0.2/CLI contract from Research 0052 and add independent version declarations. Preserve old-format emission for existing source modes.
+  - Emit present attributes, null-or-complete schema definition, exact schema provenance, declaration locations and attribute name/value spans; no defaults or extra requirement identities.
+  - Canonicalize semantic maps and enum sets deterministically; retain semantic strings exactly and separate byte/source provenance from values.
+  - Read selected schema/source bytes once, enforce compiler root rules and publish no requirement records on invalid/incomplete input.
+  - Supply a small independent serialized fixture consumer for output verification; maintained linker/analyzer support belongs to TC-1306.
+
+  ## Acceptance evidence
+
+  - Golden artifacts cover both types, required/optional absence, schema-free new source, invalid schema/value and Unicode locations. The independent consumer checks declarations and values, not only complete=true.
+  - Reversed file/attribute/declaration/enum order produces equal semantics; whitespace/comments/file moves change the appropriate provenance without changing meaning. Exact same inputs produce identical artifact bytes.
+  - New values cannot appear under old output identifiers; old source/output goldens remain unchanged. Invalid/input/output failures preserve current publication and exit rules.
+  - Worked schema changes produce the exact definition/value differences specified in Research 0053; no per-requirement digest is authored or introduced.
+  - Record schema/source fixtures, output/diagnostic goldens, JVM/native parity and authoritative verification. Document unsupported consumers and migration until TC-1306 lands.
+
+  ## Out of scope
+
+  - Maintained linking, review-policy implementation, report/editor or ReqIF support; automatic schema registries or build orchestration.
+
+  ## Compatibility and affected components
+
+  Introduce requirements output 0.2 for the selected new source; retain output 0.1
+  for old profiles. Likely components: SemanticArtifact, compiler CLI, source spans,
+  versions, output specifications and compiler fixtures. Compiled schema is derived
+  from checked-in declarations, not an alternative authoring file.
+
+  ## Completion decision
+
+  Stop if consumers could mistake attributes for optional informational fields,
+  if output cannot identify the declaration snapshot, or if invalid input yields
+  partial usable records. Completion gives TC-1306 a tested serialized boundary.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml)
+  - [Attribute design](../research/0052-project-attribute-schema-decision.md)
+  - [Worked cases](../research/0053-project-attribute-design-cases.md)

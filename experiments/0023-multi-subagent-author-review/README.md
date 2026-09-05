@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-30
 
-Roadmap task: [TC-0706](../../roadmap/closed/task-0706-run-the-subagent-author-review-trial.md)
+Roadmap task: [TC-0706](../../roadmap/closed/task-0706-run-the-subagent-author-review-trial.yaml)
 
 ## Result
 

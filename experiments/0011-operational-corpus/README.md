@@ -4,7 +4,7 @@ Status: Corpus and protocol selected; execution belongs to TC-0702 and TC-0703
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0701](../../roadmap/closed/task-0701-select-a-larger-corpus-and-trial-protocol.md)
+Roadmap task: [TC-0701](../../roadmap/closed/task-0701-select-a-larger-corpus-and-trial-protocol.yaml)
 
 ## Result
 

@@ -4,7 +4,7 @@ Status: Decided
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0701](../roadmap/closed/task-0701-select-a-larger-corpus-and-trial-protocol.md)
+Roadmap task: [TC-0701](../roadmap/closed/task-0701-select-a-larger-corpus-and-trial-protocol.yaml)
 
 ## Decision
 

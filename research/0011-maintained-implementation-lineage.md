@@ -4,7 +4,7 @@ Status: Decided
 
 Decision date: 2026-08-23
 
-Roadmap task: [TC-0104](../roadmap/closed/task-0104-select-the-maintained-implementation-lineage.md)
+Roadmap task: [TC-0104](../roadmap/closed/task-0104-select-the-maintained-implementation-lineage.yaml)
 
 ## Question
 

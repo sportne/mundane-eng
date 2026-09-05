@@ -21,7 +21,8 @@ def rebuild():
 
 compiled,analysis,view=rebuild()
 selection=json.loads((ROOT/'roadmap/work-items.json').read_text())
-actual=sorted(p.relative_to(ROOT).as_posix() for base in [ROOT/'roadmap',ROOT/'roadmap/closed'] for pattern in ['task-[0-9]*.md','issue-*.md'] for p in base.glob(pattern))
+actual=sorted(p.relative_to(ROOT).as_posix() for base in [ROOT/'roadmap',ROOT/'roadmap/closed'] for pattern in ['task-[0-9]*.yaml','issue-*.yaml'] for p in base.glob(pattern))
+assert not [p for base in [ROOT/'roadmap',ROOT/'roadmap/closed'] for pattern in ['task-[0-9]*.md','issue-*.md'] for p in base.glob(pattern)],'legacy Markdown cards must not compete with migrated YAML sources'
 assert sorted(selection['files'])==actual,'every repository task card must be explicitly selected'
 original=json.loads((ROOT/'experiments/0034-work-items/migration.json').read_text())
 ids={i['values']['id'] for i in json.loads(compiled)['items']}

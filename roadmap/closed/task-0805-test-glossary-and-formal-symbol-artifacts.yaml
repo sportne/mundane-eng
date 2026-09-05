@@ -1,0 +1,60 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-0805"
+kind: "task"
+title: "Test Glossary and Formal-Symbol Artifacts"
+status: "Complete"
+dependencies:
+  - "TC-0603"
+relations: []
+planning:
+  condition: "TC-0603 and demonstrated vocabulary ambiguity"
+  stage: "8"
+  statusNote: ""
+  type: "Model-pressure experiment"
+  unlocks: "A vocabulary and symbol model decision"
+body: |2+
+
+  ## Question
+
+  Do shared domain terms or mathematical symbols need separately identified human-readable definitions for authoring and analysis?
+
+  ## Outcome
+
+  A bounded corpus compares ordinary prose definitions, a companion glossary or symbol table, and tool-only conventions.
+
+  ## Work
+
+  - Select repeated terms and symbols whose ambiguity affects requirement interpretation.
+  - Create standalone candidate definitions with stable references only where needed.
+  - Exercise rename, changed definition, undefined use, and symbol reuse.
+  - Keep LaTeX payloads opaque while testing whether symbol metadata adds value.
+  - Compare raw readability, Git diffs, and possible lint queries.
+
+  ## Acceptance evidence
+
+  - Every structured definition answers a concrete ambiguity or analysis need.
+  - The candidate remains readable without rendering.
+  - No executable mathematical semantics are implied.
+  - The result distinguishes author guidance from normative shared definition.
+
+  ## Out of scope
+
+  - A theorem prover.
+  - Macro expansion.
+  - A general ontology or terminology server.
+
+  ## Completion decision
+
+  Adopt a companion artifact only if explicit shared identity materially improves the tested workflow over prose and project convention.
+
+  Completed on 2026-08-29. [Experiment 0021](../../experiments/0021-glossary-symbols/README.md)
+  finds that a structured companion can support rename and impact queries, but
+  ordinary normative prose plus source search finds the same affected set with
+  fewer concepts. It therefore defers both term and formal-symbol companions.
+  Normativity is independent of representation, tool-owned definitions are
+  rejected, and LaTeX stays opaque.
+
+  ## References
+
+  - [Roadmap glossary study](../0001-initial-roadmap.md#glossary-and-formal-symbols)
+  - [Mathematical content model](../../specification/0002-minimum-source-language-and-model.md#mathematical-content)

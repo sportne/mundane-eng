@@ -1,6 +1,7 @@
 # YAML work items 0.2
 
-Status: Normative experimental contract; implementation tracked by TC-1608/1609.
+Status: Maintained normative experimental contract, implemented and verified
+through TC-1608/1609.
 This addendum replaces source authoring for new work with YAML. The work-item
 meanings, import graph, limits, output safety and derived view rules in
 [0018](0018-work-items-0.1.md) continue except as explicitly amended here.

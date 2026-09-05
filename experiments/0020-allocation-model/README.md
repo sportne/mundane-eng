@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0804](../../roadmap/closed/task-0804-test-allocation-and-controlled-vocabulary.md)
+Roadmap task: [TC-0804](../../roadmap/closed/task-0804-test-allocation-and-controlled-vocabulary.yaml)
 
 ## Question
 

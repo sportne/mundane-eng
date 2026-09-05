@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0806](../../roadmap/closed/task-0806-test-reusable-trace-policies.md)
+Roadmap task: [TC-0806](../../roadmap/closed/task-0806-test-reusable-trace-policies.yaml)
 
 ## Question
 

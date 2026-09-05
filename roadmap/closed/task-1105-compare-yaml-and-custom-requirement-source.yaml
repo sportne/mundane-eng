@@ -1,0 +1,142 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1105"
+kind: "task"
+title: "Compare YAML and Custom Requirement Source"
+status: "Complete"
+dependencies: []
+relations: []
+planning:
+  condition: "none"
+  stage: "11"
+  statusNote: ""
+  type: "Experiment and decision"
+  unlocks: "TC-1103 and a requirements-specification representation decision"
+body: |2+
+
+  ## Question
+
+  Does the custom requirement syntax provide enough authoring and tooling benefit
+  to justify its maintenance cost, or should the requirements specification define
+  a YAML-compatible representation with an explicit schema and domain rules?
+
+  ## Outcome
+
+  A bounded comparison and written decision recommend retaining custom syntax,
+  adopting a specified YAML profile, or deferring the choice for a named unresolved
+  case. The decision includes the specification and migration work each option
+  requires, without changing the current normative contract during this experiment.
+
+  ## Work
+
+  - Reuse the prior representation research, but address its evidence gap: YAML was
+    discussed as prior art rather than exercised in the original candidate slate.
+  - Select a small fixed corpus of roughly 8–12 requirements from existing pilot,
+    prose/math, and comment fixtures. Encode the same semantic model in current
+    .mreq syntax and one documented YAML candidate; record any unsupported case.
+  - Define the candidate YAML version, top-level shape, schema mechanism, and
+    supported subset. Exercise a requirements list with multiple records per file
+    and a single-record file; assess document-stream alternatives only if needed.
+    The candidate must parse with an ordinary conforming YAML parser without
+    custom preprocessing that merely makes the notation resemble YAML.
+  - Map all current fields and ordered prose/math blocks explicitly. Specify scalar
+    typing, literal/folded text and trailing-newline behavior, quoting, comments,
+    absent/null/empty values, duplicate/unknown keys, and aliases/tags. Distinguish
+    structural schema checks from domain rules such as cross-file ID uniqueness
+    and reference resolution; do not silently discard duplicate keys before checking.
+  - Perform matched authoring, wrapping, relationship-edit, move, split, formatting,
+    and Git conflict tasks. Include colons, hashes, numeric/boolean-looking text,
+    Unicode, malformed indentation, and mathematical payloads. Keep IDs authored
+    and independent of filenames, record order, and YAML nesting.
+  - Compare source readability, diagnostic locations/recovery, comment and content
+    preservation, semantic equivalence, and formatter behavior. Evaluate existing
+    parser/schema/editor facilities and remaining custom work, including library
+    licensing and Java 21/GraalVM compatibility. Label estimates and untested
+    integrations explicitly; authored inspection is not independent usability evidence.
+  - Evaluate project attributes with clearly labeled hypothetical examples, without
+    selecting their scope or bypassing TC-1301/TC-1302. Both representations must
+    be able to target the same syntax-independent compiled requirement model.
+
+  ## Acceptance evidence
+
+  - Checked-in paired fixtures, a field/content mapping, exact parser versions,
+    reproducible comparison commands, and expected valid/invalid outcomes cover
+    the selected corpus. A YAML reader accepts the candidate files as written.
+  - Valid pairs have equal normalized requirement semantics, including IDs, links,
+    optional values, prose and opaque math. Any intentional mismatch is explained;
+    comments are assessed separately as source-preservation information.
+  - Matched edit/conflict examples and formatter round-trip/idempotence checks show
+    concrete advantages and failures for each representation. Report syntax/schema
+    failures separately from requirements-domain failures with source locations.
+  - A tradeoff table separates demonstrated authoring/tooling results from expected
+    maintenance savings; existing parser investment alone does not decide the result.
+  - A clause-level specification outline identifies what a YAML-based successor
+    would replace, retain, and delegate to YAML/schema rules. It covers multi-file
+    selection, diagnostics, conformance, extensions, and remaining semantic validation.
+  - The decision addresses existing .mreq files, filename/extension conventions,
+    explicit format/version selection, migration tooling and semantic checks,
+    historical fixtures, and whether any coexistence is temporary. It does not
+    silently commit to maintaining two permanent authoring formats.
+  - If YAML is selected, identify bounded successor cards for specification/schema,
+    parser/validator/formatter adaptation, migration, and conformance documentation.
+    Retaining custom syntax must identify the concrete benefit demonstrated by the
+    comparison; deferral must name the missing evidence and a bounded next check.
+
+  ## Out of scope
+
+  - Rewriting the normative specification now, converting maintained authoring
+    corpora in place, replacing production parsers, or implementing new attributes.
+  - Changing the requirement semantic model to favor either syntax, introducing
+    machine-generated identities, or treating compiled JSON as authoritative source.
+  - A broad serialization-format survey or a requirement to invent a new language
+    for each artifact type.
+
+  ## Compatibility and affected components
+
+  Current source 0.1/0.2 contracts and command behavior remain unchanged during the
+  experiment. Likely later components are the source specification, conformance
+  fixtures, Interpreter, lossless source representation, formatter, source discovery,
+  editor integration, and migration documentation. Compilation/linking remains
+  possible with either authoring syntax. Attribute definitions remain explicit,
+  typed, checked-in source under their separately selected contract.
+
+  ## Completion decision
+
+  Choose based on semantic fidelity, practical authoring, and the demonstrated
+  maintenance burden. Narrow a YAML profile that introduces avoidable ambiguity;
+  reject silent coercion, comment loss during claimed lossless rewriting, or
+  unexplained normative-text changes. Record the representation decision before
+  TC-1103 settles the compilation experiment's source adapters. Implementation and
+  normative specification changes require the resulting successor work.
+
+  ## References
+
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Representation prior art](../../research/0003-representation-prior-art.md)
+  - [Custom record sketches](../../research/0005-purpose-built-record-syntax-sketches.md)
+  - [Provisional representation decision](../../research/0007-provisional-source-representation-decision.md)
+  - [Source language](../../specification/0005-mundanereq-source-language-0.2.md)
+  - [Source representation](../../research/0012-shared-source-representation.md)
+  - [TC-1103](task-1103-test-compilation-linking-and-rebuilds.yaml)
+  - [TC-1301](task-1301-classify-project-attribute-use-cases.yaml)
+  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
+  - [YAML specification](https://yaml.org/spec/1.2.2/)
+
+  ## Completion evidence and decision
+
+  Completed the bounded comparison in [Experiment 0025](../../experiments/0025-yaml-source-comparison/README.md)
+  and recorded [Research 0033](../../research/0033-yaml-source-representation-decision.md).
+  Select a constrained YAML target through TC-1106–TC-1109; current normative and
+  production behavior remains unchanged. Eleven paired records, 28 pressure cases,
+  12 workflow outcomes and 43 JVM/native parser/emitter comparisons are recorded.
+  The maintained make verify suite and experimental golden replay passed.
+
+  Rich Java emitters lost comments; the conservative text-preserving path passed.
+  Native schema/domain integration and editor behavior remain untested and are not
+  claimed as completed work. TC-1103 still awaits TC-1102. TC-1302 additionally
+  requires TC-1106's final profile; attribute scope remains independently decided.
+
+  ## Planning refinement
+
+  The comparison selected YAML as a future specification direction and creates four
+  bounded successors for specification, interpretation, formatting and migration.
+  No requirement source files or normative contracts were converted in this task.

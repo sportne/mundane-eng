@@ -1,75 +1,94 @@
-# Work items: source, compilation and derived backlog
-
-The migration verification needs the recorded ancestor commit, so use a full Git
-checkout for `make verify`; hosted checkout fetches history for that replay.
+# Work items: YAML source, compilation and derived backlog
 
 Build `make native-work`. The standalone `build/maintained/mundane-work` executable
-supports compile, analyze and view; `--help` and `--version` describe its interface.
-Java 21/GraalVM and the existing native toolchain assumptions apply. The work-item
-runtime uses no YAML parser, requirement source parser, database or external tracker.
+supports compile, analyze and view. Java 21/GraalVM and the existing native toolchain
+assumptions apply. Work-item compilation shares the pinned YAML parsing library,
+while its domain model is independent of the requirements parser. Serialized
+analysis/view do not need either source parser. No database or external tracker.
 
-A card owns ID/kind/title in its Markdown heading, structured facts in one strict
-JSON block, and ordinary Markdown narrative below. See the
-[task template](../roadmap/task-card-template.md),
-[task/issue examples](../examples/work-items/task.work.md), and
-[contract](../specification/0018-work-items-0.1.md).
-Requirements YAML and plan TSV retain their own formats. A valid metadata block
-establishes structure, not the truth of an issue, completion or evidence claim.
+A card is one YAML mapping. ID, kind, title, status, dependencies and typed relations
+are structured fields; `body` is one opaque string, normally a literal block with
+Markdown prose. Use [the template](../roadmap/task-card-template.yaml),
+[YAML examples](../examples/work-items/yaml/task.yaml),
+[specification](../specification/0019-work-items-yaml-0.2.md) and its
+[structural schema](../specification/schema/work-items-yaml-0.2.json).
+Requirements YAML and plan TSV retain independently chosen specifications.
 
-From the repository root:
+```yaml
+format: mundane-work-yaml-0.2
+id: TC-EXAMPLE
+kind: task
+title: Review the alarm
+status: Ready
+body: |-
+  ## Question
+
+  Explain this flow:
+      Input -> Compiler -> Artifact
+```
+
+`|-` strips the final newline, `|` retains one, and `|+` preserves trailing blank
+lines. All preserve internal newlines and relative indentation; YAML removes common
+indentation and normalizes physical line endings. Quoted escapes can retain exact
+CRLF string values when needed. The compiler preserves decoded strings without
+trimming or interpreting their Markdown. YAML comments are presentation, outside
+compiled body text. This change does not introduce a YAML formatter.
+
+Optional dependencies/relations default to empty lists; optional planning annotations
+default to empty strings. Status/ID/title/kind/body remain explicit. Quote text that
+YAML Core would resolve as a number, boolean or null. Unknown/duplicate fields,
+tags/anchors/merges and multiple documents fail. Generic schema validation checks
+structure; compilation checks the source profile and domain values; analysis checks
+links and cycles. None establishes the truth of completion or evidence claims.
+
+## Commands and current authoring
+
+From the repository root, check each exit status before using the next output:
 
 ```sh
 build/maintained/mundane-work compile --root . roadmap/work-items.json > build/work-items.json
 build/maintained/mundane-work analyze --root . --imports roadmap/work-imports.json build/work-items.json > build/work-analysis.json
-build/maintained/mundane-work view --root . build/work-analysis.json > build/work-view.md
+build/maintained/mundane-work view --root . build/work-analysis.json > WORK-ITEMS.md
 ```
 
-Check each exit status before consuming output. Compilation/analysis errors publish
-an incomplete JSON artifact without usable records/edges; view errors publish no
-Markdown. Invocation/input/output failures return 2; invalid source/link/view returns
-1; success returns 0. Capturing a prefix from a failed output stream is not success.
-The view's links use the invocation root as base; move the example view to the root
-for ordinary file-relative Markdown navigation. The repository helper does this.
+The root-relative view is derived. The helper `python3 scripts/work-backlog.py --write`
+checks every pipeline step and replaces the index only after successful rendering.
+Incomplete JSON output and failed-stream prefixes are unusable. Exit 0 means success,
+1 means invalid source/link/view, and 2 means invocation/input/output failure.
 
-## Maintaining this repository's backlog
+- Use `task-NNNN-description.yaml` or `issue-description.yaml` under roadmap/ or
+  roadmap/closed/. Select each explicitly in roadmap/work-items.json, whose format
+  is mundane-work-set-0.2 and source is mundane-work-yaml-0.2. It owns selection only.
+- Edit YAML facts and narrative in the same source. planning.condition, unlocks and
+  statusNote retain opaque qualifications, not executable policy. Put mechanized
+  dependencies/relationships in their typed fields; prose citations remain prose.
+- On completion, record evidence in body, set Complete for tasks or Closed for issues,
+  move to closed/, update the selected path and rebase incoming/outgoing prose links.
+  Preserve the ID. A relation never automatically closes or approves another item.
+- Run `make work-index`, `make work-backlog-verify`, and owning implementation checks.
+  `make verify` includes YAML/schema, migration, corpus and current/legacy checks.
+- Commit each completed task separately, including source and generated index.
 
-- Edit source cards. JSON status and dependencies are the authoritative facts.
-  `planning.condition`, unlocks and statusNote preserve explanatory/historical
-  qualifications; they are not parsed as executable rules or inverse links.
-- Use `task-NNNN-description.md` for tasks or `issue-description.md` for issues
-  under roadmap/ or roadmap/closed/. Add a card's root-relative path to `roadmap/work-items.json`. That manifest selects
-  inputs only. Add supported typed links explicitly; ordinary Markdown links remain
-  useful citations without claiming artifact resolution.
-- On completion, record evidence, set Complete for a task or Closed for an issue,
-  move the source under closed/,
-  update the selected path and rebase incoming/outgoing Markdown links. Preserve ID.
-- Run `make work-index` to regenerate root `WORK-ITEMS.md`. With an already built
-  tool, `python3 scripts/work-backlog.py --write` performs only the public pipeline.
-- Run `make work-backlog-verify` to check migration replay, complete card selection,
-  identical source-to-view rebuilds and relative documentation links. `make verify`
-  includes these plus the compiler/link/view regressions.
-- Commit source and generated index together; do not update status rows by hand.
-  The strategic roadmap and planning narrative remain authored documents.
+Tasks use Ready, Planned, Conditional, In progress, Complete or Superseded. Issues
+use Open, Closed or Superseded. Analysis reports unfinished prerequisites without
+changing authored status or inferring that conditional policy is satisfied.
 
-Open/Closed are issue statuses. Tasks use Ready, Planned, Conditional, In progress,
-Complete or Superseded. Analysis reports unfinished task prerequisites without
-rewriting status or evaluating conditional policy. A task can address an issue or
-requirement; completing it closes neither automatically. Superseded prerequisites
-remain unfinished until an author changes the dependency.
+## Migration and compatibility
 
-## Migration and limits
+[Experiment 0035](../experiments/0035-work-yaml/README.md) records the checked YAML
+migration. It preserves decoded values and human IDs, individually recording prose
+link retargeting and file renames. The 0034 Markdown migration inventory remains
+historical evidence. Replays require the recorded ancestors, so `make verify` uses
+a full Git checkout; hosted checkout already fetches history.
 
-[Migration evidence](../experiments/0034-work-items/migration.json) names the immutable
-input commit and each of 78 converted cards. Headings and narrative bytes were
-preserved at conversion. Legacy stage/type/prerequisite/unlocks fields and exceptional
-completion/disposition wording were moved explicitly into JSON metadata. Four new
-execution cards gained reviewed local-resource evidence links. No relationship was
-inferred from body Markdown. The migration checkpoint is historical evidence;
-source cards can subsequently evolve, with completion records and link rebasing.
+Manifest 0.1 still explicitly selects the old Markdown profile; manifest 0.2 selects
+YAML. There is no extension inference or fallback. Compiled output 0.1 and 0.2 remain
+readable; YAML 0.2 adds real declaration coordinates while retaining semantic values.
+Current analysis remains 0.1. New compiled artifacts, locations and exact-revision
+hashes differ after migration, so rebuild derived imports/pins/views as appropriate.
+The work-item ID remains its identity. Source digests are revision provenance only.
 
-Only supported compiled work items, requirements and verification plans are imported.
-Resource evidence is a local file snapshot, not a parsed code symbol or validated
-claim. Source roots of imported work artifacts are not guessed; resource citations
-resolve under the explicit analysis root. Remote URIs, code-symbol adapters, external
-issue synchronization, customizable lifecycle rules and automatic approval are outside
-this contract. Unknown formats/kinds are rejected rather than silently flattened.
+Supported typed targets remain work items, requirements and verification plans/
+activities. Evidence resources are local file snapshots, not validated code symbols
+or approved claims. Source roots are explicit. Remote synchronization, custom
+lifecycles and other artifact source formats need their own justified decisions.

@@ -4,7 +4,7 @@ Status: Decided
 
 Decision date: 2026-08-29
 
-Roadmap task: [TC-0601](../roadmap/closed/task-0601-package-and-document-the-native-suite.md)
+Roadmap task: [TC-0601](../roadmap/closed/task-0601-package-and-document-the-native-suite.yaml)
 
 ## Question
 

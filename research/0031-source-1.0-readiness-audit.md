@@ -4,7 +4,7 @@ Status: Complete
 
 Date: 2026-08-30
 
-Roadmap task: [TC-1001](../roadmap/closed/task-1001-audit-readiness-for-1.0.md)
+Roadmap task: [TC-1001](../roadmap/closed/task-1001-audit-readiness-for-1.0.yaml)
 
 ## Decision
 

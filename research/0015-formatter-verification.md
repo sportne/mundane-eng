@@ -6,7 +6,7 @@ Date: 2026-08-23
 
 Maintained-corpus coverage expanded: 2026-08-30
 
-Roadmap task: [TC-0403](../roadmap/closed/task-0403-verify-formatter-safety-properties.md)
+Roadmap task: [TC-0403](../roadmap/closed/task-0403-verify-formatter-safety-properties.yaml)
 
 ## Question
 

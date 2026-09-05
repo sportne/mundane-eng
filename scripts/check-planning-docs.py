@@ -7,11 +7,13 @@ import urllib.parse
 
 ROOT=Path(__file__).resolve().parents[1]
 files=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard'],cwd=ROOT,text=True).splitlines()
+artifact=json.loads((ROOT/'build/work-backlog/items.json').read_text())
+source_text={i['location']['path']:i['values']['body']+'\n'+'\n'.join(i['values']['planning'].values()) for i in artifact['items']}
 missing=[]
 for name in set(files):
     p=ROOT/name
-    if p.suffix!='.md' or not p.exists():continue
-    for dest in re.findall(r'\]\(([^)\n]+)\)',p.read_text()):
+    if not p.exists() or p.suffix!='.md' and name not in source_text and name!='roadmap/task-card-template.yaml':continue
+    for dest in re.findall(r'\]\(([^)\n]+)\)',source_text.get(name,p.read_text())):
         bare=dest.split('#')[0]
         if not bare or '://' in bare or bare.startswith(('mailto:','/')) or any(x in bare for x in ['*','`',' ']):continue
         if not (p.parent/urllib.parse.unquote(bare)).exists():missing.append((name,dest))

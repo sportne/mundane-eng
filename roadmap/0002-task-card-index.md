@@ -116,12 +116,12 @@ existing planning files. The YAML comparison follow-up below adds TC-1105.
 | --- | --- |
 | [Strategic roadmap](0001-initial-roadmap.md) | Monorepo scope, compile/link workflow, bounded checks, historical anchors, incremental execution order |
 | [This index](0002-task-card-index.md) | Current dependencies/statuses and separate completed evidence inventory |
-| [Task template](task-card-template.md) | Compatibility/components, present problem, risks, and explicit refinement instructions |
-| [TC-0905](closed/task-0905-define-verification-analyzer-contract.md) | Ready becomes Planned; add compilation/import decisions and compiled plan fixture obligations |
-| [TC-0904](closed/task-0904-implement-the-selected-ecosystem-tool.md) | Add bounded linking dependency and compiled consumer evidence; unlock report instead of historical audit |
-| [TC-0903](closed/task-0903-run-a-derived-presentation-experiment.md) | Conditional becomes Planned; select verification report and make composition a possible successor |
-| [TC-0807](task-0807-test-authored-views-and-specifications.md) | Reverse the old report prerequisite; retain conditional composition scope |
-| [TC-0902](task-0902-run-an-independent-reqif-roundtrip.md) | Clarify that the decision concerns a maintained interchange capability; external-tool prerequisite remains |
+| [Task template](task-card-template.yaml) | Compatibility/components, present problem, risks, and explicit refinement instructions |
+| [TC-0905](closed/task-0905-define-verification-analyzer-contract.yaml) | Ready becomes Planned; add compilation/import decisions and compiled plan fixture obligations |
+| [TC-0904](closed/task-0904-implement-the-selected-ecosystem-tool.yaml) | Add bounded linking dependency and compiled consumer evidence; unlock report instead of historical audit |
+| [TC-0903](closed/task-0903-run-a-derived-presentation-experiment.yaml) | Conditional becomes Planned; select verification report and make composition a possible successor |
+| [TC-0807](task-0807-test-authored-views-and-specifications.yaml) | Reverse the old report prerequisite; retain conditional composition scope |
+| [TC-0902](task-0902-run-an-independent-reqif-roundtrip.yaml) | Clarify that the decision concerns a maintained interchange capability; external-tool prerequisite remains |
 | [Repository README](../README.md) | Align current direction and verification wording with incremental planning |
 | [Specification index](../specification/README.md) | Remove stale prospective status while retaining current normative authority |
 
@@ -133,7 +133,7 @@ this reconciliation.
 
 ## YAML comparison follow-up
 
-[TC-1105](closed/task-1105-compare-yaml-and-custom-requirement-source.md) is complete.
+[TC-1105](closed/task-1105-compare-yaml-and-custom-requirement-source.yaml) is complete.
 [Research 0033](../research/0033-yaml-source-representation-decision.md) selects a
 constrained YAML direction, now implemented through the explicit source 0.3
 contract and command safety addendum. Default source 0.2 invocation is retained. [Experiment 0025](../experiments/0025-yaml-source-comparison/README.md)
@@ -155,12 +155,12 @@ dependencies change in this refinement, and no additional cards are needed.
 
 | Card | Clarification |
 | --- | --- |
-| [TC-1101](closed/task-1101-define-monorepo-component-boundaries.md) | Record source-format decisions separately from shared component interfaces |
-| [TC-1103](closed/task-1103-test-compilation-linking-and-rebuilds.md) | Exercise provisional YAML requirements with the existing TSV plan adapter; remove shared-notation comparison |
-| [TC-1106](closed/task-1106-specify-yaml-requirement-source-profile.md) | Specify the requirements model, YAML mapping, structural schema and semantic rules with explicit authority and scope |
-| [TC-1203](closed/task-1203-define-import-and-reference-contracts.md) | Separate common linking meanings from each artifact's authored encoding |
-| [TC-0905](closed/task-0905-define-verification-analyzer-contract.md) | Select plan notation independently and consume published compiled interfaces |
-| [TC-1302](closed/task-1302-decide-project-attribute-schemas.md) | Keep project declaration format a decision distinct from YAML requirement values |
+| [TC-1101](closed/task-1101-define-monorepo-component-boundaries.yaml) | Record source-format decisions separately from shared component interfaces |
+| [TC-1103](closed/task-1103-test-compilation-linking-and-rebuilds.yaml) | Exercise provisional YAML requirements with the existing TSV plan adapter; remove shared-notation comparison |
+| [TC-1106](closed/task-1106-specify-yaml-requirement-source-profile.yaml) | Specify the requirements model, YAML mapping, structural schema and semantic rules with explicit authority and scope |
+| [TC-1203](closed/task-1203-define-import-and-reference-contracts.yaml) | Separate common linking meanings from each artifact's authored encoding |
+| [TC-0905](closed/task-0905-define-verification-analyzer-contract.yaml) | Select plan notation independently and consume published compiled interfaces |
+| [TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml) | Keep project declaration format a decision distinct from YAML requirement values |
 
 The [roadmap product direction](0001-initial-roadmap.md#product-direction) records
 this boundary. Existing requirements-only implementation and migration cards
@@ -189,7 +189,7 @@ and TC-1203. TC-1504 still needs parser recovery. TC-1204 remains Conditional.
 
 ## Updating cards
 
-1. Update the structured JSON metadata in the authoritative card and its prose.
+1. Update the structured YAML fields in the authoritative card and its prose.
 2. Preserve human IDs; add explicit dependencies/relations rather than infer links.
 3. Record completion evidence before setting Complete; move completed cards under
    closed/ and update the selected path in work-items.json and incoming Markdown links.
@@ -197,7 +197,7 @@ and TC-1203. TC-1504 still needs parser recovery. TC-1204 remains Conditional.
 5. Run `make work-backlog-verify` and owning implementation checks.
 6. Commit each completed task separately, including its source and derived index.
 
-Use the [template](task-card-template.md). Conditional policies remain authored
+Use the [template](task-card-template.yaml). Conditional policies remain authored
 qualifications; dependency completion alone does not authorize execution. Historical
 planning notes below are records of earlier decisions, not another status source.
 
@@ -213,9 +213,9 @@ layout and external ReqIF cards remain unchanged.
 
 ## Completed work-item integration
 
-TC-1601–1606 established the structured Markdown source, compiler, bounded typed
-linking, prerequisite analysis and generated index. The repository now uses those
-tools for its own cards. [Research 0059](../research/0059-work-item-backlog-verification.md)
+TC-1601–1606 established the original source profile, compiler, bounded typed
+linking, prerequisite analysis and generated index. The repository uses these tools for its own cards; TC-1607–1609
+move current authoring to the independently specified YAML profile. [Research 0059](../research/0059-work-item-backlog-verification.md)
 records migration and clean verification; current status remains in source cards
 and their derived view.
 
@@ -224,3 +224,7 @@ and their derived view.
 TC-1607 -> TC-1608 -> TC-1609 replaces the source-carrier decision with a YAML
 specification/schema, compiler support, then checked backlog migration. The completed
 TC-1601–1606 evidence remains historical. This chain is independent of TC-1303–1308.
+
+TC-1607–1609 are complete. [Research 0062](../research/0062-work-item-yaml-backlog-verification.md)
+records the checked YAML migration and clean authoritative verification. Current
+status remains in YAML source cards and their derived index.

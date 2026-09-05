@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0704](../../roadmap/closed/task-0704-measure-operational-scale.md)
+Roadmap task: [TC-0704](../../roadmap/closed/task-0704-measure-operational-scale.yaml)
 
 ## Question
 

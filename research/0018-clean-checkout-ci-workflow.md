@@ -4,7 +4,7 @@ Status: Decided
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0602](../roadmap/closed/task-0602-create-the-clean-checkout-ci-workflow.md)
+Roadmap task: [TC-0602](../roadmap/closed/task-0602-create-the-clean-checkout-ci-workflow.yaml)
 
 ## Question
 

@@ -4,7 +4,7 @@ Status: Complete
 
 Date begun: 2026-08-30
 
-Roadmap task: [TC-1003](../../roadmap/closed/task-1003-execute-vaccine-monitoring-requirements-pilot.md)
+Roadmap task: [TC-1003](../../roadmap/closed/task-1003-execute-vaccine-monitoring-requirements-pilot.yaml)
 
 ## Purpose
 

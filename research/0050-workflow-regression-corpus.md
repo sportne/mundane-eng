@@ -1,6 +1,6 @@
 # Research 0050: Complete workflow regression corpus
 
-Task: [TC-1501](../roadmap/closed/task-1501-extend-artifact-workflow-regression-corpora.md).
+Task: [TC-1501](../roadmap/closed/task-1501-extend-artifact-workflow-regression-corpora.yaml).
 
 ## Decision and scope
 

@@ -38,8 +38,9 @@ The source representation is the foundation. A requirements file should be under
 Requirements now have an explicitly selected [YAML 0.3 source
 contract](specification/0010-requirements-yaml-0.3.md), with a normative structural
 schema and separate semantic rules. The [authoring and migration
-guide](examples/yaml/README.md) provides executable examples. The YAML decision
-applies only to requirements; other artifact formats remain independent decisions.
+guide](examples/yaml/README.md) provides executable examples. That YAML decision
+is specific to requirements; work items now have their own independently selected
+YAML specification. Other artifact formats remain independent decisions.
 
 The default source mode remains [custom 0.2](specification/0005-mundanereq-source-language-0.2.md).
 Historical 0.1/0.2 contracts and fixtures are preserved. Three independent native
@@ -74,7 +75,7 @@ explicit project declarations and descriptive text/enum values. Attributes are
 not implemented yet. [Independent version declarations](versions.properties)
 feed command builds and package metadata.
 
-[Work items](distribution/work-items.md) now provide a separate structured Markdown
+[Work items](distribution/work-items.md) now provide a separate YAML work-item
 source profile for tasks and issues, with compilation, typed linking, prerequisite
 analysis and a [derived backlog view](WORK-ITEMS.md). The repository uses that
 workflow for its own task cards; source cards own status and completion evidence.
@@ -253,3 +254,8 @@ the responsibilities left to editors, Git, forges, CI, and project procedure.
 removal-isolation, licensing, and reproducibility evidence. The Git tag
 `native-suite-trial-0.1` identifies the source baseline; generated binaries and
 archives remain ignored and disposable.
+
+Work items now have a [YAML specification and schema](specification/0019-work-items-yaml-0.2.md),
+with multiline body strings and explicit typed relationships. See the
+[authoring workflow](distribution/work-items.md) and [YAML example](examples/work-items/yaml/task.yaml).
+The older Markdown profile remains readable for compatibility.

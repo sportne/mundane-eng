@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0805](../../roadmap/closed/task-0805-test-glossary-and-formal-symbol-artifacts.md)
+Roadmap task: [TC-0805](../../roadmap/closed/task-0805-test-glossary-and-formal-symbol-artifacts.yaml)
 
 ## Question
 

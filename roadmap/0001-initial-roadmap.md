@@ -2,7 +2,7 @@
 
 Status: Draft living roadmap
 
-Last reconciled: 2026-09-05 after the work-item integration batch
+Last reconciled: 2026-09-05 after YAML work-item migration
 
 Execution is decomposed into the [task-card index](0002-task-card-index.md).
 This remains the single strategic roadmap; cards describe bounded work and
@@ -41,7 +41,7 @@ reference reachability alone establishes neither invalidity nor satisfaction.
 
 One repository can coordinate contracts and consumers without requiring one
 language, executable, shared version number, or universal engineering metamodel.
-YAML is selected for requirements only. Each other artifact's authoring format
+YAML is independently selected for requirements and work items. Each other artifact's authoring format
 remains a separate workflow decision, including use of existing formats or native
 engineering files. Common integration concerns compiled interfaces, explicit
 references, provenance and linking. Neither shared YAML notation nor a common
@@ -119,7 +119,7 @@ Current paths are retained. Normative source and output contracts live in specif
 TC-1101 and TC-1102 are complete: logical component boundaries retain independent
 requirements use, while contextual assessments and verification plans retain their
 own authority and revisions. No physical reorganization is currently justified;
-[TC-1104](task-1104-establish-monorepo-component-layout.md) remains Conditional.
+[TC-1104](task-1104-establish-monorepo-component-layout.yaml) remains Conditional.
 
 The completed YAML chain TC-1105–TC-1109 supplies maintained YAML 0.3 with explicit
 selection and default custom 0.2 preservation. TC-1103 used that interpreter and
@@ -131,22 +131,22 @@ baseline/current scopes.
 
 ## Stage 12 — Publish bounded compiler and import interfaces
 
-[TC-1201](closed/task-1201-define-requirement-semantic-output.md) completed versioned
+[TC-1201](closed/task-1201-define-requirement-semantic-output.yaml) completed versioned
 requirement semantics, source ranges, diagnostic meanings, provenance, ordering,
-and completeness; [TC-1202](closed/task-1202-emit-compiled-requirement-artifacts.md)
+and completeness; [TC-1202](closed/task-1202-emit-compiled-requirement-artifacts.yaml)
 implemented the selected interface as mundanereq-compile.
 
-[TC-1203](closed/task-1203-define-import-and-reference-contracts.md) completed explicit
+[TC-1203](closed/task-1203-define-import-and-reference-contracts.yaml) completed explicit
 import selection, qualification, target kinds, revision binding, and failure
 behavior. Qualification preserves human-authored requirement IDs. The design
 distinguishes relationship cycles from build cycles and describes partial input
 without presenting it as fully analyzed.
 
-[TC-0905](closed/task-0905-define-verification-analyzer-contract.md) completed the
+[TC-0905](closed/task-0905-define-verification-analyzer-contract.yaml) completed the
 verification-plan contract and staleness decisions after those designs.
-[TC-1204](closed/task-1204-implement-bounded-artifact-linking.md) implemented the
+[TC-1204](closed/task-1204-implement-bounded-artifact-linking.yaml) implemented the
 bounded resolver, including exact input pins and incomplete-input rejection.
-[TC-0904](closed/task-0904-implement-the-selected-ecosystem-tool.md) implemented plan
+[TC-0904](closed/task-0904-implement-the-selected-ecosystem-tool.yaml) implemented plan
 compilation and the focused verification consumer, with 57 planned assertions and
 two stale statement bindings in the checked-in change case.
 
@@ -158,8 +158,8 @@ IDs remain identity and digests do not enter authored requirement records.
 
 ## Stage 13 — Implement the selected project attributes incrementally
 
-[TC-1301](closed/task-1301-classify-project-attribute-use-cases.md) and
-[TC-1302](closed/task-1302-decide-project-attribute-schemas.md) are complete.
+[TC-1301](closed/task-1301-classify-project-attribute-use-cases.yaml) and
+[TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml) are complete.
 [Research 0051](../research/0051-project-attribute-use-case-decision.md) selects
 text/enumeration, required/optional single values and no defaults for descriptive
 annotations. Independently revised assessments, verification results and contextual
@@ -173,17 +173,17 @@ introduced. Current normative schemas, version constants and commands are unchan
 [worked design cases](../research/0053-project-attribute-design-cases.md) are expected
 outcomes for future tests, not claims of implemented support.
 
-Execute [TC-1303](task-1303-validate-project-defined-requirement-attributes.md) for
+Execute [TC-1303](task-1303-validate-project-defined-requirement-attributes.yaml) for
 contracts/model/schema validation first. Then
-[TC-1304](task-1304-preserve-attributes-in-formatting-and-trace.md) supplies safe
+[TC-1304](task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
 formatting/trace independently of
-[TC-1305](task-1305-compile-project-attribute-artifacts.md)'s versioned output.
-[TC-1306](task-1306-link-and-analyze-project-attributes.md) validates serialized
+[TC-1305](task-1305-compile-project-attribute-artifacts.yaml)'s versioned output.
+[TC-1306](task-1306-link-and-analyze-project-attributes.yaml) validates serialized
 imports and compares explicit values plus schema definitions; changes must be
 visible rather than silently ignored.
-[TC-1307](task-1307-display-project-attributes-in-derived-reports.md) extends the
+[TC-1307](task-1307-display-project-attributes-in-derived-reports.yaml) extends the
 existing experimental report and records unsupported interchange boundaries.
-[TC-1308](task-1308-verify-and-document-project-attribute-workflows.md) closes the
+[TC-1308](task-1308-verify-and-document-project-attribute-workflows.yaml) closes the
 integration loop with reproducible examples, compatibility checks and migration
 notes; each implementation supplies its own tests before completion.
 
@@ -196,11 +196,11 @@ host/workflow, and external ReqIF fidelity remains conditional under TC-0902.
 
 TC-1401 through TC-1403 are complete:
 
-- [TC-1401](closed/task-1401-protect-formatter-write-back.md): detect intervening edits
+- [TC-1401](closed/task-1401-protect-formatter-write-back.yaml): detect intervening edits
   and document recoverable multi-file outcomes, including remaining filesystem races.
-- [TC-1402](closed/task-1402-report-cli-output-failures.md): avoid false success on
+- [TC-1402](closed/task-1402-report-cli-output-failures.yaml): avoid false success on
   stdout/stderr failures and retain focused existing command behavior.
-- [TC-1403](closed/task-1403-recover-parser-diagnostics-safely.md): recover independent
+- [TC-1403](closed/task-1403-recover-parser-diagnostics-safely.yaml): recover independent
   errors without inventing complete valid models or misleading cross-file findings.
 
 Separate decoding, syntax, semantics, and validation only where it produces an
@@ -210,18 +210,18 @@ concrete consumer, not a general cleanup objective.
 
 ## Stage 15 — Extend repeatable checks and contributor integration
 
-[TC-1502](closed/task-1502-centralize-version-declarations.md) completed authoritative current version
+[TC-1502](closed/task-1502-centralize-version-declarations.yaml) completed authoritative current version
 declarations while preserving independent source/tool/package/format identifiers and
 experimental migration policy.
-[TC-1503](closed/task-1503-align-ci-with-authoritative-verification.md) closed the
+[TC-1503](closed/task-1503-align-ci-with-authoritative-verification.yaml) closed the
 gap between hosted checks and make verify, with clean-run and deliberate-failure
 evidence.
 
 The first report loop is complete.
-[TC-1501](closed/task-1501-extend-artifact-workflow-regression-corpora.md) adds five
+[TC-1501](closed/task-1501-extend-artifact-workflow-regression-corpora.yaml) adds five
 source-rebuilt report corpora, 12 replayable seeds in both source modes and six
 isolated implementation mutations. Every implementation card still supplies its
-own tests. [TC-1504](closed/task-1504-emit-sarif-validation-diagnostics.md) adds
+own tests. [TC-1504](closed/task-1504-emit-sarif-validation-diagnostics.yaml) adds
 schema-validated SARIF with source-accurate points and tested output failure behavior.
 
 Reproduce existing package checks rather than commissioning new packaging work
@@ -231,18 +231,18 @@ must name a current missing capability and measured evidence.
 
 ## Views and specifications
 
-[TC-0903](closed/task-0903-run-a-derived-presentation-experiment.md) completed a
+[TC-0903](closed/task-0903-run-a-derived-presentation-experiment.yaml) completed a
 deterministic report over the analyzer, recording input revisions and completeness
 and linking findings to source. Its repeatable review workflow justified retaining
 the experimental renderer but did not demonstrate a need for authored composition.
 
-[TC-0807](task-0807-test-authored-views-and-specifications.md) is a conditional
+[TC-0807](task-0807-test-authored-views-and-specifications.yaml) is a conditional
 successor if the report demonstrates a need for authored composition. Source
 definitions can own selection and ordering; generated report content remains
 derived. Issued reports may be retained as delivery records with separate
 approval provenance, never as an editable competing source of requirement facts.
 
-[TC-0902](task-0902-run-an-independent-reqif-roundtrip.md) retains its existing
+[TC-0902](task-0902-run-an-independent-reqif-roundtrip.yaml) retains its existing
 conditional external-tool experiment. Editor highlighting, inline diagnostics,
 navigation, formatter integration, attribute hover/completion, and Unicode
 confusable/invisible-character diagnostics remain candidates for bounded follow-up
@@ -351,8 +351,8 @@ prospective gates with the incremental workflow above while preserving the
 
 The selected batch specifies and implements a bounded source-to-compiled-to-linked
 work-item workflow, using this repository’s cards as the migration corpus.
-[TC-1601](closed/task-1601-define-work-item-ownership.md) through
-[TC-1606](closed/task-1606-dogfood-the-work-item-backlog.md) preserve human IDs, authored
+[TC-1601](closed/task-1601-define-work-item-ownership.yaml) through
+[TC-1606](closed/task-1606-dogfood-the-work-item-backlog.yaml) preserve human IDs, authored
 status and completion evidence; generated indices are derived. Issue/task source
 notation is selected independently of requirements YAML.
 
@@ -360,3 +360,11 @@ TC-1601–1606 are complete. [Work-item commands](../distribution/work-items.md)
 compile, link and render the repository backlog; the [derived index](../WORK-ITEMS.md)
 replaces manual status tables. The attribute implementation chain remains available
 independently.
+
+## YAML work-item continuation
+
+TC-1607–1609 select and implement a work-item-specific YAML specification/schema
+and migrate the authoritative backlog. Literal body strings retain Markdown prose
+without defining machine relationships. Compiled work-item imports, analysis and
+derived views keep their established meanings; the old source remains a compatibility
+profile. Other artifact formats remain independent decisions.

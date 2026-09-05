@@ -1,6 +1,6 @@
 # Research 0051: Project attribute use-case decision
 
-Date: 2026-09-05. Task: [TC-1301](../roadmap/closed/task-1301-classify-project-attribute-use-cases.md).
+Date: 2026-09-05. Task: [TC-1301](../roadmap/closed/task-1301-classify-project-attribute-use-cases.yaml).
 
 Status: Selected design scope; attributes are not implemented.
 

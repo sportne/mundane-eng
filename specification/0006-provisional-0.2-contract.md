@@ -162,7 +162,7 @@ policy have explicit dispositions. Their deferred companion carriers are not
 missing intrinsic requirement fields.
 
 The only identified 1.0 candidate remains a no-feature, semantics-identical
-successor to this contract. [TC-1002](../roadmap/closed/task-1002-define-compatibility-and-publish-or-defer-1.0.md)
+successor to this contract. [TC-1002](../roadmap/closed/task-1002-define-compatibility-and-publish-or-defer-1.0.yaml)
 deferred publication on 2026-08-30 because independent-human authoring, normal
 human review, and realistic workflow evidence were insufficient for a durable
 compatibility promise. [Experiment 0024](../experiments/0024-vaccine-monitoring-pilot/assessment.md)

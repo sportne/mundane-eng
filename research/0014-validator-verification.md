@@ -4,7 +4,7 @@ Status: Complete
 
 Date: 2026-08-23
 
-Roadmap task: [TC-0302](../roadmap/closed/task-0302-verify-validator-behavior.md)
+Roadmap task: [TC-0302](../roadmap/closed/task-0302-verify-validator-behavior.yaml)
 
 ## Question
 

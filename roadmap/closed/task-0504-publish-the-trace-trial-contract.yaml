@@ -1,0 +1,59 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-0504"
+kind: "task"
+title: "Publish the Trace Trial Contract"
+status: "Complete"
+dependencies:
+  - "TC-0503"
+relations: []
+planning:
+  condition: "TC-0503"
+  stage: "5"
+  statusNote: ""
+  type: "Decision and documentation"
+  unlocks: "TC-0601"
+body: |2+
+
+  ## Question
+
+  Which trace operations and output guarantees are ready for independent team use?
+
+  ## Outcome
+
+  A versioned trace-tool trial contract documents supported questions, relationship meaning, determinism, limitations, and reproducible native use.
+
+  ## Work
+
+  - Document each operation using requirement-domain examples.
+  - State output ordering and cycle behavior.
+  - Explain that reverse links and indexes are derived and disposable.
+  - Separate language validity from optional policy observations.
+  - Identify the reproducible implementation and evidence baseline.
+
+  ## Acceptance evidence
+
+  - A user can predict the trace question answered by each invocation.
+  - The contract does not imply arbitrary relationship support.
+  - The output's human-readable guarantees are explicit without freezing accidental formatting unnecessarily.
+  - The README can present trace as a maintained independent tool.
+
+  ## Out of scope
+
+  - A stable machine-readable trace protocol.
+  - Visualization or browser UI.
+  - New relationship models.
+
+  ## Completion decision
+
+  Publish only the operations demonstrated by TC-0503; retain experimental operations behind no compatibility claim or remove them.
+
+  ## Result
+
+  The [trace trial contract 0.1](../../specification/0009-trace-trial-contract-0.1.md) publishes only `parents`, `children`, `higher`, and `impact` over authored `decomposes` relationships. It states each requirement-domain question, exact ordering and shortest-path selection, reachable cycle observations, source and query error precedence, exit statuses, disposable derived-state boundary, and deliberate omissions.
+
+  `make trace-verify` is the reproducible acceptance gate, and the `trace-trial-0.1` Git tag identifies the reviewed source baseline. Publish as a maintained human-readable trial without implying arbitrary relationship queries, impact correctness, policy enforcement, persistent indexes, or a stable machine protocol.
+
+  ## References
+
+  - [TC-0503](task-0503-verify-trace-graph-behavior.yaml)
+  - [Minimum decomposition semantics](../../specification/0002-minimum-source-language-and-model.md#decomposition-relationship)

@@ -4,7 +4,7 @@ Status: Complete; no additional tool selected
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0901](../roadmap/closed/task-0901-prioritize-the-next-ecosystem-tool.md)
+Roadmap task: [TC-0901](../roadmap/closed/task-0901-prioritize-the-next-ecosystem-tool.yaml)
 
 ## Decision question
 
@@ -58,7 +58,7 @@ yet contain evidence sufficient to choose one.
 
 Select no ecosystem-tool implementation and do not unlock TC-0904. The next
 bounded evidence milestone is existing
-[TC-0706](../roadmap/closed/task-0706-run-the-subagent-author-review-trial.md).
+[TC-0706](../roadmap/closed/task-0706-run-the-subagent-author-review-trial.yaml).
 Its primary question is whether a systems engineer can understand, author,
 repair, trace, and review the source using the written material and current
 tools.
@@ -107,6 +107,6 @@ The retention change also showed that whole-source-set binding creates
 irrelevant assessment churn.
 
 This evidence selects a focused verification-plan analyzer, not a generalized
-policy tool. [TC-0905](../roadmap/closed/task-0905-define-verification-analyzer-contract.md)
+policy tool. [TC-0905](../roadmap/closed/task-0905-define-verification-analyzer-contract.yaml)
 must compare revision-binding granularities and freeze a bounded trial contract.
 Only a successful TC-0905 unlocks TC-0904 implementation.

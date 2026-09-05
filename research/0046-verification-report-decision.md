@@ -1,6 +1,6 @@
 # Research 0046: Verification report decision
 
-Date: 2026-09-05. Task: [TC-0903](../roadmap/closed/task-0903-run-a-derived-presentation-experiment.md).
+Date: 2026-09-05. Task: [TC-0903](../roadmap/closed/task-0903-run-a-derived-presentation-experiment.yaml).
 
 ## Decision
 

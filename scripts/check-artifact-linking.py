@@ -12,8 +12,10 @@ ROOT=Path(__file__).resolve().parents[1]
 FIXTURE=ROOT/'experiments/0028-verification-contract'
 NATIVE=Path(sys.argv[1]).resolve()
 ISOLATED=ROOT/'build/artifact-only-classes'
-ISOLATED.mkdir(parents=True,exist_ok=True)
-subprocess.run(['javac','--release','21','-d',str(ISOLATED)]+[str(p) for p in sorted((ROOT/'src/main/java/engineering').rglob('*.java'))]+[str(ROOT/'build/maintained/generated/mundanereq/Versions.java')],check=True)
+if ISOLATED.exists():shutil.rmtree(ISOLATED)
+ISOLATED.mkdir(parents=True)
+# Compile only the serialized linker boundary; unrelated source adapters are not dependencies.
+subprocess.run(['javac','--release','21','-d',str(ISOLATED)]+[str(p) for p in sorted((ROOT/'src/main/java/engineering/artifacts').glob('*.java'))]+[str(ROOT/'build/maintained/generated/mundanereq/Versions.java')],check=True)
 COMMANDS=[['java','-cp',str(ISOLATED),'engineering.artifacts.LinkMain'],[str(NATIVE)]]
 
 

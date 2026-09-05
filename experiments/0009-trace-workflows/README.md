@@ -4,7 +4,7 @@ Status: Completed
 
 Result date: 2026-08-29
 
-Roadmap task: [TC-0503](../../roadmap/closed/task-0503-verify-trace-graph-behavior.md)
+Roadmap task: [TC-0503](../../roadmap/closed/task-0503-verify-trace-graph-behavior.yaml)
 
 ## Question
 

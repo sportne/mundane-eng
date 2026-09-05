@@ -4,7 +4,7 @@ Status: Completed
 
 Result date: 2026-08-29
 
-Roadmap task: [TC-0603](../../roadmap/closed/task-0603-run-the-integrated-toolchain-trial.md)
+Roadmap task: [TC-0603](../../roadmap/closed/task-0603-run-the-integrated-toolchain-trial.yaml)
 
 ## Question
 

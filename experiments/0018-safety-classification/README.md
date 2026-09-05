@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0803](../../roadmap/closed/task-0803-test-safety-classification-ownership.md)
+Roadmap task: [TC-0803](../../roadmap/closed/task-0803-test-safety-classification-ownership.yaml)
 
 ## Question
 

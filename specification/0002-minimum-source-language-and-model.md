@@ -371,7 +371,7 @@ Experiment 0006 demonstrates a schema-valid bounded ReqIF 1.2 semantic self-roun
    language conformance. No generalized policy language is selected.
    [Research 0029](../research/0029-trace-policy-decision.md)
 7. **Authored views:** no source syntax is selected without a concrete
-   composition workflow. [TC-0807](../roadmap/task-0807-test-authored-views-and-specifications.md)
+   composition workflow. [TC-0807](../roadmap/task-0807-test-authored-views-and-specifications.yaml)
 
 These outcomes deliberately leave companion carriers and empirical maturity
 work outside the requirement grammar. The [1.0 readiness

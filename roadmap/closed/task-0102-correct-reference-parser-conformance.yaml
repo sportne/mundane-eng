@@ -1,0 +1,69 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-0102"
+kind: "task"
+title: "Correct Reference Parser Conformance"
+status: "Complete"
+dependencies:
+  - "TC-0101"
+relations: []
+planning:
+  condition: "TC-0101"
+  stage: "1"
+  statusNote: ""
+  type: "Implementation"
+  unlocks: "TC-0103"
+body: |2+
+
+  ## Question
+
+  Can the experimental Java parser satisfy the formal 0.2 Unicode rules without disturbing existing source interpretation?
+
+  ## Outcome
+
+  The three known parser deviations are repaired and all old and new conformance tests pass on the JVM and as a GraalVM native image.
+
+  ## Work
+
+  - Reject all prohibited C1 controls required by the standard.
+  - Apply the standard's explicit Unicode whitespace set symmetrically at scalar boundaries.
+  - Count diagnostic columns in Unicode scalar values rather than UTF-16 code units.
+  - Add focused regression tests mapped to the TC-0101 fixtures.
+  - Run the complete Experiment 0002 and source-comment test harnesses.
+
+  ## Acceptance evidence
+
+  - All TC-0101 fixtures receive the specified result and coordinate.
+  - Existing 0.1 and 0.2 semantic inventories remain unchanged.
+  - The JVM and native-image test runs pass.
+  - The repair does not add a third-party dependency or broaden accepted syntax.
+
+  ## Out of scope
+
+  - Extracting production modules from the probe.
+  - Redesigning diagnostics.
+  - Adding language features or formatter support.
+
+  ## Completion decision
+
+  If a repair requires a semantic change, stop and return to the provisional standard. Otherwise record the probe as behaviorally aligned with 0.2 for the audited cases.
+
+  ## Result
+
+  The reference probe now:
+
+  - rejects the complete U+007F through U+009F prohibited range;
+  - applies the specification's enumerated scalar-boundary whitespace set to
+    both ends of scalar values;
+  - computes decoded-text columns by Unicode scalar value rather than UTF-16
+    code unit.
+
+  Four conformance fixtures have exact regression assertions. All pre-existing
+  semantic inventories remain unchanged, the dependency-free harness passes 14
+  grouped tests, and both the JVM and GraalVM native executable produce the
+  documented results. No dependency or source-language change was introduced.
+
+  ## References
+
+  - [TC-0101](task-0101-strengthen-unicode-conformance-fixtures.yaml)
+  - [Experiment 0002](../../experiments/0002-deterministic-interpretation/README.md)
+  - [0.2 language standard](../../specification/0005-mundanereq-source-language-0.2.md)

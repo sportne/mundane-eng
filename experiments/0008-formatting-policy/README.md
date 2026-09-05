@@ -4,7 +4,7 @@ Status: Completed
 
 Result date: 2026-08-23
 
-Roadmap task: [TC-0401](../../roadmap/closed/task-0401-run-the-formatting-policy-experiment.md)
+Roadmap task: [TC-0401](../../roadmap/closed/task-0401-run-the-formatting-policy-experiment.yaml)
 
 ## Question
 

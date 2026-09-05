@@ -1,6 +1,6 @@
 # Research 0053: Project attribute worked design cases
 
-Date: 2026-09-05. Evidence for [TC-1302](../roadmap/closed/task-1302-decide-project-attribute-schemas.md)
+Date: 2026-09-05. Evidence for [TC-1302](../roadmap/closed/task-1302-decide-project-attribute-schemas.yaml)
 and [Research 0052](0052-project-attribute-schema-decision.md).
 
 Status: Reviewed design examples and expected outcomes, not implemented fixtures

@@ -4,7 +4,7 @@ Status: Complete
 
 Date: 2026-08-23
 
-Roadmap task: [TC-0204](../roadmap/closed/task-0204-port-tests-and-prove-native-tool-boundaries.md)
+Roadmap task: [TC-0204](../roadmap/closed/task-0204-port-tests-and-prove-native-tool-boundaries.yaml)
 
 ## Question
 

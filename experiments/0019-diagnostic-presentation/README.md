@@ -4,7 +4,7 @@ Status: Completed
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0707](../../roadmap/closed/task-0707-test-bounded-diagnostic-presentation.md)
+Roadmap task: [TC-0707](../../roadmap/closed/task-0707-test-bounded-diagnostic-presentation.yaml)
 
 ## Question
 

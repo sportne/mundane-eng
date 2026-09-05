@@ -4,7 +4,7 @@ Status: Decided and prototyped
 
 Decision date: 2026-08-23
 
-Roadmap task: [TC-0202](../roadmap/closed/task-0202-design-the-shared-source-representation.md)
+Roadmap task: [TC-0202](../roadmap/closed/task-0202-design-the-shared-source-representation.yaml)
 
 ## Question
 

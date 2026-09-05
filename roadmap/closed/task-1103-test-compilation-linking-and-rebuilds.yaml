@@ -1,0 +1,114 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1103"
+kind: "task"
+title: "Test Compilation, Linking, and Rebuilds"
+status: "Complete"
+dependencies:
+  - "TC-1102"
+  - "TC-1105"
+relations: []
+planning:
+  condition: "TC-1102, TC-1105"
+  stage: "11"
+  statusNote: ""
+  type: "Experiment and decision"
+  unlocks: "TC-1201, TC-0905"
+body: |2+
+
+  ## Question
+
+  Can the existing verification-plan workflow be built from compiled artifacts and
+  explicit linking with a smaller, inspectable contract than a general platform?
+
+  ## Outcome
+
+  A bounded experimental requirements/verification pipeline compares representations
+  and records the minimum interfaces needed for maintained compilation and linking.
+
+  ## Work
+
+  - Apply TC-1105's source-representation decision when selecting experimental
+    requirement adapters. Keep compiled semantics independent of authoring syntax;
+    a YAML decision does not itself migrate maintained source or change production
+    parser behavior in this experiment.
+  - Reuse a small selection from Experiment 0024 plus its two-baseline change case.
+    Produce experimental requirement and plan representations, resolve references,
+    calculate planned coverage/staleness, and generate one plain report.
+  - Use a small adapter for the existing experimental TSV plan carrier alongside
+    the maintained requirements YAML interpreter. This exercises different source
+    representations through compiled interfaces. Keep the plan carrier provisional;
+    TC-0905 selects its eventual authoring format using verification workflow needs.
+  - Delete generated outputs and rebuild from explicit inputs. Capture source,
+    compiler/adapter, format, and resolved dependency provenance.
+  - Exercise a normative edit, unrelated edit, comment edit, file move, ID correction,
+    missing target, duplicate ID across imported scopes, and a relationship cycle.
+  - Distinguish local interpretation, linking, and analysis failures. A partially
+    interpreted artifact must not masquerade as a complete input.
+  - Compare Git revision binding and narrowly scoped content comparison for TC-0905;
+    identify which experiment-specific mechanics should be discarded.
+
+  ## Acceptance evidence
+
+  - Checked-in source fixtures, experimental scripts, expected reports, and commands
+    reproduce the successful build and every negative/change case.
+  - One consumer reads the compiled requirement representation without importing
+    requirement-parser internals. The recorded pipeline uses YAML requirement source
+    and the existing TSV plan fixture through separate adapters; linking and analysis
+    depend on their published experimental values, references and provenance.
+  - Each reported impact traces to an authored reference; possible impact does not
+    automatically assert invalidity, failed verification, or requirement satisfaction.
+  - Repeated builds from the same recorded inputs produce identical semantic outputs
+    and report content under documented path/provenance normalization.
+  - A decision record compares alternatives, names required common fields, and
+    enables TC-1201 without claiming the experiment is a public artifact contract.
+
+  ## Out of scope
+
+  - Production compiler/linker APIs, new core syntax, test execution, safety tooling,
+    a remote registry, a new build system, or a universal graph query language.
+
+  ## Compatibility and affected components
+
+  Reuse the pilot and maintained interpreter as experimental inputs without changing
+  their contracts. New experiment outputs remain derived. Human-authored requirement
+  IDs remain identity; any digest describes content under explicit comparison rules,
+  changes with relevant content edits, and is not added to authored requirements.
+  Likely components: a new bounded experiment, existing pilot fixtures, inventory
+  utility, and verification-plan adapters.
+
+  ## Completion decision
+
+  Select maintained contracts only if the complete change loop works with explicit
+  inputs and understandable source. Narrow or stop the common integration layer if
+  a generalized type system or mandatory platform is needed for this first consumer.
+
+  ## References
+
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [TC-1102](task-1102-define-requirement-and-assertion-ownership.yaml)
+  - [TC-1105](task-1105-compare-yaml-and-custom-requirement-source.yaml)
+  - [Pilot assessment](../../experiments/0024-vaccine-monitoring-pilot/assessment.md)
+  - [Pilot decision](../../research/0032-end-to-end-pilot-decision.md)
+  - [TC-0905](task-0905-define-verification-analyzer-contract.yaml)
+
+  ## Planning refinement
+
+  Add TC-1105 as a prerequisite so the source-adapter experiment uses the explicit
+  YAML/custom-syntax disposition. The compiled-artifact workflow and semantic-model
+  scope remain unchanged; this card does not silently adopt an authoring format.
+
+  The completed [YAML decision](../../research/0033-yaml-source-representation-decision.md)
+  is implemented by TC-1106–1109. Use the maintained YAML 0.3 interpreter; only
+  the compiled experiment and plan carrier remain provisional. TC-1102 is complete.
+
+  Limit TC-1105's YAML disposition to the requirement adapter. Replace the shared-
+  notation comparison with a bounded check using the existing distinct source
+  carriers. This neither selects TSV for maintained plans nor adds a source-format
+  decision for other artifacts. Status and dependencies remain unchanged.
+
+  The completed YAML batch supersedes the provisional requirement-adapter assumption.
+  Use maintained YAML 0.3 directly; no second YAML parser or profile is introduced.
+
+  ## Completion evidence
+
+  Completed by [Experiment 0027](../../experiments/0027-compilation-linking/README.md) and [Research 0038](../../research/0038-compilation-linking-experiment.md). The runner passed 57 requirements, 13 golden change/failure cases, independent local checkouts and two identical clean rebuilds using a serialized-only consumer. TC-1201 still awaits TC-1502; maintained import and plan contracts remain unresolved.

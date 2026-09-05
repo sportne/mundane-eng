@@ -4,7 +4,7 @@ Status: Completed controlled trial
 
 Date: 2026-08-29
 
-Roadmap task: [TC-0703](../../roadmap/closed/task-0703-run-the-multi-author-and-layout-trial.md)
+Roadmap task: [TC-0703](../../roadmap/closed/task-0703-run-the-multi-author-and-layout-trial.yaml)
 
 ## Question
 

@@ -86,3 +86,10 @@ for p in (ROOT/'examples/work-items/yaml').glob('*.yaml'):validator.validate(loa
 base=loader.load((ROOT/'examples/work-items/yaml/task.yaml').read_text())
 for change in [dict(id=123),dict(body=[]),dict(status='Done'),dict(extra='x'),dict(kind='issue',status='Open',dependencies=['A']),dict(planning={'x':'y'}),dict(relations=[{'relation':'evidence','scope':'work','kind':'resource','target':'x'}])]:assert not validator.is_valid(base|change)
 print('PASS independent YAML 1.2 loading and Draft 2020-12 work-item schema')
+
+# Real repository sources and the template use the independent loader/schema too.
+manifest=json.loads((ROOT/'roadmap/work-items.json').read_text())
+if manifest['format']=='mundane-work-set-0.2':
+    paths=manifest['files']+['roadmap/task-card-template.yaml']
+    for name in paths:validator.validate(loader.load((ROOT/name).read_text()))
+    print('PASS independent schema for',len(paths)-1,'repository cards and template')
