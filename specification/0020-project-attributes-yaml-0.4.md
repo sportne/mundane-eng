@@ -105,3 +105,12 @@ alone cannot assert semantic validity. Other artifact formats are independent ch
 Formatter and trace support is implemented by TC-1304. Their YAML 0.4 command
 contracts are formatter-cli-0.1+safety-1+attributes-1 and
 trace-cli-0.1+safety-1+attributes-1. Old-profile contract identifiers remain unchanged.
+
+## Worked adoption and downstream contracts
+
+The [example guide](../examples/attributes/README.md) demonstrates explicit header,
+project-name and command-option changes without rewriting existing projects. See
+[output 0.2](0021-requirement-semantic-output-0.2.md) for derived declarations and
+[analysis 0.2](0022-attribute-linking-and-analysis-0.2.md) for conservative review
+comparison. Current implementation/capability limits are in the
+[command guide](../distribution/attributes.md); source text remains authoritative.

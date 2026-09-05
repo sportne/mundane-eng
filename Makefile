@@ -338,3 +338,11 @@ attribute-report-verify: native-verification native-migrate
 	python3 scripts/check-attribute-report.py
 
 verify: attribute-report-verify
+
+.PHONY: attribute-workflow-verify
+attribute-workflow-verify: native-validator native-formatter native-compile native-plan native-link native-verification
+	python3 scripts/check-attribute-corpus.py
+	python3 experiments/0036-project-attributes/workflow.py
+	python3 experiments/0036-project-attributes/regressions.py
+
+verify: attribute-workflow-verify

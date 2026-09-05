@@ -10,9 +10,9 @@ Use the [declaration](../examples/attributes/requirement-attributes.json),
 [normative contract](../specification/0020-project-attributes-yaml-0.4.md).
 
 ```sh
-build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json examples/attributes
-build/maintained/mundanereq-format --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json --check examples/attributes
-build/maintained/mundanereq-trace --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json parents SYS-001 examples/attributes
+build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json examples/attributes/system.mreq.yaml
+build/maintained/mundanereq-format --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json --check examples/attributes/system.mreq.yaml
+build/maintained/mundanereq-trace --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json parents SYS-001 examples/attributes/system.mreq.yaml
 ```
 
 Formatting validates all values, preserves authored order/comments/quotes/indentation
@@ -26,13 +26,12 @@ Invalid schema/value input yields no writes or usable trace output.
 Old profiles and commands remain unchanged. Adoption requires a deliberate 0.4
 header change, matching attributeSchema name and explicit --attribute-schema option.
 Omit both schema name/option and attributes for schema-free 0.4. Existing source need
-not migrate. Compilation and downstream capabilities are enabled by their owning
-cards; unsupported selectors/formats fail instead of silently dropping values.
+not migrate. Unsupported selectors/formats fail instead of silently dropping values.
 
 Compilation is available with an explicit source root:
 
 ```sh
-build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/requirement-attributes.json examples/attributes > requirements.json
+build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/requirement-attributes.json examples/attributes/system.mreq.yaml > requirements.json
 ```
 
 [Output 0.2](../specification/0021-requirement-semantic-output-0.2.md) preserves
@@ -74,3 +73,12 @@ discovery does not select `.mreq.yaml` files; do not use a mixed directory as an
 attribute export. No YAML downgrade, ReqIF custom-field flattening, external-tool
 roundtrip or interoperability result is claimed. Attribute adoption is an explicit
 source/configuration change, with no automatic conversion from unrelated formats.
+
+
+For a complete executable workflow and the 57-requirement adoption example, see
+[the example guide](../examples/attributes/README.md). An attribute declaration is
+not itself a JSON Schema document. The checked-in structural schemas describe the
+language/declaration shape; project-specific enum membership, requiredness, names,
+physical limits and explicit selection remain compiler rules. Editors may use those
+structural schemas where supported, but this repository provides no editor host,
+project-schema completion, hover or equivalent semantic-validation integration.

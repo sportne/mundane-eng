@@ -1,0 +1,95 @@
+format: "mundanereq-yaml-0.4"
+attributeSchema: "vaccine-example-metadata"
+# Stakeholder needs derived from the project context and public operational guidance.
+requirements:
+  - id: "NEED-001"
+    attributes:
+      layer: "needs"
+      owner-team: "Example needs contributors"
+    title: "Local awareness of storage conditions"
+    statement:
+      - prose: "Clinic personnel need to recognize current refrigerator conditions, temperature excursions, and monitoring faults while they are at the storage site."
+    rationale:
+      - "Local awareness supports timely programme action and must not depend on wide-area connectivity."
+    source: "CDC-PINK-5:Monitoring Vaccine Temperatures + PILOT-CONTEXT:CTX-EXCURSION"
+  - id: "NEED-002"
+    attributes:
+      layer: "needs"
+    title: "Remote awareness of alarms and faults"
+    statement:
+      - prose: "Authorized public-health programme staff need to learn of refrigerator alarm and monitoring-fault conditions without visiting the clinic."
+    rationale:
+      - "Remote awareness supports oversight and escalation across geographically separated service points."
+    source: "WHO-EM01.2:1 and 4.6.5"
+  - id: "NEED-003"
+    attributes:
+      layer: "needs"
+    title: "Monitoring through infrastructure interruptions"
+    statement:
+      - prose: "Clinic personnel need monitoring and local alarming to continue during prolonged loss of site power and temporary loss of remote connectivity."
+    rationale:
+      - "The selected deployment context includes intermittent electricity and communications."
+    source: "WHO-EM01.2:4.2.12 + PILOT-CONTEXT:CTX-POWER-LOSS"
+  - id: "NEED-004"
+    attributes:
+      layer: "needs"
+    title: "Investigable historical record"
+    statement:
+      - prose: "Authorized users need retained time-correlated monitoring, alarm, and fault records sufficient to investigate excursions and equipment performance."
+    rationale:
+      - "A current indication alone cannot support trend review, excursion investigation, or demonstration of prior conditions."
+    source: "CDC-PINK-5:Monitoring Vaccine Temperatures"
+  - id: "NEED-005"
+    attributes:
+      layer: "needs"
+    title: "Controlled employer data access"
+    statement:
+      - prose: "The employer needs to control who can access its raw and summarized monitoring data throughout the contracted service period."
+    rationale:
+      - "Hosting the data outside the clinic must not transfer programme ownership or grant unrestricted access."
+    source: "WHO-EM01.2:4.2.19-4.2.20"
+  - id: "NEED-006"
+    attributes:
+      layer: "needs"
+    title: "Interoperability with compliant equipment"
+    statement:
+      - prose: "The employer needs the monitoring product to interoperate with compliant refrigerator loggers and external programme data systems without proprietary reinterpretation of cold-chain records."
+    rationale:
+      - "Interoperability permits equipment and data-service choices to remain separable."
+    source: "WHO-EM01.2:4.1.1 and 4.2.21"
+  - id: "NEED-007"
+    attributes:
+      layer: "needs"
+    title: "Maintainable field operation"
+    statement:
+      - prose: "A trained service technician needs to diagnose monitoring faults and replace serviceable energy-storage components at the deployment site."
+    rationale:
+      - "Field service reduces avoidable monitoring outages at remote clinics."
+    source: "WHO-EM01.2:4.2.13 and 4.9.1"
+  - id: "NEED-008"
+    attributes:
+      layer: "needs"
+    title: "Trustworthy event timing"
+    statement:
+      - prose: "Authorized users need monitoring records from logger-relative time to be associated with trustworthy absolute time and displayed in the configured local time zone."
+    rationale:
+      - "Investigation and coordination require events from different systems to share an understandable time basis."
+    source: "WHO-EM01.2:4.2.1-4.2.4"
+  - id: "NEED-009"
+    attributes:
+      layer: "needs"
+    title: "Distinguishable absence and failure"
+    statement:
+      - prose: "Authorized users need to distinguish unavailable readings, communication interruptions, and device faults from measured in-range conditions."
+    rationale:
+      - "Missing evidence must not be presented as evidence of acceptable storage conditions."
+    source: "CDC-PINK-5:Monitoring Vaccine Temperatures"
+  - id: "NEED-010"
+    attributes:
+      layer: "needs"
+    title: "Preserve human authority over vaccine disposition"
+    statement:
+      - prose: "Clinic personnel need monitoring information to support, but not automate, decisions about whether vaccines remain suitable for use after an excursion."
+    rationale:
+      - "Product monitoring is only one input to the programme's documented excursion-response process."
+    source: "CDC-PINK-5:Temperature Excursions + PILOT-CONTEXT:Explicit exclusions"

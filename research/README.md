@@ -115,3 +115,11 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 - [Research 0058: Derived work-item view verification](0058-work-item-view-verification.md)
 
 - [Research 0059: Work-item backlog integration](0059-work-item-backlog-verification.md)
+
+- [Research 63: Attribute validation](0063-attribute-validation-verification.md)
+- [Research 64: Attribute formatting](0064-attribute-formatting-verification.md)
+- [Research 65: Attribute compilation](0065-attribute-compilation-verification.md)
+- [Research 66: Attribute linking](0066-attribute-linking-verification.md)
+- [Research 67: Attribute reports](0067-attribute-report-verification.md)
+
+- [Research 0068: Attribute workflow verification](0068-attribute-workflow-verification.md)

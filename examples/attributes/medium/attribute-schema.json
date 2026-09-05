@@ -1,0 +1,22 @@
+{
+  "format": "mundanereq-attribute-schema-0.1",
+  "name": "vaccine-example-metadata",
+  "attributes": {
+    "layer": {
+      "type": "enum",
+      "required": true,
+      "description": "Illustrative source grouping, not allocation or assessment.",
+      "values": [
+        "needs",
+        "system",
+        "device",
+        "remote"
+      ]
+    },
+    "owner-team": {
+      "type": "text",
+      "required": false,
+      "description": "Illustrative team label; no approval authority."
+    }
+  }
+}

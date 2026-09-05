@@ -7,4 +7,8 @@ ROOT=Path(__file__).resolve().parents[1];yaml=YAML(typ='safe',pure=True);yaml.ve
 for schema_name,fixture in [('attribute-declaration-0.1.json','requirement-attributes.json'),('requirements-yaml-0.4.json','system.mreq.yaml')]:
     schema=json.loads((ROOT/'specification/schema'/schema_name).read_text());Draft202012Validator.check_schema(schema);v=Draft202012Validator(schema);data=yaml.load((ROOT/'examples/attributes'/fixture).read_text());v.validate(data)
     for change in [{'format':'future'},{'unknown':True}]:assert not v.is_valid(data|change)
-print('PASS independent attribute declaration and YAML 0.4 structural schemas')
+for fixture in sorted((ROOT/'examples/attributes/medium').glob('*')):
+    if fixture.suffix not in ('.json','.yaml'):continue
+    name='attribute-declaration-0.1.json' if fixture.suffix=='.json' else 'requirements-yaml-0.4.json'
+    Draft202012Validator(json.loads((ROOT/'specification/schema'/name).read_text())).validate(yaml.load(fixture.read_text()))
+print('PASS independent attribute declaration and YAML 0.4 structural schemas, including the medium example')

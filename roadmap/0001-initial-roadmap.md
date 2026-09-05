@@ -2,7 +2,7 @@
 
 Status: Draft living roadmap
 
-Last reconciled: 2026-09-05 after YAML work-item migration
+Last reconciled: 2026-09-05 after project attribute workflow verification
 
 Execution is decomposed into the [task-card index](0002-task-card-index.md).
 This remains the single strategic roadmap; cards describe bounded work and
@@ -111,7 +111,7 @@ records current source, migration, safety and verification evidence.
 The [compiled-requirements batch](../research/0041-compiled-requirements-verification.md)
 adds the documented compiler boundary, retained source spans and a serialized-only
 consumer check. Maintained local imports, TSV plans and review-basis comparisons
-now have contracts and implementations. Project attribute schemas remain unresolved.
+now have contracts and implementations. Project-defined text/enum schemas and their compiled consumers are implemented.
 Current paths are retained. Normative source and output contracts live in specification/.
 
 ## Stage 11 — Monorepo and ownership decisions
@@ -165,27 +165,18 @@ text/enumeration, required/optional single values and no defaults for descriptiv
 annotations. Independently revised assessments, verification results and contextual
 allocations remain outside the requirement. Built-in allocation/source stay valid.
 
-[Research 0052](../research/0052-project-attribute-schema-decision.md) selects a
-checked-in narrow JSON declaration passed explicitly to requirements commands,
-and YAML requirement values under an opt-in future source profile. Other artifact
-formats remain independent. No discovery, schema merging or default values are
-introduced. Current normative schemas, version constants and commands are unchanged;
-[worked design cases](../research/0053-project-attribute-design-cases.md) are expected
-outcomes for future tests, not claims of implemented support.
+[Research 0052](../research/0052-project-attribute-schema-decision.md) selected a
+checked-in narrow JSON declaration passed explicitly to requirements commands and
+YAML 0.4 values. Other artifact formats remain independent. No discovery, schema
+merging or default values are introduced.
 
-Execute [TC-1303](closed/task-1303-validate-project-defined-requirement-attributes.yaml) for
-contracts/model/schema validation first. Then
-[TC-1304](closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
-formatting/trace independently of
-[TC-1305](closed/task-1305-compile-project-attribute-artifacts.yaml)'s versioned output.
-[TC-1306](closed/task-1306-link-and-analyze-project-attributes.yaml) validates serialized
-imports and compares explicit values plus schema definitions; changes must be
-visible rather than silently ignored.
-[TC-1307](closed/task-1307-display-project-attributes-in-derived-reports.yaml) extends the
-existing experimental report and records unsupported interchange boundaries.
-[TC-1308](task-1308-verify-and-document-project-attribute-workflows.yaml) closes the
-integration loop with reproducible examples, compatibility checks and migration
-notes; each implementation supplies its own tests before completion.
+TC-1303–1308 are complete. They implement schema/model validation, safe formatting/trace, compiled
+requirements 0.2, strict scoped imports, whole-schema review comparison and the
+existing experimental report. Their closed cards retain owning regression evidence.
+[TC-1308](closed/task-1308-verify-and-document-project-attribute-workflows.yaml) records the
+integrated examples, compatibility, targeted mutations and clean-checkout gate.
+[Usage and capability limits](../distribution/attributes.md) distinguish implemented
+semantics from future editor assistance and unsupported interchange.
 
 Compiled output sorts attribute maps; authored YAML keeps its comments and key
 order under the conservative formatter. Existing custom/YAML projects remain
@@ -265,7 +256,7 @@ TC-1104?     TC-1301           TC-1202 ---------------------+
                                                        v
                                                    TC-0807?
 
-Ready: TC-1303; TC-1301 and TC-1302 are complete
+Completed attribute chain: TC-1301–1308; each closed card records its evidence
 TC-1302 -> TC-1303 -> TC-1304 ----------------------------+
                   +-> TC-1305 -> TC-1306 -> TC-1307 ------+-> TC-1308
 Complete: TC-1101, TC-1102, TC-1103, TC-1502, TC-1201, TC-1202,
@@ -358,8 +349,7 @@ notation is selected independently of requirements YAML.
 
 TC-1601–1606 are complete. [Work-item commands](../distribution/work-items.md) now
 compile, link and render the repository backlog; the [derived index](../WORK-ITEMS.md)
-replaces manual status tables. The attribute implementation chain remains available
-independently.
+replaces manual status tables. The attribute workflow composes through independently validated requirement imports.
 
 ## YAML work-item continuation
 

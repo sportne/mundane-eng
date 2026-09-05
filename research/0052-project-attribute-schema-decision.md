@@ -355,7 +355,7 @@ any other engineering artifact's format.
 - [TC-1305](../roadmap/closed/task-1305-compile-project-attribute-artifacts.yaml): versioned compiled values, definitions and source provenance.
 - [TC-1306](../roadmap/closed/task-1306-link-and-analyze-project-attributes.yaml): serialized validation, scoped imports and explicit comparison semantics.
 - [TC-1307](../roadmap/closed/task-1307-display-project-attributes-in-derived-reports.yaml): existing report display and bounded unsupported interchange handling.
-- [TC-1308](../roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml): integrated examples, compatibility, generation/mutation and migration documentation.
+- [TC-1308](../roadmap/closed/task-1308-verify-and-document-project-attribute-workflows.yaml): integrated examples, compatibility, generation/mutation and migration documentation.
 
 Each implementation owns its regression tests; TC-1308 extends integration rather
 than postponing correctness checks. Editor diagnostics/formatting integration and
@@ -380,3 +380,11 @@ production, normative schemas, tests, versions, build and CI remain unchanged.
 Makefile; no implementation test run is claimed for this design-only batch.
 The final review confirms incremental planning: version/compatibility changes
 serve the current attribute consumer and preserve explicit old-format behavior.
+
+## Implementation follow-through
+
+The preceding sections retain the selected design and its original evidence boundary.
+TC-1303–1308 implemented the selected profile; [Research 0068](0068-attribute-workflow-verification.md)
+records the final bounded workflow and clean-checkout verification. Current normative
+behavior is in specifications 0020–0022, with actual support and migration limits in
+[the attribute guide](../distribution/attributes.md).

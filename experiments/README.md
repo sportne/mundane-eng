@@ -69,3 +69,5 @@ not expected to remain navigable.
 - [Experiment 0033: Workflow regressions](0033-workflow-regressions/README.md)
 
 - [Experiment 0034: Work-item workflow](0034-work-items/README.md)
+
+- [Experiment 0036: Project attribute workflows](0036-project-attributes/README.md)

@@ -44,7 +44,7 @@ YAML specification. Other artifact formats remain independent decisions.
 
 The default source mode remains [custom 0.2](specification/0005-mundanereq-source-language-0.2.md).
 Historical 0.1/0.2 contracts and fixtures are preserved. Three independent native
-tools validate, format and trace either explicitly selected source contract;
+tools validate, format and trace the explicitly selected source profile;
 `mundanereq-migrate` provides checked conversion into a new output directory.
 The [command addendum](specification/0011-tool-safety-and-yaml-commands.md)
 defines the source selector, output failure behavior and formatter snapshot checks.
@@ -68,11 +68,13 @@ The [independent companion commands](distribution/verification.md) now compile a
 explicit TSV verification plan, link locally selected requirement artifacts, and
 analyze planned coverage and review staleness. [Experiment 0029](experiments/0029-verification-report/README.md)
 builds a disposable source-linked HTML report. TSV was selected independently for
-this plan workflow; other artifact formats remain open decisions. The
-[backlog](roadmap/0002-task-card-index.md) tracks implementation of the selected
-[project-attribute design](research/0052-project-attribute-schema-decision.md):
-explicit project declarations and descriptive text/enum values. Attributes are
-not implemented yet. [Independent version declarations](versions.properties)
+this plan workflow; other artifact formats remain open decisions.
+The opt-in [YAML 0.4 attribute profile](distribution/attributes.md) implements
+explicit project declarations and descriptive text/enum values, with validation,
+formatting, compilation, scoped linking, change analysis and experimental report
+display. [Small and medium examples](examples/attributes/README.md) demonstrate
+the workflow. Existing custom/YAML 0.3 sources remain valid without adopting attributes.
+[Independent version declarations](versions.properties)
 feed command builds and package metadata.
 
 [Work items](distribution/work-items.md) now provide a separate YAML work-item
