@@ -45,3 +45,15 @@ output may contain a prefix: callers must check status before retaining a report
 [Decision and evidence](../../research/0046-verification-report-decision.md).
 No human usability session was conducted. Authored view composition remains a
 conditional question; this experiment establishes no need for a view language.
+
+## Attribute output support
+
+The renderer also supports [analysis 0.2](../../specification/0022-attribute-linking-and-analysis-0.2.md).
+Its independent serialized checks validate typed values and recompute the attribute
+and schema comparison before display. It shows optional absence, declaration types
+and descriptions, and both snapshots of a value/schema change, with source links.
+Whole-schema changes can request review even when every present value is unchanged.
+Source bases are supplied explicitly; absent bases leave readable source locations.
+Output 0.1 remains supported with its historical report bytes. This extension does
+not promote the experiment into a maintained publishing product. See the
+[capability and migration guide](../../distribution/attributes.md).

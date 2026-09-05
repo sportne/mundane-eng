@@ -50,3 +50,27 @@ compares present values and the whole canonical declaration: even description-on
 or unused enum-vocabulary edits request review. Comments, ordering and paths alone
 do not. Schema names are scoped, not merged. Work-item typed links retain their
 existing meaning and do not infer edges from attributes.
+
+The [experimental verification report](../experiments/0029-verification-report/README.md)
+accepts analysis 0.1 and 0.2. For 0.2 it independently validates serialized attributes
+and recomputes differences before display. Present values, optional absence, types,
+requiredness, descriptions and declaration/value/assertion source locations are
+visible. Changed bindings include both baseline and current values and full schema
+definitions. Literal HTML-looking text is escaped. Generated views remain disposable.
+
+| Consumer | YAML 0.4 / attributes | Scope |
+| --- | --- | --- |
+| Validator / SARIF | Full selected-profile validation | Explicit JSON declaration; structural schemas alone do not validate project enum/requiredness rules |
+| Formatter | Lossless except CRLF normalization | Preserves comments and authored order; does not format declarations |
+| Compiler / linker / verifier | Lossless semantic propagation | Explicit output 0.2; canonical declarations and retained source provenance |
+| Work-item analyzer | Strict requirement imports and typed links | No implicit edges or attribute assessment authority |
+| Experimental review report | Full typed semantic display | Source-independent rendering; no original lexical/layout preservation or editing |
+| Legacy migration utility | Unsupported input | Custom 0.2 to YAML 0.3 only; explicit YAML 0.4 input fails before creating output |
+| Historical ReqIF probe | Unsupported input | Fixed custom-source profile only; explicit YAML 0.4 or compiled 0.2 input fails before export |
+| Editor host, hover, enum/name completion | Unimplemented | Future integration must select a project declaration and use semantic validation |
+
+No best-effort attribute mapping is implemented. Historical `.mreq` directory
+discovery does not select `.mreq.yaml` files; do not use a mixed directory as an
+attribute export. No YAML downgrade, ReqIF custom-field flattening, external-tool
+roundtrip or interoperability result is claimed. Attribute adoption is an explicit
+source/configuration change, with no automatic conversion from unrelated formats.

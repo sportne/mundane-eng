@@ -4,6 +4,7 @@ import html
 import json
 import os
 import sys
+sys.dont_write_bytecode=True
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
@@ -17,10 +18,11 @@ def unique(pairs):
 
 
 def render(a,bases):
-    if a['format']!='mundane-verification-0.1' or a['complete'] is not True or a['diagnostics']:
+    attribute_mode=a['format']=='mundane-verification-0.2'
+    if a['format'] not in ('mundane-verification-0.1','mundane-verification-0.2') or a['complete'] is not True or a['diagnostics']:
         raise ValueError('analysis is unsupported or incomplete')
     linked=a['linked']
-    if linked['format']!='mundane-linked-0.1' or linked['complete'] is not True or linked['diagnostics']:
+    if linked['format']!=('mundane-linked-0.2' if attribute_mode else 'mundane-linked-0.1') or linked['complete'] is not True or linked['diagnostics']:
         raise ValueError('linked inputs are unsupported or incomplete')
     plan=linked['planArtifact']['artifact']
     if plan['format']!='mundane-plan-0.1' or plan['complete'] is not True or plan['diagnostics']:
@@ -32,7 +34,7 @@ def render(a,bases):
     records={}
     for scope,imported in imports.items():
         artifact=imported['artifact']
-        if artifact['format']!='mundanereq-requirements-0.1' or artifact['complete'] is not True or artifact['diagnostics']:
+        if artifact['format'] not in (('mundanereq-requirements-0.1','mundanereq-requirements-0.2') if attribute_mode else ('mundanereq-requirements-0.1',)) or artifact['complete'] is not True or artifact['diagnostics']:
             raise ValueError('requirement import unsupported or incomplete')
         for record in artifact['requirements']:
             key=(scope,record['values']['id'])
@@ -45,6 +47,9 @@ def render(a,bases):
         if any(row[k]!=v for k,v in edges[key].items()):raise ValueError('analysis row changed authored reference')
         if row['state'] not in ('current','review-stale') or bool(row['changedFields'])!=(row['state']=='review-stale') or row['possibleImpact']!=bool(row['changedFields']):raise ValueError('invalid review state')
         if (row['currentScope'],row['requirementId']) not in records:raise ValueError('missing displayed requirement')
+    if attribute_mode:
+        from attribute_input import validate
+        schemas=validate(a)
     def esc(value):return html.escape(str(value),quote=True)
     def anchor(scope,id):return 'requirement/'+scope+':'+id
     def source_link(scope,path,line):
@@ -54,6 +59,28 @@ def render(a,bases):
         return '<a href="'+esc(bases[scope].rstrip('/')+'/'+quote(path,safe='/')+'#L'+str(line))+'">'+label+'</a>' if scope in bases else label
     def location(loc):
         scope,path=loc['path'].split(':',1);return source_link(scope,path,loc['line'])
+    def schema_link(scope):
+        schema=imports[scope]['artifact'].get('attributeSchema')
+        if schema is None:return '(no schema selected)'
+        return source_link(scope,schema['source']['path'],1)+'; SHA-256 '+esc(schema['source']['sha256'])
+    def attribute_changes(row):
+        if not attribute_mode or not (row['changedAttributes'] or row['schemaChanged']):return ''
+        out=['<details><summary>Attribute and declaration changes</summary>']
+        for label,key in [('Baseline','baselineScope'),('Current','currentScope')]:
+            scope=row[key];v=records[(scope,row['requirementId'])]['values'];loc=records[(scope,row['requirementId'])]['locations']['record']
+            out.append('<h4>'+label+'</h4><p>'+source_link(scope,loc['path'],loc['start']['line'])+'</p><p>'+schema_link(scope)+'</p><pre>'+esc(json.dumps({'attributes':v.get('attributes',{}),'definition':schemas[scope]},ensure_ascii=False,sort_keys=True,indent=2))+'</pre>')
+        return ''.join(out)+'</details>'
+    def attribute_table(scope,record):
+        schema=imports[scope]['artifact'].get('attributeSchema')
+        if schema is None:return '<h4>Project attributes</h4><p>No schema selected; no project attributes.</p>'
+        out=['<h4>Project attributes</h4><p>'+schema_link(scope)+'</p><table><tr><th>Name / type</th><th>Present value</th><th>Declaration</th><th>Source</th></tr>']
+        for name,d in sorted(schemas[scope]['attributes'].items()):
+            value=record['values']['attributes'].get(name);decl=schema['locations'][name]
+            links=source_link(scope,decl['path'],decl['start']['line'])
+            if value is not None:
+                loc=record['locations']['attributes'][name]['value'];links+='; value '+source_link(scope,loc['path'],loc['start']['line'])
+            out.append('<tr><td>'+esc(name)+' / '+esc(d['type'])+'</td><td>'+esc(value if value is not None else '(not supplied)')+'</td><td>'+esc(d['description'])+'; '+('required' if d['required'] else 'optional')+'</td><td>'+links+'</td></tr>')
+        return ''.join(out)+'</table>'
     def blocks(values):
         result=[]
         for block in values or []:
@@ -74,7 +101,7 @@ def render(a,bases):
     for key,row in sorted(rows.items()):
         if row['state']=='review-stale':
             href='#'+quote(anchor(row['currentScope'],row['requirementId']),safe='')
-            review.append('<li><a href="'+href+'">'+esc(row['requirementId'])+'</a> — '+esc(row['activityId'])+'; changed '+esc(', '.join(row['changedFields']))+'; '+location(row['location'])+'</li>')
+            review.append('<li><a href="'+href+'">'+esc(row['requirementId'])+'</a> — '+esc(row['activityId'])+'; changed '+esc(', '.join(row['changedFields']))+'; '+location(row['location'])+attribute_changes(row)+'</li>')
     out.insert(-1,'<h2>Needs review</h2>'+('<ul>'+''.join(review)+'</ul>' if review else '<p>No stale requirement bindings.</p>'))
     activities={v['id']:v for v in plan['activities']}
     for key,row in sorted(rows.items()):
@@ -98,7 +125,9 @@ def render(a,bases):
               '<p>'+source_link(scope,loc['path'],loc['start']['line'])+'</p>',
               '<p>Allocation: '+esc(v['allocation'] if v['allocation'] is not None else '(absent)')+'</p>',blocks(v['statement']),
               '<h4>Rationale</h4>'+blocks(v['rationale']),'<p>Authored source citation: '+esc(v['source'] if v['source'] is not None else '(absent)')+'</p>',
-              '<p>Decomposes: '+', '.join('<a href="#'+quote(anchor(scope,target),safe='')+'">'+esc(target)+'</a>' for target in v['decomposes'])+'</p></section>']
+              '<p>Decomposes: '+', '.join('<a href="#'+quote(anchor(scope,target),safe='')+'">'+esc(target)+'</a>' for target in v['decomposes'])+'</p>'+ (attribute_table(scope,record) if attribute_mode else '')+'</section>']
+    if attribute_mode:
+        out=[line.replace('Generated from requirement and verification-plan source.','Generated from requirement, attribute-declaration and verification-plan source.') for line in out]
     metadata={'analysisFormat':a['format'],'analyzer':a['analyzer'],'linker':linked['linker'],'linkFormat':linked['format'],
               'plan':{k:v for k,v in linked['planArtifact'].items() if k!='artifact'},'planCompiler':plan['compiler'],'planFormat':plan['format'],'planSources':plan['sources'],
               'imports':[{k:v for k,v in imported.items() if k!='artifact'}|{'compiler':imported['artifact']['compiler'],'format':imported['artifact']['format'],'sourceContract':imported['artifact']['sourceContract'],'sources':imported['artifact']['sources']} for _,imported in sorted(imports.items())],

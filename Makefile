@@ -332,3 +332,9 @@ attribute-link-verify: native-compile native-plan native-link native-verificatio
 	python3 scripts/check-attribute-link.py
 
 verify: attribute-link-verify
+
+.PHONY: attribute-report-verify
+attribute-report-verify: native-verification native-migrate
+	python3 scripts/check-attribute-report.py
+
+verify: attribute-report-verify

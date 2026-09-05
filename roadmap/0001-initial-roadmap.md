@@ -181,7 +181,7 @@ formatting/trace independently of
 [TC-1306](closed/task-1306-link-and-analyze-project-attributes.yaml) validates serialized
 imports and compares explicit values plus schema definitions; changes must be
 visible rather than silently ignored.
-[TC-1307](task-1307-display-project-attributes-in-derived-reports.yaml) extends the
+[TC-1307](closed/task-1307-display-project-attributes-in-derived-reports.yaml) extends the
 existing experimental report and records unsupported interchange boundaries.
 [TC-1308](task-1308-verify-and-document-project-attribute-workflows.yaml) closes the
 integration loop with reproducible examples, compatibility checks and migration
