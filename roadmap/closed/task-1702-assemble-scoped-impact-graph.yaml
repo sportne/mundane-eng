@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1702"
 kind: "task"
 title: "Assemble Scoped Impact Graph"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-1701"]
 relations: []
 planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1703"}
@@ -46,5 +46,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Task workflow](0002-task-card-index.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Task workflow](../0002-task-card-index.md)
+
+  ## Completion evidence
+
+  Implemented ImpactInputs and ImpactGraph over existing serialized validators, including a global-scope WorkGraph entry point. make test passed 22 groups, covering directional edges, retained coordinates, scope isolation, ambiguous and missing targets, import cycles, exact pins and detected snapshot changes. Backlog and documentation checks passed.

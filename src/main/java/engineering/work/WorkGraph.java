@@ -11,8 +11,15 @@ public final class WorkGraph {
     private WorkGraph() {}
     public record Evaluation(List<Object> edges,List<Object> findings) {}
     public static Evaluation evaluate(Map<String,Object> primary,List<?> imports,Consumer<String> resource) {
-        Map<String,Map<String,Map<String,Object>>> work=new TreeMap<>();work.put("work",WorkArtifact.validate(primary,"work"));
-        Map<String,Set<String>> targets=new TreeMap<>();addWorkTargets(targets,"work",work.get("work"));Set<String> scopes=new HashSet<>(Set.of("work"));
+        var selected=new ArrayList<Object>();
+        selected.add(object("scope","work","path","work.json","sha256","0".repeat(64),"artifact",primary));
+        selected.addAll(imports);
+        return evaluateImports(selected,resource);
+    }
+    /** Evaluate an explicit global scope selection, without reserving a primary scope. */
+    public static Evaluation evaluateImports(List<?> imports,Consumer<String> resource) {
+        Map<String,Map<String,Map<String,Object>>> work=new TreeMap<>();
+        Map<String,Set<String>> targets=new TreeMap<>();Set<String> scopes=new HashSet<>();
         for(Object value:imports) {
             var entry=map(value);keys(entry,"scope","path","sha256","artifact");String scope=id(entry.get("scope"));path(entry.get("path"));digest(entry.get("sha256"));
             if(!scopes.add(scope))throw new Problem("duplicate-scope","duplicate/reserved scope "+scope,"imports");
