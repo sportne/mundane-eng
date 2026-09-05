@@ -346,3 +346,12 @@ The initial ecosystem prioritization was followed by the completed audit and
 decision records and the two-baseline pilot. This roadmap replaces their
 prospective gates with the incremental workflow above while preserving the
 [closed cards](0002-task-card-index.md#completed-evidence).
+
+## Stage 16 — Issue and task artifacts
+
+The selected batch specifies and implements a bounded source-to-compiled-to-linked
+work-item workflow, using this repository’s cards as the migration corpus.
+[TC-1601](closed/task-1601-define-work-item-ownership.md) through
+[TC-1606](task-1606-dogfood-the-work-item-backlog.md) preserve human IDs, authored
+status and completion evidence; generated indices are derived. Issue/task source
+notation is selected independently of requirements YAML.

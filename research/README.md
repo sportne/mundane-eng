@@ -103,3 +103,5 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 - [Research 0052: Project attribute schema decision](0052-project-attribute-schema-decision.md)
 
 - [Research 0053: Project attribute worked design cases](0053-project-attribute-design-cases.md)
+
+- [Research 0054: Work-item ownership](0054-work-item-ownership.md)
