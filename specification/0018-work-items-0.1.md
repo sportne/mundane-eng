@@ -122,7 +122,9 @@ output 0.1. Existing requirement/plan validators guard those serialized boundari
 work-item validation checks every required field/type/ID/status/location/digest,
 not merely complete=true. Reject unknown kinds/formats, malformed/incomplete inputs,
 duplicate scopes, reserved work scope, bad pins and cyclic/missing build dependencies.
-Limit imports to 100. No source parser is imported or invoked by the consumer.
+Limit imports to 100, aggregate work items to 10000 and work relationships to
+100000. Analysis output is bounded to 16 MiB; oversize output fails with
+work-output-limit and no successful graph. No source parser is imported or invoked by the consumer.
 
 Dependency targets are tasks in the same artifact. Missing/non-task targets or
 cycles fail, including disconnected components. Validate every imported work-item
@@ -130,11 +132,14 @@ dependency graph too. Addresses/relates-to resolve scope, target kind and ID.
 Supersession edges form a separate acyclic graph across work scopes; self edges fail.
 A Superseded item needs an incoming supersedes edge among selected artifacts. It
 still does not count as a completed prerequisite, and successors are not substituted.
-Resources use bounded local snapshots; missing/unreadable files or root escapes fail.
+All resource paths, including those in imported work items, resolve against the
+explicit analysis root; callers must make that layout available, with no implicit
+rebasing to another checkout. Resources use bounded local snapshots; missing/unreadable files or root escapes fail.
 No future artifact kind is accepted without a defined validating adapter.
 
 On success, output is
-`{format,complete,analyzer,workArtifact,imports,resources,edges,findings,diagnostics}`.
+`{format,complete,analyzer,workArtifact,selection,imports,resources,edges,findings,diagnostics}`.
+selection is `{path,sha256}` for the exact import declaration;
 workArtifact is `{path,sha256,artifact}`; imports are scope-sorted
 `{scope,path,sha256,artifact}` snapshots; resources are sorted `{path,sha256}`.
 Edges contain `{from,relation,to,location}`; from/to are scope-qualified work/entity

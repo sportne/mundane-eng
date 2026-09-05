@@ -1,6 +1,6 @@
 # Task TC-1605: Generate Derived Work Item Views
 
-Status: Planned
+Status: Ready
 
 Roadmap stage: 16
 

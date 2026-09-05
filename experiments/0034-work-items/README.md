@@ -14,3 +14,7 @@ before comparison with the recorded golden.
 
 Linking, views and real-backlog migration follow in TC-1604–1606. No external tracker
 or requirements attribute support is supplied by this compiler.
+
+TC-1604 adds strict typed imports and graph analysis. The analysis golden and
+public tests cover requirement/plan/activity/work-item scopes, prerequisites,
+supersession, invalid references/pins and execution without source-parser classes.

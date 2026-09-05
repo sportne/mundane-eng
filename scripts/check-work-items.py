@@ -75,3 +75,70 @@ expected=json.loads((ROOT/'experiments/0034-work-items/golden/compiled.json').re
 assert fixture==expected
 assert [i['values']['id'] for i in fixture['items']]==['ISSUE-1','TC-EXAMPLE']
 print('PASS independently checked task/issue semantic golden')
+
+with tempfile.TemporaryDirectory(prefix='mundane-work-link-') as directory:
+    root=Path(directory)
+    def write(name,value): (root/name).write_text(json.dumps(value),encoding='utf-8')
+    relations=[{'relation':'addresses','scope':'req','kind':'requirement','target':'A'},
+               {'relation':'relates-to','scope':'plans','kind':'verification-plan','target':'PLAN-B'},
+               {'relation':'relates-to','scope':'plans','kind':'verification-activity','target':'ACT-ACCESS'},
+               {'relation':'addresses','scope':'work','kind':'work-item','target':'ISSUE-1'},
+               {'relation':'supersedes','scope':'work','kind':'work-item','target':'TC-OLD'},
+               {'relation':'evidence','scope':None,'kind':'resource','target':'evidence.md'}]
+    texts=[card('TC-1',deps=['TC-2'],relations=relations),card('TC-2',status='Complete'),card('TC-OLD',status='Superseded'),card('ISSUE-1','Issue','Open')]
+    for i,text in enumerate(texts):(root/f'{i}.work.md').write_text(text)
+    write('set.json',{'format':'mundane-work-set-0.1','files':[f'{i}.work.md' for i in range(4)]})
+    work=invoke(root,['compile','--root','.','set.json']);write('work.json',work)
+    requirement=json.loads((ROOT/'specification/examples/requirements-artifact-0.1/valid.json').read_text());write('req.json',requirement)
+    plan=json.loads((ROOT/'experiments/0028-verification-contract/fixtures/plan.json').read_text());write('plan.json',plan)
+    (root/'evidence.md').write_text('Recorded local evidence citation, not an approval.\n')
+    imports={'format':'mundane-imports-0.1','imports':[{'scope':scope,'kind':kind,'path':path,'sha256':None,'dependsOn':[]} for scope,kind,path in [('req','requirements','req.json'),('plans','verification-plan','plan.json')]]}
+    write('imports.json',imports);args=['analyze','--root','.','--imports','imports.json','work.json']
+    good=invoke(root,args);assert good['complete'] and len(good['edges'])==7
+    by_id={f['id']:f for f in good['findings']};assert by_id['TC-1']['unfinishedDependencies']==[] and by_id['ISSUE-1']['status']=='Open'
+    def changed_work(change,expected=1):
+        a=copy.deepcopy(work);change(a);write('work.json',a);result=invoke(root,args,expected);assert not result['complete'] and result['edges']==[] and result['findings']==[];write('work.json',work);return result
+    def values(a,ident):return next(x['values'] for x in a['items'] if x['values']['id']==ident)
+    cases=[lambda a:a.update(format='future'),lambda a:a.update(complete=False),lambda a:values(a,'TC-1').update(status='Done'),lambda a:values(a,'TC-1').update(dependencies=['ABSENT']),lambda a:values(a,'TC-2').update(dependencies=['TC-1']),lambda a:values(a,'TC-OLD').update(relations=[{'relation':'supersedes','scope':'work','kind':'work-item','target':'TC-1'}]),lambda a:values(a,'TC-1').update(relations=[]),lambda a:a['items'][0]['metadataLocation'].update(line=0),lambda a:a['sources'][0].update(sha256='bad'),lambda a:a['items'].append(a['items'][0]),lambda a:values(a,'ISSUE-1').update(dependencies=['TC-2'])]
+    for change in cases:changed_work(change)
+    changed_work(lambda a:values(a,'TC-1')['relations'][0].update(target='ABSENT'))
+    changed_work(lambda a:values(a,'TC-1')['relations'][0].update(scope='unknown'))
+    changed_work(lambda a:values(a,'TC-1')['relations'][0].update(kind='verification-plan'))
+    def changed_import(change,expected=1):
+        a=copy.deepcopy(imports);change(a);write('imports.json',a);result=invoke(root,args,expected);assert result['edges']==[] and result['findings']==[];write('imports.json',imports)
+    for change in [lambda a:a.update(format='future'),lambda a:a['imports'].append(a['imports'][0]),lambda a:a['imports'][0].update(scope='work'),lambda a:a['imports'][0].update(sha256='0'*64),lambda a:a['imports'][0].update(kind='work-items'),lambda a:a['imports'][0].update(dependsOn=['ABSENT']),lambda a:a['imports'][0].update(dependsOn=['req']),lambda a:a['imports'][0].update(dependsOn=['plans','plans'])]:changed_import(change)
+    a=copy.deepcopy(work);values(a,'TC-2')['status']='Planned';write('work.json',a);finding=invoke(root,args);assert next(f for f in finding['findings'] if f['id']=='TC-1')['unfinishedDependencies']==['TC-2'];write('work.json',work)
+    (root/'evidence.md').unlink();assert invoke(root,args,2)['edges']==[]
+    # Artifact consumers validate serialized contracts without access to source parsing.
+    (root/'evidence.md').write_text('Evidence restored.\n')
+    import shutil
+    isolated=root/'classes';shutil.copytree(ROOT/'build/maintained/classes',isolated)
+    for p in (isolated/'mundanereq').iterdir():
+        if p.name!='Versions.class':
+            if p.is_dir():shutil.rmtree(p)
+            else:p.unlink()
+    for p in (isolated/'engineering/work').glob('WorkCompiler*.class'):p.unlink()
+    r=subprocess.run(['java','-cp',str(isolated),'engineering.work.WorkMain']+args,cwd=root,capture_output=True,timeout=30)
+    assert r.returncode==0,r.stderr
+print('PASS work analysis: typed requirement/plan/activity/issue links, prerequisite findings, supersession, 22+ invalid serialized/import cases and parser-free execution')
+
+with tempfile.TemporaryDirectory(prefix='work-import-scope-') as directory:
+    root=Path(directory)
+    (root/'a.md').write_text(card('TC-1'))
+    (root/'set.json').write_text(json.dumps({'format':'mundane-work-set-0.1','files':['a.md']}))
+    a=invoke(root,['compile','--root','.','set.json'])
+    (root/'other.json').write_text(json.dumps(a))
+    primary=copy.deepcopy(a);primary['items'][0]['values']['relations']=[{'relation':'relates-to','scope':'other','kind':'work-item','target':'TC-1'}]
+    (root/'primary.json').write_text(json.dumps(primary))
+    (root/'imports.json').write_text(json.dumps({'format':'mundane-imports-0.1','imports':[{'scope':'other','kind':'work-items','path':'other.json','sha256':None,'dependsOn':[]}]}))
+    args=['analyze','--root','.','--imports','imports.json','primary.json']
+    out=invoke(root,args);assert out['edges'][0]['from']=='work:work-item:TC-1' and out['edges'][0]['to']=='other:work-item:TC-1'
+    broken=copy.deepcopy(a);broken['items'][0]['values']['dependencies']=['TC-1'];(root/'other.json').write_text(json.dumps(broken))
+    assert invoke(root,args,1)['diagnostics'][0]['code']=='dependency-cycle'
+print('PASS imported work-item scopes preserve equal human IDs and validate disconnected dependency graphs')
+
+raw=subprocess.check_output(COMMANDS[1]+['compile','--root','.','examples/work-items/work-items.json'],cwd=ROOT,timeout=30)
+(ROOT/'build/work-example.json').write_bytes(raw)
+analysis=invoke(ROOT,['analyze','--root','.','--imports','examples/work-items/imports.json','build/work-example.json'])
+assert analysis==json.loads((ROOT/'experiments/0034-work-items/golden/analysis.json').read_text())
+print('PASS deterministic work analysis golden')

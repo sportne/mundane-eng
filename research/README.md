@@ -109,3 +109,5 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 - [Research 0055: Work-item source decision](0055-work-item-source-decision.md)
 
 - [Research 0056: Work-item compiler verification](0056-work-item-compiler-verification.md)
+
+- [Research 0057: Work-item linking verification](0057-work-item-linking-verification.md)

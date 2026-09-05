@@ -17,8 +17,7 @@ import mundanereq.Versions;
 
 public final class WorkCompiler {
     private WorkCompiler() {}
-    public record Result(Map<String,Object> output,int status) {}
-    public static Result compile(Path root,String manifest) {
+    public static WorkResult compile(Path root,String manifest) {
         Snapshots reads=new Snapshots(root);List<Object> sources=new ArrayList<>(),diagnostics=new ArrayList<>();Map<String,Object> items=new TreeMap<>();Object selection=null;int status=0;
         try {
             var input=reads.read(manifest);selection=object("path",input.path(),"sha256",input.sha256());
@@ -42,7 +41,7 @@ public final class WorkCompiler {
         if(Json.bytes(output).length>16*1024*1024) {
             status=1;output.put("complete",false);output.put("items",List.of());output.put("diagnostics",List.of(new Problem("work-output-limit","compiled output exceeds 16 MiB",manifest).diagnostic()));
         }
-        return new Result(output,status);
+        return new WorkResult(output,status);
     }
     private static Map<String,Object> parse(Snapshots.Snapshot snapshot) {
         String file=snapshot.path();int line=1;
