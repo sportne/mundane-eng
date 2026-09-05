@@ -1,14 +1,22 @@
 # Task TC-1501: Extend Artifact Workflow Regression Corpora
 
-Status: Complete
-
-Roadmap stage: 15
-
-Type: Verification
-
-Depends on: TC-0903
-
-Unlocks: follow-up work selected by the completion decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0903"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "15",
+    "type": "Verification",
+    "condition": "TC-0903",
+    "unlocks": "follow-up work selected by the completion decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

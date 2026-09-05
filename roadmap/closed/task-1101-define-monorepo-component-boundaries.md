@@ -1,14 +1,20 @@
 # Task TC-1101: Define Monorepo Component Boundaries
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Decision
-
-Depends on: none
-
-Unlocks: TC-1102, TC-1104
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Decision",
+    "condition": "none",
+    "unlocks": "TC-1102, TC-1104",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

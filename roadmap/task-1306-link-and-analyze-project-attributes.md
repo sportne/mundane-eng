@@ -1,14 +1,23 @@
 # Task TC-1306: Link and Analyze Project Attributes
 
-Status: Planned
-
-Roadmap stage: 13
-
-Type: Implementation
-
-Depends on: TC-1302, TC-1305
-
-Unlocks: TC-1307, TC-1308
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Planned",
+  "dependencies": [
+    "TC-1302",
+    "TC-1305"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Implementation",
+    "condition": "TC-1302, TC-1305",
+    "unlocks": "TC-1307, TC-1308",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

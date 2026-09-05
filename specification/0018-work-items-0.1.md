@@ -1,6 +1,6 @@
 # Work-item source, compilation and analysis 0.1
 
-Status: Selected experimental contract. Implementation proceeds in TC-1603–1606.
+Status: Maintained experimental contract, implemented through TC-1603–1606.
 
 Source: `mundane-work-source-0.1`; selection: `mundane-work-set-0.1`;
 compiled: `mundane-work-items-0.1`; analysis: `mundane-work-analysis-0.1`.

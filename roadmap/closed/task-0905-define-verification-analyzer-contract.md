@@ -1,14 +1,25 @@
 # Task TC-0905: Define the Verification Analyzer Contract
 
-Status: Complete
-
-Roadmap stage: 9
-
-Type: Experiment and decision
-
-Depends on: TC-0802, TC-1003, TC-1103, TC-1203
-
-Unlocks: TC-1204, TC-0904
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0802",
+    "TC-1003",
+    "TC-1103",
+    "TC-1203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "9",
+    "type": "Experiment and decision",
+    "condition": "TC-0802, TC-1003, TC-1103, TC-1203",
+    "unlocks": "TC-1204, TC-0904",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

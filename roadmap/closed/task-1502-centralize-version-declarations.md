@@ -1,14 +1,20 @@
 # Task TC-1502: Centralize Independent Version Declarations
 
-Status: Complete
-
-Roadmap stage: 15
-
-Type: Implementation and documentation
-
-Depends on: none
-
-Unlocks: TC-1201
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "15",
+    "type": "Implementation and documentation",
+    "condition": "none",
+    "unlocks": "TC-1201",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

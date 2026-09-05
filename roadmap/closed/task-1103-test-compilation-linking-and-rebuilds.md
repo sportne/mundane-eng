@@ -1,14 +1,23 @@
 # Task TC-1103: Test Compilation, Linking, and Rebuilds
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Experiment and decision
-
-Depends on: TC-1102, TC-1105
-
-Unlocks: TC-1201, TC-0905
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1102",
+    "TC-1105"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Experiment and decision",
+    "condition": "TC-1102, TC-1105",
+    "unlocks": "TC-1201, TC-0905",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,23 @@
 # Task TC-0103: Audit the 0.2 Conformance Baseline
 
-Status: Complete
-
-Roadmap stage: 1
-
-Type: Conformance review
-
-Depends on: TC-0101 and TC-0102
-
-Unlocks: TC-0104
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0101",
+    "TC-0102"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "1",
+    "type": "Conformance review",
+    "condition": "TC-0101 and TC-0102",
+    "unlocks": "TC-0104",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

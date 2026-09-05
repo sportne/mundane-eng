@@ -1,14 +1,22 @@
 # Task TC-0504: Publish the Trace Trial Contract
 
-Status: Complete
-
-Roadmap stage: 5
-
-Type: Decision and documentation
-
-Depends on: TC-0503
-
-Unlocks: TC-0601
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0503"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "5",
+    "type": "Decision and documentation",
+    "condition": "TC-0503",
+    "unlocks": "TC-0601",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

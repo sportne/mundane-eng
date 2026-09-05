@@ -1,14 +1,29 @@
 # Task TC-1605: Generate Derived Work Item Views
 
-Status: Complete
-
-Roadmap stage: 16
-
-Type: Implementation
-
-Depends on: TC-1604
-
-Unlocks: TC-1606
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1604"
+  ],
+  "relations": [
+    {
+      "relation": "evidence",
+      "scope": null,
+      "kind": "resource",
+      "target": "src/main/java/engineering/work/WorkView.java"
+    }
+  ],
+  "planning": {
+    "stage": "16",
+    "type": "Implementation",
+    "condition": "TC-1604",
+    "unlocks": "TC-1606",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

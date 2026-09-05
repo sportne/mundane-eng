@@ -1,14 +1,22 @@
 # Task TC-0707: Test Bounded Diagnostic Presentation
 
-Status: Complete
-
-Roadmap stage: 7
-
-Type: Tool-interface experiment
-
-Depends on: TC-0704
-
-Unlocks: A validator diagnostic-presentation decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0704"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Tool-interface experiment",
+    "condition": "TC-0704",
+    "unlocks": "A validator diagnostic-presentation decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

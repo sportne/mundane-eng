@@ -1,14 +1,22 @@
 # Task TC-0104: Select the Maintained Implementation Lineage
 
-Status: Complete
-
-Roadmap stage: 1
-
-Type: Decision
-
-Depends on: TC-0103
-
-Unlocks: TC-0201
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0103"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "1",
+    "type": "Decision",
+    "condition": "TC-0103",
+    "unlocks": "TC-0201",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-1002: Define Compatibility and Publish or Defer 1.0
 
-Status: Complete — 1.0 deferred
-
-Roadmap stage: 10
-
-Type: Specification and release decision
-
-Depends on: TC-1001
-
-Unlocks: TC-1003 and an explicit provisional continuation
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1001"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "10",
+    "type": "Specification and release decision",
+    "condition": "TC-1001",
+    "unlocks": "TC-1003 and an explicit provisional continuation",
+    "statusNote": "Complete — 1.0 deferred"
+  }
+}
+```
 
 ## Question
 

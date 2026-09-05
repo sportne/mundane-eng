@@ -1,14 +1,20 @@
 # Task TC-1105: Compare YAML and Custom Requirement Source
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Experiment and decision
-
-Depends on: none
-
-Unlocks: TC-1103 and a requirements-specification representation decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Experiment and decision",
+    "condition": "none",
+    "unlocks": "TC-1103 and a requirements-specification representation decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

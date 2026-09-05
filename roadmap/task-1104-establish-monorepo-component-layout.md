@@ -1,14 +1,22 @@
 # Task TC-1104: Establish the Monorepo Component Layout
 
-Status: Conditional
-
-Roadmap stage: 11
-
-Type: Implementation
-
-Depends on: TC-1101
-
-Unlocks: follow-up work selected by the completion decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Conditional",
+  "dependencies": [
+    "TC-1101"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Implementation",
+    "condition": "TC-1101",
+    "unlocks": "follow-up work selected by the completion decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

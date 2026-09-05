@@ -1,14 +1,23 @@
 # Task TC-0502: Implement the Trace Executable
 
-Status: Complete
-
-Roadmap stage: 5
-
-Type: Implementation
-
-Depends on: TC-0204 and TC-0501
-
-Unlocks: TC-0503
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0204",
+    "TC-0501"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "5",
+    "type": "Implementation",
+    "condition": "TC-0204 and TC-0501",
+    "unlocks": "TC-0503",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

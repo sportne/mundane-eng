@@ -1,14 +1,22 @@
 # Task TC-1107: Interpret and Validate YAML Requirement Source
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Implementation
-
-Depends on: TC-1106
-
-Unlocks: TC-1108
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1106"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Implementation",
+    "condition": "TC-1106",
+    "unlocks": "TC-1108",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0903: Run a Derived Presentation Experiment
 
-Status: Complete
-
-Roadmap stage: 9
-
-Type: Rendering experiment
-
-Depends on: TC-0904
-
-Unlocks: TC-1501 and conditional TC-0807
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0904"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "9",
+    "type": "Rendering experiment",
+    "condition": "TC-0904",
+    "unlocks": "TC-1501 and conditional TC-0807",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

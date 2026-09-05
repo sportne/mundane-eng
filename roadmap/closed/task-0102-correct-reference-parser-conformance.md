@@ -1,14 +1,22 @@
 # Task TC-0102: Correct Reference Parser Conformance
 
-Status: Complete
-
-Roadmap stage: 1
-
-Type: Implementation
-
-Depends on: TC-0101
-
-Unlocks: TC-0103
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0101"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "1",
+    "type": "Implementation",
+    "condition": "TC-0101",
+    "unlocks": "TC-0103",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0603: Run the Integrated Toolchain Trial
 
-Status: Complete
-
-Roadmap stage: 6
-
-Type: End-to-end trial and decision
-
-Depends on: TC-0602
-
-Unlocks: TC-0701 and prioritized TC-08xx research
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0602"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "6",
+    "type": "End-to-end trial and decision",
+    "condition": "TC-0602",
+    "unlocks": "TC-0701 and prioritized TC-08xx research",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,23 @@
 # Task TC-0402: Implement the Formatter Executable
 
-Status: Complete
-
-Roadmap stage: 4
-
-Type: Implementation
-
-Depends on: TC-0401 and TC-0204
-
-Unlocks: TC-0403
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0204",
+    "TC-0401"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "4",
+    "type": "Implementation",
+    "condition": "TC-0401 and TC-0204",
+    "unlocks": "TC-0403",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -2,7 +2,7 @@
 
 Status: Draft living roadmap
 
-Last reconciled: 2026-09-05 after the project attribute design batch
+Last reconciled: 2026-09-05 after the work-item integration batch
 
 Execution is decomposed into the [task-card index](0002-task-card-index.md).
 This remains the single strategic roadmap; cards describe bounded work and
@@ -352,6 +352,11 @@ prospective gates with the incremental workflow above while preserving the
 The selected batch specifies and implements a bounded source-to-compiled-to-linked
 work-item workflow, using this repository’s cards as the migration corpus.
 [TC-1601](closed/task-1601-define-work-item-ownership.md) through
-[TC-1606](task-1606-dogfood-the-work-item-backlog.md) preserve human IDs, authored
+[TC-1606](closed/task-1606-dogfood-the-work-item-backlog.md) preserve human IDs, authored
 status and completion evidence; generated indices are derived. Issue/task source
 notation is selected independently of requirements YAML.
+
+TC-1601–1606 are complete. [Work-item commands](../distribution/work-items.md) now
+compile, link and render the repository backlog; the [derived index](../WORK-ITEMS.md)
+replaces manual status tables. The attribute implementation chain remains available
+independently.

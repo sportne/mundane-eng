@@ -1,14 +1,22 @@
 # Task TC-0301: Implement the Validator Executable
 
-Status: Complete
-
-Roadmap stage: 3
-
-Type: Implementation
-
-Depends on: TC-0204
-
-Unlocks: TC-0302
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0204"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "3",
+    "type": "Implementation",
+    "condition": "TC-0204",
+    "unlocks": "TC-0302",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

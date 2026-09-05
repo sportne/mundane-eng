@@ -1,14 +1,24 @@
 # Task TC-1001: Audit Readiness for 1.0
 
-Status: Complete
-
-Roadmap stage: 10
-
-Type: Evidence audit
-
-Depends on: TC-0704, TC-0705, TC-0706, and the model or ecosystem cards selected by evidence
-
-Unlocks: TC-1002
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0704",
+    "TC-0705",
+    "TC-0706"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "10",
+    "type": "Evidence audit",
+    "condition": "TC-0704, TC-0705, TC-0706, and the model or ecosystem cards selected by evidence",
+    "unlocks": "TC-1002",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

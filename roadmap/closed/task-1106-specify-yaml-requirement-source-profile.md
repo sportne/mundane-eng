@@ -1,14 +1,22 @@
 # Task TC-1106: Specify the YAML Requirement Source Profile
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Design
-
-Depends on: TC-1105
-
-Unlocks: TC-1107, TC-1302
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1105"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Design",
+    "condition": "TC-1105",
+    "unlocks": "TC-1107, TC-1302",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

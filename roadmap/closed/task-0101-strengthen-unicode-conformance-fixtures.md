@@ -1,14 +1,20 @@
 # Task TC-0101: Strengthen Unicode Conformance Fixtures
 
-Status: Complete
-
-Roadmap stage: 1
-
-Type: Implementation and conformance
-
-Depends on: None
-
-Unlocks: TC-0102 and TC-0103
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "1",
+    "type": "Implementation and conformance",
+    "condition": "None",
+    "unlocks": "TC-0102 and TC-0103",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

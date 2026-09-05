@@ -1,14 +1,20 @@
 # Task TC-XXXX: Short Outcome-Oriented Title
 
-Status: Planned
-
-Roadmap stage: N
-
-Type: Experiment | Implementation | Decision | Trial | Documentation | Verification
-
-Depends on: TC-XXXX or none
-
-Unlocks: TC-XXXX or none
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Planned",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "",
+    "type": "",
+    "condition": "",
+    "unlocks": "",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

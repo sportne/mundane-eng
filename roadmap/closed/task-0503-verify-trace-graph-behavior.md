@@ -1,14 +1,22 @@
 # Task TC-0503: Verify Trace Graph Behavior
 
-Status: Complete
-
-Roadmap stage: 5
-
-Type: Verification and workflow trial
-
-Depends on: TC-0502
-
-Unlocks: TC-0504
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0502"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "5",
+    "type": "Verification and workflow trial",
+    "condition": "TC-0502",
+    "unlocks": "TC-0504",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

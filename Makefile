@@ -282,3 +282,20 @@ work-verify: native-work
 	python3 scripts/check-work-items.py $(BUILD_ROOT)/mundane-work
 
 verify: work-verify
+
+.PHONY: work-index work-backlog-verify
+work-index: native-work
+	python3 scripts/work-backlog.py --write
+
+work-backlog-verify: native-work
+	python3 experiments/0034-work-items/migrate.py
+	python3 scripts/work-backlog.py
+	python3 scripts/check-planning-docs.py
+
+verify: work-backlog-verify
+
+.PHONY: work-regression-verify
+work-regression-verify: native-work
+	python3 experiments/0034-work-items/regressions.py
+
+verify: work-regression-verify

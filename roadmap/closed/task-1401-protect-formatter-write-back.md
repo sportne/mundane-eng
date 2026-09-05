@@ -1,14 +1,20 @@
 # Task TC-1401: Protect Formatter Write-Back
 
-Status: Complete
-
-Roadmap stage: 14
-
-Type: Implementation and verification
-
-Depends on: none
-
-Unlocks: follow-up work selected by the completion decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "14",
+    "type": "Implementation and verification",
+    "condition": "none",
+    "unlocks": "follow-up work selected by the completion decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

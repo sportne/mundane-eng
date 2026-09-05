@@ -1,14 +1,22 @@
 # Task TC-0403: Verify Formatter Safety Properties
 
-Status: Complete
-
-Roadmap stage: 4
-
-Type: Verification
-
-Depends on: TC-0402
-
-Unlocks: TC-0404
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0402"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "4",
+    "type": "Verification",
+    "condition": "TC-0402",
+    "unlocks": "TC-0404",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

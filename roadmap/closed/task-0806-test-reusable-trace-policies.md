@@ -1,14 +1,22 @@
 # Task TC-0806: Test Reusable Trace Policies
 
-Status: Complete
-
-Roadmap stage: 8
-
-Type: Policy experiment
-
-Depends on: TC-0603 and observed completeness needs
-
-Unlocks: A policy/tool boundary decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Policy experiment",
+    "condition": "TC-0603 and observed completeness needs",
+    "unlocks": "A policy/tool boundary decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

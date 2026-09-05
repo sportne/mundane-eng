@@ -1,14 +1,23 @@
 # Task TC-1601: Define Work Item Ownership
 
-Status: Complete
-
-Roadmap stage: 16
-
-Type: Decision
-
-Depends on: TC-1102, TC-1203
-
-Unlocks: TC-1602
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1102",
+    "TC-1203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "16",
+    "type": "Decision",
+    "condition": "TC-1102, TC-1203",
+    "unlocks": "TC-1602",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

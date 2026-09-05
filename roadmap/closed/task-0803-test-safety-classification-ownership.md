@@ -1,14 +1,22 @@
 # Task TC-0803: Test Safety Classification Ownership
 
-Status: Complete
-
-Roadmap stage: 8
-
-Type: Model-pressure experiment
-
-Depends on: TC-0603 and a safety-classification workflow
-
-Unlocks: A safety classification ownership decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Model-pressure experiment",
+    "condition": "TC-0603 and a safety-classification workflow",
+    "unlocks": "A safety classification ownership decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

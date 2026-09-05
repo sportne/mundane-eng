@@ -1,14 +1,22 @@
 # Task TC-0401: Run the Formatting Policy Experiment
 
-Status: Complete
-
-Roadmap stage: 4
-
-Type: Experiment and decision
-
-Depends on: TC-0203
-
-Unlocks: TC-0402
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "4",
+    "type": "Experiment and decision",
+    "condition": "TC-0203",
+    "unlocks": "TC-0402",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

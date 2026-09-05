@@ -1,14 +1,22 @@
 # Task TC-0702: Run the Independent-Interpretation Proxy Trial
 
-Status: Complete
-
-Roadmap stage: 7
-
-Type: Independent-interpretation trial
-
-Depends on: TC-0701
-
-Unlocks: TC-0704
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0701"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Independent-interpretation trial",
+    "condition": "TC-0701",
+    "unlocks": "TC-0704",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

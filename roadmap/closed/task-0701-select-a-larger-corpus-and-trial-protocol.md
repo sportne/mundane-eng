@@ -1,14 +1,22 @@
 # Task TC-0701: Select a Larger Corpus and Trial Protocol
 
-Status: Complete
-
-Roadmap stage: 7
-
-Type: Research and trial design
-
-Depends on: TC-0603
-
-Unlocks: TC-0702 and TC-0703
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Research and trial design",
+    "condition": "TC-0603",
+    "unlocks": "TC-0702 and TC-0703",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

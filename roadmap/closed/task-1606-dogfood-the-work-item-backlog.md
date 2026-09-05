@@ -1,14 +1,31 @@
 # Task TC-1606: Dogfood the Work Item Backlog
 
-Status: Ready
-
-Roadmap stage: 16
-
-Type: Verification and Documentation
-
-Depends on: TC-1603, TC-1604, TC-1605
-
-Unlocks: none
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1603",
+    "TC-1604",
+    "TC-1605"
+  ],
+  "relations": [
+    {
+      "relation": "evidence",
+      "scope": null,
+      "kind": "resource",
+      "target": "specification/0018-work-items-0.1.md"
+    }
+  ],
+  "planning": {
+    "stage": "16",
+    "type": "Verification and Documentation",
+    "condition": "TC-1603, TC-1604, TC-1605",
+    "unlocks": "none",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 
@@ -49,6 +66,17 @@ conditional prerequisites as authored policy rather than pretend they are execut
 
 ## References
 
-- [Roadmap](0001-initial-roadmap.md)
-- [Ownership decision](../research/0037-requirement-and-assertion-ownership.md)
-- [Local imports](../specification/0014-local-artifact-imports-0.1.md)
+- [Roadmap](../0001-initial-roadmap.md)
+- [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
+- [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
+
+## Completion evidence
+
+Completed 2026-09-05. [Research 0059](../../research/0059-work-item-backlog-verification.md)
+records the 78-card migration, preserved narrative/qualifications, authoritative
+source selection, generated index, eight replayable seeds, three killed compiled
+mutations and full clean-checkout verification. All 18 JVM groups, native/integration
+checks and deliberate CI-failure propagation passed. Completion appends this record
+and rebases links for the normal move under closed/; the migration checkpoint remains
+available in its immutable inventory. No external tracker or satisfaction inference
+is claimed.

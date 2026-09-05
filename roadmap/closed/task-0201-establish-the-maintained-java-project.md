@@ -1,14 +1,22 @@
 # Task TC-0201: Establish the Maintained Java Project
 
-Status: Complete
-
-Roadmap stage: 2
-
-Type: Implementation
-
-Depends on: TC-0104
-
-Unlocks: TC-0202
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0104"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "2",
+    "type": "Implementation",
+    "condition": "TC-0104",
+    "unlocks": "TC-0202",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

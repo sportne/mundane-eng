@@ -1,14 +1,22 @@
 # Task TC-0202: Design the Shared Source Representation
 
-Status: Complete
-
-Roadmap stage: 2
-
-Type: Design experiment and implementation
-
-Depends on: TC-0201
-
-Unlocks: TC-0203
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0201"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "2",
+    "type": "Design experiment and implementation",
+    "condition": "TC-0201",
+    "unlocks": "TC-0203",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

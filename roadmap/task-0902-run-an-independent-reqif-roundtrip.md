@@ -1,14 +1,22 @@
 # Task TC-0902: Run an Independent ReqIF Roundtrip
 
-Status: Conditional
-
-Roadmap stage: 9
-
-Type: Interchange experiment
-
-Depends on: TC-0603 and access to an independent ReqIF implementation
-
-Unlocks: A maintained-interchange decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Conditional",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "9",
+    "type": "Interchange experiment",
+    "condition": "TC-0603 and access to an independent ReqIF implementation",
+    "unlocks": "A maintained-interchange decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

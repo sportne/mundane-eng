@@ -1,14 +1,22 @@
 # Task TC-1202: Emit Compiled Requirement Artifacts
 
-Status: Complete
-
-Roadmap stage: 12
-
-Type: Implementation
-
-Depends on: TC-1201
-
-Unlocks: TC-1204
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1201"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "12",
+    "type": "Implementation",
+    "condition": "TC-1201",
+    "unlocks": "TC-1204",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

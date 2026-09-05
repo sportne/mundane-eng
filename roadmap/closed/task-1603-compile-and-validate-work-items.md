@@ -1,14 +1,29 @@
 # Task TC-1603: Compile and Validate Work Items
 
-Status: Complete
-
-Roadmap stage: 16
-
-Type: Implementation
-
-Depends on: TC-1602
-
-Unlocks: TC-1604
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1602"
+  ],
+  "relations": [
+    {
+      "relation": "evidence",
+      "scope": null,
+      "kind": "resource",
+      "target": "src/main/java/engineering/work/WorkCompiler.java"
+    }
+  ],
+  "planning": {
+    "stage": "16",
+    "type": "Implementation",
+    "condition": "TC-1602",
+    "unlocks": "TC-1604",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0602: Create the Clean-Checkout CI Workflow
 
-Status: Complete
-
-Roadmap stage: 6
-
-Type: Integration
-
-Depends on: TC-0601
-
-Unlocks: TC-0603
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0601"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "6",
+    "type": "Integration",
+    "condition": "TC-0601",
+    "unlocks": "TC-0603",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

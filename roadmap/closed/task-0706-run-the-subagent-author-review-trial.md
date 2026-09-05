@@ -1,16 +1,23 @@
 # Task TC-0706: Run the Subagent Author and Review Trial
 
-Status: Complete
-
-Completion qualifier: Material scope deviation from the planned human case
-
-Roadmap stage: 7
-
-Type: Independent author and review trial
-
-Depends on: TC-0701 and TC-0702
-
-Unlocks: TC-1001
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0701",
+    "TC-0702"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Independent author and review trial",
+    "condition": "TC-0701 and TC-0702",
+    "unlocks": "TC-1001",
+    "statusNote": "Completion qualifier: Material scope deviation from the planned human case"
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,24 @@
 # Task TC-1204: Implement Bounded Artifact Linking
 
-Status: Complete
-
-Roadmap stage: 12
-
-Type: Implementation
-
-Depends on: TC-1202, TC-1203, TC-0905
-
-Unlocks: TC-0904
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0905",
+    "TC-1202",
+    "TC-1203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "12",
+    "type": "Implementation",
+    "condition": "TC-1202, TC-1203, TC-0905",
+    "unlocks": "TC-0904",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

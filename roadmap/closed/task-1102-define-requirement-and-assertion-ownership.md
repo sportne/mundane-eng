@@ -1,14 +1,22 @@
 # Task TC-1102: Define Requirement and Assertion Ownership
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Decision
-
-Depends on: TC-1101
-
-Unlocks: TC-1103, TC-1301
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1101"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Decision",
+    "condition": "TC-1101",
+    "unlocks": "TC-1103, TC-1301",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

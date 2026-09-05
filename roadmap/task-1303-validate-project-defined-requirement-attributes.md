@@ -1,14 +1,22 @@
 # Task TC-1303: Validate Project-Defined Requirement Attributes
 
-Status: Ready
-
-Roadmap stage: 13
-
-Type: Implementation
-
-Depends on: TC-1302
-
-Unlocks: TC-1304, TC-1305
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Ready",
+  "dependencies": [
+    "TC-1302"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Implementation",
+    "condition": "TC-1302",
+    "unlocks": "TC-1304, TC-1305",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

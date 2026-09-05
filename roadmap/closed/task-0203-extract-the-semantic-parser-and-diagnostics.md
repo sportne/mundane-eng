@@ -1,14 +1,22 @@
 # Task TC-0203: Extract the Semantic Parser and Diagnostics
 
-Status: Complete
-
-Roadmap stage: 2
-
-Type: Implementation
-
-Depends on: TC-0202
-
-Unlocks: TC-0204, TC-0401, and TC-0501
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0202"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "2",
+    "type": "Implementation",
+    "condition": "TC-0202",
+    "unlocks": "TC-0204, TC-0401, and TC-0501",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-1003: Execute a Vaccine-Monitoring Requirements Pilot
 
-Status: Complete
-
-Roadmap stage: 10
-
-Type: Trial
-
-Depends on: TC-1002
-
-Unlocks: TC-0905 and a renewed source 1.0 readiness assessment
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1002"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "10",
+    "type": "Trial",
+    "condition": "TC-1002",
+    "unlocks": "TC-0905 and a renewed source 1.0 readiness assessment",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

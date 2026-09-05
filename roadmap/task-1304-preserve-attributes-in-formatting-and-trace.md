@@ -1,14 +1,23 @@
 # Task TC-1304: Preserve Attributes in Formatting and Trace
 
-Status: Planned
-
-Roadmap stage: 13
-
-Type: Implementation
-
-Depends on: TC-1302, TC-1303
-
-Unlocks: TC-1308
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Planned",
+  "dependencies": [
+    "TC-1302",
+    "TC-1303"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Implementation",
+    "condition": "TC-1302, TC-1303",
+    "unlocks": "TC-1308",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

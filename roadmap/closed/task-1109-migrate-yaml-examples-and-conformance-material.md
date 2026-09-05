@@ -1,14 +1,23 @@
 # Task TC-1109: Migrate YAML Examples and Conformance Material
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Tooling and testing
-
-Depends on: TC-1107, TC-1108
-
-Unlocks: documented YAML authoring and reproducible contributor workflows
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1107",
+    "TC-1108"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Tooling and testing",
+    "condition": "TC-1107, TC-1108",
+    "unlocks": "documented YAML authoring and reproducible contributor workflows",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

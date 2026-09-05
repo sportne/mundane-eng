@@ -1,14 +1,29 @@
 # Task TC-1604: Link and Analyze Work Items
 
-Status: Complete
-
-Roadmap stage: 16
-
-Type: Implementation
-
-Depends on: TC-1603
-
-Unlocks: TC-1605
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1603"
+  ],
+  "relations": [
+    {
+      "relation": "evidence",
+      "scope": null,
+      "kind": "resource",
+      "target": "src/main/java/engineering/work/WorkGraph.java"
+    }
+  ],
+  "planning": {
+    "stage": "16",
+    "type": "Implementation",
+    "condition": "TC-1603",
+    "unlocks": "TC-1605",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

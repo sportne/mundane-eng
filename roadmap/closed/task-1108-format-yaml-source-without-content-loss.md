@@ -1,14 +1,22 @@
 # Task TC-1108: Format YAML Source Without Content Loss
 
-Status: Complete
-
-Roadmap stage: 11
-
-Type: Implementation
-
-Depends on: TC-1107
-
-Unlocks: TC-1109
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1107"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "11",
+    "type": "Implementation",
+    "condition": "TC-1107",
+    "unlocks": "TC-1109",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

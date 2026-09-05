@@ -1,14 +1,23 @@
 # Task TC-1201: Define Requirement Semantic Output
 
-Status: Complete
-
-Roadmap stage: 12
-
-Type: Decision
-
-Depends on: TC-1103, TC-1502
-
-Unlocks: TC-1202, TC-1203, TC-1504
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1103",
+    "TC-1502"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "12",
+    "type": "Decision",
+    "condition": "TC-1103, TC-1502",
+    "unlocks": "TC-1202, TC-1203, TC-1504",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

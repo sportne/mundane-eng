@@ -74,6 +74,11 @@ explicit project declarations and descriptive text/enum values. Attributes are
 not implemented yet. [Independent version declarations](versions.properties)
 feed command builds and package metadata.
 
+[Work items](distribution/work-items.md) now provide a separate structured Markdown
+source profile for tasks and issues, with compilation, typed linking, prerequisite
+analysis and a [derived backlog view](WORK-ITEMS.md). The repository uses that
+workflow for its own task cards; source cards own status and completion evidence.
+
 [Bounded diagnostic recovery](specification/0016-diagnostic-recovery.md) now retains
 reliably parsed neighbors while keeping invalid sources incomplete. The validator
 also offers [SARIF output](specification/0017-sarif-validation-output.md) with stable

@@ -1,14 +1,24 @@
 # Task TC-1504: Emit SARIF Validation Diagnostics
 
-Status: Complete
-
-Roadmap stage: 15
-
-Type: Implementation and verification
-
-Depends on: TC-1201, TC-1402, TC-1403
-
-Unlocks: follow-up work selected by the completion decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1201",
+    "TC-1402",
+    "TC-1403"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "15",
+    "type": "Implementation and verification",
+    "condition": "TC-1201, TC-1402, TC-1403",
+    "unlocks": "follow-up work selected by the completion decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

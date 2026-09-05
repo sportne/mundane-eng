@@ -1,14 +1,22 @@
 # Task TC-1602: Specify Work Item Source and Output
 
-Status: Complete
-
-Roadmap stage: 16
-
-Type: Decision
-
-Depends on: TC-1601
-
-Unlocks: TC-1603
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1601"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "16",
+    "type": "Decision",
+    "condition": "TC-1601",
+    "unlocks": "TC-1603",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0804: Test Allocation and Controlled Vocabulary
 
-Status: Complete
-
-Roadmap stage: 8
-
-Type: Model-pressure experiment
-
-Depends on: TC-0603 and a corpus with real allocation change
-
-Unlocks: An allocation model decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Model-pressure experiment",
+    "condition": "TC-0603 and a corpus with real allocation change",
+    "unlocks": "An allocation model decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

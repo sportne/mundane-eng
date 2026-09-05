@@ -1,19 +1,23 @@
 # Task TC-0904: Implement the Selected Ecosystem Tool
 
-Status: Complete
-
-Current disposition: Experiment 0024 supplied the repeated workflow evidence
-that TC-0901 required and selected a focused verification-plan analyzer. TC-0905
-must define and survive a bounded contract experiment before implementation is
-unlocked.
-
-Roadmap stage: 9
-
-Type: Implementation
-
-Depends on: TC-0905, TC-1204
-
-Unlocks: TC-0903
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0905",
+    "TC-1204"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "9",
+    "type": "Implementation",
+    "condition": "TC-0905, TC-1204",
+    "unlocks": "TC-0903",
+    "statusNote": "Current disposition: Experiment 0024 supplied the repeated workflow evidence\nthat TC-0901 required and selected a focused verification-plan analyzer. TC-0905\nmust define and survive a bounded contract experiment before implementation is\nunlocked."
+  }
+}
+```
 
 ## Question
 

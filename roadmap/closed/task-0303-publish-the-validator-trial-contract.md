@@ -1,14 +1,22 @@
 # Task TC-0303: Publish the Validator Trial Contract
 
-Status: Complete
-
-Roadmap stage: 3
-
-Type: Decision and documentation
-
-Depends on: TC-0302
-
-Unlocks: TC-0601
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0302"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "3",
+    "type": "Decision and documentation",
+    "condition": "TC-0302",
+    "unlocks": "TC-0601",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

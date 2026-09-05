@@ -1,15 +1,23 @@
 # Task TC-0901: Prioritize the Next Ecosystem Tool
 
-Status: Complete
-
-Roadmap stage: 9
-
-Type: Portfolio decision
-
-Depends on: TC-0603 and TC-0704
-
-Unlocks: TC-0904 only when this or a successor decision selects a tool; the
-current no-tool decision does not unlock it
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603",
+    "TC-0704"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "9",
+    "type": "Portfolio decision",
+    "condition": "TC-0603 and TC-0704",
+    "unlocks": "TC-0904 only when this or a successor decision selects a tool; the\ncurrent no-tool decision does not unlock it",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0404: Publish the Formatter Trial Contract
 
-Status: Complete
-
-Roadmap stage: 4
-
-Type: Decision and documentation
-
-Depends on: TC-0403
-
-Unlocks: TC-0601
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0403"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "4",
+    "type": "Decision and documentation",
+    "condition": "TC-0403",
+    "unlocks": "TC-0601",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0204: Port Tests and Prove Native Tool Boundaries
 
-Status: Complete
-
-Roadmap stage: 2
-
-Type: Implementation and architecture verification
-
-Depends on: TC-0203
-
-Unlocks: TC-0301, TC-0402, and TC-0502
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "2",
+    "type": "Implementation and architecture verification",
+    "condition": "TC-0203",
+    "unlocks": "TC-0301, TC-0402, and TC-0502",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

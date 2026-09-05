@@ -1,14 +1,25 @@
 # Task TC-1308: Verify and Document Project Attribute Workflows
 
-Status: Planned
-
-Roadmap stage: 13
-
-Type: Verification and Documentation
-
-Depends on: TC-1302, TC-1304, TC-1306, TC-1307
-
-Unlocks: none
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Planned",
+  "dependencies": [
+    "TC-1302",
+    "TC-1304",
+    "TC-1306",
+    "TC-1307"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Verification and Documentation",
+    "condition": "TC-1302, TC-1304, TC-1306, TC-1307",
+    "unlocks": "none",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

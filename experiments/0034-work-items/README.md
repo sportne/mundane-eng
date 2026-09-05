@@ -22,3 +22,26 @@ supersession, invalid references/pins and execution without source-parser classe
 TC-1605 adds a deterministic Markdown view with revalidated findings and escaped
 source-linked navigation. `golden/view.txt` stores expected Markdown bytes using
 the analysis root as link base; it is not a standalone file-relative web page.
+
+TC-1606 converts the real 78-card backlog using `migration.json` and the one-time
+`migrate.py --write` recipe. The replay checks the immutable pre-conversion Git
+revision, every heading/body suffix and explicit metadata transform. Exceptional
+completion and current-disposition headers are retained in planning.statusNote.
+The replay describes the conversion checkpoint; future card edits remain allowed.
+
+`regressions.py` runs eight deterministic seeds (160600–160607), 4–24 tasks each,
+with independent expected values/prerequisites and ID-correction failures. Replay
+one with `--seed N`; failures retain inputs under build/work-regression-failure-N.
+Each invocation has a 30-second timeout and the suite a 180-second budget. Three
+isolated Java mutations must compile and differ from passing baseline witnesses:
+partial record publication, ignored unfinished prerequisites and ignored exact pins.
+`results/mutations.json` records actual results; noncompiling/crashing mutants are
+failures of the experiment, not counted as killed. No general mutation-coverage
+claim or unobserved minimized defect is made.
+
+`make work-backlog-verify` compiles, analyzes and regenerates the complete selected
+repository backlog, compares the checked-in derived view and deletes/rebuilds the
+intermediate artifacts. The generated root WORK-ITEMS.md replaces manual status
+rows; roadmap prose remains authored. Typed references to existing requirement,
+plan and activity fixtures are exercised by the public boundary suite. Local-resource
+links in the migrated cards exercise actual code/specification citations.

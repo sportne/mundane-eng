@@ -1,14 +1,22 @@
 # Task TC-1203: Define Import and Reference Contracts
 
-Status: Complete
-
-Roadmap stage: 12
-
-Type: Decision
-
-Depends on: TC-1201
-
-Unlocks: TC-1204, TC-1302, TC-0905
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1201"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "12",
+    "type": "Decision",
+    "condition": "TC-1201",
+    "unlocks": "TC-1204, TC-1302, TC-0905",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

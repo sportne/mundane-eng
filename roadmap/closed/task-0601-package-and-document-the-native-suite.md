@@ -1,14 +1,24 @@
 # Task TC-0601: Package and Document the Native Suite
 
-Status: Complete
-
-Roadmap stage: 6
-
-Type: Packaging and documentation
-
-Depends on: TC-0303, TC-0404, and TC-0504
-
-Unlocks: TC-0602
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0303",
+    "TC-0404",
+    "TC-0504"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "6",
+    "type": "Packaging and documentation",
+    "condition": "TC-0303, TC-0404, and TC-0504",
+    "unlocks": "TC-0602",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

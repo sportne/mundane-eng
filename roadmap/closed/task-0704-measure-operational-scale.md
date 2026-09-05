@@ -1,14 +1,23 @@
 # Task TC-0704: Measure Operational Scale
 
-Status: Complete
-
-Roadmap stage: 7
-
-Type: Operational verification
-
-Depends on: TC-0702 and TC-0703
-
-Unlocks: TC-0901 and TC-1001
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0702",
+    "TC-0703"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Operational verification",
+    "condition": "TC-0702 and TC-0703",
+    "unlocks": "TC-0901 and TC-1001",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

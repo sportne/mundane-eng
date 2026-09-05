@@ -113,3 +113,5 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 - [Research 0057: Work-item linking verification](0057-work-item-linking-verification.md)
 
 - [Research 0058: Derived work-item view verification](0058-work-item-view-verification.md)
+
+- [Research 0059: Work-item backlog integration](0059-work-item-backlog-verification.md)

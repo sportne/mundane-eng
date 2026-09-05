@@ -1,14 +1,22 @@
 # Task TC-0805: Test Glossary and Formal-Symbol Artifacts
 
-Status: Complete
-
-Roadmap stage: 8
-
-Type: Model-pressure experiment
-
-Depends on: TC-0603 and demonstrated vocabulary ambiguity
-
-Unlocks: A vocabulary and symbol model decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Model-pressure experiment",
+    "condition": "TC-0603 and demonstrated vocabulary ambiguity",
+    "unlocks": "A vocabulary and symbol model decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

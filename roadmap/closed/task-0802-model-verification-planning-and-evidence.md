@@ -1,14 +1,22 @@
 # Task TC-0802: Model Verification Planning and Evidence
 
-Status: Complete
-
-Roadmap stage: 8
-
-Type: Model-pressure experiment
-
-Depends on: TC-0603 and a verification workflow
-
-Unlocks: A verification companion-artifact decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0603"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Model-pressure experiment",
+    "condition": "TC-0603 and a verification workflow",
+    "unlocks": "A verification companion-artifact decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,20 @@
 # Task TC-1403: Recover Parser Diagnostics Safely
 
-Status: Complete
-
-Roadmap stage: 14
-
-Type: Implementation and verification
-
-Depends on: none
-
-Unlocks: TC-1504
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [],
+  "relations": [],
+  "planning": {
+    "stage": "14",
+    "type": "Implementation and verification",
+    "condition": "none",
+    "unlocks": "TC-1504",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

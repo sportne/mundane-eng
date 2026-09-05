@@ -1,14 +1,24 @@
 # Task TC-1302: Decide Project Attribute Schemas
 
-Status: Complete
-
-Roadmap stage: 13
-
-Type: Decision
-
-Depends on: TC-1301, TC-1203, TC-1106
-
-Unlocks: follow-up work selected by the completion decision
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1106",
+    "TC-1203",
+    "TC-1301"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Decision",
+    "condition": "TC-1301, TC-1203, TC-1106",
+    "unlocks": "follow-up work selected by the completion decision",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

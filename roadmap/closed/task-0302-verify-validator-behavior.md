@@ -1,14 +1,22 @@
 # Task TC-0302: Verify Validator Behavior
 
-Status: Complete
-
-Roadmap stage: 3
-
-Type: Verification and trial
-
-Depends on: TC-0301
-
-Unlocks: TC-0303
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0301"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "3",
+    "type": "Verification and trial",
+    "condition": "TC-0301",
+    "unlocks": "TC-0303",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

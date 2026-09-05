@@ -1,0 +1,810 @@
+scripts/check-yaml-schema.sh
+Collecting attrs==26.1.0 (from -r dependencies/schema-test-requirements.txt (line 1))
+  Using cached attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting jsonschema==4.26.0 (from -r dependencies/schema-test-requirements.txt (line 2))
+  Using cached jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting jsonschema-specifications==2025.9.1 (from -r dependencies/schema-test-requirements.txt (line 3))
+  Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing==0.37.0 (from -r dependencies/schema-test-requirements.txt (line 4))
+  Using cached referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py==2026.6.3 (from -r dependencies/schema-test-requirements.txt (line 5))
+  Using cached rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+Collecting ruamel.yaml==0.19.1 (from -r dependencies/schema-test-requirements.txt (line 6))
+  Using cached ruamel_yaml-0.19.1-py3-none-any.whl.metadata (16 kB)
+Collecting typing_extensions==4.16.0 (from -r dependencies/schema-test-requirements.txt (line 7))
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Using cached attrs-26.1.0-py3-none-any.whl (67 kB)
+Using cached jsonschema-4.26.0-py3-none-any.whl (90 kB)
+Using cached jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+Using cached referencing-0.37.0-py3-none-any.whl (26 kB)
+Using cached rpds_py-2026.6.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (366 kB)
+Using cached ruamel_yaml-0.19.1-py3-none-any.whl (118 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Installing collected packages: typing_extensions, ruamel.yaml, rpds-py, attrs, referencing, jsonschema-specifications, jsonschema
+Successfully installed attrs-26.1.0 jsonschema-4.26.0 jsonschema-specifications-2025.9.1 referencing-0.37.0 rpds-py-2026.6.3 ruamel.yaml-0.19.1 typing_extensions-4.16.0
+PASS independent Draft 2020-12 schema: 12 valid files, 17 structural/domain distinction cases
+scripts/fetch-yaml-parser.sh
+python3 scripts/generate-versions.py versions.properties build/maintained/generated
+mkdir -p build/maintained/classes
+javac -cp build/dependencies/snakeyaml-engine-3.1.1.jar --release 21 -Xlint:all -Werror -d build/maintained/classes src/main/java/engineering/artifacts/Artifacts.java src/main/java/engineering/artifacts/Checks.java src/main/java/engineering/artifacts/Command.java src/main/java/engineering/artifacts/Json.java src/main/java/engineering/artifacts/LinkMain.java src/main/java/engineering/artifacts/Linker.java src/main/java/engineering/artifacts/Problem.java src/main/java/engineering/artifacts/Snapshots.java src/main/java/engineering/verification/PlanCompiler.java src/main/java/engineering/verification/PlanMain.java src/main/java/engineering/verification/Verifier.java src/main/java/engineering/verification/VerifyMain.java src/main/java/engineering/work/WorkAnalyzer.java src/main/java/engineering/work/WorkArtifact.java src/main/java/engineering/work/WorkCompiler.java src/main/java/engineering/work/WorkGraph.java src/main/java/engineering/work/WorkMain.java src/main/java/engineering/work/WorkResult.java src/main/java/engineering/work/WorkValues.java src/main/java/engineering/work/WorkView.java src/main/java/mundanereq/Interpreter.java src/main/java/mundanereq/SourceFormat.java src/main/java/mundanereq/YamlRequirements.java src/main/java/mundanereq/cli/CommandOutput.java src/main/java/mundanereq/cli/CompileMain.java src/main/java/mundanereq/cli/FormatterMain.java src/main/java/mundanereq/cli/MigrateMain.java src/main/java/mundanereq/cli/SourceInvocation.java src/main/java/mundanereq/cli/TraceMain.java src/main/java/mundanereq/cli/ValidatorMain.java src/main/java/mundanereq/compile/SemanticArtifact.java src/main/java/mundanereq/diagnostics/Sarif.java src/main/java/mundanereq/format/SourceFormatter.java src/main/java/mundanereq/output/JsonOutput.java src/main/java/mundanereq/package-info.java src/main/java/mundanereq/source/ConcreteLine.java src/main/java/mundanereq/source/LineEnding.java src/main/java/mundanereq/source/PhysicalLine.java src/main/java/mundanereq/source/SourceDocument.java src/main/java/mundanereq/source/SourcePosition.java src/main/java/mundanereq/source/SourceSpan.java src/main/java/mundanereq/trace/TraceAnalyzer.java build/maintained/generated/mundanereq/Versions.java src/test/java/engineering/artifacts/ArtifactBoundaryTest.java src/test/java/engineering/verification/VerificationBoundaryTest.java src/test/java/engineering/work/WorkBoundaryTest.java src/test/java/mundanereq/InterpreterRegressionTest.java src/test/java/mundanereq/InterpreterTest.java src/test/java/mundanereq/InventoryMain.java src/test/java/mundanereq/SemanticConversionTest.java src/test/java/mundanereq/boundary/NativeBoundaryIsolationTest.java src/test/java/mundanereq/ci/CiWorkflowVerificationTest.java src/test/java/mundanereq/cli/CompileMainTest.java src/test/java/mundanereq/cli/FormatterMainTest.java src/test/java/mundanereq/cli/FormatterVerificationTest.java src/test/java/mundanereq/cli/RecoveryVerificationTest.java src/test/java/mundanereq/cli/SarifOutputTest.java src/test/java/mundanereq/cli/TraceMainTest.java src/test/java/mundanereq/cli/TraceVerificationTest.java src/test/java/mundanereq/cli/ValidatorMainTest.java src/test/java/mundanereq/cli/ValidatorVerificationTest.java src/test/java/mundanereq/cli/YamlVerificationTest.java src/test/java/mundanereq/cli/YamlWorkflowTest.java src/test/java/mundanereq/distribution/NativeSuiteVerificationTest.java src/test/java/mundanereq/format/SourceFormatterTest.java src/test/java/mundanereq/smoke/MaintainedBuildTest.java src/test/java/mundanereq/source/SourceDocumentTest.java src/test/java/mundanereq/test/MaintainedTestSuite.java src/test/java/mundanereq/trace/TraceAnalyzerTest.java src/test/java/mundanereq/trial/IntegratedToolchainTrialTest.java src/test/java/mundanereq/trial/MultiAuthorLayoutTrialTest.java src/test/java/mundanereq/trial/OperationalCorpusVerificationTest.java
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.test.MaintainedTestSuite
+PASS maintained Java 21 project skeleton
+PASS physical and concrete source representation
+PASS concrete-to-semantic conversion
+PASS maintained semantic interpretation
+PASS equivalent layouts
+PASS prose and math interpretation
+PASS optional fields
+PASS source comments
+PASS line-ending equivalence
+PASS source discovery
+PASS explicit file discovery
+PASS physical source diagnostics
+PASS Unicode conformance edges
+PASS record and field diagnostics
+PASS math diagnostics
+PASS identity and relationship diagnostics
+Passed 12 maintained interpreter regression tests.
+PASS validator command interface
+PASS conservative source formatter
+PASS formatter command interface
+PASS decomposition trace analysis
+PASS trace command interface
+PASS frozen operational corpus profile
+PASS YAML rules, migration, formatter snapshot protection and CLI output failures
+PASS compiler output faults, invocation/input errors, exact retained spans and selected snapshots
+PASS strict JSON boundary, Unicode/number roundtrip, linker output faults and detected snapshot changes
+PASS plan/analyzer prefix, flush and stderr failures; plan snapshot change suppresses publication
+PASS recovery: custom/YAML neighbors, locations, no cascades, math boundaries, strict command barriers, 100 seeded cases and diagnostic cap
+PASS SARIF invocation rejection and closed/prefix/flush output failures
+PASS work-item compilation boundary and output failure handling
+Passed 18 maintained test groups.
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/native-smoke mundanereq.smoke.MaintainedBuildTest
+========================================================================================================================
+GraalVM Native Image: Generating 'native-smoke' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.9s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.84GB of memory (82.8% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.1s @ 0.39GB)
+    3,335 reachable types   (74.1% of    4,501 total)
+    3,975 reachable fields  (51.4% of    7,734 total)
+   15,979 reachable methods (45.3% of   35,256 total)
+    1,030 types,   210 fields, and   803 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.9s @ 0.38GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.49GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.42GB)
+[6/8] Compiling methods...    [**]                                                                       (2.3s @ 0.70GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.88GB)
+[8/8] Creating image...       [*]                                                                        (1.2s @ 0.49GB)
+   5.00MB (34.62%) for code area:    13,149 compilation units
+   8.79MB (60.83%) for image heap:  112,276 objects and 52 resources
+ 673.01kB ( 4.55%) for other data
+  14.45MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   3.73MB java.base                                            1.90MB byte[] for code metadata
+ 928.02kB svm.jar (Native Image)                               1.46MB byte[] for java.lang.String
+ 105.92kB java.logging                                         1.10MB java.lang.String
+  59.46kB org.graalvm.nativeimage.base                       771.91kB java.lang.Class
+  29.64kB jdk.proxy1                                         427.54kB heap alignment
+  28.46kB jdk.proxy3                                         351.14kB java.util.HashMap$Node
+  22.71kB jdk.internal.vm.ci                                 286.60kB com.oracle.svm.core.hub.DynamicHubCompanion
+  20.38kB org.graalvm.collections                            247.17kB byte[] for general heap data
+   8.15kB jdk.internal.vm.compiler                           234.93kB java.lang.String[]
+   6.99kB jdk.proxy2                                         219.80kB java.lang.Object[]
+   3.74kB for 4 more packages                                  1.85MB for 951 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        1.0s (7.7% of total time) in 78 GCs | Peak RSS: 1.64GB | CPU load: 11.77
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/native-smoke (executable)
+========================================================================================================================
+Finished generating 'native-smoke' in 12.4s.
+build/maintained/native-smoke
+PASS maintained Java 21 project skeleton
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/mundanereq-validate mundanereq.cli.ValidatorMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundanereq-validate' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.8s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.74GB of memory (82.5% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.5s @ 0.32GB)
+    3,763 reachable types   (76.5% of    4,922 total)
+    4,600 reachable fields  (54.1% of    8,500 total)
+   17,614 reachable methods (47.3% of   37,277 total)
+    1,125 types,   326 fields, and   848 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.9s @ 0.37GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.41GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.55GB)
+[6/8] Compiling methods...    [**]                                                                       (2.6s @ 0.61GB)
+[7/8] Layouting methods...    [*]                                                                        (1.0s @ 0.82GB)
+[8/8] Creating image...       [*]                                                                        (1.2s @ 0.99GB)
+   5.79MB (36.06%) for code area:    14,521 compilation units
+   9.55MB (59.49%) for image heap:  121,266 objects and 52 resources
+ 730.92kB ( 4.45%) for other data
+  16.05MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   3.97MB java.base                                            2.19MB byte[] for code metadata
+ 942.10kB svm.jar (Native Image)                               1.56MB byte[] for java.lang.String
+ 313.94kB snakeyaml-engine-3.1.1.jar                           1.17MB java.lang.String
+ 143.70kB mundanereq                                         871.80kB java.lang.Class
+ 106.88kB java.logging                                       358.76kB heap alignment
+  60.37kB org.graalvm.nativeimage.base                       351.23kB java.util.HashMap$Node
+  29.64kB jdk.proxy1                                         323.38kB com.oracle.svm.core.hub.DynamicHubCompanion
+  28.46kB jdk.proxy3                                         248.17kB java.lang.String[]
+  22.71kB jdk.internal.vm.ci                                 247.49kB byte[] for general heap data
+  22.01kB mundanereq.diagnostics                             224.71kB java.lang.Object[]
+  86.40kB for 10 more packages                                 2.07MB for 1034 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.9s (7.0% of total time) in 85 GCs | Peak RSS: 1.68GB | CPU load: 12.42
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundanereq-validate (executable)
+========================================================================================================================
+Finished generating 'mundanereq-validate' in 12.9s.
+build/maintained/mundanereq-validate --version
+mundanereq-validate trial-0.1; source contract mundanereq-source-0.2
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/mundanereq-format mundanereq.cli.FormatterMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundanereq-format' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.6s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.71GB of memory (82.4% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (4.1s @ 0.46GB)
+    4,278 reachable types   (77.7% of    5,504 total)
+    5,342 reachable fields  (53.9% of    9,903 total)
+   19,943 reachable methods (48.9% of   40,774 total)
+    1,380 types,   337 fields, and   987 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.53GB)
+[4/8] Parsing methods...      [*]                                                                        (0.7s @ 0.49GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.42GB)
+[6/8] Compiling methods...    [**]                                                                       (2.8s @ 0.56GB)
+[7/8] Layouting methods...    [*]                                                                        (1.1s @ 0.80GB)
+[8/8] Creating image...       [*]                                                                        (1.3s @ 1.00GB)
+   6.84MB (36.86%) for code area:    16,430 compilation units
+  10.91MB (58.80%) for image heap:  141,739 objects and 52 resources
+ 824.42kB ( 4.34%) for other data
+  18.55MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.95MB java.base                                            2.57MB byte[] for code metadata
+ 968.18kB svm.jar (Native Image)                               1.79MB byte[] for java.lang.String
+ 313.94kB snakeyaml-engine-3.1.1.jar                           1.34MB java.lang.String
+ 143.67kB mundanereq                                         997.26kB java.lang.Class
+ 106.88kB java.logging                                       371.25kB java.util.HashMap$Node
+  60.37kB org.graalvm.nativeimage.base                       367.64kB com.oracle.svm.core.hub.DynamicHubCompanion
+  47.07kB jdk.crypto.ec                                      282.17kB java.lang.String[]
+  35.25kB mundanereq.cli                                     260.09kB byte[] for general heap data
+  29.64kB jdk.proxy1                                         249.43kB java.lang.Object[]
+  28.46kB jdk.proxy3                                         236.53kB java.util.concurrent.ConcurrentHashMap$Node
+  83.64kB for 9 more packages                                  2.51MB for 1114 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        1.0s (7.3% of total time) in 98 GCs | Peak RSS: 1.67GB | CPU load: 12.89
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundanereq-format (executable)
+========================================================================================================================
+Finished generating 'mundanereq-format' in 13.9s.
+build/maintained/mundanereq-format --version
+mundanereq-format trial-0.1; source contract mundanereq-source-0.2
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/mundanereq-trace mundanereq.cli.TraceMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundanereq-trace' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.8s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.70GB of memory (82.4% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.6s @ 0.33GB)
+    3,747 reachable types   (76.3% of    4,913 total)
+    4,566 reachable fields  (54.0% of    8,462 total)
+   17,486 reachable methods (47.0% of   37,194 total)
+    1,119 types,   326 fields, and   847 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.44GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.47GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.44GB)
+[6/8] Compiling methods...    [**]                                                                       (2.5s @ 0.93GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.63GB)
+[8/8] Creating image...       [*]                                                                        (1.2s @ 0.80GB)
+   5.72MB (35.84%) for code area:    14,395 compilation units
+   9.53MB (59.71%) for image heap:  121,076 objects and 52 resources
+ 727.20kB ( 4.45%) for other data
+  15.96MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   3.90MB java.base                                            2.16MB byte[] for code metadata
+ 946.42kB svm.jar (Native Image)                               1.55MB byte[] for java.lang.String
+ 313.94kB snakeyaml-engine-3.1.1.jar                           1.17MB java.lang.String
+ 143.43kB mundanereq                                         867.43kB java.lang.Class
+ 106.88kB java.logging                                       375.96kB heap alignment
+  60.37kB org.graalvm.nativeimage.base                       351.23kB java.util.HashMap$Node
+  33.25kB mundanereq.trace                                   322.01kB com.oracle.svm.core.hub.DynamicHubCompanion
+  29.64kB jdk.proxy1                                         247.45kB byte[] for general heap data
+  28.46kB jdk.proxy3                                         247.20kB java.lang.String[]
+  22.71kB jdk.internal.vm.ci                                 224.73kB java.lang.Object[]
+  77.49kB for 8 more packages                                  2.07MB for 1026 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.9s (7.0% of total time) in 88 GCs | Peak RSS: 1.69GB | CPU load: 12.40
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundanereq-trace (executable)
+========================================================================================================================
+Finished generating 'mundanereq-trace' in 12.9s.
+build/maintained/mundanereq-trace --version
+mundanereq-trace trial-0.1; source contract mundanereq-source-0.2
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.boundary.NativeBoundaryIsolationTest \
+	build/maintained/mundanereq-validate build/maintained/mundanereq-format build/maintained/mundanereq-trace
+PASS independent native executable boundaries
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.cli.ValidatorVerificationTest build/maintained/mundanereq-validate
+PASS 9 valid project corpora
+PASS 14 invalid conformance selections
+PASS source selection and invocation classes
+PASS bounded high-volume diagnostic capture
+PASS diagnostic-guided repair workflows
+OBSERVED native process duration: 2 ms (one-file corpus), 2 ms (20-file corpus); no threshold asserted.
+PASS complete validator JVM/native verification
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.cli.FormatterVerificationTest build/maintained/mundanereq-format
+PASS semantic preservation and byte-identical idempotence across 31 source sets and 65 files
+PASS ordered preservation of 37 comments and 102 opaque math lines
+PASS formatter modes agree between JVM and native image
+PASS complete formatter JVM/native verification
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.cli.TraceVerificationTest build/maintained/mundanereq-trace
+PASS published trace trial identity
+PASS graph operations, layouts, ordering, ties, disconnection, and cycles
+PASS missing-query and invalid-source behavior
+PASS maintained UAS and transferred FRET corpus traces
+PASS addition, split/retarget, coordinated-change, and retirement workflows
+PASS complete trace JVM/native verification
+test "/tmp/mreq-work-clean/build/maintained/package" = "/tmp/mreq-work-clean/build/maintained/package"
+test "/tmp/mreq-work-clean/build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34" = "/tmp/mreq-work-clean/build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34"
+test "$(uname -s)" = Linux
+test "$(uname -m)" = x86_64
+test "$(getconf GNU_LIBC_VERSION | sed 's/ .*//')" = glibc
+test -f "/home/jack/.sdkman/candidates/java/21.0.2-graalce/LICENSE_NATIVEIMAGE.txt"
+test -d "/home/jack/.sdkman/candidates/java/21.0.2-graalce/legal"
+rm -rf "/tmp/mreq-work-clean/build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34"
+mkdir -p "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/bin" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/GraalVM-JDK"
+install -m 755 "build/maintained/mundanereq-validate" "build/maintained/mundanereq-format" "build/maintained/mundanereq-trace" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/bin/"
+install -m 644 distribution/README.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/README.md"
+install -m 644 distribution/validate.md distribution/format.md distribution/trace.md distribution/THIRD-PARTY-NOTICES.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/"
+install -m 644 specification/0007-validator-trial-contract-0.1.md specification/0008-formatter-trial-contract-0.1.md specification/0009-trace-trial-contract-0.1.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts/"
+install -m 644 LICENSE "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/mundanereq-BSD-3-Clause.txt"
+install -m 644 dependencies/SnakeYAML-Engine-LICENSE.txt "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/"
+install -m 644 dependencies/README.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/YAML-DEPENDENCY.md"
+install -m 644 specification/0013-compiled-diagnostic-rules.md specification/0016-diagnostic-recovery.md specification/0017-sarif-validation-output.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts/"
+install -m 644 specification/0010-requirements-yaml-0.3.md specification/0011-tool-safety-and-yaml-commands.md "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts/"
+mkdir -p "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts/schema"
+install -m 644 specification/schema/requirements-yaml-0.3.json "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/docs/contracts/schema/"
+install -m 644 "/home/jack/.sdkman/candidates/java/21.0.2-graalce/LICENSE_NATIVEIMAGE.txt" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/GraalVM-Native-Image.txt"
+cp -R "/home/jack/.sdkman/candidates/java/21.0.2-graalce/legal/." "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/LICENSES/GraalVM-JDK/"
+install -m 644 build/maintained/generated/versions.json "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/VERSIONS.json"
+native-image --version > "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+uname -srm >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+javac -version >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt" 2>&1
+gcc --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+ldd --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+make --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+tar --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+sha256sum --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+objdump --version | sed -n '1p' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+getconf GNU_LIBC_VERSION >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+echo 'Native Image CPU target: compatibility (x86-64 baseline)' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+echo 'Package glibc symbol ceiling: GLIBC_2.34' >> "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/BUILD-ENVIRONMENT.txt"
+sha256sum "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34"/bin/* | sed 's#  build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/#  #' > "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34/SHA256SUMS"
+tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -czf "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34.tar.gz" -C "build/maintained/package" "mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34"
+sha256sum "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34.tar.gz" | sed 's#  .*/#  #' > "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34.tar.gz.sha256"
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.distribution.NativeSuiteVerificationTest "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34.tar.gz" "build/maintained/package/mundanereq-native-suite-trial-0.1-linux-x86_64-glibc2.34.tar.gz.sha256" "/home/jack/.sdkman/candidates/java/21.0.2-graalce"
+PASS package documentation, contracts, binaries, and legal notices
+PASS exact project and selected-GraalVM notice set
+PASS x86-64 compatibility target and GLIBC_2.34 symbol ceiling
+PASS three independent tool and source-contract identities
+PASS representative independent packaged operations
+PASS packaged binary checksums
+PASS exact safe archive and basename sidecar checksum
+PASS each tool performs its purpose with no sibling installed
+PASS complete native-suite package verification
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.ci.CiWorkflowVerificationTest \
+	build/maintained/mundanereq-format build/maintained/mundanereq-validate build/maintained/mundanereq-trace
+PASS clean-checkout commands, attributed failures, disposable output, and trace removal
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.trial.IntegratedToolchainTrialTest \
+	build/maintained/mundanereq-format build/maintained/mundanereq-validate build/maintained/mundanereq-trace
+PASS two deterministic branch-to-baseline workflows with and without trace
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.trial.MultiAuthorLayoutTrialTest \
+	build/maintained/mundanereq-format build/maintained/mundanereq-validate build/maintained/mundanereq-trace
+OBSERVED SEPARATED SUBJECT baseline-files=6 final-files=6 changed-paths=2 conflicted-files=0 conflict-hunks=0 fingerprint=8e98c145ac6ac798ef627a539fb2077300d1128597d8551de585b4658f8ec060
+OBSERVED SEPARATED ONE_RECORD baseline-files=60 final-files=60 changed-paths=2 conflicted-files=0 conflict-hunks=0 fingerprint=8e98c145ac6ac798ef627a539fb2077300d1128597d8551de585b4658f8ec060
+OBSERVED OVERLAP SUBJECT baseline-files=6 final-files=6 changed-paths=1 conflicted-files=1 conflict-hunks=1 fingerprint=4d397b13f5375fa13cd7610aabcec648c8a397dd3fd6df1e12b8392d5d83bdc9
+OBSERVED OVERLAP ONE_RECORD baseline-files=60 final-files=60 changed-paths=1 conflicted-files=1 conflict-hunks=1 fingerprint=4d397b13f5375fa13cd7610aabcec648c8a397dd3fd6df1e12b8392d5d83bdc9
+OBSERVED MOVE_EDIT SUBJECT baseline-files=6 final-files=6 changed-paths=2 conflicted-files=1 conflict-hunks=1 fingerprint=097b76977cbf425f64f8f55c557740aacabe60ff49d326b6b6ab4d79d5574e3f
+OBSERVED MOVE_EDIT ONE_RECORD baseline-files=60 final-files=60 changed-paths=2 conflicted-files=0 conflict-hunks=0 fingerprint=097b76977cbf425f64f8f55c557740aacabe60ff49d326b6b6ab4d79d5574e3f
+OBSERVED RETARGET SUBJECT baseline-files=6 final-files=6 changed-paths=1 conflicted-files=1 conflict-hunks=1 fingerprint=66e71cd30c8a9953956a6e9c777a66c15ae3e94721ae5f6121fb1ed51f42425f
+OBSERVED RETARGET ONE_RECORD baseline-files=61 final-files=61 changed-paths=1 conflicted-files=1 conflict-hunks=1 fingerprint=66e71cd30c8a9953956a6e9c777a66c15ae3e94721ae5f6121fb1ed51f42425f
+PASS controlled two-author histories and equivalent final semantics
+experiments/0015-independent-conformance/compare.rb \
+	build/maintained/mundanereq-validate build/maintained/independent-conformance
+PASS 16 independent verdicts and both complete semantic inventories agree
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/mundanereq-migrate mundanereq.cli.MigrateMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundanereq-migrate' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.9s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.60GB of memory (82.0% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.5s @ 0.32GB)
+    3,726 reachable types   (76.2% of    4,890 total)
+    4,534 reachable fields  (53.8% of    8,432 total)
+   17,412 reachable methods (46.9% of   37,109 total)
+    1,116 types,   313 fields, and   836 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.39GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.55GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.51GB)
+[6/8] Compiling methods...    [**]                                                                       (2.7s @ 0.70GB)
+[7/8] Layouting methods...    [*]                                                                        (1.1s @ 0.55GB)
+[8/8] Creating image...       [*]                                                                        (1.1s @ 0.72GB)
+   5.69MB (35.75%) for code area:    14,312 compilation units
+   9.52MB (59.82%) for image heap:  120,571 objects and 52 resources
+ 722.88kB ( 4.44%) for other data
+  15.91MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   3.90MB java.base                                            2.15MB byte[] for code metadata
+ 939.18kB svm.jar (Native Image)                               1.55MB byte[] for java.lang.String
+ 313.94kB snakeyaml-engine-3.1.1.jar                           1.16MB java.lang.String
+ 142.35kB mundanereq                                         861.75kB java.lang.Class
+ 106.88kB java.logging                                       407.90kB heap alignment
+  60.37kB org.graalvm.nativeimage.base                       351.23kB java.util.HashMap$Node
+  29.64kB jdk.proxy1                                         320.20kB com.oracle.svm.core.hub.DynamicHubCompanion
+  28.46kB jdk.proxy3                                         247.49kB byte[] for general heap data
+  24.75kB mundanereq.cli                                     246.75kB java.lang.String[]
+  22.71kB jdk.internal.vm.ci                                 224.68kB java.lang.Object[]
+  59.42kB for 7 more packages                                  2.06MB for 1019 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        1.0s (7.5% of total time) in 95 GCs | Peak RSS: 1.51GB | CPU load: 12.64
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundanereq-migrate (executable)
+========================================================================================================================
+Finished generating 'mundanereq-migrate' in 13.1s.
+build/maintained/mundanereq-migrate --version
+mundanereq-migrate trial-0.1; mundanereq-source-0.2 -> mundanereq-yaml-0.3
+java -ea -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar mundanereq.cli.YamlVerificationTest build/maintained/mundanereq-validate build/maintained/mundanereq-format build/maintained/mundanereq-trace build/maintained/mundanereq-migrate
+PASS 120 equivalent requirements across 3 migration corpora; 18 golden invalid cases; JVM/native validation, trace, formatting, migration, closed descriptors and broken pipes
+python3 scripts/check-versions.py "trial-0.1"
+PASS independent version declarations, actual CLI metadata, stale metadata and isolated version-domain mutation
+PASS SARIF format and validator command metadata consume authoritative declarations
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes:build/dependencies/snakeyaml-engine-3.1.1.jar -o /tmp/mreq-work-clean/build/maintained/mundanereq-compile mundanereq.cli.CompileMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundanereq-compile' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.6s @ 0.08GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.62GB of memory (82.1% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.6s @ 0.36GB)
+    3,850 reachable types   (75.9% of    5,070 total)
+    4,682 reachable fields  (52.3% of    8,954 total)
+   17,995 reachable methods (47.3% of   38,013 total)
+    1,160 types,   324 fields, and   875 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.46GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.57GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.55GB)
+[6/8] Compiling methods...    [**]                                                                       (2.7s @ 0.60GB)
+[7/8] Layouting methods...    [*]                                                                        (1.0s @ 0.81GB)
+[8/8] Creating image...       [*]                                                                        (1.3s @ 0.26GB)
+   5.98MB (35.56%) for code area:    14,798 compilation units
+  10.12MB (60.14%) for image heap:  132,046 objects and 52 resources
+ 740.78kB ( 4.30%) for other data
+  16.83MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.16MB java.base                                            2.26MB byte[] for code metadata
+ 949.01kB svm.jar (Native Image)                               1.68MB byte[] for java.lang.String
+ 313.94kB snakeyaml-engine-3.1.1.jar                           1.26MB java.lang.String
+ 143.47kB mundanereq                                         891.26kB java.lang.Class
+ 106.88kB java.logging                                       361.50kB java.util.HashMap$Node
+  60.37kB org.graalvm.nativeimage.base                       330.86kB com.oracle.svm.core.hub.DynamicHubCompanion
+  29.64kB jdk.proxy1                                         316.11kB heap alignment
+  28.46kB jdk.proxy3                                         265.95kB java.lang.String[]
+  28.28kB mundanereq.compile                                 248.48kB java.lang.Object[]
+  22.71kB jdk.internal.vm.ci                                 248.19kB byte[] for general heap data
+  80.21kB for 9 more packages                                  2.32MB for 1066 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                       1.0s (7.4% of total time) in 106 GCs | Peak RSS: 1.63GB | CPU load: 12.68
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundanereq-compile (executable)
+========================================================================================================================
+Finished generating 'mundanereq-compile' in 12.8s.
+build/maintained/mundanereq-compile --version
+mundanereq-compile experimental-0.1; source contract mundanereq-source-0.2; output mundanereq-requirements-0.1; command compile-cli-0.1
+python3 scripts/check-compiled-artifacts.py build/maintained/mundanereq-compile
+PASS compiled contract golden bytes: valid/multifile/Unicode/math, invalid, duplicate and dangling; JVM/native
+PASS 8 source corpora: source spans/checksums, deterministic reordered selection, 120 equivalent migrated requirements
+PASS legacy and YAML adversarial corpora: no partial requirement publication; JVM/native diagnostic parity
+PASS isolated consumer, exact source versus semantic changes, independent checkout, resource/input/format failures and real JVM/native broken output
+python3 experiments/0027-compilation-linking/run.py
+PASS experiment 0027: 57 requirements, 13 cases, two identical clean rebuilds; serialized-only consumer
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes -o /tmp/mreq-work-clean/build/maintained/mundane-link engineering.artifacts.LinkMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundane-link' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.7s @ 0.07GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.60GB of memory (82.0% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.4s @ 0.36GB)
+    3,521 reachable types   (74.1% of    4,750 total)
+    4,211 reachable fields  (50.3% of    8,366 total)
+   16,851 reachable methods (46.1% of   36,567 total)
+    1,084 types,   237 fields, and   828 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.36GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.40GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.52GB)
+[6/8] Compiling methods...    [**]                                                                       (2.4s @ 0.67GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.87GB)
+[8/8] Creating image...       [*]                                                                        (1.1s @ 0.53GB)
+   5.46MB (35.02%) for code area:    13,897 compilation units
+   9.45MB (60.59%) for image heap:  124,748 objects and 52 resources
+ 701.61kB ( 4.40%) for other data
+  15.59MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.04MB java.base                                            2.07MB byte[] for code metadata
+ 940.30kB svm.jar (Native Image)                               1.61MB byte[] for java.lang.String
+ 130.84kB engineering.artifacts                                1.21MB java.lang.String
+ 106.24kB java.logging                                       815.77kB java.lang.Class
+  59.46kB org.graalvm.nativeimage.base                       361.41kB java.util.HashMap$Node
+  29.64kB jdk.proxy1                                         302.59kB com.oracle.svm.core.hub.DynamicHubCompanion
+  28.46kB jdk.proxy3                                         282.01kB heap alignment
+  22.71kB jdk.internal.vm.ci                                 256.82kB java.lang.String[]
+  20.38kB org.graalvm.collections                            247.95kB byte[] for general heap data
+   8.15kB jdk.internal.vm.compiler                           233.66kB java.lang.Object[]
+  10.34kB for 4 more packages                                  2.12MB for 1009 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.9s (6.7% of total time) in 82 GCs | Peak RSS: 1.70GB | CPU load: 12.46
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundane-link (executable)
+========================================================================================================================
+Finished generating 'mundane-link' in 12.4s.
+build/maintained/mundane-link --version
+mundane-link experimental-0.1; mundane-imports-0.1; mundane-linked-0.1; link-cli-0.1
+python3 scripts/check-artifact-linking.py build/maintained/mundane-link
+PASS linker: 57 source-linked edges; 18 invalid cases; qualification, contexts, cycles, actual two-repository pinned/current imports, parser-free JVM/native parity and output failures
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes -o /tmp/mreq-work-clean/build/maintained/mundane-plan engineering.verification.PlanMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundane-plan' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.6s @ 0.06GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.58GB of memory (82.0% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.4s @ 0.32GB)
+    3,519 reachable types   (74.1% of    4,748 total)
+    4,207 reachable fields  (50.3% of    8,362 total)
+   16,837 reachable methods (46.1% of   36,562 total)
+    1,084 types,   235 fields, and   828 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.45GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.51GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.50GB)
+[6/8] Compiling methods...    [**]                                                                       (2.4s @ 0.83GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.63GB)
+[8/8] Creating image...       [*]                                                                        (1.1s @ 0.79GB)
+   5.42MB (34.89%) for code area:    13,887 compilation units
+   9.44MB (60.69%) for image heap:  124,582 objects and 52 resources
+ 704.64kB ( 4.43%) for other data
+  15.55MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.04MB java.base                                            2.06MB byte[] for code metadata
+ 940.29kB svm.jar (Native Image)                               1.60MB byte[] for java.lang.String
+ 106.24kB java.logging                                         1.21MB java.lang.String
+  59.46kB org.graalvm.nativeimage.base                       815.27kB java.lang.Class
+  57.87kB engineering.artifacts                              361.41kB java.util.HashMap$Node
+  37.38kB engineering.verification                           302.41kB com.oracle.svm.core.hub.DynamicHubCompanion
+  29.64kB jdk.proxy1                                         293.46kB heap alignment
+  28.46kB jdk.proxy3                                         256.33kB java.lang.String[]
+  22.71kB jdk.internal.vm.ci                                 247.92kB byte[] for general heap data
+  20.38kB org.graalvm.collections                            233.58kB java.lang.Object[]
+  18.48kB for 5 more packages                                  2.12MB for 1007 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.8s (6.5% of total time) in 96 GCs | Peak RSS: 1.48GB | CPU load: 12.60
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundane-plan (executable)
+========================================================================================================================
+Finished generating 'mundane-plan' in 12.1s.
+build/maintained/mundane-plan --version
+mundane-plan experimental-0.1; mundane-plan-source-0.1; mundane-plan-0.1; plan-cli-0.1
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes -o /tmp/mreq-work-clean/build/maintained/mundane-verify engineering.verification.VerifyMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundane-verify' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.4s @ 0.07GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.55GB of memory (81.9% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.3s @ 0.31GB)
+    3,552 reachable types   (74.3% of    4,781 total)
+    4,249 reachable fields  (50.5% of    8,407 total)
+   16,935 reachable methods (46.2% of   36,654 total)
+    1,089 types,   246 fields, and   830 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.8s @ 0.49GB)
+[4/8] Parsing methods...      [*]                                                                        (0.7s @ 0.43GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.54GB)
+[6/8] Compiling methods...    [**]                                                                       (2.6s @ 0.64GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.84GB)
+[8/8] Creating image...       [*]                                                                        (1.1s @ 1.01GB)
+   5.50MB (35.15%) for code area:    13,974 compilation units
+   9.46MB (60.42%) for image heap:  125,141 objects and 52 resources
+ 710.64kB ( 4.43%) for other data
+  15.66MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.06MB java.base                                            2.09MB byte[] for code metadata
+ 940.91kB svm.jar (Native Image)                               1.61MB byte[] for java.lang.String
+ 132.46kB engineering.artifacts                                1.21MB java.lang.String
+ 106.24kB java.logging                                       824.28kB java.lang.Class
+  59.46kB org.graalvm.nativeimage.base                       361.41kB java.util.HashMap$Node
+  29.64kB jdk.proxy1                                         305.25kB com.oracle.svm.core.hub.DynamicHubCompanion
+  28.46kB jdk.proxy3                                         257.35kB java.lang.String[]
+  22.71kB jdk.internal.vm.ci                                 254.51kB heap alignment
+  20.80kB engineering.verification                           248.00kB byte[] for general heap data
+  20.38kB org.graalvm.collections                            233.73kB java.lang.Object[]
+  18.48kB for 5 more packages                                  2.12MB for 1019 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.8s (6.5% of total time) in 80 GCs | Peak RSS: 1.60GB | CPU load: 12.98
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundane-verify (executable)
+========================================================================================================================
+Finished generating 'mundane-verify' in 12.2s.
+build/maintained/mundane-verify --version
+mundane-verify experimental-0.1; mundane-verification-0.1; verification-cli-0.1
+python3 scripts/check-verification-workflow.py build/maintained/mundane-plan build/maintained/mundane-verify
+PASS plan/analyzer: compiled design fixture, 57 assertions, 13 invalid source cases, current/stale/uncovered/blocked results, edit/rebuild matrix and JVM/native broken output
+python3 experiments/0029-verification-report/run.py
+PASS report: clean committed input archive, identical rebuild/golden, 57 assertions and 2 stale rows, rebaseline updates, invalid-input rejection, escaped prose/math, broken output
+python3 scripts/check-parser-recovery.py build/maintained
+PASS parser recovery: JVM/native primary diagnostics, incomplete compiled output, strict validation and preserved formatter inputs
+build/schema-check-venv/bin/python scripts/check-sarif.py build/maintained/mundanereq-validate
+PASS SARIF: six OASIS-schema goldens, JVM/native parity, Unicode source navigation, encoded/colon paths, deterministic selection, incomplete/input failures and real broken output
+python3 experiments/0033-workflow-regressions/run.py
+PASS workflow corpus: 12 replayable seeds in both source modes; source/format/compile/plan/analyze/report and incomplete barriers; five clean committed corpora, identical report rebuilds, pins/scopes/versions/contexts and moves
+python3 experiments/0033-workflow-regressions/mutations.py
+PASS mutation parser-padded-scalar
+PASS mutation validator-missing-target
+PASS mutation resolver-exact-pin
+PASS mutation resolver-incomplete-import
+PASS mutation compiler-partial-publication
+PASS mutation analyzer-statement-basis
+PASS six compiled, non-equivalent mutations killed; original tracked source unchanged; elapsed 9.11s
+native-image -O0 --no-fallback -march=compatibility -cp build/maintained/classes -o /tmp/mreq-work-clean/build/maintained/mundane-work engineering.work.WorkMain
+========================================================================================================================
+GraalVM Native Image: Generating 'mundane-work' (executable)...
+========================================================================================================================
+For detailed information and explanations on the build output, visit:
+https://github.com/oracle/graal/blob/master/docs/reference-manual/native-image/BuildOutput.md
+------------------------------------------------------------------------------------------------------------------------
+[1/8] Initializing...                                                                                    (2.7s @ 0.07GB)
+ Java version: 21.0.2+13, vendor version: GraalVM CE 21.0.2+13.1
+ Graal compiler: optimization level: 0, target machine: compatibility
+ C compiler: gcc (linux, x86_64, 13.3.0)
+ Garbage collector: Serial GC (max heap size: 80% of RAM)
+ 1 user-specific feature(s):
+ - com.oracle.svm.thirdparty.gson.GsonFeature
+------------------------------------------------------------------------------------------------------------------------
+Build resources:
+ - 25.55GB of memory (81.9% of 31.21GB system memory, determined at start)
+ - 32 thread(s) (100.0% of 32 available processor(s), determined at start)
+[2/8] Performing analysis...  [*****]                                                                    (3.3s @ 0.39GB)
+    3,566 reachable types   (74.4% of    4,796 total)
+    4,255 reachable fields  (50.6% of    8,412 total)
+   16,977 reachable methods (46.3% of   36,701 total)
+    1,090 types,   243 fields, and   833 methods registered for reflection
+       57 types,    57 fields, and    52 methods registered for JNI access
+        4 native libraries: dl, pthread, rt, z
+[3/8] Building universe...                                                                               (0.7s @ 0.44GB)
+[4/8] Parsing methods...      [*]                                                                        (0.6s @ 0.53GB)
+[5/8] Inlining methods...     [**]                                                                       (0.1s @ 0.48GB)
+[6/8] Compiling methods...    [**]                                                                       (2.5s @ 0.57GB)
+[7/8] Layouting methods...    [*]                                                                        (0.9s @ 0.77GB)
+[8/8] Creating image...       [*]                                                                        (1.1s @ 0.94GB)
+   5.61MB (35.52%) for code area:    14,020 compilation units
+   9.48MB (60.06%) for image heap:  125,459 objects and 52 resources
+ 715.75kB ( 4.43%) for other data
+  15.79MB in total
+------------------------------------------------------------------------------------------------------------------------
+Top 10 origins of code area:                                Top 10 object types in image heap:
+   4.07MB java.base                                            2.12MB byte[] for code metadata
+ 940.48kB svm.jar (Native Image)                               1.62MB byte[] for java.lang.String
+ 179.68kB engineering.work                                     1.22MB java.lang.String
+ 106.24kB java.logging                                       828.06kB java.lang.Class
+  72.89kB engineering.artifacts                              361.41kB java.util.HashMap$Node
+  59.46kB org.graalvm.nativeimage.base                       306.45kB com.oracle.svm.core.hub.DynamicHubCompanion
+  29.64kB jdk.proxy1                                         258.33kB java.lang.String[]
+  28.46kB jdk.proxy3                                         247.94kB byte[] for general heap data
+  22.71kB jdk.internal.vm.ci                                 233.71kB java.lang.Object[]
+  20.38kB org.graalvm.collections                            231.66kB heap alignment
+  18.48kB for 5 more packages                                  2.12MB for 1020 more object types
+------------------------------------------------------------------------------------------------------------------------
+Recommendations:
+ INIT: Adopt '--strict-image-heap' to prepare for the next GraalVM release.
+ HEAP: Set max heap for improved and more predictable memory usage.
+------------------------------------------------------------------------------------------------------------------------
+                        0.9s (7.4% of total time) in 87 GCs | Peak RSS: 1.59GB | CPU load: 12.49
+------------------------------------------------------------------------------------------------------------------------
+Produced artifacts:
+ /tmp/mreq-work-clean/build/maintained/mundane-work (executable)
+========================================================================================================================
+Finished generating 'mundane-work' in 12.3s.
+build/maintained/mundane-work --version
+mundane-work experimental-0.1; work-cli-0.1; mundane-work-source-0.1; mundane-work-items-0.1; mundane-work-analysis-0.1
+python3 scripts/check-work-items.py build/maintained/mundane-work
+PASS work compiler: JVM/native values, Unicode points, 9 metadata mutations, physical/size/duplicate/selection failures, CRLF preservation and real broken output
+PASS independently checked task/issue semantic golden
+PASS work analysis: typed requirement/plan/activity/issue links, prerequisite findings, supersession, 22+ invalid serialized/import cases and parser-free execution
+PASS imported work-item scopes preserve equal human IDs and validate disconnected dependency graphs
+PASS deterministic work analysis golden
+PASS derived view: exact golden/rebuild, tampered-analysis rejection, hostile text escaping, parser-independent source links and actual broken output
+python3 experiments/0034-work-items/migrate.py
+PASS migration replay: 78 IDs, complete narrative suffixes and explicit metadata transformations from immutable baseline
+python3 scripts/work-backlog.py
+PASS 78 repository work items: explicit inventory, strict analysis and identical delete/rebuild
+python3 scripts/check-planning-docs.py
+PASS relative Markdown links; 78 unique source IDs indexed once; complete dependency analysis; no duplicate manual status tables
+python3 experiments/0034-work-items/regressions.py
+PASS work workflow seeds: 160600,160601,160602,160603,160604,160605,160606,160607
+PASS three compiled behavioral mutations killed; tracked source unchanged; evidence: build/work-mutations.json

@@ -1,14 +1,22 @@
 # Task TC-1301: Classify Project Attribute Use Cases
 
-Status: Complete
-
-Roadmap stage: 13
-
-Type: Experiment and decision
-
-Depends on: TC-1102
-
-Unlocks: TC-1302
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-1102"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "13",
+    "type": "Experiment and decision",
+    "condition": "TC-1102",
+    "unlocks": "TC-1302",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

@@ -1,14 +1,22 @@
 # Task TC-0501: Define the First Trace Interface
 
-Status: Complete
-
-Roadmap stage: 5
-
-Type: Experiment and decision
-
-Depends on: TC-0203
-
-Unlocks: TC-0502
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0203"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "5",
+    "type": "Experiment and decision",
+    "condition": "TC-0203",
+    "unlocks": "TC-0502",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

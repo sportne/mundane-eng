@@ -1,14 +1,23 @@
 # Task TC-0705: Obtain Independent Conformance Evidence
 
-Status: Complete
-
-Roadmap stage: 7
-
-Type: Independent implementation or review
-
-Depends on: TC-0303 and TC-0103
-
-Unlocks: TC-1001
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Complete",
+  "dependencies": [
+    "TC-0103",
+    "TC-0303"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "7",
+    "type": "Independent implementation or review",
+    "condition": "TC-0303 and TC-0103",
+    "unlocks": "TC-1001",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 

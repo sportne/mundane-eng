@@ -6,10 +6,11 @@ Strategic source: [Roadmap 0001](0001-initial-roadmap.md)
 
 ## Purpose
 
-This index decomposes the strategic roadmap into bounded, independently
-reviewable task cards. Cards are planning, not additions to the source-language
-specification. The current tranche contains 28 new cards and three reconciled
-verification/report cards; two existing experiments remain conditional.
+Source cards selected by [work-items.json](work-items.json) own status, dependencies
+and typed links. The [derived work-item index](../WORK-ITEMS.md) is generated from
+those cards; update the source and run `make work-index`. This document retains
+strategic sequencing and historical planning decisions, not editable status rows.
+See the [authoring workflow](../distribution/work-items.md) for card changes.
 
 ## Status vocabulary
 
@@ -20,18 +21,16 @@ verification/report cards; two existing experiments remain conditional.
 - **Complete:** acceptance evidence and the completion decision are recorded.
 - **Superseded:** replaced by a later card or roadmap decision, with the replacement identified.
 
-Only recorded evidence and decisions complete a card. If future work is
+Only recorded evidence and decisions justify an authored completion claim. If future work is
 superseded, record its replacement, retain its ID, and keep a closed-card link.
 Completed historical cards retain Complete and their original evidence; a
 superseded prospective roadmap sequence does not undo their completed work.
 
 ## Dependency shape and priority
 
-The YAML/safety, compiled-requirements, verification-workflow, and diagnostics
-batches are complete. TC-1301/1302 have selected descriptive text/enum attributes
-and explicit project schemas. TC-1303 (validation) is Ready; TC-1304–1308 are the
-bounded implementation and verification successors. The graph retains completed prerequisites
-for context; active tables contain only remaining work.
+The diagrams below preserve the planned dependency shape for context. Current
+relationships, statuses and unfinished prerequisites are compiled from source cards
+in the derived index. The attribute chain remains independent of the work-item chain.
 
 ```text
 TC-1101 -> TC-1102 -> TC-1103 -> TC-1201 -> TC-1203 -> TC-0905
@@ -68,9 +67,7 @@ consumers' dependencies explicitly before proceeding.
 
 ## Stage 11: Monorepo and ownership decisions
 
-| Card | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [TC-1104](task-1104-establish-monorepo-component-layout.md) | Establish the Monorepo Component Layout | Conditional | TC-1101 |
+Current cards and their status are in the [derived work-item index](../WORK-ITEMS.md).
 
 The completed import contract precedes the plan contract, whose fixtures drive
 the maintained linker and analyzer. Their completed cards are in the evidence
@@ -78,14 +75,7 @@ inventory below; TC-1501 extends that integrated workflow.
 
 ## Stage 13: Project attribute implementation
 
-| Card | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [TC-1303](task-1303-validate-project-defined-requirement-attributes.md) | Validate Project-Defined Requirement Attributes | Ready | TC-1302 |
-| [TC-1304](task-1304-preserve-attributes-in-formatting-and-trace.md) | Preserve Attributes in Formatting and Trace | Planned | TC-1302, TC-1303 |
-| [TC-1305](task-1305-compile-project-attribute-artifacts.md) | Compile Project Attribute Artifacts | Planned | TC-1302, TC-1303 |
-| [TC-1306](task-1306-link-and-analyze-project-attributes.md) | Link and Analyze Project Attributes | Planned | TC-1302, TC-1305 |
-| [TC-1307](task-1307-display-project-attributes-in-derived-reports.md) | Display Project Attributes in Derived Reports | Planned | TC-1302, TC-1306 |
-| [TC-1308](task-1308-verify-and-document-project-attribute-workflows.md) | Verify and Document Project Attribute Workflows | Planned | TC-1302, TC-1304, TC-1306, TC-1307 |
+Current cards and their status are in the [derived work-item index](../WORK-ITEMS.md).
 
 The completed [design](../research/0052-project-attribute-schema-decision.md)
 selects explicit JSON declarations, YAML requirement values, no defaults and
@@ -103,93 +93,19 @@ Task cards and issues have an immediate consumer in this repository.
 Execute TC-1601 -> TC-1602 -> TC-1603 -> TC-1604 -> TC-1605 -> TC-1606.
 This chain is independent of the attribute implementation chain.
 
-| Card | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [TC-1601](closed/task-1601-define-work-item-ownership.md) | Define Work Item Ownership | Complete | TC-1102, TC-1203 |
-| [TC-1602](closed/task-1602-specify-work-item-source-and-output.md) | Specify Work Item Source and Output | Complete | TC-1601 |
-| [TC-1603](closed/task-1603-compile-and-validate-work-items.md) | Compile and Validate Work Items | Complete | TC-1602 |
-| [TC-1604](closed/task-1604-link-and-analyze-work-items.md) | Link and Analyze Work Items | Complete | TC-1603 |
-| [TC-1605](closed/task-1605-generate-derived-work-item-views.md) | Generate Derived Work Item Views | Complete | TC-1604 |
-| [TC-1606](task-1606-dogfood-the-work-item-backlog.md) | Dogfood the Work Item Backlog | Ready | TC-1603, TC-1604, TC-1605 |
+Current cards and their status are in the [derived work-item index](../WORK-ITEMS.md).
 
 ## Conditional existing work
 
-| Card | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [TC-0807](task-0807-test-authored-views-and-specifications.md) | Authored composition decision if simple reporting is insufficient | Conditional | TC-0603, TC-0903; demonstrated composition need |
-| [TC-0902](task-0902-run-an-independent-reqif-roundtrip.md) | External-tool ReqIF fidelity evidence | Conditional | TC-0603; access to an independent implementation |
+Current cards and their status are in the [derived work-item index](../WORK-ITEMS.md).
 
 ## Completed evidence
 
-The rows below are historical results, not the current execution sequence.
+Closed cards retain historical results and completion evidence.
 TC-1001/TC-1002 remain completed records; their prospective decision sequence is
 superseded by Stages 11–15. Their filenames and evidence are preserved.
 
-| Card | Outcome | Status | Depends on |
-| --- | --- | --- | --- |
-| [TC-0101](closed/task-0101-strengthen-unicode-conformance-fixtures.md) | Unicode edge-case fixtures | Complete | — |
-| [TC-0102](closed/task-0102-correct-reference-parser-conformance.md) | Known parser deviations repaired | Complete | TC-0101 |
-| [TC-0103](closed/task-0103-audit-the-0.2-conformance-baseline.md) | Audited 0.2 implementation baseline | Complete | TC-0101, TC-0102 |
-| [TC-0104](closed/task-0104-select-the-maintained-implementation-lineage.md) | Probe-evolution decision | Complete | TC-0103 |
-| [TC-0201](closed/task-0201-establish-the-maintained-java-project.md) | Maintained Java/GraalVM project skeleton | Complete | TC-0104 |
-| [TC-0202](closed/task-0202-design-the-shared-source-representation.md) | Shared physical and concrete source model | Complete | TC-0201 |
-| [TC-0203](closed/task-0203-extract-the-semantic-parser-and-diagnostics.md) | Shared semantic parser, discovery, and diagnostics | Complete | TC-0202 |
-| [TC-0204](closed/task-0204-port-tests-and-prove-native-tool-boundaries.md) | Regression coverage and three native boundaries | Complete | TC-0203 |
-| [TC-0301](closed/task-0301-implement-the-validator-executable.md) | `mundanereq-validate` implementation | Complete | TC-0204 |
-| [TC-0302](closed/task-0302-verify-validator-behavior.md) | Validator conformance and CI evidence | Complete | TC-0301 |
-| [TC-0303](closed/task-0303-publish-the-validator-trial-contract.md) | Maintained validator trial release | Complete | TC-0302 |
-| [TC-0401](closed/task-0401-run-the-formatting-policy-experiment.md) | Selected conservative formatting policy | Complete | TC-0203 |
-| [TC-0402](closed/task-0402-implement-the-formatter-executable.md) | `mundanereq-format` implementation | Complete | TC-0401, TC-0204 |
-| [TC-0403](closed/task-0403-verify-formatter-safety-properties.md) | Semantic-preservation and idempotence evidence | Complete | TC-0402 |
-| [TC-0404](closed/task-0404-publish-the-formatter-trial-contract.md) | Maintained formatter trial release | Complete | TC-0403 |
-| [TC-0501](closed/task-0501-define-the-first-trace-interface.md) | Bounded trace questions and output semantics | Complete | TC-0203 |
-| [TC-0502](closed/task-0502-implement-the-trace-executable.md) | `mundanereq-trace` implementation | Complete | TC-0204, TC-0501 |
-| [TC-0503](closed/task-0503-verify-trace-graph-behavior.md) | Graph and workflow evidence | Complete | TC-0502 |
-| [TC-0504](closed/task-0504-publish-the-trace-trial-contract.md) | Maintained trace trial release | Complete | TC-0503 |
-| [TC-0601](closed/task-0601-package-and-document-the-native-suite.md) | Installable, independently documented native tools | Complete | TC-0303, TC-0404, TC-0504 |
-| [TC-0602](closed/task-0602-create-the-clean-checkout-ci-workflow.md) | Reproducible example Git/CI workflow | Complete | TC-0601 |
-| [TC-0603](closed/task-0603-run-the-integrated-toolchain-trial.md) | First toolchain decision record | Complete | TC-0602 |
-| [TC-0701](closed/task-0701-select-a-larger-corpus-and-trial-protocol.md) | Licensed corpus and controlled trial plan | Complete | TC-0603 |
-| [TC-0702](closed/task-0702-run-the-independent-interpretation-proxy-trial.md) | AI-proxy independent-interpretation evidence | Complete | TC-0701 |
-| [TC-0703](closed/task-0703-run-the-multi-author-and-layout-trial.md) | Concurrency and file-granularity evidence | Complete | TC-0701 |
-| [TC-0704](closed/task-0704-measure-operational-scale.md) | Operational-scale measurements | Complete | TC-0702, TC-0703 |
-| [TC-0705](closed/task-0705-obtain-independent-conformance-evidence.md) | Independent interpretation evidence | Complete | TC-0103, TC-0303 |
-| [TC-0706](closed/task-0706-run-the-subagent-author-review-trial.md) | Material scope deviation: two-author/two-reviewer subagent evidence; human evidence absent | Complete | TC-0701, TC-0702 |
-| [TC-0707](closed/task-0707-test-bounded-diagnostic-presentation.md) | Large diagnostic-set presentation decision | Complete | TC-0704 |
-| [TC-0801](closed/task-0801-test-identity-continuity.md) | ID-correction model decision | Complete | TC-0603 |
-| [TC-0802](closed/task-0802-model-verification-planning-and-evidence.md) | Verification companion-artifact decision | Complete | TC-0603 |
-| [TC-0803](closed/task-0803-test-safety-classification-ownership.md) | Safety classification ownership decision | Complete | TC-0603 |
-| [TC-0804](closed/task-0804-test-allocation-and-controlled-vocabulary.md) | Allocation model decision | Complete | TC-0603 |
-| [TC-0805](closed/task-0805-test-glossary-and-formal-symbol-artifacts.md) | Vocabulary and symbol model decision | Complete | TC-0603 |
-| [TC-0806](closed/task-0806-test-reusable-trace-policies.md) | Language-versus-policy decision | Complete | TC-0603 |
-| [TC-0901](closed/task-0901-prioritize-the-next-ecosystem-tool.md) | Evidence-backed next-tool selection | Complete: no tool selected | TC-0603, TC-0704 |
-| [TC-1001](closed/task-1001-audit-readiness-for-1.0.md) | Historical audit; prospective sequence superseded | Complete | Historical evidence prerequisites retained in card |
-| [TC-1002](closed/task-1002-define-compatibility-and-publish-or-defer-1.0.md) | Historical decision; prospective sequence superseded | Complete | TC-1001 |
-| [TC-1003](closed/task-1003-execute-vaccine-monitoring-requirements-pilot.md) | End-to-end formal-traceability pilot | Complete | TC-1002 |
-| [TC-1105](closed/task-1105-compare-yaml-and-custom-requirement-source.md) | Compare YAML and Custom Requirement Source | Complete | — |
-| [TC-1106](closed/task-1106-specify-yaml-requirement-source-profile.md) | Specify the YAML Requirement Source Profile | Complete | TC-1105 |
-| [TC-1107](closed/task-1107-interpret-and-validate-yaml-requirement-source.md) | Interpret and Validate YAML Requirement Source | Complete | TC-1106 |
-| [TC-1108](closed/task-1108-format-yaml-source-without-content-loss.md) | Format YAML Source Without Content Loss | Complete | TC-1107 |
-| [TC-1109](closed/task-1109-migrate-yaml-examples-and-conformance-material.md) | Migrate YAML Examples and Conformance Material | Complete | TC-1107, TC-1108 |
-| [TC-1401](closed/task-1401-protect-formatter-write-back.md) | Protect Formatter Write-Back | Complete | — |
-| [TC-1402](closed/task-1402-report-cli-output-failures.md) | Report CLI Output Failures Consistently | Complete | — |
-| [TC-1101](closed/task-1101-define-monorepo-component-boundaries.md) | Define Monorepo Component Boundaries | Complete | — |
-| [TC-1102](closed/task-1102-define-requirement-and-assertion-ownership.md) | Define Requirement and Assertion Ownership | Complete | TC-1101 |
-| [TC-1103](closed/task-1103-test-compilation-linking-and-rebuilds.md) | Test Compilation, Linking, and Rebuilds | Complete | TC-1102, TC-1105 |
-| [TC-1502](closed/task-1502-centralize-version-declarations.md) | Centralize Independent Version Declarations | Complete | — |
-| [TC-1201](closed/task-1201-define-requirement-semantic-output.md) | Define Requirement Semantic Output | Complete | TC-1103, TC-1502 |
-| [TC-1202](closed/task-1202-emit-compiled-requirement-artifacts.md) | Emit Compiled Requirement Artifacts | Complete | TC-1201 |
-| [TC-1203](closed/task-1203-define-import-and-reference-contracts.md) | Define Import and Reference Contracts | Complete | TC-1201 |
-| [TC-1204](closed/task-1204-implement-bounded-artifact-linking.md) | Implement Bounded Artifact Linking | Complete | TC-1202, TC-1203, TC-0905 |
-| [TC-0905](closed/task-0905-define-verification-analyzer-contract.md) | Define the Verification Analyzer Contract | Complete | TC-0802, TC-1003, TC-1103, TC-1203 |
-| [TC-0904](closed/task-0904-implement-the-selected-ecosystem-tool.md) | Implement the Selected Ecosystem Tool | Complete | TC-0905, TC-1204 |
-| [TC-0903](closed/task-0903-run-a-derived-presentation-experiment.md) | Run a Derived Presentation Experiment | Complete | TC-0904 |
-| [TC-1503](closed/task-1503-align-ci-with-authoritative-verification.md) | Align CI with Authoritative Verification | Complete | — |
-| [TC-1403](closed/task-1403-recover-parser-diagnostics-safely.md) | Recover Parser Diagnostics Safely | Complete | — |
-| [TC-1501](closed/task-1501-extend-artifact-workflow-regression-corpora.md) | Extend Artifact Workflow Regression Corpora | Complete | TC-0903 |
-| [TC-1504](closed/task-1504-emit-sarif-validation-diagnostics.md) | Emit SARIF Validation Diagnostics | Complete | TC-1201, TC-1402, TC-1403 |
-| [TC-1301](closed/task-1301-classify-project-attribute-use-cases.md) | Classify Project Attribute Use Cases | Complete | TC-1102 |
-| [TC-1302](closed/task-1302-decide-project-attribute-schemas.md) | Decide Project Attribute Schemas | Complete | TC-1301, TC-1203, TC-1106 |
+Current cards and their status are in the [derived work-item index](../WORK-ITEMS.md).
 
 ## Planning reconciliation
 
@@ -273,20 +189,17 @@ and TC-1203. TC-1504 still needs parser recovery. TC-1204 remains Conditional.
 
 ## Updating cards
 
-When beginning a card, change its status here and in the card together. When
-completing it:
+1. Update the structured JSON metadata in the authoritative card and its prose.
+2. Preserve human IDs; add explicit dependencies/relations rather than infer links.
+3. Record completion evidence before setting Complete; move completed cards under
+   closed/ and update the selected path in work-items.json and incoming Markdown links.
+4. Regenerate `WORK-ITEMS.md` with `make work-index`; do not edit its status rows.
+5. Run `make work-backlog-verify` and owning implementation checks.
+6. Commit each completed task separately, including its source and derived index.
 
-1. record reproducible evidence and the resulting decision;
-2. update affected contracts, experiments, or roadmap text;
-3. mark the card complete, retain its ID, and link its result under closed/;
-4. make newly unblocked cards Ready only when their conditions are satisfied;
-5. revise or supersede dependencies when evidence selects a smaller scope;
-6. make a separate commit for each completed task card, including its evidence and
-   necessary index/dependency updates.
-
-Use the [template](task-card-template.md). Explain material scope/status/dependency
-changes in a Planning refinement section. Do not renumber existing cards or turn
-generated output into authored source.
+Use the [template](task-card-template.md). Conditional policies remain authored
+qualifications; dependency completion alone does not authorize execution. Historical
+planning notes below are records of earlier decisions, not another status source.
 
 ## Completed attribute decisions and selected successors
 
@@ -297,3 +210,11 @@ until their opt-in implementations land. TC-1303 is Ready; formatting/trace and
 compilation can proceed independently after it, then serialized analysis, report
 propagation and integrated verification follow. Existing conditional composition,
 layout and external ReqIF cards remain unchanged.
+
+## Completed work-item integration
+
+TC-1601–1606 established the structured Markdown source, compiler, bounded typed
+linking, prerequisite analysis and generated index. The repository now uses those
+tools for its own cards. [Research 0059](../research/0059-work-item-backlog-verification.md)
+records migration and clean verification; current status remains in source cards
+and their derived view.

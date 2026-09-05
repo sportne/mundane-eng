@@ -1,14 +1,23 @@
 # Task TC-0807: Test Authored Views and Specifications
 
-Status: Conditional
-
-Roadmap stage: 8
-
-Type: Model-pressure experiment
-
-Depends on: TC-0603, TC-0903 and a demonstrated composition need
-
-Unlocks: A view-language decision and any justified successor card
+```json
+{
+  "format": "mundane-work-source-0.1",
+  "status": "Conditional",
+  "dependencies": [
+    "TC-0603",
+    "TC-0903"
+  ],
+  "relations": [],
+  "planning": {
+    "stage": "8",
+    "type": "Model-pressure experiment",
+    "condition": "TC-0603, TC-0903 and a demonstrated composition need",
+    "unlocks": "A view-language decision and any justified successor card",
+    "statusNote": ""
+  }
+}
+```
 
 ## Question
 
