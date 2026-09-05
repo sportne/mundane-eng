@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import mundanereq.Versions;
+import mundane.attributes.AttributeRules;
 
 /** Validation and selected semantic projection for the two published artifact kinds. */
 public final class Artifacts {
@@ -26,8 +27,12 @@ public final class Artifacts {
         if(sources.isEmpty()) throw new IllegalArgumentException("empty source inventory");return sources;
     }
     public static Map<String,Map<String,Object>> requirements(Map<String,Object> a,String file) {
-        Set<String> paths=envelope(a,"requirements",Versions.REQUIREMENT_ARTIFACT,file);
-        if(!Set.of(Versions.SOURCE_CUSTOM,Versions.SOURCE_YAML).contains(text(a.get("sourceContract")))) throw new Problem("unsupported-format","unsupported requirement source",file);
+        boolean attributes=Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT.equals(a.get("format"));
+        Set<String> paths=envelope(a,"requirements",attributes?Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT:Versions.REQUIREMENT_ARTIFACT,file);
+        if(!(attributes?Set.of(Versions.SOURCE_ATTRIBUTES):Set.of(Versions.SOURCE_CUSTOM,Versions.SOURCE_YAML)).contains(text(a.get("sourceContract")))) throw new Problem("unsupported-format","unsupported requirement source",file);
+        Map<String,Object> definition=null;
+        if(attributes) {required(a,"attributeSchema");definition=attributeDefinition(a);}
+        else if(a.containsKey("attributeSchema"))throw new IllegalArgumentException("attribute schema is not old-format metadata");
         Map<String,Map<String,Object>> records=new TreeMap<>();
         for(Object record:list(a.get("requirements"))) {
             var r=map(record);var v=map(r.get("values"));required(v,VALUE_FIELDS.toArray(String[]::new));String id=id(v.get("id"));
@@ -41,10 +46,30 @@ public final class Artifacts {
             if(!targets.isEmpty()) required(fields,"decomposes");var references=map(loc.get("references"));
             if(!references.keySet().equals(targets)) throw new IllegalArgumentException("reference locations do not match targets");
             for(Object s:references.values()) span(s,paths);
+            if(attributes) {
+                required(v,"attributes");required(loc,"attributes");var values=attributes(r);
+                AttributeRules.values(definition,values);var points=map(loc.get("attributes"));
+                if(!points.keySet().equals(values.keySet()))throw new IllegalArgumentException("attribute locations do not match values");
+                for(Object point:points.values()) {var pair=map(point);keys(pair,"name","value");span(pair.get("name"),paths);span(pair.get("value"),paths);}
+            } else if(v.containsKey("attributes")||loc.containsKey("attributes"))throw new IllegalArgumentException("attributes are not old-format metadata");
         }
         if(records.isEmpty()) throw new IllegalArgumentException("empty requirements");
         for(var r:records.values()) for(Object target:list(map(r.get("values")).get("decomposes"))) if(!records.containsKey(target)) throw new IllegalArgumentException("unresolved decomposition");
         return records;
+    }
+    /** Canonical declaration meaning only: provenance is validated, never compared as meaning. */
+    public static Map<String,Object> attributeDefinition(Map<String,Object> artifact) {
+        if(artifact.get("attributeSchema")==null)return null;
+        var schema=map(artifact.get("attributeSchema"));keys(schema,"definition","source","locations");
+        var definition=AttributeRules.definition(schema.get("definition"));var source=map(schema.get("source"));keys(source,"path","sha256");
+        String file=path(source.get("path"));digest(source.get("sha256"));var locations=map(schema.get("locations"));
+        if(!locations.keySet().equals(map(definition.get("attributes")).keySet()))throw new IllegalArgumentException("schema declaration locations do not match definitions");
+        for(Object location:locations.values())span(location,Set.of(file));return definition;
+    }
+    /** Explicit old-format promotion: missing attributes are an empty map, with no defaults. */
+    public static Map<String,String> attributes(Map<String,Object> record) {
+        var values=map(record.get("values"));if(!values.containsKey("attributes"))return Map.of();
+        Map<String,String> result=new TreeMap<>();for(var e:map(values.get("attributes")).entrySet())result.put(e.getKey(),AttributeRules.text(e.getValue(),e.getKey()));return result;
     }
     private static void blocks(Object value,boolean math) {
         List<?> blocks=list(value);if(blocks.isEmpty()) throw new IllegalArgumentException("empty body");

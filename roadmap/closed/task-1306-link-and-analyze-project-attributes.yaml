@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1306"
 kind: "task"
 title: "Link and Analyze Project Attributes"
-status: "Planned"
+status: "Complete"
 dependencies:
   - "TC-1302"
   - "TC-1305"
@@ -61,10 +61,10 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml)
-  - [Attribute design](../research/0052-project-attribute-schema-decision.md)
-  - [Worked cases](../research/0053-project-attribute-design-cases.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
+  - [Attribute design](../../research/0052-project-attribute-schema-decision.md)
+  - [Worked cases](../../research/0053-project-attribute-design-cases.md)
 
   ## Planning refinement
 
@@ -72,3 +72,7 @@ body: |2+
   strict import and typed-link regression coverage for work items referencing
   requirement output 0.2, without introducing attribute-based graph inference or
   adding requirement source-parser dependencies to work-item analysis.
+
+  ## Completion evidence
+
+  [Completion report](../../research/0066-attribute-linking-verification.md) records strict output 0.2 consumers, scoped whole-schema comparison, explicit old/new promotion, work-item links and passing authoritative verification.

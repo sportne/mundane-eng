@@ -326,3 +326,9 @@ attribute-compile-verify: native-compile
 	python3 scripts/check-attribute-compile.py
 
 verify: attribute-compile-verify
+
+.PHONY: attribute-link-verify
+attribute-link-verify: native-compile native-plan native-link native-verification native-work
+	python3 scripts/check-attribute-link.py
+
+verify: attribute-link-verify

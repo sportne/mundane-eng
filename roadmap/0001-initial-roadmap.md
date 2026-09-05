@@ -178,7 +178,7 @@ contracts/model/schema validation first. Then
 [TC-1304](closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
 formatting/trace independently of
 [TC-1305](closed/task-1305-compile-project-attribute-artifacts.yaml)'s versioned output.
-[TC-1306](task-1306-link-and-analyze-project-attributes.yaml) validates serialized
+[TC-1306](closed/task-1306-link-and-analyze-project-attributes.yaml) validates serialized
 imports and compares explicit values plus schema definitions; changes must be
 visible rather than silently ignored.
 [TC-1307](task-1307-display-project-attributes-in-derived-reports.yaml) extends the

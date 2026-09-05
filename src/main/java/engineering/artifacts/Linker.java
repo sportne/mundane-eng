@@ -38,7 +38,12 @@ public final class Linker {
                 String pin=d.get("sha256")==null?null:digest(d.get("sha256"));String file=path(d.get("path"));current=file;
                 var snapshot=snapshots.read(file);
                 if(pin!=null&&!pin.equals(snapshot.sha256())) throw new Problem("digest-mismatch","artifact does not match pin for "+scope,manifest);
-                var artifact=map(Snapshots.json(snapshot));records.put(scope,Artifacts.requirements(artifact,file));
+                var artifact=map(Snapshots.json(snapshot));
+                if(Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT.equals(artifact.get("format"))) {
+                    output.put("format",Versions.LINK_ATTRIBUTE_ARTIFACT);
+                    output.put("linker",Json.object("name","mundane-link","version",Versions.LINK_VERSION,"contract",Versions.LINK_ATTRIBUTE_CONTRACT));
+                }
+                records.put(scope,Artifacts.requirements(artifact,file));
                 imports.put(scope,Json.object("scope",scope,"path",file,"sha256",snapshot.sha256(),"artifact",artifact));
             }
             current=manifest;

@@ -40,3 +40,13 @@ values, typed declarations and separate source provenance. Schema-free YAML 0.4
 also emits 0.2, with null schema and empty attributes. Existing profiles emit 0.1.
 The compiler rechecks selected snapshots before publication; a detected source or
 schema edit returns 2 and no usable records. Old consumers reject the new format.
+
+The maintained linker, verifier and work-item analyzer accept requirement output 0.2
+without loading its source files. They validate declarations, requiredness, values,
+provenance and locations before publishing edges. Verification selects linked and
+analysis output 0.2 whenever any imported requirements use output 0.2. All-old inputs
+keep their original output. [The comparison contract](../specification/0022-attribute-linking-and-analysis-0.2.md)
+compares present values and the whole canonical declaration: even description-only
+or unused enum-vocabulary edits request review. Comments, ordering and paths alone
+do not. Schema names are scoped, not merged. Work-item typed links retain their
+existing meaning and do not infer edges from attributes.

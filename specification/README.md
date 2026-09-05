@@ -74,3 +74,5 @@ explicit contract update and applicable compatibility notes.
 - [Project attributes and YAML 0.4](0020-project-attributes-yaml-0.4.md)
 
 - [Requirement semantic output 0.2](0021-requirement-semantic-output-0.2.md)
+
+- [Attribute linking and analysis 0.2](0022-attribute-linking-and-analysis-0.2.md)
