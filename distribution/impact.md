@@ -31,3 +31,16 @@ omitted by that bound. This is neither a comparison of old/new source nor a clai
 that listed artifacts are invalid. Empty results only describe this selection and
 policy. Existing verification review analysis supplies its separate revision
 comparison; the impact command does not infer it from timestamps or digests.
+
+## Derived report
+
+```sh
+build/maintained/mundane-impact view --root . impact.json > IMPACT.md
+```
+
+Save the report at the analysis root so its relative source links resolve. It shows
+the seed, affected nodes, every step of each explanatory path, and selected compiled
+revisions. A prominent notice identifies depth truncation. The renderer validates
+embedded artifacts and recomputes results, rejecting forged paths or incomplete
+analysis before writing a report. It does not reread source; linked files may have
+changed since compilation. Regenerate both query and report for a fresh snapshot.

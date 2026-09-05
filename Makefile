@@ -357,5 +357,6 @@ native-impact: test
 .PHONY: impact-verify
 impact-verify: native-impact
 	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactCliTest $(BUILD_ROOT)/mundane-impact
+	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactViewTest $(BUILD_ROOT)/mundane-impact
 
 verify: impact-verify

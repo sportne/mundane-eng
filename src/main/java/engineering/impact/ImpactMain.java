@@ -1,6 +1,8 @@
 package engineering.impact;
 
 import engineering.artifacts.Command;
+import engineering.artifacts.Checks;
+import engineering.artifacts.Problem;
 import engineering.artifacts.Json;
 import engineering.artifacts.Snapshots;
 import java.io.PrintStream;
@@ -17,26 +19,36 @@ public final class ImpactMain {
         int status = 0;
         try {
             if (args.length == 1 && args[0].equals("--help"))
-                out.println("Usage: mundane-impact query --root DIRECTORY --from SCOPE:KIND:ID [--depth 1..64] [--] IMPORTS");
+                out.println("Usage: mundane-impact query --root DIRECTORY --from SCOPE:KIND:ID [--depth 1..64] [--] IMPORTS\n       mundane-impact view --root DIRECTORY [--] QUERY_JSON");
             else if (args.length == 1 && args[0].equals("--version"))
                 out.println("mundane-impact " + Versions.IMPACT_VERSION + "; " + Versions.IMPACT_ARTIFACT + "; " + Versions.IMPACT_CONTRACT);
             else {
                 var options = options(args);
-                var result = ImpactAnalyzer.analyze(options.root(), options.input(), options.from(), options.depth());
-                out.writeBytes(Json.bytes(result.output())); status = result.status();
+                if (args[0].equals("query")) {
+                    var result = ImpactAnalyzer.analyze(options.root(), options.input(), options.from(), options.depth());
+                    out.writeBytes(Json.bytes(result.output())); status = result.status();
+                } else {
+                    try {
+                        var reads = new Snapshots(options.root());
+                        String report = ImpactView.render(Checks.map(Snapshots.json(reads.read(options.input()))));
+                        reads.recheck(); out.print(report);
+                    } catch (Problem p) { err.println(p.code + ": " + p.getMessage()); status = p.operational() ? 2 : 1; }
+                    catch (IllegalArgumentException e) { err.println("invalid-impact-analysis: " + e.getMessage()); status = 1; }
+                }
             }
         } catch (IllegalArgumentException e) { err.println("invocation-failed: " + e.getMessage()); status = 2; }
         return Command.finish(out, err, status);
     }
     private record Options(Path root, String input, String from, int depth) {}
     private static Options options(String[] args) {
-        if (args.length == 0 || !args[0].equals("query")) throw new IllegalArgumentException("expected query");
+        if (args.length == 0 || !Set.of("query", "view").contains(args[0])) throw new IllegalArgumentException("expected query or view");
+        boolean query = args[0].equals("query");
         Map<String,String> options = new HashMap<>(); String input = null; boolean ended = false;
         for (int i = 1; i < args.length; i++) {
             String arg = args[i];
             if (!ended && arg.equals("--")) { ended = true; continue; }
             if (!ended && arg.startsWith("--")) {
-                if (!Set.of("--root", "--from", "--depth").contains(arg) || options.containsKey(arg) || i + 1 == args.length)
+                if (!(query ? Set.of("--root", "--from", "--depth") : Set.of("--root")).contains(arg) || options.containsKey(arg) || i + 1 == args.length)
                     throw new IllegalArgumentException("unknown, duplicate or incomplete option: " + arg);
                 options.put(arg, args[++i]);
             } else {
@@ -44,10 +56,10 @@ public final class ImpactMain {
                 input = arg;
             }
         }
-        if (input == null || !options.containsKey("--root") || !options.containsKey("--from"))
+        if (input == null || !options.containsKey("--root") || query && !options.containsKey("--from"))
             throw new IllegalArgumentException("supply --root, --from and one input");
         String from = options.get("--from");
-        if (!from.matches("[A-Za-z0-9][A-Za-z0-9._-]*:(requirement|verification-plan|verification-activity|work-item):[A-Za-z0-9][A-Za-z0-9._-]*"))
+        if (query && !from.matches("[A-Za-z0-9][A-Za-z0-9._-]*:(requirement|verification-plan|verification-activity|work-item):[A-Za-z0-9][A-Za-z0-9._-]*"))
             throw new IllegalArgumentException("expected scoped node SCOPE:KIND:ID");
         String number = options.getOrDefault("--depth", "8");
         if (!number.matches("[0-9]{1,2}")) throw new IllegalArgumentException("depth must be 1..64");

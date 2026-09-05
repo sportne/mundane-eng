@@ -92,8 +92,8 @@ Items: 86.
 | [TC-1701](./roadmap/closed/task-1701-define-cross-artifact-impact-contract.yaml#L2) | task | Define Cross-Artifact Impact Contract | Complete | — | — |
 | [TC-1702](./roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml#L2) | task | Assemble Scoped Impact Graph | Complete | TC-1701 | — |
 | [TC-1703](./roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml#L2) | task | Query Explained Cross-Artifact Impact | Complete | TC-1702 | — |
-| [TC-1704](./roadmap/task-1704-render-source-linked-impact-reports.yaml#L2) | task | Render Source-Linked Impact Reports | Planned | TC-1703 | — |
-| [TC-1705](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L2) | task | Verify and Document Impact Workflows | Planned | TC-1703, TC-1704 | TC-1704 |
+| [TC-1704](./roadmap/closed/task-1704-render-source-linked-impact-reports.yaml#L2) | task | Render Source-Linked Impact Reports | Complete | TC-1703 | — |
+| [TC-1705](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L2) | task | Verify and Document Impact Workflows | Planned | TC-1703, TC-1704 | — |
 
 ## Planning qualifications
 
@@ -303,7 +303,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1609 | depends-on | work:work-item:TC-1608 | [work:roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml](./roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml#L1) |
 | work:work-item:TC-1702 | depends-on | work:work-item:TC-1701 | [work:roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml](./roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml#L1) |
 | work:work-item:TC-1703 | depends-on | work:work-item:TC-1702 | [work:roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml](./roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml#L1) |
-| work:work-item:TC-1704 | depends-on | work:work-item:TC-1703 | [work:roadmap/task-1704-render-source-linked-impact-reports.yaml](./roadmap/task-1704-render-source-linked-impact-reports.yaml#L1) |
+| work:work-item:TC-1704 | depends-on | work:work-item:TC-1703 | [work:roadmap/closed/task-1704-render-source-linked-impact-reports.yaml](./roadmap/closed/task-1704-render-source-linked-impact-reports.yaml#L1) |
 | work:work-item:TC-1705 | depends-on | work:work-item:TC-1703 | [work:roadmap/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1) |
 | work:work-item:TC-1705 | depends-on | work:work-item:TC-1704 | [work:roadmap/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1) |
 
@@ -378,14 +378,14 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-1608: [work:work-item:TC-1609 (depends-on)](./roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml#L1)
 - work:work-item:TC-1701: [work:work-item:TC-1702 (depends-on)](./roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml#L1)
 - work:work-item:TC-1702: [work:work-item:TC-1703 (depends-on)](./roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml#L1)
-- work:work-item:TC-1703: [work:work-item:TC-1704 (depends-on)](./roadmap/task-1704-render-source-linked-impact-reports.yaml#L1), [work:work-item:TC-1705 (depends-on)](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1)
+- work:work-item:TC-1703: [work:work-item:TC-1704 (depends-on)](./roadmap/closed/task-1704-render-source-linked-impact-reports.yaml#L1), [work:work-item:TC-1705 (depends-on)](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1)
 - work:work-item:TC-1704: [work:work-item:TC-1705 (depends-on)](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 484309c66e3ca7da2ce69cf13b9df909db57332332a2d8cdbf4289145af949fb
+- Work artifact: build/work-backlog/items.json; SHA-256 45b2c70381ac806453c2e97e721034716fb63e1ebfe300b07df76bfe62c4d255
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 f11eff45b94c1e61fe09b2c25cd0796846489482c88f4ae2894298a05c4433b7
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 109ddf5d3e5909505859ac8bc21c8294f42b20fe2c47d2c59412d3eb4414bd37
 - Source: [roadmap/closed/task-0101-strengthen-unicode-conformance-fixtures.yaml](./roadmap/closed/task-0101-strengthen-unicode-conformance-fixtures.yaml#L1); SHA-256 930f6128181d53c1f7766bb869e51e65e182b24434c2750a3e83c07ba196c01e
 - Source: [roadmap/closed/task-0102-correct-reference-parser-conformance.yaml](./roadmap/closed/task-0102-correct-reference-parser-conformance.yaml#L1); SHA-256 bb016737d4b752f62c02ea3db77eeeba8a6e660e9584f284222c4eaf1e1b775c
 - Source: [roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.yaml](./roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.yaml#L1); SHA-256 4685313657f73abd87f2567347c417c19f0e3a8e829377dc23ae3687eeff12db
@@ -467,10 +467,10 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1701-define-cross-artifact-impact-contract.yaml](./roadmap/closed/task-1701-define-cross-artifact-impact-contract.yaml#L1); SHA-256 91fa5347291769094e784fb2c5c620b45ee15a774594370a1a38a56fd7197709
 - Source: [roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml](./roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml#L1); SHA-256 2d6c15a10645a387b6011cb4883a68675487779797e2d0e27b0ba3f811c48b5d
 - Source: [roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml](./roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml#L1); SHA-256 71e11839ce07322cce65d10c5d141d160b43c32c04201752ad2ed28014616f1e
+- Source: [roadmap/closed/task-1704-render-source-linked-impact-reports.yaml](./roadmap/closed/task-1704-render-source-linked-impact-reports.yaml#L1); SHA-256 c2ee9d58764333fd437d492e1ef30248cae1b7a52e3cea7a2ea2df0bb784e051
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 936566e1203e95673fdb137e56e4be5852a666acb4dbff34434fea4c24183a83
 - Source: [roadmap/task-0902-run-an-independent-reqif-roundtrip.yaml](./roadmap/task-0902-run-an-independent-reqif-roundtrip.yaml#L1); SHA-256 199daffae3c9c1774e27820cd85011b6fa10baaca9ec1d0fae93723cab8a5fdd
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 05ebbee3a48dc1cf747299ac8754e28034d70667b899f345d5e3801a80640c6d
-- Source: [roadmap/task-1704-render-source-linked-impact-reports.yaml](./roadmap/task-1704-render-source-linked-impact-reports.yaml#L1); SHA-256 ce7293e7222070ce7a9d38727ac11d3c6ac1078b6ca7fef20098b05746d0688b
 - Source: [roadmap/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/task-1705-verify-and-document-impact-workflows.yaml#L1); SHA-256 fecd248434852d2e4b585a4ca2bae142ee42d5fa78aaf697a4843d1e65085a17
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff9f89dba866090ac8ef0e5fbf75f16dffe9de1c6e288f4358f66583c9b4aaff

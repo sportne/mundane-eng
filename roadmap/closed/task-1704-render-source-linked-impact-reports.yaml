@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1704"
 kind: "task"
 title: "Render Source-Linked Impact Reports"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-1703"]
 relations: []
 planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Tooling", "unlocks": "TC-1705"}
@@ -46,5 +46,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Task workflow](0002-task-card-index.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Task workflow](../0002-task-card-index.md)
+
+  ## Completion evidence
+
+  Implemented mundane-impact view with strict embedded-graph/query recomputation, source-linked explanatory paths, selected revisions, safe Markdown URLs and prominent bounded-result notices. make impact-verify passed all 24 JVM groups and query/report JVM/native parity, including forged nodes/edges/results, numeric boolean tampering, incomplete analysis, empty results, escaping and output failures. [Report guide](../../distribution/impact.md#derived-report) explains root-relative links and snapshot limits.
