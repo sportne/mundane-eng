@@ -348,3 +348,14 @@ attribute-workflow-verify: native-validator native-formatter native-compile nati
 	python3 experiments/0036-project-attributes/regressions.py
 
 verify: attribute-workflow-verify
+
+.PHONY: native-impact
+native-impact: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-impact) engineering.impact.ImpactMain
+	$(BUILD_ROOT)/mundane-impact --version
+
+.PHONY: impact-verify
+impact-verify: native-impact
+	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactCliTest $(BUILD_ROOT)/mundane-impact
+
+verify: impact-verify

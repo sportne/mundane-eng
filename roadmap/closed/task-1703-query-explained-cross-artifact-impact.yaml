@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1703"
 kind: "task"
 title: "Query Explained Cross-Artifact Impact"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-1702"]
 relations: []
 planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1704, TC-1705"}
@@ -46,5 +46,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Task workflow](0002-task-card-index.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Task workflow](../0002-task-card-index.md)
+
+  ## Completion evidence
+
+  Implemented the independent mundane-impact query CLI, version declarations, bounded shortest-path output and native build/check target. make impact-verify passed all 23 JVM groups and native parity cases for deterministic paths, truncation, cycles, unknown nodes, malformed/missing inputs, exact pins and output failures. Detected read changes suppress results. The initial shell lacked native-image; reran successfully with the documented GraalVM 21.0.2 bin directory on PATH. [Command guide](../../distribution/impact.md) records invocation and limits.
