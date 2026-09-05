@@ -41,7 +41,7 @@ public final class FormatterMain {
 
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments);
+            SourceInvocation selected = SourceInvocation.parse(arguments,true);
             return CommandOutput.finish(out, err, runSelected(selected.arguments(), out, err, selected.format()));
         } catch (IllegalArgumentException exception) {
             err.println(exception.getMessage());
@@ -50,13 +50,15 @@ public final class FormatterMain {
     }
 
     private static int runSelected(String[] arguments, PrintStream out, PrintStream err, SourceFormat sourceFormat) {
+        AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3");
+            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {
             out.printf("mundanereq-format %s; source contract %s%n", TOOL_VERSION, sourceFormat.contract);
+            if(sourceFormat==SourceFormat.YAML_04)out.println(Versions.FORMAT_ATTRIBUTE_CONTRACT);
             return 0;
         }
 
@@ -68,7 +70,8 @@ public final class FormatterMain {
             renderDiagnostics(selection.diagnostics(), err);
             return 2;
         }
-        Interpreter.Result semantics = Interpreter.interpretSources(selection.sources(), sourceFormat);
+        mundanereq.AttributeSchema schema=attributes.schema()==null?null:mundanereq.AttributeSchema.read(attributes.schema(),null);
+        Interpreter.Result semantics = Interpreter.interpretSources(selection.sources(), sourceFormat,schema);
         if (!semantics.valid()) {
             renderDiagnostics(semantics.diagnostics(), err);
             return 2;
@@ -85,7 +88,7 @@ public final class FormatterMain {
         return switch (invocation.mode()) {
             case STANDARD_OUTPUT -> writeStandardOutput(invocation.output(), formatted, out, err);
             case CHECK -> check(selection.sources(), formatted, out, err);
-            case WRITE -> writeFiles(selection.sources(), formatted, out, err);
+            case WRITE -> writeFiles(selection.sources(), formatted, out, err,schema,i->{});
         };
     }
 
@@ -139,7 +142,7 @@ public final class FormatterMain {
         for (Interpreter.Source source : sources) {
             try {
                 SourceDocument document = SourceDocument.read(source.file(), source.bytes());
-                formatted.put(Path.of(source.file()), sourceFormat == SourceFormat.YAML_03
+                formatted.put(Path.of(source.file()), sourceFormat != SourceFormat.CUSTOM_02
                         ? new String(source.bytes(), java.nio.charset.StandardCharsets.UTF_8).replace("\r\n", "\n")
                             .getBytes(java.nio.charset.StandardCharsets.UTF_8)
                         : SourceFormatter.format(document));
@@ -174,7 +177,9 @@ public final class FormatterMain {
     }
 
     static int writeFiles(
-            List<Interpreter.Source> sources, Map<Path, byte[]> formatted, PrintStream out, PrintStream err) {
+            List<Interpreter.Source> sources, Map<Path, byte[]> formatted, PrintStream out, PrintStream err) {return writeFiles(sources,formatted,out,err,null,i->{});}
+
+    static int writeFiles(List<Interpreter.Source> sources, Map<Path, byte[]> formatted, PrintStream out, PrintStream err,mundanereq.AttributeSchema schema,java.util.function.IntConsumer beforeReplace) {
         int changes = 0;
         for (int index = 0; index < sources.size(); index++) {
             Interpreter.Source source = sources.get(index);
@@ -182,10 +187,10 @@ public final class FormatterMain {
             byte[] bytes = formatted.get(path);
             if (java.util.Arrays.equals(source.bytes(), bytes)) continue;
             try {
-                replace(source, bytes);
+                beforeReplace.accept(index);replace(source, bytes,schema);
                 changes++;
             } catch (IOException exception) {
-                err.printf("%s:1:1: write-failed: %s%n", path, exception.getMessage());
+                err.printf("%s:1:1: write-failed: %s%n", schema!=null&&exception.getMessage().contains("attribute-schema-changed")?schema.source().file():path, exception.getMessage());
                 for (int prior = 0; prior < index; prior++) {
                     Interpreter.Source done = sources.get(prior);
                     err.println((java.util.Arrays.equals(done.bytes(), formatted.get(Path.of(done.file())))
@@ -201,13 +206,14 @@ public final class FormatterMain {
         return 0;
     }
 
-    private static void replace(Interpreter.Source source, byte[] bytes) throws IOException {
+    private static void replace(Interpreter.Source source, byte[] bytes,mundanereq.AttributeSchema schema) throws IOException {
         Path path = Path.of(source.file());
         Path parent = path.toAbsolutePath().normalize().getParent();
         Path temporary = Files.createTempFile(parent, "." + path.getFileName() + ".", ".tmp");
         try {
             Files.write(temporary, bytes);
             copyPosixPermissions(path, temporary);
+            if(schema!=null)verifySchema(schema);
             verifySnapshot(source);
             try {
                 Files.move(
@@ -216,6 +222,7 @@ public final class FormatterMain {
                         StandardCopyOption.ATOMIC_MOVE,
                         StandardCopyOption.REPLACE_EXISTING);
             } catch (AtomicMoveNotSupportedException exception) {
+                if(schema!=null)verifySchema(schema);
                 verifySnapshot(source);
                 Files.move(temporary, path, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -224,6 +231,9 @@ public final class FormatterMain {
         }
     }
 
+    private static void verifySchema(mundanereq.AttributeSchema schema) throws IOException {
+        try {schema.recheck();}catch(IOException e){throw new IOException("attribute-schema-changed: "+schema.source().file()+": "+e.getMessage(),e);}
+    }
     private static void verifySnapshot(Interpreter.Source source) throws IOException {
         Path path = Path.of(source.file());
         var current = Files.readAttributes(path, java.nio.file.attribute.BasicFileAttributes.class,

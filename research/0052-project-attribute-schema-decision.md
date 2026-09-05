@@ -351,7 +351,7 @@ any other engineering artifact's format.
 ## 10. Successor work
 
 - [TC-1303](../roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml): normative source/declaration contracts, model, schema validation and diagnostics.
-- [TC-1304](../roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml): safe formatting and trace integration.
+- [TC-1304](../roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml): safe formatting and trace integration.
 - [TC-1305](../roadmap/task-1305-compile-project-attribute-artifacts.yaml): versioned compiled values, definitions and source provenance.
 - [TC-1306](../roadmap/task-1306-link-and-analyze-project-attributes.yaml): serialized validation, scoped imports and explicit comparison semantics.
 - [TC-1307](../roadmap/task-1307-display-project-attributes-in-derived-reports.yaml): existing report display and bounded unsupported interchange handling.

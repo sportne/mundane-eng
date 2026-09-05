@@ -175,7 +175,7 @@ outcomes for future tests, not claims of implemented support.
 
 Execute [TC-1303](closed/task-1303-validate-project-defined-requirement-attributes.yaml) for
 contracts/model/schema validation first. Then
-[TC-1304](task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
+[TC-1304](closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml) supplies safe
 formatting/trace independently of
 [TC-1305](task-1305-compile-project-attribute-artifacts.yaml)'s versioned output.
 [TC-1306](task-1306-link-and-analyze-project-attributes.yaml) validates serialized

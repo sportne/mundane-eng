@@ -68,11 +68,11 @@ Items: 81.
 | [TC-1301](./roadmap/closed/task-1301-classify-project-attribute-use-cases.yaml#L2) | task | Classify Project Attribute Use Cases | Complete | TC-1102 | — |
 | [TC-1302](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L2) | task | Decide Project Attribute Schemas | Complete | TC-1106, TC-1203, TC-1301 | — |
 | [TC-1303](./roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml#L2) | task | Validate Project-Defined Requirement Attributes | Complete | TC-1302 | — |
-| [TC-1304](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L2) | task | Preserve Attributes in Formatting and Trace | Planned | TC-1302, TC-1303 | — |
+| [TC-1304](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L2) | task | Preserve Attributes in Formatting and Trace | Complete | TC-1302, TC-1303 | — |
 | [TC-1305](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L2) | task | Compile Project Attribute Artifacts | Planned | TC-1302, TC-1303 | — |
 | [TC-1306](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L2) | task | Link and Analyze Project Attributes | Planned | TC-1302, TC-1305 | TC-1305 |
 | [TC-1307](./roadmap/task-1307-display-project-attributes-in-derived-reports.yaml#L2) | task | Display Project Attributes in Derived Reports | Planned | TC-1302, TC-1306 | TC-1306 |
-| [TC-1308](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L2) | task | Verify and Document Project Attribute Workflows | Planned | TC-1302, TC-1304, TC-1306, TC-1307 | TC-1304, TC-1306, TC-1307 |
+| [TC-1308](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L2) | task | Verify and Document Project Attribute Workflows | Planned | TC-1302, TC-1304, TC-1306, TC-1307 | TC-1306, TC-1307 |
 | [TC-1401](./roadmap/closed/task-1401-protect-formatter-write-back.yaml#L2) | task | Protect Formatter Write-Back | Complete | — | — |
 | [TC-1402](./roadmap/closed/task-1402-report-cli-output-failures.yaml#L2) | task | Report CLI Output Failures Consistently | Complete | — | — |
 | [TC-1403](./roadmap/closed/task-1403-recover-parser-diagnostics-safely.yaml#L2) | task | Recover Parser Diagnostics Safely | Complete | — | — |
@@ -260,8 +260,8 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1302 | depends-on | work:work-item:TC-1203 | [work:roadmap/closed/task-1302-decide-project-attribute-schemas.yaml](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1) |
 | work:work-item:TC-1302 | depends-on | work:work-item:TC-1301 | [work:roadmap/closed/task-1302-decide-project-attribute-schemas.yaml](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1) |
 | work:work-item:TC-1303 | depends-on | work:work-item:TC-1302 | [work:roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml](./roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml#L1) |
-| work:work-item:TC-1304 | depends-on | work:work-item:TC-1302 | [work:roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1) |
-| work:work-item:TC-1304 | depends-on | work:work-item:TC-1303 | [work:roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1) |
+| work:work-item:TC-1304 | depends-on | work:work-item:TC-1302 | [work:roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1) |
+| work:work-item:TC-1304 | depends-on | work:work-item:TC-1303 | [work:roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1) |
 | work:work-item:TC-1305 | depends-on | work:work-item:TC-1302 | [work:roadmap/task-1305-compile-project-attribute-artifacts.yaml](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1) |
 | work:work-item:TC-1305 | depends-on | work:work-item:TC-1303 | [work:roadmap/task-1305-compile-project-attribute-artifacts.yaml](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1) |
 | work:work-item:TC-1306 | depends-on | work:work-item:TC-1302 | [work:roadmap/task-1306-link-and-analyze-project-attributes.yaml](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L1) |
@@ -345,8 +345,8 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-1203: [work:work-item:TC-0905 (depends-on)](./roadmap/closed/task-0905-define-verification-analyzer-contract.yaml#L1), [work:work-item:TC-1204 (depends-on)](./roadmap/closed/task-1204-implement-bounded-artifact-linking.yaml#L1), [work:work-item:TC-1302 (depends-on)](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1), [work:work-item:TC-1601 (depends-on)](./roadmap/closed/task-1601-define-work-item-ownership.yaml#L1)
 - work:work-item:TC-1204: [work:work-item:TC-0904 (depends-on)](./roadmap/closed/task-0904-implement-the-selected-ecosystem-tool.yaml#L1)
 - work:work-item:TC-1301: [work:work-item:TC-1302 (depends-on)](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1)
-- work:work-item:TC-1302: [work:work-item:TC-1303 (depends-on)](./roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml#L1), [work:work-item:TC-1304 (depends-on)](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1), [work:work-item:TC-1305 (depends-on)](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1), [work:work-item:TC-1306 (depends-on)](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L1), [work:work-item:TC-1307 (depends-on)](./roadmap/task-1307-display-project-attributes-in-derived-reports.yaml#L1), [work:work-item:TC-1308 (depends-on)](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L1)
-- work:work-item:TC-1303: [work:work-item:TC-1304 (depends-on)](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1), [work:work-item:TC-1305 (depends-on)](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1)
+- work:work-item:TC-1302: [work:work-item:TC-1303 (depends-on)](./roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml#L1), [work:work-item:TC-1304 (depends-on)](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1), [work:work-item:TC-1305 (depends-on)](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1), [work:work-item:TC-1306 (depends-on)](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L1), [work:work-item:TC-1307 (depends-on)](./roadmap/task-1307-display-project-attributes-in-derived-reports.yaml#L1), [work:work-item:TC-1308 (depends-on)](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L1)
+- work:work-item:TC-1303: [work:work-item:TC-1304 (depends-on)](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1), [work:work-item:TC-1305 (depends-on)](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1)
 - work:work-item:TC-1304: [work:work-item:TC-1308 (depends-on)](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L1)
 - work:work-item:TC-1305: [work:work-item:TC-1306 (depends-on)](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L1)
 - work:work-item:TC-1306: [work:work-item:TC-1307 (depends-on)](./roadmap/task-1307-display-project-attributes-in-derived-reports.yaml#L1), [work:work-item:TC-1308 (depends-on)](./roadmap/task-1308-verify-and-document-project-attribute-workflows.yaml#L1)
@@ -364,9 +364,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 ddf27e4e08757210535d2e5adfefcf67aa44ecd32dd63549b51e4bcaef8529c6
+- Work artifact: build/work-backlog/items.json; SHA-256 3911c28873e1f9c71a9ddb54a94744d01c0e53a13e95e7ceca4f1343809d811d
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 9dd6c83d892c2df7f53e715b48d06ecd4886acd8c366b8045c782ced2745f7a0
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 73e5d651b60674ea7aebfe3788fac88b4719d5be5eb3a0874253b0db30f6e1bd
 - Source: [roadmap/closed/task-0101-strengthen-unicode-conformance-fixtures.yaml](./roadmap/closed/task-0101-strengthen-unicode-conformance-fixtures.yaml#L1); SHA-256 32b59f0c3381791e94bef9f80643f0f9eb2b8a807617488fcec0cd3773707dde
 - Source: [roadmap/closed/task-0102-correct-reference-parser-conformance.yaml](./roadmap/closed/task-0102-correct-reference-parser-conformance.yaml#L1); SHA-256 bb016737d4b752f62c02ea3db77eeeba8a6e660e9584f284222c4eaf1e1b775c
 - Source: [roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.yaml](./roadmap/closed/task-0103-audit-the-0.2-conformance-baseline.yaml#L1); SHA-256 4685313657f73abd87f2567347c417c19f0e3a8e829377dc23ae3687eeff12db
@@ -424,6 +424,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1301-classify-project-attribute-use-cases.yaml](./roadmap/closed/task-1301-classify-project-attribute-use-cases.yaml#L1); SHA-256 c5e2f1634bb9c21230a06a5a09b660dce56583ccb74d456d01324a77649c9f34
 - Source: [roadmap/closed/task-1302-decide-project-attribute-schemas.yaml](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1); SHA-256 33acc6f8f8570073079163acf493a6438e374eb47721ced4db792e909d0deb52
 - Source: [roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml](./roadmap/closed/task-1303-validate-project-defined-requirement-attributes.yaml#L1); SHA-256 751e985b3838ccf8c5d1adcbe7128b0b98771fdbfb8475e764bc559f5ce7906c
+- Source: [roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/closed/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1); SHA-256 0a7f9103be49b165412842a3ce95f7336fd429bca13332524a246be96c7de560
 - Source: [roadmap/closed/task-1401-protect-formatter-write-back.yaml](./roadmap/closed/task-1401-protect-formatter-write-back.yaml#L1); SHA-256 8944f38fc2668339d2810738d2edf16eb4135df42774e1b667f42e5196eb92a3
 - Source: [roadmap/closed/task-1402-report-cli-output-failures.yaml](./roadmap/closed/task-1402-report-cli-output-failures.yaml#L1); SHA-256 b803f95389e2029879aed06845a16bcbbfa90c8c2e76e5952597220067001ac6
 - Source: [roadmap/closed/task-1403-recover-parser-diagnostics-safely.yaml](./roadmap/closed/task-1403-recover-parser-diagnostics-safely.yaml#L1); SHA-256 59a6d54e327987e81c32bb35faf8c2b6d33b036322613ac55b900fc70b253395
@@ -443,7 +444,6 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 936566e1203e95673fdb137e56e4be5852a666acb4dbff34434fea4c24183a83
 - Source: [roadmap/task-0902-run-an-independent-reqif-roundtrip.yaml](./roadmap/task-0902-run-an-independent-reqif-roundtrip.yaml#L1); SHA-256 199daffae3c9c1774e27820cd85011b6fa10baaca9ec1d0fae93723cab8a5fdd
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 05ebbee3a48dc1cf747299ac8754e28034d70667b899f345d5e3801a80640c6d
-- Source: [roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml](./roadmap/task-1304-preserve-attributes-in-formatting-and-trace.yaml#L1); SHA-256 57e2bd8d17cfee19db2c8272693df44fed4aa290213db4339201120fba9110dc
 - Source: [roadmap/task-1305-compile-project-attribute-artifacts.yaml](./roadmap/task-1305-compile-project-attribute-artifacts.yaml#L1); SHA-256 45b2b2f8f34e53a99f1316ec0c07a55ade48e672bbb7f40418a3b7321e9a734b
 - Source: [roadmap/task-1306-link-and-analyze-project-attributes.yaml](./roadmap/task-1306-link-and-analyze-project-attributes.yaml#L1); SHA-256 f0b179887fec33e74d097ab40c6221b32da7a3402690ee17491de4698d0a7082
 - Source: [roadmap/task-1307-display-project-attributes-in-derived-reports.yaml](./roadmap/task-1307-display-project-attributes-in-derived-reports.yaml#L1); SHA-256 02556cc34592e1b5681f279a401b2260f67b86e62b3f420c72f5f295b5627e56

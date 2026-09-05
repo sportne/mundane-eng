@@ -101,3 +101,7 @@ Compiled output, linking, review comparison and report contracts are versioned i
 their owning addenda. ReqIF and existing migration commands remain unsupported for
 new attribute-bearing input; no flattening is allowed. Structural editor assistance
 alone cannot assert semantic validity. Other artifact formats are independent choices.
+
+Formatter and trace support is implemented by TC-1304. Their YAML 0.4 command
+contracts are formatter-cli-0.1+safety-1+attributes-1 and
+trace-cli-0.1+safety-1+attributes-1. Old-profile contract identifiers remain unchanged.

@@ -45,7 +45,7 @@ public final class TraceMain {
 
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments);
+            SourceInvocation selected = SourceInvocation.parse(arguments,true);
             return CommandOutput.finish(out, err, runSelected(selected.arguments(), out, err, selected.format()));
         } catch (IllegalArgumentException exception) {
             err.println(exception.getMessage());
@@ -54,13 +54,15 @@ public final class TraceMain {
     }
 
     private static int runSelected(String[] arguments, PrintStream out, PrintStream err, SourceFormat sourceFormat) {
+        AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3");
+            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {
             out.printf("mundanereq-trace %s; source contract %s%n", TOOL_VERSION, sourceFormat.contract);
+            if(sourceFormat==SourceFormat.YAML_04)out.println(Versions.TRACE_ATTRIBUTE_CONTRACT);
             return 0;
         }
         if (arguments.length < 3) {
@@ -93,7 +95,8 @@ public final class TraceMain {
             renderDiagnostics(selection.diagnostics(), err);
             return 2;
         }
-        Interpreter.Result result = Interpreter.interpretSources(selection.sources(), sourceFormat);
+        mundanereq.AttributeSchema schema=attributes.schema()==null?null:mundanereq.AttributeSchema.read(attributes.schema(),null);
+        Interpreter.Result result = Interpreter.interpretSources(selection.sources(), sourceFormat,schema);
         if (!result.valid()) {
             renderDiagnostics(result.diagnostics(), err);
             return 2;

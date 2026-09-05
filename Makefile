@@ -314,3 +314,9 @@ attribute-validate-verify: native-validator
 	python3 scripts/check-attributes.py
 
 verify: attribute-validate-verify
+
+.PHONY: attribute-format-verify
+attribute-format-verify: native-formatter native-trace
+	python3 scripts/check-attribute-format.py
+
+verify: attribute-format-verify
