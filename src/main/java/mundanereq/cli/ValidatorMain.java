@@ -24,7 +24,7 @@ public final class ValidatorMain {
 
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments,true);
+            SourceInvocation selected = SourceInvocation.parse(arguments);
             return CommandOutput.finish(out, err, runSelected(selected.arguments(), out, err, selected.format()));
         } catch (IllegalArgumentException exception) {
             err.println(exception.getMessage());

@@ -47,7 +47,7 @@ a source-compatibility release or requires deferral.
 
 ## Audit method
 
-The audit applies every [Roadmap Stage 10](../roadmap/0001-initial-roadmap.md#stage-10--decide-whether-to-stabilize-10)
+The audit applies every [Roadmap Stage 10](https://github.com/sportne/mundane-req/blob/93c45faf6686393538244a3e003342eb87140140/roadmap/0001-initial-roadmap.md#stage-10--decide-whether-to-stabilize-10)
 criterion to committed specifications, fixtures, experiments, decision
 records, tool contracts, tests, tags, and distribution evidence. It treats
 tool existence as supporting evidence only where the tool exercises a written

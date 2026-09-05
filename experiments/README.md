@@ -54,20 +54,17 @@ Raw participant logs and reviewer transcripts are evidence captures. Paths to
 temporary workspaces inside those captures are historical observations and are
 not expected to remain navigable.
 
-- [Experiment 0027: Compilation and linking](0027-compilation-linking/README.md)
+## Compiled workflows and regression evidence
 
-- [Experiment 0028: Verification plan contract](0028-verification-contract/README.md)
-
-- [Experiment 0029: Verification report](0029-verification-report/README.md)
-
-- [Experiment 0030: Complete CI verification](0030-ci-verification/README.md)
-
-- [Experiment 0031: Parser recovery](0031-parser-recovery/README.md)
-
-- [Experiment 0032: SARIF diagnostics](0032-sarif-diagnostics/README.md)
-
-- [Experiment 0033: Workflow regressions](0033-workflow-regressions/README.md)
-
-- [Experiment 0034: Work-item workflow](0034-work-items/README.md)
-
-- [Experiment 0036: Project attribute workflows](0036-project-attributes/README.md)
+| Experiment |
+| --- |
+| [Experiment 0027: Compile, link, analyze and rebuild](0027-compilation-linking/README.md) |
+| [Experiment 0028: Verification plan contract](0028-verification-contract/README.md) |
+| [Experiment 0029: Verification review report](0029-verification-report/README.md) |
+| [Experiment 0030: Complete CI verification](0030-ci-verification/README.md) |
+| [Experiment 0031: Bounded parser recovery](0031-parser-recovery/README.md) |
+| [Experiment 0032: SARIF validation diagnostics](0032-sarif-diagnostics/README.md) |
+| [Experiment 0033: Complete workflow regressions](0033-workflow-regressions/README.md) |
+| [Work-item workflow verification](0034-work-items/README.md) |
+| [YAML work-item verification](0035-work-yaml/README.md) |
+| [Experiment 0036: Project attribute workflow evidence](0036-project-attributes/README.md) |

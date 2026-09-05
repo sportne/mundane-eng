@@ -58,4 +58,4 @@ body: |2+
 
   - [TC-0603](task-0603-run-the-integrated-toolchain-trial.yaml)
   - [TC-0704](task-0704-measure-operational-scale.yaml)
-  - [Roadmap Stage 9](../0001-initial-roadmap.md#stage-9--add-focused-ecosystem-tools-only-where-use-justifies-them)
+  - [Roadmap Stage 9](https://github.com/sportne/mundane-req/blob/93c45faf6686393538244a3e003342eb87140140/roadmap/0001-initial-roadmap.md#stage-9--add-focused-ecosystem-tools-only-where-use-justifies-them)

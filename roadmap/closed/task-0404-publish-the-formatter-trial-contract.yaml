@@ -67,4 +67,4 @@ body: |2+
   ## References
 
   - [TC-0403](task-0403-verify-formatter-safety-properties.yaml)
-  - [Roadmap cross-cutting rules](../0001-initial-roadmap.md#cross-cutting-rules-for-every-stage)
+  - [Roadmap cross-cutting rules](https://github.com/sportne/mundane-req/blob/0e1d468989fb756540df3df9f6d9fdefc3ec8de0/roadmap/0001-initial-roadmap.md#cross-cutting-rules-for-every-stage)

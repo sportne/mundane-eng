@@ -59,3 +59,9 @@ YAML 0.4 adds attribute-schema-unavailable (input), attribute-schema-invalid,
 attribute-schema-duplicate, attribute-schema-required, attribute-schema-mismatch,
 attribute-unknown, attribute-value and attribute-required (source). These are errors;
 [0020](0020-project-attributes-yaml-0.4.md) defines their locations and suppression.
+
+Before publishing YAML 0.4 output, detected requirement or declaration edits produce
+`input-changed` or `attribute-schema-changed`, respectively (input phase, exit 2,
+no requirement records). [Output 0.2](0021-requirement-semantic-output-0.2.md) defines
+these snapshot checks. Formatter declaration changes use `attribute-schema-changed`
+within its existing write-failure report.

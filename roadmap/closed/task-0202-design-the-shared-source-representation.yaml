@@ -66,4 +66,4 @@ body: |2+
 
   - [TC-0201](task-0201-establish-the-maintained-java-project.yaml)
   - [Source-comment decision](../../research/0009-nonsemantic-source-comments.md)
-  - [Roadmap formatter stage](../0001-initial-roadmap.md#stage-4--define-and-deliver-mundanereq-format)
+  - [Roadmap formatter stage](https://github.com/sportne/mundane-req/blob/93c45faf6686393538244a3e003342eb87140140/roadmap/0001-initial-roadmap.md#stage-4--define-and-deliver-mundanereq-format)

@@ -94,5 +94,5 @@ body: |2+
   - [TC-0704](task-0704-measure-operational-scale.yaml)
   - [TC-0705](task-0705-obtain-independent-conformance-evidence.yaml)
   - [TC-0706](task-0706-run-the-subagent-author-review-trial.yaml)
-  - [Roadmap Stage 10](../0001-initial-roadmap.md#stage-10--decide-whether-to-stabilize-10)
+  - [Roadmap Stage 10](https://github.com/sportne/mundane-req/blob/93c45faf6686393538244a3e003342eb87140140/roadmap/0001-initial-roadmap.md#stage-10--decide-whether-to-stabilize-10)
   - [Research 0031](../../research/0031-source-1.0-readiness-audit.md)

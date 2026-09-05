@@ -64,12 +64,16 @@ public final class NativeSuiteVerificationTest {
         for (String contract : List.of(
                 "0007-validator-trial-contract-0.1.md",
                 "0008-formatter-trial-contract-0.1.md",
-                "0009-trace-trial-contract-0.1.md")) {
+                "0009-trace-trial-contract-0.1.md",
+                "0020-project-attributes-yaml-0.4.md")) {
             assertRegular(packageRoot.resolve("docs/contracts").resolve(contract));
         }
         assertRegular(packageRoot.resolve("LICENSES/mundanereq-BSD-3-Clause.txt"));
         assertRegular(packageRoot.resolve("LICENSES/SnakeYAML-Engine-LICENSE.txt"));
-        assertRegular(packageRoot.resolve("docs/contracts/schema/requirements-yaml-0.3.json"));
+        for (String schema : List.of("requirements-yaml-0.3.json", "requirements-yaml-0.4.json", "attribute-declaration-0.1.json")) {
+            assertSameFile(ROOT.resolve("specification/schema").resolve(schema),
+                    packageRoot.resolve("docs/contracts/schema").resolve(schema), "packaged source schema");
+        }
         assertRegular(packageRoot.resolve("LICENSES/GraalVM-Native-Image.txt"));
         assertRegular(packageRoot.resolve("LICENSES/GraalVM-JDK/java.base/LICENSE"));
         assertRegular(archive);

@@ -45,7 +45,7 @@ public final class TraceMain {
 
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments,true);
+            SourceInvocation selected = SourceInvocation.parse(arguments);
             return CommandOutput.finish(out, err, runSelected(selected.arguments(), out, err, selected.format()));
         } catch (IllegalArgumentException exception) {
             err.println(exception.getMessage());
@@ -84,7 +84,14 @@ public final class TraceMain {
 
         List<Path> inputs = new ArrayList<>();
         try {
-            for (int index = 2; index < arguments.length; index++) inputs.add(Path.of(arguments[index]));
+            boolean optionsEnded = false;
+            for (int index = 2; index < arguments.length; index++) {
+                if (!optionsEnded && arguments[index].equals("--")) {
+                    optionsEnded = true;
+                } else {
+                    inputs.add(Path.of(arguments[index]));
+                }
+            }
         } catch (InvalidPathException exception) {
             err.println("invalid input path: " + exception.getMessage());
             return 2;
@@ -148,10 +155,10 @@ public final class TraceMain {
     }
 
     private static String usage() {
-        return "Usage: mundanereq-trace parents ID FILE_OR_DIRECTORY...\n"
-                + "       mundanereq-trace children ID FILE_OR_DIRECTORY...\n"
-                + "       mundanereq-trace higher ID FILE_OR_DIRECTORY...\n"
-                + "       mundanereq-trace impact ID FILE_OR_DIRECTORY...\n"
+        return "Usage: mundanereq-trace parents ID [--] FILE_OR_DIRECTORY...\n"
+                + "       mundanereq-trace children ID [--] FILE_OR_DIRECTORY...\n"
+                + "       mundanereq-trace higher ID [--] FILE_OR_DIRECTORY...\n"
+                + "       mundanereq-trace impact ID [--] FILE_OR_DIRECTORY...\n"
                 + "       mundanereq-trace --help\n"
                 + "       mundanereq-trace --version\n";
     }

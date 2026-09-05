@@ -66,7 +66,7 @@ body: |2+
   - [TC-1204](task-1204-implement-bounded-artifact-linking.yaml)
   - [TC-0903](task-0903-run-a-derived-presentation-experiment.yaml)
   - [Pilot decision](../../research/0032-end-to-end-pilot-decision.md)
-  - [Roadmap product direction](../0001-initial-roadmap.md#product-direction)
+  - [Roadmap product direction](https://github.com/sportne/mundane-req/blob/0e1d468989fb756540df3df9f6d9fdefc3ec8de0/roadmap/0001-initial-roadmap.md#product-direction)
 
   ## Compatibility and affected components
 

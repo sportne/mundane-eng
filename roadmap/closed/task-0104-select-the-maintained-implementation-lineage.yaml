@@ -67,4 +67,4 @@ body: |2+
 
   - [TC-0103](task-0103-audit-the-0.2-conformance-baseline.yaml)
   - [Experiment probe source](../../experiments/0002-deterministic-interpretation/src/mundanereq/Probe.java)
-  - [Roadmap implementation hypothesis](../0001-initial-roadmap.md#first-implementation-hypothesis)
+  - [Roadmap implementation hypothesis](https://github.com/sportne/mundane-req/blob/4fb8430c6190e63610055187831a9f2e1b8c7143/roadmap/0001-initial-roadmap.md#first-implementation-hypothesis)

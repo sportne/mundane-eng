@@ -45,7 +45,7 @@ def render(a,bases):
     if len(edges)!=len(linked['edges']) or len(rows)!=len(a['coverage']) or rows.keys()!=edges.keys():raise ValueError('analysis rows do not match linked assertions')
     for key,row in rows.items():
         if any(row[k]!=v for k,v in edges[key].items()):raise ValueError('analysis row changed authored reference')
-        if row['state'] not in ('current','review-stale') or bool(row['changedFields'])!=(row['state']=='review-stale') or row['possibleImpact']!=bool(row['changedFields']):raise ValueError('invalid review state')
+        if row['state'] not in ('current','review-stale') or bool(row['changedFields'])!=(row['state']=='review-stale') or type(row['possibleImpact']) is not bool or row['possibleImpact']!=bool(row['changedFields']):raise ValueError('invalid review state')
         if (row['currentScope'],row['requirementId']) not in records:raise ValueError('missing displayed requirement')
     if attribute_mode:
         from attribute_input import validate

@@ -16,7 +16,9 @@ workflow engine. Install only the executables a team needs, for example:
 Each executable reports its own tool and source-contract versions with
 `--version`. All three default to tool `trial-0.1` and source contract
 `mundanereq-source-0.2`; a leading `--source=yaml-0.3` selects and reports
-`mundanereq-yaml-0.3`. Those version surfaces remain independent even when
+`mundanereq-yaml-0.3`. Use `--source=yaml-0.4` for typed project attributes, with
+`--attribute-schema PATH` when the source selects a declaration. These source and
+command contracts are included in the package. Version surfaces remain independent even when
 their values happen to match.
 
 ## Independent use
@@ -49,7 +51,9 @@ it does not mean a fully static Linux binary.
 
 ## Rebuilding from source
 
-The package source baseline is Git tag `native-suite-trial-0.1`. The tested
+Git tag `native-suite-trial-0.1` records the original package experiment. A current
+build uses the selected checkout and its `versions.properties`; it includes later
+command additions. The tested
 build environment is Linux x86-64 with Java/Javac 21 and GraalVM CE 21.0.2
 Native Image. Native Image also requires a C toolchain and development files
 for glibc and zlib. The packaging recipe uses GNU Make, GNU tar, Coreutils
@@ -77,7 +81,7 @@ overridden staging path outside `build/maintained/package/`.
 This is a reproducible source-to-artifact procedure, not a claim that repeated
 GraalVM CE 21.0.2 builds are bit-for-bit identical. Use the emitted checksums
 to identify a particular binary package. Generated binaries and packages are
-ignored by Git and are disposable; the tagged source remains authoritative.
+ignored by Git and are disposable; the selected source checkout remains authoritative.
 
 ## Responsibilities outside these tools
 

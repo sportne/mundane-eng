@@ -17,29 +17,37 @@ import mundanereq.Versions;
 import mundanereq.source.SourcePosition;
 import mundanereq.source.SourceSpan;
 
-/** Requirement artifact 0.1; serializes retained interpretation, never reparses source. */
+/** Versioned requirement artifacts from retained interpretation, without reparsing source. */
 public final class SemanticArtifact {
     private SemanticArtifact() {}
 
     public static byte[] emit(List<Interpreter.Source> sources, Interpreter.Result result, SourceFormat format) {
-        if(format!=SourceFormat.YAML_04&&(result.attributeSchema()!=null||result.requirements().stream().anyMatch(r->!r.attributes().isEmpty())))throw new IllegalArgumentException("attributes cannot be serialized under an old source/output contract");
+        boolean attributes = format == SourceFormat.YAML_04;
+        if (!attributes && (result.attributeSchema() != null
+                || result.requirements().stream().anyMatch(r -> !r.attributes().isEmpty()))) {
+            throw new IllegalArgumentException("attributes cannot be serialized under an old source/output contract");
+        }
         Map<String, Object> envelope = object(
-                "artifactKind", "requirements", "format", format==SourceFormat.YAML_04?Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT:Versions.REQUIREMENT_ARTIFACT,
+                "artifactKind", "requirements", "format", attributes ? Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT : Versions.REQUIREMENT_ARTIFACT,
                 "sourceContract", format.contract,
                 "compiler", object("name", "mundanereq-compile", "version", Versions.COMPILE_VERSION,
-                        "contract", format==SourceFormat.YAML_04?Versions.COMPILE_ATTRIBUTE_CONTRACT:Versions.COMPILE_CONTRACT),
+                        "contract", attributes ? Versions.COMPILE_ATTRIBUTE_CONTRACT : Versions.COMPILE_CONTRACT),
                 "complete", result.valid());
         envelope.put("sources", sources.stream().sorted(Comparator.comparing(Interpreter.Source::file))
                 .map(s -> object("path", s.file(), "sha256",
                         format != SourceFormat.CUSTOM_02 && s.bytes().length > 8 * 1024 * 1024 ? null : sha256(s.bytes())))
                 .toList());
-        if(format==SourceFormat.YAML_04) {
-            var schema=result.attributeSchema();Object compiledSchema=null;
-            if(schema!=null&&schema.valid()) {
-                Map<String,Object> locations=new TreeMap<>();schema.locations().forEach((k,v)->locations.put(k,span(v)));
-                compiledSchema=object("definition",schema.definition(),"source",object("path",schema.source().file(),"sha256",sha256(schema.source().bytes())),"locations",locations);
+        if (attributes) {
+            var schema = result.attributeSchema();
+            Object compiledSchema = null;
+            if (schema != null && schema.valid()) {
+                Map<String, Object> locations = new TreeMap<>();
+                schema.locations().forEach((name, location) -> locations.put(name, span(location)));
+                compiledSchema = object("definition", schema.definition(),
+                        "source", object("path", schema.source().file(), "sha256", sha256(schema.source().bytes())),
+                        "locations", locations);
             }
-            envelope.put("attributeSchema",compiledSchema);
+            envelope.put("attributeSchema", compiledSchema);
         }
         List<Object> records = new ArrayList<>();
         if (result.valid()) {
@@ -52,12 +60,16 @@ public final class SemanticArtifact {
                 origin.fields().forEach((name, spans) -> fields.put(name, spans.stream().map(SemanticArtifact::span).toList()));
                 Map<String, Object> references = new TreeMap<>();
                 origin.references().forEach((target, value) -> references.put(target, span(value)));
-                var semantic=values(requirement);var locations=object("record",span(origin.record()),"fields",fields,"references",references);
-                if(format==SourceFormat.YAML_04) {
-                    semantic.put("attributes",new TreeMap<>(requirement.attributes()));
-                    var attributes=new TreeMap<String,Object>();origin.attributes().forEach((k,v)->attributes.put(k,object("name",span(v.name()),"value",span(v.value()))));locations.put("attributes",attributes);
+                var semantic = values(requirement);
+                var locations = object("record", span(origin.record()), "fields", fields, "references", references);
+                if (attributes) {
+                    semantic.put("attributes", new TreeMap<>(requirement.attributes()));
+                    var attributeLocations = new TreeMap<String,Object>();
+                    origin.attributes().forEach((name, location) -> attributeLocations.put(name,
+                            object("name", span(location.name()), "value", span(location.value()))));
+                    locations.put("attributes", attributeLocations);
                 }
-                records.add(object("values",semantic,"locations",locations));
+                records.add(object("values", semantic, "locations", locations));
             }
         }
         envelope.put("requirements", records);

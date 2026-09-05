@@ -33,9 +33,13 @@ field. Complete output does not imply approved, covered or satisfied requirement
 [Semantic output 0.1](../specification/0012-requirement-semantic-output-0.1.md)
 defines fields, comparison policy, diagnostics, Unicode coordinates, source roots
 and compatibility. [Rule meanings](../specification/0013-compiled-diagnostic-rules.md)
-are separate from explanatory diagnostic messages. Custom attributes and maintained
-cross-artifact imports await their own designs. Other artifact authoring formats
-remain independent choices.
+are separate from explanatory diagnostic messages. YAML 0.4 emits
+[output 0.2](../specification/0021-requirement-semantic-output-0.2.md), including typed
+project declarations and attributes. Select it explicitly with `--source=yaml-0.4`
+and, when declared, `--attribute-schema PATH`; see the [attribute guide](attributes.md).
+The small consumer above supports output 0.1 only. The maintained
+[linker and verifier](verification.md) accept both versions and preserve independent
+import scopes. Other artifact authoring formats remain independent choices.
 
 `make compiled-verify` checks native/JVM golden output, retained source spans,
 legacy/YAML semantic equivalence, invalid input, resource limits, consumer isolation

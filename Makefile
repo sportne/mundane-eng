@@ -94,7 +94,8 @@ package-native-suite: native-suite
 	install -m 644 specification/0013-compiled-diagnostic-rules.md specification/0016-diagnostic-recovery.md specification/0017-sarif-validation-output.md "$(PACKAGE_STAGE)/docs/contracts/"
 	install -m 644 specification/0010-requirements-yaml-0.3.md specification/0011-tool-safety-and-yaml-commands.md "$(PACKAGE_STAGE)/docs/contracts/"
 	mkdir -p "$(PACKAGE_STAGE)/docs/contracts/schema"
-	install -m 644 specification/schema/requirements-yaml-0.3.json "$(PACKAGE_STAGE)/docs/contracts/schema/"
+	install -m 644 specification/schema/requirements-yaml-0.3.json specification/schema/requirements-yaml-0.4.json specification/schema/attribute-declaration-0.1.json "$(PACKAGE_STAGE)/docs/contracts/schema/"
+	install -m 644 specification/0020-project-attributes-yaml-0.4.md "$(PACKAGE_STAGE)/docs/contracts/"
 	install -m 644 "$(GRAALVM_HOME)/LICENSE_NATIVEIMAGE.txt" "$(PACKAGE_STAGE)/LICENSES/GraalVM-Native-Image.txt"
 	cp -R "$(GRAALVM_HOME)/legal/." "$(PACKAGE_STAGE)/LICENSES/GraalVM-JDK/"
 	install -m 644 $(GENERATED_DIR)/versions.json "$(PACKAGE_STAGE)/VERSIONS.json"
@@ -322,8 +323,9 @@ attribute-format-verify: native-formatter native-trace
 verify: attribute-format-verify
 
 .PHONY: attribute-compile-verify
-attribute-compile-verify: native-compile
+attribute-compile-verify: native-compile native-validator native-formatter native-trace
 	python3 scripts/check-attribute-compile.py
+	python3 scripts/check-cli-delimiters.py
 
 verify: attribute-compile-verify
 

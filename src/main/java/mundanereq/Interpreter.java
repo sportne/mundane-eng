@@ -27,7 +27,7 @@ import mundanereq.source.SourceDocument;
 import mundanereq.source.SourceSpan;
 import mundanereq.source.SourcePosition;
 
-/** Strict interpretation of explicitly selected custom 0.2 or requirements YAML 0.3 source. */
+/** Strict interpretation of explicitly selected requirement source profiles. */
 public final class Interpreter {
     private static final Pattern ID_PATTERN = Pattern.compile("[A-Za-z0-9][A-Za-z0-9._-]*");
     private static final Pattern OPENER_PATTERN = Pattern.compile("requirement (.+)");

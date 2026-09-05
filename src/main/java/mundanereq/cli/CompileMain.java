@@ -11,7 +11,7 @@ import mundanereq.SourceFormat;
 import mundanereq.Versions;
 import mundanereq.compile.SemanticArtifact;
 
-/** Independently usable requirement compiler; semantic output contract 0.1. */
+/** Independent compiler for the selected source and corresponding semantic output contract. */
 public final class CompileMain {
     private CompileMain() {}
 
@@ -22,7 +22,7 @@ public final class CompileMain {
     static int run(String[] arguments, PrintStream out, PrintStream err) {
         int status;
         try {
-            SourceInvocation selected = SourceInvocation.parse(arguments,true);
+            SourceInvocation selected = SourceInvocation.parse(arguments);
             status = compile(selected.arguments(), selected.format(), out, err);
         } catch (IllegalArgumentException exception) {
             err.println("compile-failed: " + exception.getMessage());

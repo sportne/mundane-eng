@@ -48,7 +48,7 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 
 ## Model-pressure decisions
 
-| Record | Current disposition |
+| Record | Recorded disposition |
 | --- | --- |
 | [0023 — Identity continuity](0023-identity-continuity-decision.md) | Retain human ID as sole identity until an external consumer needs pre-exchanged continuity. |
 | [0024 — Verification companion](0024-verification-companion-decision.md) | Separate activity, plan, coverage, execution, evidence, and result; defer stable carrier and satisfaction policy. |
@@ -68,58 +68,43 @@ decision](0032-end-to-end-pilot-decision.md), then follow its evidence links.
 | [0034 — Requirements YAML contract](0034-yaml-requirements-contract-decision.md) | Selects the requirements-only YAML profile, rule authority and explicit migration contract. |
 | [0035 — Requirements YAML batch verification](0035-yaml-requirements-batch-verification.md) | Records maintained YAML tooling, migration and safety verification. |
 
-- [Research 0036: Monorepo component boundaries](0036-monorepo-component-boundaries.md)
+## Compilation, YAML work items and project attributes
 
-- [Research 0037: Requirement and assertion ownership](0037-requirement-and-assertion-ownership.md)
+These records retain their dated decisions and verification boundaries. Current
+capabilities are summarized in the [project README](../README.md).
 
-- [Research 0038: Compilation and linking experiment](0038-compilation-linking-experiment.md)
-
-- [Research 0039: Independent version declarations](0039-independent-version-declarations.md)
-
-- [Research 0040: Semantic output decision](0040-requirement-semantic-output-decision.md)
-
-- [Research 0041: Compiled requirements verification](0041-compiled-requirements-verification.md)
-
-- [Research 0042: Local imports and references](0042-local-import-and-reference-decision.md)
-
-- [Research 0043: Verification plan contract](0043-verification-plan-contract-decision.md)
-
-- [Research 0044: Bounded linker verification](0044-bounded-linker-verification.md)
-
-- [Research 0045: Verification analyzer implementation](0045-verification-analyzer-implementation.md)
-
-- [Research 0046: Verification report decision](0046-verification-report-decision.md)
-
-- [Research 0047: Complete CI verification](0047-complete-ci-verification.md)
-
-- [Research 0048: Parser recovery](0048-parser-recovery-verification.md)
-
-- [Research 0049: SARIF diagnostics](0049-sarif-diagnostics-verification.md)
-
-- [Research 0050: Workflow regression corpus](0050-workflow-regression-corpus.md)
-
-- [Research 0051: Project attribute use cases](0051-project-attribute-use-case-decision.md)
-
-- [Research 0052: Project attribute schema decision](0052-project-attribute-schema-decision.md)
-
-- [Research 0053: Project attribute worked design cases](0053-project-attribute-design-cases.md)
-
-- [Research 0054: Work-item ownership](0054-work-item-ownership.md)
-
-- [Research 0055: Work-item source decision](0055-work-item-source-decision.md)
-
-- [Research 0056: Work-item compiler verification](0056-work-item-compiler-verification.md)
-
-- [Research 0057: Work-item linking verification](0057-work-item-linking-verification.md)
-
-- [Research 0058: Derived work-item view verification](0058-work-item-view-verification.md)
-
-- [Research 0059: Work-item backlog integration](0059-work-item-backlog-verification.md)
-
-- [Research 63: Attribute validation](0063-attribute-validation-verification.md)
-- [Research 64: Attribute formatting](0064-attribute-formatting-verification.md)
-- [Research 65: Attribute compilation](0065-attribute-compilation-verification.md)
-- [Research 66: Attribute linking](0066-attribute-linking-verification.md)
-- [Research 67: Attribute reports](0067-attribute-report-verification.md)
-
-- [Research 0068: Attribute workflow verification](0068-attribute-workflow-verification.md)
+| Record |
+| --- |
+| [Research 0036: Component boundaries for the first compiled workflow](0036-monorepo-component-boundaries.md) |
+| [Research 0037: Requirement and assertion ownership](0037-requirement-and-assertion-ownership.md) |
+| [Research 0038: Compilation and linking experiment decision](0038-compilation-linking-experiment.md) |
+| [Research 0039: Independent version declarations](0039-independent-version-declarations.md) |
+| [Research 0040: Requirement semantic output decision](0040-requirement-semantic-output-decision.md) |
+| [Research 0041: Maintained requirement compilation verification](0041-compiled-requirements-verification.md) |
+| [Research 0042: Local imports and references](0042-local-import-and-reference-decision.md) |
+| [Research 0043: Verification plan and staleness contract](0043-verification-plan-contract-decision.md) |
+| [Research 0044: Bounded artifact resolver](0044-bounded-linker-verification.md) |
+| [Research 0045: Verification plan compiler and analyzer](0045-verification-analyzer-implementation.md) |
+| [Research 0046: Verification report decision](0046-verification-report-decision.md) |
+| [Research 0047: Complete CI verification](0047-complete-ci-verification.md) |
+| [Research 0048: Bounded parser recovery](0048-parser-recovery-verification.md) |
+| [Research 0049: SARIF validation diagnostics](0049-sarif-diagnostics-verification.md) |
+| [Research 0050: Complete workflow regression corpus](0050-workflow-regression-corpus.md) |
+| [Research 0051: Project attribute use-case decision](0051-project-attribute-use-case-decision.md) |
+| [Research 0052: Project attribute schema decision](0052-project-attribute-schema-decision.md) |
+| [Research 0053: Project attribute worked design cases](0053-project-attribute-design-cases.md) |
+| [Research 0054: Work-item ownership](0054-work-item-ownership.md) |
+| [Research 0055: Work-item source and interface decision](0055-work-item-source-decision.md) |
+| [Research 0056: Work-item compiler verification](0056-work-item-compiler-verification.md) |
+| [Research 0057: Work-item linking verification](0057-work-item-linking-verification.md) |
+| [Research 0058: Derived work-item view verification](0058-work-item-view-verification.md) |
+| [Research 0059: Work-item backlog integration](0059-work-item-backlog-verification.md) |
+| [Research 0060: YAML work-item source decision](0060-work-item-yaml-decision.md) |
+| [Research 0061: YAML work-item compiler verification](0061-work-item-yaml-compiler-verification.md) |
+| [Research 0062: YAML backlog migration and verification](0062-work-item-yaml-backlog-verification.md) |
+| [Research 0063: Project attribute validation](0063-attribute-validation-verification.md) |
+| [Research 0064: Attribute formatting and trace](0064-attribute-formatting-verification.md) |
+| [Research 0065: Compiled project attributes](0065-attribute-compilation-verification.md) |
+| [Research 0066: Attribute linking and analysis](0066-attribute-linking-verification.md) |
+| [Research 0067: Attribute-aware derived reports](0067-attribute-report-verification.md) |
+| [Research 0068: Integrated project attribute workflows](0068-attribute-workflow-verification.md) |

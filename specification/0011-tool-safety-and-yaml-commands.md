@@ -8,6 +8,10 @@ compatible. A leading `--source=yaml-0.3` selects the new requirements contract;
 `--source=custom-0.2` selects the default explicitly. The selector precedes all other
 options/operations. `--version` describes the selected source contract.
 
+YAML 0.4 adds explicit project attributes through [0020](0020-project-attributes-yaml-0.4.md).
+A `--` delimiter before input paths ends option parsing, including for trace after
+its operation and ID. Subsequent names such as `--help` are literal paths.
+
 ## Output completion
 
 All three tools and the migration utility check stdout and stderr completion on

@@ -1,6 +1,6 @@
 # Specification 0002: Minimum Source Language and Model
 
-Status: Current nonnormative design record for `mundanereq-source-0.2`
+Status: Historical design rationale for custom source 0.1/0.2
 
 Last reconciled: 2026-08-30 through Experiment 0022 and Research 0031
 
@@ -9,6 +9,10 @@ Original provisional contract: [mundanereq source 0.1](0003-provisional-0.1-cont
 Original normative language standard: [mundanereq Source Language Specification 0.1](0004-mundanereq-source-language-0.1.md)
 
 Current successor contract and standard: [mundanereq source 0.2](0006-provisional-0.2-contract.md) and [mundanereq Source Language Specification 0.2](0005-mundanereq-source-language-0.2.md)
+
+Current project direction and additional source profiles are documented in the
+[living foundation](0001-project-foundation.md) and [specification index](README.md).
+The decisions below retain their original custom-source scope.
 
 ## Purpose
 
