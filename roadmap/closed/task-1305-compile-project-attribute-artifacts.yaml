@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1305"
 kind: "task"
 title: "Compile Project Attribute Artifacts"
-status: "Planned"
+status: "Complete"
 dependencies:
   - "TC-1302"
   - "TC-1303"
@@ -61,7 +61,11 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [TC-1302](closed/task-1302-decide-project-attribute-schemas.yaml)
-  - [Attribute design](../research/0052-project-attribute-schema-decision.md)
-  - [Worked cases](../research/0053-project-attribute-design-cases.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
+  - [Attribute design](../../research/0052-project-attribute-schema-decision.md)
+  - [Worked cases](../../research/0053-project-attribute-design-cases.md)
+
+  ## Completion evidence
+
+  [Completion report](../../research/0065-attribute-compilation-verification.md) records output 0.2, retained declaration/value provenance, snapshot publication barriers, independent serialized checks and passing authoritative verification.

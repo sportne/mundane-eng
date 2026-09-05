@@ -47,6 +47,7 @@ public final class MaintainedTestSuite {
         engineering.work.WorkBoundaryTest.run();
         mundanereq.cli.AttributeValidationTest.run();
         mundanereq.cli.AttributeFormattingTest.run();
-        System.out.println("Passed 20 maintained test groups.");
+        mundanereq.cli.AttributeCompilationTest.run();
+        System.out.println("Passed 21 maintained test groups.");
     }
 }

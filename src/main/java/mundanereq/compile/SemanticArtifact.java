@@ -22,16 +22,25 @@ public final class SemanticArtifact {
     private SemanticArtifact() {}
 
     public static byte[] emit(List<Interpreter.Source> sources, Interpreter.Result result, SourceFormat format) {
+        if(format!=SourceFormat.YAML_04&&(result.attributeSchema()!=null||result.requirements().stream().anyMatch(r->!r.attributes().isEmpty())))throw new IllegalArgumentException("attributes cannot be serialized under an old source/output contract");
         Map<String, Object> envelope = object(
-                "artifactKind", "requirements", "format", Versions.REQUIREMENT_ARTIFACT,
+                "artifactKind", "requirements", "format", format==SourceFormat.YAML_04?Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT:Versions.REQUIREMENT_ARTIFACT,
                 "sourceContract", format.contract,
                 "compiler", object("name", "mundanereq-compile", "version", Versions.COMPILE_VERSION,
-                        "contract", Versions.COMPILE_CONTRACT),
+                        "contract", format==SourceFormat.YAML_04?Versions.COMPILE_ATTRIBUTE_CONTRACT:Versions.COMPILE_CONTRACT),
                 "complete", result.valid());
         envelope.put("sources", sources.stream().sorted(Comparator.comparing(Interpreter.Source::file))
                 .map(s -> object("path", s.file(), "sha256",
-                        format == SourceFormat.YAML_03 && s.bytes().length > 8 * 1024 * 1024 ? null : sha256(s.bytes())))
+                        format != SourceFormat.CUSTOM_02 && s.bytes().length > 8 * 1024 * 1024 ? null : sha256(s.bytes())))
                 .toList());
+        if(format==SourceFormat.YAML_04) {
+            var schema=result.attributeSchema();Object compiledSchema=null;
+            if(schema!=null&&schema.valid()) {
+                Map<String,Object> locations=new TreeMap<>();schema.locations().forEach((k,v)->locations.put(k,span(v)));
+                compiledSchema=object("definition",schema.definition(),"source",object("path",schema.source().file(),"sha256",sha256(schema.source().bytes())),"locations",locations);
+            }
+            envelope.put("attributeSchema",compiledSchema);
+        }
         List<Object> records = new ArrayList<>();
         if (result.valid()) {
             Map<String, Interpreter.RequirementOrigin> origins = new TreeMap<>();
@@ -43,8 +52,12 @@ public final class SemanticArtifact {
                 origin.fields().forEach((name, spans) -> fields.put(name, spans.stream().map(SemanticArtifact::span).toList()));
                 Map<String, Object> references = new TreeMap<>();
                 origin.references().forEach((target, value) -> references.put(target, span(value)));
-                records.add(object("values", values(requirement), "locations",
-                        object("record", span(origin.record()), "fields", fields, "references", references)));
+                var semantic=values(requirement);var locations=object("record",span(origin.record()),"fields",fields,"references",references);
+                if(format==SourceFormat.YAML_04) {
+                    semantic.put("attributes",new TreeMap<>(requirement.attributes()));
+                    var attributes=new TreeMap<String,Object>();origin.attributes().forEach((k,v)->attributes.put(k,object("name",span(v.name()),"value",span(v.value()))));locations.put("attributes",attributes);
+                }
+                records.add(object("values",semantic,"locations",locations));
             }
         }
         envelope.put("requirements", records);
@@ -74,7 +87,7 @@ public final class SemanticArtifact {
     }
 
     public static boolean operational(Interpreter.Diagnostic diagnostic) {
-        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files") || diagnostic.code().equals("attribute-schema-unavailable");
+        return diagnostic.code().equals("input-unavailable") || diagnostic.code().equals("no-source-files") || diagnostic.code().equals("attribute-schema-unavailable") || diagnostic.code().equals("attribute-schema-changed") || diagnostic.code().equals("input-changed");
     }
 
     private static Map<String, Object> values(Interpreter.Requirement r) {

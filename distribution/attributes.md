@@ -28,3 +28,15 @@ header change, matching attributeSchema name and explicit --attribute-schema opt
 Omit both schema name/option and attributes for schema-free 0.4. Existing source need
 not migrate. Compilation and downstream capabilities are enabled by their owning
 cards; unsupported selectors/formats fail instead of silently dropping values.
+
+Compilation is available with an explicit source root:
+
+```sh
+build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/requirement-attributes.json examples/attributes > requirements.json
+```
+
+[Output 0.2](../specification/0021-requirement-semantic-output-0.2.md) preserves
+values, typed declarations and separate source provenance. Schema-free YAML 0.4
+also emits 0.2, with null schema and empty attributes. Existing profiles emit 0.1.
+The compiler rechecks selected snapshots before publication; a detected source or
+schema edit returns 2 and no usable records. Old consumers reject the new format.

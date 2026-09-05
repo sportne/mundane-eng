@@ -320,3 +320,9 @@ attribute-format-verify: native-formatter native-trace
 	python3 scripts/check-attribute-format.py
 
 verify: attribute-format-verify
+
+.PHONY: attribute-compile-verify
+attribute-compile-verify: native-compile
+	python3 scripts/check-attribute-compile.py
+
+verify: attribute-compile-verify
