@@ -1,6 +1,6 @@
 # Task TC-1604: Link and Analyze Work Items
 
-Status: Planned
+Status: Ready
 
 Roadmap stage: 16
 

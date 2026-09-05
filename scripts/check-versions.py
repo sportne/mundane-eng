@@ -28,7 +28,7 @@ for tool, main in [('VALIDATE','Validator'),('FORMAT','Formatter'),('TRACE','Tra
     else:
         yaml = subprocess.check_output(['java','-cp',cp,'mundanereq.cli.'+main+'Main','--source=yaml-0.3','--version'], text=True)
         assert values['SOURCE_YAML'] in yaml
-for tool, main, formats in [('LINK','engineering.artifacts.LinkMain',['IMPORT_FORMAT','LINK_ARTIFACT']),('PLAN','engineering.verification.PlanMain',['PLAN_SOURCE','PLAN_ARTIFACT']),('VERIFY','engineering.verification.VerifyMain',['VERIFICATION_ARTIFACT'])]:
+for tool, main, formats in [('WORK','engineering.work.WorkMain',['WORK_SOURCE','WORK_ARTIFACT','WORK_ANALYSIS']),('LINK','engineering.artifacts.LinkMain',['IMPORT_FORMAT','LINK_ARTIFACT']),('PLAN','engineering.verification.PlanMain',['PLAN_SOURCE','PLAN_ARTIFACT']),('VERIFY','engineering.verification.VerifyMain',['VERIFICATION_ARTIFACT'])]:
     actual=subprocess.check_output(['java','-cp',cp,main,'--version'],text=True)
     assert all(values[key] in actual for key in [tool+'_VERSION',tool+'_CONTRACT']+formats)
 # The same agreement predicate catches stale metadata, not just copied constants.

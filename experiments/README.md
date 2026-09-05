@@ -67,3 +67,5 @@ not expected to remain navigable.
 - [Experiment 0032: SARIF diagnostics](0032-sarif-diagnostics/README.md)
 
 - [Experiment 0033: Workflow regressions](0033-workflow-regressions/README.md)
+
+- [Experiment 0034: Work-item workflow](0034-work-items/README.md)

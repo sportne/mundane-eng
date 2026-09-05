@@ -107,8 +107,8 @@ This chain is independent of the attribute implementation chain.
 | --- | --- | --- | --- |
 | [TC-1601](closed/task-1601-define-work-item-ownership.md) | Define Work Item Ownership | Complete | TC-1102, TC-1203 |
 | [TC-1602](closed/task-1602-specify-work-item-source-and-output.md) | Specify Work Item Source and Output | Complete | TC-1601 |
-| [TC-1603](task-1603-compile-and-validate-work-items.md) | Compile and Validate Work Items | Ready | TC-1602 |
-| [TC-1604](task-1604-link-and-analyze-work-items.md) | Link and Analyze Work Items | Planned | TC-1603 |
+| [TC-1603](closed/task-1603-compile-and-validate-work-items.md) | Compile and Validate Work Items | Complete | TC-1602 |
+| [TC-1604](task-1604-link-and-analyze-work-items.md) | Link and Analyze Work Items | Ready | TC-1603 |
 | [TC-1605](task-1605-generate-derived-work-item-views.md) | Generate Derived Work Item Views | Planned | TC-1604 |
 | [TC-1606](task-1606-dogfood-the-work-item-backlog.md) | Dogfood the Work Item Backlog | Planned | TC-1603, TC-1604, TC-1605 |
 

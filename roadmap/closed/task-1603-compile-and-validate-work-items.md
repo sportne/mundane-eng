@@ -1,6 +1,6 @@
 # Task TC-1603: Compile and Validate Work Items
 
-Status: Ready
+Status: Complete
 
 Roadmap stage: 16
 
@@ -49,6 +49,10 @@ conditional prerequisites as authored policy rather than pretend they are execut
 
 ## References
 
-- [Roadmap](0001-initial-roadmap.md)
-- [Ownership decision](../research/0037-requirement-and-assertion-ownership.md)
-- [Local imports](../specification/0014-local-artifact-imports-0.1.md)
+- [Roadmap](../0001-initial-roadmap.md)
+- [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
+- [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
+
+## Completion evidence
+
+Completed 2026-09-05. [Research 0056](../../research/0056-work-item-compiler-verification.md) records the maintained compiler, versioned serialized boundary, semantic golden, 18 JVM groups and actual native/JVM malformed-input/output checks. Linking and source migration remain separate cards.

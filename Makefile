@@ -272,3 +272,13 @@ workflow-corpus-verify: native-compile native-formatter native-plan native-verif
 	python3 experiments/0033-workflow-regressions/mutations.py
 
 verify: workflow-corpus-verify
+
+.PHONY: native-work work-verify
+native-work: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
+	$(BUILD_ROOT)/mundane-work --version
+
+work-verify: native-work
+	python3 scripts/check-work-items.py $(BUILD_ROOT)/mundane-work
+
+verify: work-verify

@@ -44,6 +44,7 @@ public final class MaintainedTestSuite {
         engineering.verification.VerificationBoundaryTest.run();
         mundanereq.cli.RecoveryVerificationTest.run();
         mundanereq.cli.SarifOutputTest.run();
-        System.out.println("Passed 17 maintained test groups.");
+        engineering.work.WorkBoundaryTest.run();
+        System.out.println("Passed 18 maintained test groups.");
     }
 }
