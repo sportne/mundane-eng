@@ -1,0 +1,54 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1701"
+kind: "task"
+title: "Define Cross-Artifact Impact Contract"
+status: "Complete"
+dependencies: []
+relations: []
+planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Design", "unlocks": "TC-1702, TC-1703, TC-1704"}
+body: |2+
+
+  ## Question
+
+  The existing tools link individual artifact domains but cannot explain a selected
+  cross-artifact change's potential review consequences.
+
+  ## Outcome
+
+  Decide the supported prospective impact questions, scope rules, directions, limits and failure contract before implementing a consumer.
+
+  ## Work
+
+  Write a versioned contract with worked positive and negative paths, explicit source ownership, exact-revision provenance and rejected alternatives. Define a deterministic bounded query and derived report interface.
+
+  ## Acceptance evidence
+
+  The contract defines every traversable relationship, ambiguous and missing scope behavior, cycle handling, result ordering, output completeness and independent versioning. Worked cases explain both inclusion and exclusion.
+
+  ## Out of scope
+
+  New source languages, automatic status changes, approval or satisfaction claims,
+  source diffs, resource/code-symbol analysis and a universal metamodel.
+
+  ## Compatibility and affected components
+
+  Existing source and compiled contracts remain unchanged. A separate experimental
+  impact contract owns integration and output. Likely components are serialized domain
+  validation, a new impact consumer, version declarations, CLI tests and documentation.
+  Human-authored IDs retain identity; SHA-256 records selected exact revisions only.
+
+  ## Completion decision
+
+  Proceed only when the predecessor contract resolves scope and traversal meaning.
+  Stop or revise if a relationship needs inferred domain facts, silently merged
+  revisions, unbounded traversal or an unsupported claim about correctness. Each card
+  supplies evidence for its own outcome before dependent work starts.
+
+  ## References
+
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Task workflow](../0002-task-card-index.md)
+
+  ## Completion evidence
+
+  Adopted [impact contract](../../specification/0023-cross-artifact-impact-0.1.md) records scope resolution, six directional rules, worked inclusions/exclusions, graph/query bounds, output and failure contracts, and rejected generic traversal. Existing source formats and IDs remain authoritative. Backlog compilation, dependency analysis, documentation links and git diff --check passed.

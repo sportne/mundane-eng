@@ -39,6 +39,8 @@ also apply. Research and experiments supply rationale, not overriding syntax.
 | [Requirement semantic output 0.2](0021-requirement-semantic-output-0.2.md) | Requirement output 0.2 |
 | [Attribute-aware linking and verification output 0.2](0022-attribute-linking-and-analysis-0.2.md) | Attribute-aware linking and verification output 0.2 |
 
+| [Cross-artifact impact analysis 0.1](0023-cross-artifact-impact-0.1.md) | Scoped prospective impact queries and derived reports |
+
 ## Authority boundaries
 
 - The selected source specification controls syntax, validity and semantic values.

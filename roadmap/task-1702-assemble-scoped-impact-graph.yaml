@@ -1,0 +1,50 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1702"
+kind: "task"
+title: "Assemble Scoped Impact Graph"
+status: "Planned"
+dependencies: ["TC-1701"]
+relations: []
+planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1703"}
+body: |2+
+
+  ## Question
+
+  The existing tools link individual artifact domains but cannot explain a selected
+  cross-artifact change's potential review consequences.
+
+  ## Outcome
+
+  Connect existing compiled requirements, plans and work items without conflating scopes or revisions.
+
+  ## Work
+
+  Validate explicit compiled imports and pins; assemble typed nodes and directional edges with declaration locations. Reuse domain validation and reject dangling references, malformed snapshots and import build cycles.
+
+  ## Acceptance evidence
+
+  Behavioral tests demonstrate scope isolation, current/baseline coverage, dependencies, source coordinates, invalid imports and bounded cycles. No source parser is required by the consumer.
+
+  ## Out of scope
+
+  New source languages, automatic status changes, approval or satisfaction claims,
+  source diffs, resource/code-symbol analysis and a universal metamodel.
+
+  ## Compatibility and affected components
+
+  Existing source and compiled contracts remain unchanged. A separate experimental
+  impact contract owns integration and output. Likely components are serialized domain
+  validation, a new impact consumer, version declarations, CLI tests and documentation.
+  Human-authored IDs retain identity; SHA-256 records selected exact revisions only.
+
+  ## Completion decision
+
+  Proceed only when the predecessor contract resolves scope and traversal meaning.
+  Stop or revise if a relationship needs inferred domain facts, silently merged
+  revisions, unbounded traversal or an unsupported claim about correctness. Each card
+  supplies evidence for its own outcome before dependent work starts.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Task workflow](0002-task-card-index.md)

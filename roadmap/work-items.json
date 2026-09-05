@@ -80,7 +80,12 @@
     "roadmap/closed/task-1308-verify-and-document-project-attribute-workflows.yaml",
     "roadmap/closed/task-1607-specify-yaml-work-items.yaml",
     "roadmap/closed/task-1608-compile-yaml-work-items.yaml",
-    "roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml"
+    "roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml",
+    "roadmap/closed/task-1701-define-cross-artifact-impact-contract.yaml",
+    "roadmap/task-1702-assemble-scoped-impact-graph.yaml",
+    "roadmap/task-1703-query-explained-cross-artifact-impact.yaml",
+    "roadmap/task-1704-render-source-linked-impact-reports.yaml",
+    "roadmap/task-1705-verify-and-document-impact-workflows.yaml"
   ],
   "format": "mundane-work-set-0.2",
   "source": "mundane-work-yaml-0.2"

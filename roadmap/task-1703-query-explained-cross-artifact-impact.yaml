@@ -1,0 +1,50 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1703"
+kind: "task"
+title: "Query Explained Cross-Artifact Impact"
+status: "Planned"
+dependencies: ["TC-1702"]
+relations: []
+planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1704, TC-1705"}
+body: |2+
+
+  ## Question
+
+  The existing tools link individual artifact domains but cannot explain a selected
+  cross-artifact change's potential review consequences.
+
+  ## Outcome
+
+  Answer which selected artifacts might need review when a named artifact changes, and explain each answer.
+
+  ## Work
+
+  Implement the versioned CLI and deterministic breadth-first query with explicit depth bound, shortest explanatory paths, snapshot provenance, diagnostics and output failure handling.
+
+  ## Acceptance evidence
+
+  CLI checks cover deterministic paths, cycles, truncation, unknown seeds, invalid input, missing files, changed reads and closed or partial output. JVM and native interfaces agree.
+
+  ## Out of scope
+
+  New source languages, automatic status changes, approval or satisfaction claims,
+  source diffs, resource/code-symbol analysis and a universal metamodel.
+
+  ## Compatibility and affected components
+
+  Existing source and compiled contracts remain unchanged. A separate experimental
+  impact contract owns integration and output. Likely components are serialized domain
+  validation, a new impact consumer, version declarations, CLI tests and documentation.
+  Human-authored IDs retain identity; SHA-256 records selected exact revisions only.
+
+  ## Completion decision
+
+  Proceed only when the predecessor contract resolves scope and traversal meaning.
+  Stop or revise if a relationship needs inferred domain facts, silently merged
+  revisions, unbounded traversal or an unsupported claim about correctness. Each card
+  supplies evidence for its own outcome before dependent work starts.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Task workflow](0002-task-card-index.md)

@@ -39,6 +39,14 @@ These capabilities establish bounded workflows. They do not establish executed
 verification, evidence adequacy, safety approval or requirement satisfaction.
 Historical research and completed cards retain their original scope and evidence.
 
+## Selected impact-analysis batch
+
+TC-1701 defines the [impact contract](../specification/0023-cross-artifact-impact-0.1.md).
+TC-1702 assembles the scoped graph; TC-1703 queries explained paths; TC-1704 renders
+source-linked reports; TC-1705 verifies and documents the complete workflow.
+The dependency order is TC-1701 → TC-1702 → TC-1703 → TC-1704 → TC-1705.
+Examples and adversarial case preparation can proceed after the contract decision.
+
 ## Conditional backlog
 
 | Card | Condition and decision enabled |
@@ -57,8 +65,6 @@ Select a concrete workflow before turning a candidate into implementation work:
 
 - Editor file/schema association, inline diagnostics, reference navigation, formatter
   integration and separate attribute completion/hover capabilities.
-- Cross-artifact impact questions with explicit traversal rules and source-linked
-  explanations; graph reachability alone must not imply invalidity or satisfaction.
 - Unicode confusable/invisible-character diagnostics with explicit source rules.
 - Removal of repeated decoding/parsing where measurements show a correctness or
   performance benefit, supported by behavioral regression tests.
