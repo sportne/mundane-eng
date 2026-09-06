@@ -33,11 +33,19 @@ def verify(archive):
         assert top==f"mundane-editor-{expected['version']}-linux-x86_64"
         assert tar.getmember(top+'/bin/mundane-editor').mode==0o755
         assert 'LICENSES/SnakeYAML-Engine-LICENSE.txt' in files
+        assert files['LICENSES/YAML-DEPENDENCY.md']==(ROOT/'dependencies/README.md').read_bytes()
         assert any(n.startswith('LICENSES/GraalVM-JDK/') for n in files)
     return top
 
 if __name__=='__main__':
-    graal=Path(sys.argv[1]);meta=package.metadata()
+    meta=package.metadata()
+    if sys.argv[1:2] == ['--extract']:
+        archive=ROOT/f"build/editor-package/mundane-editor-{meta['version']}-linux-x86_64.tar.gz"
+        top=verify(archive); destination=Path(sys.argv[2]);destination.mkdir(parents=True,exist_ok=True)
+        if any(destination.iterdir()):raise ValueError('extraction destination must be empty')
+        with tarfile.open(archive) as tar:tar.extractall(destination,filter='data')
+        print(destination/top);raise SystemExit(0)
+    graal=Path(sys.argv[1])
     archive=ROOT/f"build/editor-package/mundane-editor-{meta['version']}-linux-x86_64.tar.gz"
     verify(archive)
     bridge=ROOT/'build/maintained/mundane-editor';vsix=ROOT/f"build/mundane-requirements-{meta['version']}.vsix"
@@ -59,6 +67,9 @@ if __name__=='__main__':
         try:package.inspect_inputs(bridge,vsix,meta,system='unsupported')
         except ValueError:pass
         else:raise AssertionError('unsupported platform accepted')
+        try:package.inspect_inputs(bridge,vsix,dict(meta,version='0.0.0'))
+        except ValueError:pass
+        else:raise AssertionError('mismatched bridge build accepted')
         corrupt=base/archive.name;shutil.copy2(archive,corrupt);shutil.copy2(archive.with_name(archive.name+'.sha256'),corrupt.with_name(corrupt.name+'.sha256'))
         with corrupt.open('ab') as stream:stream.write(b'changed')
         try:verify(corrupt)

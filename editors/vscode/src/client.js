@@ -100,7 +100,7 @@ function invoke(executable, request, signal) {
         finish(null, result);
       } catch (error) { finish(error); }
     });
-    child.stdin.end(bytes);
+    child.once('spawn', () => { if (!settled) child.stdin.end(bytes); });
   });
 }
 module.exports = { project, snapshot, invoke, relative, PROTOCOL };

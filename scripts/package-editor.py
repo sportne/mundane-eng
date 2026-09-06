@@ -72,6 +72,7 @@ def assemble(bridge, vsix, graal, output):
         shutil.copy2(ROOT/'distribution/editor-bundle.md',stage/'README.md')
         shutil.copy2(ROOT/'LICENSE',stage/'LICENSES/mundanereq-BSD-3-Clause.txt')
         shutil.copy2(ROOT/'dependencies/SnakeYAML-Engine-LICENSE.txt',stage/'LICENSES/SnakeYAML-Engine-LICENSE.txt')
+        shutil.copy2(ROOT/'dependencies/README.md',stage/'LICENSES/YAML-DEPENDENCY.md')
         shutil.copy2(ROOT/'distribution/THIRD-PARTY-NOTICES.md',stage/'THIRD-PARTY-NOTICES.md')
         shutil.copy2(graal/'LICENSE_NATIVEIMAGE.txt',stage/'LICENSES/GraalVM-Native-Image.txt')
         shutil.copytree(graal/'legal',stage/'LICENSES/GraalVM-JDK')

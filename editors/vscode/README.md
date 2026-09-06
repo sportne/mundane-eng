@@ -74,3 +74,8 @@ Editor package, bridge and protocol declarations are maintained in
 `python3 scripts/editor-versions.py --write` from the repository root. Normal
 verification checks the generated metadata, package and lockfile without updating
 them silently. `mundane-editor --version` reports the paired build metadata.
+
+`make installed-editor-verify` additionally installs the bundle in an isolated
+profile, checks configuration failure/recovery, and reruns the provider workflow
+against the installed extension and extracted bridge. `make verify` includes both
+the development and installed-package checks.

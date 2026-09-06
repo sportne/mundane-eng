@@ -61,3 +61,12 @@ from the paired native bridge and VSIX. It checks metadata and the glibc ceiling
 includes runtime notices, inventories checksums, rejects mismatched inputs and
 reassembles identical inputs to check determinism. Follow the
 [bundle guide](editor-bundle.md) for installation.
+
+`make verify` also runs `installed-editor-verify`: it verifies/extracts the bundle,
+installs its VSIX in an isolated extensions directory and profile, and launches an
+empty test harness alongside the installed extension. The target editor is loaded
+from the installed path and uses only the extracted bridge. Tests cover missing
+executables, incompatible protocol responses, bad selections, recovery and all
+providers. Local WSL runs suppress the CLI's interactive Linux-install suggestion
+only for this disposable test profile; the test never installs into the user's
+normal VS Code profile. The downloaded test build is shared through `build/`.
