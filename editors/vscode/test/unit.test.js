@@ -56,3 +56,17 @@ test('active processes can be cancelled and oversized output is rejected', async
     await assert.rejects(invoke(helper, {}), /exceeds/);
   } finally { await fs.rm(root,{recursive:true,force:true}); }
 });
+test('project requests share work, remain bounded and reject results after invalidation', async () => {
+  const {Project} = require('../src/project');
+  let reads=0,calls=0;const published=[];
+  const project = new Project(async()=>{reads++;return {files:[]};},async request=>{calls++;return request;},s=>published.push(s),e=>{throw e;});
+  const [a,b] = await Promise.all([project.get(),project.get()]);
+  assert.equal(a,b);assert.equal(reads,1);assert.equal(calls,1);
+  for(let line=1;line<=10;line++) await project.get({line});
+  assert.ok(project.entries.size<=4);assert.equal(reads,1);
+  project.invalidate();await project.get();assert.equal(reads,2);
+  let release;const slow = new Project(async()=>({}),()=>new Promise(resolve=>release=resolve),s=>published.push(s),()=>{});
+  const pending=slow.get();await new Promise(resolve=>setImmediate(resolve));const before=published.length;
+  slow.invalidate();release({valid:true});assert.equal(await pending,null);assert.equal(published.length,before);
+  project.dispose();assert.equal(await project.get(),null);
+});

@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-1903
 kind: task
 title: Reduce Redundant Editor Project Validation
-status: Planned
+status: Complete
 dependencies:
 - TC-1902
 relations: []
@@ -43,5 +43,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor contract](../specification/0024-vscode-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor contract](../../specification/0024-vscode-editor-0.1.md)
+
+  ## Completion evidence
+
+  The actual two-folder Extension Host scenario measured repeated-query launches falling from 12 to 1, unrelated-edit launches from 2 to 0, and both concurrent folders returning results instead of only one. The scenario is now in make verify. Six Node tests cover bounded request sharing, invalidation and late results; existing actual editor provider/unsaved-schema tests passed. research/0071-editor-request-traffic.md records the bounded evidence.

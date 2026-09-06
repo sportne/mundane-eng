@@ -51,7 +51,7 @@
     "roadmap/task-1104-establish-monorepo-component-layout.yaml",
     "roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml",
     "roadmap/closed/task-1902-centralize-editor-version-and-protocol-declarations.yaml",
-    "roadmap/task-1903-reduce-redundant-editor-project-validation.yaml",
+    "roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml",
     "roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml",
     "roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml"
   ],

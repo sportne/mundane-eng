@@ -20,3 +20,4 @@ site/
 # VS Code extension dependencies
 editors/vscode/node_modules/
 editors/vscode/.vscode-test/
+.vscode-test/

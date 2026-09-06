@@ -182,4 +182,4 @@ native-editor: test
 	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-editor) mundanereq.editor.EditorMain
 editor-verify: native-editor
 	python3 scripts/check-editor-bridge.py
-	cd editors/vscode && npm ci && npm run test:unit && xvfb-run -a npm test && npm run package
+	cd editors/vscode && npm ci && npm run test:unit && xvfb-run -a npm test && xvfb-run -a node test/traffic-run.js && npm run package

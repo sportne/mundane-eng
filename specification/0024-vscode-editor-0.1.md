@@ -56,8 +56,10 @@ describes building, installing and exercising a local VSIX.
 
 ## Live diagnostics
 
-A 200 ms debounce groups edits. Every change immediately clears previous diagnostics
-and aborts pending requests. A generation check rejects responses overtaken by
+A 200 ms debounce groups relevant edits within each project. A selected source,
+selection or declaration change clears that project's diagnostics and aborts its
+pending requests. Unrelated files leave results intact. A per-project generation
+check rejects responses overtaken by
 buffer, selection, declaration, configuration or selected-disk changes. Project
 validation overlays all open buffers, so references and schemas are checked together.
 Configuration, UTF-8, resource or process failures mark the selection and are logged
@@ -119,3 +121,15 @@ with `python3 scripts/editor-versions.py --write`; ordinary verification fails o
 stale metadata. `mundane-editor --version` emits the three declarations as JSON.
 Protocol mismatches fail explicitly rather than accepting a differently shaped
 response. Adding this metadata command changes no requirement source semantics.
+
+## Project request reuse
+
+Each configured folder retains one read-only snapshot per generation and at most
+four response entries, including pending requests. Identical concurrent requests
+share a promise; repeated cursor queries reuse their result. Different folders do
+not cancel each other. Eviction aborts a pending evicted request; invalidation or
+disposal aborts every pending request for that project. Selection, schema, selected
+source, relevant settings, opening/closing selected buffers and folder removal
+participate in invalidation. Explicit validation deliberately refreshes all selected
+projects. A cancelled provider cannot apply its result even when another consumer
+continues using a shared request. No cache is written to disk.
