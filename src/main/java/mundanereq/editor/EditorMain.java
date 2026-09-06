@@ -59,7 +59,10 @@ public final class EditorMain {
             if (!paths.add(source.file())) throw new IllegalArgumentException("schema is also selected as requirements");
             schema = AttributeSchema.parse(source);
         }
-        return Json.object("protocol", PROTOCOL, "files", sources.size());
+        var result = Interpreter.interpretSources(sources, format, schema);
+        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "diagnostics",
+                result.diagnostics().stream().map(d -> Json.object("path", d.file(),
+                        "line", d.line(), "column", d.column(), "code", d.code(), "message", d.message())).toList());
     }
 
     private static Interpreter.Source source(Object value, int maximum) {

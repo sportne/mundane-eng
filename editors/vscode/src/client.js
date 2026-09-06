@@ -52,8 +52,9 @@ async function read(root, name, documents, maximum) {
   if (Buffer.byteLength(text) > maximum) throw new Error('Buffer exceeds limit');
   return { path: name, text };
 }
-async function snapshot(root, selection, documents) {
+async function snapshot(root, selection, documents, selected = () => {}) {
   const config = project((await read(root, selection, documents, 64 * 1024)).text);
+  selected([...config.files, ...(config.attributeSchema ? [config.attributeSchema] : [])]);
   const files = []; let total = 0;
   for (const name of config.files) {
     const file = await read(root, name, documents, 8 * 1024 * 1024);

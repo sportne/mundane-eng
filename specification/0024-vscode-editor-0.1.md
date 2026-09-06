@@ -21,7 +21,9 @@ The native `mundane-editor` executable accepts a single JSON request on stdin:
 `protocol: "mundane-editor-0.1"`, `source`, `files: [{path,text}]`, and
 `schema: {path,text}` or null. Paths are normalized folder-relative paths. Buffer
 snapshots are authoritative for that request; the bridge never reads or writes
-project files. Initial responses echo `protocol` and the selected file count.
+project files. Responses echo `protocol`, `valid` and `diagnostics` containing path, line, column,
+code and message. Semantic errors use the interpreter's stable rules and point
+locations. VS Code displays error markers without inventing token end ranges.
 Invalid requests exit 2 with an `editor-request` stderr message; output delivery
 failures also exit 2. Semantic diagnostics are successful protocol responses.
 
@@ -51,3 +53,13 @@ source, and no behavior is inferred for work items, safety artifacts or BOMs.
 Actual VS Code Extension Host checks cover activation and the bridge; owning cards
 add tests for their providers. The [extension guide](../editors/vscode/README.md)
 describes building, installing and exercising a local VSIX.
+
+## Live diagnostics
+
+A 200 ms debounce groups edits. Every change immediately clears previous diagnostics
+and aborts pending requests. A generation check rejects responses overtaken by
+buffer, selection, declaration, configuration or selected-disk changes. Project
+validation overlays all open buffers, so references and schemas are checked together.
+Configuration, UTF-8, resource or process failures mark the selection and are logged
+in the output channel. No request writes to disk. Unselected YAML files receive no
+Mundane diagnostic or authoring operation.

@@ -15,3 +15,8 @@ test('process errors and cancellation settle without hanging', async () => {
   await assert.rejects(invoke('/bin/cat', {}, abort.signal), /Cancelled/);
   await assert.rejects(invoke('/bin/cat', {}), /Unsupported/);
 });
+test('source code-point coordinates convert to UTF-16', () => {
+  const { position } = require('../src/positions');
+  assert.deepEqual(position('a😀b\r\nnext\n', 1, 3), { line: 0, character: 3 });
+  assert.deepEqual(position('a😀b\r\nnext\n', 2, 2), { line: 1, character: 1 });
+});

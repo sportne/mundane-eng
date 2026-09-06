@@ -48,3 +48,8 @@ Mundane Requirements output channel.
 See the [editor contract](../../specification/0024-vscode-editor-0.1.md) for
 snapshot limits, coordinates and supported behavior. Generated results are never
 written back as authoring source.
+
+Syntax, semantic, reference and declaration diagnostics refresh after a 200 ms
+pause in editing. Results from older snapshots are discarded, and repaired markers
+clear immediately. Open declaration and selection buffers participate in validation.
+Errors have the same rule identifiers as the command-line validator.

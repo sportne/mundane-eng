@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1802"
-kind: "task"
-title: "Show Inline YAML Diagnostics"
-status: "Planned"
-dependencies: ["TC-1801"]
+format: mundane-work-yaml-0.2
+id: TC-1802
+kind: task
+title: Show Inline YAML Diagnostics
+status: Complete
+dependencies: [TC-1801]
 relations: []
-planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
-body: |2+
+planning: {stage: '18', type: Implementation, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
 
   ## Outcome
 
@@ -31,5 +32,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Source rules](../specification/0010-requirements-yaml-0.3.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  Maintained Java tests and native editor build passed. Node tests verify coordinates and process failures. Actual VS Code 1.109.5 Extension Host tests passed for unsaved syntax/reference errors, stale requests, repaired diagnostics, unsaved declaration edits, enum rejection, schema diagnostics and unchanged disk bytes. Snapshot generation and cancellation prevent publishing older results.

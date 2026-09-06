@@ -52,10 +52,10 @@ Items: 49.
 | [TC-1705](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L2) | task | Verify and Document Impact Workflows | Complete | TC-1703, TC-1704 | — |
 | [TC-1800](./roadmap/closed/task-1800-establish-yaml-only-requirement-tooling.yaml#L2) | task | Establish YAML-Only Requirement Tooling | Complete | — | — |
 | [TC-1801](./roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml#L2) | task | Establish VS Code Extension Foundation | Complete | TC-1800 | — |
-| [TC-1802](./roadmap/task-1802-show-inline-yaml-diagnostics.yaml#L2) | task | Show Inline YAML Diagnostics | Planned | TC-1801 | — |
-| [TC-1803](./roadmap/task-1803-navigate-requirement-definitions.yaml#L2) | task | Navigate Requirement Definitions | Planned | TC-1802 | TC-1802 |
-| [TC-1804](./roadmap/task-1804-integrate-requirement-formatting.yaml#L2) | task | Integrate Requirement Formatting | Planned | TC-1802 | TC-1802 |
-| [TC-1805](./roadmap/task-1805-complete-project-attributes.yaml#L2) | task | Complete Project Attributes | Planned | TC-1802 | TC-1802 |
+| [TC-1802](./roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml#L2) | task | Show Inline YAML Diagnostics | Complete | TC-1801 | — |
+| [TC-1803](./roadmap/task-1803-navigate-requirement-definitions.yaml#L2) | task | Navigate Requirement Definitions | Planned | TC-1802 | — |
+| [TC-1804](./roadmap/task-1804-integrate-requirement-formatting.yaml#L2) | task | Integrate Requirement Formatting | Planned | TC-1802 | — |
+| [TC-1805](./roadmap/task-1805-complete-project-attributes.yaml#L2) | task | Complete Project Attributes | Planned | TC-1802 | — |
 | [TC-1806](./roadmap/task-1806-show-attribute-hover-documentation.yaml#L2) | task | Show Attribute Hover Documentation | Planned | TC-1805 | TC-1805 |
 
 ## Planning qualifications
@@ -170,7 +170,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1705 | depends-on | work:work-item:TC-1703 | [work:roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L1) |
 | work:work-item:TC-1705 | depends-on | work:work-item:TC-1704 | [work:roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L1) |
 | work:work-item:TC-1801 | depends-on | work:work-item:TC-1800 | [work:roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml](./roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml#L1) |
-| work:work-item:TC-1802 | depends-on | work:work-item:TC-1801 | [work:roadmap/task-1802-show-inline-yaml-diagnostics.yaml](./roadmap/task-1802-show-inline-yaml-diagnostics.yaml#L1) |
+| work:work-item:TC-1802 | depends-on | work:work-item:TC-1801 | [work:roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml](./roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml#L1) |
 | work:work-item:TC-1803 | depends-on | work:work-item:TC-1802 | [work:roadmap/task-1803-navigate-requirement-definitions.yaml](./roadmap/task-1803-navigate-requirement-definitions.yaml#L1) |
 | work:work-item:TC-1804 | depends-on | work:work-item:TC-1802 | [work:roadmap/task-1804-integrate-requirement-formatting.yaml](./roadmap/task-1804-integrate-requirement-formatting.yaml#L1) |
 | work:work-item:TC-1805 | depends-on | work:work-item:TC-1802 | [work:roadmap/task-1805-complete-project-attributes.yaml](./roadmap/task-1805-complete-project-attributes.yaml#L1) |
@@ -213,15 +213,15 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-1703: [work:work-item:TC-1704 (depends-on)](./roadmap/closed/task-1704-render-source-linked-impact-reports.yaml#L1), [work:work-item:TC-1705 (depends-on)](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L1)
 - work:work-item:TC-1704: [work:work-item:TC-1705 (depends-on)](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L1)
 - work:work-item:TC-1800: [work:work-item:TC-1801 (depends-on)](./roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml#L1)
-- work:work-item:TC-1801: [work:work-item:TC-1802 (depends-on)](./roadmap/task-1802-show-inline-yaml-diagnostics.yaml#L1)
+- work:work-item:TC-1801: [work:work-item:TC-1802 (depends-on)](./roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml#L1)
 - work:work-item:TC-1802: [work:work-item:TC-1803 (depends-on)](./roadmap/task-1803-navigate-requirement-definitions.yaml#L1), [work:work-item:TC-1804 (depends-on)](./roadmap/task-1804-integrate-requirement-formatting.yaml#L1), [work:work-item:TC-1805 (depends-on)](./roadmap/task-1805-complete-project-attributes.yaml#L1)
 - work:work-item:TC-1805: [work:work-item:TC-1806 (depends-on)](./roadmap/task-1806-show-attribute-hover-documentation.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 717b450d71a8084e70facaf29aa554ebc7905cdce90ed4320f865651a8601663
+- Work artifact: build/work-backlog/items.json; SHA-256 56eaf35a7b51b5e1f8e3aa306bc845ff370778703e7395c92f4fec211d387609
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 aa40294cff80f77fadef096d16ac785f5d1134f7e33f01ccecf3d58b1667ffa0
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 2d523feae4b05d6ea0d7f2de641c45735351a192e1fa86a3d52b5d9914759bb4
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -264,9 +264,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml](./roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml#L1); SHA-256 17bde56568f937fffdd365f4572512e749505659f26dcea1dc1a89340edac97c
 - Source: [roadmap/closed/task-1800-establish-yaml-only-requirement-tooling.yaml](./roadmap/closed/task-1800-establish-yaml-only-requirement-tooling.yaml#L1); SHA-256 05bb4ee20c9f0b86377848a9bfe66a088740a8cf0285cc50a43ae0508d4a9a75
 - Source: [roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml](./roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml#L1); SHA-256 e17bcac9933ec72f5932a96e025b438784bcda8ecf6a5826eabdf4da4b23dff8
+- Source: [roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml](./roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml#L1); SHA-256 5029b894294a69e6cba22f344d0a3517e50b4f70d030249b4a25e69aa998130e
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 d2725eac0256429e43df12e0ca90854fb52e0d0a78fa708307d44f6a93e0d733
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 dd217c5584ecb076e17288616e39cc67c6ce1e45d86ed510177d7b4658e528f3
-- Source: [roadmap/task-1802-show-inline-yaml-diagnostics.yaml](./roadmap/task-1802-show-inline-yaml-diagnostics.yaml#L1); SHA-256 f2fc410f60351d7e5db5ad564c3635e5ab0aad5b3fff54a8c639dbaaa7980443
 - Source: [roadmap/task-1803-navigate-requirement-definitions.yaml](./roadmap/task-1803-navigate-requirement-definitions.yaml#L1); SHA-256 3bf7384d5aebba1dae05a8209a2be087945aa5137c42eb7d19fddc7351493e74
 - Source: [roadmap/task-1804-integrate-requirement-formatting.yaml](./roadmap/task-1804-integrate-requirement-formatting.yaml#L1); SHA-256 f3059174eb329af64d74949da36561c9539e95ff4c2f03d4be849438ea2a7265
 - Source: [roadmap/task-1805-complete-project-attributes.yaml](./roadmap/task-1805-complete-project-attributes.yaml#L1); SHA-256 2e373e007b6e644baba310aa648fcbe6c6b50cf037d08f6759d81401f126c181
