@@ -48,7 +48,9 @@ snapshot text, including non-BMP characters. Decode disk UTF-8 strictly.
 
 The interface is experimental and independently versioned. Unknown protocol IDs
 fail explicitly. No requirement source syntax is added, no generated file becomes
-source, and no behavior is inferred for work items, safety artifacts or BOMs.
+source, and other artifact editor behavior requires its own contract. The additive
+[work-item editor source](0025-work-item-editor-0.1.md) defines YAML card assistance;
+safety artifacts and BOMs have no editor interpretation.
 
 Actual VS Code Extension Host checks cover activation and the bridge; owning cards
 add tests for their providers. The [extension guide](../editors/vscode/README.md)
@@ -124,7 +126,7 @@ response. Adding this metadata command changes no requirement source semantics.
 
 ## Project request reuse
 
-Each configured folder retains one read-only snapshot per generation and at most
+Each configured artifact project in a folder retains one read-only snapshot per generation and at most
 four response entries, including pending requests. Identical concurrent requests
 share a promise; repeated cursor queries reuse their result. Different folders do
 not cancel each other. Eviction aborts a pending evicted request; invalidation or

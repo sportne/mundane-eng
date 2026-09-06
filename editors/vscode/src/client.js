@@ -69,7 +69,9 @@ async function snapshot(root, selection, documents, selected = () => {}, work = 
     // independent selection must not disable the healthy domain.
     let other;
     try { other = project((await read(root, otherSelection, documents, 64 * 1024)).text, !work); } catch (_) { /* independently diagnosed */ }
-    if (other?.files.some(name => config.files.includes(name))) throw new Error('A file is selected as both requirements and work items');
+    const ownPaths = [...config.files, ...(config.attributeSchema ? [config.attributeSchema] : [])];
+    const otherPaths = other ? [...other.files, ...(other.attributeSchema ? [other.attributeSchema] : [])] : [];
+    if (otherPaths.some(name => ownPaths.includes(name))) throw new Error('A file is selected as both requirements and work items');
   }
   const files = []; let total = 0;
   for (const name of config.files) {

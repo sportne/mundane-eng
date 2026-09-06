@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2006
 kind: task
 title: Dogfood and Verify Work-item Authoring
-status: Planned
+status: Complete
 dependencies: ["TC-2005"]
 relations: []
 planning:
@@ -45,5 +45,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  scripts/run-ci-verification.sh passed the full gate and both restored failure injections. Development and installed VS Code hosts passed the 60-card backlog, mixed domains, local providers, overlap/unselected-file checks and independent cache behavior. research/0073-work-item-editor-verification.md records checks, the corrected local npm environment and scope limits. Editor 0.1.2 packaging, checksums and installed recovery passed; setup and capability documentation are reconciled.

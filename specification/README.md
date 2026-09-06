@@ -21,5 +21,4 @@ Current contracts and evidence for the YAML engineering tools.
 - [Attribute-aware linking and verification output 0.2](0022-attribute-linking-and-analysis-0.2.md)
 - [Cross-artifact impact analysis 0.1](0023-cross-artifact-impact-0.1.md)
 - [VS Code editor contract 0.1](0024-vscode-editor-0.1.md)
-
 - [Work-item editor contract](0025-work-item-editor-0.1.md) — explicit YAML backlog snapshots and local authoring assistance.

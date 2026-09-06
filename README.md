@@ -18,12 +18,13 @@ or requirement satisfaction. Each artifact's source format is an independent cho
 | Verification planning | Independently specified TSV plans, activities and coverage assertions | [Plan compilation, scoped imports and review analysis](distribution/verification.md) |
 | Work items | YAML task/issue records, literal narrative strings and typed relationships | [Authoring and commands](distribution/work-items.md); [repository backlog](WORK-ITEMS.md) |
 | Impact analysis | Explicit compiled requirements, plans and work-item imports | [Bounded queries and explained reports](distribution/impact.md); [logger example](examples/impact/README.md) |
+| VS Code authoring | Explicit requirement and YAML work-item selections, including unsaved buffers | [Diagnostics, navigation, completion and hover](editors/vscode/README.md); [Linux bundle](distribution/editor-bundle.md) |
 | Derived reports | Compiled snapshots and explicit analysis results | [Experimental verification report](experiments/0029-verification-report/README.md); work-item views via `mundane-work view` |
 
 Compiled interfaces are versioned separately from source languages and tools.
 Attribute changes and whole-schema changes participate in conservative review
-analysis. Current development is incremental and experimental. Editor integration,
-ReqIF interchange, and additional engineering artifact domains remain future work.
+analysis. Current development is incremental and experimental. ReqIF interchange and
+additional engineering artifact domains remain future work.
 
 ## Build and try
 

@@ -1,8 +1,8 @@
-# VS Code requirements editor
+# VS Code YAML authoring
 
 VS Code 1.109 or newer is required. This workspace extension uses the same Java interpreter as the requirement commands.
-It operates on explicit YAML 0.3/0.4 projects. Other engineering artifact languages
-keep their own contracts.
+It operates on explicit requirement YAML 0.3/0.4 and work-item YAML 0.2 projects.
+Other engineering artifact languages keep their own contracts.
 
 The [Linux bundle installation guide](../../distribution/editor-bundle.md) explains
 how to install the paired VSIX and native bridge. Build that bundle with
@@ -22,8 +22,7 @@ and `npm ci && npm run package` from `editors/vscode/`.
 In VS Code settings, select `mundane.executable` as the absolute path to
 `build/maintained/mundane-editor` and `mundane.project` as a workspace-relative
 JSON project file. The compiler runs only in trusted, local workspaces. Multi-root
-workspaces configure each folder independently. An empty project setting disables
-that folder; there is no traversal or implicit file discovery.
+workspaces configure each folder independently. An empty setting disables its artifact project; there is no traversal or implicit file discovery.
 
 ```json
 {
@@ -39,7 +38,7 @@ declaration path, or null for a schema-free project. Open unsaved buffers overri
 the selected disk files. Files must already exist inside the workspace. The explicit
 manifest may also be edited without saving. Use **Mundane: Validate Selected Project**
 to exercise the configured bridge; configuration/process failures appear in the
-Mundane Requirements output channel.
+Mundane Authoring output channel.
 
 See the [editor contract](../../specification/0024-vscode-editor-0.1.md) for
 snapshot limits, coordinates and supported behavior. Generated results are never
@@ -79,3 +78,38 @@ them silently. `mundane-editor --version` reports the paired build metadata.
 profile, checks configuration failure/recovery, and reruns the provider workflow
 against the installed extension and extracted bridge. `make verify` includes both
 the development and installed-package checks.
+
+## YAML task cards and issues
+
+Set `mundane.workProject` to an existing work-item manifest. To edit this repository's
+backlog, use `"mundane.workProject": "roadmap/work-items.json"` with the repository
+root as the workspace folder. `mundane.project` may remain empty or select an
+independent requirements project. Both use the same paired `mundane.executable`.
+
+```json
+{
+  "format": "mundane-work-set-0.2",
+  "source": "mundane-work-yaml-0.2",
+  "files": ["tasks/first.yaml", "tasks/second.yaml"]
+}
+```
+
+Use ordinary `.yaml` files in YAML language mode, or `.mwork.yaml` for automatic
+Mundane Work Items mode. YAML highlighting comes from VS Code. Explicit selection
+is required in either mode; unrelated YAML receives no Mundane assistance. A file
+cannot belong to both editor domains. Select at most 128 cards of at most 1 MiB
+each; larger CLI backlogs need a smaller explicit editor manifest.
+
+Diagnostics reuse work source rules and check duplicate IDs, local missing
+prerequisites and dependency cycles across selected unsaved buffers. **Go to
+Definition** on a dependency opens its selected task ID. **Trigger Suggest** offers
+kind-specific statuses, relation roles and local task IDs in dependencies or
+work-scoped work-item relation targets. Simple incomplete values are supported when
+the surrounding YAML still parses. Insertions are quoted. Hover explains those
+fields and shows local target titles/statuses as literal text. Body strings and
+comments stay opaque. Work-item formatting is not provided.
+
+These checks do not resolve imported targets, check evidence files or certify that
+work is complete. Continue using `mundane-work analyze` for full explicit import
+and resource analysis. Status remains an authored decision. See the
+[work-item editor contract](../../specification/0025-work-item-editor-0.1.md).

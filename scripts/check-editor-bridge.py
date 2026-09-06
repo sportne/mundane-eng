@@ -34,3 +34,21 @@ for command in commands:
                                 stderr=subprocess.PIPE, timeout=30)
         assert failed.returncode == 2 and b'output unavailable' in failed.stderr
 print('PASS editor JVM/native request parity, incomplete semantics, rejected protocol/cursor/selection and failed output delivery')
+
+selection = json.loads((ROOT / 'roadmap/work-items.json').read_text())
+work = {'protocol': expected['protocol'], 'source': 'mundane-work-yaml-0.2', 'schema': None,
+        'files': [{'path': name, 'text': (ROOT / name).read_text()} for name in selection['files']]}
+for case in [work, dict(work, schema={'path':'schema.json','text':'{}'}), dict(work, files=[]),
+             dict(work, cursor={'path':work['files'][0]['path'], 'line':6, 'column':10})]:
+    results = [subprocess.run(command, input=json.dumps(case).encode(), capture_output=True, timeout=30) for command in commands]
+    assert (results[0].returncode,results[0].stdout,results[0].stderr) == (results[1].returncode,results[1].stdout,results[1].stderr)
+    if case.get('schema') is not None or not case['files']:
+        assert results[0].returncode == 2 and not results[0].stdout
+    else:
+        result=json.loads(results[0].stdout)
+        assert result['valid'] and len(result['definitions']) == len(work['files'])
+for command in commands:
+    with open('/dev/full','wb') as unavailable:
+        result=subprocess.run(command,input=json.dumps(work).encode(),stdout=unavailable,stderr=subprocess.PIPE,timeout=30)
+        assert result.returncode == 2 and b'output unavailable' in result.stderr
+print('PASS work editor JVM/native parity, full repository backlog, invalid requests and output failure')

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Editor bundle 0.1.2 adds explicit YAML work-item selection, unsaved diagnostics,
+  local dependency navigation, status/relation/ID completion and literal hover.
+  Requirements and task cards can be edited together; their source and compiled
+  contracts are unchanged. Use the matching bridge for the additive work source.
+
 - Removed the custom requirements language (source 0.1/0.2), its parser, formatter
   branch, source fixtures, migration command and ReqIF prototype. YAML 0.3 is now
   the default; YAML 0.4 supports project-defined attributes. The `custom-0.2`

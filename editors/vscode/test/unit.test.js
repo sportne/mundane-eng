@@ -77,3 +77,17 @@ test('work selections are explicit, bounded and independent of requirement schem
     assert.throws(()=>project(JSON.stringify({...valid,...change}),true));
   }
 });
+test('domain overlap includes requirement declarations and clears after independent selection repair', async () => {
+  const fs=require('node:fs/promises'), os=require('node:os'), path=require('node:path');
+  const {snapshot}=require('../src/client');
+  const root=await fs.mkdtemp(path.join(os.tmpdir(),'mundane-domain-'));
+  try {
+    await fs.writeFile(path.join(root,'req.json'),JSON.stringify({format:'mundane-editor-project-0.1',source:'yaml-0.4',files:['req.yaml'],attributeSchema:'shared.json'}));
+    await fs.writeFile(path.join(root,'work.json'),JSON.stringify({format:'mundane-work-set-0.2',source:'mundane-work-yaml-0.2',files:['shared.json']}));
+    await fs.writeFile(path.join(root,'shared.json'),'{}');await fs.writeFile(path.join(root,'req.yaml'),'source');
+    await assert.rejects(snapshot(root,'req.json',[],undefined,false,'work.json'),/both/);
+    await assert.rejects(snapshot(root,'work.json',[],undefined,true,'req.json'),/both/);
+    await fs.writeFile(path.join(root,'work.json'),'{');
+    assert.equal((await snapshot(root,'req.json',[],undefined,false,'work.json')).schema.path,'shared.json');
+  } finally {await fs.rm(root,{recursive:true,force:true});}
+});

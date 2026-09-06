@@ -70,3 +70,9 @@ executables, incompatible protocol responses, bad selections, recovery and all
 providers. Local WSL runs suppress the CLI's interactive Linux-install suggestion
 only for this disposable test profile; the test never installs into the user's
 normal VS Code profile. The downloaded test build is shared through `build/`.
+
+Both editor host workflows include requirements and YAML work items together,
+local task navigation/assistance, selection recovery and the copied repository
+backlog. Bridge parity checks validate the same backlog through JVM and native
+processes. Work-item editor analysis deliberately stops at local prerequisites;
+full imports and resource checks remain owned by the work-item CLI.

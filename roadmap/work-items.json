@@ -57,9 +57,9 @@
     "roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml",
     "roadmap/closed/task-2004-navigate-local-task-dependencies.yaml",
     "roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml",
+    "roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml",
     "roadmap/task-0807-test-authored-views-and-specifications.yaml",
-    "roadmap/task-1104-establish-monorepo-component-layout.yaml",
-    "roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml"
+    "roadmap/task-1104-establish-monorepo-component-layout.yaml"
   ],
   "format": "mundane-work-set-0.2",
   "source": "mundane-work-yaml-0.2"

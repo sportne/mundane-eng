@@ -86,3 +86,10 @@ Supported typed targets remain work items, requirements and verification plans/
 activities. Evidence resources are local file snapshots, not validated code symbols
 or approved claims. Source roots are explicit. Remote synchronization, custom
 lifecycles and other artifact source formats need their own justified decisions.
+
+## VS Code authoring
+
+The [YAML editor](../editors/vscode/README.md#yaml-task-cards-and-issues) uses an explicit
+work manifest for live diagnostics, local dependency navigation, status/relation/ID
+completion and literal hover help. Full imports and evidence analysis remain CLI
+operations. For the repository backlog, select `roadmap/work-items.json`.

@@ -67,7 +67,7 @@ Items: 60.
 | [TC-2003](./roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml#L2) | task | Diagnose Work Items in VS Code | Complete | TC-2002 | — |
 | [TC-2004](./roadmap/closed/task-2004-navigate-local-task-dependencies.yaml#L2) | task | Navigate Local Task Dependencies | Complete | TC-2003 | — |
 | [TC-2005](./roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml#L2) | task | Complete and Describe Work-item Fields | Complete | TC-2004 | — |
-| [TC-2006](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L2) | task | Dogfood and Verify Work-item Authoring | Planned | TC-2005 | — |
+| [TC-2006](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L2) | task | Dogfood and Verify Work-item Authoring | Complete | TC-2005 | — |
 
 ## Planning qualifications
 
@@ -206,7 +206,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2003 | depends-on | work:work-item:TC-2002 | [work:roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml](./roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml#L1) |
 | work:work-item:TC-2004 | depends-on | work:work-item:TC-2003 | [work:roadmap/closed/task-2004-navigate-local-task-dependencies.yaml](./roadmap/closed/task-2004-navigate-local-task-dependencies.yaml#L1) |
 | work:work-item:TC-2005 | depends-on | work:work-item:TC-2004 | [work:roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml](./roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml#L1) |
-| work:work-item:TC-2006 | depends-on | work:work-item:TC-2005 | [work:roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1) |
+| work:work-item:TC-2006 | depends-on | work:work-item:TC-2005 | [work:roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1) |
 
 ## Reverse navigation
 
@@ -256,13 +256,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2002: [work:work-item:TC-2003 (depends-on)](./roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml#L1)
 - work:work-item:TC-2003: [work:work-item:TC-2004 (depends-on)](./roadmap/closed/task-2004-navigate-local-task-dependencies.yaml#L1)
 - work:work-item:TC-2004: [work:work-item:TC-2005 (depends-on)](./roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml#L1)
-- work:work-item:TC-2005: [work:work-item:TC-2006 (depends-on)](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1)
+- work:work-item:TC-2005: [work:work-item:TC-2006 (depends-on)](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 0030cd10d1f2b567ded31b2e345cb5c0b2c629bfc64ec0c1cdfd28acc05dfca1
+- Work artifact: build/work-backlog/items.json; SHA-256 a183102edcd7d92bd9048b0f3353fe9c8d1291ea26f60e4cffbb2d9cc8fd423a
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 a327b38cec45b2e2faec658abc499f810cc8d020d0b61a2e51b0ca9e9b572cd1
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 1a32720d127d0d26860465f8a19f880d3bab1d40db06818ab22621d329d64642
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -320,9 +320,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml](./roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml#L1); SHA-256 77cbe7a4bd0dc4e20d631cac90642ed511e1342018493c8c4cd307ab42411fc5
 - Source: [roadmap/closed/task-2004-navigate-local-task-dependencies.yaml](./roadmap/closed/task-2004-navigate-local-task-dependencies.yaml#L1); SHA-256 5ac76375c32f8bb80de435e0deb6b4cbbbe1bbeaed4673c1b9d70bb4d41995f4
 - Source: [roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml](./roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml#L1); SHA-256 1969e341534f91dfb53c95b81afed6afc65974bba82c7df1e962de000eeba434
+- Source: [roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1); SHA-256 6900e7a9ffc699912bb1f3277e09f1d6821b24e52165584d498bceb6f0bb8edd
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
-- Source: [roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1); SHA-256 7abd1f214209cc5b85e9f0d01d49b6880fc66aa018d99e098927410ad0c877f2
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff926fb0db9a44ea3519adb77085d021b6873e855816a87e4ffcff0c7615be3c
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 e783bf3e39ad7a00e1ab80a1de931b7a1fc3aa3baef14ecad4699aca53467bfc
