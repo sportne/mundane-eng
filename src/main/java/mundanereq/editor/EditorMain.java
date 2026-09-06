@@ -43,10 +43,11 @@ public final class EditorMain {
     public static Map<String, Object> analyze(Object value) {
         Map<String, Object> request = object(value);
         if (!request.keySet().containsAll(java.util.Set.of("protocol", "source", "files", "schema"))
-                || !java.util.Set.of("protocol", "source", "files", "schema", "cursor").containsAll(request.keySet()))
+                || !java.util.Set.of("protocol", "source", "files", "schema", "cursor", "imports").containsAll(request.keySet()))
             throw new IllegalArgumentException("unexpected snapshot fields");
         if (!PROTOCOL.equals(request.get("protocol"))) throw new IllegalArgumentException("unsupported editor protocol");
         if (mundanereq.Versions.WORK_SOURCE.equals(request.get("source"))) return work(request);
+        if(request.containsKey("imports"))throw new IllegalArgumentException("imports require work-item source");
         SourceFormat format = switch (string(request.get("source"))) {
             case "yaml-0.3" -> SourceFormat.YAML_03;
             case "yaml-0.4" -> SourceFormat.YAML_04;
@@ -107,6 +108,13 @@ public final class EditorMain {
             coordinate(cursor.get("line"));coordinate(cursor.get("column"));
             if(sources.stream().noneMatch(s->s.path().equals(cursor.get("path"))))throw new IllegalArgumentException("cursor file is not selected");
         }
+        EditorImports.Selection imports=null;var importDiagnostics=new ArrayList<Map<String,Object>>();
+        if(request.containsKey("imports"))try {imports=EditorImports.read(request.get("imports"));}
+        catch(IllegalArgumentException|engineering.artifacts.Problem error) {
+            var packet=object(request.get("imports"));var selected=object(packet.get("selection"));
+            importDiagnostics.add(Json.object("path",string(selected.get("path")),"line",1,"column",1,"severity","error",
+                "code",error instanceof engineering.artifacts.Problem p?p.code:"invalid-import","message",error.getMessage()));
+        }
         var result=engineering.work.WorkCompiler.compileSnapshots(sources);
         var assistance=new engineering.work.WorkEditor.Assistance(List.of(),null);
         if(request.get("cursor")!=null) {
@@ -119,7 +127,8 @@ public final class EditorMain {
         return Json.object("protocol",PROTOCOL,"valid",diagnostics.isEmpty(),"diagnostics",diagnostics.stream().map(d->{
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
                 "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
-        }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",assistance.suggestions(),"hover",assistance.hover());
+        }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",assistance.suggestions(),"hover",assistance.hover(),
+            "importDiagnostics",importDiagnostics,"importTargets",imports==null?List.of():imports.targets().values().stream().map(EditorImports.Target::describe).toList(),"importNavigation",List.of());
     }
 
     static Map<String,Object> span(mundanereq.source.SourceSpan span) {

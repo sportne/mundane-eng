@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2102
 kind: task
 title: Validate Compiled Editor Imports
-status: Planned
+status: Complete
 dependencies: ["TC-2101"]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor imports contract](../../specification/0026-editor-imports-0.1.md)
+
+  ## Completion evidence
+
+  make test passed all 14 maintained groups. EditorImportsTest verifies serialized attribute artifacts, exact pins, source hashes, absent/modified source, strict JSON, source inventories, supported kinds, reserved scopes and build cycles through shared artifact validators.
