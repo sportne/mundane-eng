@@ -1,0 +1,1 @@
+{"format":"mundane-imports-0.1","imports":[{"scope":"req","path":"artifacts/requirements.json","kind":"requirements","sha256":null,"dependsOn":[]},{"scope":"baseline","path":"artifacts/requirements.json","kind":"requirements","sha256":null,"dependsOn":[]},{"scope":"other","path":"artifacts/work.json","kind":"work-items","sha256":null,"dependsOn":[]}]}

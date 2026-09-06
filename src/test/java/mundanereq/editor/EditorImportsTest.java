@@ -23,7 +23,17 @@ public final class EditorImportsTest {
     }
     public static void run() throws Exception {
         var packet=packet();var result=EditorImports.read(packet);
-        assert !result.targets().isEmpty();assert result.targets().values().stream().allMatch(t->t.state().equals("matching"));
+        assert !result.targets().isEmpty();
+        var resolved=ImportedNavigation.resolve(result,List.of());
+        assert resolved.targets().values().stream().allMatch(t->t.get("sourceState").equals("matching"));
+        var one=result.targets().values().iterator().next();
+        var ref=object("scope",one.scope(),"kind",one.kind(),"id",one.id(),"location",object("path","local.yaml","start",object("line",1,"column",1),"end",object("line",1,"column",2)));
+        assert ImportedNavigation.resolve(result,List.of(ref)).navigation().size()==1;
+        var forged=new EditorImports.Target(one.scope(),one.kind(),one.id(),one.title(),one.status(),one.revision(),one.file(),one.sourceDigest(),
+            object("path","ignored","start",object("line",1,"column",1),"end",object("line",1,"column",2)),one.sourceText(),"matching");
+        var badOrigin=ImportedNavigation.resolve(new EditorImports.Selection(Map.of(forged.key(),forged)),List.of(ref));
+        assert badOrigin.navigation().isEmpty();assert badOrigin.diagnostics().getFirst().get("severity").equals("warning");
+        assert result.targets().values().stream().allMatch(t->t.state().equals("matching"));
         var missing=copy(packet);
         var sources=new ArrayList<Object>(list(missing.get("sources")));var first=new TreeMap<>(map(sources.getFirst()));first.put("text",null);sources.set(0,first);missing.put("sources",sources);
         assert EditorImports.read(missing).targets().values().stream().anyMatch(t->t.state().equals("unavailable"));

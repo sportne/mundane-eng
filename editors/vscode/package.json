@@ -88,6 +88,12 @@
           "default": "",
           "scope": "resource",
           "description": "Explicit workspace-relative mundane-work-set-0.2 JSON manifest. Empty disables work-item assistance."
+        },
+        "mundane.workImports": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Optional workspace-relative editor import/source mapping JSON for typed work-item relations."
         }
       }
     }

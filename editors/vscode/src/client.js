@@ -61,9 +61,11 @@ async function read(root, name, documents, maximum) {
   if (Buffer.byteLength(text) > maximum) throw new Error('Buffer exceeds limit');
   return { path: name, text };
 }
-async function snapshot(root, selection, documents, selected = () => {}, work = false, otherSelection = '') {
+async function snapshot(root, selection, documents, selected = () => {}, work = false, otherSelection = '', importSelection = '') {
   const config = project((await read(root, selection, documents, 64 * 1024)).text, work);
-  selected([...config.files, ...(config.attributeSchema ? [config.attributeSchema] : [])]);
+  const watched=new Set([...config.files, ...(config.attributeSchema ? [config.attributeSchema] : [])]);
+  const watch=name=>{watched.add(name);selected([...watched]);};
+  selected([...watched]);
   if (otherSelection) {
     // Only overlapping selections are shared configuration errors. A malformed
     // independent selection must not disable the healthy domain.
@@ -81,7 +83,13 @@ async function snapshot(root, selection, documents, selected = () => {}, work = 
     files.push(file);
   }
   const schema = config.attributeSchema === null ? null : await read(root, config.attributeSchema, documents, 1024 * 1024);
-  return { protocol: PROTOCOL, source: config.source, files, schema };
+  const request={ protocol: PROTOCOL, source: config.source, files, schema };
+  if(work && importSelection) {
+    relative(importSelection);
+    try {request.imports=await require('./imports').load(root,importSelection,documents,watch,read,relative);}
+    catch(error) {request.importError={path:importSelection,message:error.message.slice(0,4096)};}
+  }
+  return request;
 }
 function invoke(executable, request, signal) {
   if (!path.isAbsolute(executable)) return Promise.reject(new Error('Configure an absolute mundane.executable path'));

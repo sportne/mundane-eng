@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2104
 kind: task
 title: Navigate Imported Artifact Targets
-status: Planned
+status: Complete
 dependencies: ["TC-2103"]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor imports contract](../../specification/0026-editor-imports-0.1.md)
+
+  ## Completion evidence
+
+  All 14 Java groups, native compilation and actual VS Code host checks passed. Tests cover scope-qualified requirement/work targets, mapped Unicode locations, changed unsaved source, forged origins, missing targets, pin failure, local navigation recovery and opaque prose. Node checks cover buffer overlays, watched missing files and local operation during import read failure.

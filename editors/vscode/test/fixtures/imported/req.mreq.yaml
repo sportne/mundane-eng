@@ -1,0 +1,2 @@
+format: "mundanereq-yaml-0.3"
+requirements: [{title: "😀 Shared requirement", id: "SHARE", statement: "The logger shall retain measurements."}]

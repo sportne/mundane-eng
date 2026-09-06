@@ -43,11 +43,11 @@ public final class EditorMain {
     public static Map<String, Object> analyze(Object value) {
         Map<String, Object> request = object(value);
         if (!request.keySet().containsAll(java.util.Set.of("protocol", "source", "files", "schema"))
-                || !java.util.Set.of("protocol", "source", "files", "schema", "cursor", "imports").containsAll(request.keySet()))
+                || !java.util.Set.of("protocol", "source", "files", "schema", "cursor", "imports", "importError").containsAll(request.keySet()))
             throw new IllegalArgumentException("unexpected snapshot fields");
         if (!PROTOCOL.equals(request.get("protocol"))) throw new IllegalArgumentException("unsupported editor protocol");
         if (mundanereq.Versions.WORK_SOURCE.equals(request.get("source"))) return work(request);
-        if(request.containsKey("imports"))throw new IllegalArgumentException("imports require work-item source");
+        if(request.containsKey("imports")||request.containsKey("importError"))throw new IllegalArgumentException("imports require work-item source");
         SourceFormat format = switch (string(request.get("source"))) {
             case "yaml-0.3" -> SourceFormat.YAML_03;
             case "yaml-0.4" -> SourceFormat.YAML_04;
@@ -115,6 +115,14 @@ public final class EditorMain {
             importDiagnostics.add(Json.object("path",string(selected.get("path")),"line",1,"column",1,"severity","error",
                 "code",error instanceof engineering.artifacts.Problem p?p.code:"invalid-import","message",error.getMessage()));
         }
+        if(request.containsKey("importError")) {
+            if(request.containsKey("imports"))throw new IllegalArgumentException("conflicting import payloads");
+            var failure=object(request.get("importError"));
+            if(!failure.keySet().equals(java.util.Set.of("path","message")))throw new IllegalArgumentException("invalid import failure");
+            String path=engineering.artifacts.Checks.path(failure.get("path")),message=string(failure.get("message"));
+            if(message.length()>4096)throw new IllegalArgumentException("import error exceeds limit");
+            importDiagnostics.add(Json.object("path",path,"line",1,"column",1,"severity","error","code","editor-import-input","message",message));
+        }
         var result=engineering.work.WorkCompiler.compileSnapshots(sources);
         var assistance=new engineering.work.WorkEditor.Assistance(List.of(),null);
         if(request.get("cursor")!=null) {
@@ -124,12 +132,15 @@ public final class EditorMain {
         var diagnostics=new ArrayList<>(result.diagnostics());
         if(result.valid())try {engineering.work.WorkGraph.validateDependencies(result.items());}
         catch(engineering.artifacts.Problem p){diagnostics.add(p.diagnostic());}
+        var relations=diagnostics.isEmpty()?engineering.work.WorkEditor.relations(sources):List.<Map<String,Object>>of();
+        var imported=imports==null?new ImportedNavigation.Result(List.of(),List.of(),Map.of()):ImportedNavigation.resolve(imports,relations);
+        importDiagnostics.addAll(imported.diagnostics());
         return Json.object("protocol",PROTOCOL,"valid",diagnostics.isEmpty(),"diagnostics",diagnostics.stream().map(d->{
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
                 "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
         }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",assistance.suggestions(),"hover",assistance.hover(),
-            "workRelations",diagnostics.isEmpty()?engineering.work.WorkEditor.relations(sources):List.of(),
-            "importDiagnostics",importDiagnostics,"importTargets",imports==null?List.of():imports.targets().values().stream().map(EditorImports.Target::describe).toList(),"importNavigation",List.of());
+            "workRelations",relations,
+            "importDiagnostics",importDiagnostics,"importTargets",new ArrayList<>(imported.targets().values()),"importNavigation",imported.navigation());
     }
 
     static Map<String,Object> span(mundanereq.source.SourceSpan span) {

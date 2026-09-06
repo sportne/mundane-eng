@@ -18,14 +18,18 @@ function activate(context) {
   function publish(project, state) {
     const {snapshot,result} = state;
     if (!Array.isArray(result.diagnostics) || typeof result.valid !== 'boolean') throw new Error('Invalid diagnostic response');
-    const files = [...snapshot.files, ...(snapshot.schema ? [snapshot.schema] : [])];
+    const files = [...snapshot.files, ...(snapshot.schema ? [snapshot.schema] : []),
+      ...(snapshot.imports ? [snapshot.imports.selection,snapshot.imports.manifest] : []),
+      ...(snapshot.importError ? [{path:snapshot.importError.path,text:''}] : [])];
     const grouped = new Map();
-    for (const d of result.diagnostics) {
+    for (const d of [...result.diagnostics,...(result.importDiagnostics || [])]) {
       const file = files.find(f => f.path === d.path);
       if (!file || !Number.isInteger(d.line) || !Number.isInteger(d.column) || d.line < 1 || d.column < 1) throw new Error('Invalid diagnostic source');
       const point = position(file.text, d.line, d.column);
       const start = new vscode.Position(point.line, point.character);
-      const diagnostic = new vscode.Diagnostic(new vscode.Range(start, start), d.message, vscode.DiagnosticSeverity.Error);
+      const end=d.end ? position(file.text,d.end.line,d.end.column) : point;
+      const diagnostic = new vscode.Diagnostic(new vscode.Range(start,new vscode.Position(end.line,end.character)),d.message,
+        d.severity==='warning'?vscode.DiagnosticSeverity.Warning:vscode.DiagnosticSeverity.Error);
       diagnostic.code = d.code; diagnostic.source = 'Mundane';
       if (!grouped.has(d.path)) grouped.set(d.path, []);
       grouped.get(d.path).push(diagnostic);
@@ -56,7 +60,7 @@ function activate(context) {
   function related(project, uri) {
     if (uri.scheme !== 'file') return false;
     const name = path.relative(project.folder.uri.fsPath, uri.fsPath).split(path.sep).join('/');
-    return name === project.settings().get(project.setting) || name === project.settings().get(project.otherSetting) || project.watched.has(name);
+    return name === project.settings().get(project.setting) || name === project.settings().get(project.otherSetting) || (project.setting==='workProject' && name===project.settings().get('workImports')) || project.watched.has(name);
   }
   function changed(document) {
     for (const project of projects.values()) if (related(project, document.uri)) schedule(project);
@@ -78,10 +82,10 @@ function activate(context) {
     const candidates = [...projects.values()].filter(p => p.folder.uri.toString() === folder.uri.toString() && p.settings().get(p.setting));
     const version = document.version;
     const fileName = path.relative(folder.uri.fsPath, document.uri.fsPath).split(path.sep).join('/');
-    await Promise.all(candidates.filter(p => !p.watched.has(fileName)).map(p => p.session.get()));
-    const selected = candidates.filter(p => p.watched.has(fileName));
-    if (selected.length !== 1) return null;
-    const project = selected[0];
+    const states=await Promise.all(candidates.map(async project=>({project,state:await project.session.get()})));
+    const selected=states.filter(p=>p.state?.snapshot.files.some(f=>f.path===fileName));
+    if(selected.length!==1)return null;
+    const project=selected[0].project;
     const query = point ? {path:fileName,line:point.line+1,
       column:Array.from(document.lineAt(point.line).text.substring(0,point.character)).length+1} : undefined;
     const state = await project.session.get(query);
@@ -98,6 +102,13 @@ function activate(context) {
     async provideDefinition(document, point, token) {
       const state = await current(document, token);
       if (!state?.result.valid) return [];
+      const imported=(state.result.importNavigation || []).find(n=>n.reference.path===state.file.path &&
+        range(state.file.text,n.reference).contains(point) && !range(state.file.text,n.reference).end.isEqual(point));
+      if(imported) {
+        const text=state.snapshot.imports?.sources.find(f=>f.path===imported.target.path)?.text;
+        if(typeof text!=='string')return [];
+        return [new vscode.Location(vscode.Uri.file(path.join(state.folder,imported.target.path)),range(text,imported.target))];
+      }
       const definitions = state.result.definitions;
       const reference = definitions.flatMap(d => d.references).find(r => r.location.path === state.file.path &&
         range(state.file.text, r.location).contains(point) && !range(state.file.text, r.location).end.isEqual(point));
@@ -162,7 +173,7 @@ function activate(context) {
       project.session = new Project(
         generation => client.snapshot(folder.uri.fsPath,project.settings().get(project.setting),vscode.workspace.textDocuments,names=>{
           if(project.session.generation===generation) project.watched=new Set(names);
-        },setting === 'workProject',project.settings().get(project.otherSetting)),
+        },setting === 'workProject',project.settings().get(project.otherSetting),project.settings().get('workImports')),
         (request,signal)=>client.invoke(project.settings().get('executable'),request,signal),
         state=>publish(project,state),error=>failure(project,error));
       project.watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(folder,'**/*'));
@@ -177,7 +188,7 @@ function activate(context) {
     vscode.workspace.onDidOpenTextDocument(changed),
     vscode.workspace.onDidCloseTextDocument(changed),
     vscode.workspace.onDidChangeConfiguration(event=>{
-      for (const project of projects.values()) if(event.affectsConfiguration('mundane',project.folder.uri)) schedule(project);
+      for (const project of projects.values()) if(['executable','project','workProject',...(project.setting==='workProject'?['workImports']:[])].some(key=>event.affectsConfiguration('mundane.'+key,project.folder.uri))) schedule(project);
     }),
     vscode.workspace.onDidChangeWorkspaceFolders(synchronizeFolders),
     vscode.workspace.onDidGrantWorkspaceTrust(()=>{ for(const project of projects.values()) schedule(project); }),

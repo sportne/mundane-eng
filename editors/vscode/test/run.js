@@ -10,6 +10,7 @@ async function main() {
   const fixtures = path.join(__dirname, 'fixtures');
   await fs.cp(fixtures, workspace, { recursive: true });
   await fs.cp(path.join(root,'roadmap'),path.join(workspace,'roadmap'),{recursive:true});
+  await require('./stage-imports').stage(root,workspace);
   await fs.writeFile(path.join(workspace, '.vscode/settings.json'), JSON.stringify({
     'mundane.project': 'editor.json',
     'mundane.executable': path.join(root, 'build/maintained/mundane-editor'),

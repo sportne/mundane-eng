@@ -129,6 +129,7 @@ async function run() {
   console.log('PASS unsaved declaration changes, enum diagnostics and schema repair');
   console.log('PASS unsaved syntax/reference diagnostics, repair, stale request rejection and unchanged disk');
   await require('./work').run(api);
+  await require('./imports').run(api);
   console.log('PASS actual VS Code Extension Host: activation, language registration, explicit project and Java bridge');
 }
 module.exports = { run };

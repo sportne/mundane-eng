@@ -91,3 +91,24 @@ test('domain overlap includes requirement declarations and clears after independ
     assert.equal((await snapshot(root,'req.json',[],undefined,false,'work.json')).schema.path,'shared.json');
   } finally {await fs.rm(root,{recursive:true,force:true});}
 });
+test('import snapshots overlay mapped buffers, watch missing sources and preserve local work on read failures', async () => {
+  const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
+  const {snapshot}=require('../src/client'),root=await fs.mkdtemp(path.join(os.tmpdir(),'mundane-imports-'));
+  try {
+    const files={
+      'work.json':JSON.stringify({format:'mundane-work-set-0.2',source:'mundane-work-yaml-0.2',files:['card.yaml']}),
+      'card.yaml':'local\n',
+      'map.json':JSON.stringify({format:'mundane-editor-imports-0.1',manifest:'imports.json',sourceRoots:{req:'.'}}),
+      'imports.json':JSON.stringify({format:'mundane-imports-0.1',imports:[{scope:'req',path:'compiled.json',kind:'requirements',sha256:null,dependsOn:[]}]}),
+      'compiled.json':JSON.stringify({sources:[{path:'target.yaml'}]}),'target.yaml':'disk\n'};
+    for(const [name,text] of Object.entries(files))await fs.writeFile(path.join(root,name),text);
+    const documents=[{uri:{scheme:'file',fsPath:path.join(root,'target.yaml')},getText:()=>'unsaved\n'}];let watched=[];
+    const load=()=>snapshot(root,'work.json',documents,names=>watched=names,true,'','map.json');
+    assert.equal((await load()).imports.sources[0].text,'unsaved\n');
+    documents.length=0;await fs.unlink(path.join(root,'target.yaml'));
+    assert.equal((await load()).imports.sources[0].text,null);assert.ok(watched.includes('target.yaml'));
+    await fs.writeFile(path.join(root,'compiled.json'),'{');const failed=await load();
+    assert.ok(failed.importError);assert.equal(failed.files[0].text,'local\n');assert.ok(watched.includes('compiled.json'));
+    await fs.writeFile(path.join(root,'compiled.json'),files['compiled.json']);assert.ok((await load()).imports);
+  } finally {await fs.rm(root,{recursive:true,force:true});}
+});

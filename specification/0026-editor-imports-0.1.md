@@ -34,7 +34,9 @@ Artifacts contain exact compiled JSON text; source paths are mapped workspace pa
 A null source text means the mapped file is unavailable, including missing files,
 invalid UTF-8 or resolved paths outside the workspace. No source error is replaced
 by different file content. The bridge reads no files and validates the complete
-manifest and artifact inventory before exposing targets. Requirements requests
+manifest and artifact inventory before exposing targets. A client read failure instead supplies `importError: {path,message}` (at most
+4 KiB of message); it produces an import marker while local work remains usable.
+Requests cannot supply both fields. Requirements requests
 reject imports. Older bridges reject this added field; install the paired bundle.
 
 Selection/manifest texts are bounded to 64 KiB each; at most 100 imports, 256 mapped
