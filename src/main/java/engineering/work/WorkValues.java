@@ -11,6 +11,7 @@ import java.util.Set;
 public final class WorkValues {
     private WorkValues() {}
     public static final Set<String> TASK_STATUS=Set.of("Ready","Planned","Conditional","In progress","Complete","Superseded");
+    public static final Set<String> RELATIONS=Set.of("addresses","relates-to","supersedes","evidence");
     public static final Set<String> ISSUE_STATUS=Set.of("Open","Closed","Superseded");
     public static String single(Object value) {
         String s=text(value);
@@ -41,7 +42,7 @@ public final class WorkValues {
                 if(!targetKind.equals("resource")||r.get("scope")!=null)throw new IllegalArgumentException("evidence must cite an unscoped local resource");
                 path(r.get("target"));
             } else {
-                if(!Set.of("addresses","relates-to","supersedes").contains(role))throw new IllegalArgumentException("unknown relation");
+                if(!RELATIONS.contains(role))throw new IllegalArgumentException("unknown relation");
                 id(r.get("scope"));id(r.get("target"));
                 if(!Set.of("work-item","requirement","verification-plan","verification-activity").contains(targetKind)||role.equals("supersedes")&&!targetKind.equals("work-item"))
                     throw new IllegalArgumentException("unsupported relation target kind");

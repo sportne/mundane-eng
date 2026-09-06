@@ -137,13 +137,16 @@ function activate(context) {
       const state = await current(document, token, point);
       if (!state?.result.hover) return null;
       const info = state.result.hover;
-      const definition = info.definition;
       const markdown = new vscode.MarkdownString();
       markdown.isTrusted = false; markdown.supportHtml = false;
-      markdown.appendText(`${info.name} — ${definition.type}, ${definition.required ? 'required' : 'optional'}\n\n`);
-      if (definition.description) markdown.appendText(definition.description + '\n\n');
-      if (definition.values) markdown.appendText('Allowed values: ' + definition.values.join(', ') + '\n\n');
-      markdown.appendText(`Declaration: ${info.declaration.path}:${info.declaration.start.line}`);
+      if (typeof info.text === 'string') markdown.appendText(info.text);
+      else {
+        const definition = info.definition;
+        markdown.appendText(`${info.name} — ${definition.type}, ${definition.required ? 'required' : 'optional'}\n\n`);
+        if (definition.description) markdown.appendText(definition.description + '\n\n');
+        if (definition.values) markdown.appendText('Allowed values: ' + definition.values.join(', ') + '\n\n');
+        markdown.appendText(`Declaration: ${info.declaration.path}:${info.declaration.start.line}`);
+      }
       return new vscode.Hover(markdown, range(state.file.text, info.location));
     }
   }));

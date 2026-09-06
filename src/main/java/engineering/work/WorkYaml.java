@@ -70,7 +70,7 @@ final class WorkYaml {
         return new Compose(settings).composeString(source).orElseThrow(()->new IllegalArgumentException("expected a work-item document"));
     }
     private static Map<String,Object> point(String file,Mark mark) {return object("path",file,"line",mark.getLine()+1,"column",mark.getColumn()+1);}
-    private static Object value(String file,Node node) {
+    static Object value(String file,Node node) {
         if(node instanceof ScalarNode scalar) {
             if(Tag.STR.equals(scalar.getTag()))return scalar.getValue();
             if(Tag.NULL.equals(scalar.getTag()))return null;

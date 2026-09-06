@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2005
 kind: task
 title: Complete and Describe Work-item Fields
-status: Planned
+status: Complete
 dependencies: ["TC-2004"]
 relations: []
 planning:
@@ -45,5 +45,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  All 13 Java test groups and actual VS Code provider tests passed. Checks cover kind-specific statuses, quoted insertion yielding valid YAML, relation roles, local target IDs, used prerequisite exclusion, imported scopes, literal escaped hover, comments, block scalars, anchors and unsupported YAML.

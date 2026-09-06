@@ -108,13 +108,18 @@ public final class EditorMain {
             if(sources.stream().noneMatch(s->s.path().equals(cursor.get("path"))))throw new IllegalArgumentException("cursor file is not selected");
         }
         var result=engineering.work.WorkCompiler.compileSnapshots(sources);
+        var assistance=new engineering.work.WorkEditor.Assistance(List.of(),null);
+        if(request.get("cursor")!=null) {
+            var cursor=object(request.get("cursor"));
+            assistance=engineering.work.WorkEditor.assist(sources,string(cursor.get("path")),coordinate(cursor.get("line")),coordinate(cursor.get("column")));
+        }
         var diagnostics=new ArrayList<>(result.diagnostics());
         if(result.valid())try {engineering.work.WorkGraph.validateDependencies(result.items());}
         catch(engineering.artifacts.Problem p){diagnostics.add(p.diagnostic());}
         return Json.object("protocol",PROTOCOL,"valid",diagnostics.isEmpty(),"diagnostics",diagnostics.stream().map(d->{
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
                 "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
-        }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",List.of(),"hover",null);
+        }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",assistance.suggestions(),"hover",assistance.hover());
     }
 
     static Map<String,Object> span(mundanereq.source.SourceSpan span) {
