@@ -94,6 +94,16 @@ function activate(context) {
       return [new vscode.Location(vscode.Uri.file(path.join(state.folder, target.path)), range(text, target))];
     }
   }));
+  context.subscriptions.push(vscode.languages.registerDocumentFormattingEditProvider(selector, {
+    async provideDocumentFormattingEdits(document, options, token) {
+      const state = await current(document, token);
+      if (!state?.result.valid) return [];
+      const formatted = state.result.formatting.find(f => f.path === state.file.path);
+      if (!formatted || formatted.text === state.file.text) return [];
+      return [new vscode.TextEdit(new vscode.Range(document.positionAt(0), document.positionAt(state.file.text.length)), formatted.text),
+        vscode.TextEdit.setEndOfLine(vscode.EndOfLine.LF)];
+    }
+  }));
   context.subscriptions.push(output, diagnostics,
     vscode.commands.registerCommand('mundane.validate', validate),
     vscode.workspace.onDidChangeTextDocument(schedule),

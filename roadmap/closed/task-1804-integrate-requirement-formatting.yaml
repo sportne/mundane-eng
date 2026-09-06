@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1804"
-kind: "task"
-title: "Integrate Requirement Formatting"
-status: "Planned"
-dependencies: ["TC-1802"]
+format: mundane-work-yaml-0.2
+id: TC-1804
+kind: task
+title: Integrate Requirement Formatting
+status: Complete
+dependencies: [TC-1802]
 relations: []
-planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
-body: |2+
+planning: {stage: '18', type: Implementation, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
 
   ## Outcome
 
@@ -31,5 +32,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Source rules](../specification/0010-requirements-yaml-0.3.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  Actual VS Code formatting-provider tests passed: an invalid surrounding project blocks edits, a valid CRLF buffer receives editor-managed LF edits, exact text is preserved, a second format returns no edits, and source files remain unsaved. Maintained Java tests and the native bridge build passed. Provider freshness checks reject overtaken document versions.

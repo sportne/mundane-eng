@@ -72,3 +72,12 @@ only matches the reference token, never prose. It opens the unique selected targ
 ID-value span, including unsaved origin changes. Invalid project snapshots provide
 no definitions, so duplicate IDs, missing targets and incomplete parses cannot
 produce a guessed jump. Navigation resumes after project errors are repaired.
+
+## Formatting
+
+Valid responses include `formatting` entries only for sources containing CRLF.
+Each entry gives `path` and the exact text with CRLF replaced by LF. Invalid whole
+project snapshots produce no edits. VS Code receives a text edit plus an LF end-of-line
+edit; its normal undo/save workflow applies them. No schema formatting, field
+reordering, quote changes, comment movement or rewriting of opaque text is added.
+A changed document version or cancelled request cannot supply edits.

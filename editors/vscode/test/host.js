@@ -53,6 +53,18 @@ async function run() {
   assert.equal(doc.getText(unicode[0].range), '"PARENT"', 'non-BMP prefix maps to exact UTF-16 target');
   await replace(doc, savedParent);
   console.log('PASS actual definition provider: cross-file origins, unsaved target moves, duplicate/missing targets and prose exclusion');
+  const eol = new vscode.WorkspaceEdit(); eol.set(child.uri, [vscode.TextEdit.setEndOfLine(vscode.EndOfLine.CRLF)]);
+  assert.ok(await vscode.workspace.applyEdit(eol));
+  assert.ok(child.getText().includes('\r\n'));
+  await replace(doc, 'format: [\n');
+  assert.equal(((await vscode.commands.executeCommand('vscode.executeFormatDocumentProvider', child.uri, {tabSize:2, insertSpaces:true})) || []).length, 0, 'invalid surrounding project blocks edits');
+  await replace(doc, savedParent);
+  await vscode.window.showTextDocument(child);
+  await vscode.commands.executeCommand('editor.action.formatDocument');
+  assert.equal(child.getText(), original, 'LF conversion preserves every other authored byte');
+  assert.equal(((await vscode.commands.executeCommand('vscode.executeFormatDocumentProvider', child.uri, {tabSize:2, insertSpaces:true})) || []).length, 0, 'formatting is idempotent');
+  assert.equal(require('node:fs').readFileSync(child.uri.fsPath, 'utf8'), original);
+  console.log('PASS actual formatting provider: whole-project validation, CRLF-to-LF edits, exact preservation, idempotence and no save');
   const selection = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'editor.json'));
   const selectionText = selection.getText();
   const schema = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'schema.json'));

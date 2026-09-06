@@ -57,3 +57,7 @@ Errors have the same rule identifiers as the command-line validator.
 **Go to Definition** on a `decomposes` target opens its selected requirement ID.
 Navigation uses current parser spans, including unsaved target edits. Repair project
 errors first: invalid snapshots deliberately provide no navigation targets.
+
+**Format Document** preserves source layout, comments, quoting and attribute order;
+its current change is CRLF-to-LF normalization. It requires a valid complete project
+snapshot and returns ordinary VS Code edits. Save and undo remain editor actions.

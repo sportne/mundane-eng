@@ -60,7 +60,9 @@ public final class EditorMain {
             schema = AttributeSchema.parse(source);
         }
         var result = Interpreter.interpretSources(sources, format, schema);
-        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "definitions", result.valid() ? result.origins().stream().map(origin -> Json.object(
+        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "formatting", result.valid() ? sources.stream().filter(source -> new String(source.bytes(), StandardCharsets.UTF_8).contains("\r\n"))
+                        .map(source -> Json.object("path", source.file(), "text", new String(source.bytes(), StandardCharsets.UTF_8).replace("\r\n", "\n"))).toList() : List.of(),
+                "definitions", result.valid() ? result.origins().stream().map(origin -> Json.object(
                         "id", origin.id(), "location", span(origin.fields().get("id").getFirst()),
                         "references", origin.references().entrySet().stream().sorted(Map.Entry.comparingByKey())
                                 .map(entry -> Json.object("id", entry.getKey(), "location", span(entry.getValue()))).toList())).toList() : List.of(),
