@@ -3,7 +3,8 @@ const { spawn } = require('node:child_process');
 const path = require('node:path');
 const fs = require('node:fs/promises');
 const LIMIT = 16 * 1024 * 1024;
-const PROTOCOL = 'mundane-editor-0.1';
+const metadata = require('../versions.json');
+const PROTOCOL = metadata.protocol;
 
 function relative(name) {
   if (typeof name !== 'string' || !name || /[\\:]/.test(name) || name.split('/').some(p => !p || p === '.' || p === '..')) {
@@ -13,7 +14,7 @@ function relative(name) {
 }
 function project(text) {
   const p = JSON.parse(text);
-  if (!p || Object.keys(p).sort().join() !== 'attributeSchema,files,format,source' || p.format !== 'mundane-editor-project-0.1' || !['yaml-0.3', 'yaml-0.4'].includes(p.source)) throw new Error('Invalid editor project contract');
+  if (!p || Object.keys(p).sort().join() !== 'attributeSchema,files,format,source' || p.format !== metadata.project || !['yaml-0.3', 'yaml-0.4'].includes(p.source)) throw new Error('Invalid editor project contract');
   if (!Array.isArray(p.files) || p.files.length < 1 || p.files.length > 128) throw new Error('Select 1–128 requirement files');
   p.files.forEach(relative);
   if (new Set(p.files).size !== p.files.length) throw new Error('Duplicate selected path');

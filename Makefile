@@ -135,6 +135,7 @@ package-native-suite: native-suite
 .PHONY: verify native-suite package-native-suite yaml-schema-verify version-declarations version-verify work-index work-backlog-verify work-verify work-yaml-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify native-suite-verify yaml-verify
 version-declarations:
 	python3 scripts/generate-versions.py versions.properties $(GENERATED_DIR)
+	python3 scripts/editor-versions.py
 yaml-schema-verify:
 	scripts/check-yaml-schema.sh
 version-verify: test

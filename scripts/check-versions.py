@@ -52,3 +52,22 @@ sarif=json.loads(subprocess.check_output(['java','-cp',cp,'mundanereq.cli.Valida
 assert sarif['version']==values['SARIF_VERSION']
 assert sarif['runs'][0]['properties']['commandContract']==values['VALIDATE_CONTRACT']
 print('PASS SARIF format and validator command metadata consume authoritative declarations')
+
+editor_spec = importlib.util.spec_from_file_location('editor_versions', ROOT/'scripts/editor-versions.py')
+editor = importlib.util.module_from_spec(editor_spec)
+editor_spec.loader.exec_module(editor)
+expected = editor.synchronize(ROOT, values)
+actual = json.loads(subprocess.check_output(['java','-cp',cp,'mundanereq.editor.EditorMain','--version']))
+assert actual == expected
+with tempfile.TemporaryDirectory() as tmp:
+    sandbox = Path(tmp); target = sandbox/'editors/vscode'; target.mkdir(parents=True)
+    for name in ['package.json','package-lock.json','versions.json']:
+        (target/name).write_bytes((ROOT/'editors/vscode'/name).read_bytes())
+    changed = dict(values, EDITOR_VERSION='0.1.99', EDITOR_PROTOCOL='mundane-editor-test-0.9')
+    try: editor.synchronize(sandbox, changed)
+    except ValueError: pass
+    else: raise AssertionError('stale editor metadata accepted')
+    editor.synchronize(sandbox, changed, True)
+    assert editor.synchronize(sandbox, changed) == editor.expected(changed)
+    assert json.loads((target/'package-lock.json').read_text())['packages']['']['version'] == '0.1.99'
+print('PASS actual JVM editor metadata, stale editor metadata rejection and isolated version/protocol regeneration')

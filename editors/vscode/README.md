@@ -18,7 +18,8 @@ npm run package
 The host test downloads VS Code into the ignored `build/vscode-test` directory.
 Linux needs the usual Electron libraries and Xvfb when no display is available.
 Tests use a disposable workspace in `build/editor-test-workspace`.
-Install `build/mundane-requirements-0.1.0.vsix` with **Extensions: Install from VSIX**.
+The package command prints the versioned VSIX path under `build/`. Install it
+with **Extensions: Install from VSIX**.
 The VSIX contains JavaScript, grammar and documentation; build the native bridge
 for the extension host separately. In a Remote/WSL workspace, install the extension
 and configure the bridge in that workspace environment. No Marketplace publication or bundled platform binary
@@ -73,3 +74,9 @@ Hover over a declared attribute name or scalar value to see its type, requiredne
 description, permitted values and declaration location. Authored documentation is
 rendered as literal text; embedded HTML and commands are not enabled. Hover refreshes
 from unsaved schema changes and disappears when the declaration becomes invalid.
+
+Editor package, bridge and protocol declarations are maintained in
+`versions.properties`. After changing them, run
+`python3 scripts/editor-versions.py --write` from the repository root. Normal
+verification checks the generated metadata, package and lockfile without updating
+them silently. `mundane-editor --version` reports the paired build metadata.

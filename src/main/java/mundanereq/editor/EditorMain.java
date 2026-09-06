@@ -13,12 +13,19 @@ import mundanereq.SourceFormat;
 
 /** One bounded, read-only editor snapshot per process; never reads project files. */
 public final class EditorMain {
-    public static final String PROTOCOL = "mundane-editor-0.1";
+    public static final String PROTOCOL = mundanereq.Versions.EDITOR_PROTOCOL;
     public static final int MAX_REQUEST = 16 * 1024 * 1024;
     private EditorMain() {}
 
     public static void main(String[] args) {
         try {
+            if (args.length == 1 && args[0].equals("--version")) {
+                System.out.write(Json.bytes(Json.object("version", mundanereq.Versions.EDITOR_VERSION,
+                        "protocol", PROTOCOL, "project", mundanereq.Versions.EDITOR_PROJECT)));
+                System.out.flush();
+                if (System.out.checkError()) throw new IOException("editor output unavailable");
+                return;
+            }
             if (args.length != 0) throw new IllegalArgumentException("editor bridge accepts JSON on stdin only");
             byte[] bytes = System.in.readNBytes(MAX_REQUEST + 1);
             if (bytes.length > MAX_REQUEST) throw new IllegalArgumentException("snapshot exceeds 16 MiB");

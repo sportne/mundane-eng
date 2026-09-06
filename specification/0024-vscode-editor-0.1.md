@@ -107,3 +107,15 @@ requiredness, description, enum values and declaration source span. Unknown name
 invalid declarations and ambiguous syntax produce no hover. Hover never repairs
 source. The extension converts the exact token range and displays all authored
 content using literal Markdown text with HTML and command trust disabled.
+
+## Version declarations
+
+`versions.properties` owns `EDITOR_VERSION`, `EDITOR_PROTOCOL` and `EDITOR_PROJECT`.
+The package version describes the paired extension/bridge build; the protocol and
+project selection identifiers change independently. Java uses generated constants;
+JavaScript reads checked-in generated `editors/vscode/versions.json`. Package and
+lockfile versions are checked against the same declarations. Update them explicitly
+with `python3 scripts/editor-versions.py --write`; ordinary verification fails on
+stale metadata. `mundane-editor --version` emits the three declarations as JSON.
+Protocol mismatches fail explicitly rather than accepting a differently shaped
+response. Adding this metadata command changes no requirement source semantics.

@@ -7,6 +7,9 @@ ROOT = Path(__file__).resolve().parents[1]
 BIN = ROOT / 'build/maintained'
 CP = str(BIN / 'classes') + ':' + str(ROOT / 'build/dependencies/snakeyaml-engine-3.1.1.jar')
 commands = [[str(BIN / 'mundane-editor')], ['java', '-cp', CP, 'mundanereq.editor.EditorMain']]
+expected = json.loads((ROOT / 'editors/vscode/versions.json').read_text())
+for command in commands:
+    assert json.loads(subprocess.check_output(command + ['--version'])) == expected
 fixtures = ROOT / 'editors/vscode/test/fixtures'
 request = {'protocol': 'mundane-editor-0.1', 'source': 'yaml-0.3',
            'files': [{'path': name, 'text': (fixtures / name).read_text()}

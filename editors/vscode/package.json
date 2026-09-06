@@ -2,7 +2,7 @@
   "name": "mundane-requirements",
   "displayName": "Mundane Requirements",
   "description": "Explicit YAML requirement projects backed by the Mundane Java tools.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "mundane-engineering",
   "license": "BSD-3-Clause",
   "repository": {
@@ -74,7 +74,7 @@
   "scripts": {
     "test": "node test/run.js",
     "test:unit": "node --test test/unit.test.js",
-    "package": "vsce package --no-dependencies --out ../../build/mundane-requirements-0.1.0.vsix --baseContentUrl https://github.com/sportne/mundane-req/blob/main/editors/vscode"
+    "package": "node scripts/package.js"
   },
   "devDependencies": {
     "@vscode/test-electron": "3.1.0",

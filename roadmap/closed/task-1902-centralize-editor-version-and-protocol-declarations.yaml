@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-1902
 kind: task
 title: Centralize Editor Version and Protocol Declarations
-status: Planned
+status: Complete
 dependencies:
 - TC-1901
 relations: []
@@ -43,5 +43,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor contract](../specification/0024-vscode-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor contract](../../specification/0024-vscode-editor-0.1.md)
+
+  ## Completion evidence
+
+  Version verification passed for authoritative declarations, actual JVM metadata, deliberately stale editor metadata and isolated version/protocol regeneration. Native/JVM bridge metadata and protocol rejection checks passed. Node boundary tests passed and vsce built the version-derived 0.1.1 package with runtime metadata included.
