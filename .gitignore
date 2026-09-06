@@ -16,3 +16,7 @@ site/
 # Local environment/configuration
 .env
 .env.*
+
+# VS Code extension dependencies
+editors/vscode/node_modules/
+editors/vscode/.vscode-test/

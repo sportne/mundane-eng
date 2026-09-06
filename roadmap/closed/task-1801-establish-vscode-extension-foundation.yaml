@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1801"
-kind: "task"
-title: "Establish VS Code Extension Foundation"
-status: "Planned"
-dependencies: ["TC-1800"]
+format: mundane-work-yaml-0.2
+id: TC-1801
+kind: task
+title: Establish VS Code Extension Foundation
+status: Complete
+dependencies: [TC-1800]
 relations: []
-planning: {"stage": "18", "type": "Design and tooling", "condition": "", "unlocks": "", "statusNote": ""}
-body: |2+
+planning: {stage: '18', type: Design and tooling, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
 
   ## Outcome
 
@@ -31,5 +32,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Source rules](../specification/0010-requirements-yaml-0.3.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  Selected direct VS Code providers and a bounded, versioned Java snapshot bridge in specification/0024-vscode-editor-0.1.md. The native bridge built, maintained Java tests and Node boundary tests passed, and actual VS Code 1.109.5 Extension Host activation exercised explicit selection and the bridge. vsce produced build/mundane-requirements-0.1.0.vsix. No extension was published.

@@ -1,0 +1,5 @@
+format: "mundanereq-yaml-0.3"
+requirements:
+  - id: "PARENT"
+    title: "Retain measurements"
+    statement: "The logger shall retain measurements."

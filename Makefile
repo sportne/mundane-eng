@@ -175,3 +175,9 @@ native-suite-verify: package-native-suite
 yaml-verify: native-validator native-formatter native-trace native-compile
 	python3 scripts/check-yaml-workflow.py
 verify: yaml-schema-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify
+
+.PHONY: native-editor editor-verify
+native-editor: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-editor) mundanereq.editor.EditorMain
+editor-verify: native-editor
+	cd editors/vscode && npm ci && npm run test:unit && xvfb-run -a npm test && npm run package

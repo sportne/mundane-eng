@@ -1,0 +1,6 @@
+format: "mundanereq-yaml-0.3"
+requirements:
+  - id: "CHILD"
+    title: "Storage"
+    statement: "The storage shall retain measurements."
+    decomposes: ["PARENT"]

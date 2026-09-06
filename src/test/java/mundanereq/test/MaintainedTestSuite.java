@@ -15,6 +15,7 @@ public final class MaintainedTestSuite {
         engineering.impact.ImpactGraphTest.run();
         engineering.impact.ImpactCliTest.run();
         engineering.impact.ImpactViewTest.run();
-        System.out.println("Passed 11 maintained test groups.");
+        mundanereq.editor.EditorBridgeTest.run();
+        System.out.println("Passed 12 maintained test groups.");
     }
 }
