@@ -17,7 +17,7 @@ function activate(context) {
     clearTimeout(timer); controller?.abort();
     states = []; diagnostics.clear();
   }
-  async function refresh() {
+  async function refresh(query) {
     if (!vscode.workspace.isTrusted || disposed) return [];
     const version = generation;
     const abort = new AbortController(); controller = abort;
@@ -28,6 +28,10 @@ function activate(context) {
       if (!selected) continue;
       try {
         const snapshot = await client.snapshot(folder.uri.fsPath, selected, vscode.workspace.textDocuments, names => watched.set(folder.uri.fsPath, new Set(names)));
+        if (query) {
+          const file = snapshot.files.find(f => path.join(folder.uri.fsPath, f.path) === query.path);
+          if (file) snapshot.cursor = { path: file.path, line: query.line, column: query.column };
+        }
         if (version !== generation) return [];
         const result = await client.invoke(settings.get('executable'), snapshot, abort.signal);
         if (version !== generation || disposed) return [];
@@ -62,11 +66,13 @@ function activate(context) {
     return results;
   }
   function schedule() { invalidate(); timer = setTimeout(() => { void refresh(); }, 200); }
-  async function validate() { invalidate(); return refresh(); }
-  async function current(document, token) {
+  async function validate(query) { invalidate(); return refresh(query); }
+  async function current(document, token, point) {
     if (token?.isCancellationRequested) return null;
     const version = document.version;
-    const results = await validate();
+    const query = point ? { path: document.uri.fsPath, line: point.line + 1,
+      column: Array.from(document.lineAt(point.line).text.substring(0, point.character)).length + 1 } : undefined;
+    const results = await validate(query);
     if (token?.isCancellationRequested || document.version !== version) return null;
     const state = results.find(s => s.generation === generation && s.snapshot.files.some(f => path.join(s.folder, f.path) === document.uri.fsPath));
     if (!state) return null;
@@ -104,6 +110,18 @@ function activate(context) {
         vscode.TextEdit.setEndOfLine(vscode.EndOfLine.LF)];
     }
   }));
+  context.subscriptions.push(vscode.languages.registerCompletionItemProvider(selector, {
+    async provideCompletionItems(document, point, token) {
+      const state = await current(document, token, point);
+      if (!state) return [];
+      return state.result.suggestions.map(suggestion => {
+        const item = new vscode.CompletionItem(suggestion.label, vscode.CompletionItemKind.Value);
+        item.insertText = suggestion.insertText; item.filterText = suggestion.insertText;
+        item.detail = suggestion.detail; item.range = range(state.file.text, suggestion.location);
+        return item;
+      });
+    }
+  }, ':', ' ', '"'));
   context.subscriptions.push(output, diagnostics,
     vscode.commands.registerCommand('mundane.validate', validate),
     vscode.workspace.onDidChangeTextDocument(schedule),

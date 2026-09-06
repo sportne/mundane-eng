@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1805"
-kind: "task"
-title: "Complete Project Attributes"
-status: "Planned"
-dependencies: ["TC-1802"]
+format: mundane-work-yaml-0.2
+id: TC-1805
+kind: task
+title: Complete Project Attributes
+status: Complete
+dependencies: [TC-1802]
 relations: []
-planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
-body: |2+
+planning: {stage: '18', type: Implementation, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
 
   ## Outcome
 
@@ -31,5 +32,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Source rules](../specification/0010-requirements-yaml-0.3.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  Native build and maintained Java tests passed, including required/optional names, empty mappings, partial key repair, enum values, comments and block-scalar boundaries. Actual VS Code completion-provider tests passed for unused names, quoted enum insertion, incomplete keys, prose/comment exclusion and unsaved declaration changes. The written contract limits repair to syntax-only cursor assistance.

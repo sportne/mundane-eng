@@ -61,3 +61,9 @@ errors first: invalid snapshots deliberately provide no navigation targets.
 **Format Document** preserves source layout, comments, quoting and attribute order;
 its current change is CRLF-to-LF normalization. It requires a valid complete project
 snapshot and returns ordinary VS Code edits. Save and undo remain editor actions.
+
+In a declared YAML 0.4 project's `attributes` mapping, **Trigger Suggest** offers
+unused attribute names (with required/optional type detail) and allowed enum values.
+Enum insertion includes quotes. Partial key lines are supported; other syntax errors
+may need repair before the YAML structure can establish a completion context.
+Prose and comments receive no attribute suggestions.

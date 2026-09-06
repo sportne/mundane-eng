@@ -35,7 +35,8 @@ public final class EditorMain {
 
     public static Map<String, Object> analyze(Object value) {
         Map<String, Object> request = object(value);
-        if (!request.keySet().equals(java.util.Set.of("protocol", "source", "files", "schema")))
+        if (!request.keySet().containsAll(java.util.Set.of("protocol", "source", "files", "schema"))
+                || !java.util.Set.of("protocol", "source", "files", "schema", "cursor").containsAll(request.keySet()))
             throw new IllegalArgumentException("unexpected snapshot fields");
         if (!PROTOCOL.equals(request.get("protocol"))) throw new IllegalArgumentException("unsupported editor protocol");
         SourceFormat format = switch (string(request.get("source"))) {
@@ -59,8 +60,18 @@ public final class EditorMain {
             if (!paths.add(source.file())) throw new IllegalArgumentException("schema is also selected as requirements");
             schema = AttributeSchema.parse(source);
         }
+        List<Map<String,Object>> suggestions = List.of();
+        if (request.get("cursor") != null) {
+            var cursor = object(request.get("cursor"));
+            if (!cursor.keySet().equals(java.util.Set.of("path", "line", "column"))) throw new IllegalArgumentException("invalid cursor fields");
+            String path = string(cursor.get("path"));
+            var source = sources.stream().filter(file -> file.file().equals(path)).findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException("cursor file is not selected"));
+            int line = coordinate(cursor.get("line")), column = coordinate(cursor.get("column"));
+            if (format == SourceFormat.YAML_04) suggestions = AttributeCompletion.suggest(source, schema, line, column);
+        }
         var result = Interpreter.interpretSources(sources, format, schema);
-        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "formatting", result.valid() ? sources.stream().filter(source -> new String(source.bytes(), StandardCharsets.UTF_8).contains("\r\n"))
+        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "suggestions", suggestions, "formatting", result.valid() ? sources.stream().filter(source -> new String(source.bytes(), StandardCharsets.UTF_8).contains("\r\n"))
                         .map(source -> Json.object("path", source.file(), "text", new String(source.bytes(), StandardCharsets.UTF_8).replace("\r\n", "\n"))).toList() : List.of(),
                 "definitions", result.valid() ? result.origins().stream().map(origin -> Json.object(
                         "id", origin.id(), "location", span(origin.fields().get("id").getFirst()),
@@ -86,6 +97,12 @@ public final class EditorMain {
         byte[] bytes = string(file.get("text")).getBytes(StandardCharsets.UTF_8);
         if (bytes.length > maximum) throw new IllegalArgumentException("file snapshot exceeds limit");
         return new Interpreter.Source(path, bytes);
+    }
+
+    private static int coordinate(Object value) {
+        if (!(value instanceof Number number) || number.doubleValue() != number.intValue() || number.intValue() < 1 || number.intValue() > 8 * 1024 * 1024)
+            throw new IllegalArgumentException("invalid cursor coordinate");
+        return number.intValue();
     }
 
     private static String string(Object value) {

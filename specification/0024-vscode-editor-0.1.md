@@ -81,3 +81,20 @@ project snapshots produce no edits. VS Code receives a text edit plus an LF end-
 edit; its normal undo/save workflow applies them. No schema formatting, field
 reordering, quote changes, comment movement or rewriting of opaque text is added.
 A changed document version or cancelled request cannot supply edits.
+
+## Attribute completion
+
+A request may include `cursor: {path,line,column}` using the same code-point
+coordinates and a selected requirement path. The response includes `suggestions`
+with label, insertion text, replacement location and required/optional type detail.
+Assistance requires a valid explicitly selected declaration and matching YAML 0.4
+header/schema name, even when requirement values are incomplete.
+
+Java composes the cursor source with the same bounded YAML engine. It recognizes
+only `requirements[i].attributes`, excludes already used keys, and quotes enum
+insertions as YAML-compatible JSON strings. For an incomplete, space-indented key
+line it may temporarily append `: null` (or use an empty-key placeholder) solely to
+identify that structural path. It never validates, publishes or writes the repaired
+text. Prose, block scalars, comments, unrelated mappings, ambiguous structures,
+anchors, aliases and unsupported YAML constructs do not acquire attribute meaning.
+Malformed structures that this one-line repair cannot resolve produce no suggestions.
