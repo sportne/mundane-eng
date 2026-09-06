@@ -60,9 +60,18 @@ public final class EditorMain {
             schema = AttributeSchema.parse(source);
         }
         var result = Interpreter.interpretSources(sources, format, schema);
-        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "diagnostics",
-                result.diagnostics().stream().map(d -> Json.object("path", d.file(),
+        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "definitions", result.valid() ? result.origins().stream().map(origin -> Json.object(
+                        "id", origin.id(), "location", span(origin.fields().get("id").getFirst()),
+                        "references", origin.references().entrySet().stream().sorted(Map.Entry.comparingByKey())
+                                .map(entry -> Json.object("id", entry.getKey(), "location", span(entry.getValue()))).toList())).toList() : List.of(),
+                "diagnostics", result.diagnostics().stream().map(d -> Json.object("path", d.file(),
                         "line", d.line(), "column", d.column(), "code", d.code(), "message", d.message())).toList());
+    }
+
+    static Map<String,Object> span(mundanereq.source.SourceSpan span) {
+        return Json.object("path", span.start().source(),
+                "start", Json.object("line", span.start().line(), "column", span.start().column()),
+                "end", Json.object("line", span.end().line(), "column", span.end().column()));
     }
 
     private static Interpreter.Source source(Object value, int maximum) {

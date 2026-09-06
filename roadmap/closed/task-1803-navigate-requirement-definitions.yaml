@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1803"
-kind: "task"
-title: "Navigate Requirement Definitions"
-status: "Planned"
-dependencies: ["TC-1802"]
+format: mundane-work-yaml-0.2
+id: TC-1803
+kind: task
+title: Navigate Requirement Definitions
+status: Complete
+dependencies: [TC-1802]
 relations: []
-planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
-body: |2+
+planning: {stage: '18', type: Implementation, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
 
   ## Outcome
 
@@ -31,5 +32,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Source rules](../specification/0010-requirements-yaml-0.3.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  Actual VS Code definition-provider tests passed for cross-file decomposition, unsaved target line movement, non-BMP UTF-16 target spans, missing and duplicate IDs, and prose exclusion. Maintained Java tests and the native bridge build passed. The editor contract records that invalid snapshots provide no guessed navigation.

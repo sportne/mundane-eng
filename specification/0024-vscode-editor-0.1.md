@@ -63,3 +63,12 @@ validation overlays all open buffers, so references and schemas are checked toge
 Configuration, UTF-8, resource or process failures mark the selection and are logged
 in the output channel. No request writes to disk. Unselected YAML files receive no
 Mundane diagnostic or authoring operation.
+
+## Definition navigation
+
+Valid snapshot responses include definitions (human `id`, ID-value `location` and
+explicit decomposition `references` with target IDs and spans). Go to Definition
+only matches the reference token, never prose. It opens the unique selected target's
+ID-value span, including unsaved origin changes. Invalid project snapshots provide
+no definitions, so duplicate IDs, missing targets and incomplete parses cannot
+produce a guessed jump. Navigation resumes after project errors are repaired.

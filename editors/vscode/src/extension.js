@@ -73,6 +73,27 @@ function activate(context) {
     const file = state.snapshot.files.find(f => path.join(state.folder, f.path) === document.uri.fsPath);
     return { ...state, file };
   }
+  function range(text, span) {
+    const start = position(text, span.start.line, span.start.column);
+    const end = position(text, span.end.line, span.end.column);
+    return new vscode.Range(start.line, start.character, end.line, end.character);
+  }
+  context.subscriptions.push(vscode.languages.registerDefinitionProvider(selector, {
+    async provideDefinition(document, point, token) {
+      const state = await current(document, token);
+      if (!state?.result.valid) return [];
+      const definitions = state.result.definitions;
+      const reference = definitions.flatMap(d => d.references).find(r => r.location.path === state.file.path &&
+        range(state.file.text, r.location).contains(point) && !range(state.file.text, r.location).end.isEqual(point));
+      if (!reference) return [];
+      const targets = definitions.filter(d => d.id === reference.id);
+      if (targets.length !== 1) return [];
+      const target = targets[0].location;
+      const text = state.snapshot.files.find(f => f.path === target.path)?.text;
+      if (text === undefined) return [];
+      return [new vscode.Location(vscode.Uri.file(path.join(state.folder, target.path)), range(text, target))];
+    }
+  }));
   context.subscriptions.push(output, diagnostics,
     vscode.commands.registerCommand('mundane.validate', validate),
     vscode.workspace.onDidChangeTextDocument(schedule),
