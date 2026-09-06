@@ -32,8 +32,27 @@ public final class WorkSnapshotTest {
         String prefix=text.substring(0,offset);String[] lines=prefix.split("\n",-1);
         return new int[]{lines.length,lines[lines.length-1].codePointCount(0,lines[lines.length-1].length())+1};
     }
+    private static void relations() {
+        String text=A+"relations:\n- {relation: addresses, scope: req, kind: requirement, target: \"REQ\"}\n"
+            +"- relation: relates-to\n  scope: other\n  kind: work-item\n  target: TASK\n"
+            +"- {relation: evidence, scope: null, kind: resource, target: docs.txt}\n";
+        var sources=List.of(source("card.yaml",text));assert WorkCompiler.compileSnapshots(sources).valid();
+        var refs=WorkEditor.relations(sources);assert refs.size()==2;
+        for(var ref:refs) {
+            var span=map(ref.get("location"));var start=map(span.get("start"));var end=map(span.get("end"));
+            String line=text.split("\n")[(int)start.get("line")-1];
+            String token=line.substring(line.offsetByCodePoints(0,(int)start.get("column")-1),line.offsetByCodePoints(0,(int)end.get("column")-1));
+            assert token.equals(ref.get("id"))||token.equals("\""+ref.get("id")+"\"");
+        }
+        var body=List.of(source("card.yaml",A.replace("Literal prose.","target: REQ; scope: req; kind: requirement")));
+        assert WorkEditor.relations(body).isEmpty();
+        var req=new TreeMap<>(mundanereq.editor.EditorBridgeTest.request());req.put("source","mundane-work-yaml-0.2");
+        req.put("files",List.of(Json.object("path","card.yaml","text",text.replace("id: A","id: bad id"))));
+        assert list(mundanereq.editor.EditorMain.analyze(req).get("workRelations")).isEmpty();
+    }
     public static void run() throws Exception {
         assistance();
+        relations();
         Path root=Files.createTempDirectory("work-snapshot");
         try {
             Files.writeString(root.resolve("a.yaml"),A);

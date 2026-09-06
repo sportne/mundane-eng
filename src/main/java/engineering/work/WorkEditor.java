@@ -22,6 +22,22 @@ public final class WorkEditor {
         }
         result.sort(Comparator.comparing(x->(String)x.get("id")));return result;
     }
+    /** Exact relation value spans for editor consumers; opaque body text stays opaque. */
+    public static List<Map<String,Object>> relations(List<Snapshots.Snapshot> sources) {
+        var result=new ArrayList<Map<String,Object>>();
+        for(var source:sources) {
+            Node root=WorkYaml.compose(source.path(),new String(source.bytes(),StandardCharsets.UTF_8));
+            var fields=mapping(root);
+            if(!(fields.get("relations") instanceof SequenceNode relations))continue;
+            for(Node entry:relations.getValue()) {
+                var relation=mapping(entry);Node target=relation.get("target");
+                String role=optional(relation.get("relation")),kind=optional(relation.get("kind"));
+                if(!Set.of("addresses","relates-to","supersedes").contains(role)||!Set.of("requirement","work-item").contains(kind)||!simple(target))continue;
+                result.add(object("scope",scalar(relation.get("scope")),"kind",kind,"id",scalar(target),"role",role,"location",span(source.path(),target)));
+            }
+        }
+        result.sort(Comparator.comparing(engineering.artifacts.Json::write));return result;
+    }
     public record Assistance(List<Map<String,Object>> suggestions,Map<String,Object> hover) {}
     private record Slot(Node key,Node value,List<String> choices,String help,Map<String,String> targets) {}
     public static Assistance assist(List<Snapshots.Snapshot> sources,String file,int line,int column) {

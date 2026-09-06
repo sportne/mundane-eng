@@ -128,6 +128,7 @@ public final class EditorMain {
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
                 "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
         }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",assistance.suggestions(),"hover",assistance.hover(),
+            "workRelations",diagnostics.isEmpty()?engineering.work.WorkEditor.relations(sources):List.of(),
             "importDiagnostics",importDiagnostics,"importTargets",imports==null?List.of():imports.targets().values().stream().map(EditorImports.Target::describe).toList(),"importNavigation",List.of());
     }
 

@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2103
 kind: task
 title: Locate Typed Work-item References
-status: Planned
+status: Complete
 dependencies: ["TC-2102"]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor imports contract](../../specification/0026-editor-imports-0.1.md)
+
+  ## Completion evidence
+
+  make test passed all 14 maintained groups. WorkSnapshotTest checks exact quoted and unquoted relation spans, scope/kind/role retention, evidence and literal-body exclusion, and suppression for invalid source. Compiled artifact formats are unchanged.
