@@ -123,3 +123,10 @@ TC-2002 reuses compilation for buffers; TC-2003 adds local diagnostics. TC-2004
 adds dependency navigation, TC-2005 adds structural completion and hover, and
 TC-2006 dogfoods the backlog and verifies installation. Execution order:
 TC-2001 → TC-2002 → TC-2003 → TC-2004 → TC-2005 → TC-2006.
+
+## Imported editor targets
+
+TC-2101 defines explicit imports and source mappings, TC-2102 validates compiled
+inputs, and TC-2103 captures typed relation spans. TC-2104 adds revision-checked
+navigation, TC-2105 adds imported completion/hover, and TC-2106 verifies installed
+workflows. Order: TC-2101 → TC-2102 → TC-2103 → TC-2104 → TC-2105 → TC-2106.

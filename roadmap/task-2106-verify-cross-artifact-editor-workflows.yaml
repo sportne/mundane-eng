@@ -1,0 +1,54 @@
+format: mundane-work-yaml-0.2
+id: TC-2106
+kind: task
+title: Verify Cross-artifact Editor Workflows
+status: Planned
+dependencies: ["TC-2105"]
+relations: []
+planning:
+  stage: '21'
+  type: Testing
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+body: |2
+
+  ## Problem and outcome
+
+  Work-item relations can name compiled artifacts but editor assistance currently
+  stops at local task prerequisites. Run development and installed workflows for fresh/stale/missing sources, repaired imports, ambiguous scopes, mismatched pins and cancellation. Consolidate setup guidance and run the full repository gate.
+
+  ## Scope and acceptance
+
+  Run development and installed workflows for fresh/stale/missing sources, repaired imports, ambiguous scopes, mismatched pins and cancellation. Consolidate setup guidance and run the full repository gate.
+  Verify scope-qualified identities, unchanged source bytes and refusal to guess
+  targets. Implementation uses the preceding decision and existing domain contracts.
+
+  ## Evidence
+
+  Design requires a written contract and worked input before dependent code.
+  Implementation requires behavioral fixtures and the owning executable checks.
+  Record actual outcomes in completion evidence before closing the card.
+
+  ## Dependencies and work unlocked
+
+  The contract enables validation, structural origins enable navigation, and target
+  assistance enables installed workflow verification. Follow declared predecessors.
+
+  ## Non-goals and compatibility
+
+  No new authoring language, artifact identities, implicit builds, network fetching,
+  source rewriting, plan/evidence navigation, publication or maturity promise.
+  IDs remain human-authored. Compiled formats remain independent of editor versions.
+
+  ## Risks and stop conditions
+
+  Refuse ambiguous scopes, unsupported formats, mismatched pins and unverifiable
+  source origins. Missing or modified source must never produce a guessed jump.
+  Keep authored facts distinct from compiled revision descriptions. Affected areas:
+  editor bridge, work origins, VS Code selection/providers, fixtures and guides.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
