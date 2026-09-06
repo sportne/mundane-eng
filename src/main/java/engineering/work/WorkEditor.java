@@ -41,6 +41,9 @@ public final class WorkEditor {
     public record Assistance(List<Map<String,Object>> suggestions,Map<String,Object> hover) {}
     private record Slot(Node key,Node value,List<String> choices,String help,Map<String,String> targets) {}
     public static Assistance assist(List<Snapshots.Snapshot> sources,String file,int line,int column) {
+        return assist(sources,file,line,column,Map.of());
+    }
+    public static Assistance assist(List<Snapshots.Snapshot> sources,String file,int line,int column,Map<String,Map<String,Object>> imports) {
         var none=new Assistance(List.of(),null);
         var source=sources.stream().filter(s->s.path().equals(file)).findFirst().orElseThrow();
         String text=new String(source.bytes(),StandardCharsets.UTF_8);String[] lines=text.split("\n",-1);
@@ -66,11 +69,23 @@ public final class WorkEditor {
             if(fields.get("relations") instanceof SequenceNode relations)for(Node entry:relations.getValue()) {
                 var relation=mapping(entry);
                 slots.add(new Slot(key(entry,"relation"),relation.get("relation"),WorkValues.RELATIONS.stream().sorted().toList(),
-                    "Typed relation: addresses, relates-to, supersedes or evidence. Evidence requires an unscoped resource; supersedes requires a work-item target. Imported targets are not resolved by this editor.",Map.of()));
+                    "Typed relation: addresses, relates-to, supersedes or evidence. Evidence requires an unscoped resource; supersedes requires a work-item target. Explicit editor imports enable supported target resolution.",Map.of()));
                 if("work-item".equals(optional(relation.get("kind")))&&"work".equals(optional(relation.get("scope")))
                     &&Set.of("addresses","relates-to","supersedes").contains(optional(relation.get("relation")))) {
                     slots.add(new Slot(key(entry,"target"),relation.get("target"),List.copyOf(targets.keySet()),
                         "Selected local task target in scope work. Imported scopes and evidence resources are outside editor resolution.",targets));
+                }
+                String scope=optional(relation.get("scope")),targetKind=optional(relation.get("kind")),role=optional(relation.get("relation"));
+                if(!scope.equals("work")&&Set.of("requirement","work-item").contains(targetKind)
+                    &&Set.of("addresses","relates-to","supersedes").contains(role)&&(!role.equals("supersedes")||targetKind.equals("work-item"))) {
+                    Map<String,String> imported=new TreeMap<>();
+                    for(var candidate:imports.values())if(scope.equals(candidate.get("scope"))&&targetKind.equals(candidate.get("kind"))) {
+                        imported.put((String)candidate.get("id"),candidate.get("scope")+":"+candidate.get("kind")+":"+candidate.get("id")
+                            +" — "+candidate.get("title")+(candidate.get("status")==null?"":" ("+candidate.get("status")+")")
+                            +"\nCompiled revision: "+candidate.get("revision")+"\nMapped source: "+candidate.get("path")+" — "+candidate.get("sourceState"));
+                    }
+                    if(!imported.isEmpty())slots.add(new Slot(key(entry,"target"),relation.get("target"),List.copyOf(imported.keySet()),
+                        "Compiled "+targetKind+" targets in scope "+scope+". Source changes do not update this compiled description. Navigation requires matching source bytes and origin.",imported));
                 }
             }
             for(Slot slot:slots) {
@@ -88,7 +103,7 @@ public final class WorkEditor {
                 if(!match)continue;
                 var location=empty?object("path",file,"start",object("line",line,"column",column),"end",object("line",line,"column",column)):span(file,node);
                 var suggestions=slot.choices().stream().map(choice->object("label",choice,"insertText",engineering.artifacts.Json.write(choice),
-                    "detail","work-item: "+slot.help(),"location",location)).toList();
+                    "detail","work-item: "+slot.help()+(slot.targets().containsKey(choice)?"\n"+slot.targets().get(choice):""),"location",location)).toList();
                 String description=slot.help();String target=slot.targets().get(optional(node));
                 if(target!=null)description+="\n\n"+target;
                 var hover=hit(node,line,column,false)?object("text",description,"location",span(file,node)):null;

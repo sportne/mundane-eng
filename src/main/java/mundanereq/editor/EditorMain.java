@@ -124,16 +124,16 @@ public final class EditorMain {
             importDiagnostics.add(Json.object("path",path,"line",1,"column",1,"severity","error","code","editor-import-input","message",message));
         }
         var result=engineering.work.WorkCompiler.compileSnapshots(sources);
-        var assistance=new engineering.work.WorkEditor.Assistance(List.of(),null);
-        if(request.get("cursor")!=null) {
-            var cursor=object(request.get("cursor"));
-            assistance=engineering.work.WorkEditor.assist(sources,string(cursor.get("path")),coordinate(cursor.get("line")),coordinate(cursor.get("column")));
-        }
         var diagnostics=new ArrayList<>(result.diagnostics());
         if(result.valid())try {engineering.work.WorkGraph.validateDependencies(result.items());}
         catch(engineering.artifacts.Problem p){diagnostics.add(p.diagnostic());}
         var relations=diagnostics.isEmpty()?engineering.work.WorkEditor.relations(sources):List.<Map<String,Object>>of();
         var imported=imports==null?new ImportedNavigation.Result(List.of(),List.of(),Map.of()):ImportedNavigation.resolve(imports,relations);
+        var assistance=new engineering.work.WorkEditor.Assistance(List.of(),null);
+        if(request.get("cursor")!=null) {
+            var cursor=object(request.get("cursor"));
+            assistance=engineering.work.WorkEditor.assist(sources,string(cursor.get("path")),coordinate(cursor.get("line")),coordinate(cursor.get("column")),imported.targets());
+        }
         importDiagnostics.addAll(imported.diagnostics());
         return Json.object("protocol",PROTOCOL,"valid",diagnostics.isEmpty(),"diagnostics",diagnostics.stream().map(d->{
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),

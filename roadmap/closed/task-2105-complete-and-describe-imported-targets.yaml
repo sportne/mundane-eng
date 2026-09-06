@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2105
 kind: task
 title: Complete and Describe Imported Targets
-status: Planned
+status: Complete
 dependencies: ["TC-2104"]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor imports contract](../../specification/0026-editor-imports-0.1.md)
+
+  ## Completion evidence
+
+  All 14 Java groups, native build and actual VS Code provider checks passed. Imported completion is constrained by scope, kind and role; quoted insertions validate. Hover shows compiled revision and source state, preserves compiled titles after unsaved changes, and excludes prose, invalid roles and invalid imports.

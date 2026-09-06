@@ -62,9 +62,9 @@
     "roadmap/closed/task-2102-validate-compiled-editor-imports.yaml",
     "roadmap/closed/task-2103-locate-typed-work-item-references.yaml",
     "roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml",
+    "roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml",
     "roadmap/task-0807-test-authored-views-and-specifications.yaml",
     "roadmap/task-1104-establish-monorepo-component-layout.yaml",
-    "roadmap/task-2105-complete-and-describe-imported-targets.yaml",
     "roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml"
   ],
   "format": "mundane-work-set-0.2",
