@@ -4,26 +4,20 @@ VS Code 1.109 or newer is required. This workspace extension uses the same Java 
 It operates on explicit YAML 0.3/0.4 projects. Other engineering artifact languages
 keep their own contracts.
 
-Build `make native-editor` with the Java/GraalVM environment in the
-[build guide](../../distribution/build-verification.md). With Node.js 22 or newer:
+The [Linux bundle installation guide](../../distribution/editor-bundle.md) explains
+how to install the paired VSIX and native bridge. Build that bundle with
+`make package-editor` using the environment in the
+[contributor build guide](../../distribution/build-verification.md). The archive,
+checksums, versions and runtime notices are written under `build/editor-package/`.
+The bundle does not publish to a marketplace or bundle VS Code itself.
 
-```sh
-cd editors/vscode
-npm ci
-npm run test:unit
-xvfb-run -a npm test
-npm run package
-```
-
-The host test downloads VS Code into the ignored `build/vscode-test` directory.
-Linux needs the usual Electron libraries and Xvfb when no display is available.
-Tests use a disposable workspace in `build/editor-test-workspace`.
-The package command prints the versioned VSIX path under `build/`. Install it
-with **Extensions: Install from VSIX**.
-The VSIX contains JavaScript, grammar and documentation; build the native bridge
-for the extension host separately. In a Remote/WSL workspace, install the extension
-and configure the bridge in that workspace environment. No Marketplace publication or bundled platform binary
-is implied.
+For extension development, `make editor-verify` builds the bridge, runs Node and
+actual Extension Host checks (including two-folder request traffic), and builds
+the VSIX. Tests download the pinned VS Code build into `build/vscode-test` and use
+disposable example workspaces. The VSIX contains no native platform code; configure
+the paired bridge in the same extension host, including the workspace side of
+Remote/WSL sessions. Standalone builds remain available with `make native-editor`
+and `npm ci && npm run package` from `editors/vscode/`.
 
 In VS Code settings, select `mundane.executable` as the absolute path to
 `build/maintained/mundane-editor` and `mundane.project` as a workspace-relative

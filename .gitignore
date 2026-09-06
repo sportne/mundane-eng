@@ -21,3 +21,4 @@ site/
 editors/vscode/node_modules/
 editors/vscode/.vscode-test/
 .vscode-test/
+__pycache__/

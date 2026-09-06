@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-1904
 kind: task
 title: Bundle the Linux Editor and Native Bridge
-status: Planned
+status: Complete
 dependencies:
 - TC-1902
 - TC-1903
@@ -44,5 +44,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor contract](../specification/0024-vscode-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor contract](../../specification/0024-vscode-editor-0.1.md)
+
+  ## Completion evidence
+
+  The 0.1.1 Linux x86-64 bundle was assembled from matching native and VSIX metadata. Checks passed for complete checksums/inventory, executable mode, runtime notices, glibc symbol ceiling and byte-identical reassembly from identical inputs. Corrupt archives, mismatched VSIX metadata and unsupported platforms were rejected. The installed-runtime checks follow in TC-1905.

@@ -183,3 +183,9 @@ native-editor: test
 editor-verify: native-editor
 	python3 scripts/check-editor-bridge.py
 	cd editors/vscode && npm ci && npm run test:unit && xvfb-run -a npm test && xvfb-run -a node test/traffic-run.js && npm run package
+
+.PHONY: package-editor
+package-editor: native-editor
+	cd editors/vscode && npm ci && npm run package
+	python3 scripts/package-editor.py "$(GRAALVM_HOME)"
+	python3 scripts/check-editor-package.py "$(GRAALVM_HOME)"

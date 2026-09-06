@@ -55,3 +55,9 @@ Host tests, and packages the local VSIX. This requires Node.js 22+, npm, Xvfb on
 headless Linux host and Electron's GTK/GBM/NSS/ALSA libraries. `npm ci` uses the
 checked-in lockfile; the pinned VS Code test build is cached under `build/`.
 See the [extension guide](../editors/vscode/README.md) for installation and settings.
+
+`make package-editor` assembles and checks the local Linux x86-64 editor bundle
+from the paired native bridge and VSIX. It checks metadata and the glibc ceiling,
+includes runtime notices, inventories checksums, rejects mismatched inputs and
+reassembles identical inputs to check determinism. Follow the
+[bundle guide](editor-bundle.md) for installation.
