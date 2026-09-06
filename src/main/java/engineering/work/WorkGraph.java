@@ -43,7 +43,7 @@ public final class WorkGraph {
             List<String> unfinished=new ArrayList<>();
             for(Object depValue:list(v.get("dependencies"))) {
                 String dep=text(depValue);var target=scopeEntry.getValue().get(dep);
-                if(target==null||!"task".equals(map(target.get("values")).get("kind")))throw new Problem("missing-work-target","dependency must name a local task: "+dep,loc);
+                requireTask(target,dep,loc);
                 String to=scope+":work-item:"+dep;dependencies.get(key).add(to);edges.add(object("from",key,"relation","depends-on","to",to,"location",loc));
                 if(!"Complete".equals(map(target.get("values")).get("status")))unfinished.add(dep);
             }
@@ -66,6 +66,25 @@ public final class WorkGraph {
         acyclic(dependencies,"dependency-cycle",locations);acyclic(supersedes,"supersession-cycle",locations);
         for(String key:retired)if(!supersededTargets.contains(key))throw new Problem("missing-supersession","Superseded item lacks an incoming supersedes link: "+key,locations.get(key));
         edges.sort(Comparator.comparing(Json::write));findings.sort(Comparator.comparing(x->text(map(x).get("id"))));return new Evaluation(edges,findings);
+    }
+    /** The local prerequisite subset, without resolving external relations or resources. */
+    public static void validateDependencies(List<Map<String,Object>> records) {
+        Map<String,Map<String,Object>> items=new TreeMap<>();
+        for(var record:records)items.put(text(map(record.get("values")).get("id")),record);
+        Map<String,List<String>> graph=new TreeMap<>();Map<String,Map<String,Object>> locations=new TreeMap<>();
+        for(var entry:items.entrySet()) {
+            var location=map(entry.getValue().get("metadataLocation"));locations.put(entry.getKey(),location);
+            List<String> deps=new ArrayList<>();
+            for(Object value:list(map(entry.getValue().get("values")).get("dependencies"))) {
+                String dep=text(value);requireTask(items.get(dep),dep,location);deps.add(dep);
+            }
+            graph.put(entry.getKey(),deps);
+        }
+        acyclic(graph,"dependency-cycle",locations);
+    }
+    private static void requireTask(Map<String,Object> target,String dep,Map<String,Object> location) {
+        if(target==null||!"task".equals(map(target.get("values")).get("kind")))
+            throw new Problem("missing-work-target","dependency must name a local task: "+dep,location);
     }
     private static void addWorkTargets(Map<String,Set<String>> targets,String scope,Map<String,Map<String,Object>> items){targets.put(scope+":work-item",items.keySet());}
     public static void acyclic(Map<String,List<String>> graph,String code,Map<String,Map<String,Object>> locations) {

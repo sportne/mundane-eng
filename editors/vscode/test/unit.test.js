@@ -70,3 +70,10 @@ test('project requests share work, remain bounded and reject results after inval
   slow.invalidate();release({valid:true});assert.equal(await pending,null);assert.equal(published.length,before);
   project.dispose();assert.equal(await project.get(),null);
 });
+test('work selections are explicit, bounded and independent of requirement schemas', () => {
+  const valid={format:'mundane-work-set-0.2',source:'mundane-work-yaml-0.2',files:['a.yaml']};
+  assert.equal(project(JSON.stringify(valid),true).attributeSchema,null);
+  for (const change of [{source:'yaml-0.4'},{files:[]},{files:['a.yaml','a.yaml']},{files:['../a']},{attributeSchema:null},{files:Array.from({length:129},(_,i)=>`${i}.yaml`)}]) {
+    assert.throws(()=>project(JSON.stringify({...valid,...change}),true));
+  }
+});

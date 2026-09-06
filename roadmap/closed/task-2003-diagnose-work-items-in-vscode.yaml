@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2003
 kind: task
 title: Diagnose Work Items in VS Code
-status: Planned
+status: Complete
 dependencies: ["TC-2002"]
 relations: []
 planning:
@@ -45,5 +45,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  make native-editor passed Java tests and native compilation. Actual VS Code host tests passed simultaneous requirements/work projects, unsaved invalid fields, duplicate IDs, missing prerequisites, cycles, stale-result rejection and selection recovery. Node boundary tests passed explicit work manifest limits.

@@ -128,6 +128,7 @@ async function run() {
   assert.equal(vscode.languages.getDiagnostics(schema.uri).length, 0);
   console.log('PASS unsaved declaration changes, enum diagnostics and schema repair');
   console.log('PASS unsaved syntax/reference diagnostics, repair, stale request rejection and unchanged disk');
+  await require('./work').run(api);
   console.log('PASS actual VS Code Extension Host: activation, language registration, explicit project and Java bridge');
 }
 module.exports = { run };

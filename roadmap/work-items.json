@@ -54,9 +54,9 @@
     "roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml",
     "roadmap/closed/task-2001-define-work-item-editor-selection.yaml",
     "roadmap/closed/task-2002-compile-work-item-editor-snapshots.yaml",
+    "roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml",
     "roadmap/task-0807-test-authored-views-and-specifications.yaml",
     "roadmap/task-1104-establish-monorepo-component-layout.yaml",
-    "roadmap/task-2003-diagnose-work-items-in-vscode.yaml",
     "roadmap/task-2004-navigate-local-task-dependencies.yaml",
     "roadmap/task-2005-complete-and-describe-work-item-fields.yaml",
     "roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml"

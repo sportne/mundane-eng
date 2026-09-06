@@ -12,8 +12,15 @@ function relative(name) {
   }
   return name;
 }
-function project(text) {
+function project(text, work = false) {
   const p = JSON.parse(text);
+  if (work) {
+    if (!p || Object.keys(p).sort().join() !== 'files,format,source' || p.format !== 'mundane-work-set-0.2' || p.source !== 'mundane-work-yaml-0.2') throw new Error('Invalid work-item editor selection');
+    if (!Array.isArray(p.files) || p.files.length < 1 || p.files.length > 128) throw new Error('Select 1–128 work-item files');
+    p.files.forEach(relative);
+    if (new Set(p.files).size !== p.files.length) throw new Error('Duplicate selected path');
+    return {...p, attributeSchema:null};
+  }
   if (!p || Object.keys(p).sort().join() !== 'attributeSchema,files,format,source' || p.format !== metadata.project || !['yaml-0.3', 'yaml-0.4'].includes(p.source)) throw new Error('Invalid editor project contract');
   if (!Array.isArray(p.files) || p.files.length < 1 || p.files.length > 128) throw new Error('Select 1–128 requirement files');
   p.files.forEach(relative);
@@ -54,12 +61,19 @@ async function read(root, name, documents, maximum) {
   if (Buffer.byteLength(text) > maximum) throw new Error('Buffer exceeds limit');
   return { path: name, text };
 }
-async function snapshot(root, selection, documents, selected = () => {}) {
-  const config = project((await read(root, selection, documents, 64 * 1024)).text);
+async function snapshot(root, selection, documents, selected = () => {}, work = false, otherSelection = '') {
+  const config = project((await read(root, selection, documents, 64 * 1024)).text, work);
   selected([...config.files, ...(config.attributeSchema ? [config.attributeSchema] : [])]);
+  if (otherSelection) {
+    // Only overlapping selections are shared configuration errors. A malformed
+    // independent selection must not disable the healthy domain.
+    let other;
+    try { other = project((await read(root, otherSelection, documents, 64 * 1024)).text, !work); } catch (_) { /* independently diagnosed */ }
+    if (other?.files.some(name => config.files.includes(name))) throw new Error('A file is selected as both requirements and work items');
+  }
   const files = []; let total = 0;
   for (const name of config.files) {
-    const file = await read(root, name, documents, 8 * 1024 * 1024);
+    const file = await read(root, name, documents, (work ? 1 : 8) * 1024 * 1024);
     total += Buffer.byteLength(file.text);
     if (total > LIMIT) throw new Error('Snapshot exceeds 16 MiB');
     files.push(file);

@@ -1,0 +1,8 @@
+format: mundane-work-yaml-0.2
+id: BETA
+kind: task
+title: Beta task
+status: Planned
+dependencies: [ALPHA]
+body: |
+  Literal ALPHA citation, not a dependency.

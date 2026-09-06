@@ -1,7 +1,7 @@
 {
   "name": "mundane-requirements",
   "displayName": "Mundane Requirements",
-  "description": "Explicit YAML requirement projects backed by the Mundane Java tools.",
+  "description": "Explicit YAML requirements and work-item projects backed by the Mundane Java tools.",
   "version": "0.1.1",
   "publisher": "mundane-engineering",
   "license": "BSD-3-Clause",
@@ -44,6 +44,16 @@
           ".mreq.yaml"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "mundane-work-items",
+        "aliases": [
+          "Mundane Work Items"
+        ],
+        "extensions": [
+          ".mwork.yaml"
+        ],
+        "configuration": "./language-configuration.json"
       }
     ],
     "grammars": [
@@ -51,6 +61,11 @@
         "language": "mundane-requirements",
         "scopeName": "source.mundane-requirements",
         "path": "./syntaxes/requirements.tmLanguage.json"
+      },
+      {
+        "language": "mundane-work-items",
+        "scopeName": "source.mundane-work-items",
+        "path": "./syntaxes/work-items.tmLanguage.json"
       }
     ],
     "configuration": {
@@ -67,6 +82,12 @@
           "default": "",
           "scope": "machine-overridable",
           "description": "Absolute path to the local mundane-editor executable. Executed only in trusted workspaces."
+        },
+        "mundane.workProject": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Explicit workspace-relative mundane-work-set-0.2 JSON manifest. Empty disables work-item assistance."
         }
       }
     }

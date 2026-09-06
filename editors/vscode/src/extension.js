@@ -6,11 +6,11 @@ const { position } = require('./positions');
 const { Project } = require('./project');
 
 function activate(context) {
-  const output = vscode.window.createOutputChannel('Mundane Requirements');
+  const output = vscode.window.createOutputChannel('Mundane Authoring');
   const diagnostics = vscode.languages.createDiagnosticCollection('mundane-requirements');
   let disposed = false;
   const projects = new Map();
-  const selector = [{ scheme: 'file', language: 'mundane-requirements' }, { scheme: 'file', language: 'yaml' }];
+  const selector = [{ scheme: 'file', language: 'mundane-requirements' }, { scheme: 'file', language: 'yaml' }, { scheme: 'file', language: 'mundane-work-items' }];
   function clear(project) {
     for (const uri of project.markers) diagnostics.delete(uri);
     project.markers = [];
@@ -41,7 +41,7 @@ function activate(context) {
     const diagnostic = new vscode.Diagnostic(new vscode.Range(0, 0, 0, 0), error.message, vscode.DiagnosticSeverity.Error);
     diagnostic.code = 'editor-configuration'; diagnostic.source = 'Mundane';
     let uri = project.folder.uri;
-    try { uri = vscode.Uri.joinPath(uri, client.relative(project.settings().get('project'))); } catch (_) { /* folder marker */ }
+    try { uri = vscode.Uri.joinPath(uri, client.relative(project.settings().get(project.setting))); } catch (_) { /* folder marker */ }
     project.markers.push(uri); diagnostics.set(uri, [diagnostic]);
   }
   function invalidate(project) {
@@ -49,14 +49,14 @@ function activate(context) {
   }
   function schedule(project) {
     invalidate(project);
-    if (vscode.workspace.isTrusted && project.settings().get('project')) {
+    if (vscode.workspace.isTrusted && project.settings().get(project.setting)) {
       project.timer = setTimeout(() => { void project.session.get(); }, 200);
     }
   }
   function related(project, uri) {
     if (uri.scheme !== 'file') return false;
     const name = path.relative(project.folder.uri.fsPath, uri.fsPath).split(path.sep).join('/');
-    return name === project.settings().get('project') || project.watched.has(name);
+    return name === project.settings().get(project.setting) || name === project.settings().get(project.otherSetting) || project.watched.has(name);
   }
   function changed(document) {
     for (const project of projects.values()) if (related(project, document.uri)) schedule(project);
@@ -65,7 +65,7 @@ function activate(context) {
     if (!vscode.workspace.isTrusted || disposed) return [];
     const results = await Promise.all([...projects.values()].map(async project => {
       invalidate(project);
-      if (!project.settings().get('project')) return null;
+      if (!project.settings().get(project.setting)) return null;
       const state = await project.session.get();
       return state ? {...state,folder:project.folder.uri.fsPath} : null;
     }));
@@ -73,14 +73,15 @@ function activate(context) {
   }
   async function current(document, token, point) {
     if (token?.isCancellationRequested || !vscode.workspace.isTrusted || disposed) return null;
-    const project = projects.get(vscode.workspace.getWorkspaceFolder(document.uri)?.uri.toString());
-    if (!project || !project.settings().get('project')) return null;
+    const folder = vscode.workspace.getWorkspaceFolder(document.uri);
+    if (!folder) return null;
+    const candidates = [...projects.values()].filter(p => p.folder.uri.toString() === folder.uri.toString() && p.settings().get(p.setting));
     const version = document.version;
-    const fileName = path.relative(project.folder.uri.fsPath, document.uri.fsPath).split(path.sep).join('/');
-    if (!project.watched.has(fileName)) {
-      await project.session.get();
-      if (!project.watched.has(fileName)) return null;
-    }
+    const fileName = path.relative(folder.uri.fsPath, document.uri.fsPath).split(path.sep).join('/');
+    await Promise.all(candidates.filter(p => !p.watched.has(fileName)).map(p => p.session.get()));
+    const selected = candidates.filter(p => p.watched.has(fileName));
+    if (selected.length !== 1) return null;
+    const project = selected[0];
     const query = point ? {path:fileName,line:point.line+1,
       column:Array.from(document.lineAt(point.line).text.substring(0,point.character)).length+1} : undefined;
     const state = await project.session.get(query);
@@ -148,22 +149,23 @@ function activate(context) {
   }));
   function synchronizeFolders() {
     const folders = vscode.workspace.workspaceFolders || [];
-    for (const [key,project] of projects) if (!folders.some(f=>f.uri.toString()===key)) {
+    for (const [key,project] of projects) if (!folders.some(f=>f.uri.toString()===project.folder.uri.toString())) {
       invalidate(project); project.session.dispose(); project.watcher.dispose(); projects.delete(key);
     }
-    for (const folder of folders) {
-      if (projects.has(folder.uri.toString())) continue;
-      const project = {folder,markers:[],watched:new Set(),settings:()=>vscode.workspace.getConfiguration('mundane',folder.uri)};
+    for (const folder of folders) for (const setting of ['project','workProject']) {
+      const key = folder.uri.toString() + ':' + setting;
+      if (projects.has(key)) continue;
+      const project = {folder,setting,otherSetting:setting === 'project' ? 'workProject' : 'project',markers:[],watched:new Set(),settings:()=>vscode.workspace.getConfiguration('mundane',folder.uri)};
       project.session = new Project(
-        generation => client.snapshot(folder.uri.fsPath,project.settings().get('project'),vscode.workspace.textDocuments,names=>{
+        generation => client.snapshot(folder.uri.fsPath,project.settings().get(project.setting),vscode.workspace.textDocuments,names=>{
           if(project.session.generation===generation) project.watched=new Set(names);
-        }),
+        },setting === 'workProject',project.settings().get(project.otherSetting)),
         (request,signal)=>client.invoke(project.settings().get('executable'),request,signal),
         state=>publish(project,state),error=>failure(project,error));
       project.watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(folder,'**/*'));
       const disk = uri=>{ if (related(project,uri)) schedule(project); };
       project.watcher.onDidChange(disk); project.watcher.onDidCreate(disk); project.watcher.onDidDelete(disk);
-      projects.set(folder.uri.toString(),project); schedule(project);
+      projects.set(key,project); schedule(project);
     }
   }
   context.subscriptions.push(output, diagnostics,
