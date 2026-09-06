@@ -40,15 +40,20 @@
     "roadmap/closed/task-1703-query-explained-cross-artifact-impact.yaml",
     "roadmap/closed/task-1704-render-source-linked-impact-reports.yaml",
     "roadmap/closed/task-1705-verify-and-document-impact-workflows.yaml",
-    "roadmap/task-0807-test-authored-views-and-specifications.yaml",
-    "roadmap/task-1104-establish-monorepo-component-layout.yaml",
     "roadmap/closed/task-1800-establish-yaml-only-requirement-tooling.yaml",
     "roadmap/closed/task-1801-establish-vscode-extension-foundation.yaml",
     "roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml",
     "roadmap/closed/task-1803-navigate-requirement-definitions.yaml",
     "roadmap/closed/task-1804-integrate-requirement-formatting.yaml",
     "roadmap/closed/task-1805-complete-project-attributes.yaml",
-    "roadmap/closed/task-1806-show-attribute-hover-documentation.yaml"
+    "roadmap/closed/task-1806-show-attribute-hover-documentation.yaml",
+    "roadmap/task-0807-test-authored-views-and-specifications.yaml",
+    "roadmap/task-1104-establish-monorepo-component-layout.yaml",
+    "roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml",
+    "roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml",
+    "roadmap/task-1903-reduce-redundant-editor-project-validation.yaml",
+    "roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml",
+    "roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml"
   ],
   "format": "mundane-work-set-0.2",
   "source": "mundane-work-yaml-0.2"

@@ -49,8 +49,7 @@ body: |2
   ## References
 
   - [Roadmap views study](0001-initial-roadmap.md#views-and-specifications)
-  - Non-Markdown view research
-  - TC-0903
+  - [Current generated-report workflow](../distribution/verification.md)
 
   ## Planning refinement
 
@@ -58,3 +57,8 @@ body: |2
   considering authored composition. This reverses the former prerequisite so a
   useful generated view can be tested without first selecting a view language.
   The original Conditional status and composition scope are retained.
+
+  ## Documentation maintenance
+
+  Replaced an obsolete task citation with the current report workflow. The condition
+  and proposed composition experiment remain unchanged.

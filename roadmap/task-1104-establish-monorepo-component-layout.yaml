@@ -66,5 +66,10 @@ body: |2
 
   - [Roadmap](0001-initial-roadmap.md)
   - [TC-1101](closed/task-1101-define-monorepo-component-boundaries.yaml)
-  - Native packaging evidence
-  - Integrated trial
+  - [Current native package guide](../distribution/README.md)
+  - [Contributor verification](../distribution/build-verification.md)
+
+  ## Documentation maintenance
+
+  Replaced orphaned evidence labels with current owning guides. No layout movement
+  has been authorized by this documentation update; the condition remains in force.

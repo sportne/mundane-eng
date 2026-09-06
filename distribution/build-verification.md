@@ -16,12 +16,12 @@ Do not edit those fixtures concurrently with the injection checks.
 ## Tested build environment
 
 Use Linux x86-64, Ubuntu 24.04, GraalVM CE 21.0.2 (Javac 21 and Native Image),
-Python 3.12 with venv support, and Ruby 3.2. The hosted workflow selects Ubuntu
+Python 3.12 with venv support, Ruby 3.2, and Node.js 22+ with npm. The hosted workflow selects Ubuntu
 24.04 and installs required packages explicitly. With GraalVM's `bin` directory
 first on PATH, the Ubuntu system packages are:
 
 ```sh
-sudo apt-get install ruby python3-venv curl gcc make libc6-dev zlib1g-dev binutils
+sudo apt-get install ruby python3-venv curl gcc make libc6-dev zlib1g-dev binutils xvfb libgtk-3-0 libgbm1 libnss3 libasound2t64
 ```
 
 Git, Bash, GNU tar, Coreutils and Findutils are also required and supplied by the
@@ -32,7 +32,8 @@ single-binary installation checks. This does not assert byte-identical native
 binaries, support for other OS/architecture pairs, or published new packages.
 
 The first run needs network access for the checksummed SnakeYAML jar and pinned
-Python schema-verifier dependencies. The pinned `rpds-py` requires Python 3.11 or
+Python schema-verifier dependencies, the locked npm dependencies and the pinned
+VS Code test build. The pinned `rpds-py` requires Python 3.11 or
 newer; Ubuntu 22.04's default Python 3.10 cannot run the full gate unchanged.
 The tested configuration uses Python 3.12. Source fixtures and expected outputs
 remain checked in; build output and downloaded dependencies are disposable.
@@ -44,7 +45,7 @@ and schema failures; native package checks; version declarations; independent wo
 plan, verification and impact consumers; attribute workflows; golden outputs;
 seeded graphs; targeted mutations; and source-card/documentation checks.
 
-The wrapper separately injects invalid YAML and an invalid structural schema into
+The wrapper separately injects a dangling requirement reference and an invalid structural schema into
 the actual gate, verifies attributed failure, and restores exact input bytes.
 Logs under `build/ci-evidence/` record the actual environment and exit status.
 

@@ -4,7 +4,7 @@ Generated from authoritative source cards and explicit compiled inputs. Do not e
 status or relationships here; regenerate this view. Source links use the analysis
 root as their base. Completion and closure are authored claims, not satisfaction.
 
-Items: 49.
+Items: 54.
 
 | ID | Kind | Title | Status | Dependencies | Unfinished prerequisites |
 | --- | --- | --- | --- | --- | --- |
@@ -57,6 +57,11 @@ Items: 49.
 | [TC-1804](./roadmap/closed/task-1804-integrate-requirement-formatting.yaml#L2) | task | Integrate Requirement Formatting | Complete | TC-1802 | — |
 | [TC-1805](./roadmap/closed/task-1805-complete-project-attributes.yaml#L2) | task | Complete Project Attributes | Complete | TC-1802 | — |
 | [TC-1806](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L2) | task | Show Attribute Hover Documentation | Complete | TC-1805 | — |
+| [TC-1901](./roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml#L2) | task | Reconcile Editor Planning and Setup Documentation | Complete | — | — |
+| [TC-1902](./roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml#L2) | task | Centralize Editor Version and Protocol Declarations | Planned | TC-1901 | — |
+| [TC-1903](./roadmap/task-1903-reduce-redundant-editor-project-validation.yaml#L2) | task | Reduce Redundant Editor Project Validation | Planned | TC-1902 | TC-1902 |
+| [TC-1904](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L2) | task | Bundle the Linux Editor and Native Bridge | Planned | TC-1902, TC-1903 | TC-1902, TC-1903 |
+| [TC-1905](./roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml#L2) | task | Verify Installed Editor Setup and Recovery | Planned | TC-1904 | TC-1904 |
 
 ## Planning qualifications
 
@@ -111,6 +116,11 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - TC-1804 — stage: 18; type: Implementation
 - TC-1805 — stage: 18; type: Implementation
 - TC-1806 — stage: 18; type: Implementation
+- TC-1901 — stage: 19; type: Maintenance
+- TC-1902 — stage: 19; type: Maintenance
+- TC-1903 — stage: 19; type: Implementation
+- TC-1904 — stage: 19; type: Packaging
+- TC-1905 — stage: 19; type: Testing
 
 ## Authored relationships
 
@@ -175,6 +185,11 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1804 | depends-on | work:work-item:TC-1802 | [work:roadmap/closed/task-1804-integrate-requirement-formatting.yaml](./roadmap/closed/task-1804-integrate-requirement-formatting.yaml#L1) |
 | work:work-item:TC-1805 | depends-on | work:work-item:TC-1802 | [work:roadmap/closed/task-1805-complete-project-attributes.yaml](./roadmap/closed/task-1805-complete-project-attributes.yaml#L1) |
 | work:work-item:TC-1806 | depends-on | work:work-item:TC-1805 | [work:roadmap/closed/task-1806-show-attribute-hover-documentation.yaml](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L1) |
+| work:work-item:TC-1902 | depends-on | work:work-item:TC-1901 | [work:roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml](./roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml#L1) |
+| work:work-item:TC-1903 | depends-on | work:work-item:TC-1902 | [work:roadmap/task-1903-reduce-redundant-editor-project-validation.yaml](./roadmap/task-1903-reduce-redundant-editor-project-validation.yaml#L1) |
+| work:work-item:TC-1904 | depends-on | work:work-item:TC-1902 | [work:roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1) |
+| work:work-item:TC-1904 | depends-on | work:work-item:TC-1903 | [work:roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1) |
+| work:work-item:TC-1905 | depends-on | work:work-item:TC-1904 | [work:roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1) |
 
 ## Reverse navigation
 
@@ -216,12 +231,16 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-1801: [work:work-item:TC-1802 (depends-on)](./roadmap/closed/task-1802-show-inline-yaml-diagnostics.yaml#L1)
 - work:work-item:TC-1802: [work:work-item:TC-1803 (depends-on)](./roadmap/closed/task-1803-navigate-requirement-definitions.yaml#L1), [work:work-item:TC-1804 (depends-on)](./roadmap/closed/task-1804-integrate-requirement-formatting.yaml#L1), [work:work-item:TC-1805 (depends-on)](./roadmap/closed/task-1805-complete-project-attributes.yaml#L1)
 - work:work-item:TC-1805: [work:work-item:TC-1806 (depends-on)](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L1)
+- work:work-item:TC-1901: [work:work-item:TC-1902 (depends-on)](./roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml#L1)
+- work:work-item:TC-1902: [work:work-item:TC-1903 (depends-on)](./roadmap/task-1903-reduce-redundant-editor-project-validation.yaml#L1), [work:work-item:TC-1904 (depends-on)](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1)
+- work:work-item:TC-1903: [work:work-item:TC-1904 (depends-on)](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1)
+- work:work-item:TC-1904: [work:work-item:TC-1905 (depends-on)](./roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 68c2ce697c8acec80ff00b367ebabeea3054be82afb87890dcd75f0b256d1e7c
+- Work artifact: build/work-backlog/items.json; SHA-256 d430b28346564faa92d96f3bc4492af0a1f757ba7dd687f3b4e90a20eb7ab4d4
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 d3b737baba029a592b4205d75617cf9a28b873c6d5b82ae6ff4bac4f8c01103d
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 bb9cda77a1db1e6fac9e2351e5d5346e7acaab0cfd5c264112d50a4eebf8d229
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -269,8 +288,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1804-integrate-requirement-formatting.yaml](./roadmap/closed/task-1804-integrate-requirement-formatting.yaml#L1); SHA-256 b2ef129125f6796394231226e64a7a922d1b7bbed0536412ca1b2fd68ff4911c
 - Source: [roadmap/closed/task-1805-complete-project-attributes.yaml](./roadmap/closed/task-1805-complete-project-attributes.yaml#L1); SHA-256 684f17c7105dde90332a580ca2732fdb0ec29149e9d6df18613dc99a87106a3e
 - Source: [roadmap/closed/task-1806-show-attribute-hover-documentation.yaml](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L1); SHA-256 d1af87ee3467420b132a196e5355a614cca09163571ce88dece9a0bfb6c12e25
-- Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 d2725eac0256429e43df12e0ca90854fb52e0d0a78fa708307d44f6a93e0d733
-- Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 dd217c5584ecb076e17288616e39cc67c6ce1e45d86ed510177d7b4658e528f3
+- Source: [roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml](./roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml#L1); SHA-256 20a69da8910c1690162b8b39eee44fef780ca67d03676d7c583e730060ae7681
+- Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
+- Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
+- Source: [roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml](./roadmap/task-1902-centralize-editor-version-and-protocol-declarations.yaml#L1); SHA-256 3166ff827a017266de579d59219a6b15e438b57e4a49d145e226bb8d1223b097
+- Source: [roadmap/task-1903-reduce-redundant-editor-project-validation.yaml](./roadmap/task-1903-reduce-redundant-editor-project-validation.yaml#L1); SHA-256 dac15f0528d25e209b88f0cc747d8fdbf31621cfb636dc420a27f39a0204cadb
+- Source: [roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1); SHA-256 6f1c05571d38fc1032eed849caec37d392eae136307ecc4e877f7b32ab5b8361
+- Source: [roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1); SHA-256 cff3811ca969e9fb2392ed1c97b3b07c59721e5b4e3803d768e082e8584c00df
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff9f89dba866090ac8ef0e5fbf75f16dffe9de1c6e288f4358f66583c9b4aaff
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 ae1e76391d43961f569ff65e993109e752d0451427b1d18f7f0439c0cf572287

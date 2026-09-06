@@ -64,8 +64,6 @@ validate/format/trace; the other maintained commands have separate build targets
 
 Select a concrete workflow before turning a candidate into implementation work:
 
-- Editor file/schema association, inline diagnostics, reference navigation, formatter
-  integration and separate attribute completion/hover capabilities.
 - Unicode confusable/invisible-character diagnostics with explicit source rules.
 - Removal of repeated decoding/parsing where measurements show a correctness or
   performance benefit, supported by behavioral regression tests.
@@ -109,3 +107,11 @@ extension and explicit project snapshots; TC-1802 adds compiler diagnostics.
 Navigation (TC-1803), formatting (TC-1804) and attribute completion (TC-1805)
 then use that foundation. TC-1806 adds attribute hover help after completion.
 The [derived index](../WORK-ITEMS.md) records individual status and evidence.
+
+## Editor consolidation batch
+
+TC-1901 reconciles planning and setup documentation. TC-1902 centralizes editor
+version declarations; TC-1903 measures and reduces repeated validation while
+preserving freshness. TC-1904 packages the matching Linux editor and bridge, and
+TC-1905 tests installation and recovery from that bundle. The execution order is
+TC-1901 → TC-1902 → TC-1903 → TC-1904 → TC-1905.

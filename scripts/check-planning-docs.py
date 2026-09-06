@@ -53,3 +53,9 @@ for folder, pattern in [('specification', '[0-9][0-9][0-9][0-9]-*.md'),
                  if str(path.relative_to(directory)) not in targets]
     assert not unindexed, (folder, 'unindexed documentation', unindexed)
 print('PASS complete specification, research and experiment indexes')
+
+# Prose citations must not silently outlive their source cards.
+for name, text in source_text.items():
+    unresolved = set(re.findall(r'\bTC-[0-9]{4}\b', text)) - set(ids)
+    assert not unresolved, (name, 'unresolved task citations', sorted(unresolved))
+print('PASS source-card prose task citations resolve')

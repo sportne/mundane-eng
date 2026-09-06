@@ -1,0 +1,47 @@
+format: mundane-work-yaml-0.2
+id: TC-1903
+kind: task
+title: Reduce Redundant Editor Project Validation
+status: Planned
+dependencies:
+- TC-1902
+relations: []
+planning:
+  stage: '19'
+  type: Implementation
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+body: |2
+
+  ## Problem and outcome
+
+  Provider calls and unrelated edits currently invalidate all selected projects. Record a reproducible request-count baseline, then scope invalidation and reuse unchanged results with bounded caches.
+
+  ## Scope and acceptance
+
+  Measured request counts decrease for repeated providers and unrelated edits; changed schemas/files still invalidate; simultaneous folders, cancellation and stale results have behavioral tests.
+
+  ## Evidence
+
+  Record actual owning checks and changed artifacts before completion. Use repository
+  examples and repeatable local tests; do not infer hosted or cross-platform results.
+
+  ## Dependencies and boundaries
+
+  Predecessor decisions establish the contracts used here. Tasks 1902 and 1903
+  unlock packaging, which unlocks installed-package checks. Human-authored YAML
+  and IDs remain authoritative. No new artifact language, Marketplace publication,
+  release milestone or unsupported platform promise is included.
+
+  ## Compatibility, risks and stop conditions
+
+  Preserve requirement source and compiled semantics. Keep wire compatibility explicit.
+  Stop or revise if measurements do not justify an optimization, cached results can
+  become stale, or a package needs unverified platform assumptions. Components are
+  editor code/tests, version generation, Makefile, distribution and planning guides.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Editor contract](../specification/0024-vscode-editor-0.1.md)
