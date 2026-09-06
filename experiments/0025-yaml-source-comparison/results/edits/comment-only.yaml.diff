@@ -1,9 +1,0 @@
---- before.yaml
-+++ after.yaml
-@@ -1,5 +1,5 @@
- requirements:
--  # Synthetic lexical pressure; this is not an engineering obligation from the pilot.
-+  # Revised lexical pressure; this is not an engineering obligation from the pilot.
-   - id: "001"
-     title: "true: status # Δ 😀"
-     allocation: "2026-09-04"

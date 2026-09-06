@@ -38,7 +38,7 @@ command/package and compatibility checks, and the new impact targets. New eviden
   termination, explicit depth truncation, unknown seeds and malformed inputs.
 - Strict scoped import validation, exact pin rejection, detected read changes and
   suppression of incomplete query/report publication.
-- Source-to-compiled-to-query-to-report goldens from actual compilers; legacy and
+- Source-to-compiled-to-query-to-report goldens from actual compilers; YAML 0.3 and
   attribute-aware requirement output have the expected identical topology.
 - Consumption with source files and source-parser classes absent, retaining strict
   attribute validation through the compiled boundary.

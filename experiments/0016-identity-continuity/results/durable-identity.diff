@@ -1,8 +1,0 @@
---- baseline-a/identity-bindings.tsv
-+++ baseline-b/identity-bindings.tsv
-@@ -1,4 +1,4 @@
- durable_id	human_id
--MR-018f4db2-9428-7d31-a7d0-9c2cfba9d571	SYS-MONITOR-SMAPLE-001
-+MR-018f4db2-9428-7d31-a7d0-9c2cfba9d571	SYS-MONITOR-SAMPLE-001
- MR-018f4db2-9428-7d31-a7d0-9c2cfba9d572	SENSOR-LEVEL-001
- MR-018f4db2-9428-7d31-a7d0-9c2cfba9d573	SENSOR-WEATHER-001

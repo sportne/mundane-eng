@@ -4,7 +4,7 @@ These checked-in sources demonstrate the opt-in YAML 0.4 requirements profile.
 The narrow JSON declaration is authored project configuration, independently selected
 from the YAML requirement language. Human requirement IDs remain authoritative.
 The [language reference](../../specification/0020-project-attributes-yaml-0.4.md) and
-[command/migration guide](../../distribution/attributes.md) define the actual rules.
+[command guide](../../distribution/attributes.md) define the actual rules.
 
 The small example contains two logger requirements, an enumerated discipline and
 an optional owner-team string. These are descriptive labels, not hazard assessments,
@@ -38,8 +38,8 @@ is present on the first requirement of each file. These labels are demonstration
 not additional engineering findings or organizational ownership claims.
 
 The underlying source is the hypothetical
-[SVEMS pilot](../../experiments/0024-vaccine-monitoring-pilot/README.md), with its
-[source register](../../experiments/0024-vaccine-monitoring-pilot/source-register.md)
+SVEMS pilot, with its
+source register
 and original attribution preserved. Repository-authored derived requirements remain
 under the root BSD 3-Clause license. No external-document text, user feedback or
 interoperability result was added. Historical pilot and YAML 0.3 files are unchanged.

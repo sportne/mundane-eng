@@ -1,0 +1,35 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1806"
+kind: "task"
+title: "Show Attribute Hover Documentation"
+status: "Planned"
+dependencies: ["TC-1805"]
+relations: []
+planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
+body: |2+
+
+  ## Outcome
+
+  Show attribute descriptions, types, allowed values and requiredness on hover.
+
+  ## Work and acceptance evidence
+
+  Use current declaration data and source context, escape untrusted Markdown, and avoid stale or unrelated hover results. Document the complete extension, run integrated Extension Host and authoritative checks, and record evidence.
+
+  ## Compatibility and boundaries
+
+  Human-authored source remains authoritative. Requirements and other artifact
+  languages keep independent contracts. No work-item authoring integration, remote
+  publishing, automated approval or general language-server framework is included.
+  Each implemented behavior needs reproducible tests and contributor documentation.
+
+  ## Completion decision
+
+  Stop or revise if the feature requires hidden project discovery, a competing
+  semantic validator, stale edits, unsupported source inference or unbounded input.
+  The predecessor's contract must resolve dependent implementation choices first.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Source rules](../specification/0010-requirements-yaml-0.3.md)

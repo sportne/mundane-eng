@@ -1,9 +1,0 @@
---- before.mreq
-+++ after.mreq
-@@ -10,5 +10,5 @@
- 
-   math latex is ordinary rationale prose here.
- source: https://example.invalid/spec#section:4
--decomposes: TOP
-+decomposes: CHILD
- end requirement

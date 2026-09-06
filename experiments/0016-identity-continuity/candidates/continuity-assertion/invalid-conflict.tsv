@@ -1,3 +1,0 @@
-predecessor_id	successor_id	decision	source_baseline	source_sha256	target_baseline	target_sha256	authority_role	basis
-SYS-MONITOR-SMAPLE-001	SYS-MONITOR-SAMPLE-001	same-requirement	baseline-a	5aea0001b00415cc66195732a6df3636b9928ba4bc30ebebfb5b42bf68088c9e	baseline-b	00803d2089cfd44426b8e7b7c72ffe3a9715ec505f266e1cb3638e5b7ba73d1a	requirements-change-authority	Reviewed typo correction.
-SYS-MONITOR-SMAPLE-001	SYS-MONITOR-REPLACEMENT-001	same-requirement	baseline-a	5aea0001b00415cc66195732a6df3636b9928ba4bc30ebebfb5b42bf68088c9e	baseline-b	00803d2089cfd44426b8e7b7c72ffe3a9715ec505f266e1cb3638e5b7ba73d1a	requirements-change-authority	Conflicting claim.

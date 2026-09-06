@@ -1,19 +1,6 @@
 # Diagnostic recovery and incomplete interpretation
 
-Status: Experimental implementation contract. Applies to explicitly selected
-custom 0.2 and requirements YAML 0.3, including preserved 0.1-compatible fixtures.
-No valid-source syntax or semantic rule changes.
-
-Custom source retains successfully parsed records before and after independently
-malformed records. Recovery searches for a valid unindented `requirement ID`
-opener preceded by a blank or comment line. It never treats indented prose or math
-payload as a record. Missing record terminators can synchronize at such a boundary.
-An unclosed math block makes later boundaries ambiguous: recovery stops and retains
-only the already parsed prefix. A malformed candidate without reliable separation
-is skipped. Recovery reports one primary error per attempted malformed record;
-after 99 primary errors it emits `recovery-limit` and stops (100 diagnostics per
-file). Source bytes/lines are traversed with forward progress; this does not impose
-a new maximum custom source-file size or promise a source-set-wide error cap.
+Status: Experimental YAML interpretation contract.
 
 YAML document syntax, encoding, forbidden profile constructs and invalid top-level
 envelopes are file-fatal. Once a valid envelope and sequence have been composed,
@@ -35,6 +22,5 @@ for the entire selected invalid source set. Compiled requirements retain
 `complete:false`, primary diagnostics, and an empty `requirements` array; recovered
 records are not published for linking. Existing valid-input semantic inventories,
 formatter output, default human CLI mode and source selection are unchanged.
-Diagnostic ordering remains path, line, column, rule, message. Existing rule IDs
-keep their meanings; `recovery-limit` is an additive rule in the
-[compiled catalog](0013-compiled-diagnostic-rules.md).
+Diagnostic ordering remains path, line, column and rule. The YAML diagnostic cap
+is 100 per file; the [catalog](0013-compiled-diagnostic-rules.md) defines rule IDs.

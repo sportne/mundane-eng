@@ -1,2 +1,0 @@
-mutated/cycle-scope.tsv: policy/decomposition-cycle: scoped requirement is absent: SYS-OO5
-mutated/cycle-scope.tsv: policy/decomposition-cycle: source requirement is absent from complete scope: SYS-005

@@ -1,85 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1107"
-kind: "task"
-title: "Interpret and Validate YAML Requirement Source"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1107
+kind: task
+title: Interpret and Validate YAML Requirement Source
+status: Complete
 dependencies:
-  - "TC-1106"
+- TC-1106
 relations: []
 planning:
-  condition: "TC-1106"
-  stage: "11"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1108"
-body: |2+
-
-  ## Question
-
-  The selected YAML direction has only experimental adapters. Maintained commands
-  need consistent profile validation and domain semantics, not merely YAML parsing.
-
+  condition: ''
+  stage: '11'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  An explicitly selected YAML input path constructs the specified requirement model
-  and truthful diagnostics on JVM and native builds.
+  Interpret and Validate YAML Requirement Source.
 
-  ## Work
+  ## Current contract and scope
 
-  - Integrate a pinned ordinary Java YAML parser and the selected profile, preserving
-    duplicate-key detection and source marks before object construction.
-  - Implement schema-equivalent structural checks and domain validation, including
-    decoded text restrictions, source-set uniqueness, references and partial input.
-  - Apply format/discovery/version selection from TC-1106. Route validator and trace
-    through the shared interpretation boundary; coordinate recovery with TC-1403.
-  - Record parser/schema-library selection, license notices, reproducible dependency
-    setup, native compatibility and resource limits; avoid production Python glue.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Positive and negative fixtures cover each selected profile rule, exact text/math
-    values, multiple files, malformed UTF-8, duplicate keys/IDs and unresolved links.
-  - Golden diagnostics distinguish syntax, profile and domain failures with the
-    specified locations and incomplete-result behavior; exit/output checks reuse
-    TC-1402's contract where available.
-  - JVM/native results agree on the selected corpus. Maintained verification passes
-    and source-version compatibility fixtures prove intended legacy behavior.
-  - Dependencies are pinned and license/package effects documented. No accepted
-    YAML construct bypasses limits or silently overwrites authored values.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  No new semantic fields, universal artifact parser, structural formatter, or
-  conversion of maintained authoring corpora.
-
-  ## Compatibility, affected components and completion decision
-
-  Likely components: Interpreter, source discovery/model, validator/trace entry
-  points, dependency metadata, tests and native packaging. Experimental parser-only
-  native evidence is insufficient for acceptance. Stop on semantic drift or missing
-  source provenance; do not change the selected contract to conceal a library gap.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Representation decision](../../research/0033-yaml-source-representation-decision.md)
-  - [Comparison and specification outline](../../experiments/0025-yaml-source-comparison/README.md)
-  - [TC-1106](task-1106-specify-yaml-requirement-source-profile.yaml)
-
-
-  ## Completion evidence and decision
-
-  Completed 2026-09-05 in the requirements YAML batch.
-
-  Implemented explicit YAML selection in validator, formatter and trace, ordinary
-  SnakeYAML node parsing, source locations, limits, structural/domain validation and
-  partial-input rejection. JVM/native command and conformance checks pass.
-
-  The [batch verification](../../research/0035-yaml-requirements-batch-verification.md)
-  records full make verify, golden/native checks and limitations. The
-  [contract decision](../../research/0034-yaml-requirements-contract-decision.md),
-  [source contract](../../specification/0010-requirements-yaml-0.3.md),
-  [command addendum](../../specification/0011-tool-safety-and-yaml-commands.md), and
-  [reproducible regression evidence](../../experiments/0026-yaml-requirements-batch/README.md)
-  provide the acceptance artifacts. Historical contracts remain preserved; other
-  artifact authoring formats and future attribute scope remain independent decisions.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

@@ -1,8 +1,0 @@
---- before.yaml
-+++ after.yaml
-@@ -13,4 +13,4 @@
-           math latex is ordinary rationale prose here.
-     source: "https://example.invalid/spec#section:4"
-     decomposes:
--      - "TOP"
-+      - "CHILD"

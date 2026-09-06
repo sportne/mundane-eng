@@ -23,7 +23,7 @@ between the final check and filesystem rename; this is not a multi-file transact
 Trace validates attributes but derives edges exclusively from explicit decomposes.
 Invalid schema/value input yields no writes or usable trace output.
 
-Old profiles and commands remain unchanged. Adoption requires a deliberate 0.4
+The YAML 0.3 profile remains supported. Adoption requires a deliberate 0.4
 header change, matching attributeSchema name and explicit --attribute-schema option.
 Omit both schema name/option and attributes for schema-free 0.4. Existing source need
 not migrate. Unsupported selectors/formats fail instead of silently dropping values.
@@ -64,16 +64,9 @@ definitions. Literal HTML-looking text is escaped. Generated views remain dispos
 | Compiler / linker / verifier | Lossless semantic propagation | Explicit output 0.2; canonical declarations and retained source provenance |
 | Work-item analyzer | Strict requirement imports and typed links | No implicit edges or attribute assessment authority |
 | Experimental review report | Full typed semantic display | Source-independent rendering; no original lexical/layout preservation or editing |
-| Legacy migration utility | Unsupported input | Custom 0.2 to YAML 0.3 only; explicit YAML 0.4 input fails before creating output |
-| Historical ReqIF probe | Unsupported input | Fixed custom-source profile only; explicit YAML 0.4 or compiled 0.2 input fails before export |
 | Editor host, hover, enum/name completion | Unimplemented | Future integration must select a project declaration and use semantic validation |
 
-No best-effort attribute mapping is implemented. Historical `.mreq` directory
-discovery does not select `.mreq.yaml` files; do not use a mixed directory as an
-attribute export. No YAML downgrade, ReqIF custom-field flattening, external-tool
-roundtrip or interoperability result is claimed. Attribute adoption is an explicit
-source/configuration change, with no automatic conversion from unrelated formats.
-
+ReqIF interchange is not implemented. Attribute adoption is an explicit source/configuration change.
 
 For a complete executable workflow and the 57-requirement adoption example, see
 [the example guide](../examples/attributes/README.md). An attribute declaration is

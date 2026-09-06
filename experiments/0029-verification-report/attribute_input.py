@@ -38,7 +38,7 @@ def definition(schema):
 def artifact(a):
     require(a['artifactKind']=='requirements' and a['complete'] is True and a['diagnostics']==[],'incomplete requirement snapshot')
     new=a['format']=='mundanereq-requirements-0.2';require(new or a['format']=='mundanereq-requirements-0.1','unsupported requirements')
-    require(a['sourceContract'] in (('mundanereq-yaml-0.4',) if new else ('mundanereq-source-0.2','mundanereq-yaml-0.3')),'source/output mismatch')
+    require(a['sourceContract'] in (('mundanereq-yaml-0.4',) if new else ('mundanereq-yaml-0.3',)),'source/output mismatch')
     require(new or 'attributeSchema' not in a,'schema in old output');d=definition(a['attributeSchema']) if new else None;decl={} if d is None else d['attributes']
     require(isinstance(a['sources'],list) and bool(a['sources']),'empty source inventory');paths=set()
     for s in a['sources']:

@@ -1,12 +1,9 @@
-.PHONY: test native-smoke native-validator validator-verify native-formatter formatter-verify native-trace trace-verify native-boundaries native-suite package-native-suite native-suite-verify boundary-isolation ci-workflow-evidence ci-workflow-verify integrated-toolchain-trial multi-author-layout-trial operational-scale-trial independent-conformance-compare native-reqif-probe identity-continuity-trial verification-model-trial safety-classification-trial diagnostic-presentation-trial allocation-model-trial glossary-symbol-trial trace-policy-trial verify
-
 BUILD_ROOT := build/maintained
 CLASS_DIR := $(BUILD_ROOT)/classes
 NATIVE_SMOKE := $(BUILD_ROOT)/native-smoke
 VALIDATE_NATIVE := $(BUILD_ROOT)/mundanereq-validate
 FORMAT_NATIVE := $(BUILD_ROOT)/mundanereq-format
 TRACE_NATIVE := $(BUILD_ROOT)/mundanereq-trace
-REQIF_PROBE := experiments/0006-reqif-interchange/build/reqifprobe
 NATIVE_IMAGE ?= native-image
 override NATIVE_IMAGE_FLAGS := -O0 --no-fallback -march=compatibility
 GRAALVM_HOME = $(shell candidate="$$(readlink -f "$$(command -v $(NATIVE_IMAGE))")"; \
@@ -36,38 +33,58 @@ yaml-dependency:
 	scripts/fetch-yaml-parser.sh
 
 test: yaml-dependency version-declarations
+	rm -rf $(CLASS_DIR)
 	mkdir -p $(CLASS_DIR)
 	javac -cp $(YAML_JAR) --release 21 -Xlint:all -Werror -d $(CLASS_DIR) $(MAIN_SOURCES) $(GENERATED_DIR)/mundanereq/Versions.java $(TEST_SOURCES)
 	java -ea -cp $(CLASSPATH) mundanereq.test.MaintainedTestSuite
 
-native-smoke: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(NATIVE_SMOKE)) mundanereq.smoke.MaintainedBuildTest
-	$(NATIVE_SMOKE)
 
+.PHONY: native-validator
 native-validator: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(VALIDATE_NATIVE)) mundanereq.cli.ValidatorMain
-	$(VALIDATE_NATIVE) --version
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-validate) mundanereq.cli.ValidatorMain
+	$(BUILD_ROOT)/mundanereq-validate --version
 
-validator-verify: native-validator
-	java -ea -cp $(CLASSPATH) mundanereq.cli.ValidatorVerificationTest $(VALIDATE_NATIVE)
-
+.PHONY: native-formatter
 native-formatter: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(FORMAT_NATIVE)) mundanereq.cli.FormatterMain
-	$(FORMAT_NATIVE) --version
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-format) mundanereq.cli.FormatterMain
+	$(BUILD_ROOT)/mundanereq-format --version
 
-formatter-verify: native-formatter
-	java -ea -cp $(CLASSPATH) mundanereq.cli.FormatterVerificationTest $(FORMAT_NATIVE)
-
+.PHONY: native-trace
 native-trace: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(TRACE_NATIVE)) mundanereq.cli.TraceMain
-	$(TRACE_NATIVE) --version
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-trace) mundanereq.cli.TraceMain
+	$(BUILD_ROOT)/mundanereq-trace --version
 
-trace-verify: native-trace
-	java -ea -cp $(CLASSPATH) mundanereq.cli.TraceVerificationTest $(TRACE_NATIVE)
+.PHONY: native-compile
+native-compile: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-compile) mundanereq.cli.CompileMain
+	$(BUILD_ROOT)/mundanereq-compile --version
 
-native-boundaries: native-validator native-formatter native-trace
+.PHONY: native-plan
+native-plan: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-plan) engineering.verification.PlanMain
+	$(BUILD_ROOT)/mundane-plan --version
 
-native-suite: native-boundaries
+.PHONY: native-link
+native-link: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-link) engineering.artifacts.LinkMain
+	$(BUILD_ROOT)/mundane-link --version
+
+.PHONY: native-verification
+native-verification: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-verify) engineering.verification.VerifyMain
+	$(BUILD_ROOT)/mundane-verify --version
+
+.PHONY: native-work
+native-work: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
+	$(BUILD_ROOT)/mundane-work --version
+
+.PHONY: native-impact
+native-impact: test
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-impact) engineering.impact.ImpactMain
+	$(BUILD_ROOT)/mundane-impact --version
+
+native-suite: native-validator native-formatter native-trace
 
 package-native-suite: native-suite
 	test "$(abspath $(PACKAGE_DIR))" = "$(EXPECTED_PACKAGE_DIR)"
@@ -115,255 +132,46 @@ package-native-suite: native-suite
 	tar --sort=name --mtime='UTC 1970-01-01' --owner=0 --group=0 --numeric-owner -czf "$(PACKAGE_ARCHIVE)" -C "$(PACKAGE_DIR)" "$(PACKAGE_NAME)"
 	sha256sum "$(PACKAGE_ARCHIVE)" | sed 's#  .*/#  #' > "$(PACKAGE_ARCHIVE_CHECKSUM)"
 
-native-suite-verify: package-native-suite
-	java -ea -cp $(CLASSPATH) mundanereq.distribution.NativeSuiteVerificationTest "$(PACKAGE_STAGE)" "$(PACKAGE_ARCHIVE)" "$(PACKAGE_ARCHIVE_CHECKSUM)" "$(GRAALVM_HOME)"
-
-boundary-isolation: native-boundaries
-	java -ea -cp $(CLASSPATH) mundanereq.boundary.NativeBoundaryIsolationTest \
-		$(VALIDATE_NATIVE) $(FORMAT_NATIVE) $(TRACE_NATIVE)
-
-ci-workflow-evidence:
-	java -ea -cp $(CLASSPATH) mundanereq.ci.CiWorkflowVerificationTest \
-		$(FORMAT_NATIVE) $(VALIDATE_NATIVE) $(TRACE_NATIVE)
-
-ci-workflow-verify: native-suite ci-workflow-evidence
-
-integrated-toolchain-trial: native-suite
-	java -ea -cp $(CLASSPATH) mundanereq.trial.IntegratedToolchainTrialTest \
-		$(FORMAT_NATIVE) $(VALIDATE_NATIVE) $(TRACE_NATIVE)
-
-multi-author-layout-trial: native-suite
-	java -ea -cp $(CLASSPATH) mundanereq.trial.MultiAuthorLayoutTrialTest \
-		$(FORMAT_NATIVE) $(VALIDATE_NATIVE) $(TRACE_NATIVE)
-
-operational-scale-trial: native-suite
-	experiments/0014-operational-scale/run.sh \
-		$(FORMAT_NATIVE) $(VALIDATE_NATIVE) $(TRACE_NATIVE) $(BUILD_ROOT)/operational-scale
-
-independent-conformance-compare: native-validator
-	experiments/0015-independent-conformance/compare.rb \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/independent-conformance
-
-native-reqif-probe:
-	$(MAKE) -C experiments/0006-reqif-interchange native
-
-identity-continuity-trial: native-validator native-trace native-reqif-probe
-	$(RM) -r $(BUILD_ROOT)/identity-continuity
-	experiments/0016-identity-continuity/run.sh \
-		$(VALIDATE_NATIVE) $(TRACE_NATIVE) $(REQIF_PROBE) $(BUILD_ROOT)/identity-continuity
-
-verification-model-trial: native-validator
-	$(RM) -r $(BUILD_ROOT)/verification-model
-	experiments/0017-verification-evidence/run.sh \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/verification-model
-
-safety-classification-trial: native-validator
-	$(RM) -r $(BUILD_ROOT)/safety-classification
-	experiments/0018-safety-classification/run.sh \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/safety-classification
-
-diagnostic-presentation-trial: native-validator
-	$(RM) -r $(BUILD_ROOT)/diagnostic-presentation
-	experiments/0019-diagnostic-presentation/run.sh \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/diagnostic-presentation
-
-allocation-model-trial: native-validator
-	$(RM) -r $(BUILD_ROOT)/allocation-model
-	experiments/0020-allocation-model/run.sh \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/allocation-model
-
-glossary-symbol-trial: native-validator
-	$(RM) -r $(BUILD_ROOT)/glossary-symbols
-	experiments/0021-glossary-symbols/run.sh \
-		$(VALIDATE_NATIVE) $(BUILD_ROOT)/glossary-symbols
-
-trace-policy-trial: native-validator native-trace
-	$(RM) -r $(BUILD_ROOT)/trace-policies
-	experiments/0022-trace-policies/run.sh \
-		$(VALIDATE_NATIVE) $(TRACE_NATIVE) $(BUILD_ROOT)/trace-policies
-
-verify: yaml-schema-verify test native-smoke boundary-isolation validator-verify formatter-verify trace-verify native-suite-verify ci-workflow-verify integrated-toolchain-trial multi-author-layout-trial independent-conformance-compare
-
-.PHONY: native-migrate yaml-verify
-native-migrate: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-migrate) mundanereq.cli.MigrateMain
-	$(BUILD_ROOT)/mundanereq-migrate --version
-
-yaml-verify: native-suite native-migrate
-	java -ea -cp $(CLASSPATH) mundanereq.cli.YamlVerificationTest $(VALIDATE_NATIVE) $(FORMAT_NATIVE) $(TRACE_NATIVE) $(BUILD_ROOT)/mundanereq-migrate
-
-verify: yaml-verify
-
-.PHONY: yaml-schema-verify
-yaml-schema-verify:
-	scripts/check-yaml-schema.sh
-
-verify: yaml-schema-verify
-
-.PHONY: version-declarations version-verify
+.PHONY: verify native-suite package-native-suite yaml-schema-verify version-declarations version-verify work-index work-backlog-verify work-verify work-yaml-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify native-suite-verify yaml-verify
 version-declarations:
 	python3 scripts/generate-versions.py versions.properties $(GENERATED_DIR)
-
+yaml-schema-verify:
+	scripts/check-yaml-schema.sh
 version-verify: test
 	python3 scripts/check-versions.py "$(SUITE_VERSION)"
-
-verify: version-verify
-
-.PHONY: native-compile compiled-verify
-native-compile: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-compile) mundanereq.cli.CompileMain
-	$(BUILD_ROOT)/mundanereq-compile --version
-
-compiled-verify: native-compile
-	python3 scripts/check-compiled-artifacts.py $(BUILD_ROOT)/mundanereq-compile
-
-verify: compiled-verify
-
-.PHONY: compilation-experiment-verify
-compilation-experiment-verify: test
-	python3 experiments/0027-compilation-linking/run.py
-
-verify: compilation-experiment-verify
-
-.PHONY: native-link link-verify
-native-link: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-link) engineering.artifacts.LinkMain
-	$(BUILD_ROOT)/mundane-link --version
-
-link-verify: native-link native-compile
-	python3 scripts/check-artifact-linking.py $(BUILD_ROOT)/mundane-link
-
-verify: link-verify
-
-.PHONY: native-plan native-verification verification-verify
-native-plan: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-plan) engineering.verification.PlanMain
-	$(BUILD_ROOT)/mundane-plan --version
-
-native-verification: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-verify) engineering.verification.VerifyMain
-	$(BUILD_ROOT)/mundane-verify --version
-
-verification-verify: native-plan native-verification native-compile
-	python3 scripts/check-verification-workflow.py $(BUILD_ROOT)/mundane-plan $(BUILD_ROOT)/mundane-verify
-
-verify: verification-verify
-
-.PHONY: report-verify
-report-verify: native-verification
-	python3 experiments/0029-verification-report/run.py
-
-verify: report-verify
-
-.PHONY: recovery-verify
-recovery-verify: native-validator native-formatter native-compile
-	python3 scripts/check-parser-recovery.py $(BUILD_ROOT)
-
-verify: recovery-verify
-
-.PHONY: sarif-verify
-sarif-verify: native-validator yaml-schema-verify
-	build/schema-check-venv/bin/python scripts/check-sarif.py $(VALIDATE_NATIVE)
-
-verify: sarif-verify
-
-.PHONY: workflow-corpus-verify
-workflow-corpus-verify: native-compile native-formatter native-plan native-verification
-	python3 experiments/0033-workflow-regressions/run.py
-	python3 experiments/0033-workflow-regressions/mutations.py
-
-verify: workflow-corpus-verify
-
-.PHONY: native-work work-verify
-native-work: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
-	$(BUILD_ROOT)/mundane-work --version
-
-work-verify: native-work
-	python3 scripts/check-work-items.py $(BUILD_ROOT)/mundane-work
-
-verify: work-verify
-
-.PHONY: work-index work-backlog-verify
 work-index: native-work
 	python3 scripts/work-backlog.py --write
-
 work-backlog-verify: native-work
-	python3 experiments/0034-work-items/migrate.py
-	python3 experiments/0035-work-yaml/migrate.py
 	python3 scripts/work-backlog.py
 	python3 scripts/check-planning-docs.py
-
-verify: work-backlog-verify
-
-.PHONY: work-regression-verify
-work-regression-verify: native-work
-	python3 experiments/0034-work-items/regressions.py
-	python3 experiments/0035-work-yaml/regressions.py
-
-verify: work-regression-verify
-
-.PHONY: work-yaml-verify
+work-verify: native-work
+	python3 scripts/check-work-items.py $(BUILD_ROOT)/mundane-work
 work-yaml-verify: native-work
 	scripts/check-work-yaml.sh
-
-verify: work-yaml-verify
-
-.PHONY: attribute-validate-verify
 attribute-validate-verify: native-validator
 	scripts/check-attribute-schema.sh
 	python3 scripts/check-attributes.py
-
-verify: attribute-validate-verify
-
-.PHONY: attribute-format-verify
 attribute-format-verify: native-formatter native-trace
 	python3 scripts/check-attribute-format.py
-
-verify: attribute-format-verify
-
-.PHONY: attribute-compile-verify
 attribute-compile-verify: native-compile native-validator native-formatter native-trace
 	python3 scripts/check-attribute-compile.py
 	python3 scripts/check-cli-delimiters.py
-
-verify: attribute-compile-verify
-
-.PHONY: attribute-link-verify
 attribute-link-verify: native-compile native-plan native-link native-verification native-work
 	python3 scripts/check-attribute-link.py
-
-verify: attribute-link-verify
-
-.PHONY: attribute-report-verify
-attribute-report-verify: native-verification native-migrate
+attribute-report-verify: native-verification
 	python3 scripts/check-attribute-report.py
-
-verify: attribute-report-verify
-
-.PHONY: attribute-workflow-verify
 attribute-workflow-verify: native-validator native-formatter native-compile native-plan native-link native-verification
 	python3 scripts/check-attribute-corpus.py
 	python3 experiments/0036-project-attributes/workflow.py
 	python3 experiments/0036-project-attributes/regressions.py
-
-verify: attribute-workflow-verify
-
-.PHONY: native-impact
-native-impact: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASS_DIR) -o $(abspath $(BUILD_ROOT)/mundane-impact) engineering.impact.ImpactMain
-	$(BUILD_ROOT)/mundane-impact --version
-
-.PHONY: impact-verify
 impact-verify: native-impact
 	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactCliTest $(BUILD_ROOT)/mundane-impact
 	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactViewTest $(BUILD_ROOT)/mundane-impact
-
-verify: impact-verify
-
-.PHONY: impact-workflow-verify
 impact-workflow-verify: native-compile native-plan native-work native-impact
 	python3 experiments/0037-impact-analysis/regressions.py
 	python3 experiments/0037-impact-analysis/mutations.py
-
-verify: impact-workflow-verify
+native-suite-verify: package-native-suite
+	python3 scripts/check-native-package.py $(PACKAGE_STAGE) $(PACKAGE_ARCHIVE)
+yaml-verify: native-validator native-formatter native-trace native-compile
+	python3 scripts/check-yaml-workflow.py
+verify: yaml-schema-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify

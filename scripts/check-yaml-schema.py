@@ -12,8 +12,8 @@ schema = json.loads((root / 'specification/schema/requirements-yaml-0.3.json').r
 Draft202012Validator.check_schema(schema)
 validator = Draft202012Validator(schema)
 valid_count = 0
-for line in (root / 'conformance/0.3/migration-corpus.tsv').read_text().splitlines():
-    _, folder = line.split('\t')
+for line in (root / 'conformance/0.3/corpora.txt').read_text().splitlines():
+    folder = line
     for path in sorted((root / folder).glob('*.mreq.yaml')):
         data = yaml.load(path.read_text())
         errors = list(validator.iter_errors(data))

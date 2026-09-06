@@ -1,0 +1,35 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1801"
+kind: "task"
+title: "Establish VS Code Extension Foundation"
+status: "Planned"
+dependencies: ["TC-1800"]
+relations: []
+planning: {"stage": "18", "type": "Design and tooling", "condition": "", "unlocks": "", "statusNote": ""}
+body: |2+
+
+  ## Outcome
+
+  Install an independently testable VS Code extension with explicit project/profile selection.
+
+  ## Work and acceptance evidence
+
+  Select direct VS Code providers with a versioned Java snapshot bridge. Define configuration, bounded requests, workspace trust, unsaved-buffer behavior and source-coordinate conversion. Package a local VSIX and run actual Extension Host activation tests.
+
+  ## Compatibility and boundaries
+
+  Human-authored source remains authoritative. Requirements and other artifact
+  languages keep independent contracts. No work-item authoring integration, remote
+  publishing, automated approval or general language-server framework is included.
+  Each implemented behavior needs reproducible tests and contributor documentation.
+
+  ## Completion decision
+
+  Stop or revise if the feature requires hidden project discovery, a competing
+  semantic validator, stale edits, unsupported source inference or unbounded input.
+  The predecessor's contract must resolve dependent implementation choices first.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Source rules](../specification/0010-requirements-yaml-0.3.md)

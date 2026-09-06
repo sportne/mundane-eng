@@ -1,2 +1,0 @@
-Direct higher-level requirements for SELF:
-SELF

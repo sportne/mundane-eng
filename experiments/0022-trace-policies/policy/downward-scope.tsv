@@ -1,4 +1,0 @@
-requirement_id	decision	rationale
-SYS-005	required	Allocated system behavior shall have lower-level decomposition coverage.
-SYS-008	waived	Timing basis has no allocated lower-level behavior in this bounded source set.
-SYS-009	required	Allocated audit behavior shall have lower-level decomposition coverage.

@@ -1,2 +1,0 @@
-EXEC-A-001	activity=ACT-LEVEL-TEST	plan=PLAN-A	planned=yes	executed=yes	evidence=yes	result=pass	passing=yes
-EXEC-A-002	activity=ACT-SAMPLE-ANALYSIS	plan=PLAN-A	planned=yes	executed=yes	evidence=no	result=none	passing=no

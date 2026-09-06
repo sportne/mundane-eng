@@ -1,9 +1,0 @@
---- policy/vocabulary-a.tsv
-+++ policy/vocabulary-b.tsv
-@@ -1,5 +1,5 @@
- label	target_type
--Vehicle manager	service
-+Vehicle registry service	service
- Flight-plan manager	service
- Authorization service	service
- Ground-control adapter	adapter

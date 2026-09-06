@@ -1,18 +1,18 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1104"
-kind: "task"
-title: "Establish the Monorepo Component Layout"
-status: "Conditional"
+format: mundane-work-yaml-0.2
+id: TC-1104
+kind: task
+title: Establish the Monorepo Component Layout
+status: Conditional
 dependencies:
-  - "TC-1101"
+- TC-1101
 relations: []
 planning:
-  condition: "TC-1101"
-  stage: "11"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "follow-up work selected by the completion decision"
-body: |2+
+  condition: A demonstrated current workflow need
+  stage: '11'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |2
 
   ## Question
 
@@ -66,5 +66,5 @@ body: |2+
 
   - [Roadmap](0001-initial-roadmap.md)
   - [TC-1101](closed/task-1101-define-monorepo-component-boundaries.yaml)
-  - [Native packaging evidence](../research/0017-native-suite-packaging.md)
-  - [Integrated trial](closed/task-0603-run-the-integrated-toolchain-trial.yaml)
+  - Native packaging evidence
+  - Integrated trial

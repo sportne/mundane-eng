@@ -1,6 +1,0 @@
-name	source	format	requirements
-legacy-compatible	conformance/0.1/valid	custom-0.2	3
-small-custom	conformance/0.2/valid	custom-0.2	3
-small-yaml	conformance/0.3/valid	yaml-0.3	3
-pilot-custom	experiments/0024-vaccine-monitoring-pilot/product/requirements	custom-0.2	57
-pilot-yaml	examples/yaml/vaccine-monitoring	yaml-0.3	57

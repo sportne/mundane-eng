@@ -7,7 +7,7 @@ import mundanereq.SourceFormat;
 record SourceInvocation(SourceFormat format, String[] arguments) {
     static SourceInvocation parse(String[] arguments) {
         if (arguments.length == 0 || !arguments[0].startsWith("--source=")) {
-            return new SourceInvocation(SourceFormat.CUSTOM_02, arguments);
+            return new SourceInvocation(SourceFormat.YAML_03, arguments);
         }
         String value = arguments[0].substring("--source=".length());
         for (SourceFormat format : SourceFormat.values()) {

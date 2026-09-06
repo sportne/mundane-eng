@@ -5,19 +5,17 @@ Status: Selected experimental contract (TC-1201)
 Format: `mundanereq-requirements-0.1`
 
 This is compiled semantic output, never an alternative authoring format. Human
-requirement IDs remain identity within an explicitly selected source set. Only
-requirements have a selected YAML source profile; this contract imposes no source
-notation on other engineering artifacts.
+requirement IDs remain identity within an explicitly selected source set. This contract imposes no source notation on other engineering artifacts.
 
 ## 1. Command and failure boundary
 
 ```text
-mundanereq-compile [--source=custom-0.2|--source=yaml-0.3] --root DIRECTORY [--] INPUT...
+mundanereq-compile [--source=yaml-0.3] --root DIRECTORY [--] INPUT...
 mundanereq-compile [--source=...] --help
 mundanereq-compile [--source=...] --version
 ```
 
-Source selection defaults to custom 0.2 and must be the first option when supplied.
+Source selection defaults to YAML 0.3 and must be the first option when supplied.
 The existing selection rules apply, including suffix filtering for directories,
 no symlink traversal, deterministic deduplication and no mixed-profile fallback.
 INPUT and root are resolved against the invocation working directory. Root must
@@ -47,7 +45,7 @@ incomplete input before analysis. Do not guess support from a numeric prefix.
 | --- | --- |
 | artifactKind | Literal `requirements` |
 | format | Exact compiled-format identifier above |
-| sourceContract | Selected maintained source contract (`mundanereq-source-0.2` or `mundanereq-yaml-0.3`) |
+| sourceContract | Selected maintained source contract (`mundanereq-yaml-0.3`) |
 | compiler | Object: name `mundanereq-compile`, version `experimental-0.1`, contract `compile-cli-0.1`; independently declared domains |
 | complete | true only when every selected input was read/interpreted and source-set validation passed |
 | sources | Sorted list of `{path, sha256}` input snapshots |
@@ -71,8 +69,7 @@ A prose block is `{kind:"prose", text:STRING}`. A math block is
 preserves exact semantic newlines; no formula interpretation occurs. Paragraph
 and block order is significant. Cycles/self-links remain valid relationships.
 Optional absence is null; an empty relationship set is `[]`. No untyped extension
-bag or guessed attribute syntax is published. TC-1302 must choose typed attribute
-semantics and compatible output evolution before attributes can be compiled.
+bag or guessed attribute syntax is published. [Output 0.2](0021-requirement-semantic-output-0.2.md) carries typed attributes.
 
 ## 3. Locations and source snapshots
 
@@ -90,11 +87,6 @@ locations contains:
 - `fields`: map from each present source field (including id) to an array of spans;
 - `references`: map from each decomposes target ID to its authored value span.
 
-For custom 0.2, record spans from the opener's column 1 through the end of
-`end requirement`, excluding its newline. ID/scalar spans cover the value token.
-Body spans include the field header and all consumed body/blank lines, ending at
-the end of the last consumed physical line. Repeated decomposes fields have
-separate value spans in source order. Comments between fields are not field values.
 For YAML 0.3, record spans cover the parser mapping node (excluding the sequence
 indicator). Field spans cover value nodes, including quotes or block indicators
 and lexical content. A YAML sequence-valued field has one encompassing field span;
@@ -126,9 +118,7 @@ lexicographic ordering for strings. All strings are emitted as valid Unicode JSO
 
 No partial semantic records are published in this version, including records from
 otherwise valid files when another file fails. Editor consumers can display the
-available diagnostics but cannot infer a complete inventory from them. The existing
-legacy parser may stop after one file error; TC-1403 remains independent future
-recovery work. Duplicate IDs and unresolved references are invalid input with
+available diagnostics but cannot infer a complete inventory from them. The [recovery contract](0016-diagnostic-recovery.md) defines incomplete interpretation. Duplicate IDs and unresolved references are invalid input with
 source-linked diagnostics, not silently chosen graph nodes. A compiler may not
 emit complete=true with diagnostics or omit failed files to manufacture success.
 
@@ -147,17 +137,14 @@ claim is implied.
 For semantic comparison use only each requirement's values object. This excludes
 locations, paths, source bytes and compiler metadata; comment edits and file moves
 therefore preserve equal values. Source citation/rationale edits do change values.
-Review policy may select a narrower projection in TC-0905, but must document it.
-No per-requirement digest is needed by the present consumer. normalizedInventory
-remains a private test utility, not an alternative published compiled format.
+Verification comparison follows its own versioned contract.
 
 | Evolution | Required action |
 | --- | --- |
 | Add explicitly informational provenance data | Retain format only if old readers can ignore it without changing interpretation |
 | Change field type/meaning, comparison semantics, required values or supported block kinds | New format identifier, consumer rejection of unsupported formats, migration note with before/after examples |
-| Add custom attributes | Resolve TC-1302 and source/output contracts first; do not emit them as ignored informational data |
+| Add custom attributes | Use output 0.2; do not emit attributes as informational data in output 0.1 |
 | New source profile mapping to identical values | Explicitly declare support, update source-contract acceptance and fixtures; no automatic inference |
 
 [Worked examples](examples/requirements-artifact-0.1/README.md) are contract fixtures.
-This version has present value for the verification consumer demonstrated by
-Experiment 0027. No long-term compatibility promise is made.
+This version has present value for the verification consumer implemented by the independent plan/analyzer commands. No long-term compatibility promise is made.

@@ -17,7 +17,7 @@ def consume(text):
     artifact = json.loads(text, object_pairs_hook=unique)
     if artifact['artifactKind'] != 'requirements' or artifact['format'] != 'mundanereq-requirements-0.1':
         raise ValueError('unsupported artifact format or kind')
-    if artifact['sourceContract'] not in ['mundanereq-source-0.2', 'mundanereq-yaml-0.3']:
+    if artifact['sourceContract'] not in [ 'mundanereq-yaml-0.3']:
         raise ValueError('unsupported source contract')
     if artifact['complete'] is not True or artifact['diagnostics']:
         raise ValueError('incomplete artifact; analysis prohibited')

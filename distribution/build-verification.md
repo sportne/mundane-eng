@@ -39,25 +39,11 @@ remain checked in; build output and downloaded dependencies are disposable.
 
 ## Coverage and failures
 
-The gate includes JVM regressions; native behavior and executable isolation;
-validator, formatter and trace corpora; package checks; the independent-tool CI
-workflow; integrated/layout/conformance experiments; YAML/schema/migration checks;
-version declarations; compiled requirements; artifact linking; plan compilation
-and verification analysis; the derived report experiment; and scoped impact queries/reports with source-to-report
-goldens, seeded reachability cases and targeted behavioral mutations.
+The gate includes YAML validation, formatting, tracing, compilation, source/profile
+and schema failures; native package checks; version declarations; independent work,
+plan, verification and impact consumers; attribute workflows; golden outputs;
+seeded graphs; targeted mutations; and source-card/documentation checks.
 
-The schema target runs first so its injected failure stops before expensive native
-builds. No target is removed. GNU Make shares prerequisites within the invocation;
-no new cross-run build cache is introduced. Native tools remain independent and
-are demonstrated by the existing behavior/isolation checks inside the full gate.
-
-`scripts/check-ci-failure-propagation.py` prepends an invalid opener to the valid
-source corpus and separately changes the YAML schema's root type to `number`.
-Each actual `make verify` must return nonzero with the expected target and fault
-marker. A `finally` block restores the original input bytes. The second check
-specifically covers a target omitted by the previous hosted workflow.
-
-The workflow uses pipe failure propagation and no continue-on-error, check-skipping
-option or fallback partial gate. CI logs include actual commands, tool versions
-and final status. [Research 0047](../research/0047-complete-ci-verification.md)
-records the clean local and hosted evidence, including the initial setup failure.
+The wrapper separately injects invalid YAML and an invalid structural schema into
+the actual gate, verifies attributed failure, and restores exact input bytes.
+Logs under `build/ci-evidence/` record the actual environment and exit status.

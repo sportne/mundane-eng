@@ -1,2 +1,0 @@
-potable-water-control	SC2	SA-002	hazard-analysis.git@b729a30#HAZ-017
-uncrewed-rural	SC1	SA-001	hazard-analysis.git@a014c2e#HAZ-004

@@ -1,70 +1,37 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1304"
-kind: "task"
-title: "Preserve Attributes in Formatting and Trace"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1304
+kind: task
+title: Preserve Attributes in Formatting and Trace
+status: Complete
 dependencies:
-  - "TC-1302"
-  - "TC-1303"
+- TC-1302
+- TC-1303
 relations: []
 planning:
-  condition: "TC-1302, TC-1303"
-  stage: "13"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1308"
-body: |2+
-
-  ## Question
-
-  After schema validation exists, the current formatter and trace still cannot
-  process the opted-in source profile safely. A schema change during write-back could
-  invalidate the interpretation used to authorize a write.
-
+  condition: ''
+  stage: '13'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  Formatting preserves authored attributes/comments and detects intervening schema
-  changes; trace validates attributes while retaining its existing graph meanings.
+  Preserve Attributes in Formatting and Trace.
 
-  ## Work
+  ## Current contract and scope
 
-  - Add explicit schema selection to formatter/trace using the shared validated snapshots; document each command's options and existing exit classes.
-  - Keep YAML formatting limited to CRLF normalization. Preserve authored attribute order, comments, quotes, indentation, prose and opaque math. Never rewrite the JSON declaration.
-  - Recheck declaration bytes and available file identity before each replacement alongside requirement snapshots; retain existing completed/remaining-file reporting and documented final-check race.
-  - Validate all selected attributes before trace or formatting; attributes contribute no hidden edges. Keep independent tool builds and source modes.
-  - Add format-check/write, failure, comment/Unicode, schema-edit, source-edit and trace regressions.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Golden before/after bytes differ only by permitted line-ending normalization, including comments inside/around attribute mappings; a second format produces identical bytes and parse-format-parse values/definitions agree.
-  - Missing/invalid schemas or attribute values cause no writes or usable trace result. Injected edits between read and replacement survive; partial multi-file outcomes identify exactly completed/remaining paths.
-  - Existing decomposition queries return equivalent results for equal built-in models with or without valid annotations; references are neither added nor hidden by text values.
-  - Actual JVM/native commands cover standalone selection, output failure and source/schema changes; record tests and authoritative verification in a completion report.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Canonical key sorting in authored YAML, JSON schema formatting, a new trace policy, filesystem transactions, editor integration.
-
-  ## Compatibility and affected components
-
-  New source/option support is explicit; old source/CLI behavior and requirement IDs
-  remain unchanged. Likely components: FormatterMain, TraceMain, shared source
-  selection/snapshots, command contracts, versions and safety tests. Keep requirements
-  commands independent from engineering analyzers.
-
-  ## Completion decision
-
-  Do not complete if comment ownership must be guessed or a schema change can be
-  silently overwritten/ignored. Preserve the documented residual filesystem race;
-  no atomic multi-file guarantee is promised. TC-1308 consumes the safe authoring path.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
-  - [Attribute design](../../research/0052-project-attribute-schema-decision.md)
-  - [Worked cases](../../research/0053-project-attribute-design-cases.md)
-
-  ## Completion evidence
-
-  [Completion report](../../research/0064-attribute-formatting-verification.md) records safe schema-aware formatting, unchanged trace semantics, exact-value preservation and the passing full verification gate.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

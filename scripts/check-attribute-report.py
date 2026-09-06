@@ -1,4 +1,4 @@
-"""Attribute-aware derived display and deliberately unsupported interchange paths."""
+"""Attribute-aware derived display."""
 import copy,json,subprocess,tempfile
 from pathlib import Path
 from html.parser import HTMLParser
@@ -26,13 +26,4 @@ with tempfile.TemporaryDirectory(prefix='attribute-report-') as tmp:
  args=['python3',str(RENDER),str(p)]
  process=subprocess.Popen(args,stdout=subprocess.PIPE,stderr=subprocess.PIPE);assert process.stdout.read(1);process.stdout.close();assert process.wait(timeout=30)==2;process.stderr.close()
  for fd in [1,2]:assert subprocess.run(['bash','-c',f'exec "$@" {fd}>&-','closed']+args,capture_output=True,timeout=30).returncode==2
- # The old migration adapter only accepts custom source, and rejects explicit attribute input unchanged.
- source=root/'source.mreq.yaml';source.write_bytes((ROOT/'examples/attributes/system.mreq.yaml').read_bytes());before=source.read_bytes()
- cp=str(BIN/'classes')+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar')
- for c in [[str(BIN/'mundanereq-migrate')],['java','-cp',cp,'mundanereq.cli.MigrateMain']]:
-  result=subprocess.run(c+[str(root/'converted'),str(source)],capture_output=True,timeout=30);assert result.returncode==2 and not (root/'converted').exists() and source.read_bytes()==before
- # Historical bounded ReqIF adapter compiled as-is, with its historical custom parser.
- classes=root/'reqif';classes.mkdir();subprocess.run(['javac','-d',str(classes),str(ROOT/'experiments/0002-deterministic-interpretation/src/mundanereq/Probe.java'),str(ROOT/'experiments/0006-reqif-interchange/src/mundanereq/ReqifProbe.java')],check=True,capture_output=True)
- for source_input in [source,HERE/'golden/requirements.json']:
-  result=subprocess.run(['java','-cp',str(classes),'mundanereq.ReqifProbe','export','2000-01-01T00:00:00Z',str(root/'out.reqif'),str(source_input)],capture_output=True,timeout=30);assert result.returncode!=0 and not (root/'out.reqif').exists()
-print('PASS attribute report: exact rebuild/golden, literal Unicode and HTML, typed optional display, schema/value/assertion provenance, invalid/tampered rejection, output failures and unsupported migration/ReqIF')
+print('PASS attribute report: golden, typed values, escaped text, provenance, tamper rejection and output failures')

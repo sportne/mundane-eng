@@ -106,16 +106,13 @@ input/output, read rechecks, stream errors and exit 0/1/2 remain as in 0018.
 Analysis stays 0.1 and validates either embedded work output version; derived views
 use the supplied source points. Consumers remain independent of source parsers.
 
-## Repository migration
+## Repository authoring
 
-Rename cards and template to .yaml; keep IDs, kind, title, lifecycle/dependencies,
-relations and planning annotations. Preserve body strings exactly except individually
-recorded Markdown-link destination changes needed for renamed source paths. Keep
-one authoritative source per card. Update the explicit manifest and incoming links;
-generate WORK-ITEMS.md with the public pipeline. Record immutable migration inputs
-and independently compare decoded values before publishing converted source.
+Each card has one authoritative YAML source. Maintain its human ID, typed
+relationships and literal body; list current paths in the explicit selection.
+Generate `WORK-ITEMS.md` with the public work-item pipeline and check it with
+`make work-backlog-verify`. Completed cards move into `roadmap/closed/` with
+recorded evidence and repaired incoming links.
 
-The old specification, decision, examples and evidence remain historical/compatibility
-fixtures. New YAML examples and current workflow documentation become the authoring
-entry point. No format choice for safety, BOM or other future artifacts follows
-from this work-item-specific decision.
+Markdown work-item sources remain an independent compatibility profile. The
+work-item format makes no choice for safety, BOM or other future artifacts.

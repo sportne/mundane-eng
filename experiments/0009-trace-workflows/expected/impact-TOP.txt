@@ -1,6 +1,0 @@
-Lower-level impact paths to TOP:
-1 A-NEAR-TOP -> TOP
-1 Z-NEAR-TOP -> TOP
-2 A-NEAR-D -> Z-NEAR-TOP -> TOP
-2 Z-NEAR-D -> A-NEAR-TOP -> TOP
-3 D -> A-NEAR-D -> Z-NEAR-TOP -> TOP

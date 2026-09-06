@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1703"
-kind: "task"
-title: "Query Explained Cross-Artifact Impact"
-status: "Complete"
-dependencies: ["TC-1702"]
+format: mundane-work-yaml-0.2
+id: TC-1703
+kind: task
+title: Query Explained Cross-Artifact Impact
+status: Complete
+dependencies:
+- TC-1702
 relations: []
-planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1704, TC-1705"}
-body: |2+
+planning: {condition: '', stage: '17', statusNote: '', type: Implementation, unlocks: ''}
+body: |2
 
   ## Question
 

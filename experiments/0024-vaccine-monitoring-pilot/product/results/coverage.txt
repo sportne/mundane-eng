@@ -1,8 +1,0 @@
-plan=PLAN-B
-requirement_source_set_sha256=2f3ce6e76a89fb573f0bb3a7f697b410f981a2b7d50a8ee68068128c9aa9ea51
-requirements=57
-coverage_rows=57
-covered_requirements=57
-uncovered_requirements=0
-executed_product_activities=0
-satisfied_requirements=not-derived

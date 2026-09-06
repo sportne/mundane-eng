@@ -1,63 +1,37 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1601"
-kind: "task"
-title: "Define Work Item Ownership"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1601
+kind: task
+title: Define Work Item Ownership
+status: Complete
 dependencies:
-  - "TC-1102"
-  - "TC-1203"
+- TC-1102
+- TC-1203
 relations: []
 planning:
-  condition: "TC-1102, TC-1203"
-  stage: "16"
-  statusNote: ""
-  type: "Decision"
-  unlocks: "TC-1602"
-body: |2+
-
-  ## Question
-
-  Decide the difference between an issue reporting a problem and a task planning work, using the actual backlog.
-
+  condition: ''
+  stage: '16'
+  statusNote: ''
+  type: Decision
+  unlocks: ''
+body: |
   ## Outcome
 
-  Define Work Item Ownership for the repository-native issue/task workflow, with reproducible evidence.
+  Define Work Item Ownership.
 
-  ## Work
+  ## Current contract and scope
 
-  - Record identity, lifecycle authority, dependency and typed relationship meanings; distinguish completion claims from satisfaction; preserve historical qualifications.
-  - Record the selected behavior and its limitations; each implementation owns its regression tests.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A worked issue/task/requirement example and an inventory of existing cards support explicit include/defer decisions. Missing targets, cycles, supersession and evidence have stated meanings.
-  - Record exact checks and artifacts in a completion report; make a separate completion commit.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - No syntax, implementation, automated approval or universal issue-management workflow.
-
-  ## Compatibility and affected components
-
-  Human-authored IDs and source remain authoritative. Other artifact languages and
-  existing requirement/verification interfaces retain their contracts. Likely components:
-  roadmap cards and indices, work-item source/compiled specifications, a separate
-  engineering work-item component, public import validation and owning examples/tests.
-  No directory move is justified solely by this additional artifact kind.
-
-  ## Completion decision
-
-  Stop or narrow scope if the selected workflow requires competing source copies,
-  automatic satisfaction judgments, or unbounded schema/relationship extensibility.
-  Unresolved source choices must be decided in TC-1602 before implementation. Preserve
-  conditional prerequisites as authored policy rather than pretend they are executable.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
-  - [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
-
-  ## Completion evidence
-
-  Completed 2026-09-05. [Research 0054](../../research/0054-work-item-ownership.md) records the 72-card input inventory, task/issue ownership, lifecycle and relation meanings, worked example and scope limits. TC-1602 is Ready; no implementation is claimed.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

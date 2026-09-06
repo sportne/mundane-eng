@@ -1,7 +1,0 @@
-requirement INVALID-COMMENT-SPLITS-PROSE
-title: Comment splitting prose
-statement:
-  The system shall provide the first behavior
-# A comment cannot interrupt a prose body.
-  and the second behavior.
-end requirement

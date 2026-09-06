@@ -1,0 +1,35 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-1802"
+kind: "task"
+title: "Show Inline YAML Diagnostics"
+status: "Planned"
+dependencies: ["TC-1801"]
+relations: []
+planning: {"stage": "18", "type": "Implementation", "condition": "", "unlocks": "", "statusNote": ""}
+body: |2+
+
+  ## Outcome
+
+  Display compiler-backed project diagnostics while editing unsaved requirement buffers.
+
+  ## Work and acceptance evidence
+
+  Reuse Java interpretation and explicit project attributes; debounce requests, reject stale results and clear repaired diagnostics. Exercise syntax/value/reference errors, schema edits and failure reporting without writing authored files.
+
+  ## Compatibility and boundaries
+
+  Human-authored source remains authoritative. Requirements and other artifact
+  languages keep independent contracts. No work-item authoring integration, remote
+  publishing, automated approval or general language-server framework is included.
+  Each implemented behavior needs reproducible tests and contributor documentation.
+
+  ## Completion decision
+
+  Stop or revise if the feature requires hidden project discovery, a competing
+  semantic validator, stale edits, unsupported source inference or unbounded input.
+  The predecessor's contract must resolve dependent implementation choices first.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Source rules](../specification/0010-requirements-yaml-0.3.md)

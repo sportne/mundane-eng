@@ -1,12 +1,13 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1702"
-kind: "task"
-title: "Assemble Scoped Impact Graph"
-status: "Complete"
-dependencies: ["TC-1701"]
+format: mundane-work-yaml-0.2
+id: TC-1702
+kind: task
+title: Assemble Scoped Impact Graph
+status: Complete
+dependencies:
+- TC-1701
 relations: []
-planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Implementation", "unlocks": "TC-1703"}
-body: |2+
+planning: {condition: '', stage: '17', statusNote: '', type: Implementation, unlocks: ''}
+body: |2
 
   ## Question
 

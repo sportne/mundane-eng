@@ -1,106 +1,35 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1106"
-kind: "task"
-title: "Specify the YAML Requirement Source Profile"
-status: "Complete"
-dependencies:
-  - "TC-1105"
+format: mundane-work-yaml-0.2
+id: TC-1106
+kind: task
+title: Specify the YAML Requirement Source Profile
+status: Complete
+dependencies: []
 relations: []
 planning:
-  condition: "TC-1105"
-  stage: "11"
-  statusNote: ""
-  type: "Design"
-  unlocks: "TC-1107, TC-1302"
-body: |2+
-
-  ## Question
-
-  The comparison proves a bounded YAML representation but leaves scalar styles,
-  source selection and complete semantic edge cases unresolved. A written source
-  contract prevents library defaults from silently defining requirements.
-
+  condition: ''
+  stage: '11'
+  statusNote: ''
+  type: Design
+  unlocks: ''
+body: |
   ## Outcome
 
-  A reviewed requirements specification defines the requirement model, its YAML
-  representation, a pinned machine-readable structural schema, and semantic rules
-  beyond that schema. It enables implementation without changing requirement
-  identity or inventing attribute scope. Its authoring-format scope is requirements
-  only; other artifact representations remain independent decisions.
+  Specify the YAML Requirement Source Profile.
 
-  ## Work
+  ## Current contract and scope
 
-  - Apply every clause in Experiment 0025's specification outline. Settle YAML
-    version/Core resolution, schema dialect, key types, record shape and scalar
-    shorthand; decide quoted/block text requirements using the hash-loss finding.
-  - Specify physical/decoded characters, folded/literal/chomping behavior, ordered
-    paragraphs/math, duplicates, null/empty, aliases/tags/directives/streams and
-    resource limits with valid/invalid examples.
-  - Select explicit source-format/version identifiers, extension/discovery and
-    standalone-file behavior. State mixed-input and temporary migration policies.
-  - Assign structural constraints, field/relationship meanings, domain/source-set
-    rules and diagnostic obligations explicit authoritative homes in the schema and
-    specification. State precedence and consistency checks. Preserve current field
-    meanings and human IDs; leave typed project attributes to TC-1301/TC-1302.
-    Record alternatives and intentional compatibility changes.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A clause-by-clause disposition and reviewable normative successor define every
-    current semantic field and every experimental failure case; no default library
-    setting substitutes for a rule.
-  - Examples cover one/many records, multiple files, quoting hazards, paragraph/math
-    boundaries, comments, invalid input and format/version conflicts.
-  - The schema and prose agree; a rule map identifies their respective authority
-    and conformance examples check consistency. Field meanings, reference direction,
-    source-set validity and source-coordinate conventions are explicit. Historical
-    0.1/0.2 contracts retain their original authority.
-  - The scope statement confines this YAML profile to requirements. Verification
-    plans, safety assessments, BOMs and other artifacts inherit no authoring format,
-    schema or YAML parser requirement from this specification.
-  - Migration notes specify selectors, temporary coexistence if needed, checks and
-    retirement conditions without committing to permanent dual authoring.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  No production parser/formatter changes, corpus conversion, new attributes, or
-  long-term language-stability promise.
-
-  ## Compatibility, affected components and completion decision
-
-  Likely components: source specification, conformance examples, schema and command
-  contracts. This is a breaking surface-syntax proposal; retain current behavior
-  until successor implementation and migration checks. Stop if an existing semantic
-  case cannot be represented without loss; revise the profile/decision explicitly.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Representation decision](../../research/0033-yaml-source-representation-decision.md)
-  - [Comparison and specification outline](../../experiments/0025-yaml-source-comparison/README.md)
-  - [TC-1105](task-1105-compare-yaml-and-custom-requirement-source.yaml)
-
-  ## Planning refinement
-
-  Make the requirements model, representation, structural schema and semantic rules
-  explicit deliverables, with one authoritative home per rule. Scope these decisions
-  to requirements; integration with other artifacts uses their separately selected
-  contracts. Status and dependencies remain unchanged.
-
-
-  ## Completion evidence and decision
-
-  Completed 2026-09-05 in the requirements YAML batch.
-
-  Selected mundanereq-yaml-0.3 with normative structural schema, explicit YAML
-  profile/domain rules, selectors, migration policy and source 0.2 clause disposition.
-  The independent schema check verifies consistency with maintained conformance cases.
-
-  The [batch verification](../../research/0035-yaml-requirements-batch-verification.md)
-  records full make verify, golden/native checks and limitations. The
-  [contract decision](../../research/0034-yaml-requirements-contract-decision.md),
-  [source contract](../../specification/0010-requirements-yaml-0.3.md),
-  [command addendum](../../specification/0011-tool-safety-and-yaml-commands.md), and
-  [reproducible regression evidence](../../experiments/0026-yaml-requirements-batch/README.md)
-  provide the acceptance artifacts. Historical contracts remain preserved; other
-  artifact authoring formats and future attribute scope remain independent decisions.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

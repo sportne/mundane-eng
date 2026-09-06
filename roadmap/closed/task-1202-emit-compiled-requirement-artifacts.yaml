@@ -1,82 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1202"
-kind: "task"
-title: "Emit Compiled Requirement Artifacts"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1202
+kind: task
+title: Emit Compiled Requirement Artifacts
+status: Complete
 dependencies:
-  - "TC-1201"
+- TC-1201
 relations: []
 planning:
-  condition: "TC-1201"
-  stage: "12"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1204"
-body: |2+
-
-  ## Question
-
-  How can requirements be compiled into the selected public representation while
-  preserving the existing independent validation and formatting interfaces?
-
+  condition: ''
+  stage: '12'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  A focused compiler boundary emits TC-1201's deterministic requirement artifacts
-  and diagnostics, with regression evidence for its documented failure behavior.
+  Emit Compiled Requirement Artifacts.
 
-  ## Work
+  ## Current contract and scope
 
-  - Implement the selected command or API boundary and serialize all current semantic
-    fields, reference locations, provenance, and format identifiers.
-  - Preserve explicit source selection and distinguish source, invocation, input,
-    serialization, and output failures.
-  - Reuse one maintained interpretation. Retain necessary source locations instead
-    of making downstream consumers reconstruct them from text.
-  - Inspect Interpreter.decode, SourceDocument.read, and FormatterMain.format:
-    decoding currently occurs repeatedly. Where sharing the interpreted concrete
-    document removes duplicate work, verify preservation of source bytes/comments.
-    Keep broader refactoring separate if the emitter does not require it.
-  - Document independent use and extend the authoritative verification command with
-    focused artifact checks.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Golden files cover multi-file source, both existing language corpora, optional
-    fields, math, Unicode, and invalid inputs according to TC-1201.
-  - Reordered input arguments produce the same normalized semantic output; two runs
-    from recorded inputs agree byte-for-byte under the documented provenance policy.
-  - A fixture consumer reads the artifact without linking requirement-parser classes.
-  - Fault injection covers closed output, failure after a written prefix, and flush
-    failure; no truncated artifact is reported as a successful compilation.
-  - Any decoding-path change passes formatter idempotence, comment preservation,
-    and parse-format-parse checks; current validator/formatter/trace behavior remains
-    covered by existing verification.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Attribute grammar, a remote artifact registry, generalized compiler infrastructure,
-    or performance claims without a profile.
-
-  ## Compatibility and affected components
-
-  Add an explicitly experimental interface; retain existing command names and source
-  validity. Components: Interpreter, source representation, a focused CLI boundary,
-  semantic serialization, relevant tests and build targets.
-
-  ## Completion decision
-
-  Accept only a complete TC-1201 implementation with source-linked diagnostics.
-  Split optimization work if profiling or a larger architectural change is required;
-  do not expand this card merely to make implementation classes more uniform.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1201](task-1201-define-requirement-semantic-output.yaml)
-  - [Formatter entry point](../../src/main/java/mundanereq/cli/FormatterMain.java)
-  - [SourceDocument](../../src/main/java/mundanereq/source/SourceDocument.java)
-  - [TC-1402](task-1402-report-cli-output-failures.yaml)
-
-  ## Completion evidence
-
-  Completed by [Research 0041](../../research/0041-compiled-requirements-verification.md) and the independent mundanereq-compile command. Final `make verify` passed all 13 JVM groups, native/package/schema/version checks, compiled golden and adversarial corpora, independent consumer and rebuild checks. Record/field/reference spans are retained during parsing. Planning refinement: malformed-UTF-8 byte columns are converted only at the compiled boundary; existing CLI diagnostics and the formatter decoding path remain unchanged. TC-1204 remains Conditional pending TC-1203 and TC-0905.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

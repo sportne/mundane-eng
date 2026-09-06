@@ -1,2 +1,0 @@
-mutated/uses.tsv:2: glossary-policy: literal is not a preferred term or alias for TERM-LINK-LOSS
-mutated/uses.tsv: glossary-policy: unmapped use in SYS-006: command link lost

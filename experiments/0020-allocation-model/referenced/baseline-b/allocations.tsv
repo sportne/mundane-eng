@@ -1,6 +1,0 @@
-requirement_id	target_id	role
-SYS-001	TGT-VEHICLE	primary
-SYS-002	TGT-VEHICLE	primary
-SYS-004	TGT-AUTH	primary
-SYS-012	TGT-GCA	primary
-SYS-012	TGT-LINK	supporting

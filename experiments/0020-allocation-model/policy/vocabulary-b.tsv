@@ -1,7 +1,0 @@
-label	target_type
-Vehicle registry service	service
-Flight-plan manager	service
-Authorization service	service
-Ground-control adapter	adapter
-Link monitor	service
-Operator role	human-role

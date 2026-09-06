@@ -1,1 +1,0 @@
-SYS-ALARM-001	WMSCS-r1	potable-water-control	SC2	SA-002

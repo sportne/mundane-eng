@@ -1,14 +1,14 @@
 format: "mundanereq-yaml-0.3"
 # File-level author comment. It is not part of the requirement model.
-# A comment may follow the opener.
+# A comment may precede a requirement.
 # A comment may occur between complete scalar fields.
 # A comment may precede a prose field, but not its body.
 # The preceding prose body is complete here.
 # A comment may precede a relationship.
-# A comment may precede the closer.
+# A comment may follow a requirement.
 # A comment line by itself separates adjacent records.
 # Math and prose content are complete before this comment.
-# Comments may occur between repeated relationship fields.
+# Comments may occur between relationship values.
 # Blank and comment lines may be combined between records.
 # A trailing comment is permitted after the final record.
 requirements:

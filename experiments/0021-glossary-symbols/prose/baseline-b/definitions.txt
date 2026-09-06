@@ -1,5 +1,0 @@
-Normative shared definitions
-
-Command link lost — The state declared by SYS-006 when its configured loss condition is met.
-
-Local mathematical symbols are defined beside each equation. The symbol T in MON-001 is a sampling interval in seconds; T in ENV-001 is temperature in kelvin. They are separate local definitions, not one project-global symbol.

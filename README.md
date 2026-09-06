@@ -13,7 +13,7 @@ or requirement satisfaction. Each artifact's source format is an independent cho
 
 | Component | Authoritative source | Tools and examples |
 | --- | --- | --- |
-| Requirements | Custom 0.2 (default), explicitly selected YAML 0.3 or YAML 0.4 with project attributes | [Validate](distribution/validate.md), [format](distribution/format.md), [trace](distribution/trace.md), [compile](distribution/compile.md); [YAML examples](examples/yaml/README.md) |
+| Requirements | YAML 0.3 (default) or explicitly selected YAML 0.4 with project attributes | [Validate](distribution/validate.md), [format](distribution/format.md), [trace](distribution/trace.md), [compile](distribution/compile.md); [YAML examples](examples/yaml/README.md) |
 | Project attributes | Explicit JSON project declaration plus YAML 0.4 values; text/enum types, required/optional presence, no defaults | [Contracts and capabilities](distribution/attributes.md); [small and medium examples](examples/attributes/README.md) |
 | Verification planning | Independently specified TSV plans, activities and coverage assertions | [Plan compilation, scoped imports and review analysis](distribution/verification.md) |
 | Work items | YAML task/issue records, literal narrative strings and typed relationships | [Authoring and commands](distribution/work-items.md); [repository backlog](WORK-ITEMS.md) |
@@ -22,12 +22,8 @@ or requirement satisfaction. Each artifact's source format is an independent cho
 
 Compiled interfaces are versioned separately from source languages and tools.
 Attribute changes and whole-schema changes participate in conservative review
-analysis. Existing source profiles remain supported through explicit selection;
-`mundanereq-migrate` converts custom 0.2 into separate YAML 0.3 output.
-
-Editor integration and attribute ReqIF mapping remain unimplemented. The historical
-[ReqIF experiment](experiments/0006-reqif-interchange/README.md) covers its bounded
-custom-source profile only. Current development is incremental and experimental.
+analysis. Current development is incremental and experimental. Editor integration,
+ReqIF interchange, and additional engineering artifact domains remain future work.
 
 ## Build and try
 
@@ -58,12 +54,9 @@ contains only those three commands.
 
 ## Verify and contribute
 
-`make verify` is the authoritative JVM/native gate, including schemas, compatibility
-fixtures, source-to-report workflows, mutation checks, documentation links and the
+`make verify` is the authoritative JVM/native gate, including schemas, YAML fixtures, source-to-report workflows, mutation checks, documentation links and the
 backlog rebuild. `scripts/run-ci-verification.sh` runs that gate, records the environment
-and tests CI failure propagation. [Impact workflow evidence](research/0069-impact-workflow-verification.md)
-records the latest completed feature batch; individual research records identify the
-inputs and environment actually verified.
+and tests CI failure propagation. Individual cards and research records identify the inputs and environment actually verified.
 
 The first build downloads a checksummed YAML parser. Full verification also uses
 pinned Python schema-checking dependencies; these are not native runtime dependencies.

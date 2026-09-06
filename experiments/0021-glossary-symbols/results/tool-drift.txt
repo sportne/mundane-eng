@@ -1,4 +1,0 @@
-scenario/baseline-b/requirements.mreq:4: tool-convention: unrecognized command-link state
-scenario/baseline-b/requirements.mreq:24: tool-convention: unrecognized command-link state
-scenario/baseline-b/requirements.mreq:30: tool-convention: unrecognized command-link state
-scenario/baseline-b/requirements.mreq:37: tool-convention: unrecognized command-link state

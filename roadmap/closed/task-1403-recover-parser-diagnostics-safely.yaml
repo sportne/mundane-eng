@@ -1,86 +1,35 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1403"
-kind: "task"
-title: "Recover Parser Diagnostics Safely"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1403
+kind: task
+title: Recover Parser Diagnostics Safely
+status: Complete
 dependencies: []
 relations: []
 planning:
-  condition: "none"
-  stage: "14"
-  statusNote: ""
-  type: "Implementation and verification"
-  unlocks: "TC-1504"
-body: |2+
-
-  ## Question
-
-  Can the parser report independent errors usefully while keeping recovered records
-  distinct from a valid complete source model?
-
+  condition: ''
+  stage: '14'
+  statusNote: ''
+  type: Implementation and verification
+  unlocks: ''
+body: |
   ## Outcome
 
-  Bounded record recovery preserves useful diagnostics and valid neighboring records
-  without allowing invalid input to pass validation, linking, or formatter write-back.
+  Recover Parser Diagnostics Safely.
 
-  ## Work
+  ## Current contract and scope
 
-  - Reproduce the current file-level ParseFailure catch: one syntax failure discards
-    the returned record list for that file and may cause misleading dangling links
-    from other files.
-  - Define safe synchronization at actual record boundaries, respecting math/body
-    delimiters, and suppress or qualify downstream errors caused by missing parse data.
-  - Separate decoding, syntax recognition, semantic construction, and source-set
-    validation only where required to preserve recovery state and diagnostic locations.
-  - Expose completeness explicitly for future compilation/editor consumers. Coordinate
-    diagnostic ranges and partial-output rules with TC-1201 without blocking local
-    strict-validation fixes on a new public output format.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A fixture with two independent malformed records and valid neighbors yields both
-    primary syntax diagnostics at the correct locations in deterministic order.
-  - Multiline math, missing terminators, malformed headers, invalid UTF-8, and
-    cross-file references do not cause invented valid records or cascades presented
-    as certain semantic errors.
-  - Invalid recovered input still fails strict validation and formatter write-back;
-    valid-input semantic inventories remain unchanged.
-  - Adversarial inputs terminate with bounded diagnostics; include a deterministic
-    generator or targeted mutations for boundary recovery.
-  - The recorded before/after examples show user-visible diagnostic improvement,
-    independently of internal class names or package layout.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Incremental parsing, a complete language server, new grammar, Unicode policy
-    changes, or generalized compiler infrastructure.
-
-  ## Compatibility and affected components
-
-  Valid 0.1/0.2 behavior remains unchanged. Document improved invalid-input diagnostics
-  and incomplete semantic data explicitly. Components: Interpreter.Parser, decode and
-  source-set validation boundaries, diagnostics, and regression fixtures.
-
-  ## Completion decision
-
-  Keep recovery only where synchronization is reliable. Prefer an explicit incomplete
-  result to speculative records; split unrelated performance or formatting refactors
-  and profile before optimizing them.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Interpreter](../../src/main/java/mundanereq/Interpreter.java)
-  - [Source representation decision](../../research/0012-shared-source-representation.md)
-  - [TC-1201](task-1201-define-requirement-semantic-output.yaml)
-
-  ## Planning refinement
-
-  Include explicitly selected YAML 0.3 alongside retained custom-source fixtures.
-  YAML recovery is limited to independently invalid mappings after successful
-  composition; malformed YAML and invalid document envelopes remain file-fatal.
-  Do not infer record boundaries from malformed YAML text.
-
-  ## Completion evidence
-
-  Implemented and verified bounded recovery under [Contract 0016](../../specification/0016-diagnostic-recovery.md), with before/after captures and [Research 0048](../../research/0048-parser-recovery-verification.md). Sixteen JVM groups, existing compiled-output checks and the JVM/native recovery matrix passed. TC-1504 is Ready; YAML syntax recovery remains deliberately conservative.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

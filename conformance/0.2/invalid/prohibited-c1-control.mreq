@@ -1,5 +1,0 @@
-requirement REQ-001
-title: C1control
-statement:
-  The system shall reject prohibited physical-source characters.
-end requirement

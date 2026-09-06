@@ -1,7 +1,0 @@
-Higher-level decomposition paths from SCOPE:
-1 SCOPE -> CYCLE-A
-1 SCOPE -> SELF
-2 SCOPE -> CYCLE-A -> CYCLE-B
-3 SCOPE -> CYCLE-A -> CYCLE-B -> CYCLE-C
-Cycle observed among: CYCLE-A CYCLE-B CYCLE-C
-Cycle observed among: SELF

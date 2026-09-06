@@ -28,17 +28,17 @@ source notation. Requirement IDs remain human-authored; digests identify revisio
 
 | Area | Current result and evidence |
 | --- | --- |
-| Requirement authoring | Custom 0.2, explicit YAML 0.3/0.4, validation/SARIF, conservative formatting and decomposition trace; [contracts](../specification/README.md) |
+| Requirement authoring | YAML 0.3/0.4, validation/SARIF, conservative formatting and decomposition trace; [contracts](../specification/README.md) |
 | Compiled integration | Versioned requirement output, explicit scopes and pins, parser-free consumers; [compiler guide](../distribution/compile.md) |
 | Verification | Independent TSV plan compiler, coverage/review analysis and an experimental derived report; [workflow](../distribution/verification.md) |
-| Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [evidence](../research/0062-work-item-yaml-backlog-verification.md) |
-| Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [evidence](../research/0068-attribute-workflow-verification.md) |
+| Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [contracts](../specification/README.md) |
+| Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [contracts](../specification/README.md) |
 | Impact analysis | Scoped prospective queries, deterministic shortest explanations and validated source-linked reports; [workflow](../experiments/0037-impact-analysis/README.md) |
 | Contributor checks | Authoritative `make verify`, clean-checkout wrapper, compatibility/golden corpora, seeded workflows and targeted behavioral mutations; [build guide](../distribution/build-verification.md) |
 
 These capabilities establish bounded workflows. They do not establish executed
 verification, evidence adequacy, safety approval or requirement satisfaction.
-Historical research and completed cards retain their original scope and evidence.
+Completed cards record the scope of their maintained capabilities.
 
 ## Impact-analysis workflow
 
@@ -54,10 +54,9 @@ completed workflow. Its source cards retain individual completion evidence.
 | Card | Condition and decision enabled |
 | --- | --- |
 | [TC-0807: Authored views](task-0807-test-authored-views-and-specifications.yaml) | Demonstrate a composition/delivery need beyond the current generated report; compare simple ordering with a separate view artifact before selecting syntax. |
-| [TC-0902: Independent ReqIF roundtrip](task-0902-run-an-independent-reqif-roundtrip.yaml) | Identify an available independent implementation and concrete exchange workflow; classify actual preservation and loss before extending the bounded adapter. |
 | [TC-1104: Component layout](task-1104-establish-monorepo-component-layout.yaml) | Show a measurable navigation or dependency benefit; retain current paths when movement has no observable value. |
 
-Completed prerequisites do not remove these conditions. Attribute ReqIF support and
+Completed prerequisites do not remove these conditions. ReqIF interchange and
 editor integration remain unimplemented. The three-command native archive covers
 validate/format/trace; the other maintained commands have separate build targets.
 
@@ -102,3 +101,11 @@ The existing report is disposable, deterministic and linked to source. Issued
 reports may be retained as delivery records with their own approval provenance.
 Selection, ordering and composition can become separately authored facts only when
 TC-0807 demonstrates the need; they do not change requirement identity or hierarchy.
+
+## VS Code authoring batch
+
+TC-1800 establishes YAML-only requirement commands. TC-1801 defines the VS Code
+extension and explicit project snapshots; TC-1802 adds compiler diagnostics.
+Navigation (TC-1803), formatting (TC-1804) and attribute completion (TC-1805)
+then use that foundation. TC-1806 adds attribute hover help after completion.
+The [derived index](../WORK-ITEMS.md) records individual status and evidence.

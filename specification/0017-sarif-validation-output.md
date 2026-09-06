@@ -3,7 +3,7 @@
 Status: Selected experimental command addendum, decided before implementation.
 
 Select `--output=sarif --root DIR` on `mundanereq-validate`, after an optional
-leading `--source=custom-0.2` or `--source=yaml-0.3`, followed by explicit inputs.
+leading `--source=yaml-0.3` or `--source=yaml-0.4`, followed by explicit inputs.
 `--` ends options. Root is required, must be a directory, and all selected input
 paths must be lexically beneath it. No root traversal, repository discovery, forge
 upload or editor installation is implied. Default text mode and its version/help
@@ -26,9 +26,7 @@ results and observed rule descriptors are sorted deterministically. Unknown futu
 rule IDs must first be added to the diagnostic contract.
 
 The interpreter currently supplies diagnostic points, not token ranges. Emit
-truthful `startLine`/`startColumn` without invented end positions. Convert legacy
-invalid-UTF-8 byte columns using the known-valid prefix from the selected byte
-snapshot, exactly as compiled diagnostics do. Missing/unreadable inputs have an
+truthful `startLine`/`startColumn` without invented end positions. Use Unicode code-point columns. Missing/unreadable inputs have an
 artifact URI but no fabricated source region. Unicode supplementary characters
 count as one code point, independent of UTF-16 editor indexing. A consumer must
 honor columnKind when navigating. Full diagnostic spans require later parser data.

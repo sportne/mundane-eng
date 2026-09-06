@@ -28,8 +28,8 @@ def reject(name, path, mutate, target, marker):
     print(f'PASS {name}: restored exact input bytes', flush=True)
 
 
-reject('invalid-example', ROOT / 'conformance/0.2/valid/requirements.mreq',
-       lambda original: b'not a requirement opener\n' + original, 'test', 'not a requirement opener')
+reject('invalid-example', ROOT / 'conformance/0.3/valid/requirements.mreq.yaml',
+       lambda original: original.replace(b'      - \"TOP\"\n', b'      - \"ABSENT\"\n', 1), 'test', 'dangling-reference')
 reject('omitted-schema-target', ROOT / 'specification/schema/requirements-yaml-0.3.json',
        lambda original: (json.dumps(json.loads(original) | {'type': 'number'}) + '\n').encode(), 'yaml-schema-verify', "not of type 'number'")
 print('PASS both injected failures reached the authoritative gate and inputs were restored')

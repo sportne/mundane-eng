@@ -7,7 +7,7 @@ import java.util.*;
 import mundanereq.Interpreter;
 import mundanereq.SourceFormat;
 
-/** Behavioral checks of YAML source, migration, output delivery and snapshot safety. */
+/** Behavioral checks of YAML source, output delivery and snapshot safety. */
 public final class YamlWorkflowTest {
     private static final String BASIC = "format: \"mundanereq-yaml-0.3\"\nrequirements:\n"
             + "  - id: \"001\"\n    title: \"status: ready # Δ 😀\"\n    statement: \"The device shall retain data.\"\n";
@@ -17,11 +17,11 @@ public final class YamlWorkflowTest {
         sourceRules();
         Path temp = Files.createTempDirectory("mundanereq-yaml-test-");
         try {
-            cliAndMigration(temp);
+            cliBehavior(temp);
             snapshotSafety(temp);
             outputFailures(temp);
         } finally { delete(temp); }
-        System.out.println("PASS YAML rules, migration, formatter snapshot protection and CLI output failures");
+        System.out.println("PASS YAML rules, formatter snapshot protection and CLI output failures");
     }
 
     static void require(boolean condition, Object message) {
@@ -33,6 +33,8 @@ public final class YamlWorkflowTest {
     }
 
     private static void sourceRules() {
+        var corpus = Interpreter.interpretInputs(List.of(Path.of("conformance/0.3/valid")));
+        require(corpus.valid(), corpus.diagnostics());
         require(parse(BASIC).valid(), parse(BASIC).diagnostics());
         var authoring = Interpreter.interpretInputs(List.of(Path.of("conformance/0.3/authoring")), SourceFormat.YAML_03);
         require(authoring.valid(), authoring.diagnostics());
@@ -86,11 +88,11 @@ public final class YamlWorkflowTest {
         require(badUtf.diagnostics().getFirst().code().equals("invalid-utf8"), badUtf);
     }
 
-    private static void cliAndMigration(Path temp) throws Exception {
+    private static void cliBehavior(Path temp) throws Exception {
         Path yaml = temp.resolve("source.mreq.yaml"); Files.writeString(yaml, BASIC.replace("\n", "\r\n"));
         Files.writeString(temp.resolve("unrelated.yaml"), "not requirement input");
         require(call(ValidatorMain::run, "--source=yaml-0.3", temp.toString()).status == 0, "YAML discovery");
-        require(call(ValidatorMain::run, yaml.toString()).status == 1, "no syntax guessing");
+        require(call(ValidatorMain::run, yaml.toString()).status == 0, "YAML default");
         require(call(ValidatorMain::run, "--source=unknown", yaml.toString()).status == 2, "unknown source format");
         require(call(TraceMain::run, "--source=yaml-0.3", "impact", "001", yaml.toString()).status == 0, "YAML trace");
         require(call(FormatterMain::run, "--source=yaml-0.3", "--check", yaml.toString()).status == 1, "CRLF needs formatting");
@@ -100,40 +102,14 @@ public final class YamlWorkflowTest {
         Files.writeString(yaml, BASIC.replace("id:", "bad:")); byte[] invalid = Files.readAllBytes(yaml);
         require(call(FormatterMain::run, "--source=yaml-0.3", "--write", yaml.toString()).status == 2, "invalid formatting");
         require(Arrays.equals(invalid, Files.readAllBytes(yaml)), "invalid input rewritten");
-        Path source = temp.resolve("legacy.mreq");
-        String legacy = "# file comment\nrequirement A\n# record comment\ntitle: Hash # colon: Δ 😀\nstatement:\n  First paragraph.\n\n  Second paragraph.\n\n  math latex\n    \\alpha = 1\n  end math\nrationale:\n  A rationale.\nend requirement\n# last comment\n";
-        Files.writeString(source, legacy);
-        Path output = temp.resolve("converted");
-        var dry = call(MigrateMain::run, "--dry-run", output.toString(), source.toString());
-        require(dry.status == 0 && !Files.exists(output), dry);
-        var migrated = call(MigrateMain::run, output.toString(), source.toString()); require(migrated.status == 0, migrated);
-        var before = Interpreter.interpretInputs(List.of(source));
-        var after = Interpreter.interpretInputs(List.of(output), SourceFormat.YAML_03);
-        require(after.valid() && before.byId().equals(after.byId()), after.diagnostics());
-        String result = Files.readString(output.resolve("legacy.mreq.yaml"));
-        require(result.lines().filter(l -> l.startsWith("#")).toList().equals(legacy.lines().filter(l -> l.startsWith("#")).toList()), "comments lost");
-        require(Files.readString(source).equals(legacy), "original changed");
-        require(call(MigrateMain::run, output.toString(), source.toString()).status == 2, "output overwrite");
-        Path collisionDir = Files.createDirectory(temp.resolve("other")); Path collision = collisionDir.resolve("legacy.mreq");
-        Files.writeString(collision, legacy.replace("requirement A", "requirement B"));
-        require(call(MigrateMain::run, temp.resolve("collision").toString(), source.toString(), collision.toString()).status == 2, "filename collision");
-        require(!Files.exists(temp.resolve("collision")), "collision wrote directory");
-        Files.writeString(collision, "invalid\n");
-        require(call(MigrateMain::run, temp.resolve("invalid-migration").toString(), collision.toString()).status == 2, "invalid migration");
-        require(!Files.exists(temp.resolve("invalid-migration")), "invalid source wrote output");
-        // Deterministic mid-output failure preserves the earlier file and existing collision.
-        Path first = temp.resolve("first-created"); Path existing = temp.resolve("existing"); Files.writeString(existing, "keep");
-        Map<Path, byte[]> outputs = new LinkedHashMap<>(); outputs.put(first, new byte[] {1}); outputs.put(existing, new byte[] {2});
-        try { MigrateMain.writeOutputs(outputs, new PrintStream(OutputStream.nullOutputStream())); throw new AssertionError("expected CREATE_NEW failure"); }
-        catch (FileAlreadyExistsException expected) { require(Files.exists(first) && Files.readString(existing).equals("keep"), "partial output safety"); }
     }
 
     private static void snapshotSafety(Path temp) throws Exception {
         for (String kind : List.of("edit", "delete", "replace")) {
             Path dir = Files.createDirectory(temp.resolve(kind)); List<Path> paths = new ArrayList<>();
             for (String id : List.of("A", "B", "C")) {
-                Path file = dir.resolve(id + ".mreq");
-                Files.writeString(file, "requirement " + id + "\r\ntitle: Title\r\nstatement:\r\n  Text.\r\nend requirement\r\n"); paths.add(file);
+                Path file = dir.resolve(id + ".mreq.yaml");
+                Files.writeString(file, BASIC.replace("001", id).replace("\n", "\r\n")); paths.add(file);
             }
             var selection = Interpreter.selectInputs(paths); Map<Path, byte[]> formatted = new LinkedHashMap<>();
             for (var source : selection.sources()) formatted.put(Path.of(source.file()), new String(source.bytes(), StandardCharsets.UTF_8).replace("\r\n", "\n").getBytes(StandardCharsets.UTF_8));
@@ -158,7 +134,7 @@ public final class YamlWorkflowTest {
     }
 
     private static void outputFailures(Path temp) throws Exception {
-        for (Command command : List.<Command>of(ValidatorMain::run, FormatterMain::run, TraceMain::run, MigrateMain::run)) {
+        for (Command command : List.<Command>of(ValidatorMain::run, FormatterMain::run, TraceMain::run, CompileMain::run)) {
             for (String option : List.of("--help", "--version")) {
                 for (int fail : List.of(0, 10, -1)) {
                     PrintStream out = new PrintStream(new FaultStream(fail));
@@ -170,9 +146,9 @@ public final class YamlWorkflowTest {
             require(command.run(new String[] {}, new PrintStream(OutputStream.nullOutputStream()), new PrintStream(new FaultStream(0))) == 2, "diagnostic failure");
             require(command.run(new String[] {}, new PrintStream(new FaultStream(0)), new PrintStream(new FaultStream(0))) == 2, "both streams failure");
         }
-        Path bad = temp.resolve("bad.mreq"); Files.writeString(bad, "invalid\n");
+        Path bad = temp.resolve("bad.mreq.yaml"); Files.writeString(bad, "invalid\n");
         require(ValidatorMain.run(new String[] {bad.toString()}, new PrintStream(OutputStream.nullOutputStream()), new PrintStream(new FaultStream(0))) == 2, "diagnostic failure must override source status 1");
-        require(ValidatorMain.run(new String[] {"conformance/0.2/valid"}, new PrintStream(new FaultStream(10)), new PrintStream(OutputStream.nullOutputStream())) == 2, "normal validator output failure");
+        require(ValidatorMain.run(new String[] {"conformance/0.3/valid"}, new PrintStream(new FaultStream(10)), new PrintStream(OutputStream.nullOutputStream())) == 2, "normal validator output failure");
     }
 
     private static final class FaultStream extends OutputStream {

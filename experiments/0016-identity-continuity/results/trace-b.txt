@@ -1,3 +1,0 @@
-Direct lower-level requirements for SYS-MONITOR-SAMPLE-001:
-SENSOR-LEVEL-001
-SENSOR-WEATHER-001

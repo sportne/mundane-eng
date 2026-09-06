@@ -29,7 +29,7 @@ public final class Artifacts {
     public static Map<String,Map<String,Object>> requirements(Map<String,Object> a,String file) {
         boolean attributes=Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT.equals(a.get("format"));
         Set<String> paths=envelope(a,"requirements",attributes?Versions.REQUIREMENT_ATTRIBUTE_ARTIFACT:Versions.REQUIREMENT_ARTIFACT,file);
-        if(!(attributes?Set.of(Versions.SOURCE_ATTRIBUTES):Set.of(Versions.SOURCE_CUSTOM,Versions.SOURCE_YAML)).contains(text(a.get("sourceContract")))) throw new Problem("unsupported-format","unsupported requirement source",file);
+        if(!(attributes?Set.of(Versions.SOURCE_ATTRIBUTES):Set.of(Versions.SOURCE_YAML)).contains(text(a.get("sourceContract")))) throw new Problem("unsupported-format","unsupported requirement source",file);
         Map<String,Object> definition=null;
         if(attributes) {required(a,"attributeSchema");definition=attributeDefinition(a);}
         else if(a.containsKey("attributeSchema"))throw new IllegalArgumentException("attribute schema is not old-format metadata");

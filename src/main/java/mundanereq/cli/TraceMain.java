@@ -13,7 +13,7 @@ import mundanereq.trace.TraceAnalyzer;
 /** Focused decomposition trace command selected by Research 0016. */
 public final class TraceMain {
     static final String TOOL_VERSION = Versions.TRACE_VERSION;
-    static final String SOURCE_CONTRACT = Versions.SOURCE_CUSTOM;
+    static final String SOURCE_CONTRACT = Versions.SOURCE_YAML;
 
     private enum Operation {
         PARENTS("parents", "Direct higher-level requirements for %s:"),
@@ -57,7 +57,7 @@ public final class TraceMain {
         AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
+            out.println("Optional leading selector: --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {

@@ -1,6 +1,0 @@
-Higher-level decomposition paths from D:
-1 D -> A-NEAR-D
-1 D -> Z-NEAR-D
-2 D -> Z-NEAR-D -> A-NEAR-TOP
-2 D -> A-NEAR-D -> Z-NEAR-TOP
-3 D -> A-NEAR-D -> Z-NEAR-TOP -> TOP

@@ -11,7 +11,7 @@ import java.util.List;
 public final class SarifOutputTest {
     private SarifOutputTest() {}
     public static void run() {
-        String root="experiments/0032-sarif-diagnostics/valid";
+        String root="conformance/0.3/valid";
         String[] args={"--output=sarif","--root",root,root};
         for(int limit:List.of(0,37,Integer.MAX_VALUE)) {
             PrintStream failure=new PrintStream(new OutputStream() {

@@ -1,6 +1,0 @@
---- companion/baseline-b/definitions.tsv
-+++ companion/baseline-c/definitions.tsv
-@@ -1,2 +1,2 @@
- definition_id	preferred_text	aliases	meaning
--TERM-LINK-LOSS	command link lost	command link is declared lost	The state declared by SYS-006 when its configured loss condition is met.
-+TERM-LINK-LOSS	command link lost	command link is declared lost	The state declared by SYS-006 when its configured loss condition is met and retained until vehicle reactivation.

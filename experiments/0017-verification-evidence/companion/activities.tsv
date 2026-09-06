@@ -1,5 +1,0 @@
-activity_id	method	objective	expected_evidence
-ACT-SAMPLE-ANALYSIS	analysis	Demonstrate that configured sampling schedules are complete.	Analysis report and analyzed configuration
-ACT-LEVEL-TEST	test	Measure level error across the declared operating range.	Procedure, rig configuration, and measured observations
-ACT-LEVEL-ANALYSIS	analysis	Review the level-error budget against allocated contributors.	Error-budget report and analyzed configuration
-ACT-ARCHIVE-TEST	test	Demonstrate retention across the declared duration boundary.	Procedure, storage configuration, and retention observations

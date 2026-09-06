@@ -1,5 +1,0 @@
-requirement DUPLICATE
-title: First duplicate
-statement:
-  The system shall provide the first behavior.
-end requirement

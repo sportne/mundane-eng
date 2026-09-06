@@ -28,7 +28,7 @@ make impact-workflow-verify
 ```
 
 - Public source-to-report JVM/native comparisons and exact JSON/text goldens.
-- Legacy requirement output and attribute-aware output yield the same graph topology
+- YAML 0.3 requirement output and attribute-aware output yield the same graph topology
   for the selected relationships; embedded schema/value data remain validated.
 - Parser-free consumption without authored files or source parser classes.
 - Malformed selections, unsupported formats, missing imports, wrong pins, bad

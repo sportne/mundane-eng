@@ -1,4 +1,0 @@
-lines=1200
-bytes=157200
-diagnostic_codes:
-   1200 content-outside-record

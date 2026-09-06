@@ -1,9 +1,0 @@
-language_accepts_unknown_allocation_label=yes
-policy_rejects_typo=yes
-plain_rename_requirement_lines=4
-identified_rename_target_lines=2
-plain_reallocation_requirement_lines=2
-identified_reallocation_assertion_lines=2
-plain_multi_target_support=not-representable-with-one-allocation-field
-identified_multi_target_assertions=2
-general_system_model_introduced=no

@@ -1,56 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1608"
-kind: "task"
-title: "Compile YAML Work Items"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1608
+kind: task
+title: Compile YAML Work Items
+status: Complete
 dependencies:
-  - "TC-1607"
+- TC-1607
 relations: []
 planning:
-  condition: "TC-1607"
-  stage: "16"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1609"
-body: |2+
-
-  ## Question
-
-  The structured Markdown carrier splits facts between a heading and JSON. A YAML document can expose the full record while retaining readable multiline prose.
-
+  condition: ''
+  stage: '16'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  Compile the selected YAML source profile through the existing work-item semantics and serialized consumers.
+  Compile YAML Work Items.
 
-  ## Work
+  ## Current contract and scope
 
-  - Implement bounded node validation with source marks, duplicate-key detection and explicit profile selection.
-  - Keep legacy source/artifact reading; propagate YAML locations through analysis/views and native builds.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Public JVM/native fixtures cover literals, normalization, invalid YAML/schema/domain input and unchanged graph meanings.
-  - Legacy source and serialized artifact checks, parser-free consumers and output failures remain covered.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  No new work-item lifecycle, inferred prose relationships, requirement attributes, remote tracker, general artifact serialization rule or narrative-section metamodel.
-
-  ## Compatibility and affected components
-
-  Human-authored IDs and source remain authoritative. Requirements and verification plans keep their independent formats. Affected components: work-item specification/schema, compiler, serialized validation, fixtures, native build and backlog authoring helpers. Preserve existing graph meanings and historical evidence.
-
-  ## Completion decision
-
-  The design enables source implementation; implementation enables migration. Stop or revise if migration loses narrative strings, breaks explicit IDs or requires generated source authority. Diagnose unsupported formats explicitly. No future stability promise is implied.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Previous source decision](../../research/0055-work-item-source-decision.md)
-
-  ## Completion evidence
-
-  [Research 0061](../../research/0061-work-item-yaml-compiler-verification.md) records
-  JVM/native profile and legacy compatibility checks, source points, schema validation,
-  parser-free consumers, seeded regressions and killed mutations.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

@@ -1,4 +1,0 @@
-prior_reallocation_commit=0ee3a8311a8a59e2b1dfd46f965bc6e121194f08
-prior_reallocation_subject=Reallocate flight-plan authorization
--allocation: Flight-plan manager
-+allocation: Authorization service

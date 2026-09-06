@@ -1,80 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1102"
-kind: "task"
-title: "Define Requirement and Assertion Ownership"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1102
+kind: task
+title: Define Requirement and Assertion Ownership
+status: Complete
 dependencies:
-  - "TC-1101"
+- TC-1101
 relations: []
 planning:
-  condition: "TC-1101"
-  stage: "11"
-  statusNote: ""
-  type: "Decision"
-  unlocks: "TC-1103, TC-1301"
-body: |2+
-
-  ## Question
-
-  Which facts belong to requirements, explicit relationships, or independently
-  owned assertions when engineering artifacts can be compiled and linked?
-
+  condition: ''
+  stage: '11'
+  statusNote: ''
+  type: Decision
+  unlocks: ''
+body: |
   ## Outcome
 
-  A decision matrix establishes ownership, context, revision, and authority
-  boundaries before choosing syntax or widening the requirement model.
+  Define Requirement and Assertion Ownership.
 
-  ## Work
+  ## Current contract and scope
 
-  - Classify ID, title, obligation, rationale, provenance, decomposition, descriptive
-    tags, assessed criticality, allocation by variant, verification plans, and results.
-  - Exercise two simultaneous contexts, a changed assessment of unchanged source,
-    product-variant allocation, and an independently revised verification plan.
-  - State which direction of each relationship is authored and which inverse links
-    are derived; retain source locations for the authored assertion.
-  - Distinguish planned coverage, possible impact, review staleness, and satisfaction.
-    Identify what a generic resolver can establish and what requires a domain rule.
-  - Preserve current built-in fields while examining future additions. Representation
-    may be shared across artifact kinds; semantic ownership need not be shared.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A checked-in matrix gives each example an owner, required context, revision
-    binding, source of authority, and rule for independent change.
-  - Worked valid and invalid examples show assessed safety levels retaining scheme,
-    context, rationale, evidence reference, and authority rather than becoming bare
-    timeless requirement attributes.
-  - A requirement stays identified by its human-authored ID; imported qualification
-    resolves scope without creating a second machine identity.
-  - The record explicitly distinguishes an obligation from an assertion about it and
-    states the boundary decisions needed by TC-1103 and TC-1301.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Changing grammar, removing allocation or other existing fields, standardizing
-    every engineering artifact, or implementing hazard analysis.
-
-  ## Compatibility and affected components
-
-  The 0.2 source contract remains the baseline. Likely inputs are the minimum-model
-  design record and verification, safety, allocation, and identity studies. New
-  decisions must explain any changed planning disposition without rewriting evidence.
-
-  ## Completion decision
-
-  Proceed with requirements plus verification planning if the examples can retain
-  distinct owners and revisions. Stop a proposed generalization when it requires
-  universal inheritance, behavior, or implicit cross-domain approval semantics.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1101](task-1101-define-monorepo-component-boundaries.yaml)
-  - [Verification ownership](../../research/0024-verification-companion-decision.md)
-  - [Safety ownership](../../research/0025-safety-classification-ownership-decision.md)
-  - [Allocation decision](../../research/0027-allocation-model-decision.md)
-  - [Identity decision](../../research/0023-identity-continuity-decision.md)
-
-  ## Completion evidence
-
-  Completed by [Research 0037](../../research/0037-requirement-and-assertion-ownership.md): ownership/context/revision matrix, valid and invalid safety examples, independent variant and plan revisions, authored link direction and analysis distinctions. Planning refinement: preserve both maintained custom 0.2 and YAML 0.3 contracts. TC-1103 and TC-1301 are now Ready.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

@@ -98,7 +98,7 @@ completed/remaining-file reporting. Preserve the documented final-check/rename r
 No JSON declaration formatting is allowed. Trace adds no attribute edges.
 
 Compiled output, linking, review comparison and report contracts are versioned in
-their owning addenda. ReqIF and existing migration commands remain unsupported for
+their owning addenda. ReqIF interchange remains unsupported for
 new attribute-bearing input; no flattening is allowed. Structural editor assistance
 alone cannot assert semantic validity. Other artifact formats are independent choices.
 

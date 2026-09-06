@@ -1,9 +1,0 @@
---- referenced/baseline-a/targets.tsv
-+++ referenced/baseline-b/targets.tsv
-@@ -1,5 +1,5 @@
- target_id	display_name	target_type
--TGT-VEHICLE	Vehicle manager	service
-+TGT-VEHICLE	Vehicle registry service	service
- TGT-FLIGHT-PLAN	Flight-plan manager	service
- TGT-AUTH	Authorization service	service
- TGT-GCA	Ground-control adapter	adapter

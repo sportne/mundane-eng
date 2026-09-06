@@ -1,6 +1,0 @@
-plan=PLAN-A
-declared_baseline=baseline-a
-evaluated_baseline=baseline-b
-status=stale-requirement-baseline
-declared_sha256=f728639a68406e7a5101fae3f7b52f61b40765018980d4621f816e871fe6da8d
-actual_sha256=58bb3b47a4303221ea1e5637883d35e3de0d27e3af1b70561036a4dcedcfffcf

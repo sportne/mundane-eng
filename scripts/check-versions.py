@@ -21,13 +21,11 @@ check_metadata(metadata)
 if len(sys.argv) > 1:
     assert sys.argv[1] == values['SUITE_VERSION'], 'Make package version overrides authoritative declaration'
 cp = str(ROOT/'build/maintained/classes')+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar')
-for tool, main in [('VALIDATE','Validator'),('FORMAT','Formatter'),('TRACE','Trace'),('MIGRATE','Migrate'),('COMPILE','Compile')]:
+for tool, main in [('VALIDATE','Validator'),('FORMAT','Formatter'),('TRACE','Trace'),('COMPILE','Compile')]:
     actual = subprocess.check_output(['java','-cp',cp,'mundanereq.cli.'+main+'Main','--version'], text=True)
-    assert values[tool+'_VERSION'] in actual and values['SOURCE_CUSTOM'] in actual
-    if tool == 'MIGRATE': assert values['SOURCE_YAML'] in actual
-    else:
-        yaml = subprocess.check_output(['java','-cp',cp,'mundanereq.cli.'+main+'Main','--source=yaml-0.3','--version'], text=True)
-        assert values['SOURCE_YAML'] in yaml
+    assert values[tool+'_VERSION'] in actual and values['SOURCE_YAML'] in actual
+    yaml = subprocess.check_output(['java','-cp',cp,'mundanereq.cli.'+main+'Main','--source=yaml-0.3','--version'], text=True)
+    assert values['SOURCE_YAML'] in yaml
 for tool, main, formats in [('WORK','engineering.work.WorkMain',['WORK_SOURCE','WORK_ARTIFACT','WORK_ANALYSIS']),('LINK','engineering.artifacts.LinkMain',['IMPORT_FORMAT','LINK_ARTIFACT']),('PLAN','engineering.verification.PlanMain',['PLAN_SOURCE','PLAN_ARTIFACT']),('VERIFY','engineering.verification.VerifyMain',['VERIFICATION_ARTIFACT'])]:
     actual=subprocess.check_output(['java','-cp',cp,main,'--version'],text=True)
     assert all(values[key] in actual for key in [tool+'_VERSION',tool+'_CONTRACT']+formats)
@@ -50,7 +48,7 @@ with tempfile.TemporaryDirectory() as directory:
     else: raise AssertionError('duplicate declaration accepted')
 print('PASS independent version declarations, actual CLI metadata, stale metadata and isolated version-domain mutation')
 
-sarif=json.loads(subprocess.check_output(['java','-cp',cp,'mundanereq.cli.ValidatorMain','--output=sarif','--root','conformance/0.2/valid','conformance/0.2/valid'],cwd=ROOT))
+sarif=json.loads(subprocess.check_output(['java','-cp',cp,'mundanereq.cli.ValidatorMain','--output=sarif','--root','conformance/0.3/valid','conformance/0.3/valid'],cwd=ROOT))
 assert sarif['version']==values['SARIF_VERSION']
 assert sarif['runs'][0]['properties']['commandContract']==values['VALIDATE_CONTRACT']
 print('PASS SARIF format and validator command metadata consume authoritative declarations')

@@ -25,7 +25,7 @@ structural schema validation, JVM/native parity and the following additions:
 | AttributeFormattingTest / check-attribute-format.py | Schema edit between replacements preserves external edit and remaining sources; CRLF-only normalization, comments/order and trace parity |
 | AttributeCompilationTest / check-attribute-compile.py | Source/schema revision rechecks, no downgraded fields, exact compiled golden and an independent serialized fixture consumer |
 | check-attribute-link.py | Scoped declarations, pins, conservative changes, malformed imports, explicit old/new promotion and parser-free work-item links |
-| check-attribute-report.py | Exact escaped report, values/declarations/locations, recomputed findings, invalid input and output failure; existing migration/ReqIF rejection |
+| check-attribute-report.py | Exact escaped report, values/declarations/locations, recomputed findings, invalid input and output failure |
 | check-attribute-corpus.py | 57 unchanged built-in requirements, four-file adoption, independent Unicode slices, invalid and Unicode artifact goldens |
 | workflow.py | Author/validate/format/compile/plan/link/analyze/render the small example, source navigation and identical delete/rebuild |
 | regressions.py | Twelve deterministic source-to-report seeds, exact model values, formatter preservation, value/schema edits and incomplete barriers |
@@ -55,10 +55,10 @@ Three deliberate mutations are compiled in temporary classpath overlays: ignore
 required attributes, accept invalid enums, and ignore whole-schema meaning in review.
 Each unchanged implementation first passes its expected signature; each mutant must
 compile and produce a different, incorrect signature. Uncompilable mutants do not
-count as kills. [Recorded mutation results](results/mutations.json) are replayed
+count as kills. Recorded mutation results are replayed
 against actual behavior; tracked production sources are never changed by this check.
 These are targeted behavioral witnesses, not a general mutation score or proof.
 
-The [completion record](../../research/0068-attribute-workflow-verification.md) links
+The completion record links
 the final clean-checkout environment and gate logs. Earlier 1303–1307 summaries are working-checkout checks, not claims of hosted CI.
 Generated artifacts and digests identify derived revisions, never authored identity.

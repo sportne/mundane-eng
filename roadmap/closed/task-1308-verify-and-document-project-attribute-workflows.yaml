@@ -1,74 +1,39 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1308"
-kind: "task"
-title: "Verify and Document Project Attribute Workflows"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1308
+kind: task
+title: Verify and Document Project Attribute Workflows
+status: Complete
 dependencies:
-  - "TC-1302"
-  - "TC-1304"
-  - "TC-1306"
-  - "TC-1307"
+- TC-1302
+- TC-1304
+- TC-1306
+- TC-1307
 relations: []
 planning:
-  condition: "TC-1302, TC-1304, TC-1306, TC-1307"
-  stage: "13"
-  statusNote: ""
-  type: "Verification and Documentation"
-  unlocks: "none"
-body: |2+
-
-  ## Question
-
-  Owning component checks alone will not show whether a project can retain its
-  explicit declaration through editing, compilation, imports and review reports, or
-  whether no-schema projects still behave as documented.
-
+  condition: ''
+  stage: '13'
+  statusNote: ''
+  type: Verification and Documentation
+  unlocks: ''
+body: |
   ## Outcome
 
-  A reproducible multi-file example and bounded workflow corpus establish the
-  implemented attribute path and a truthful opt-in migration guide.
+  Verify and Document Project Attribute Workflows.
 
-  ## Work
+  ## Current contract and scope
 
-  - Add a realistic small project using both descriptive types and a medium corpus derived from existing examples, with explicit licensing/provenance and no invented usage feedback. Preserve historical pilot evidence.
-  - Extend TC-1501's existing corpus strategy with source/schema/value/diagnostic/format/artifact/report goldens, seeded generation and targeted mutations of the new rules. Reuse owning tests rather than duplicate every check.
-  - Exercise schema absence, isolated files, old source/profile compatibility, source/schema moves, definition revisions, explicit import scopes, strict pins and invalid-publication barriers.
-  - Publish language-reference examples and migration notes matching implemented flags/formats. Explain no defaults, unchanged old files, conservative schema review staleness and independent assessment ownership.
-  - Record editor obligations and actual support honestly: structural assistance is not semantic validation; completion/hover require selected project schema; no editor host or attribute assistance is claimed implemented.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A clean checkout can author/validate/format/compile/link/analyze/render the example from checked-in source and declarations; deleting all derived artifacts and rebuilding yields equal semantics and identical report bytes.
-  - Formatter idempotence, parse-format-parse equivalence, optional omission, exact enums and schema-change effects have independent assertions; invalid schema/value cannot produce usable downstream output.
-  - Bounded reproducible seeds and compilable behavioral mutations include ignored requiredness, invalid enum acceptance and ignored schema changes; record actual results and replay/minimization instructions, not a general coverage claim.
-  - Existing 0.1-compatible/custom 0.2 and YAML 0.3 corpora retain validity and documented outputs; old-to-new adoption examples identify each deliberate header/configuration change.
-  - Authoritative verification and documentation/link checks pass; evidence names actual environment, commands and failures. Every published capability is implemented or explicitly unsupported; no external-tool or user-study evidence is invented.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Deferring owning regression tests until this card, new attribute types, editor implementation, new artifact languages, long-running deployment studies.
-
-  ## Compatibility and affected components
-
-  Likely components: examples, conformance, experiment 0033 extensions, language and
-  command documentation, owning verification targets only where integration needs
-  them. Existing source stays authoritative; generated editor schemas/reports must
-  not compete with it. No changes to unrelated tooling versions are justified.
-
-  ## Completion decision
-
-  Stop if an example needs unselected defaults, lists or assessment semantics, or
-  if compatibility requires rewriting existing authored projects without explicit
-  opt-in. Narrow the example rather than implement extra types. Completion records
-  bounded evidence and leaves future editor/interchange work conditional.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
-  - [Attribute design](../../research/0052-project-attribute-schema-decision.md)
-  - [Worked cases](../../research/0053-project-attribute-design-cases.md)
-
-  ## Completion evidence
-
-  [Completion report](../../research/0068-attribute-workflow-verification.md) records small/medium source examples, explicit migration and capability guidance, twelve seeded workflows, three killed compiled mutants and a passing clean authoritative gate.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

@@ -15,7 +15,7 @@ python3 specification/examples/requirements-artifact-0.1/consume.py build/requir
 
 The explicit root makes locations relative to a known checkout. It selects no
 files by itself. Supply files/directories below that root; directories use the
-selected source suffix. Omit the leading source selector for custom 0.2.
+selected source suffix. Omit the leading source selector for YAML 0.3.
 
 Exit 0 means the complete selected source set compiled successfully. Exit 1 means
 source nonconformance, with a diagnostic-only JSON artifact and no requirement
@@ -42,7 +42,7 @@ The small consumer above supports output 0.1 only. The maintained
 import scopes. Other artifact authoring formats remain independent choices.
 
 `make compiled-verify` checks native/JVM golden output, retained source spans,
-legacy/YAML semantic equivalence, invalid input, resource limits, consumer isolation
+YAML semantic equivalence, invalid input, resource limits, consumer isolation
 and output failures. `make verify` includes these checks. The compiler is a separate
-build target alongside migration; the existing trial archive still contains its
+build target alongside the other artifact tools; the existing trial archive still contains its
 three documented validate/format/trace executables. No new release is published.

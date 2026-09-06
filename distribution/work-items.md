@@ -66,7 +66,7 @@ Incomplete JSON output and failed-stream prefixes are unusable. Exit 0 means suc
   move to closed/, update the selected path and rebase incoming/outgoing prose links.
   Preserve the ID. A relation never automatically closes or approves another item.
 - Run `make work-index`, `make work-backlog-verify`, and owning implementation checks.
-  `make verify` includes YAML/schema, migration, corpus and current/legacy checks.
+  `make verify` includes YAML/schema, corpus and supported-profile checks.
 - Commit each completed task separately, including source and generated index.
 
 Tasks use Ready, Planned, Conditional, In progress, Complete or Superseded. Issues
@@ -74,12 +74,6 @@ use Open, Closed or Superseded. Analysis reports unfinished prerequisites withou
 changing authored status or inferring that conditional policy is satisfied.
 
 ## Migration and compatibility
-
-[Experiment 0035](../experiments/0035-work-yaml/README.md) records the checked YAML
-migration. It preserves decoded values and human IDs, individually recording prose
-link retargeting and file renames. The 0034 Markdown migration inventory remains
-historical evidence. Replays require the recorded ancestors, so `make verify` uses
-a full Git checkout; hosted checkout already fetches history.
 
 Manifest 0.1 still explicitly selects the old Markdown profile; manifest 0.2 selects
 YAML. There is no extension inference or fallback. Compiled output 0.1 and 0.2 remain

@@ -1,6 +1,0 @@
---- baseline-a/plan.tsv
-+++ baseline-b/plan.tsv
-@@ -1,2 +1,2 @@
- plan_id	requirement_baseline	requirement_source_sha256	activity_source_sha256
--PLAN-A	baseline-a	f728639a68406e7a5101fae3f7b52f61b40765018980d4621f816e871fe6da8d	aa7528db2ec0c0480e36c3236f4c43939171841e8be446cc9655062371af8d7a
-+PLAN-B	baseline-b	58bb3b47a4303221ea1e5637883d35e3de0d27e3af1b70561036a4dcedcfffcf	aa7528db2ec0c0480e36c3236f4c43939171841e8be446cc9655062371af8d7a

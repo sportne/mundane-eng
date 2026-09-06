@@ -1,4 +1,0 @@
-COMMS-REMOTE-001	criticality[WMSCS-r1/uncrewed-rural]=SC0	derived-from=SA-004	source=hazard-analysis.git@a014c2e#HAZ-004
-SENSOR-LEVEL-001	criticality[WMSCS-r1/uncrewed-rural]=SC1	derived-from=SA-003	source=hazard-analysis.git@a014c2e#HAZ-004
-SYS-ALARM-001	criticality[WMSCS-r1/potable-water-control]=SC2	derived-from=SA-002	source=hazard-analysis.git@b729a30#HAZ-017
-SYS-ALARM-001	criticality[WMSCS-r1/uncrewed-rural]=SC1	derived-from=SA-001	source=hazard-analysis.git@a014c2e#HAZ-004

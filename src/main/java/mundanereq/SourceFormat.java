@@ -2,7 +2,6 @@ package mundanereq;
 
 /** Explicit authoring contracts; never inferred from parse failure. */
 public enum SourceFormat {
-    CUSTOM_02("custom-0.2", Versions.SOURCE_CUSTOM, ".mreq"),
     YAML_03("yaml-0.3", Versions.SOURCE_YAML, ".mreq.yaml"),
     YAML_04("yaml-0.4", Versions.SOURCE_ATTRIBUTES, ".mreq.yaml");
 

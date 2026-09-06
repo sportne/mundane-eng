@@ -1,6 +1,0 @@
---- baseline-a/verification-plan.tsv
-+++ baseline-b/verification-plan.tsv
-@@ -1,2 +1,2 @@
- activity_id	requirement_id	objective
--VERIFY-SAMPLE-001	SYS-MONITOR-SMAPLE-001	Demonstrate complete periodic station sampling.
-+VERIFY-SAMPLE-001	SYS-MONITOR-SAMPLE-001	Demonstrate complete periodic station sampling.

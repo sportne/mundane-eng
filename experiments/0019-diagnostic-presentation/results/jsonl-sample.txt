@@ -1,3 +1,0 @@
-{"sequence":1,"path":"<invalid>/invalid-0000.mreq","line":1,"column":1,"category":"content-outside-record","message":"nonblank content must occur inside a requirement record"}
-{"sequence":2,"path":"<invalid>/invalid-0001.mreq","line":1,"column":1,"category":"content-outside-record","message":"nonblank content must occur inside a requirement record"}
-{"sequence":3,"path":"<invalid>/invalid-0002.mreq","line":1,"column":1,"category":"content-outside-record","message":"nonblank content must occur inside a requirement record"}

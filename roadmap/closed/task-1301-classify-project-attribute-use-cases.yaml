@@ -1,77 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1301"
-kind: "task"
-title: "Classify Project Attribute Use Cases"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1301
+kind: task
+title: Classify Project Attribute Use Cases
+status: Complete
 dependencies:
-  - "TC-1102"
+- TC-1102
 relations: []
 planning:
-  condition: "TC-1102"
-  stage: "13"
-  statusNote: ""
-  type: "Experiment and decision"
-  unlocks: "TC-1302"
-body: |2+
-
-  ## Question
-
-  Which project-specific facts earn typed requirement attributes, and which need
-  independently owned assertions in the compiled-artifact workflow?
-
+  condition: ''
+  stage: '13'
+  statusNote: ''
+  type: Experiment and decision
+  unlocks: ''
+body: |
   ## Outcome
 
-  A bounded use-case decision selects the smallest useful attribute capability, or
-  records why a particular example should remain an assertion or project policy.
+  Classify Project Attribute Use Cases.
 
-  ## Work
+  ## Current contract and scope
 
-  - Collect descriptive classifications, external references, ownership labels,
-    assessed safety levels, verification status, and allocation-by-variant examples.
-  - Apply TC-1102's ownership matrix; distinguish project annotation from consequential
-    assessment and broadly useful language behavior from organization-specific policy.
-  - Consider text and enumeration first. Evaluate lists, booleans, integers, URLs,
-    and requirement references individually, with a concrete need for each inclusion.
-  - Decide required/optional/repeated behavior and whether defaults improve authoring
-    enough to justify implicit values and schema-change effects.
-  - Draft valid/invalid conceptual examples without prematurely selecting .mreq syntax.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A use-case matrix records ownership, type, cardinality, authority, and concrete
-    consumers for each candidate.
-  - At least one text and one enumeration example have valid/invalid values; list
-    references and contextual criticality explicitly receive include/defer/reject
-    decisions with reasons.
-  - The record separates descriptive tags from contextual safety assertions and
-    verification results, using existing studies as evidence.
-  - Rejected alternatives and stop conditions are written down; TC-1302 receives a
-    bounded initial type/cardinality set rather than a universal metadata framework.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Grammar, implementation, automatic machine identities, inferred requirement
-    satisfaction, or moving all project facts onto requirement records.
-
-  ## Compatibility and affected components
-
-  Existing requirement fields remain valid. Any later attribute declarations must
-  be typed, explicit, reviewable, and checked-in source. Likely inputs: ownership
-  decision, project examples, model-pressure studies, and future language reference.
-
-  ## Completion decision
-
-  Proceed to schema design only for intrinsic/descriptive cases with a demonstrated
-  consumer. Keep independently revised, contextual, or evidential assertions outside
-  the requirement object. Stop types whose sole justification is hypothetical breadth.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1102](task-1102-define-requirement-and-assertion-ownership.yaml)
-  - [Safety ownership](../../research/0025-safety-classification-ownership-decision.md)
-  - [Allocation decision](../../research/0027-allocation-model-decision.md)
-
-  ## Completion evidence
-
-  Completed 2026-09-05. [Research 0051](../../research/0051-project-attribute-use-case-decision.md) records the ownership/use-case matrix, text and enumeration scope, required/optional single values, rejected defaults and deferred lists/references, and valid/invalid conceptual examples. This is a design assessment against repository evidence, not implementation or user-trial evidence. TC-1302 is now Ready.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

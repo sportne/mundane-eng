@@ -1,7 +1,0 @@
-target_id	display_name	target_type
-TGT-VEHICLE	Vehicle manager	service
-TGT-FLIGHT-PLAN	Flight-plan manager	service
-TGT-AUTH	Authorization service	service
-TGT-GCA	Ground-control adapter	adapter
-TGT-LINK	Link monitor	service
-TGT-OPERATOR	Operator role	human-role

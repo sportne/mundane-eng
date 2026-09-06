@@ -1,78 +1,37 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1306"
-kind: "task"
-title: "Link and Analyze Project Attributes"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1306
+kind: task
+title: Link and Analyze Project Attributes
+status: Complete
 dependencies:
-  - "TC-1302"
-  - "TC-1305"
+- TC-1302
+- TC-1305
 relations: []
 planning:
-  condition: "TC-1302, TC-1305"
-  stage: "13"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1307, TC-1308"
-body: |2+
-
-  ## Question
-
-  The maintained linker/analyzer accepts only current fixed-field requirement
-  artifacts and compares seven values. Attribute or schema-meaning changes would be
-  missed unless serialized validation and review comparison evolve explicitly.
-
+  condition: ''
+  stage: '13'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  Imported schema snapshots remain independent by scope, and changed attributes or
-  schema definitions produce an explicit review-stale finding.
+  Link and Analyze Project Attributes.
 
-  ## Work
+  ## Current contract and scope
 
-  - Extend strict serialized validation to the selected output 0.2 schema/attribute types, requiredness, completeness, provenance and locations; do not import parser classes or reload schema source.
-  - Preserve explicit scopes and exact pins. Reject unsupported/malformed/incomplete artifacts before publishing successful edges or results; same-name schemas from different scopes never merge.
-  - Compare eight value fields plus the whole canonical schema definition under the selected conservative policy; publish new linked/verification output identifiers wherever nested formats or result meanings require them.
-  - Support explicit promotion of old output 0.1 to absent attributes/null schema for cross-format comparison. Keep historical comparisons unchanged.
-  - Identify changed attributes/schema definitions in machine-readable findings sufficient for TC-1307's source-linked report; retain original assertion authority and provenance.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Serialized tampering cases for undeclared keys, invalid enum, required omission, forged completeness, bad locations and unsupported schema format fail before analysis.
-  - Changing owner-team, enum vocabulary, description or requiredness yields the specified stale/invalid outcomes. Comment/reordering/path-only edits remain current; schema definition changes are not ignored as metadata.
-  - Equal old/schema-free new snapshots compare current; old/schema-selected new snapshots compare stale. Scope ambiguity, wrong pins and ID corrections retain existing failure meanings.
-  - Published output/CLI contracts, golden findings and migration notes explain the conservative whole-schema review policy and explicit format support. Readers requiring the old result format reject new meanings.
-  - Actual public JVM/native workflow checks and the authoritative gate pass; compilation/linking still makes no assessment, execution or satisfaction claim.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Configurable per-attribute comparison policies, schema merging/import registries, assessment inference, report implementation.
-
-  ## Compatibility and affected components
-
-  Requirement, linked and verification formats evolve independently. The plan TSV
-  language and human IDs need no change. Likely components: artifact validation,
-  resolver/analyzer, version declarations, specification 0014/0015 successors and
-  owning tests. Requirements-only commands remain independent.
-
-  ## Completion decision
-
-  Stop if old consumers could silently apply seven-field comparison to new values.
-  Whole-schema comparison may cause extra reviews; document this rather than narrow
-  it without evidence. Completion enables attribute-aware reporting and integration.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1302](task-1302-decide-project-attribute-schemas.yaml)
-  - [Attribute design](../../research/0052-project-attribute-schema-decision.md)
-  - [Worked cases](../../research/0053-project-attribute-design-cases.md)
-
-  ## Planning refinement
-
-  TC-1601–1609 introduced a work-item consumer after this card was written. Include
-  strict import and typed-link regression coverage for work items referencing
-  requirement output 0.2, without introducing attribute-based graph inference or
-  adding requirement source-parser dependencies to work-item analysis.
-
-  ## Completion evidence
-
-  [Completion report](../../research/0066-attribute-linking-verification.md) records strict output 0.2 consumers, scoped whole-schema comparison, explicit old/new promotion, work-item links and passing authoritative verification.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

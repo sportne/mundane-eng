@@ -1,6 +1,0 @@
-requirement INVALID-COMMENT-BEFORE-BODY
-title: Comment before body
-statement:
-# A comment cannot replace or precede the required body content.
-  The system shall provide the behavior.
-end requirement

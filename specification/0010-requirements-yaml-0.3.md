@@ -8,7 +8,7 @@ Identifier: `mundanereq-yaml-0.3`
 
 This contract defines human-authored requirements in YAML. Other engineering
 artifacts have independent representation decisions. The abstract requirement
-model retains source 0.2 clause 5, including human-authored IDs, optional opaque
+model includes human-authored IDs, optional opaque
 allocation/source values, ordered statement prose/math, prose-only rationale and
 unordered decomposition edges. Generated artifacts remain derived.
 
@@ -70,8 +70,7 @@ values. Attribute extensions await their own decision.
 A prose paragraph is a nonempty decoded string without CR/LF. Its exact spaces are
 semantic. `>-` folds ordinary wrapping and strips its terminal newline; blank lines
 and extra indentation that create decoded newlines are invalid in a paragraph.
-Use distinct list entries for distinct paragraphs. There is no second custom
-folding pass. Rationale strings containing math words stay prose.
+Use distinct list entries for distinct paragraphs. Only YAML scalar folding applies. Rationale strings containing math words stay prose.
 
 Math is opaque LaTeX. Payloads are nonempty and contain at least one character
 other than LF. All decoded payload characters, including leading/trailing spaces
@@ -94,12 +93,10 @@ by the surrounding project/version-control workflow; no generated identity is ad
 
 ## 5. Explicit selection and compatibility
 
-Existing command invocation defaults to source 0.2 and its `.mreq` directory
-selection. A leading `--source=yaml-0.3` selects this contract; a leading
-`--source=custom-0.2` explicitly selects the old one. Unknown selectors fail with
-exit 2. The selector precedes modes/operations; `--` still ends filename-option
-processing where already supported. The selected contract is shown by `--version`
-and validator summaries.
+Command invocation defaults to YAML 0.3. A leading `--source=yaml-0.3` selects
+this contract explicitly; `--source=yaml-0.4` selects the attribute-aware profile.
+Unknown selectors fail with exit 2. The selector precedes modes/operations, and
+`--` ends filename-option processing. Version output names the selected contract.
 
 YAML directory traversal selects only `.mreq.yaml`; arbitrary project YAML is
 excluded. Explicit regular files may have any filename but MUST satisfy the
@@ -108,12 +105,8 @@ selected contract. Existing path normalization, sorting, duplicate-path removal,
 failure. The required document format identifier must match; missing/unknown
 identifiers fail validation. Source format is never inferred by parser fallback.
 
-One invocation interprets one source format. Transitional projects can hold both
-formats in separate directories and validate them explicitly. Combining authored
-copies of the same requirement into one selected source set is invalid. Historical
-0.1/0.2 documents and fixtures remain unchanged. This experimental addition does
-not promise permanent dual-format support. Retiring the custom adapter requires
-recorded migration coverage and an explicit later compatibility decision.
+One invocation interprets one source profile. The required document format must
+match that profile. IDs must be unique across every selected file.
 
 ## 6. Diagnostics, formatting and commands
 
@@ -155,6 +148,5 @@ requirements:
 
 `id: 001`, `title: status # ready`, `statement: null`, duplicate keys and
 `format: "unknown"` are invalid. Examples, mutation checks, exact semantic
-migration and JVM/native conformance live in the maintained YAML tests and
-conformance/0.3. The [decision](../research/0034-yaml-requirements-contract-decision.md)
-records alternatives and the complete source 0.2 clause disposition.
+equivalence and JVM/native conformance live in the maintained YAML tests and
+`conformance/0.3`.

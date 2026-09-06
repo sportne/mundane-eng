@@ -1,8 +1,0 @@
-requirement UNTERMINATED-MATH
-title: Unterminated math
-statement:
-  The system shall satisfy:
-
-  math latex
-    x = 1
-end requirement

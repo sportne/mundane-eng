@@ -1,2 +1,0 @@
-tool_owned_meaning=The state declared by SYS-006 when its configured loss condition is met.
-recognized_uses=0

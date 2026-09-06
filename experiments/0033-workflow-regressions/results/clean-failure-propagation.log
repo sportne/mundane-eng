@@ -1,5 +1,0 @@
-PASS invalid-example: make verify exit=2; failing target=test; elapsed=1.73s
-PASS invalid-example: restored exact input bytes
-PASS omitted-schema-target: make verify exit=2; failing target=yaml-schema-verify; elapsed=0.08s
-PASS omitted-schema-target: restored exact input bytes
-PASS both injected failures reached the authoritative gate and inputs were restored

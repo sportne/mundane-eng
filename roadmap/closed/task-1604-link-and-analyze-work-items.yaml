@@ -1,66 +1,40 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1604"
-kind: "task"
-title: "Link and Analyze Work Items"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1604
+kind: task
+title: Link and Analyze Work Items
+status: Complete
 dependencies:
-  - "TC-1603"
+- TC-1603
 relations:
-  - kind: "resource"
-    relation: "evidence"
-    scope: null
-    target: "src/main/java/engineering/work/WorkGraph.java"
+- kind: resource
+  relation: evidence
+  scope:
+  target: src/main/java/engineering/work/WorkGraph.java
 planning:
-  condition: "TC-1603"
-  stage: "16"
-  statusNote: ""
-  type: "Implementation"
-  unlocks: "TC-1605"
-body: |2+
-
-  ## Question
-
-  Resolve authored dependencies and supported artifact relationships rather than infer them from arbitrary prose.
-
+  condition: ''
+  stage: '16'
+  statusNote: ''
+  type: Implementation
+  unlocks: ''
+body: |
   ## Outcome
 
-  Link and Analyze Work Items for the repository-native issue/task workflow, with reproducible evidence.
+  Link and Analyze Work Items.
 
-  ## Work
+  ## Current contract and scope
 
-  - Validate serialized work items and explicit local imports; resolve supported targets, check exact pins, missing references and cycles; report unfinished prerequisites and reverse navigation with authored provenance.
-  - Record the selected behavior and its limitations; each implementation owns its regression tests.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Fixture requirements/plans/work items link via public serialized interfaces. Wrong kind/format, duplicates, invalid completeness, missing targets and cycles fail without partial successful results; closed tasks do not establish requirement satisfaction.
-  - Record exact checks and artifacts in a completion report; make a separate completion commit.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - No universal resolver rewrite, source parsing in consumers, automatic closure or interpretation of code/document content.
-
-  ## Compatibility and affected components
-
-  Human-authored IDs and source remain authoritative. Other artifact languages and
-  existing requirement/verification interfaces retain their contracts. Likely components:
-  roadmap cards and indices, work-item source/compiled specifications, a separate
-  engineering work-item component, public import validation and owning examples/tests.
-  No directory move is justified solely by this additional artifact kind.
-
-  ## Completion decision
-
-  Stop or narrow scope if the selected workflow requires competing source copies,
-  automatic satisfaction judgments, or unbounded schema/relationship extensibility.
-  Unresolved source choices must be decided in TC-1602 before implementation. Preserve
-  conditional prerequisites as authored policy rather than pretend they are executable.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Ownership decision](../../research/0037-requirement-and-assertion-ownership.md)
-  - [Local imports](../../specification/0014-local-artifact-imports-0.1.md)
-
-  ## Completion evidence
-
-  Completed 2026-09-05. [Research 0057](../../research/0057-work-item-linking-verification.md) records typed serialized imports, prerequisites/supersession checks, exact pins, parser-free execution, malformed-artifact cases and the deterministic analysis golden. TC-1605 is Ready.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

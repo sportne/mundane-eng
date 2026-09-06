@@ -1,6 +1,0 @@
-requirement 001
-title: A test
-allocation: null
-statement:
-  The display shall preserve its label.
-end requirement

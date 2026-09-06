@@ -77,13 +77,13 @@ def build():
     for record in old['requirements']:
         record['values'].pop('attributes')
         record['locations'].pop('attributes')
-    write(OUT / 'legacy.json', old)
+    write(OUT / 'yaml03.json', old)
     original = (OUT / 'imports.json').read_bytes()
     try:
-        selection(OUT, [('req', 'legacy.json', 'requirements'), ('baseline', 'legacy.json', 'requirements'),
+        selection(OUT, [('req', 'yaml03.json', 'requirements'), ('baseline', 'yaml03.json', 'requirements'),
                         ('plan', 'plan.json', 'verification-plan'), ('work', 'work.json', 'work-items')])
-        legacy = json.loads(invoke('mundane-impact', args))
-        assert legacy['query'] == a['query'] and legacy['edges'] == a['edges']
+        yaml03 = json.loads(invoke('mundane-impact', args))
+        assert yaml03['query'] == a['query'] and yaml03['edges'] == a['edges']
     finally:
         (OUT / 'imports.json').write_bytes(original)
     return result, report
@@ -93,7 +93,7 @@ def verify():
     result, report = build()
     assert result == (GOLD / 'impact.json').read_bytes(), 'impact golden changed'
     assert report == (GOLD / 'impact-report.txt').read_bytes(), 'report golden changed'
-    print('PASS impact workflow: actual source compilers, attribute/legacy topology, six review candidates, isolated scopes, unchanged source/status, JVM/native and golden parity')
+    print('PASS impact workflow: actual source compilers, YAML 0.3/0.4 topology, six review candidates, isolated scopes, unchanged source/status, JVM/native and golden parity')
 
 
 if __name__ == '__main__':

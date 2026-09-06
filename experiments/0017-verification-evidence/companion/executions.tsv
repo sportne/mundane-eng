@@ -1,3 +1,0 @@
-execution_id	activity_id	plan_id	configuration_ref	executed_at
-EXEC-A-001	ACT-LEVEL-TEST	PLAN-A	rig-config.git@4b71c6e	2026-08-29T14:00:00Z
-EXEC-A-002	ACT-SAMPLE-ANALYSIS	PLAN-A	schedule-analysis.toml@8f3aa10	2026-08-29T15:00:00Z

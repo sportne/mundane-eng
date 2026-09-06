@@ -106,7 +106,7 @@ public final class CompileMain {
     }
 
     private static String usage() {
-        return "Usage: mundanereq-compile [--source=custom-0.2|--source=yaml-0.3|--source=yaml-0.4] [--attribute-schema PATH] --root DIRECTORY [--] INPUT...\n"
+        return "Usage: mundanereq-compile [--source=yaml-0.3|--source=yaml-0.4] [--attribute-schema PATH] --root DIRECTORY [--] INPUT...\n"
                 + "       mundanereq-compile [--source=...] --help|--version\n";
     }
 }

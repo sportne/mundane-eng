@@ -1,4 +1,0 @@
-scheme_id	level	meaning
-WMSCS-r1	SC0	No credited role in a declared project hazard control.
-WMSCS-r1	SC1	Supports detection or mitigation of a declared project hazard.
-WMSCS-r1	SC2	Required control whose loss contributes directly to a declared hazardous outcome.

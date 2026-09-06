@@ -1,5 +1,0 @@
-requirement REQ-001
-title: Trailing boundary whitespace 
-statement:
-  The system shall reject padded scalar values.
-end requirement

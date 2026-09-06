@@ -1,5 +1,0 @@
-requirements:
-  - id: !!str "001"
-    title: "A test"
-    statement: >-
-      The display shall preserve its label.

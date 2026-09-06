@@ -1,9 +1,0 @@
-requirement INVALID-COMMENT-SPLITS-MATH
-title: Comment splitting math
-statement:
-  math latex
-    x = 1
-# A comment cannot occur inside a mathematical payload.
-    y = 2
-  end math
-end requirement

@@ -11,10 +11,10 @@ import mundanereq.Interpreter;
 import mundanereq.SourceFormat;
 import mundanereq.Versions;
 
-/** Focused command-line validator for the provisional 0.2 source contract. */
+/** Focused command-line validator for the selected YAML source contract. */
 public final class ValidatorMain {
     static final String TOOL_VERSION = Versions.VALIDATE_VERSION;
-    static final String SOURCE_CONTRACT = Versions.SOURCE_CUSTOM;
+    static final String SOURCE_CONTRACT = Versions.SOURCE_YAML;
 
     private ValidatorMain() {}
 
@@ -36,7 +36,7 @@ public final class ValidatorMain {
         AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
+            out.println("Optional leading selector: --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {

@@ -1,81 +1,35 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1503"
-kind: "task"
-title: "Align CI with Authoritative Verification"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1503
+kind: task
+title: Align CI with Authoritative Verification
+status: Complete
 dependencies: []
 relations: []
 planning:
-  condition: "none"
-  stage: "15"
-  statusNote: ""
-  type: "Implementation and verification"
-  unlocks: "follow-up work selected by the completion decision"
-body: |2+
-
-  ## Question
-
-  How can repository CI exercise the documented complete verification command rather
-  than only the current example requirements workflow?
-
+  condition: ''
+  stage: '15'
+  statusNote: ''
+  type: Implementation and verification
+  unlocks: ''
+body: |
   ## Outcome
 
-  CI executes the authoritative verification command with attributable failures in
-  a documented supported clean environment.
+  Align CI with Authoritative Verification.
 
-  ## Work
+  ## Current contract and scope
 
-  - Compare .github/workflows/requirements.yml with Makefile's verify prerequisites:
-    the workflow currently runs native-suite and selected example/CI checks.
-  - Preserve the useful independent-tool demonstration while ensuring all required
-    verification targets run. Use explicit environment/toolchain setup and record
-    actual commands.
-  - Verify that corpus failures and a failure in a currently omitted verification
-    target fail CI. Avoid duplicated expensive native builds where dependency reuse
-    suffices; measure before broader performance optimization.
-  - Reuse package checksum, notice, installation and isolation smoke checks already in
-    native-suite-verify. Identify additional provenance or packaging work only for a
-    demonstrated missing input, not to recreate completed TC-0601.
-  - Document the exact local equivalent and tested operating-system/toolchain
-    assumptions; account for required Ruby and native utilities as well as Java.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - A clean supported environment runs the same complete gate locally and in CI;
-    captured logs identify toolchain versions, invoked targets, and exit status.
-  - Deliberate example-source and omitted-target failures are attributed and cause
-    failure; the evidence describes the injected cases and cleanup.
-  - Build outputs remain disposable, required checks cannot be silently skipped,
-    and existing executable independence remains verified.
-  - Any cache or deduplication change has a recorded correctness check; no untested
-    platform or byte-identical native-build claim is introduced.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Publishing artifacts, new operating-system packages without a user need,
-    replacing the build system, or adding an approval process.
-
-  ## Compatibility and affected components
-
-  Present problem: hosted checks do not cover the repository's complete gate.
-  Components: requirements workflow, authoritative Make targets, CI verification
-  tests, build-environment and contributor documentation. Coordinate path changes
-  with TC-1104; that optional move is not a prerequisite for closing today's gap.
-
-  ## Completion decision
-
-  Complete on recorded full-gate and deliberate-failure evidence. If an environment
-  cannot run a required check, report and fix that limitation rather than relabeling
-  the partial workflow as complete.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [Current workflow](../../.github/workflows/requirements.yml)
-  - [Makefile](../../Makefile)
-  - [Existing CI card](task-0602-create-the-clean-checkout-ci-workflow.yaml)
-  - [Packaging evidence](../../research/0017-native-suite-packaging.md)
-
-  ## Completion evidence
-
-  Completed the full local/hosted gate and deliberate-failure evidence in [Research 0047](../../research/0047-complete-ci-verification.md) and [Experiment 0030](../../experiments/0030-ci-verification/README.md). CI invokes make verify through the same logging/failure-check wrapper used locally. The first hosted run exposed Python 3.10 incompatibility with pinned schema dependencies; the corrected Ubuntu 24.04 run passed. Existing native package and independent-tool checks are retained.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

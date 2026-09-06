@@ -17,13 +17,11 @@ import java.util.Set;
 import mundanereq.Interpreter;
 import mundanereq.SourceFormat;
 import mundanereq.Versions;
-import mundanereq.format.SourceFormatter;
-import mundanereq.source.SourceDocument;
 
 /** Focused formatter for the conservative Experiment 0008 policy. */
 public final class FormatterMain {
     static final String TOOL_VERSION = Versions.FORMAT_VERSION;
-    static final String SOURCE_CONTRACT = Versions.SOURCE_CUSTOM;
+    static final String SOURCE_CONTRACT = Versions.SOURCE_YAML;
 
     private enum Mode {
         STANDARD_OUTPUT,
@@ -53,7 +51,7 @@ public final class FormatterMain {
         AttributeInvocation attributes=AttributeInvocation.parse(arguments,sourceFormat);arguments=attributes.arguments();
         if (arguments.length == 1 && arguments[0].equals("--help")) {
             out.print(usage());
-            out.println("Optional leading selector: --source=custom-0.2 or --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
+            out.println("Optional leading selector: --source=yaml-0.3 or --source=yaml-0.4; YAML 0.4 accepts --attribute-schema PATH");
             return 0;
         }
         if (arguments.length == 1 && arguments[0].equals("--version")) {
@@ -140,15 +138,8 @@ public final class FormatterMain {
     private static Map<Path, byte[]> format(List<Interpreter.Source> sources, SourceFormat sourceFormat) {
         Map<Path, byte[]> formatted = new LinkedHashMap<>();
         for (Interpreter.Source source : sources) {
-            try {
-                SourceDocument document = SourceDocument.read(source.file(), source.bytes());
-                formatted.put(Path.of(source.file()), sourceFormat != SourceFormat.CUSTOM_02
-                        ? new String(source.bytes(), java.nio.charset.StandardCharsets.UTF_8).replace("\r\n", "\n")
-                            .getBytes(java.nio.charset.StandardCharsets.UTF_8)
-                        : SourceFormatter.format(document));
-            } catch (java.nio.charset.CharacterCodingException exception) {
-                throw new IllegalStateException("validated source could not be decoded", exception);
-            }
+            formatted.put(Path.of(source.file()), new String(source.bytes(), java.nio.charset.StandardCharsets.UTF_8)
+                    .replace("\r\n", "\n").getBytes(java.nio.charset.StandardCharsets.UTF_8));
         }
         return Map.copyOf(formatted);
     }

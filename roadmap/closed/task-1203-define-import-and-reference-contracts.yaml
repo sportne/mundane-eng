@@ -1,98 +1,36 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1203"
-kind: "task"
-title: "Define Import and Reference Contracts"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1203
+kind: task
+title: Define Import and Reference Contracts
+status: Complete
 dependencies:
-  - "TC-1201"
+- TC-1201
 relations: []
 planning:
-  condition: "TC-1201"
-  stage: "12"
-  statusNote: ""
-  type: "Decision"
-  unlocks: "TC-1204, TC-1302, TC-0905"
-body: |2+
-
-  ## Question
-
-  How can independently compiled artifacts refer to one another with explicit scope,
-  revision, provenance, and completeness rather than hidden project state?
-
+  condition: ''
+  stage: '12'
+  statusNote: ''
+  type: Decision
+  unlocks: ''
+body: |
   ## Outcome
 
-  A reference/import/linking decision record and worked fixture contract sufficient
-  for the first verification consumer and TC-1204's bounded resolver.
+  Define Import and Reference Contracts.
 
-  ## Work
+  ## Current contract and scope
 
-  - Define common reference/provenance/linking meanings at the compiled interface.
-    Distinguish those meanings from their encoding in each artifact's source or
-    input declaration. Use TC-1103's different source carriers as the first example;
-    bindings for other artifact formats remain with their own contract decisions.
-  - Define import declarations, local resolution roots, dependency selection and
-    recorded resolved versions. Compare current-checkout selection with pinned Git
-    revisions using two local repositories; remote fetching can remain unsupported.
-  - Define artifact qualification plus the existing authored element ID, expected
-    target kinds, duplicate/ambiguous names, missing targets, and incompatible formats.
-  - Separate authored references from derived inverse indexes. Preserve the location,
-    owner, context, and revision binding of each assertion.
-  - Separate legitimate relationship cycles from build dependency cycles. Specify
-    unresolved-reference preservation, linking passes, and unsupported build cycles.
-  - Specify incomplete or invalid imports, offline behavior, input changes during a
-    build, deterministic ordering, diagnostics, and consumer completeness checks.
-  - Define revision comparison with TC-0905's concrete staleness question in mind:
-    compare Git binding and per-requirement semantic comparison before selecting a
-    fingerprint. Document canonicalization, hashing inputs, and version if exposed.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Written examples resolve equal IDs in two scopes without changing either
-    requirement ID; ambiguous unqualified references fail precisely.
-  - A table covers comment-only, normative, unrelated, ID, file-move, and imported
-    revision changes with expected identity, binding, and rebuild outcomes.
-  - Missing, incompatible, cyclic, partial, and context-filtered cases have explicit
-    expected diagnostics or supported linked results.
-  - Linking proves resolvability/type compatibility only; a path to a requirement
-    does not prove satisfaction or propagate approval.
-  - A worked requirement/plan example resolves references and retains source
-    provenance across TC-1103's different source representations. The linker contract
-    requires the selected compiled interfaces, without requiring YAML source or a
-    shared source parser for imported artifacts.
-  - Source remains authoritative; compiled imports and recorded build manifests
-    identify their exact inputs and can be regenerated.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Network resolution, package registries, machine-generated requirement identity,
-    universal type inheritance, arbitrary queries, or domain inference.
-
-  ## Compatibility and affected components
-
-  Current standalone .mreq input selection remains valid. Likely components:
-  artifact-envelope contracts, explicit project input declarations, source locators,
-  and a resolver. A digest represents a particular compiled form/revision, changes
-  with relevant content edits, and stays outside authored requirements.
-
-  ## Completion decision
-
-  Enable TC-0905 and conditionally TC-1204 when local, inspectable imports satisfy
-  the first workflow. Stop rules that require hidden global identity or a complete
-  systems model merely to resolve references.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1201](task-1201-define-requirement-semantic-output.yaml)
-  - [Identity decision](../../research/0023-identity-continuity-decision.md)
-  - [TC-0905](task-0905-define-verification-analyzer-contract.yaml)
-
-  ## Planning refinement
-
-  Make the compiled integration boundary independent of authoring notation. The
-  requirements YAML choice does not select import syntax for every artifact type.
-  Status and dependencies remain unchanged.
-
-  ## Completion evidence
-
-  Completed by [Research 0042](../../research/0042-local-import-and-reference-decision.md) and [local import contract 0.1](../../specification/0014-local-artifact-imports-0.1.md): explicit local snapshots, qualification, provenance, completeness, failure/cycle/context cases and revision change matrix. Select a bounded resolver for TC-1204 after TC-0905 supplies its companion fixtures. TC-0905 is Ready; TC-1302 still needs TC-1301.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

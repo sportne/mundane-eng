@@ -1,2 +1,0 @@
-predecessor_id	successor_id	decision	source_baseline	source_sha256	target_baseline	target_sha256	authority_role	basis
-SYS-MONITOR-SMAPLE-001	SYS-MONITOR-SAMPLE-001	same-requirement	baseline-a	5aea0001b00415cc66195732a6df3636b9928ba4bc30ebebfb5b42bf68088c9e	baseline-b	ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff	requirements-change-authority	Assertion has a stale target digest.

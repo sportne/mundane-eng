@@ -1,19 +1,17 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-0807"
-kind: "task"
-title: "Test Authored Views and Specifications"
-status: "Conditional"
-dependencies:
-  - "TC-0603"
-  - "TC-0903"
+format: mundane-work-yaml-0.2
+id: TC-0807
+kind: task
+title: Test Authored Views and Specifications
+status: Conditional
+dependencies: []
 relations: []
 planning:
-  condition: "TC-0603, TC-0903 and a demonstrated composition need"
-  stage: "8"
-  statusNote: ""
-  type: "Model-pressure experiment"
-  unlocks: "A view-language decision and any justified successor card"
-body: |2+
+  condition: A demonstrated current workflow need
+  stage: '8'
+  statusNote: ''
+  type: Model-pressure experiment
+  unlocks: ''
+body: |2
 
   ## Question
 
@@ -51,8 +49,8 @@ body: |2+
   ## References
 
   - [Roadmap views study](0001-initial-roadmap.md#views-and-specifications)
-  - [Non-Markdown view research](../research/0006-non-markdown-view-notation.md)
-  - [TC-0903](closed/task-0903-run-a-derived-presentation-experiment.yaml)
+  - Non-Markdown view research
+  - TC-0903
 
   ## Planning refinement
 

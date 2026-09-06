@@ -1,5 +1,0 @@
-Lower-level impact paths to CYCLE-A:
-1 CYCLE-C -> CYCLE-A
-1 SCOPE -> CYCLE-A
-2 CYCLE-B -> CYCLE-C -> CYCLE-A
-Cycle observed among: CYCLE-A CYCLE-B CYCLE-C

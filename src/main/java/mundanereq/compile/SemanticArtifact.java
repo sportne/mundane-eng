@@ -35,7 +35,7 @@ public final class SemanticArtifact {
                 "complete", result.valid());
         envelope.put("sources", sources.stream().sorted(Comparator.comparing(Interpreter.Source::file))
                 .map(s -> object("path", s.file(), "sha256",
-                        format != SourceFormat.CUSTOM_02 && s.bytes().length > 8 * 1024 * 1024 ? null : sha256(s.bytes())))
+                        s.bytes().length > 8 * 1024 * 1024 ? null : sha256(s.bytes())))
                 .toList());
         if (attributes) {
             var schema = result.attributeSchema();
@@ -83,7 +83,7 @@ public final class SemanticArtifact {
         return JsonOutput.encode(envelope);
     }
 
-    // Legacy invalid-UTF-8 diagnostics use raw-byte columns. Convert the known-valid
+    // Invalid-UTF-8 diagnostics use raw-byte columns. Convert the known-valid
     // prefix only, keeping existing CLI coordinates and avoiding a second parse.
     public static int diagnosticColumn(Interpreter.Diagnostic diagnostic, List<Interpreter.Source> sources) {
         if (!diagnostic.code().equals("invalid-utf8")) return diagnostic.column();

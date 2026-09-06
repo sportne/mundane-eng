@@ -1,4 +1,0 @@
-2026-09-05T17:46:22.4699026Z Python 3.10.12
-2026-09-05T17:46:27.8857497Z ERROR: No matching distribution found for rpds-py==2026.6.3
-2026-09-05T17:46:27.9673072Z make: *** [Makefile:197: yaml-schema-verify] Error 1
-2026-09-05T17:46:27.9687903Z verification wrapper exit status: 2

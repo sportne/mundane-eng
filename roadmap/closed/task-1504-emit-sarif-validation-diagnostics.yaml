@@ -1,89 +1,38 @@
-format: "mundane-work-yaml-0.2"
-id: "TC-1504"
-kind: "task"
-title: "Emit SARIF Validation Diagnostics"
-status: "Complete"
+format: mundane-work-yaml-0.2
+id: TC-1504
+kind: task
+title: Emit SARIF Validation Diagnostics
+status: Complete
 dependencies:
-  - "TC-1201"
-  - "TC-1402"
-  - "TC-1403"
+- TC-1201
+- TC-1402
+- TC-1403
 relations: []
 planning:
-  condition: "TC-1201, TC-1402, TC-1403"
-  stage: "15"
-  statusNote: ""
-  type: "Implementation and verification"
-  unlocks: "follow-up work selected by the completion decision"
-body: |2+
-
-  ## Question
-
-  How can validation diagnostics be consumed by code-review and editor tools without
-  scraping the human-readable CLI output?
-
+  condition: ''
+  stage: '15'
+  statusNote: ''
+  type: Implementation and verification
+  unlocks: ''
+body: |
   ## Outcome
 
-  An explicit SARIF output mode represents the selected diagnostic contract with
-  correct ranges, rule identifiers, severity, and failure behavior.
+  Emit SARIF Validation Diagnostics.
 
-  ## Work
+  ## Current contract and scope
 
-  - Select and document the SARIF specification/schema version and CLI output mode;
-    map TC-1201's diagnostic rules and completeness states.
-  - Define artifact URIs, path roots, Unicode coordinate conversion, range endpoints,
-    severity mapping, tool metadata, and deterministic multi-file ordering.
-  - Handle malformed source, input-selection failure, partial recovery, no findings,
-    unknown options, closed output, partial writes, and flush failure.
-  - Preserve the default human-readable validator interface; document exits separately
-    from SARIF emission success.
+  This completed capability is represented by the current versioned source and tool
+  contracts. Human IDs and authoritative source remain independent of generated
+  artifacts. The current verification gate exercises applicable behavior.
 
-  ## Acceptance evidence
+  ## Evidence
 
-  - Golden output validates against the selected checked-in or reproducibly obtained
-    SARIF schema, including clean, multi-file, and invalid-input examples.
-  - Fixtures verify exact source ranges with non-ASCII text and supplementary Unicode
-    characters, stable rule IDs, severity mapping, and portable path encoding.
-  - Malformed source remains a failed validation even if a valid report was emitted;
-    output failures never yield success.
-  - A bounded fixture consumer or available viewer demonstrates source navigation;
-    record exact consumer/version if an external integration is exercised.
-  - Human-readable default output and existing source validity checks remain covered.
+  Use the [specification index](../../specification/README.md) and the
+  [verification guide](../../distribution/build-verification.md) for supported behavior
+  and reproducible checks. This card does not claim new results for earlier runs.
 
-  ## Out of scope
+  ## Documentation refinement
 
-  - Forge upload automation, a complete language server, new Unicode validity policy,
-    or representing successful report generation as successful validation.
-
-  ## Compatibility and affected components
-
-  Present problem: integrations otherwise parse plain diagnostic strings.
-  Components: Diagnostic/source spans, validator output selection, SARIF serializer,
-  focused tests and CLI documentation. Rule evolution follows the experimental
-  compatibility policy rather than silently changing rule meanings.
-
-  ## Completion decision
-
-  Accept only schema-valid, source-accurate reports with tested failure behavior.
-  If current locations cannot support truthful ranges, preserve accurate points
-  temporarily with an explicit contract decision instead of inventing spans.
-
-  ## References
-
-  - [Roadmap](../0001-initial-roadmap.md)
-  - [TC-1201](task-1201-define-requirement-semantic-output.yaml)
-  - [TC-1402](task-1402-report-cli-output-failures.yaml)
-  - [TC-1403](task-1403-recover-parser-diagnostics-safely.yaml)
-  - [Validator](../../src/main/java/mundanereq/cli/ValidatorMain.java)
-  - [Source positions](../../src/main/java/mundanereq/source/SourcePosition.java)
-
-  ## Planning refinement
-
-  Cover YAML 0.3 and retained custom source. The parser supplies accurate points,
-  so the selected contract uses start positions without invented end ranges. Test
-  OS stderr closure on an actual diagnostic write; quiet SARIF emission does not
-  write that descriptor. Closed Java streams and output-prefix/flush failures have
-  separate checks. The OASIS schema is a checked-in test dependency only.
-
-  ## Completion evidence
-
-  Implemented the explicit SARIF mode under [Contract 0017](../../specification/0017-sarif-validation-output.md). [Research 0049](../../research/0049-sarif-diagnostics-verification.md) records six OASIS-schema goldens, exact Unicode/path navigation, JVM/native agreement, stream-failure behavior, version metadata, and native package verification. Seventeen JVM groups passed. Point regions preserve truthful locations; no end spans or external-editor compatibility are invented.
+  Retained the task ID and completion status; refreshed documentation links and
+  prerequisites to describe the current repository. Historical implementation
+  narrative is not used as the current contract.

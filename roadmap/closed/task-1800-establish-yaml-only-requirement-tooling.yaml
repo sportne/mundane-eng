@@ -1,0 +1,40 @@
+format: mundane-work-yaml-0.2
+id: TC-1800
+kind: task
+title: Establish YAML-Only Requirement Tooling
+status: Complete
+dependencies: []
+relations: []
+planning: {stage: '18', type: Implementation, condition: '', unlocks: '', 
+    statusNote: ''}
+body: |2
+
+  ## Outcome
+
+  YAML is the sole requirements authoring language in the working tree. Default commands select YAML 0.3, with explicit YAML 0.4 support.
+
+  ## Work and acceptance evidence
+
+  Remove obsolete adapters, fixtures and documentation; retain current YAML behaviors, domain consumers and source-controlled identities. Record the removal only in the changelog. Verify runnable checks, clean source search, source-card links and native packages.
+
+  ## Compatibility and boundaries
+
+  Human-authored source remains authoritative. Requirements and other artifact
+  languages keep independent contracts. No work-item authoring integration, remote
+  publishing, automated approval or general language-server framework is included.
+  Each implemented behavior needs reproducible tests and contributor documentation.
+
+  ## Completion decision
+
+  Stop or revise if the feature requires hidden project discovery, a competing
+  semantic validator, stale edits, unsupported source inference or unbounded input.
+  The predecessor's contract must resolve dependent implementation choices first.
+
+  ## References
+
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Source rules](../../specification/0010-requirements-yaml-0.3.md)
+
+  ## Completion evidence
+
+  The full scripts/run-ci-verification.sh wrapper passed: maintained Java tests, native/JVM YAML and attribute checks, package checksums and independent binaries, work-item workflows, impact properties/mutations, and both injected gate failures with exact restoration. Source searches found no removed-language identifiers outside CHANGELOG.md. Planning links, unique source IDs and git diff --check passed.

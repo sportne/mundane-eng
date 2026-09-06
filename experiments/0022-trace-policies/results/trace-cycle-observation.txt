@@ -1,4 +1,0 @@
-Higher-level decomposition paths from GCA-001:
-1 GCA-001 -> SYS-005
-2 GCA-001 -> SYS-005 -> OPS-001
-Cycle observed among: GCA-001 SYS-005
