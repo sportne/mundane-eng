@@ -41,7 +41,9 @@ For task cards, set `mundane.workProject` to an existing YAML work-item manifest
 such as `roadmap/work-items.json` in this repository. It may coexist with the
 requirements selection. The [authoring guide](../editors/vscode/README.md#yaml-task-cards-and-issues)
 describes assistance, limits and the local-only analysis boundary. Work items do not
-receive formatting edits.
+receive formatting edits. Optional `mundane.workImports` selects compiled targets
+and explicit source mappings; the [import setup guide](../editors/vscode/README.md#imported-requirements-and-work-item-targets)
+explains pins, revision warnings and recovery.
 
 Trust the workspace before running its configured bridge. For WSL/Remote, install
 the extension on the workspace side and use the Linux bundle only where that host

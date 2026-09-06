@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2106
 kind: task
 title: Verify Cross-artifact Editor Workflows
-status: Planned
+status: Complete
 dependencies: ["TC-2105"]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Editor imports contract](../specification/0026-editor-imports-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Editor imports contract](../../specification/0026-editor-imports-0.1.md)
+
+  ## Completion evidence
+
+  The final scripts/run-ci-verification.sh passed all maintained checks and restored failure injections. Thirteen JVM/native import cases, nine Node tests, development and installed hosts cover pins, source revisions, missing/escaped files, delayed responses and local-provider compatibility across 66 cards. research/0074-editor-import-verification.md records evidence and limits. Editor bundle 0.1.3 and consolidated setup documentation are complete.

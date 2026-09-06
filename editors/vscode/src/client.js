@@ -87,7 +87,7 @@ async function snapshot(root, selection, documents, selected = () => {}, work = 
   if(work && importSelection) {
     relative(importSelection);
     try {request.imports=await require('./imports').load(root,importSelection,documents,watch,read,relative);}
-    catch(error) {request.importError={path:importSelection,message:error.message.slice(0,4096)};}
+    catch(error) {request.importError={path:importSelection,message:Array.from(error.message).slice(0,1024).join('')};}
   }
   return request;
 }

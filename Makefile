@@ -186,6 +186,7 @@ editor-vsix: version-declarations editor-dependencies
 	cd editors/vscode && npm run package
 editor-verify: native-editor editor-vsix
 	python3 scripts/check-editor-bridge.py
+	python3 scripts/check-editor-imports.py
 	cd editors/vscode && npm run test:unit && xvfb-run -a npm test && xvfb-run -a node test/traffic-run.js
 package-editor: native-editor editor-vsix
 	python3 scripts/package-editor.py "$(GRAALVM_HOME)"

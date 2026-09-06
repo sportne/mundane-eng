@@ -34,7 +34,7 @@ source notation. Requirement IDs remain human-authored; digests identify revisio
 | Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [contracts](../specification/README.md) |
 | Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [contracts](../specification/README.md) |
 | Impact analysis | Scoped prospective queries, deterministic shortest explanations and validated source-linked reports; [workflow](../experiments/0037-impact-analysis/README.md) |
-| VS Code authoring | Local extension with explicit projects, unsaved compiler diagnostics, navigation, formatting and attribute assistance; [guide](../editors/vscode/README.md) |
+| VS Code authoring | Local extension with explicit projects, unsaved diagnostics, local and imported-target navigation, formatting and typed assistance; [guide](../editors/vscode/README.md) |
 | Contributor checks | Authoritative `make verify`, clean-checkout wrapper, compatibility/golden corpora, seeded workflows and targeted behavioral mutations; [build guide](../distribution/build-verification.md) |
 
 These capabilities establish bounded workflows. They do not establish executed

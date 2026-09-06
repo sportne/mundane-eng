@@ -112,7 +112,7 @@ public final class EditorMain {
         if(request.containsKey("imports"))try {imports=EditorImports.read(request.get("imports"));}
         catch(IllegalArgumentException|engineering.artifacts.Problem error) {
             var packet=object(request.get("imports"));var selected=object(packet.get("selection"));
-            importDiagnostics.add(Json.object("path",string(selected.get("path")),"line",1,"column",1,"severity","error",
+            importDiagnostics.add(Json.object("path",engineering.artifacts.Checks.path(selected.get("path")),"line",1,"column",1,"severity","error",
                 "code",error instanceof engineering.artifacts.Problem p?p.code:"invalid-import","message",error.getMessage()));
         }
         if(request.containsKey("importError")) {
@@ -120,7 +120,7 @@ public final class EditorMain {
             var failure=object(request.get("importError"));
             if(!failure.keySet().equals(java.util.Set.of("path","message")))throw new IllegalArgumentException("invalid import failure");
             String path=engineering.artifacts.Checks.path(failure.get("path")),message=string(failure.get("message"));
-            if(message.length()>4096)throw new IllegalArgumentException("import error exceeds limit");
+            if(message.getBytes(StandardCharsets.UTF_8).length>4096)throw new IllegalArgumentException("import error exceeds limit");
             importDiagnostics.add(Json.object("path",path,"line",1,"column",1,"severity","error","code","editor-import-input","message",message));
         }
         var result=engineering.work.WorkCompiler.compileSnapshots(sources);

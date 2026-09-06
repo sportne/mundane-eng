@@ -45,6 +45,7 @@ async function run(api) {
   assert.equal(candidates(await complete()).length,1,'stale source retains compiled completion');assert.equal((await definition()).length,0);
   await replace(req,reqText);await replace(b,related('other'));
   choices=candidates(await complete());assert.equal(choices.length,1);assert.ok(choices[0].detail.includes('other:work-item:SHARE'));assert.ok(choices[0].detail.includes('Planned'));
+  help=(await hover())[0].contents[0];assert.equal(help.isTrusted,false);assert.equal(help.supportHtml,false);assert.ok(help.value.includes('\\[run\\]'),'compiled titles are escaped literal text');
   await replace(b,related('missing'));assert.equal(candidates(await complete()).length,0);
   await replace(b,related('req').replace('relation: addresses','relation: supersedes'));assert.equal(candidates(await complete()).length,0,'supersedes cannot target requirements');
   await replace(b,original.replace('Literal ALPHA','target: SHARE'));
@@ -52,6 +53,39 @@ async function run(api) {
   await replace(b,related('req'));await replace(manifest,'{');
   assert.equal(candidates(await complete()).length,0);assert.equal((await hover()).length,0);
   await replace(manifest,manifestText);assert.equal(candidates(await complete()).length,1);
+  const fs=require('node:fs/promises'),os=require('node:os'),path=require('node:path');
+  const saved=req.uri.fsPath+'.saved';
+  await fs.rename(req.uri.fsPath,saved);
+  try {
+    await api.validate();assert.equal((await definition()).length,0);
+    assert.ok((await hover())[0].contents[0].value.includes('unavailable'));assert.equal(candidates(await complete()).length,1);
+    const outside=await fs.mkdtemp(path.join(os.tmpdir(),'mundane-external-source-'));
+    try {
+      const file=path.join(outside,'req.yaml');await fs.writeFile(file,reqText);await fs.symlink(file,req.uri.fsPath);
+      await api.validate();assert.equal((await definition()).length,0,'matching bytes outside mapped workspace cannot be opened');
+      await fs.unlink(req.uri.fsPath);
+    } finally {await fs.rm(outside,{recursive:true,force:true});}
+  } finally {await fs.rename(saved,req.uri.fsPath);}
+  await api.validate();assert.equal((await definition()).length,1,'missing/escaped source recovers without reconfiguration');
+  const selection=await open('editor-imports.json'),selectionText=selection.getText();
+  await replace(selection,'{');await api.validate();assert.equal((await definition()).length,0);
+  await replace(selection,selectionText);assert.equal((await definition()).length,1);
+  const client=require(path.join(vscode.extensions.getExtension('mundane-engineering.mundane-requirements').extensionPath,'src/client.js'));
+  const invoke=client.invoke;let counts={requirements:0,work:0};
+  client.invoke=(exe,request,...rest)=>{counts[request.source==='mundane-work-yaml-0.2'?'work':'requirements']++;return invoke(exe,request,...rest);};
+  await api.validate();counts={requirements:0,work:0};
+  await replace(manifest,manifestText+'\n');await new Promise(resolve=>setTimeout(resolve,500));await api.current(b);
+  assert.deepEqual(counts,{requirements:0,work:1},'import changes leave requirement session cached');
+  client.invoke=invoke;await replace(manifest,manifestText);await api.validate();
+  let release,started;const gate=new Promise(resolve=>release=resolve),ready=new Promise(resolve=>started=resolve);
+  client.invoke=async(...args)=>{const result=await invoke(...args);if(args[1].cursor){started();await gate;}return result;};
+  try {
+    const stale=api.current(b,undefined,b.positionAt(b.getText().lastIndexOf('SHARE')+2));
+    await ready;await replace(req,'# changed while cursor response waited\n'+reqText);release();
+    assert.equal(await stale,null,'a completed but delayed result cannot survive mapped-source changes');
+  } finally {release();client.invoke=invoke;await replace(req,reqText);}
+  await api.validate();assert.equal((await definition()).length,1);
+  console.log('PASS imported source recovery, outside-path refusal, independent import invalidation and delayed-response freshness');
   console.log('PASS imported assistance: scope/kind-specific quoted completion, compiled revisions, stale-source descriptions, literal hover and prose/invalid-role/import exclusions');
   await replace(b,original);await settings.update('workImports','',vscode.ConfigurationTarget.WorkspaceFolder);
   await settings.update('workProject','',vscode.ConfigurationTarget.WorkspaceFolder);await api.validate();

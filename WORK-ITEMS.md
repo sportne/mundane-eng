@@ -73,7 +73,7 @@ Items: 66.
 | [TC-2103](./roadmap/closed/task-2103-locate-typed-work-item-references.yaml#L2) | task | Locate Typed Work-item References | Complete | TC-2102 | — |
 | [TC-2104](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L2) | task | Navigate Imported Artifact Targets | Complete | TC-2103 | — |
 | [TC-2105](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L2) | task | Complete and Describe Imported Targets | Complete | TC-2104 | — |
-| [TC-2106](./roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml#L2) | task | Verify Cross-artifact Editor Workflows | Planned | TC-2105 | — |
+| [TC-2106](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L2) | task | Verify Cross-artifact Editor Workflows | Complete | TC-2105 | — |
 
 ## Planning qualifications
 
@@ -223,7 +223,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2103 | depends-on | work:work-item:TC-2102 | [work:roadmap/closed/task-2103-locate-typed-work-item-references.yaml](./roadmap/closed/task-2103-locate-typed-work-item-references.yaml#L1) |
 | work:work-item:TC-2104 | depends-on | work:work-item:TC-2103 | [work:roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1) |
 | work:work-item:TC-2105 | depends-on | work:work-item:TC-2104 | [work:roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1) |
-| work:work-item:TC-2106 | depends-on | work:work-item:TC-2105 | [work:roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml#L1) |
+| work:work-item:TC-2106 | depends-on | work:work-item:TC-2105 | [work:roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1) |
 
 ## Reverse navigation
 
@@ -278,13 +278,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2102: [work:work-item:TC-2103 (depends-on)](./roadmap/closed/task-2103-locate-typed-work-item-references.yaml#L1)
 - work:work-item:TC-2103: [work:work-item:TC-2104 (depends-on)](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1)
 - work:work-item:TC-2104: [work:work-item:TC-2105 (depends-on)](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1)
-- work:work-item:TC-2105: [work:work-item:TC-2106 (depends-on)](./roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml#L1)
+- work:work-item:TC-2105: [work:work-item:TC-2106 (depends-on)](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 7e1837b54a79d4f92112742b26825ab2039512a2b72de7c0e5841ccb936abcac
+- Work artifact: build/work-backlog/items.json; SHA-256 cf749dc313a95053152f52ad455dc575dc645bff9db5ea13c08c479431b67037
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 2d7610ff758bf74651c316b38af096ae6e78efd0968969f796a0c29adaedaacd
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 1b8d3fd567b41d2ab8650e2aa170333776adf1b6d01257988134dd2a70be87c9
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -348,9 +348,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2103-locate-typed-work-item-references.yaml](./roadmap/closed/task-2103-locate-typed-work-item-references.yaml#L1); SHA-256 db195491e684318954221b681a13c973b682b6cf8919547d858378fa35014873
 - Source: [roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1); SHA-256 e7dc32de221ad4fbd214e1da3a41ce30983c2fb5e383120f6ff7e734446d7caa
 - Source: [roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1); SHA-256 7bf78ddb0adfb1ca72cf3883e8c9a1fafbbb55f729bee495b21b2684c6655e71
+- Source: [roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1); SHA-256 6492836f633933491f4261c404503c6d2a739de45b878ebb0bc8005589218290
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
-- Source: [roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/task-2106-verify-cross-artifact-editor-workflows.yaml#L1); SHA-256 fd72aa14437b2148f72757264cd6a5b4e3635104b605c454ae36ff753c3345a5
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff926fb0db9a44ea3519adb77085d021b6873e855816a87e4ffcff0c7615be3c
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 e783bf3e39ad7a00e1ab80a1de931b7a1fc3aa3baef14ecad4699aca53467bfc

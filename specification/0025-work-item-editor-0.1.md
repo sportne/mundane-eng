@@ -30,15 +30,16 @@ An older bridge rejects the unknown source; use the matching packaged bridge.
 Responses use the existing diagnostics, definitions, suggestions and hover fields.
 Work-item requests forbid a schema and never read files. Work source parsing and
 value validation are shared with the CLI. Diagnostics additionally check local
-prerequisites and cycles through shared graph rules. Cross-artifact relations are
-checked for source shape only: this is not a full imports/evidence analysis.
+prerequisites and cycles through shared graph rules. Without the optional [editor imports](0026-editor-imports-0.1.md), cross-artifact
+relations are checked for source shape only. Neither mode is a full imports/evidence
+workflow analysis.
 Semantic failures are normal protocol responses; malformed requests exit 2.
 No compiled artifact is synthesized or persisted as authoring state.
 
 ## Assistance decision
 
-Navigation is limited to parsed `dependencies` scalar tokens and unique selected
-task IDs. Invalid projects yield no definitions. Completion uses parsed structural
+Local navigation follows parsed `dependencies` scalar tokens and unique selected
+task IDs. Optional editor imports separately enable typed imported target navigation. Invalid projects yield no definitions. Completion uses parsed structural
 positions for kind-specific status values, relation roles and local task IDs in
 dependencies or work-scoped work-item relation targets. It excludes self targets,
 already used dependencies, prose, comments, block scalars, unsupported constructs

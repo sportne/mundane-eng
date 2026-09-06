@@ -109,7 +109,86 @@ the surrounding YAML still parses. Insertions are quoted. Hover explains those
 fields and shows local target titles/statuses as literal text. Body strings and
 comments stay opaque. Work-item formatting is not provided.
 
-These checks do not resolve imported targets, check evidence files or certify that
-work is complete. Continue using `mundane-work analyze` for full explicit import
+Without editor imports, these checks stop at local prerequisites. They do not
+check evidence files or certify that work is complete. Continue using `mundane-work analyze` for full explicit import
 and resource analysis. Status remains an authored decision. See the
 [work-item editor contract](../../specification/0025-work-item-editor-0.1.md).
+
+## Imported requirements and work-item targets
+
+With `mundane.workProject` configured, optionally set `mundane.workImports` to an
+editor import/source mapping file. Use the matching 0.1.3 bundle or a later compatible
+bridge; an older bridge rejects the added request fields. This setting affects the
+work project independently of `mundane.project`. An empty value disables imports.
+
+For example, `editor-imports.json`:
+
+```json
+{
+  "format": "mundane-editor-imports-0.1",
+  "manifest": "imports.json",
+  "sourceRoots": {"req": ".", "other": "vendor"}
+}
+```
+
+The existing import manifest selects already compiled artifacts:
+
+```json
+{
+  "format": "mundane-imports-0.1",
+  "imports": [
+    {"scope":"req","path":"build/requirements.json","kind":"requirements","sha256":null,"dependsOn":[]},
+    {"scope":"other","path":"build/vendor-work.json","kind":"work-items","sha256":null,"dependsOn":[]}
+  ]
+}
+```
+
+All artifact paths are workspace-relative. Map every scope explicitly: a compiled
+source `tasks/check.yaml` in scope `other` maps to `vendor/tasks/check.yaml`. `.`
+means the workspace root. The reserved `work` scope denotes the live local work
+selection and cannot be imported. Equal IDs in other scopes do not conflict.
+Replace a null `sha256` with an exact SHA-256 when that import must remain pinned.
+The digest describes compiled bytes; requirement and task IDs remain authored identity.
+
+A work card can refer to those targets through ordinary typed relations:
+
+```yaml
+relations:
+- {relation: addresses, scope: req, kind: requirement, target: SYS-001}
+- {relation: relates-to, scope: other, kind: work-item, target: CHECK-001}
+```
+
+**Go to Definition** on `target` follows its explicit scope/kind/ID only when the
+mapped file's current bytes match the compiled source digest and its structural ID
+location agrees. This includes unsaved buffers. Even a comment edit blocks navigation
+until you restore the selected revision or explicitly rebuild the artifact and update
+any pin. Imported source files are not automatically added to an authoring project.
+
+**Trigger Suggest** offers only imported targets of the declared scope and kind.
+Hover and completion describe compiled titles/statuses, exact artifact revision and
+mapped source state. They remain useful when source is unavailable or modified:
+
+| Source state | Meaning | Navigation |
+| --- | --- | --- |
+| `matching` | Target file bytes and structural ID origin agree | Available |
+| `modified` | Current file/buffer differs from the compiled source | Blocked; restore or rebuild |
+| `unavailable` | Missing, unreadable, invalid UTF-8 or outside the workspace | Blocked; repair the mapping/file |
+| `origin-mismatch` | Compiled location does not identify that source ID | Blocked; inspect/rebuild the artifact |
+
+These source problems produce warnings on the relation token. Missing scopes, wrong
+kinds or absent IDs produce errors. Invalid declarations, pins or compiled files
+mark the editor import selection and suppress imported assistance. Local prerequisite
+navigation remains available when the local work project is valid. Repairing source
+or configuration refreshes results; imports never build or save files automatically.
+
+Supported imports are requirement output 0.1/0.2 and YAML work-item output 0.2.
+Limits are 100 imports, 256 mapped source files, 10,000 targets, 8 MiB per mapped
+source, 64 KiB per manifest/mapping and 16 MiB per compiled file and total wire
+message. Readable source must resolve inside the trusted workspace, including
+symlinks. No registry, network fetch or automatic Git checkout is involved.
+
+Plan/evidence navigation and full cross-artifact workflow analysis remain CLI work.
+A successful jump establishes a checked location, not approval or satisfaction.
+See the [editor import contract](../../specification/0026-editor-imports-0.1.md).
+`make editor-verify` compiles the checked-in import fixtures with public commands and
+exercises this workflow; `make installed-editor-verify` repeats it from the bundle.

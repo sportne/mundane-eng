@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Editor bundle 0.1.3 adds explicit compiled imports and source mappings for work-item
+  relations. Imported requirement/task targets gain revision-checked navigation and
+  compiled completion/hover; unavailable or changed source blocks navigation.
+  Existing source and compiled artifact formats are unchanged.
+
 - Editor bundle 0.1.2 adds explicit YAML work-item selection, unsaved diagnostics,
   local dependency navigation, status/relation/ID completion and literal hover.
   Requirements and task cards can be edited together; their source and compiled

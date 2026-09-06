@@ -7,3 +7,4 @@ Current contracts and evidence for the YAML engineering tools.
 - [Editor request traffic and freshness](0071-editor-request-traffic.md)
 - [Installed editor bundle verification](0072-installed-editor-bundle-verification.md)
 - [Work-item editor and backlog verification](0073-work-item-editor-verification.md)
+- [Imported editor targets and source revision verification](0074-editor-import-verification.md)

@@ -93,3 +93,8 @@ The [YAML editor](../editors/vscode/README.md#yaml-task-cards-and-issues) uses a
 work manifest for live diagnostics, local dependency navigation, status/relation/ID
 completion and literal hover help. Full imports and evidence analysis remain CLI
 operations. For the repository backlog, select `roadmap/work-items.json`.
+
+Optional [editor imports](../editors/vscode/README.md#imported-requirements-and-work-item-targets)
+add typed requirement/work-item target completion and revision-checked source
+navigation. Full dependency, supersession, plan and resource analysis remain CLI
+operations; editor navigation does not establish workflow validity.

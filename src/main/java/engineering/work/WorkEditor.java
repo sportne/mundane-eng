@@ -73,7 +73,7 @@ public final class WorkEditor {
                 if("work-item".equals(optional(relation.get("kind")))&&"work".equals(optional(relation.get("scope")))
                     &&Set.of("addresses","relates-to","supersedes").contains(optional(relation.get("relation")))) {
                     slots.add(new Slot(key(entry,"target"),relation.get("target"),List.copyOf(targets.keySet()),
-                        "Selected local task target in scope work. Imported scopes and evidence resources are outside editor resolution.",targets));
+                        "Selected local task target in scope work. Configure editor imports for other scopes. Evidence resources remain outside editor resolution.",targets));
                 }
                 String scope=optional(relation.get("scope")),targetKind=optional(relation.get("kind")),role=optional(relation.get("relation"));
                 if(!scope.equals("work")&&Set.of("requirement","work-item").contains(targetKind)

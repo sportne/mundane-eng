@@ -76,3 +76,8 @@ local task navigation/assistance, selection recovery and the copied repository
 backlog. Bridge parity checks validate the same backlog through JVM and native
 processes. Work-item editor analysis deliberately stops at local prerequisites;
 full imports and resource checks remain owned by the work-item CLI.
+
+Editor checks also compile imported-target fixtures using the public JVM commands,
+compare JVM/native responses for invalid pins/scopes/sources/origins, and exercise
+revision-checked navigation and compiled hover/completion in development and installed
+hosts. Missing source, source-path escapes and delayed responses have regression checks.

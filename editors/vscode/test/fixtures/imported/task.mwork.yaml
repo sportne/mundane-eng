@@ -1,7 +1,7 @@
 format: mundane-work-yaml-0.2
 id: SHARE
 kind: task
-title: Shared imported task
+title: "Shared [run](command:bad) <script>literal</script>"
 status: Planned
 body: |
   An independently compiled task.
