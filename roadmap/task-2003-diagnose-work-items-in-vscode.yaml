@@ -1,0 +1,49 @@
+format: mundane-work-yaml-0.2
+id: TC-2003
+kind: task
+title: Diagnose Work Items in VS Code
+status: Planned
+dependencies: ["TC-2002"]
+relations: []
+planning:
+  stage: '20'
+  type: Tooling
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+body: |2
+
+  ## Problem and outcome
+
+  Task cards are authoritative YAML but currently lack the editor assistance available
+  for requirements. Publish unsaved field, duplicate-ID, missing-dependency and cycle diagnostics using domain rules. Preserve independent requirement and work project freshness and recovery.
+
+  ## Scope and acceptance
+
+  Publish unsaved field, duplicate-ID, missing-dependency and cycle diagnostics using domain rules. Preserve independent requirement and work project freshness and recovery.
+  Record executable behavioral checks or, for design, a written decision with request
+  examples before dependent implementation. Validate error recovery and unchanged source.
+
+  ## Evidence
+
+  Record actual checks and artifacts in completion evidence. Never infer user feedback
+  or platform support from local tests.
+
+  ## Dependencies and boundaries
+
+  Follow declared predecessors; the selection decision enables snapshot implementation,
+  diagnostics enable navigation, and structural assistance precedes installed dogfooding.
+  Reuse the existing work-item language. No imported-target navigation, evidence-file
+  checking, work-item formatting, automatic status edits or publication is included.
+
+  ## Compatibility, risks and stop conditions
+
+  Human-authored IDs and YAML remain authoritative; compiled contracts stay unchanged.
+  Requests must reject stale results and ambiguous structures. Defer assistance when
+  parsing cannot identify a safe token. Preserve existing requirement providers.
+  Affected components: editor bridge, work compiler, VS Code providers/tests and guides.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)

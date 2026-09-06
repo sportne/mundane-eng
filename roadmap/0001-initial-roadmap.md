@@ -115,3 +115,11 @@ version declarations; TC-1903 measures and reduces repeated validation while
 preserving freshness. TC-1904 packages the matching Linux editor and bridge, and
 TC-1905 tests installation and recovery from that bundle. The execution order is
 TC-1901 → TC-1902 → TC-1903 → TC-1904 → TC-1905.
+
+## Work-item editor batch
+
+TC-2001 selects the existing work-item manifest and defines the editor boundary.
+TC-2002 reuses compilation for buffers; TC-2003 adds local diagnostics. TC-2004
+adds dependency navigation, TC-2005 adds structural completion and hover, and
+TC-2006 dogfoods the backlog and verifies installation. Execution order:
+TC-2001 → TC-2002 → TC-2003 → TC-2004 → TC-2005 → TC-2006.

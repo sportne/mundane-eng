@@ -4,7 +4,7 @@ Generated from authoritative source cards and explicit compiled inputs. Do not e
 status or relationships here; regenerate this view. Source links use the analysis
 root as their base. Completion and closure are authored claims, not satisfaction.
 
-Items: 54.
+Items: 60.
 
 | ID | Kind | Title | Status | Dependencies | Unfinished prerequisites |
 | --- | --- | --- | --- | --- | --- |
@@ -62,6 +62,12 @@ Items: 54.
 | [TC-1903](./roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml#L2) | task | Reduce Redundant Editor Project Validation | Complete | TC-1902 | — |
 | [TC-1904](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L2) | task | Bundle the Linux Editor and Native Bridge | Complete | TC-1902, TC-1903 | — |
 | [TC-1905](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L2) | task | Verify Installed Editor Setup and Recovery | Complete | TC-1904 | — |
+| [TC-2001](./roadmap/closed/task-2001-define-work-item-editor-selection.yaml#L2) | task | Define Work-item Editor Selection | Complete | — | — |
+| [TC-2002](./roadmap/task-2002-compile-work-item-editor-snapshots.yaml#L2) | task | Compile Work-item Editor Snapshots | Planned | TC-2001 | — |
+| [TC-2003](./roadmap/task-2003-diagnose-work-items-in-vscode.yaml#L2) | task | Diagnose Work Items in VS Code | Planned | TC-2002 | TC-2002 |
+| [TC-2004](./roadmap/task-2004-navigate-local-task-dependencies.yaml#L2) | task | Navigate Local Task Dependencies | Planned | TC-2003 | TC-2003 |
+| [TC-2005](./roadmap/task-2005-complete-and-describe-work-item-fields.yaml#L2) | task | Complete and Describe Work-item Fields | Planned | TC-2004 | TC-2004 |
+| [TC-2006](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L2) | task | Dogfood and Verify Work-item Authoring | Planned | TC-2005 | TC-2005 |
 
 ## Planning qualifications
 
@@ -121,6 +127,12 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - TC-1903 — stage: 19; type: Implementation
 - TC-1904 — stage: 19; type: Packaging
 - TC-1905 — stage: 19; type: Testing
+- TC-2001 — stage: 20; type: Design
+- TC-2002 — stage: 20; type: Implementation
+- TC-2003 — stage: 20; type: Tooling
+- TC-2004 — stage: 20; type: Tooling
+- TC-2005 — stage: 20; type: Tooling
+- TC-2006 — stage: 20; type: Testing
 
 ## Authored relationships
 
@@ -190,6 +202,11 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1904 | depends-on | work:work-item:TC-1902 | [work:roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1) |
 | work:work-item:TC-1904 | depends-on | work:work-item:TC-1903 | [work:roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1) |
 | work:work-item:TC-1905 | depends-on | work:work-item:TC-1904 | [work:roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1) |
+| work:work-item:TC-2002 | depends-on | work:work-item:TC-2001 | [work:roadmap/task-2002-compile-work-item-editor-snapshots.yaml](./roadmap/task-2002-compile-work-item-editor-snapshots.yaml#L1) |
+| work:work-item:TC-2003 | depends-on | work:work-item:TC-2002 | [work:roadmap/task-2003-diagnose-work-items-in-vscode.yaml](./roadmap/task-2003-diagnose-work-items-in-vscode.yaml#L1) |
+| work:work-item:TC-2004 | depends-on | work:work-item:TC-2003 | [work:roadmap/task-2004-navigate-local-task-dependencies.yaml](./roadmap/task-2004-navigate-local-task-dependencies.yaml#L1) |
+| work:work-item:TC-2005 | depends-on | work:work-item:TC-2004 | [work:roadmap/task-2005-complete-and-describe-work-item-fields.yaml](./roadmap/task-2005-complete-and-describe-work-item-fields.yaml#L1) |
+| work:work-item:TC-2006 | depends-on | work:work-item:TC-2005 | [work:roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1) |
 
 ## Reverse navigation
 
@@ -235,12 +252,17 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-1902: [work:work-item:TC-1903 (depends-on)](./roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml#L1), [work:work-item:TC-1904 (depends-on)](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1)
 - work:work-item:TC-1903: [work:work-item:TC-1904 (depends-on)](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1)
 - work:work-item:TC-1904: [work:work-item:TC-1905 (depends-on)](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1)
+- work:work-item:TC-2001: [work:work-item:TC-2002 (depends-on)](./roadmap/task-2002-compile-work-item-editor-snapshots.yaml#L1)
+- work:work-item:TC-2002: [work:work-item:TC-2003 (depends-on)](./roadmap/task-2003-diagnose-work-items-in-vscode.yaml#L1)
+- work:work-item:TC-2003: [work:work-item:TC-2004 (depends-on)](./roadmap/task-2004-navigate-local-task-dependencies.yaml#L1)
+- work:work-item:TC-2004: [work:work-item:TC-2005 (depends-on)](./roadmap/task-2005-complete-and-describe-work-item-fields.yaml#L1)
+- work:work-item:TC-2005: [work:work-item:TC-2006 (depends-on)](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 0260fd8385434d469a23769c88e219fb6d732a39925c8e648c721412b65234cb
+- Work artifact: build/work-backlog/items.json; SHA-256 1f948112894a888982f166f9678432f89c2429b97487a4d4f0ef2bc95cdee625
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 eccd04d85bd9f701c19b8d86751520199bd8ed814f2751a9d1d99292602b5b21
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 729258fdeb8442763e8b33bcb3f22165c3d49a96cd3eb1f0d459476fb4b0d41f
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -293,8 +315,14 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml](./roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml#L1); SHA-256 6463661870e7af3becbce1cfa4817c9ac9874f851ea581ea215f6c7f663d6393
 - Source: [roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1); SHA-256 e7419bfdf0f608629cdb29110b4d1972837e9dee4e5915934a21055382db1023
 - Source: [roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1); SHA-256 442029aeb47d8bc28503c288b18308fb4e25af090cf60c16a5ceee3cfa905fc1
+- Source: [roadmap/closed/task-2001-define-work-item-editor-selection.yaml](./roadmap/closed/task-2001-define-work-item-editor-selection.yaml#L1); SHA-256 e3c258790ffc520f72396f338d38b3a2fd354d8a76dbc25dc3c45f8bf746767a
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
+- Source: [roadmap/task-2002-compile-work-item-editor-snapshots.yaml](./roadmap/task-2002-compile-work-item-editor-snapshots.yaml#L1); SHA-256 64f71d14646f27bdc4e47227da94b91ab93a53b0dbbe67ef7101a420bccbbc38
+- Source: [roadmap/task-2003-diagnose-work-items-in-vscode.yaml](./roadmap/task-2003-diagnose-work-items-in-vscode.yaml#L1); SHA-256 ae22bddf28cf9d28b924cccbc2adf5bc524164db9c3514b650903bf6b20c809a
+- Source: [roadmap/task-2004-navigate-local-task-dependencies.yaml](./roadmap/task-2004-navigate-local-task-dependencies.yaml#L1); SHA-256 e3ba629e47a9c508b3c1f1c5c3d40ab2a5fb8dd202a6a364b9b7dd16314c3b0a
+- Source: [roadmap/task-2005-complete-and-describe-work-item-fields.yaml](./roadmap/task-2005-complete-and-describe-work-item-fields.yaml#L1); SHA-256 b9775c8a7418e242f7d17d321ec4582dfdcc19687f49f47c8a61278da75bd778
+- Source: [roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1); SHA-256 7abd1f214209cc5b85e9f0d01d49b6880fc66aa018d99e098927410ad0c877f2
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff9f89dba866090ac8ef0e5fbf75f16dffe9de1c6e288f4358f66583c9b4aaff
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 ae1e76391d43961f569ff65e993109e752d0451427b1d18f7f0439c0cf572287

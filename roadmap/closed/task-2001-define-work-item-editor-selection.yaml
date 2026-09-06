@@ -1,0 +1,54 @@
+format: mundane-work-yaml-0.2
+id: TC-2001
+kind: task
+title: Define Work-item Editor Selection
+status: Complete
+dependencies: []
+relations: []
+planning:
+  stage: '20'
+  type: Design
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+body: |2
+
+  ## Problem and outcome
+
+  Task cards are authoritative YAML but currently lack the editor assistance available
+  for requirements. Specify explicit YAML work-item manifest selection alongside requirements, read-only snapshots, local dependency analysis and conservative assistance boundaries.
+
+  ## Scope and acceptance
+
+  Specify explicit YAML work-item manifest selection alongside requirements, read-only snapshots, local dependency analysis and conservative assistance boundaries.
+  Record executable behavioral checks or, for design, a written decision with request
+  examples before dependent implementation. Validate error recovery and unchanged source.
+
+  ## Evidence
+
+  Record actual checks and artifacts in completion evidence. Never infer user feedback
+  or platform support from local tests.
+
+  ## Dependencies and boundaries
+
+  Follow declared predecessors; the selection decision enables snapshot implementation,
+  diagnostics enable navigation, and structural assistance precedes installed dogfooding.
+  Reuse the existing work-item language. No imported-target navigation, evidence-file
+  checking, work-item formatting, automatic status edits or publication is included.
+
+  ## Compatibility, risks and stop conditions
+
+  Human-authored IDs and YAML remain authoritative; compiled contracts stay unchanged.
+  Requests must reject stale results and ambiguous structures. Defer assistance when
+  parsing cannot identify a safe token. Preserve existing requirement providers.
+  Affected components: editor bridge, work compiler, VS Code providers/tests and guides.
+
+  ## References
+
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  specification/0025-work-item-editor-0.1.md records selection, request example,
+  resource limits, compatibility and deferred imported analysis before implementation.
