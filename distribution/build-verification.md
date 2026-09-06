@@ -47,3 +47,10 @@ seeded graphs; targeted mutations; and source-card/documentation checks.
 The wrapper separately injects invalid YAML and an invalid structural schema into
 the actual gate, verifies attributed failure, and restores exact input bytes.
 Logs under `build/ci-evidence/` record the actual environment and exit status.
+
+The gate also builds `mundane-editor`, compares serialized JVM/native responses
+and output failures, runs Node boundary tests and actual VS Code 1.109.5 Extension
+Host tests, and packages the local VSIX. This requires Node.js 22+, npm, Xvfb on a
+headless Linux host and Electron's GTK/GBM/NSS/ALSA libraries. `npm ci` uses the
+checked-in lockfile; the pinned VS Code test build is cached under `build/`.
+See the [extension guide](../editors/vscode/README.md) for installation and settings.

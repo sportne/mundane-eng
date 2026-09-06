@@ -14,6 +14,8 @@ trap record_status EXIT
     cat /etc/os-release
     uname -sm
     java -version
+    node --version
+    npm --version
     javac -version
     native-image --version
     gcc --version

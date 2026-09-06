@@ -98,3 +98,12 @@ identify that structural path. It never validates, publishes or writes the repai
 text. Prose, block scalars, comments, unrelated mappings, ambiguous structures,
 anchors, aliases and unsupported YAML constructs do not acquire attribute meaning.
 Malformed structures that this one-line repair cannot resolve produce no suggestions.
+
+## Attribute hover
+
+Cursor responses include `hover` or null. A hover identifies the actual parsed
+attribute name or simple scalar value token, the selected declaration's type,
+requiredness, description, enum values and declaration source span. Unknown names,
+invalid declarations and ambiguous syntax produce no hover. Hover never repairs
+source. The extension converts the exact token range and displays all authored
+content using literal Markdown text with HTML and command trust disabled.

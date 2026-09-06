@@ -34,6 +34,7 @@ source notation. Requirement IDs remain human-authored; digests identify revisio
 | Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [contracts](../specification/README.md) |
 | Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [contracts](../specification/README.md) |
 | Impact analysis | Scoped prospective queries, deterministic shortest explanations and validated source-linked reports; [workflow](../experiments/0037-impact-analysis/README.md) |
+| VS Code authoring | Local extension with explicit projects, unsaved compiler diagnostics, navigation, formatting and attribute assistance; [guide](../editors/vscode/README.md) |
 | Contributor checks | Authoritative `make verify`, clean-checkout wrapper, compatibility/golden corpora, seeded workflows and targeted behavioral mutations; [build guide](../distribution/build-verification.md) |
 
 These capabilities establish bounded workflows. They do not establish executed
@@ -56,8 +57,7 @@ completed workflow. Its source cards retain individual completion evidence.
 | [TC-0807: Authored views](task-0807-test-authored-views-and-specifications.yaml) | Demonstrate a composition/delivery need beyond the current generated report; compare simple ordering with a separate view artifact before selecting syntax. |
 | [TC-1104: Component layout](task-1104-establish-monorepo-component-layout.yaml) | Show a measurable navigation or dependency benefit; retain current paths when movement has no observable value. |
 
-Completed prerequisites do not remove these conditions. ReqIF interchange and
-editor integration remain unimplemented. The three-command native archive covers
+Completed prerequisites do not remove these conditions. ReqIF interchange remains unimplemented. The three-command native archive covers
 validate/format/trace; the other maintained commands have separate build targets.
 
 ## Candidates for new bounded cards

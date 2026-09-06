@@ -89,6 +89,38 @@ final class AttributeCompletion {
         }
         return List.of();
     }
+    static Map<String,Object> describe(Interpreter.Source source, AttributeSchema schema, int line, int column) {
+        if (schema == null || !schema.valid()) return null;
+        try {
+            Map<String,Node> root = mapping(compose(new String(source.bytes(), StandardCharsets.UTF_8)));
+            if (!scalar(root.get("format")).equals("mundanereq-yaml-0.4")
+                    || !scalar(root.get("attributeSchema")).equals(schema.name())
+                    || !(root.get("requirements") instanceof SequenceNode requirements)) return null;
+            Map<?,?> declarations = (Map<?,?>) schema.definition().get("attributes");
+            for (Node record : requirements.getValue()) {
+                if (!(mapping(record).get("attributes") instanceof MappingNode attributes)) continue;
+                mapping(attributes); // Duplicate names make the context ambiguous.
+                for (var tuple : attributes.getValue()) {
+                    String name = scalar(tuple.getKeyNode());
+                    if (!(declarations.get(name) instanceof Map<?,?> definition)) continue;
+                    for (Node token : List.of(tuple.getKeyNode(), tuple.getValueNode())) {
+                        if (!(token instanceof ScalarNode scalar) || !simple(scalar)) continue;
+                        var start = token.getStartMark().orElseThrow(); var end = token.getEndMark().orElseThrow();
+                        if ((line > start.getLine() + 1 || line == start.getLine() + 1 && column >= start.getColumn() + 1)
+                                && (line < end.getLine() + 1 || line == end.getLine() + 1 && column < end.getColumn() + 1)) {
+                            return Json.object("name", name, "definition", definition,
+                                    "declaration", EditorMain.span(schema.locations().get(name)),
+                                    "location", EditorMain.span(new SourceSpan(new SourcePosition(source.file(), start.getLine() + 1, start.getColumn() + 1),
+                                            new SourcePosition(source.file(), end.getLine() + 1, end.getColumn() + 1))));
+                        }
+                    }
+                }
+            }
+        } catch (IllegalArgumentException | org.snakeyaml.engine.v2.exceptions.YamlEngineException ignored) {
+            // Hover requires an unambiguous parsed token; it never repairs source.
+        }
+        return null;
+    }
     private static Map<String,Object> suggestion(String label, String insertion, String path, int line, int first, int last, Map<?,?> definition) {
         return Json.object("label", label, "insertText", insertion, "location", EditorMain.span(new SourceSpan(
                 new SourcePosition(path, line, first), new SourcePosition(path, line, last))),

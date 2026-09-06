@@ -61,6 +61,7 @@ public final class EditorMain {
             schema = AttributeSchema.parse(source);
         }
         List<Map<String,Object>> suggestions = List.of();
+        Map<String,Object> hover = null;
         if (request.get("cursor") != null) {
             var cursor = object(request.get("cursor"));
             if (!cursor.keySet().equals(java.util.Set.of("path", "line", "column"))) throw new IllegalArgumentException("invalid cursor fields");
@@ -68,10 +69,13 @@ public final class EditorMain {
             var source = sources.stream().filter(file -> file.file().equals(path)).findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("cursor file is not selected"));
             int line = coordinate(cursor.get("line")), column = coordinate(cursor.get("column"));
-            if (format == SourceFormat.YAML_04) suggestions = AttributeCompletion.suggest(source, schema, line, column);
+            if (format == SourceFormat.YAML_04) {
+                suggestions = AttributeCompletion.suggest(source, schema, line, column);
+                hover = AttributeCompletion.describe(source, schema, line, column);
+            }
         }
         var result = Interpreter.interpretSources(sources, format, schema);
-        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "suggestions", suggestions, "formatting", result.valid() ? sources.stream().filter(source -> new String(source.bytes(), StandardCharsets.UTF_8).contains("\r\n"))
+        return Json.object("protocol", PROTOCOL, "valid", result.valid(), "suggestions", suggestions, "hover", hover, "formatting", result.valid() ? sources.stream().filter(source -> new String(source.bytes(), StandardCharsets.UTF_8).contains("\r\n"))
                         .map(source -> Json.object("path", source.file(), "text", new String(source.bytes(), StandardCharsets.UTF_8).replace("\r\n", "\n"))).toList() : List.of(),
                 "definitions", result.valid() ? result.origins().stream().map(origin -> Json.object(
                         "id", origin.id(), "location", span(origin.fields().get("id").getFirst()),

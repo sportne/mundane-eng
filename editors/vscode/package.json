@@ -5,21 +5,82 @@
   "version": "0.1.0",
   "publisher": "mundane-engineering",
   "license": "BSD-3-Clause",
-  "repository": {"type": "git", "url": "https://github.com/sportne/mundane-req.git"},
-  "engines": {"vscode": "^1.95.0", "node": ">=22"},
-  "categories": ["Programming Languages"],
-  "main": "./src/extension.js",
-  "activationEvents": ["onStartupFinished"],
-  "capabilities": {"untrustedWorkspaces": {"supported": false, "description": "The extension runs an explicitly configured local compiler."}, "virtualWorkspaces": false},
-  "contributes": {
-    "commands": [{"command": "mundane.validate", "title": "Mundane: Validate Selected Project"}],
-    "languages": [{"id": "mundane-requirements", "aliases": ["Mundane Requirements"], "extensions": [".mreq.yaml"], "configuration": "./language-configuration.json"}],
-    "grammars": [{"language": "mundane-requirements", "scopeName": "source.mundane-requirements", "path": "./syntaxes/requirements.tmLanguage.json"}],
-    "configuration": {"title": "Mundane Requirements", "properties": {
-      "mundane.project": {"type": "string", "default": "", "scope": "resource", "description": "Explicit workspace-relative editor project JSON path. Empty disables this folder."},
-      "mundane.executable": {"type": "string", "default": "", "scope": "machine-overridable", "description": "Absolute path to the local mundane-editor executable. Executed only in trusted workspaces."}
-    }}
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sportne/mundane-req.git"
   },
-  "scripts": {"test": "node test/run.js", "test:unit": "node --test test/unit.test.js", "package": "vsce package --no-dependencies --out ../../build/mundane-requirements-0.1.0.vsix"},
-  "devDependencies": {"@vscode/test-electron": "3.1.0", "@vscode/vsce": "3.9.2"}
+  "engines": {
+    "vscode": "^1.109.0",
+    "node": ">=22"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "main": "./src/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "The extension runs an explicitly configured local compiler."
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "mundane.validate",
+        "title": "Mundane: Validate Selected Project"
+      }
+    ],
+    "languages": [
+      {
+        "id": "mundane-requirements",
+        "aliases": [
+          "Mundane Requirements"
+        ],
+        "extensions": [
+          ".mreq.yaml"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "mundane-requirements",
+        "scopeName": "source.mundane-requirements",
+        "path": "./syntaxes/requirements.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "Mundane Requirements",
+      "properties": {
+        "mundane.project": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Explicit workspace-relative editor project JSON path. Empty disables this folder."
+        },
+        "mundane.executable": {
+          "type": "string",
+          "default": "",
+          "scope": "machine-overridable",
+          "description": "Absolute path to the local mundane-editor executable. Executed only in trusted workspaces."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "test": "node test/run.js",
+    "test:unit": "node --test test/unit.test.js",
+    "package": "vsce package --no-dependencies --out ../../build/mundane-requirements-0.1.0.vsix --baseContentUrl https://github.com/sportne/mundane-req/blob/main/editors/vscode"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "3.9.2"
+  },
+  "extensionKind": [
+    "workspace"
+  ]
 }

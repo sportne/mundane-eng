@@ -8,14 +8,13 @@ function activate(context) {
   const output = vscode.window.createOutputChannel('Mundane Requirements');
   const diagnostics = vscode.languages.createDiagnosticCollection('mundane-requirements');
   let generation = 0, timer, controller, disposed = false;
-  let states = [];
   const watched = new Map();
   let watchers = [];
   const selector = [{ scheme: 'file', language: 'mundane-requirements' }, { scheme: 'file', language: 'yaml' }];
   function invalidate() {
     ++generation;
     clearTimeout(timer); controller?.abort();
-    states = []; diagnostics.clear();
+    diagnostics.clear();
   }
   async function refresh(query) {
     if (!vscode.workspace.isTrusted || disposed) return [];
@@ -62,7 +61,6 @@ function activate(context) {
         diagnostics.set(uri, [diagnostic]);
       }
     }
-    if (version === generation && !disposed) states = results;
     return results;
   }
   function schedule() { invalidate(); timer = setTimeout(() => { void refresh(); }, 200); }
@@ -122,6 +120,21 @@ function activate(context) {
       });
     }
   }, ':', ' ', '"'));
+  context.subscriptions.push(vscode.languages.registerHoverProvider(selector, {
+    async provideHover(document, point, token) {
+      const state = await current(document, token, point);
+      if (!state?.result.hover) return null;
+      const info = state.result.hover;
+      const definition = info.definition;
+      const markdown = new vscode.MarkdownString();
+      markdown.isTrusted = false; markdown.supportHtml = false;
+      markdown.appendText(`${info.name} — ${definition.type}, ${definition.required ? 'required' : 'optional'}\n\n`);
+      if (definition.description) markdown.appendText(definition.description + '\n\n');
+      if (definition.values) markdown.appendText('Allowed values: ' + definition.values.join(', ') + '\n\n');
+      markdown.appendText(`Declaration: ${info.declaration.path}:${info.declaration.start.line}`);
+      return new vscode.Hover(markdown, range(state.file.text, info.location));
+    }
+  }));
   context.subscriptions.push(output, diagnostics,
     vscode.commands.registerCommand('mundane.validate', validate),
     vscode.workspace.onDidChangeTextDocument(schedule),
@@ -134,15 +147,15 @@ function activate(context) {
   function installWatchers() {
     watchers.forEach(w => w.dispose()); watchers = [];
     for (const folder of vscode.workspace.workspaceFolders || []) {
-    const watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(folder, '**/*'));
-    const changed = uri => {
-      const relative = path.relative(folder.uri.fsPath, uri.fsPath).split(path.sep).join('/');
-      const selected = vscode.workspace.getConfiguration('mundane', folder.uri).get('project');
-      if (relative === selected || watched.get(folder.uri.fsPath)?.has(relative)) schedule();
-    };
-    watchers.push(watcher, watcher.onDidChange(changed), watcher.onDidCreate(changed), watcher.onDidDelete(changed));
-  }
+      const watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(folder, '**/*'));
+      const changed = uri => {
+        const relative = path.relative(folder.uri.fsPath, uri.fsPath).split(path.sep).join('/');
+        const selected = vscode.workspace.getConfiguration('mundane', folder.uri).get('project');
+        if (relative === selected || watched.get(folder.uri.fsPath)?.has(relative)) schedule();
+      };
+      watchers.push(watcher, watcher.onDidChange(changed), watcher.onDidCreate(changed), watcher.onDidDelete(changed));
     }
+  }
   installWatchers();
   schedule();
   return { validate, current, selector };

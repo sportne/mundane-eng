@@ -13,8 +13,6 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Immutable migration replay reads the recorded ancestor.
 
       - name: Install GraalVM Community Edition 21
         uses: graalvm/setup-graalvm@5298d94fb55a4f185c602eeac5de1b553882abe2 # v1.6.4
@@ -23,10 +21,15 @@ jobs:
           distribution: graalvm-community
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Install editor test runtime
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: "22"
+
       - name: Install full verification prerequisites
         run: |
           sudo apt-get update
-          sudo apt-get install -y ruby python3-venv curl gcc make libc6-dev zlib1g-dev binutils
+          sudo apt-get install -y ruby python3-venv curl gcc make libc6-dev zlib1g-dev binutils xvfb libgtk-3-0 libgbm1 libnss3 libasound2t64
 
       - name: Run authoritative verification and failure propagation checks
         run: scripts/run-ci-verification.sh

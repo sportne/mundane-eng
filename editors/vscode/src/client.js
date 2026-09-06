@@ -46,9 +46,10 @@ async function read(root, name, documents, maximum) {
         count += result.bytesRead;
       }
       if (count > maximum) throw new Error('Selected file exceeds limit');
-      text = new TextDecoder('utf-8', { fatal: true }).decode(buffer.subarray(0, count));
+      text = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true }).decode(buffer.subarray(0, count));
     } finally { await handle.close(); }
   }
+  if (!text.isWellFormed()) throw new Error('Buffer contains an unpaired Unicode surrogate');
   if (Buffer.byteLength(text) > maximum) throw new Error('Buffer exceeds limit');
   return { path: name, text };
 }

@@ -1,6 +1,6 @@
 # VS Code requirements editor
 
-This local extension uses the same Java interpreter as the requirement commands.
+VS Code 1.109 or newer is required. This workspace extension uses the same Java interpreter as the requirement commands.
 It operates on explicit YAML 0.3/0.4 projects. Other engineering artifact languages
 keep their own contracts.
 
@@ -20,7 +20,8 @@ Linux needs the usual Electron libraries and Xvfb when no display is available.
 Tests use a disposable workspace in `build/editor-test-workspace`.
 Install `build/mundane-requirements-0.1.0.vsix` with **Extensions: Install from VSIX**.
 The VSIX contains JavaScript, grammar and documentation; build the native bridge
-for your host separately. No Marketplace publication or bundled platform binary
+for the extension host separately. In a Remote/WSL workspace, install the extension
+and configure the bridge in that workspace environment. No Marketplace publication or bundled platform binary
 is implied.
 
 In VS Code settings, select `mundane.executable` as the absolute path to
@@ -67,3 +68,8 @@ unused attribute names (with required/optional type detail) and allowed enum val
 Enum insertion includes quotes. Partial key lines are supported; other syntax errors
 may need repair before the YAML structure can establish a completion context.
 Prose and comments receive no attribute suggestions.
+
+Hover over a declared attribute name or scalar value to see its type, requiredness,
+description, permitted values and declaration location. Authored documentation is
+rendered as literal text; embedded HTML and commands are not enabled. Hover refreshes
+from unsaved schema changes and disappears when the declaration becomes invalid.

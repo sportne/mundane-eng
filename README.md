@@ -74,3 +74,8 @@ dependencies and evidence in YAML cards; regenerate `WORK-ITEMS.md` with `make w
 - `src/main/java/`: requirement tooling, shared primitives and independent engineering consumers.
 - `src/test/java/`, `conformance/` and `scripts/`: owning regression and integration checks.
 - [Distribution](distribution/README.md): installation, platform assumptions and package contents.
+
+The [VS Code extension](editors/vscode/README.md) provides YAML highlighting,
+compiler diagnostics, reference navigation, conservative formatting, attribute
+completion and hover documentation for explicitly selected requirement projects.
+Build and install the local VSIX; the native bridge is built separately for the host.

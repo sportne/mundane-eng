@@ -174,10 +174,11 @@ native-suite-verify: package-native-suite
 	python3 scripts/check-native-package.py $(PACKAGE_STAGE) $(PACKAGE_ARCHIVE)
 yaml-verify: native-validator native-formatter native-trace native-compile
 	python3 scripts/check-yaml-workflow.py
-verify: yaml-schema-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify
+verify: yaml-schema-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify editor-verify
 
 .PHONY: native-editor editor-verify
 native-editor: test
 	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-editor) mundanereq.editor.EditorMain
 editor-verify: native-editor
+	python3 scripts/check-editor-bridge.py
 	cd editors/vscode && npm ci && npm run test:unit && xvfb-run -a npm test && npm run package
