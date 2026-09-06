@@ -12,10 +12,11 @@ public final class MaintainedTestSuite {
         engineering.artifacts.ArtifactBoundaryTest.run();
         engineering.verification.VerificationBoundaryTest.run();
         engineering.work.WorkBoundaryTest.run();
+        engineering.work.WorkSnapshotTest.run();
         engineering.impact.ImpactGraphTest.run();
         engineering.impact.ImpactCliTest.run();
         engineering.impact.ImpactViewTest.run();
         mundanereq.editor.EditorBridgeTest.run();
-        System.out.println("Passed 12 maintained test groups.");
+        System.out.println("Passed 13 maintained test groups.");
     }
 }

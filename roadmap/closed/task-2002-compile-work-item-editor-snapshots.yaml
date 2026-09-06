@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2002
 kind: task
 title: Compile Work-item Editor Snapshots
-status: Planned
+status: Complete
 dependencies: ["TC-2001"]
 relations: []
 planning:
@@ -45,5 +45,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  WorkSnapshotTest compares disk and buffer semantics, malformed YAML, invalid lifecycle values, duplicate IDs, schema rejection and no-write behavior. make test passed all 13 maintained groups.

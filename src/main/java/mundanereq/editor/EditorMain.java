@@ -46,6 +46,7 @@ public final class EditorMain {
                 || !java.util.Set.of("protocol", "source", "files", "schema", "cursor").containsAll(request.keySet()))
             throw new IllegalArgumentException("unexpected snapshot fields");
         if (!PROTOCOL.equals(request.get("protocol"))) throw new IllegalArgumentException("unsupported editor protocol");
+        if (mundanereq.Versions.WORK_SOURCE.equals(request.get("source"))) return work(request);
         SourceFormat format = switch (string(request.get("source"))) {
             case "yaml-0.3" -> SourceFormat.YAML_03;
             case "yaml-0.4" -> SourceFormat.YAML_04;
@@ -90,6 +91,27 @@ public final class EditorMain {
                                 .map(entry -> Json.object("id", entry.getKey(), "location", span(entry.getValue()))).toList())).toList() : List.of(),
                 "diagnostics", result.diagnostics().stream().map(d -> Json.object("path", d.file(),
                         "line", d.line(), "column", d.column(), "code", d.code(), "message", d.message())).toList());
+    }
+
+    private static Map<String,Object> work(Map<String,Object> request) {
+        if(request.get("schema")!=null)throw new IllegalArgumentException("work snapshots do not accept a schema");
+        if(!(request.get("files") instanceof List<?> files))throw new IllegalArgumentException("expected selected files");
+        var sources=new ArrayList<engineering.artifacts.Snapshots.Snapshot>();
+        for(Object value:files) {
+            var input=source(value,1024*1024);
+            sources.add(new engineering.artifacts.Snapshots.Snapshot(input.file(),input.bytes(),null));
+        }
+        if(request.get("cursor")!=null) {
+            var cursor=object(request.get("cursor"));
+            if(!cursor.keySet().equals(java.util.Set.of("path","line","column")))throw new IllegalArgumentException("invalid cursor fields");
+            coordinate(cursor.get("line"));coordinate(cursor.get("column"));
+            if(sources.stream().noneMatch(s->s.path().equals(cursor.get("path"))))throw new IllegalArgumentException("cursor file is not selected");
+        }
+        var result=engineering.work.WorkCompiler.compileSnapshots(sources);
+        return Json.object("protocol",PROTOCOL,"valid",result.valid(),"diagnostics",result.diagnostics().stream().map(d->{
+            var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
+                "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
+        }).toList(),"definitions",List.of(),"formatting",List.of(),"suggestions",List.of(),"hover",null);
     }
 
     static Map<String,Object> span(mundanereq.source.SourceSpan span) {
