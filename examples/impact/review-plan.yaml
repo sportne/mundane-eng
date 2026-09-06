@@ -1,0 +1,12 @@
+format: mundane-work-yaml-0.2
+id: TASK-PLAN
+kind: task
+title: Review the logger verification plan
+status: Planned
+relations:
+  - relation: addresses
+    scope: plan
+    kind: verification-plan
+    target: PLAN-LOGGER
+body: |-
+  Review the plan when a covered activity changes.

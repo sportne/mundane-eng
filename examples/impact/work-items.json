@@ -1,0 +1,5 @@
+{
+  "format": "mundane-work-set-0.2",
+  "source": "mundane-work-yaml-0.2",
+  "files": ["source/review-storage.yaml", "source/review-plan.yaml", "source/update-procedure.yaml", "source/issue.yaml"]
+}

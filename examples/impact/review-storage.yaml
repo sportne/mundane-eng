@@ -1,0 +1,13 @@
+format: mundane-work-yaml-0.2
+id: TASK-STORAGE
+kind: task
+title: Review storage interruption procedure
+status: Complete
+relations:
+  - relation: addresses
+    scope: plan
+    kind: verification-activity
+    target: ACT-STORAGE
+body: |-
+  Review the procedure against the selected recording behavior.
+  Completion is an authored workflow claim; a later change can still require review.

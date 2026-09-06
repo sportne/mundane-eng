@@ -44,3 +44,23 @@ revisions. A prominent notice identifies depth truncation. The renderer validate
 embedded artifacts and recomputes results, rejecting forged paths or incomplete
 analysis before writing a report. It does not reread source; linked files may have
 changed since compilation. Regenerate both query and report for a fresh snapshot.
+
+## Run the checked-in workflow
+
+From the repository root:
+
+```sh
+make native-compile native-plan native-work native-impact
+python3 experiments/0037-impact-analysis/workflow.py
+```
+
+Open `build/impact-example/IMPACT.md`. It identifies six review candidates for the
+logger recording requirement and links to the source snapshots staged beside it.
+The [authoritative example](../examples/impact/README.md) stays under `examples/`.
+The workflow verifies exact goldens and does not edit authored status. Run
+`make impact-workflow-verify` for the adversarial, seeded and mutation checks.
+
+Requirement locations retain record/reference starts; plan links retain coverage-row
+coordinates. Work-item output currently supplies a metadata-block start for relations,
+so those declaration links point to that block, not an individual YAML relation.
+Every node is scope-qualified even when two snapshots link to the same source path.

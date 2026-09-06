@@ -360,3 +360,10 @@ impact-verify: native-impact
 	java -ea -cp $(CLASS_DIR) engineering.impact.ImpactViewTest $(BUILD_ROOT)/mundane-impact
 
 verify: impact-verify
+
+.PHONY: impact-workflow-verify
+impact-workflow-verify: native-compile native-plan native-work native-impact
+	python3 experiments/0037-impact-analysis/regressions.py
+	python3 experiments/0037-impact-analysis/mutations.py
+
+verify: impact-workflow-verify

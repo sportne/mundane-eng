@@ -1,0 +1,17 @@
+format: mundane-work-yaml-0.2
+id: ISSUE-CONTEXT
+kind: issue
+title: Record related field notes
+status: Open
+relations:
+  - relation: relates-to
+    scope: req
+    kind: requirement
+    target: SYS-001
+  - relation: evidence
+    scope: null
+    kind: resource
+    target: notes-not-selected.txt
+body: |-
+  These notes provide context only. The typed generic link does not assert
+  dependency, and impact does not open or interpret the evidence resource.

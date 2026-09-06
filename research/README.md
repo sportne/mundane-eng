@@ -108,3 +108,5 @@ capabilities are summarized in the [project README](../README.md).
 | [Research 0066: Attribute linking and analysis](0066-attribute-linking-verification.md) |
 | [Research 0067: Attribute-aware derived reports](0067-attribute-report-verification.md) |
 | [Research 0068: Integrated project attribute workflows](0068-attribute-workflow-verification.md) |
+
+- [0069: Cross-artifact impact workflow verification](0069-impact-workflow-verification.md): scoped queries, explained reports, golden/property/mutation checks and local authoritative-gate evidence.

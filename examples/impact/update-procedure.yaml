@@ -1,0 +1,8 @@
+format: mundane-work-yaml-0.2
+id: TASK-PROCEDURE
+kind: task
+title: Update the storage procedure after review
+status: Planned
+dependencies: [TASK-STORAGE]
+body: |-
+  Use the storage review observations to revise the procedure as needed.

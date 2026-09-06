@@ -33,19 +33,21 @@ source notation. Requirement IDs remain human-authored; digests identify revisio
 | Verification | Independent TSV plan compiler, coverage/review analysis and an experimental derived report; [workflow](../distribution/verification.md) |
 | Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [evidence](../research/0062-work-item-yaml-backlog-verification.md) |
 | Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [evidence](../research/0068-attribute-workflow-verification.md) |
+| Impact analysis | Scoped prospective queries, deterministic shortest explanations and validated source-linked reports; [workflow](../experiments/0037-impact-analysis/README.md) |
 | Contributor checks | Authoritative `make verify`, clean-checkout wrapper, compatibility/golden corpora, seeded workflows and targeted behavioral mutations; [build guide](../distribution/build-verification.md) |
 
 These capabilities establish bounded workflows. They do not establish executed
 verification, evidence adequacy, safety approval or requirement satisfaction.
 Historical research and completed cards retain their original scope and evidence.
 
-## Selected impact-analysis batch
+## Impact-analysis workflow
 
 TC-1701 defines the [impact contract](../specification/0023-cross-artifact-impact-0.1.md).
 TC-1702 assembles the scoped graph; TC-1703 queries explained paths; TC-1704 renders
 source-linked reports; TC-1705 verifies and documents the complete workflow.
 The dependency order is TC-1701 → TC-1702 → TC-1703 → TC-1704 → TC-1705.
-Examples and adversarial case preparation can proceed after the contract decision.
+[Recorded verification](../research/0069-impact-workflow-verification.md) covers the
+completed workflow. Its source cards retain individual completion evidence.
 
 ## Conditional backlog
 

@@ -17,6 +17,7 @@ or requirement satisfaction. Each artifact's source format is an independent cho
 | Project attributes | Explicit JSON project declaration plus YAML 0.4 values; text/enum types, required/optional presence, no defaults | [Contracts and capabilities](distribution/attributes.md); [small and medium examples](examples/attributes/README.md) |
 | Verification planning | Independently specified TSV plans, activities and coverage assertions | [Plan compilation, scoped imports and review analysis](distribution/verification.md) |
 | Work items | YAML task/issue records, literal narrative strings and typed relationships | [Authoring and commands](distribution/work-items.md); [repository backlog](WORK-ITEMS.md) |
+| Impact analysis | Explicit compiled requirements, plans and work-item imports | [Bounded queries and explained reports](distribution/impact.md); [logger example](examples/impact/README.md) |
 | Derived reports | Compiled snapshots and explicit analysis results | [Experimental verification report](experiments/0029-verification-report/README.md); work-item views via `mundane-work view` |
 
 Compiled interfaces are versioned separately from source languages and tools.
@@ -37,7 +38,7 @@ SDKMAN installation:
 ```sh
 sdk use java 21.0.2-graalce
 make test
-make native-suite native-compile native-plan native-link native-verification native-work
+make native-suite native-compile native-plan native-link native-verification native-work native-impact
 ```
 
 From the repository root:
@@ -60,7 +61,7 @@ contains only those three commands.
 `make verify` is the authoritative JVM/native gate, including schemas, compatibility
 fixtures, source-to-report workflows, mutation checks, documentation links and the
 backlog rebuild. `scripts/run-ci-verification.sh` runs that gate, records the environment
-and tests CI failure propagation. [Attribute workflow evidence](research/0068-attribute-workflow-verification.md)
+and tests CI failure propagation. [Impact workflow evidence](research/0069-impact-workflow-verification.md)
 records the latest completed feature batch; individual research records identify the
 inputs and environment actually verified.
 

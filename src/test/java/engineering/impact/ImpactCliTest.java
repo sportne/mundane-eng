@@ -52,11 +52,8 @@ public final class ImpactCliTest {
                 var invalid = bounded.clone(); invalid[6] = depth; invoke(invalid, 2, binary);
             }
             for (String name : List.of("--help", "--version", "--")) {
-                Path input = Path.of(name).toAbsolutePath();
-                // The actual literal CLI check runs from the temporary input directory.
                 Files.copy(root.resolve("imports.json"), root.resolve(name));
                 var literal = new String[]{"query", "--root", root.toString(), "--from", "req:requirement:TOP", "--", root.resolve(name).toString()};
-                check(input.getFileName().toString().equals(name), "fixture path");
                 invoke(literal, 0, binary);
             }
             for (int limit : List.of(0, 41, Integer.MAX_VALUE)) {

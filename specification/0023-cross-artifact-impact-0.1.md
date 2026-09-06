@@ -40,6 +40,8 @@ rules. Requirement decomposition cycles are accepted and bounded by visited node
 
 Edges below point from the possible change to the possible review consequence.
 Their source locations cite the declaration that supplies the relationship.
+Requirement links use reference-span starts, plan links use coverage rows, and work
+links use the metadata-block start available in the current compiled work contract.
 
 | Declaration | Impact edge | Reason |
 | --- | --- | --- |

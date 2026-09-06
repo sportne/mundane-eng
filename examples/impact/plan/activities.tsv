@@ -1,0 +1,3 @@
+activity_id	method	objective	expected_evidence
+ACT-STORAGE	test	Interrupt power during sample recording and inspect retained records.	Power interruption sequence and observed records
+ACT-POWER	inspection	Inspect supply connections and ratings.	Inspection observations

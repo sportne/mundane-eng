@@ -43,7 +43,8 @@ The gate includes JVM regressions; native behavior and executable isolation;
 validator, formatter and trace corpora; package checks; the independent-tool CI
 workflow; integrated/layout/conformance experiments; YAML/schema/migration checks;
 version declarations; compiled requirements; artifact linking; plan compilation
-and verification analysis; and the derived report experiment.
+and verification analysis; the derived report experiment; and scoped impact queries/reports with source-to-report
+goldens, seeded reachability cases and targeted behavioral mutations.
 
 The schema target runs first so its injected failure stops before expensive native
 builds. No target is removed. GNU Make shares prerequisites within the invocation;

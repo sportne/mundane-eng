@@ -1,0 +1,71 @@
+# Derived impact report
+
+Generated from explicit compiled snapshots. Do not edit this report; regenerate it
+from authoritative source. Results identify possible review consequences, not
+invalidity, completion, execution, approval or satisfaction. Authored status is unchanged.
+Source links are relative to the analysis root and may display newer source than
+the recorded snapshot.
+
+Starting node: [req:requirement:SYS-001](./source/requirements.yaml#L4).
+
+Depth bound: 8. One shortest explanatory path per affected node.
+
+Affected nodes within this selection and policy: 6.
+
+## plan:verification-activity:ACT-STORAGE
+
+Review candidate: [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+- [req:requirement:DEV-001](./source/requirements.yaml#L9) → [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) via coverage-current; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+
+## plan:verification-plan:PLAN-LOGGER
+
+Review candidate: [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+- [req:requirement:DEV-001](./source/requirements.yaml#L9) → [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) via coverage-current; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+- [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) → [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2) via activity-plan; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+
+## req:requirement:DEV-001
+
+Review candidate: [req:requirement:DEV-001](./source/requirements.yaml#L9).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+
+## work:work-item:TASK-PLAN
+
+Review candidate: [work:work-item:TASK-PLAN](./source/review-plan.yaml#L2).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+- [req:requirement:DEV-001](./source/requirements.yaml#L9) → [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) via coverage-current; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+- [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) → [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2) via activity-plan; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+- [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2) → [work:work-item:TASK-PLAN](./source/review-plan.yaml#L2) via addresses; [declaration](./source/review-plan.yaml#L1).
+
+## work:work-item:TASK-PROCEDURE
+
+Review candidate: [work:work-item:TASK-PROCEDURE](./source/update-procedure.yaml#L2).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+- [req:requirement:DEV-001](./source/requirements.yaml#L9) → [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) via coverage-current; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+- [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) → [work:work-item:TASK-STORAGE](./source/review-storage.yaml#L2) via addresses; [declaration](./source/review-storage.yaml#L1).
+- [work:work-item:TASK-STORAGE](./source/review-storage.yaml#L2) → [work:work-item:TASK-PROCEDURE](./source/update-procedure.yaml#L2) via depends-on; [declaration](./source/update-procedure.yaml#L1).
+
+## work:work-item:TASK-STORAGE
+
+Review candidate: [work:work-item:TASK-STORAGE](./source/review-storage.yaml#L2).
+
+- [req:requirement:SYS-001](./source/requirements.yaml#L4) → [req:requirement:DEV-001](./source/requirements.yaml#L9) via decomposes; [declaration](./source/requirements.yaml#L12).
+- [req:requirement:DEV-001](./source/requirements.yaml#L9) → [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) via coverage-current; [declaration](./source/plan/coverage.tsv#L2); context [plan:verification-plan:PLAN-LOGGER](./source/plan/plan.tsv#L2).
+- [plan:verification-activity:ACT-STORAGE](./source/plan/activities.tsv#L2) → [work:work-item:TASK-STORAGE](./source/review-storage.yaml#L2) via addresses; [declaration](./source/review-storage.yaml#L1).
+
+## Selected revisions
+
+These digests record exact input bytes; human-authored IDs retain identity.
+Provenance is not a signature or evidence of approval.
+
+- Import selection: imports.json; SHA-256 1600e125a7d5ae3721bdafe5ea1516552640a7a0f24400b4e1db87e3812e78e1
+- Scope baseline: baseline.json; SHA-256 bca886580577e609b77cb742ff33bb37bc555978701d4b68e08ab1f0c23e79fb
+- Scope plan: plan.json; SHA-256 d51bd4edb4f799af95d9f05d79e152f96d661ce57caf4846671f6c98d97d3813
+- Scope req: req.json; SHA-256 bca886580577e609b77cb742ff33bb37bc555978701d4b68e08ab1f0c23e79fb
+- Scope work: work.json; SHA-256 d0c42fefeb67c6dd451b518d201c9927f74ed9d28c0ef2ca9e795f354c9c01e5

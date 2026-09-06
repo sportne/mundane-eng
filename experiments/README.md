@@ -68,3 +68,5 @@ not expected to remain navigable.
 | [Work-item workflow verification](0034-work-items/README.md) |
 | [YAML work-item verification](0035-work-yaml/README.md) |
 | [Experiment 0036: Project attribute workflow evidence](0036-project-attributes/README.md) |
+
+- [0037: Explained cross-artifact impact](0037-impact-analysis/README.md): scoped source-to-report workflow, golden outputs, seeded graphs and behavioral mutations.

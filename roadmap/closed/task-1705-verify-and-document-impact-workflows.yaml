@@ -2,7 +2,7 @@ format: "mundane-work-yaml-0.2"
 id: "TC-1705"
 kind: "task"
 title: "Verify and Document Impact Workflows"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-1703", "TC-1704"]
 relations: []
 planning: {"condition": "", "stage": "17", "statusNote": "", "type": "Testing", "unlocks": ""}
@@ -46,5 +46,9 @@ body: |2+
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Task workflow](0002-task-card-index.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Task workflow](../0002-task-card-index.md)
+
+  ## Completion evidence
+
+  The [completion record](../../research/0069-impact-workflow-verification.md) documents the checked-in logger workflow, six expected review candidates, exact goldens, 16 seeded cyclic graphs, four killed behavioral mutations, parser-free JVM/native consumption, unchanged source/status and source-linked reports. scripts/run-ci-verification.sh passed with exit 0, including the authoritative gate and both failure injections. Final backlog/migration, documentation and diff checks passed. TC-1701–1705 are complete without changing artifact source languages or treating generated output as authoritative.

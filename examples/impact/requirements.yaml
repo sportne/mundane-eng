@@ -1,0 +1,20 @@
+format: "mundanereq-yaml-0.4"
+attributeSchema: "logger-metadata"
+requirements:
+  - id: "SYS-001"
+    title: "Retain monitoring records"
+    statement: "The logger shall retain temperature measurements for review."
+    attributes:
+      discipline: "software"
+  - id: "DEV-001"
+    title: "Persist samples"
+    statement: "The logger shall persist each temperature sample before accepting the next sample."
+    decomposes: ["SYS-001"]
+    attributes:
+      discipline: "software"
+      owner-team: "Logger firmware"
+  - id: "PWR-001"
+    title: "Power the logger"
+    statement: "The power supply shall power the logger."
+    attributes:
+      discipline: "electronics"
