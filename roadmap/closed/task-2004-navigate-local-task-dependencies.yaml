@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2004
 kind: task
 title: Navigate Local Task Dependencies
-status: Planned
+status: Complete
 dependencies: ["TC-2003"]
 relations: []
 planning:
@@ -45,5 +45,9 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Work-item editor contract](../specification/0025-work-item-editor-0.1.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Work-item editor contract](../../specification/0025-work-item-editor-0.1.md)
+
+  ## Completion evidence
+
+  Native compilation and all 13 Java groups passed. Actual VS Code navigation tests passed structural local dependencies, unsaved target movement, non-BMP coordinates, duplicate-ID refusal, literal-body exclusion and absence of work-item formatting.

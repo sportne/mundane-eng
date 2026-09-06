@@ -114,7 +114,7 @@ public final class EditorMain {
         return Json.object("protocol",PROTOCOL,"valid",diagnostics.isEmpty(),"diagnostics",diagnostics.stream().map(d->{
             var location=object(d.get("location"));return Json.object("path",location.get("path"),"line",location.get("line"),
                 "column",location.get("column"),"code",d.get("code"),"message",d.get("message"));
-        }).toList(),"definitions",List.of(),"formatting",List.of(),"suggestions",List.of(),"hover",null);
+        }).toList(),"definitions",diagnostics.isEmpty()?engineering.work.WorkEditor.definitions(sources):List.of(),"formatting",List.of(),"suggestions",List.of(),"hover",null);
     }
 
     static Map<String,Object> span(mundanereq.source.SourceSpan span) {

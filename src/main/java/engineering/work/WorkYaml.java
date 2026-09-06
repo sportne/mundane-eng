@@ -22,10 +22,30 @@ import org.snakeyaml.engine.v2.schema.CoreSchema;
 final class WorkYaml {
     private WorkYaml() {}
     static Map<String,Object> parse(String file,String source) {
-        var settings=LoadSettings.builder().setSchema(new CoreSchema()).setAllowDuplicateKeys(false)
-            .setMaxAliasesForCollections(0).setCodePointLimit(1024*1024).setUseMarks(true).build();
         Map<String,Object> declaration=object("path",file,"line",1,"column",1);
         try {
+            Node root=compose(file,source);
+            declaration=point(file,root.getStartMark().orElseThrow());
+            var values=map(value(file,root));
+            required(values,"format","id","kind","title","status","body");
+            if(!Versions.WORK_SOURCE.equals(values.remove("format")))throw new IllegalArgumentException("unsupported work source format");
+            if(!values.containsKey("dependencies"))values.put("dependencies",List.of());if(!values.containsKey("relations"))values.put("relations",List.of());
+            // Explicit null is invalid; only omitted annotations/lists receive defaults.
+            var planning=new TreeMap<String,Object>();for(String k:List.of("stage","type","condition","unlocks","statusNote"))planning.put(k,"");
+            if(values.containsKey("planning"))planning.putAll(map(values.get("planning")));
+            values.put("planning",planning);WorkValues.validate(values);
+            Node id=((MappingNode)root).getValue().stream().filter(t->((ScalarNode)t.getKeyNode()).getValue().equals("id")).findFirst().orElseThrow().getValueNode();
+            return object("values",values,"location",point(file,id.getStartMark().orElseThrow()),"metadataLocation",declaration);
+        } catch(MarkedYamlEngineException e) {
+            throw new Problem("invalid-work-source",e.getProblem(),e.getProblemMark().map(m->point(file,m)).orElse(declaration));
+        } catch(YamlEngineException|IllegalArgumentException e) {
+            throw new Problem("invalid-work-source",e.getMessage(),declaration);
+        }
+    }
+    /** The same bounded presentation checks for semantic parsing and editor origins. */
+    static Node compose(String file,String source) {
+        var settings=LoadSettings.builder().setSchema(new CoreSchema()).setAllowDuplicateKeys(false)
+            .setMaxAliasesForCollections(0).setCodePointLimit(1024*1024).setUseMarks(true).build();
             int documents=0,depth=0;
             var containers=new java.util.ArrayDeque<int[]>();
             for(Event event:new Parse(settings).parseString(source)) {
@@ -47,23 +67,7 @@ final class WorkYaml {
                 if(event instanceof CollectionEndEvent)depth--;
                 if(failure!=null)throw new Problem("invalid-work-source",failure,point(file,event.getStartMark().orElseThrow()));
             }
-            Node root=new Compose(settings).composeString(source).orElseThrow(()->new IllegalArgumentException("expected a work-item document"));
-            declaration=point(file,root.getStartMark().orElseThrow());
-            var values=map(value(file,root));
-            required(values,"format","id","kind","title","status","body");
-            if(!Versions.WORK_SOURCE.equals(values.remove("format")))throw new IllegalArgumentException("unsupported work source format");
-            if(!values.containsKey("dependencies"))values.put("dependencies",List.of());if(!values.containsKey("relations"))values.put("relations",List.of());
-            // Explicit null is invalid; only omitted annotations/lists receive defaults.
-            var planning=new TreeMap<String,Object>();for(String k:List.of("stage","type","condition","unlocks","statusNote"))planning.put(k,"");
-            if(values.containsKey("planning"))planning.putAll(map(values.get("planning")));
-            values.put("planning",planning);WorkValues.validate(values);
-            Node id=((MappingNode)root).getValue().stream().filter(t->((ScalarNode)t.getKeyNode()).getValue().equals("id")).findFirst().orElseThrow().getValueNode();
-            return object("values",values,"location",point(file,id.getStartMark().orElseThrow()),"metadataLocation",declaration);
-        } catch(MarkedYamlEngineException e) {
-            throw new Problem("invalid-work-source",e.getProblem(),e.getProblemMark().map(m->point(file,m)).orElse(declaration));
-        } catch(YamlEngineException|IllegalArgumentException e) {
-            throw new Problem("invalid-work-source",e.getMessage(),declaration);
-        }
+        return new Compose(settings).composeString(source).orElseThrow(()->new IllegalArgumentException("expected a work-item document"));
     }
     private static Map<String,Object> point(String file,Mark mark) {return object("path",file,"line",mark.getLine()+1,"column",mark.getColumn()+1);}
     private static Object value(String file,Node node) {

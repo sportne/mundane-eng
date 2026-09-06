@@ -27,6 +27,19 @@ async function run(api) {
     await replace(b,originalB);assert.equal((await api.validate()).filter(x=>x.result.valid).length,2);
     assert.equal(vscode.languages.getDiagnostics(b.uri).length,0);
   }
+  const references = () => vscode.commands.executeCommand('vscode.executeDefinitionProvider',b.uri,b.positionAt(b.getText().indexOf('[ALPHA]')+2));
+  let definitions=await references();assert.equal(definitions.length,1);
+  assert.equal(definitions[0].uri.fsPath,a.uri.fsPath);assert.equal(a.getText(definitions[0].range),'ALPHA');
+  const firstLine=definitions[0].range.start.line;
+  await replace(a,'\n'+originalA);definitions=await references();assert.equal(definitions[0].range.start.line,firstLine+1);
+  await replace(a,'{format: mundane-work-yaml-0.2, title: "😀 title", id: ALPHA, kind: task, status: Planned, body: Text}\n');
+  definitions=await references();assert.equal(a.getText(definitions[0].range),'ALPHA','Unicode offsets target exact ID');
+  await replace(a,originalA);
+  assert.equal((await vscode.commands.executeCommand('vscode.executeDefinitionProvider',b.uri,b.positionAt(b.getText().lastIndexOf('ALPHA')+1))).length,0,'body is not navigation');
+  await replace(b,originalB.replace('id: BETA','id: ALPHA'));assert.equal((await references()).length,0);
+  await replace(b,originalB);
+  assert.equal(((await vscode.commands.executeCommand('vscode.executeFormatDocumentProvider',b.uri,{tabSize:2,insertSpaces:true}))||[]).length,0,'work items have no formatter');
+  console.log('PASS work navigation: structural dependencies, unsaved locations, Unicode targets, ambiguity and prose exclusion');
   const pending = api.validate();await replace(b,originalB.replace('Planned','Wrong'));await pending;
   await api.validate();assert.ok(vscode.languages.getDiagnostics(b.uri).length);
   await replace(b,originalB);await api.validate();
