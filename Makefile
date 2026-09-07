@@ -238,3 +238,13 @@ native-architecture: test-architecture
 architecture-verify: native-architecture gcs-seed-verify
 	python3 scripts/check-architecture-workflow.py
 verify: architecture-verify
+
+.PHONY: test-configuration native-configuration configuration-verify
+test-configuration: yaml-dependency version-declarations
+	python3 scripts/build-components.py test configuration
+native-configuration: test-configuration
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath configuration)" -o $(abspath $(BUILD_ROOT)/mundane-configuration) engineering.configuration.ConfigurationMain
+configuration-verify: native-configuration architecture-verify
+	build/schema-check-venv/bin/python scripts/check-configuration-workflow.py
+configuration-verify: yaml-schema-verify
+verify: configuration-verify

@@ -1,0 +1,313 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Configuration YAML 0.1",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": [
+        "scope",
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "purpose",
+    "configuration",
+    "baseline",
+    "previous",
+    "change"
+  ],
+  "properties": {
+    "format": {
+      "const": "mundane-configuration-yaml-0.1"
+    },
+    "purpose": {
+      "enum": [
+        "simulation-engineering",
+        "design-probe-only"
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "stage",
+        "environment",
+        "observationBasis",
+        "selections"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "stage": {
+          "enum": [
+            "designed",
+            "built",
+            "deployed"
+          ]
+        },
+        "environment": {
+          "enum": [
+            "simulation",
+            "field-proposed"
+          ]
+        },
+        "observationBasis": {
+          "enum": [
+            "design-intent",
+            "synthetic-assembly",
+            "synthetic-deployment"
+          ]
+        },
+        "selections": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "slot",
+              "memberScope"
+            ],
+            "properties": {
+              "slot": {
+                "type": "string",
+                "minLength": 1
+              },
+              "memberScope": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "members",
+        "sourceMappings"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "members": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "scope",
+              "kind",
+              "format",
+              "path",
+              "sha256",
+              "required",
+              "appliesTo"
+            ],
+            "properties": {
+              "scope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "kind": {
+                "enum": [
+                  "requirements",
+                  "architecture",
+                  "native-resource"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "minLength": 1
+              },
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "$ref": "#/$defs/sha256"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "appliesTo": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "enum": [
+                    "simulation",
+                    "field-proposed"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "sourceMappings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "artifactScope",
+              "sourcePath",
+              "memberScope"
+            ],
+            "properties": {
+              "artifactScope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourcePath": {
+                "type": "string",
+                "minLength": 1
+              },
+              "memberScope": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "previous": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "ref",
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "ref": {
+              "$ref": "#/$defs/ref"
+            },
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "$ref": "#/$defs/sha256"
+            }
+          }
+        }
+      ]
+    },
+    "change": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "from",
+            "owner",
+            "reason",
+            "state"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "from": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "ref",
+                "path",
+                "sha256"
+              ],
+              "properties": {
+                "ref": {
+                  "$ref": "#/$defs/ref"
+                },
+                "path": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "sha256": {
+                  "$ref": "#/$defs/sha256"
+                }
+              }
+            },
+            "owner": {
+              "type": "string",
+              "minLength": 1
+            },
+            "reason": {
+              "type": "string",
+              "minLength": 1
+            },
+            "state": {
+              "const": "proposed"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

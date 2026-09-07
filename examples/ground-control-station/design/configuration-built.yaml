@@ -62,7 +62,7 @@ baseline:
     kind: native-resource
     format: version-declarations-json
     path: resources/versions.json
-    sha256: 06fbf3d35581cdcba71a450e588663375bb90db8067fd6a6cf07fb5dfd076355
+    sha256: b9f06ded4b93e71666b2216d8fc69b8be16cfe1aaa0998f064fe604eeddfcd38
     required: true
     appliesTo:
     - simulation
@@ -98,5 +98,5 @@ previous:
     kind: baseline
     id: BL-SIM-DESIGN
   path: configuration-sim.yaml
-  sha256: ae38eea9931ddf432d7a520ca463b805900abe1829c7a9e42e155356f508a5d4
+  sha256: 886c2abc8c721aad0464606a075865819503554d3948a35306544949306031fa
 change: null

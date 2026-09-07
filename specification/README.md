@@ -27,3 +27,4 @@ Current contracts and evidence for the YAML engineering tools.
 - [YAML authoring policy](0027-yaml-authoring-policy.md): shared presentation rules and YAML declaration/plan source contracts.
 
 - [Architecture and domain artifact boundary](0028-architecture-and-domain-boundary.md).
+- [Configuration baselines](0029-configuration-baselines.md).

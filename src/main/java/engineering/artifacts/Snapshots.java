@@ -49,6 +49,8 @@ public final class Snapshots {
             Snapshot snapshot=new Snapshot(name,bytes,attributes.fileKey());reads.add(snapshot);return snapshot;
         } catch(IOException|IllegalArgumentException ex) { throw new Problem("input-unavailable",ex.getMessage(),name); }
     }
+    /** Immutable captured inputs for explicit snapshot retention. */
+    public List<Snapshot> captured() { return List.copyOf(reads); }
     public void recheck() {
         for(Snapshot snapshot:reads) {
             try {

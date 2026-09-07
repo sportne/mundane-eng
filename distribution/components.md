@@ -124,3 +124,9 @@ dependency. Shared infrastructure contains no architecture-specific field meanin
 `test-architecture` has a test-only requirements dependency to produce real imports.
 `native-architecture` builds its independently tested closure. Boundary probes reject
 YAML/source compiler dependencies from the compiled architecture model.
+
+TC-2409 adds `configuration-model` (selection, comparison and retained publication),
+using architecture's compiled model, and `configuration` (source/CLI wiring).
+Nested validation shares the bounded snapshot capture and recheck infrastructure.
+`test-configuration` exercises publication and failure semantics with real files;
+`configuration-verify` exercises the native GCS workflow and independent schemas.

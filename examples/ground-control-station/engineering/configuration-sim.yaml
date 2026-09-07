@@ -1,0 +1,83 @@
+baseline:
+  id: BL-SIM-DESIGN
+  members:
+  - appliesTo: [simulation, field-proposed]
+    format: mundanereq-requirements-0.2
+    kind: requirements
+    path: requirements.json
+    required: true
+    scope: gcs-req
+    sha256: 33ce6bf9fbce9dd5def3eecb065da32510a9beaf45a3edd7ac8ce0420dec9a63
+  - appliesTo: [simulation, field-proposed]
+    format: mundane-architecture-0.1
+    kind: architecture
+    path: architecture.json
+    required: true
+    scope: gcs-arch
+    sha256: 2599b2edcb0f05694b5177cd9710638e4b71d1ff4674196833c8ff68130d2fae
+  - appliesTo: [simulation]
+    format: gcs-equipment-assumption-0.1
+    kind: native-resource
+    path: resources/server-simulation.yaml
+    required: true
+    scope: host
+    sha256: 45aa9d62e5b6b068ea97ec86d33d67adc7539b19d8005f59c66f2133e7f5b391
+  - appliesTo: [simulation, field-proposed]
+    format: python-source
+    kind: native-resource
+    path: seed.py
+    required: true
+    scope: seed-tool
+    sha256: 3d984a8bd519a4fc039a37ac1fe52ac4069298662cd0dc897cac15cc2235b540
+  - appliesTo: [simulation, field-proposed]
+    format: version-declarations-json
+    kind: native-resource
+    path: versions.json
+    required: true
+    scope: tool-versions
+    sha256: b9f06ded4b93e71666b2216d8fc69b8be16cfe1aaa0998f064fe604eeddfcd38
+  - appliesTo: [simulation, field-proposed]
+    format: mundanereq-yaml-0.4
+    kind: native-resource
+    path: source/requirements.yaml
+    required: true
+    scope: gcs-req-source
+    sha256: 8f88ee036f91ec251989b0e4bf6aefd7e23cc3a8c94b210d64709d3c6ea6d825
+  - appliesTo: [simulation, field-proposed]
+    format: mundanereq-attributes-yaml-0.1
+    kind: native-resource
+    path: source/attributes.yaml
+    required: true
+    scope: gcs-attribute-source
+    sha256: f16c8ace147a163e50ef995b8bd189cfb1d938e38fb1088dff6ef572f8c8f649
+  - appliesTo: [simulation, field-proposed]
+    format: mundane-architecture-yaml-0.1
+    kind: native-resource
+    path: architecture.yaml
+    required: true
+    scope: gcs-arch-source
+    sha256: bbe25e4bb4470d2f18244702909e14b4c46029066042f30df177198eb64df1d8
+  sourceMappings:
+  - {artifactScope: gcs-req, memberScope: gcs-req-source, sourcePath: 
+      source/requirements.yaml}
+  - {artifactScope: gcs-req, memberScope: gcs-attribute-source, sourcePath: 
+      source/attributes.yaml}
+  - {artifactScope: gcs-arch, memberScope: gcs-arch-source, sourcePath: 
+      architecture.yaml}
+change: null
+configuration:
+  environment: simulation
+  id: CFG-SIM-DESIGN
+  observationBasis: design-intent
+  selections:
+  - {memberScope: gcs-req, slot: requirements}
+  - {memberScope: gcs-arch, slot: architecture}
+  - {memberScope: host, slot: host}
+  - {memberScope: seed-tool, slot: workflow-source}
+  - {memberScope: tool-versions, slot: tool-versions}
+  - {memberScope: gcs-req-source, slot: gcs-req-source}
+  - {memberScope: gcs-attribute-source, slot: gcs-attribute-source}
+  stage: designed
+format: mundane-configuration-yaml-0.1
+previous: null
+purpose: simulation-engineering

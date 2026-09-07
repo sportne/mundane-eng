@@ -4,7 +4,7 @@ import static engineering.artifacts.Checks.*;
 import engineering.artifacts.*;
 import java.nio.file.*;
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import mundanereq.Versions;
 
 /** Bounded provenance and local resource infrastructure; domain meanings stay with their owners. */
@@ -20,8 +20,11 @@ public final class Model {
         public final Path root;
         public final Map<String,Map<String,Object>> imports=new TreeMap<>();
         public final Map<String,Map<String,Object>> selections=new TreeMap<>();
-        private final Map<String,Consumer<Map<String,Object>>> adapters;
-        public Context(Path root,Map<String,Consumer<Map<String,Object>>> adapters) {this.root=root;this.snapshots=new Snapshots(root);this.adapters=adapters;}
+        private final Map<String,BiConsumer<Map<String,Object>,Context>> adapters;
+        private final int depth;
+        public Context(Path root,Map<String,BiConsumer<Map<String,Object>,Context>> adapters) {this(root,adapters,new Snapshots(root),0);}
+        private Context(Path root,Map<String,BiConsumer<Map<String,Object>,Context>> adapters,Snapshots snapshots,int depth) {if(depth>16)throw new IllegalArgumentException("import depth exceeds 16");this.root=root;this.snapshots=snapshots;this.adapters=adapters;this.depth=depth;}
+        public Context child(){return new Context(root,adapters,snapshots,depth+1);}
         public void select(Object entries) {
             for(Object item:list(entries)) {
                 var e=map(item);keys(e,"scope","kind","format","path","sha256");String scope=id(e.get("scope"));
@@ -31,7 +34,7 @@ public final class Model {
                 if(kind.equals("requirements"))Artifacts.requirements(artifact,raw.path());
                 else if(kind.equals("verification-plan"))Artifacts.plan(artifact,raw.path());
                 else {
-                    var adapter=adapters.get(kind);if(adapter==null)throw new IllegalArgumentException("unsupported import kind "+kind);adapter.accept(artifact);
+                    var adapter=adapters.get(kind);if(adapter==null)throw new IllegalArgumentException("unsupported import kind "+kind);adapter.accept(artifact,this);
                 }
                 imports.put(scope,artifact);
             }
@@ -85,6 +88,7 @@ public final class Model {
         if(value instanceof Map<?,?>)for(var e:map(value).entrySet())pointers(e.getValue(),mundane.json.Json.pointer(at,e.getKey()),locs);
         else if(value instanceof List<?> a)for(int i=0;i<a.size();i++)pointers(a.get(i),at+"/"+i,locs);
     }
+    public static void validateSelected(Map<String,Object> a,Domain domain,Context parent) {envelope(a,domain);var nested=parent.child();nested.select(a.get("imports"));domain.validate(map(a.get("values")),nested);}
     public static Map<String,Object> read(Path file,Context context,Domain domain) {
         var a=map(Snapshots.json(context.snapshots.read(context.snapshots.argument(file))));envelope(a,domain);context.select(a.get("imports"));domain.validate(map(a.get("values")),context);return a;
     }

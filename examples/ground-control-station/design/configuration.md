@@ -158,3 +158,12 @@ editor checks, the seed, and all three local design probes. This independently
 reproduced the actual resource pins and design outputs. Later edits only improve
 navigation documentation and close the task cards; the final backlog and schema
 checks cover those metadata changes.
+
+## Maintained implementation
+
+TC-2409 implements the independently versioned [configuration contract](../../../specification/0029-configuration-baselines.md)
+and [native commands](../../../distribution/configuration.md). Maintained fixtures
+are under `../engineering/` and select compiled architecture and compiled predecessor
+baselines. The original source-pin probe above retains its dated design scope; it
+is not the current compiled contract. Publication retains exact inputs for a new
+root, checks existing publications and never repairs them by overwriting a revision.

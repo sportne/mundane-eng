@@ -3,7 +3,8 @@
 The example now includes a runnable workflow using maintained tools and bounded
 artifact designs checked by local prototypes. Architecture now has
 [maintained compile/check/view commands](../../distribution/architecture.md);
-configuration remains a design probe. The example does not yet contain an executable GCS. The generated
+[configuration compile/resolve/compare/publish commands](../../distribution/configuration.md)
+are also maintained. The example does not yet contain an executable GCS. The generated
 backlog records each card's current status.
 
 The completed deliverables are the [reference-system decision](decisions/reference-system.md),
@@ -240,7 +241,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2406](../../roadmap/task-2406-design-safety-analysis.yaml) | Design Hazard Control and Failure Analysis Artifacts | TC-2403, TC-2404 |
 | [TC-2407](../../roadmap/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
 | [TC-2408](../../roadmap/closed/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |
-| [TC-2409](../../roadmap/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
+| [TC-2409](../../roadmap/closed/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
 | [TC-2410](../../roadmap/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |
 | [TC-2411](../../roadmap/task-2411-implement-verification-evidence.yaml) | Implement Procedures Runs and Evidence Queries | TC-2410, TC-2405, TC-2409 |
 | [TC-2412](../../roadmap/task-2412-design-equipment-connectivity.yaml) | Design Equipment Parts and Wiring Artifacts | TC-2403, TC-2404, TC-2408 |

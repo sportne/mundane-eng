@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2409"
 kind: "task"
 title: "Implement Reproducible Configuration Baselines"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2408"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -58,7 +58,30 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Implemented configuration source/model/CLI components,
+  closed published schema, explicit selected revisions and source mappings, compiled
+  predecessor chains, slot/stage/applicability comparison, and retained local publication.
+  Optional missing resources remain unknown and publication requires their availability.
+  Imported architecture validation shares bounded snapshots without its source reader.
+
+  make native-configuration and component-boundary-verify passed, including all 16
+  Java groups and requirements-only operation. The native configuration workflow
+  passed five stage/variant fixtures, independent schema validation, the thirteen
+  original negative cases, exact source mapping, comparison, identical clean rebuild,
+  publication/recompilation solely from retained inputs, existing-publication checks
+  and tamper rejection. The compiled consumer also ran with YAML/source classes
+  removed. The original draft configuration probe passed after explicitly revising
+  its version pins. Logs are under build/ci-evidence/gcs-execution/2409-*.log.
+
+  Published commands are compile/check/resolve/view/compare/publish. Native-resource
+  adapters preserve bytes and do not infer engineering validity. The local cooperative
+  publication lock/atomic directory protocol does not establish remote immutable
+  storage, actual installation, trusted approval or field readiness. Editor and
+  package expansion remain their owning cards.

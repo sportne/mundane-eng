@@ -63,5 +63,5 @@ body: |2
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2414](task-2414-design-quantities-budgets-reliability.yaml)
-  - [TC-2409](task-2409-implement-configurations-baselines.yaml)
+  - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
   - [TC-2413](task-2413-implement-equipment-connectivity.yaml)

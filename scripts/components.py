@@ -15,6 +15,8 @@ COMPONENTS = {
     'domain': (['artifacts'], [MAIN+'engineering/domain/*.java']),
     'domain-source': (['domain','yaml'], [MAIN+'engineering/domainsource/*.java']),
     'architecture-model': (['domain'], [MAIN+'engineering/architecture/Architecture.java', 'build/maintained/generated/engineering/architecture/ArchitectureSchema.java']),
+    'configuration-model': (['architecture-model'], [MAIN+'engineering/configuration/Configuration.java', MAIN+'engineering/configuration/Publication.java', 'build/maintained/generated/engineering/configuration/ConfigurationSchema.java']),
+    'configuration': (['configuration-model','domain-source'], [MAIN+'engineering/configuration/ConfigurationMain.java']),
     'architecture': (['architecture-model','domain-source'], [MAIN+'engineering/architecture/ArchitectureMain.java']),
     'plan': (['artifacts', 'yaml'], [MAIN+'engineering/verification/Plan*.java']),
     'verification': (['artifacts'], [MAIN+'engineering/verification/Verif*.java']),
@@ -29,6 +31,7 @@ COMPONENTS = {
 YAML_USERS = {'yaml', 'requirements', 'work-source'}
 # Test dependencies may include collaborating components; production dependencies may not.
 TESTS = {
+    'configuration': ([], [TEST+'engineering/configuration/*.java'], ['engineering.configuration.ConfigurationTest']),
     'architecture': (['requirements'], [TEST+'engineering/architecture/*.java'], ['engineering.architecture.ArchitectureTest']),
     'requirements': ([], [TEST+'mundanereq/cli/*.java'], [
         'mundanereq.cli.'+name for name in ['YamlWorkflowTest','SarifOutputTest',

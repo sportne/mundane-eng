@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix='component-boundary-') as directory:
     for component, forbidden in [('requirements','engineering.work.WorkMain'),
             ('verification','engineering.verification.PlanCompiler'),
             ('impact','engineering.work.WorkCompiler'),
-            ('artifacts','mundanereq.Interpreter'), ('architecture-model','engineering.domainsource.Source'), ('architecture-model','mundane.yaml.Yaml')]:
+            ('artifacts','mundanereq.Interpreter'), ('architecture-model','engineering.domainsource.Source'), ('architecture-model','mundane.yaml.Yaml'), ('configuration-model','engineering.domainsource.Source')]:
         probe = temp/'BoundaryProbe.java'
         probe.write_text('class BoundaryProbe { '+forbidden+' forbidden; }\n')
         result = subprocess.run(['javac','--release','21','-sourcepath',str(empty),
@@ -51,4 +51,4 @@ with tempfile.TemporaryDirectory(prefix='component-boundary-') as directory:
                         str(ROOT/'conformance/0.3/authoring')],check=True,capture_output=True)
     # Production output cannot depend on test classes.
     assert not list((isolated/'build/maintained/components').rglob('*Test.class'))
-print('PASS complete unique source ownership, acyclic dependencies, four forbidden-dependency compiler probes, and requirements-only build/operations with other sources removed')
+print('PASS complete unique source ownership, acyclic dependencies, forbidden-dependency compiler probes, and requirements-only build/operations with other sources removed')
