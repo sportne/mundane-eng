@@ -19,7 +19,7 @@ whole field span under fields. The per-name locations exactly match present valu
 
 attributeSchema is null for schema-free input, otherwise exactly:
 
-- definition: the validated JSON declaration, with maps sorted and enum arrays sorted
+- definition: the normalized definition from the validated YAML declaration, with maps sorted and enum arrays sorted
   as sets, preserving exact decoded strings.
 - source: {path, sha256}, the exact declaration snapshot under the compiler root.
 - locations: declaration names mapped to full declaration spans in that source.

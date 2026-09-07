@@ -6,7 +6,8 @@ and [verification 0.1](0015-verification-planning-0.1.md).
 A resolver importing any requirement output 0.2 emits mundane-linked-0.2 with
 link-cli-0.2. Its analyzer emits mundane-verification-0.2 with verify-cli-0.2.
 All-old imports retain existing formats, metadata and seven-field findings.
-The import JSON and verification-plan TSV contracts are unchanged.
+The import JSON contract is unchanged. Verification plans use the YAML source
+defined in [0015](0015-verification-planning-0.1.md).
 
 Before linking, validate each complete requirement artifact's exact source/output
 pairing, schema definition and declaration locations/provenance, present attributes,

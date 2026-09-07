@@ -12,7 +12,7 @@ Markdown prose. Use [the template](../roadmap/task-card-template.yaml),
 [YAML examples](../examples/work-items/yaml/task.yaml),
 [specification](../specification/0019-work-items-yaml-0.2.md) and its
 [structural schema](../specification/schema/work-items-yaml-0.2.json).
-Requirements YAML and plan TSV retain independently chosen specifications.
+Requirements and plans also use YAML, with independently owned fields and semantics.
 
 ```yaml
 format: mundane-work-yaml-0.2

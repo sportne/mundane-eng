@@ -73,8 +73,8 @@ Existing source physical/Unicode, key, scalar, YAML feature and target checks ap
 | --- | --- | --- |
 | Unsupported/repeated option or outside root | Invocation stderr, no machine document | 2 |
 | Missing/unreadable/nonregular declaration | attribute-schema-unavailable, path without fabricated SARIF region | 2 |
-| Invalid JSON, declaration or bound | attribute-schema-invalid, offending token or containing object | 1 |
-| Duplicate JSON key | attribute-schema-duplicate, repeated key | 1 |
+| Invalid YAML, declaration or bound | attribute-schema-invalid, offending token or containing object | 1 |
+| Duplicate YAML key | attribute-schema-duplicate, repeated key | 1 |
 | Missing explicit schema | attribute-schema-required, document name or attachment | 1 |
 | Missing/different document name | attribute-schema-mismatch, name or document start | 1 |
 | Unknown attribute | attribute-unknown, key | 1 |

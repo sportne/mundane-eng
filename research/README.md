@@ -8,3 +8,4 @@ Current contracts and evidence for the YAML engineering tools.
 - [Installed editor bundle verification](0072-installed-editor-bundle-verification.md)
 - [Work-item editor and backlog verification](0073-work-item-editor-verification.md)
 - [Imported editor targets and source revision verification](0074-editor-import-verification.md)
+- [YAML authoring migration verification](0075-yaml-authoring-verification.md)

@@ -6,7 +6,7 @@
 <p>Analysis: complete. Context: all declared plans. Plans: PLAN-ATTR.</p>
 <p>Planned assertions: 2. Review-stale: 2. Uncovered requirements by plan: 0.</p>
 <p>Regenerate: run mundane-plan and mundane-verify with recorded imports, then render.py ANALYSIS.json with the same source-link bases. Check command exit status before using output.</p>
-<h2>Needs review</h2><ul><li><a href="#requirement%2Fcurrent%3ASYS-001">SYS-001</a> — ACT-REVIEW; changed attributeSchema, attributes; <a href="https://example.invalid/plan/plan/coverage.tsv#L2">plan:plan/coverage.tsv:2</a><details><summary>Attribute and declaration changes</summary><h4>Baseline</h4><p><a href="https://example.invalid/baseline/source.mreq.yaml#L4">baseline:source.mreq.yaml:4</a></p><p><a href="https://example.invalid/baseline/schema.yaml#L1">baseline:schema.yaml:1</a>; SHA-256 6d732bd3f9391d8a05545ecb655ed24ccd9701c26c2e39a206dd71e9e7d18ba1</p><pre>{
+<h2>Needs review</h2><ul><li><a href="#requirement%2Fcurrent%3ASYS-001">SYS-001</a> — ACT-REVIEW; changed attributeSchema, attributes; <a href="https://example.invalid/plan/plan/plan.yaml#L13">plan:plan/plan.yaml:13</a><details><summary>Attribute and declaration changes</summary><h4>Baseline</h4><p><a href="https://example.invalid/baseline/source.mreq.yaml#L4">baseline:source.mreq.yaml:4</a></p><p><a href="https://example.invalid/baseline/schema.yaml#L1">baseline:schema.yaml:1</a>; SHA-256 9e8a1fb0917448544b6f2c48362210e93ce71b03c2ad74e5cae1cccba221b549</p><pre>{
   &quot;attributes&quot;: {
     &quot;discipline&quot;: &quot;software&quot;,
     &quot;owner-team&quot;: &quot;Logger firmware&quot;
@@ -32,7 +32,7 @@
     &quot;format&quot;: &quot;mundanereq-attribute-schema-0.1&quot;,
     &quot;name&quot;: &quot;logger-metadata&quot;
   }
-}</pre><h4>Current</h4><p><a href="https://example.invalid/current/source.mreq.yaml#L4">current:source.mreq.yaml:4</a></p><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 4f7821e6fbf4de6b1500afb6d32eb82807b2a53c723473e8a586f2c731ff18f6</p><pre>{
+}</pre><h4>Current</h4><p><a href="https://example.invalid/current/source.mreq.yaml#L4">current:source.mreq.yaml:4</a></p><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 2e2e4f38700d08757c3763bf547151c8ce4aacf5d38b9c8a991aa14e3b1792ac</p><pre>{
   &quot;attributes&quot;: {
     &quot;discipline&quot;: &quot;software&quot;,
     &quot;owner-team&quot;: &quot;Controls 😀 &lt;review&gt;&quot;
@@ -58,7 +58,7 @@
     &quot;format&quot;: &quot;mundanereq-attribute-schema-0.1&quot;,
     &quot;name&quot;: &quot;logger-metadata&quot;
   }
-}</pre></details></li><li><a href="#requirement%2Fcurrent%3ASYS-002">SYS-002</a> — ACT-REVIEW; changed attributeSchema; <a href="https://example.invalid/plan/plan/coverage.tsv#L3">plan:plan/coverage.tsv:3</a><details><summary>Attribute and declaration changes</summary><h4>Baseline</h4><p><a href="https://example.invalid/baseline/source.mreq.yaml#L11">baseline:source.mreq.yaml:11</a></p><p><a href="https://example.invalid/baseline/schema.yaml#L1">baseline:schema.yaml:1</a>; SHA-256 6d732bd3f9391d8a05545ecb655ed24ccd9701c26c2e39a206dd71e9e7d18ba1</p><pre>{
+}</pre></details></li><li><a href="#requirement%2Fcurrent%3ASYS-002">SYS-002</a> — ACT-REVIEW; changed attributeSchema; <a href="https://example.invalid/plan/plan/plan.yaml#L16">plan:plan/plan.yaml:16</a><details><summary>Attribute and declaration changes</summary><h4>Baseline</h4><p><a href="https://example.invalid/baseline/source.mreq.yaml#L11">baseline:source.mreq.yaml:11</a></p><p><a href="https://example.invalid/baseline/schema.yaml#L1">baseline:schema.yaml:1</a>; SHA-256 9e8a1fb0917448544b6f2c48362210e93ce71b03c2ad74e5cae1cccba221b549</p><pre>{
   &quot;attributes&quot;: {
     &quot;discipline&quot;: &quot;electronics&quot;
   },
@@ -83,7 +83,7 @@
     &quot;format&quot;: &quot;mundanereq-attribute-schema-0.1&quot;,
     &quot;name&quot;: &quot;logger-metadata&quot;
   }
-}</pre><h4>Current</h4><p><a href="https://example.invalid/current/source.mreq.yaml#L11">current:source.mreq.yaml:11</a></p><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 4f7821e6fbf4de6b1500afb6d32eb82807b2a53c723473e8a586f2c731ff18f6</p><pre>{
+}</pre><h4>Current</h4><p><a href="https://example.invalid/current/source.mreq.yaml#L11">current:source.mreq.yaml:11</a></p><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 2e2e4f38700d08757c3763bf547151c8ce4aacf5d38b9c8a991aa14e3b1792ac</p><pre>{
   &quot;attributes&quot;: {
     &quot;discipline&quot;: &quot;electronics&quot;
   },
@@ -110,13 +110,13 @@
   }
 }</pre></details></li></ul>
 <h2>Planned coverage and review findings</h2><table><tr><th>Plan / context</th><th>Activity</th><th>Requirement</th><th>Review basis</th><th>Authored assertion</th></tr>
-<tr><td>PLAN-ATTR / logger</td><td>ACT-REVIEW<br>review</td><td><a href="#requirement%2Fcurrent%3ASYS-001">current:SYS-001</a></td><td class="stale">review-stale — changed attributeSchema, attributes</td><td><a href="https://example.invalid/plan/plan/coverage.tsv#L2">plan:plan/coverage.tsv:2</a></td></tr>
-<tr><td>PLAN-ATTR / logger</td><td>ACT-REVIEW<br>review</td><td><a href="#requirement%2Fcurrent%3ASYS-002">current:SYS-002</a></td><td class="stale">review-stale — changed attributeSchema</td><td><a href="https://example.invalid/plan/plan/coverage.tsv#L3">plan:plan/coverage.tsv:3</a></td></tr>
+<tr><td>PLAN-ATTR / logger</td><td>ACT-REVIEW<br>review</td><td><a href="#requirement%2Fcurrent%3ASYS-001">current:SYS-001</a></td><td class="stale">review-stale — changed attributeSchema, attributes</td><td><a href="https://example.invalid/plan/plan/plan.yaml#L13">plan:plan/plan.yaml:13</a></td></tr>
+<tr><td>PLAN-ATTR / logger</td><td>ACT-REVIEW<br>review</td><td><a href="#requirement%2Fcurrent%3ASYS-002">current:SYS-002</a></td><td class="stale">review-stale — changed attributeSchema</td><td><a href="https://example.invalid/plan/plan/plan.yaml#L16">plan:plan/plan.yaml:16</a></td></tr>
 </table>
 <h2>Uncovered requirements</h2>
 <p>None in the selected plans.</p>
 <h2>Activity definitions</h2>
-<details><summary>ACT-REVIEW — review</summary><p>Review logger requirements and their descriptive classification.</p><p>Expected evidence: Recorded review observations</p><p><a href="https://example.invalid/plan/plan/activities.tsv#L2">plan:plan/activities.tsv:2</a></p></details>
+<details><summary>ACT-REVIEW — review</summary><p>Review logger requirements and their descriptive classification.</p><p>Expected evidence: Recorded review observations</p><p><a href="https://example.invalid/plan/plan/plan.yaml#L8">plan:plan/plan.yaml:8</a></p></details>
 <h2>Current requirement values</h2>
 <section id="requirement/current:SYS-001"><h3>current:SYS-001 — Record measurements</h3>
 <p><a href="https://example.invalid/current/source.mreq.yaml#L4">current:source.mreq.yaml:4</a></p>
@@ -124,14 +124,14 @@
 <p>The logger shall record temperature measurements.</p>
 <h4>Rationale</h4>
 <p>Authored source citation: (absent)</p>
-<p>Decomposes: </p><h4>Project attributes</h4><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 4f7821e6fbf4de6b1500afb6d32eb82807b2a53c723473e8a586f2c731ff18f6</p><table><tr><th>Name / type</th><th>Present value</th><th>Declaration</th><th>Source</th></tr><tr><td>discipline / enum</td><td>software</td><td>Descriptive engineering discipline; not approval authority.; required</td><td><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L9">current:source.mreq.yaml:9</a></td></tr><tr><td>owner-team / text</td><td>Controls 😀 &lt;review&gt;</td><td>Revised &lt;team&gt; description; optional</td><td><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L10">current:source.mreq.yaml:10</a></td></tr></table></section>
+<p>Decomposes: </p><h4>Project attributes</h4><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 2e2e4f38700d08757c3763bf547151c8ce4aacf5d38b9c8a991aa14e3b1792ac</p><table><tr><th>Name / type</th><th>Present value</th><th>Declaration</th><th>Source</th></tr><tr><td>discipline / enum</td><td>software</td><td>Descriptive engineering discipline; not approval authority.; required</td><td><a href="https://example.invalid/current/schema.yaml#L5">current:schema.yaml:5</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L9">current:source.mreq.yaml:9</a></td></tr><tr><td>owner-team / text</td><td>Controls 😀 &lt;review&gt;</td><td>Revised &lt;team&gt; description; optional</td><td><a href="https://example.invalid/current/schema.yaml#L13">current:schema.yaml:13</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L10">current:source.mreq.yaml:10</a></td></tr></table></section>
 <section id="requirement/current:SYS-002"><h3>current:SYS-002 — Supply power</h3>
 <p><a href="https://example.invalid/current/source.mreq.yaml#L11">current:source.mreq.yaml:11</a></p>
 <p>Allocation: (absent)</p>
 <p>The power supply shall power the logger.</p>
 <h4>Rationale</h4>
 <p>Authored source citation: (absent)</p>
-<p>Decomposes: </p><h4>Project attributes</h4><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 4f7821e6fbf4de6b1500afb6d32eb82807b2a53c723473e8a586f2c731ff18f6</p><table><tr><th>Name / type</th><th>Present value</th><th>Declaration</th><th>Source</th></tr><tr><td>discipline / enum</td><td>electronics</td><td>Descriptive engineering discipline; not approval authority.; required</td><td><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L15">current:source.mreq.yaml:15</a></td></tr><tr><td>owner-team / text</td><td>(not supplied)</td><td>Revised &lt;team&gt; description; optional</td><td><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a></td></tr></table></section>
+<p>Decomposes: </p><h4>Project attributes</h4><p><a href="https://example.invalid/current/schema.yaml#L1">current:schema.yaml:1</a>; SHA-256 2e2e4f38700d08757c3763bf547151c8ce4aacf5d38b9c8a991aa14e3b1792ac</p><table><tr><th>Name / type</th><th>Present value</th><th>Declaration</th><th>Source</th></tr><tr><td>discipline / enum</td><td>electronics</td><td>Descriptive engineering discipline; not approval authority.; required</td><td><a href="https://example.invalid/current/schema.yaml#L5">current:schema.yaml:5</a>; value <a href="https://example.invalid/current/source.mreq.yaml#L15">current:source.mreq.yaml:15</a></td></tr><tr><td>owner-team / text</td><td>(not supplied)</td><td>Revised &lt;team&gt; description; optional</td><td><a href="https://example.invalid/current/schema.yaml#L13">current:schema.yaml:13</a></td></tr></table></section>
 <h2>Selected inputs and provenance</h2><pre>{
   &quot;analysisFormat&quot;: &quot;mundane-verification-0.2&quot;,
   &quot;analyzer&quot;: {
@@ -149,7 +149,7 @@
       &quot;format&quot;: &quot;mundanereq-requirements-0.2&quot;,
       &quot;path&quot;: &quot;baseline.json&quot;,
       &quot;scope&quot;: &quot;baseline&quot;,
-      &quot;sha256&quot;: &quot;f74a25ef4af814b84cd8c656f20ea2ec6564264c50670815114ea3ec7b32b5da&quot;,
+      &quot;sha256&quot;: &quot;acd6c23b53dad94c4521d473cc6b5bdc41e762b8ca84475fbde85775203a23a1&quot;,
       &quot;sourceContract&quot;: &quot;mundanereq-yaml-0.4&quot;,
       &quot;sources&quot;: [
         {
@@ -167,7 +167,7 @@
       &quot;format&quot;: &quot;mundanereq-requirements-0.2&quot;,
       &quot;path&quot;: &quot;current.json&quot;,
       &quot;scope&quot;: &quot;current&quot;,
-      &quot;sha256&quot;: &quot;db4140f394b583903bbb05a3956177165888aa4a6c53895e96040fffbcf8473f&quot;,
+      &quot;sha256&quot;: &quot;ebbd8daac1780a29ed3b69fbc9083d83d88c287d4a48728d908803e346f6ff93&quot;,
       &quot;sourceContract&quot;: &quot;mundanereq-yaml-0.4&quot;,
       &quot;sources&quot;: [
         {
@@ -185,26 +185,18 @@
   },
   &quot;plan&quot;: {
     &quot;path&quot;: &quot;plan.json&quot;,
-    &quot;sha256&quot;: &quot;25df40eb5ef6e6c79450c2f7440db1ca9daccf30f47e174eb1b7dff5432b1dc7&quot;
+    &quot;sha256&quot;: &quot;87f24cce7b12ef788df8c4f874d34bce87cd4e5f2e7db831e1602b7842927698&quot;
   },
   &quot;planCompiler&quot;: {
-    &quot;contract&quot;: &quot;plan-cli-0.1&quot;,
+    &quot;contract&quot;: &quot;plan-cli-0.2&quot;,
     &quot;name&quot;: &quot;mundane-plan&quot;,
-    &quot;version&quot;: &quot;experimental-0.1&quot;
+    &quot;version&quot;: &quot;experimental-0.2&quot;
   },
   &quot;planFormat&quot;: &quot;mundane-plan-0.1&quot;,
   &quot;planSources&quot;: [
     {
-      &quot;path&quot;: &quot;plan/activities.tsv&quot;,
-      &quot;sha256&quot;: &quot;a9dfe6587c09ce8b45e2a53e7362d2f375d4888dfc078583ee705d797c9e793a&quot;
-    },
-    {
-      &quot;path&quot;: &quot;plan/coverage.tsv&quot;,
-      &quot;sha256&quot;: &quot;aaed465a286e66b00bfac7b05555cecfeda3d51df0a8101bdac9cb94e4d899a5&quot;
-    },
-    {
-      &quot;path&quot;: &quot;plan/plan.tsv&quot;,
-      &quot;sha256&quot;: &quot;07ca22182aeaf08cded25c6acefac1223a7c19a8b00c10a65ea0d93f4f43556a&quot;
+      &quot;path&quot;: &quot;plan/plan.yaml&quot;,
+      &quot;sha256&quot;: &quot;7c6a9216ed960c39c0c7b5a688d2abdc4129071bd451b49a2c7bfef61315a719&quot;
     }
   ],
   &quot;sourceLinkBases&quot;: {

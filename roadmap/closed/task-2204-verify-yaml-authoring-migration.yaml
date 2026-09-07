@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2204
 kind: task
 title: Verify YAML Authoring Migration and Remove Replaced Sources
-status: Planned
+status: Complete
 dependencies: ["TC-2202", "TC-2203"]
 relations: []
 planning:
@@ -34,4 +34,8 @@ body: |
   
   ## References
   
-  - [Roadmap](0001-initial-roadmap.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+
+  ## Executed evidence
+
+  The full scripts/run-ci-verification.sh wrapper passed with exit 0 on 2026-09-07, including native CLI/package checks, all golden/seeded/mutation workflows, nine Node tests, development/installed VS Code hosts and both restored failure injections. research/0075-yaml-authoring-verification.md records exact environment, semantic invariants and scope. JSON declaration and TSV plan sources are removed; current guides and golden source provenance are regenerated.

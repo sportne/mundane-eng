@@ -117,7 +117,7 @@ and resource analysis. Status remains an authored decision. See the
 ## Imported requirements and work-item targets
 
 With `mundane.workProject` configured, optionally set `mundane.workImports` to an
-editor import/source mapping file. Use the matching 0.1.3 bundle or a later compatible
+editor import/source mapping file. Use the matching 0.2.0 bundle or a later compatible
 bridge; an older bridge rejects the added request fields. This setting affects the
 work project independently of `mundane.project`. An empty value disables imports.
 

@@ -33,7 +33,7 @@ to a workspace-relative editor selection file. For example, `editor.json`:
 ```
 
 Files must exist inside the workspace. For declared attributes, select `yaml-0.4`
-and the project-relative JSON declaration path in `attributeSchema`. Requirement
+and the project-relative YAML declaration path in `attributeSchema`. Requirement
 source must use the corresponding header and declaration name. No automatic file
 or schema discovery occurs. Source files and human-authored IDs remain authoritative.
 
