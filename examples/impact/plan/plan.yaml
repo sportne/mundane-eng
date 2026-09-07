@@ -1,0 +1,22 @@
+format: mundane-plan-yaml-0.1
+plans:
+- id: PLAN-LOGGER
+  context: logger
+  baselineScope: baseline
+  currentScope: req
+activities:
+- id: ACT-STORAGE
+  method: test
+  objective: Interrupt power during sample recording and inspect retained records.
+  expectedEvidence: Power interruption sequence and observed records
+- id: ACT-POWER
+  method: inspection
+  objective: Inspect supply connections and ratings.
+  expectedEvidence: Inspection observations
+coverage:
+- planId: PLAN-LOGGER
+  activityId: ACT-STORAGE
+  requirementId: DEV-001
+- planId: PLAN-LOGGER
+  activityId: ACT-POWER
+  requirementId: PWR-001

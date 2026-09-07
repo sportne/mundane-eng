@@ -175,7 +175,7 @@ native-suite-verify: package-native-suite
 	python3 scripts/check-native-package.py $(PACKAGE_STAGE) $(PACKAGE_ARCHIVE)
 yaml-verify: native-validator native-formatter native-trace native-compile
 	python3 scripts/check-yaml-workflow.py
-verify: yaml-schema-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify editor-verify installed-editor-verify
+verify: yaml-schema-verify plan-yaml-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify editor-verify installed-editor-verify
 
 .PHONY: native-editor editor-dependencies editor-vsix editor-verify package-editor installed-editor-verify
 native-editor: test
@@ -193,3 +193,7 @@ package-editor: native-editor editor-vsix
 	python3 scripts/check-editor-package.py "$(GRAALVM_HOME)"
 installed-editor-verify: package-editor
 	cd editors/vscode && xvfb-run -a node test/installed-run.js
+
+.PHONY: plan-yaml-verify
+plan-yaml-verify: native-plan
+	python3 scripts/check-plan-yaml.py

@@ -1,7 +1,7 @@
 # Project-defined requirement attributes
 
 These checked-in sources demonstrate the opt-in YAML 0.4 requirements profile.
-The narrow JSON declaration is authored project configuration, independently selected
+The narrow YAML declaration is authored project configuration, independently selected
 from the YAML requirement language. Human requirement IDs remain authoritative.
 The [language reference](../../specification/0020-project-attributes-yaml-0.4.md) and
 [command guide](../../distribution/attributes.md) define the actual rules.
@@ -20,7 +20,7 @@ python3 experiments/0036-project-attributes/workflow.py
 Run from the repository root. This compiles two explicitly scoped snapshots, with
 an exact baseline pin, and builds `build/attribute-example/report.html`. The current
 example changes one owner label and the declaration's description. Both requirements
-request schema review; only SYS-001 reports a changed attribute value. The checked-in [TSV plan](plan/plan.tsv)
+request schema review; only SYS-001 reports a changed attribute value. The checked-in [YAML plan](plan/plan.yaml)
 asserts planned coverage, with no executed review or satisfaction claim. The script
 checks exit 1 as the expected complete stale result, then deletes all derived JSON
 and HTML and proves identical rebuild. Generated sources under build are controlled

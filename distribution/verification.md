@@ -1,8 +1,8 @@
 # Compile plans, resolve imports and inspect verification coverage
 
 Three independently installed commands implement the first engineering companion
-workflow. They consume requirement JSON, with no requirements parser or YAML library
-at runtime. Build with Java 21/GraalVM Native Image:
+workflow. The plan compiler reads YAML. The linker and analyzer consume compiled JSON
+without a requirements parser or YAML library at runtime. Build with Java 21/GraalVM Native Image:
 
 ```sh
 make native-plan native-link native-verification
@@ -37,11 +37,12 @@ an output failure can leave a prefix. Help/version are standalone options.
 
 [Local imports](../specification/0014-local-artifact-imports-0.1.md) define scope,
 pins, snapshot checks and provenance. [Verification planning](../specification/0015-verification-planning-0.1.md)
-defines the independently selected TSV source, compiled plan, coverage and review
+defines the independently selected YAML source, compiled plan, coverage and review
 semantics. It does not execute activities, store evidence or declare requirements
 satisfied. Other engineering authoring formats remain independent decisions.
 
 These are separate native targets, outside the historical three-command trial archive.
 Requirements validate/format/trace/compile commands remain independently usable.
-`make link-verify` and `make verification-verify` run the maintained acceptance
-matrices; both are included in `make verify`. No release publication is involved.
+`make plan-yaml-verify` checks public plan compilation; `make test` and the
+attribute/impact workflow targets check linking and analysis. All are included in
+`make verify`. No release publication is involved.

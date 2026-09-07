@@ -31,10 +31,10 @@ final class ImpactFixtures {
         return a;
     }
     static Map<String,Object> plan() {
-        var a = envelope("verification-plan", "mundane-plan-0.1", "mundane-plan-source-0.1", "plan.tsv");
-        a.put("plans", List.of(object("id", "PLAN", "context", "device", "baselineScope", "baseline", "currentScope", "req", "location", location("plan.tsv"))));
-        a.put("activities", List.of(object("id", "TEST", "method", "test", "objective", "Check records", "expectedEvidence", "Observations", "location", location("plan.tsv"))));
-        a.put("coverage", List.of(object("planId", "PLAN", "activityId", "TEST", "requirementId", "LOW", "location", location("plan.tsv"))));
+        var a = envelope("verification-plan", "mundane-plan-0.1", "mundane-plan-yaml-0.1", "plan.yaml");
+        a.put("plans", List.of(object("id", "PLAN", "context", "device", "baselineScope", "baseline", "currentScope", "req", "location", location("plan.yaml"))));
+        a.put("activities", List.of(object("id", "TEST", "method", "test", "objective", "Check records", "expectedEvidence", "Observations", "location", location("plan.yaml"))));
+        a.put("coverage", List.of(object("planId", "PLAN", "activityId", "TEST", "requirementId", "LOW", "location", location("plan.yaml"))));
         return a;
     }
     static Map<String,Object> item(String id, List<String> deps, List<Object> relations) {

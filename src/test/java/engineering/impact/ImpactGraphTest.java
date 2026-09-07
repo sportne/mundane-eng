@@ -31,10 +31,10 @@ public final class ImpactGraphTest {
         cycle.put("dependsOn", List.of("absent"));
         reject(() -> ImpactGraph.build(List.of(cycle)), "missing-dependency");
         var bad = ImpactFixtures.plan();
-        bad.put("plans", List.of(object("id", "PLAN", "context", "device", "baselineScope", null, "currentScope", null, "location", ImpactFixtures.location("plan.tsv"))));
+        bad.put("plans", List.of(object("id", "PLAN", "context", "device", "baselineScope", null, "currentScope", null, "location", ImpactFixtures.location("plan.yaml"))));
         reject(() -> ImpactGraph.build(List.of(imports.get(0), imports.get(1), ImpactFixtures.imported("plan", bad))), "ambiguous-scope");
         check(ImpactGraph.build(List.of(imports.get(0), ImpactFixtures.imported("plan", bad))).nodes().size() == 4, "single scope resolution failed");
-        bad.put("coverage", List.of(object("planId", "PLAN", "activityId", "TEST", "requirementId", "MISSING", "location", ImpactFixtures.location("plan.tsv"))));
+        bad.put("coverage", List.of(object("planId", "PLAN", "activityId", "TEST", "requirementId", "MISSING", "location", ImpactFixtures.location("plan.yaml"))));
         reject(() -> ImpactGraph.build(List.of(imports.get(0), ImpactFixtures.imported("plan", bad))), "missing-target");
         var root = java.nio.file.Files.createTempDirectory("impact-inputs-");
         try {

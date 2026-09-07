@@ -1,0 +1,273 @@
+format: mundane-plan-yaml-0.1
+plans:
+- id: PLAN-B
+  context: vaccine-store
+  baselineScope: baseline
+  currentScope: current
+activities:
+- id: ACT-NEED-REVIEW
+  method: review
+  objective: Confirm each stakeholder need is understandable, sourced, consistent
+    with the context, and represented by system requirements.
+  expectedEvidence: Review record and need-to-system trace report
+- id: ACT-M2M-COMPAT
+  method: test
+  objective: Demonstrate data and power interoperability with representative conforming
+    logger interfaces, including the mount-duration bound.
+  expectedEvidence: Protocol, interface configurations, captured transfers, power
+    measurements, and mount timing
+- id: ACT-TIME
+  method: test
+  objective: Measure synchronization error and verify logger-relative to UTC association
+    and configured local-time presentation.
+  expectedEvidence: Clock-reference record, observed timestamps, and error calculations
+- id: ACT-LOCAL-STATE
+  method: demonstration
+  objective: Exercise each local state and control and observe the display, mute behavior,
+    and disabled-monitoring indication.
+  expectedEvidence: Procedure, device configuration, photographs or captured display
+    states, and observations
+- id: ACT-ALARM-LATENCY
+  method: test
+  objective: Inject alarm conditions and measure local annunciation, remote submission
+    latency, content, and gateway outcome reporting.
+  expectedEvidence: Injected event log, synchronized timestamps, sound measurement,
+    notification capture, and results
+- id: ACT-POWER-ENDURANCE
+  method: test
+  objective: Operate the device without supplied power at 43 degrees Celsius for 240
+    hours while exercising allocated essential functions and power limits.
+  expectedEvidence: Chamber and device configuration, calibrated measurements, event
+    record, and endurance observations
+- id: ACT-NETWORK-RECOVERY
+  method: test
+  objective: Interrupt and restore communications and verify retention, automatic
+    reconnect, idempotent replay, and explicit interval status.
+  expectedEvidence: Network-fault schedule, device and service logs, record comparison,
+    and status captures
+- id: ACT-DATA-STANDARD
+  method: inspection
+  objective: Compare acquired, transmitted, stored, and exported objects with the
+    declared WHO data format and verify logger files remain unmodified.
+  expectedEvidence: Schema or field comparison and file-digest comparison
+- id: ACT-RETENTION
+  method: analysis
+  objective: Inspect storage lifecycle rules and capacity evidence against the five-year
+    retention obligation for every record class.
+  expectedEvidence: Lifecycle configuration, capacity analysis, and record-class inventory
+- id: ACT-ACCESS
+  method: test
+  objective: Attempt permitted and prohibited data and administrative operations using
+    representative employer and role assignments.
+  expectedEvidence: Authorization matrix, test identities, requests, and observed
+    decisions
+- id: ACT-EXPORT
+  method: test
+  objective: Request boundary-spanning exports and compare package content, documentation,
+    and digest with the retained source records.
+  expectedEvidence: Export request, package, source comparison, and independent digest
+    result
+- id: ACT-CONFIG-AUDIT
+  method: test
+  objective: Change each controlled configuration class and verify actor, time, previous
+    value, and new value are recorded before application.
+  expectedEvidence: Change requests and resulting immutable audit records
+- id: ACT-DISPOSITION
+  method: inspection
+  objective: Inspect every excursion presentation and export for the required disposition
+    boundary and absence of automated disposition classifications.
+  expectedEvidence: Interface and export inspection record
+- id: ACT-DIAGNOSTIC
+  method: test
+  objective: Inject interface, power, device, and communication faults and verify
+    code distinction, persistence, and field-service access.
+  expectedEvidence: Fault-injection procedure, observed codes, retention record, and
+    service demonstration
+- id: ACT-INTEGRITY
+  method: test
+  objective: Alter and truncate transferred and exported artifacts and verify detection,
+    rejection from operational use, and status reporting.
+  expectedEvidence: Original and modified artifacts, digests, service outcomes, and
+    interface captures
+- id: ACT-ENCLOSURE
+  method: inspection
+  objective: Inspect enclosure qualification evidence against the required IP64 classification.
+  expectedEvidence: Supplier or laboratory classification report tied to the tested
+    enclosure configuration
+- id: ACT-SYSTEM-TRACE
+  method: analysis
+  objective: Review system requirements against allocated lower-level requirements
+    and verification coverage for omitted behavior or conflicting bounds.
+  expectedEvidence: Trace and coverage review report
+coverage:
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-001
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-002
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-003
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-004
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-005
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-006
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-007
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-008
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-009
+- planId: PLAN-B
+  activityId: ACT-NEED-REVIEW
+  requirementId: NEED-010
+- planId: PLAN-B
+  activityId: ACT-M2M-COMPAT
+  requirementId: SYS-001
+- planId: PLAN-B
+  activityId: ACT-TIME
+  requirementId: SYS-002
+- planId: PLAN-B
+  activityId: ACT-LOCAL-STATE
+  requirementId: SYS-003
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: SYS-004
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: SYS-005
+- planId: PLAN-B
+  activityId: ACT-POWER-ENDURANCE
+  requirementId: SYS-006
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: SYS-007
+- planId: PLAN-B
+  activityId: ACT-DATA-STANDARD
+  requirementId: SYS-008
+- planId: PLAN-B
+  activityId: ACT-RETENTION
+  requirementId: SYS-009
+- planId: PLAN-B
+  activityId: ACT-ACCESS
+  requirementId: SYS-010
+- planId: PLAN-B
+  activityId: ACT-EXPORT
+  requirementId: SYS-011
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: SYS-012
+- planId: PLAN-B
+  activityId: ACT-CONFIG-AUDIT
+  requirementId: SYS-013
+- planId: PLAN-B
+  activityId: ACT-DISPOSITION
+  requirementId: SYS-014
+- planId: PLAN-B
+  activityId: ACT-DIAGNOSTIC
+  requirementId: SYS-015
+- planId: PLAN-B
+  activityId: ACT-INTEGRITY
+  requirementId: SYS-016
+- planId: PLAN-B
+  activityId: ACT-M2M-COMPAT
+  requirementId: DEV-001
+- planId: PLAN-B
+  activityId: ACT-M2M-COMPAT
+  requirementId: DEV-002
+- planId: PLAN-B
+  activityId: ACT-TIME
+  requirementId: DEV-003
+- planId: PLAN-B
+  activityId: ACT-TIME
+  requirementId: DEV-004
+- planId: PLAN-B
+  activityId: ACT-TIME
+  requirementId: DEV-005
+- planId: PLAN-B
+  activityId: ACT-LOCAL-STATE
+  requirementId: DEV-006
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: DEV-007
+- planId: PLAN-B
+  activityId: ACT-LOCAL-STATE
+  requirementId: DEV-008
+- planId: PLAN-B
+  activityId: ACT-LOCAL-STATE
+  requirementId: DEV-009
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: DEV-010
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: DEV-011
+- planId: PLAN-B
+  activityId: ACT-POWER-ENDURANCE
+  requirementId: DEV-012
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: DEV-013
+- planId: PLAN-B
+  activityId: ACT-POWER-ENDURANCE
+  requirementId: DEV-014
+- planId: PLAN-B
+  activityId: ACT-DIAGNOSTIC
+  requirementId: DEV-015
+- planId: PLAN-B
+  activityId: ACT-DIAGNOSTIC
+  requirementId: DEV-016
+- planId: PLAN-B
+  activityId: ACT-ENCLOSURE
+  requirementId: DEV-017
+- planId: PLAN-B
+  activityId: ACT-DATA-STANDARD
+  requirementId: DEV-018
+- planId: PLAN-B
+  activityId: ACT-INTEGRITY
+  requirementId: DEV-019
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: RDS-001
+- planId: PLAN-B
+  activityId: ACT-RETENTION
+  requirementId: RDS-002
+- planId: PLAN-B
+  activityId: ACT-ACCESS
+  requirementId: RDS-003
+- planId: PLAN-B
+  activityId: ACT-CONFIG-AUDIT
+  requirementId: RDS-004
+- planId: PLAN-B
+  activityId: ACT-INTEGRITY
+  requirementId: RDS-005
+- planId: PLAN-B
+  activityId: ACT-EXPORT
+  requirementId: RDS-006
+- planId: PLAN-B
+  activityId: ACT-INTEGRITY
+  requirementId: RDS-007
+- planId: PLAN-B
+  activityId: ACT-NETWORK-RECOVERY
+  requirementId: RDS-008
+- planId: PLAN-B
+  activityId: ACT-LOCAL-STATE
+  requirementId: UI-001
+- planId: PLAN-B
+  activityId: ACT-DISPOSITION
+  requirementId: UI-002
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: NTF-001
+- planId: PLAN-B
+  activityId: ACT-ALARM-LATENCY
+  requirementId: NTF-002

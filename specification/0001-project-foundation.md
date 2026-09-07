@@ -46,9 +46,10 @@ not establish them.
 
 ## Source and tooling
 
-Requirements and work items independently selected YAML profiles. Verification plans
-use TSV; project attribute declarations use a narrow JSON format. Other engineering
-artifacts may select different text formats or retain native/binary authoring tools.
+Requirements, work items, verification plans and project attribute declarations
+use YAML with domain-owned fields and shared presentation rules. Human-authored
+artifacts should use consistent syntax unless a concrete user workflow justifies
+another representation; native engineering files may retain their own formats.
 Common integration uses compiled contracts, explicit references and provenance.
 
 Source files can contain multiple complete requirements. Source placement and ordering

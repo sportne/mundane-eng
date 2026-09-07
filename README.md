@@ -14,8 +14,8 @@ or requirement satisfaction. Each artifact's source format is an independent cho
 | Component | Authoritative source | Tools and examples |
 | --- | --- | --- |
 | Requirements | YAML 0.3 (default) or explicitly selected YAML 0.4 with project attributes | [Validate](distribution/validate.md), [format](distribution/format.md), [trace](distribution/trace.md), [compile](distribution/compile.md); [YAML examples](examples/yaml/README.md) |
-| Project attributes | Explicit JSON project declaration plus YAML 0.4 values; text/enum types, required/optional presence, no defaults | [Contracts and capabilities](distribution/attributes.md); [small and medium examples](examples/attributes/README.md) |
-| Verification planning | Independently specified TSV plans, activities and coverage assertions | [Plan compilation, scoped imports and review analysis](distribution/verification.md) |
+| Project attributes | Explicit YAML project declaration plus YAML 0.4 values; text/enum types, required/optional presence, no defaults | [Contracts and capabilities](distribution/attributes.md); [small and medium examples](examples/attributes/README.md) |
+| Verification planning | Independently specified YAML plans, activities and coverage assertions | [Plan compilation, scoped imports and review analysis](distribution/verification.md) |
 | Work items | YAML task/issue records, literal narrative strings and typed relationships | [Authoring and commands](distribution/work-items.md); [repository backlog](WORK-ITEMS.md) |
 | Impact analysis | Explicit compiled requirements, plans and work-item imports | [Bounded queries and explained reports](distribution/impact.md); [logger example](examples/impact/README.md) |
 | VS Code authoring | Explicit requirement and YAML work-item selections, including unsaved buffers | [Local authoring and imported-target navigation](editors/vscode/README.md); [Linux bundle](distribution/editor-bundle.md) |

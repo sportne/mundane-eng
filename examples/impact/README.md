@@ -1,7 +1,7 @@
 # Logger change-impact example
 
 These checked-in files are authoritative example source: requirements YAML 0.4,
-a project attribute declaration, an independent TSV verification plan, and YAML
+a project attribute declaration, an independent YAML verification plan, and YAML
 work items. The [workflow](../../experiments/0037-impact-analysis/README.md) copies
 them into a disposable analysis root, compiles them, pins the imports and renders a
 report whose source links resolve to those copied snapshots.

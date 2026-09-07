@@ -13,9 +13,11 @@ def command(root,tool,args,status=0):
 
 def plan(root,ids):
     directory=root/'plan';directory.mkdir(exist_ok=True)
-    (directory/'plan.tsv').write_text('format\tplan_id\tcontext\tbaseline_scope\tcurrent_scope\nmundane-plan-source-0.1\tPLAN-ATTR\tlogger\tbaseline\tcurrent\n')
-    (directory/'activities.tsv').write_text('activity_id\tmethod\tobjective\texpected_evidence\nACT-REVIEW\treview\tReview logger requirements and their descriptive classification.\tRecorded review observations\n')
-    (directory/'coverage.tsv').write_text('plan_id\tactivity_id\trequirement_id\n'+''.join('PLAN-ATTR\tACT-REVIEW\t'+id+'\n' for id in sorted(ids)))
+    write(directory/'plan.yaml', {
+        'format': 'mundane-plan-yaml-0.1',
+        'plans': [{'id':'PLAN-ATTR','context':'logger','baselineScope':'baseline','currentScope':'current'}],
+        'activities': [{'id':'ACT-REVIEW','method':'review','objective':'Review logger requirements and their descriptive classification.','expectedEvidence':'Recorded review observations'}],
+        'coverage': [{'planId':'PLAN-ATTR','activityId':'ACT-REVIEW','requirementId':id} for id in sorted(ids)]})
     (root/'plan.json').write_bytes(command(root,'mundane-plan',['--root','.','plan']))
 
 def imports(root):

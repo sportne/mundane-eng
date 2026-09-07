@@ -12,6 +12,7 @@ import java.util.List;
 public final class VerificationBoundaryTest {
     private VerificationBoundaryTest() {}
     public static void run() throws Exception {
+        PlanYamlTest.run();
         Path root=Path.of("experiments/0028-verification-contract").toAbsolutePath();
         String[] plan={"--root",root.toString(),root.resolve("source").toString()};
         String[] verify={"--root",root.toString(),"--plan",root.resolve("fixtures/plan.json").toString(),root.resolve("fixtures/imports.json").toString()};
@@ -26,9 +27,9 @@ public final class VerificationBoundaryTest {
         if(PlanMain.run(plan,sink(),closed)!=2||VerifyMain.run(verify,sink(),closed)!=2)throw new AssertionError("closed stderr succeeded");
         Path temporary=Files.createTempDirectory("plan-snapshot-");
         try {
-            for(String name:List.of("plan.tsv","activities.tsv","coverage.tsv"))Files.copy(root.resolve("source").resolve(name),temporary.resolve(name));
+            for(String name:List.of("plan.yaml"))Files.copy(root.resolve("source").resolve(name),temporary.resolve(name));
             var result=PlanCompiler.compile(temporary,temporary,()->{
-                try{Files.writeString(temporary.resolve("coverage.tsv"),"changed\n");}catch(IOException ex){throw new IllegalStateException(ex);}});
+                try{Files.writeString(temporary.resolve("plan.yaml"),"changed\n");}catch(IOException ex){throw new IllegalStateException(ex);}});
             if(result.status()!=2||Boolean.TRUE.equals(result.output().get("complete"))||!Checks.list(result.output().get("coverage")).isEmpty())throw new AssertionError("changed plan published complete");
         } finally {try(var paths=Files.walk(temporary)){for(Path path:paths.sorted(java.util.Comparator.reverseOrder()).toList())Files.delete(path);}}
         System.out.println("PASS plan/analyzer prefix, flush and stderr failures; plan snapshot change suppresses publication");

@@ -1,0 +1,18 @@
+format: mundane-plan-yaml-0.1
+plans:
+- id: PLAN-ATTR
+  context: logger
+  baselineScope: baseline
+  currentScope: current
+activities:
+- id: ACT-REVIEW
+  method: review
+  objective: Review logger requirements and their descriptive classification.
+  expectedEvidence: Recorded review observations
+coverage:
+- planId: PLAN-ATTR
+  activityId: ACT-REVIEW
+  requirementId: SYS-001
+- planId: PLAN-ATTR
+  activityId: ACT-REVIEW
+  requirementId: SYS-002

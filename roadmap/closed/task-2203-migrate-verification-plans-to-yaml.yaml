@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2203
 kind: task
 title: Migrate Verification Plans to YAML
-status: Planned
+status: Complete
 dependencies: ["TC-2201", "TC-2202"]
 relations: []
 planning:
@@ -34,4 +34,8 @@ body: |
   
   ## References
   
-  - [Roadmap](0001-initial-roadmap.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+
+  ## Executed evidence
+
+  All 14 maintained JVM groups pass, including new YAML plan cases for comments/folding, scalar types, duplicate keys/IDs/assertions, local references, real coordinates, old-source rejection and source mutation. Public plan checks pass with exact JVM/native parity on all three converted corpora and decoded-value/source-hash oracles. The complete attribute example passes plan/link/analyze/render and identical delete/rebuild. TSV plan parser and all nine TSV plan source files are removed.

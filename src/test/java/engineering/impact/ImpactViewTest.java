@@ -28,7 +28,7 @@ public final class ImpactViewTest {
             var output = map(Json.read(Json.bytes(result.output())));
             String report = ImpactView.render(output);
             check(report.equals(ImpactView.render(output)), "report nondeterministic");
-            check(report.contains("Derived impact report") && report.contains("SHA-256") && report.contains("./req.yaml#L2") && report.contains("./plan.tsv#L2") && report.contains("coverage-current") && report.contains("depends-on"), "report missing paths or provenance");
+            check(report.contains("Derived impact report") && report.contains("SHA-256") && report.contains("./req.yaml#L2") && report.contains("./plan.yaml#L2") && report.contains("coverage-current") && report.contains("depends-on"), "report missing paths or provenance");
             Files.write(root.resolve("query.json"), Json.bytes(output));
             String[] args = {"view", "--root", root.toString(), root.resolve("query.json").toString()};
             check(new String(ImpactCliTest.invoke(args, 0, binary), StandardCharsets.UTF_8).equals(report), "CLI report differs");

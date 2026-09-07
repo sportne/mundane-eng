@@ -14,9 +14,7 @@ with tempfile.TemporaryDirectory(prefix='attribute-link-') as temp:
  def compile():return json.loads(run([str(BIN/'mundanereq-compile')],['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source.mreq.yaml'],root))
  original=compile();write(root/'baseline.json',original);write(root/'current.json',original)
  (root/'plan').mkdir();
- (root/'plan/plan.tsv').write_text('format\tplan_id\tcontext\tbaseline_scope\tcurrent_scope\nmundane-plan-source-0.1\tPLAN-ATTR\tlogger\tbaseline\tcurrent\n')
- (root/'plan/activities.tsv').write_text('activity_id\tmethod\tobjective\texpected_evidence\nACT-REVIEW\treview\tReview logger requirements and their descriptive classification.\tRecorded review observations\n')
- (root/'plan/coverage.tsv').write_text('plan_id\tactivity_id\trequirement_id\nPLAN-ATTR\tACT-REVIEW\tSYS-001\nPLAN-ATTR\tACT-REVIEW\tSYS-002\n')
+ shutil.copyfile(ROOT/'examples/attributes/plan/plan.yaml',root/'plan/plan.yaml')
  (root/'plan.json').write_bytes(run([str(BIN/'mundane-plan')],['--root','.','plan'],root))
  manifest={'format':'mundane-imports-0.1','imports':[{'scope':scope,'path':scope+'.json','kind':'requirements','sha256':None,'dependsOn':[]} for scope in ['baseline','current']]};write(root/'imports.json',manifest)
  # Remove every requirement/source adapter and YAML library from the consumer classpath.

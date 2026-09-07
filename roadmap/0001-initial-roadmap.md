@@ -19,10 +19,9 @@ work-item source -------------------> work-item compiler ------+
 ```
 
 This shows component relationships, not a universal command or shared metamodel.
-Requirements and work items independently use YAML, plans use TSV and project
-attribute declarations use narrow JSON. Future artifacts may use different formats
-or retain native engineering files. Shared integration does not require common
-source notation. Requirement IDs remain human-authored; digests identify revisions.
+Requirements, work items, plans and project attribute declarations use YAML.
+Future human-authored artifacts should follow the same syntax unless a concrete
+workflow justifies another format, including native engineering files. Requirement IDs remain human-authored; digests identify revisions.
 
 ## Implemented foundation
 
@@ -30,7 +29,7 @@ source notation. Requirement IDs remain human-authored; digests identify revisio
 | --- | --- |
 | Requirement authoring | YAML 0.3/0.4, validation/SARIF, conservative formatting and decomposition trace; [contracts](../specification/README.md) |
 | Compiled integration | Versioned requirement output, explicit scopes and pins, parser-free consumers; [compiler guide](../distribution/compile.md) |
-| Verification | Independent TSV plan compiler, coverage/review analysis and an experimental derived report; [workflow](../distribution/verification.md) |
+| Verification | Independent YAML plan compiler, coverage/review analysis and an experimental derived report; [workflow](../distribution/verification.md) |
 | Work items | YAML source, typed linking, prerequisite analysis and generated views; the repository uses these for its own cards; [contracts](../specification/README.md) |
 | Project attributes | Explicit declarations, text/enum values, formatter/validator propagation, strict imports, whole-schema review comparison and reports; [contracts](../specification/README.md) |
 | Impact analysis | Scoped prospective queries, deterministic shortest explanations and validated source-linked reports; [workflow](../experiments/0037-impact-analysis/README.md) |

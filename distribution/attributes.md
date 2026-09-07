@@ -1,7 +1,7 @@
 # Project-defined requirement attributes
 
 The opt-in YAML 0.4 profile supports descriptive text and enum attributes defined
-in an explicitly selected JSON project declaration. The declaration and requirement
+in an explicitly selected YAML project declaration. The declaration and requirement
 source are authoritative; generated artifacts are derived. Requiredness is checked
 without default values. Classifications do not establish assessment authority.
 
@@ -16,7 +16,7 @@ build/maintained/mundanereq-trace --source=yaml-0.4 --attribute-schema examples/
 ```
 
 Formatting validates all values, preserves authored order/comments/quotes/indentation
-and changes only CRLF to LF. It never formats the JSON declaration. Each replacement
+and changes only CRLF to LF. It never formats the YAML declaration. Each replacement
 rechecks declaration and source snapshots. A detected intervening edit returns 2,
 preserves that external edit and lists completed/remaining files. A race remains
 between the final check and filesystem rename; this is not a multi-file transaction.
@@ -59,7 +59,7 @@ definitions. Literal HTML-looking text is escaped. Generated views remain dispos
 
 | Consumer | YAML 0.4 / attributes | Scope |
 | --- | --- | --- |
-| Validator / SARIF | Full selected-profile validation | Explicit JSON declaration; structural schemas alone do not validate project enum/requiredness rules |
+| Validator / SARIF | Full selected-profile validation | Explicit YAML declaration; structural schemas alone do not validate project enum/requiredness rules |
 | Formatter | Lossless except CRLF normalization | Preserves comments and authored order; does not format declarations |
 | Compiler / linker / verifier | Lossless semantic propagation | Explicit output 0.2; canonical declarations and retained source provenance |
 | Work-item analyzer | Strict requirement imports and typed links | No implicit edges or attribute assessment authority |

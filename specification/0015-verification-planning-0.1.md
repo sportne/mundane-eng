@@ -2,38 +2,26 @@
 
 Status: Selected experimental contract
 
-Source: `mundane-plan-source-0.1`; compiled plan: `mundane-plan-0.1`;
+Source: `mundane-plan-yaml-0.1`; compiled plan: `mundane-plan-0.1`;
 analysis: `mundane-verification-0.1`.
 
 ## Source choice and authority
 
-Select three UTF-8 TSV files in one explicitly selected directory: plan.tsv,
-activities.tsv, coverage.tsv. The existing pilot already authors one activity or
-coverage assertion per row; the bounded second experiment demonstrates this carrier
-without nested data or multiline procedures. This decision is independent of YAML
-requirements. Safety, evidence, procedures and other artifacts retain their own
-format decisions. The carrier is a verification plan, not a test-procedure language.
+Select one UTF-8 `plan.yaml` file in an explicitly selected directory. Its root
+contains `format: mundane-plan-yaml-0.1` and `plans`, `activities`, `coverage`
+sequences. The [YAML authoring policy](0027-yaml-authoring-policy.md) specifies the
+complete shape, comments, scalar typing, rejected features and worked example.
+The carrier is a verification plan, not a test-procedure language.
 
-Exact headers (tabs separate columns):
-
-```text
-plan.tsv: format  plan_id  context  baseline_scope  current_scope
-activities.tsv: activity_id  method  objective  expected_evidence
-coverage.tsv: plan_id  activity_id  requirement_id
-```
-
-Each plan row repeats the exact source identifier in format. All files require LF
-or CRLF termination and at least the header. No BOM, quoting/escaping convention,
-blank data rows, comments, tab/newline/control characters within values or padded
-values are supported. Reject wrong/duplicate headers, wrong column counts, duplicate
-IDs/coverage tuples, and unknown activity/plan references. Each file is at most
-8 MiB; each table at most 10000 data rows. Plans and activities are nonempty;
-coverage may be empty and then all selected current requirements are uncovered.
-IDs and scopes use the requirement ID pattern. Context is a nonempty authored label.
-Empty scope cells mean unqualified selection under the import contract; empty cells
-otherwise fail. Method is one of test, analysis, inspection, demonstration, review.
-Objective and expected_evidence are nonempty text. Expected evidence describes a
-planned deliverable; it neither stores evidence nor asserts a result.
+Each sequence is at most 10,000 records; the document is at most 8 MiB. Plans and
+activities are nonempty; coverage may be empty. IDs and scopes use the requirement
+ID pattern. Context is nonempty unpadded single-line text. Omitted or null scope
+fields mean unqualified selection under the import contract. Method is one of
+test, analysis, inspection, demonstration, review. Objective and expectedEvidence
+are nonempty unpadded single-line text, including folded YAML strings that decode
+to that shape. Expected evidence describes a planned deliverable; it neither stores
+evidence nor asserts a result. Unknown fields, duplicate IDs/coverage triples and
+unknown local plan/activity references fail.
 
 Source rows are authoritative. Plans own context and baseline/current selections;
 activities own method/objective/expected evidence; coverage rows own the activity
@@ -42,14 +30,14 @@ activity changes the plan artifact's provenance, not requirement semantics.
 
 ## Compiled plan boundary
 
-`mundane-plan --root DIRECTORY PLAN_DIRECTORY` compiles exactly those three files,
+`mundane-plan --root DIRECTORY PLAN_DIRECTORY` compiles exactly `plan.yaml`,
 with no discovery of requirements or imports. The root/path rules and bounded-read
 rechecks are those of local imports. Standalone --help/--version are supported.
 Output is sorted-key compact JSON plus LF:
 
 ```text
 {artifactKind:"verification-plan",format:"mundane-plan-0.1",
- sourceContract:"mundane-plan-source-0.1",compiler:{name,version,contract},
+ sourceContract:"mundane-plan-yaml-0.1",compiler:{name,version,contract},
  complete:BOOLEAN,sources:[{path,sha256}],plans:[...],activities:[...],coverage:[...],diagnostics:[...]}
 ```
 
@@ -57,10 +45,10 @@ Plan: `{id,context,baselineScope,currentScope,location}`.
 Activity: `{id,method,objective,expectedEvidence,location}`.
 Coverage: `{planId,activityId,requirementId,location}`.
 location is `{path,line,column}`, with one-based code-point coordinates and a retained
-row-start column 1; paths are relative to compiler root. Plans/activities sort by ID,
+YAML record-start position; paths are relative to compiler root. Plans/activities sort by ID,
 coverage by plan/activity/requirement. Arrays are empty on invalid/incomplete source;
 locations/checksums retain their original authority and exact bytes. Compiler name is
-`mundane-plan`, version `experimental-0.1`, contract `plan-cli-0.1`. Diagnostics follow
+`mundane-plan`, version `experimental-0.2`, contract `plan-cli-0.2`. Diagnostics follow
 local imports with additional code `invalid-plan`. Source invalidity returns 1;
 invocation/input/output failure returns 2. A prefix after failed output is unusable.
 
@@ -126,8 +114,7 @@ report; it cannot treat incomplete output as a successful analysis.
 
 The three version domains are independent of requirements/source/import versions.
 Unknown plan/analysis versions fail; changed meanings/required fields require a new
-identifier and migration notes with before/after examples. Historical TSV fixtures
-remain historical: conversion explicitly adds format/context/scope selections and
-preserves activity/coverage rows. No hidden data migration or reinterpretation occurs.
+identifier and migration notes with before/after examples. TSV source and fixtures have been removed. Rebuild plan artifacts from YAML; the
+old source contract is rejected. No dual source support or adapter is retained.
 No evidence execution/storage, safety inference, certification, satisfaction,
 generalized policies or permanent language stability is claimed.

@@ -33,7 +33,7 @@ workspaces configure each folder independently. An empty setting disables its ar
 }
 ```
 
-For YAML 0.4 select `"source": "yaml-0.4"` and a project-relative JSON attribute
+For YAML 0.4 select `"source": "yaml-0.4"` and a project-relative YAML attribute
 declaration path, or null for a schema-free project. Open unsaved buffers override
 the selected disk files. Files must already exist inside the workspace. The explicit
 manifest may also be edited without saving. Use **Mundane: Validate Selected Project**

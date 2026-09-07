@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Attribute declarations now use YAML source `mundanereq-attributes-yaml-0.1`.
+  The former JSON declaration source is removed. Select the `.yaml` declaration
+  explicitly; normalized compiled definitions remain `mundanereq-attribute-schema-0.1`.
+- Verification planning now selects one `plan.yaml` with format
+  `mundane-plan-yaml-0.1` and plans/activities/coverage sequences. The three TSV
+  source files and their parser are removed. Rebuild compiled plans from YAML.
+  Plan CLI is 0.2; the compiled plan shape remains 0.1.
+- Editor bundle 0.2.0 reads YAML declarations, including unsaved buffers. Install
+  the paired bridge/VSIX. No legacy declaration or plan source adapter is retained.
+
+
 - Editor bundle 0.1.3 adds explicit compiled imports and source mappings for work-item
   relations. Imported requirement/task targets gain revision-checked navigation and
   compiled completion/hover; unavailable or changed source blocks navigation.
