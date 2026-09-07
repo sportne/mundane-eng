@@ -71,7 +71,7 @@ def verify():
         result=compile_source(d);assert result['scanState']=='complete' and not result['findings'] and result['reviews'][0]['state']=='stale-or-unavailable-review'
         d=copy.deepcopy(source);d['reviews'][0]['sbomSha256']='0'*64
         assert compile_source(d)['reviews'][0]['state']=='stale-or-unavailable-review'
-        for case in ['missing-source','unsupported-slsa','unsupported-bom','unknown-target','changed-dependency']:
+        for case in ['missing-source','unsupported-slsa','unsupported-bom','unknown-target','changed-dependency','unscoped-advisory']:
             d=copy.deepcopy(source)
             if case in ['missing-source','unsupported-slsa']:
                 raw=json.loads((root/'provenance.intoto.json').read_text())
@@ -81,6 +81,7 @@ def verify():
             else:
                 raw=json.loads((root/'scan.cdx.json').read_text())
                 if case=='unsupported-bom':raw['specVersion']='999'
+                elif case=='unscoped-advisory':raw['vulnerabilities'][0]['affects']=[]
                 elif case=='unknown-target':raw['vulnerabilities'][0]['affects'][0]['ref']='absent'
                 else:raw['components'][0]['version']='2.0'
                 emit(root/'bad-native.json',raw);d['scan']['result']=dict(path='bad-native.json',sha256=sha(root/'bad-native.json'))

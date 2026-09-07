@@ -134,7 +134,22 @@ public final class Equipment implements Model.Domain {
     public String render(Map<String,Object> a,Model.Context c,boolean showBom,boolean wiring) {
         var d=map(a.get("values"));var findings=analyze(d,c);
         var text=new StringBuilder("# Equipment inspection\n\n").append(Model.sourceLink(a,c,"/id",engineering.artifacts.Checks.text(d.get("id")))).append("\n\nBaseline: ").append(Model.escape(map(d.get("configuration")).get("id"))).append("; basis: ").append(d.get("basis")).append("\n\n");
-        if(showBom){text.append("| Part | Quantity |\n| --- | --- |\n");for(var row:bom(d))text.append("| ").append(Model.escape(row.get("part"))).append(" | ").append(row.get("quantity")).append(" |\n");}
+        if(showBom) {
+            text.append("| Part source | Model | Quantity | Ratings | Selected datasheet |\n| --- | --- | --- | --- | --- |\n");
+            var parts=Model.rows(d,"parts");
+            for(var row:bom(d)) {
+                var part=Model.find(parts,engineering.artifacts.Checks.text(row.get("part")));
+                var evidence=map(part.get("evidence"));
+                text.append("| ").append(Model.sourceLink(a,c,"/parts/"+parts.indexOf(part),engineering.artifacts.Checks.text(row.get("part"))))
+                    .append(" | ").append(Model.escape(part.get("model"))).append(" | ").append(row.get("quantity"))
+                    .append(" | ").append(Model.escape(Json.write(part.get("ratings"))))
+                    .append(" | [Selected bytes](").append(c.root.resolve(path(evidence.get("path"))).toUri().toASCIIString()).append(") |\n");
+            }
+        }
+        text.append("\n| Instance source | Selected part | Baseline selection |\n| --- | --- | --- |\n");
+        var baseline=c.imports.get(map(d.get("configuration")).get("scope"));int instanceNumber=0;
+        for(var instance:Model.rows(d,"instances"))text.append("| ").append(Model.sourceLink(a,c,"/instances/"+instanceNumber++,engineering.artifacts.Checks.text(instance.get("id"))))
+            .append(" | ").append(Model.escape(instance.get("part"))).append(" | ").append(Model.sourceLink(baseline,c,"/baseline",engineering.artifacts.Checks.text(map(d.get("configuration")).get("id")))).append(" |\n");
         if(wiring) {
             text.append("\n```mermaid\nflowchart LR\n");var nodes=new HashMap<String,String>();int n=0;
             for(var i:Model.rows(d,"instances")){String node="n"+n++;nodes.put(engineering.artifacts.Checks.text(i.get("id")),node);text.append("  ").append(node).append("[\"").append(i.get("id")).append("\"]\n");}

@@ -164,6 +164,13 @@
                 "type": "null"
               }
             ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "quantity",
+              "fraction"
+            ]
           }
         },
         "required": [
@@ -174,7 +181,8 @@
           "basis",
           "explanation",
           "evidence",
-          "rating"
+          "rating",
+          "role"
         ],
         "additionalProperties": false
       },

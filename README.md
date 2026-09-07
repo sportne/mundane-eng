@@ -96,3 +96,8 @@ The [VS Code extension](editors/vscode/README.md) provides YAML highlighting,
 compiler diagnostics, reference navigation, conservative formatting, attribute
 completion and hover documentation for explicitly selected requirement projects.
 Build and install the local VSIX; the native bridge is built separately for the host.
+
+The GCS reference also exercises [software provenance/security](distribution/software.md),
+[equipment and wiring](distribution/equipment.md), and [budgets/reliability](distribution/budget.md).
+Native SLSA/in-toto and CycloneDX artifacts retain their standard formats; project
+selections and judgments remain YAML.

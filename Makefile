@@ -311,3 +311,12 @@ verify: equipment-verify
 budget-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-budget.py
 verify: budget-design-verify
+
+.PHONY: test-budget native-budget budget-verify
+test-budget: yaml-dependency version-declarations
+	python3 scripts/build-components.py test budget
+native-budget: test-budget
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath budget)" -o $(abspath $(BUILD_ROOT)/mundane-budget) engineering.budget.BudgetMain
+budget-verify: native-budget equipment-verify budget-design-verify
+	build/schema-check-venv/bin/python scripts/check-budget-workflow.py
+verify: budget-verify

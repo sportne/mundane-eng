@@ -40,6 +40,7 @@ public final class CycloneDx {
         for(Object raw:list(bom.getOrDefault("vulnerabilities",List.of()))) {
             var vulnerability=map(raw);String ident=text(vulnerability.get("id"));
             if(!ids.add(ident))throw new IllegalArgumentException("ambiguous advisory identity");
+            if(Model.rows(vulnerability,"affects").isEmpty())throw new IllegalArgumentException("advisory has no scoped affected component");
             for(var affected:Model.rows(vulnerability,"affects")) {
                 String ref=text(affected.get("ref"));
                 if(!components.containsKey(ref))throw new IllegalArgumentException("unknown affected component");

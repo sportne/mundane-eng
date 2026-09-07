@@ -7,7 +7,8 @@ artifact designs checked by local prototypes. Architecture now has
 are also maintained, alongside [safety analysis](../../distribution/safety.md)
 and [procedure/evidence tooling](../../distribution/evidence.md), plus
 [native software provenance and security](../../distribution/software.md) and
-[equipment/BOM/wiring](../../distribution/equipment.md). The event simulator
+[equipment/BOM/wiring](../../distribution/equipment.md) and
+[budgets/reliability](../../distribution/budget.md). The event simulator
 is a bounded ground-state test harness, not a deployable GCS or aircraft simulator. The generated
 backlog records each card's current status.
 
@@ -22,7 +23,9 @@ Run `make gcs-design-verify` from the repository root to rebuild and check the s
 and design probes. The seed reports appear under `build/gcs-seed`; allocation,
 interface and configuration inspection reports appear under `build/gcs-design`.
 Run `make evidence-verify safety-verify` to exercise the maintained native domains.
-Their reports appear under `build/gcs-architecture`, `build/gcs-configuration`,
+Run `make software-verify budget-verify` for native standards, equipment and
+calculation workflows; their reports are `build/gcs-software`, `build/gcs-equipment`
+and `build/gcs-budget`. Earlier domain reports appear under `build/gcs-architecture`, `build/gcs-configuration`,
 `build/gcs-safety` and `build/gcs-evidence`. See the linked guides for prerequisites,
 acceptance evidence and remaining limits.
 
@@ -255,8 +258,8 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2411](../../roadmap/closed/task-2411-implement-verification-evidence.yaml) | Implement Procedures Runs and Evidence Queries | TC-2410, TC-2405, TC-2409 |
 | [TC-2412](../../roadmap/closed/task-2412-design-equipment-connectivity.yaml) | Design Equipment Parts and Wiring Artifacts | TC-2403, TC-2404, TC-2408 |
 | [TC-2413](../../roadmap/closed/task-2413-implement-equipment-connectivity.yaml) | Implement Equipment Selection and Wiring Views | TC-2412, TC-2405, TC-2409 |
-| [TC-2414](../../roadmap/task-2414-design-quantities-budgets-reliability.yaml) | Design Quantities Budgets and Reliability Analyses | TC-2403, TC-2408, TC-2412 |
-| [TC-2415](../../roadmap/task-2415-implement-budgets-reliability.yaml) | Implement Budget and Reliability Calculations | TC-2414, TC-2409, TC-2413 |
+| [TC-2414](../../roadmap/closed/task-2414-design-quantities-budgets-reliability.yaml) | Design Quantities Budgets and Reliability Analyses | TC-2403, TC-2408, TC-2412 |
+| [TC-2415](../../roadmap/closed/task-2415-implement-budgets-reliability.yaml) | Implement Budget and Reliability Calculations | TC-2414, TC-2409, TC-2413 |
 | [TC-2416](../../roadmap/closed/task-2416-design-software-security-provenance.yaml) | Design Software Provenance and Security Artifacts | TC-2403, TC-2404, TC-2408 |
 | [TC-2417](../../roadmap/closed/task-2417-implement-software-security-provenance.yaml) | Implement Build Provenance and Security Traceability | TC-2416, TC-2405, TC-2409 |
 | [TC-2418](../../roadmap/task-2418-design-assurance-reviews.yaml) | Design Assurance Arguments Reviews and Waivers | TC-2406, TC-2408, TC-2410, TC-2416 |

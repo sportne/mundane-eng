@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Added canonical equipment/BOM/wiring and dimensional interval budgets with
+  conditional repair/availability calculations and adversarial GCS workflows.
 - Added native SLSA/in-toto and CycloneDX SBOM/VEX adapters with exact build,
   configuration and security-review traceability.
 

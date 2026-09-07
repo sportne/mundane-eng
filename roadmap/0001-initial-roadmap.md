@@ -147,11 +147,11 @@ The [GCS example plan](../examples/ground-control-station/README.md) defines a
 civilian, simulator-first engineering project and adversarial scenario ledger for
 additional artifact families. TC-2401 through TC-2428 separate boundary and current-tool
 seeding, representation decisions, implementation, semantic change, editor/report
-workflows, integrated verification, distribution and final cleanup. TC-2401 through TC-2411 now provide the boundary, current-tool seed, ownership
+workflows, integrated verification, distribution and final cleanup. TC-2401 through TC-2417 provide the boundary, current-tool seed, ownership
 decisions, architecture/configuration tooling, safety traceability, procedures and
-bounded simulated evidence. Equipment, security, assurance and release domains
-remain planned; the implemented foundation above
-remains the current support statement.
+bounded simulated evidence, native software provenance/security adapters, equipment
+and wiring, and bounded budget/reliability calculations. Assurance and release
+remain planned, followed by semantic impact, editor/review integration and packaging.
 The example uses YAML for new authored engineering facts and explicit adapters for
 canonical native resources. It does not establish flight readiness or certification.
 

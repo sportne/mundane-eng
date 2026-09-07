@@ -1,7 +1,7 @@
 # Quantities, budgets and reliability decision
 
 TC-2414 selects YAML parameters with explicit units, lower/upper bounds, basis,
-explanation and optional native evidence/selected equipment rating reference.
+explanation, quantity/fraction role and optional native evidence/selected equipment rating reference.
 Manufacturer ratings, measurements and assumptions cannot silently substitute for
 each other. Non-assumed inputs require pinned evidence; equipment references must
 identify the selected instance/part/rating and enclose its declared value. The

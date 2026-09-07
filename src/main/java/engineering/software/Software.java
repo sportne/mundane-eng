@@ -72,7 +72,7 @@ public final class Software implements Model.Domain {
             reviews.add(Json.object("id",review.get("id"),"state",current&&found?"current-authored-review":"stale-or-unavailable-review"));
         }
         return Json.object("format","mundane-software-analysis-0.1","configuration",config.get("id"),"stage",config.get("stage"),
-            "baseline",baseline.get("id"),"build",provenance,"scanState",state,"findings",findings,"reviews",reviews,
+            "baseline",baseline.get("id"),"build",provenance,"nativeResources",build,"scanner",Json.object("tool",scan.get("tool"),"version",scan.get("version")),"scanState",state,"findings",findings,"reviews",reviews,
             "controls",values.get("controls"),"authorization","none");
     }
     private static Map<String,Object> nativeJson(Object resource,Model.Context context) {

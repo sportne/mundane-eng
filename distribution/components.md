@@ -74,7 +74,7 @@ undeclared repository sources. A failing declared dependency still fails the bui
 
 Each component writes to `build/maintained/components/COMPONENT/classes`; focused
 tests use its `test-classes` directory. `make test` assembles a disposable aggregate
-at `build/maintained/classes` for the existing integration scripts and runs all 14
+at `build/maintained/classes` for the existing integration scripts and runs all 21
 maintained test groups. This is a compatibility test view, never a component's
 production compile input. It is rebuilt from scratch, including after deletions.
 
@@ -151,3 +151,7 @@ for YAML/CLI wiring. Its isolated consumer requires no YAML parser.
 
 TC-2413 adds `equipment-model` on compiled configuration/architecture and `equipment`
 for source/CLI wiring. BOM and wiring share the same checked connectivity model.
+
+TC-2415 adds `budget-model` (dimensional interval arithmetic and conditional repair
+models) on compiled equipment/configuration, and `budget` for source/CLI wiring.
+The three new domains bring the aggregate suite to 21 maintained groups.

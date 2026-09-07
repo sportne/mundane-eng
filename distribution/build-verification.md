@@ -108,3 +108,8 @@ retained baseline publication, safety queries, the deterministic event simulator
 synthetic manual observations, assessed-result separation and adversarial provenance
 cases. New compiled-model classpaths are tested without YAML readers. Focused targets
 and limitations are documented in each domain's distribution guide.
+
+The full gate also runs `software-design-verify`, `software-verify`,
+`equipment-design-verify`, `equipment-verify`, `budget-design-verify` and
+`budget-verify`. Native SLSA/CycloneDX fixtures use offline upstream schemas; budget
+outputs are checked against independent Decimal reference calculations.

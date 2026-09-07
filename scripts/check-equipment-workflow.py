@@ -23,6 +23,7 @@ def verify():
     compiled=stage(out)
     for view in ['view','bom','wiring']:(out/('equipment-'+view+'.md')).write_bytes(run(out,view,'equipment.json'))
     assert not json.loads(run(out,'analyze','equipment.json'))['findings']
+    report=run(out,'view','equipment.json');assert b'configuration-sim.yaml#L' in report and b'equipment-datasheet.txt' in report
     cp=subprocess.check_output(['python3','scripts/build-components.py','classpath','equipment'],cwd=ROOT,text=True).strip();cp=':'.join(p for p in cp.split(':') if '/domain-source/' not in p and '/yaml/' not in p and not p.endswith('.jar'))
     assert run(out,'check','equipment.json',command=['java','-cp',cp,'engineering.equipment.EquipmentMain'])==compiled
     with tempfile.TemporaryDirectory(prefix='equipment-rebuild-') as tmp:

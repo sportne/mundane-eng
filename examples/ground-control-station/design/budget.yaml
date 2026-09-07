@@ -1,338 +1,122 @@
-format: mundane-budget-yaml-0.1
-id: BUDGET-GCS
-configuration:
-  scope: gcs-config
-  kind: baseline
-  id: BL-SIM-DESIGN
-equipmentScope: gcs-equipment
-reviewedEquipmentSha256: '0000000000000000000000000000000000000000000000000000000000000000'
-parameters:
-- id: HOST-PEAK
-  unit: W
-  min: 60
-  max: 60
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-    instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-HOST
-    rating: PEAK
-- id: SWITCH-PEAK
-  unit: W
-  min: 12
-  max: 12
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-    instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-SWITCH
-    rating: PEAK
-- id: LINK-PEAK
-  unit: W
-  min: 18
-  max: 18
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-    instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-LINK
-    rating: PEAK
-- id: ENERGY
-  unit: Wh
-  min: 120
-  max: 120
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-    instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-UPS
-    rating: ENERGY
-- id: USABLE
-  unit: '1'
-  min: 0.8
-  max: 0.8
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: EFFICIENCY
-  unit: '1'
-  min: 0.9
-  max: 0.9
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: POWER-LIMIT
-  unit: W
-  min: 120
-  max: 120
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: RUNTIME-MIN
-  unit: h
-  min: 0.5
-  max: 0.5
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: NETWORK
-  unit: Mbps
-  min: 12
-  max: 12
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: OVERHEAD
-  unit: '1'
-  min: 1.25
-  max: 1.25
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: NET-LIMIT
-  unit: Mbps
-  min: 100
-  max: 100
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: LATENCY
-  unit: ms
-  min: 150
-  max: 150
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: LATENCY-LIMIT
-  unit: ms
-  min: 200
-  max: 200
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: CPU-DEMAND
-  unit: '1'
-  min: 0.6
-  max: 0.6
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: CPU-LIMIT
-  unit: '1'
-  min: 0.8
-  max: 0.8
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: RECORD-RATE
-  unit: Mbps
-  min: 8
-  max: 8
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: DURATION
-  unit: h
-  min: 2
-  max: 2
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: STORAGE-LIMIT
-  unit: GB
-  min: 16
-  max: 16
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: HOST-MTBF
-  unit: h
-  min: 20000
-  max: 20000
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: HOST-REPAIR
-  unit: h
-  min: 4
-  max: 4
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: SWITCH-MTBF
-  unit: h
-  min: 20000
-  max: 20000
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: SWITCH-REPAIR
-  unit: h
-  min: 4
-  max: 4
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: LINK-MTBF
-  unit: h
-  min: 20000
-  max: 20000
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: LINK-REPAIR
-  unit: h
-  min: 4
-  max: 4
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: POWER-MTBF
-  unit: h
-  min: 1000
-  max: 1000
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-- id: POWER-REPAIR
-  unit: h
-  min: 2
-  max: 2
-  basis: assumption
-  explanation: Illustrative assumption; no measurement or qualified rating.
-  evidence:
-  rating:
-formulas:
-- id: TOTAL-POWER
-  op: sum
-  inputs:
-  - HOST-PEAK
-  - SWITCH-PEAK
-  - LINK-PEAK
-  unit: W
-  explanation: Bounded interval calculation, explicitly selected inputs.
-- id: USABLE-ENERGY
-  op: product
-  inputs:
-  - ENERGY
-  - USABLE
-  - EFFICIENCY
-  unit: Wh
-  explanation: Bounded interval calculation, explicitly selected inputs.
-- id: RUNTIME
-  op: ratio
-  inputs:
-  - USABLE-ENERGY
-  - TOTAL-POWER
-  unit: h
-  explanation: Bounded interval calculation, explicitly selected inputs.
-- id: NETWORK-TOTAL
-  op: product
-  inputs:
-  - NETWORK
-  - OVERHEAD
-  unit: Mbps
-  explanation: Bounded interval calculation, explicitly selected inputs.
-- id: STORAGE
-  op: product
-  inputs:
-  - RECORD-RATE
-  - DURATION
-  unit: GB
-  explanation: Bounded interval calculation, explicitly selected inputs.
 checks:
-- id: CHECK-POWER
-  kind: peak-power
-  actual: TOTAL-POWER
-  limit: POWER-LIMIT
-  relation: at-most
-- id: CHECK-RUNTIME
-  kind: minimum
-  actual: RUNTIME
-  limit: RUNTIME-MIN
-  relation: at-least
-- id: CHECK-NETWORK
-  kind: capacity
-  actual: NETWORK-TOTAL
-  limit: NET-LIMIT
-  relation: at-most
-- id: CHECK-LATENCY
-  kind: capacity
-  actual: LATENCY
-  limit: LATENCY-LIMIT
-  relation: at-most
-- id: CHECK-CPU
-  kind: capacity
-  actual: CPU-DEMAND
-  limit: CPU-LIMIT
-  relation: at-most
-- id: CHECK-STORAGE
-  kind: capacity
-  actual: STORAGE
-  limit: STORAGE-LIMIT
-  relation: at-most
+- {actual: TOTAL-POWER, id: CHECK-POWER, kind: peak-power, limit: POWER-LIMIT, relation: at-most}
+- {actual: RUNTIME, id: CHECK-RUNTIME, kind: minimum, limit: RUNTIME-MIN, relation: at-least}
+- {actual: NETWORK-TOTAL, id: CHECK-NETWORK, kind: capacity, limit: NET-LIMIT, relation: at-most}
+- {actual: LATENCY, id: CHECK-LATENCY, kind: capacity, limit: LATENCY-LIMIT, relation: at-most}
+- {actual: CPU-DEMAND, id: CHECK-CPU, kind: capacity, limit: CPU-LIMIT, relation: at-most}
+- {actual: STORAGE, id: CHECK-STORAGE, kind: capacity, limit: STORAGE-LIMIT, relation: at-most}
+configuration: {id: BL-SIM-DESIGN, kind: baseline, scope: gcs-config}
+equipmentScope: gcs-equipment
+format: mundane-budget-yaml-0.1
+formulas:
+- explanation: Bounded interval calculation, explicitly selected inputs.
+  id: TOTAL-POWER
+  inputs: [HOST-PEAK, SWITCH-PEAK, LINK-PEAK]
+  op: sum
+  unit: W
+- explanation: Bounded interval calculation, explicitly selected inputs.
+  id: USABLE-ENERGY
+  inputs: [ENERGY, USABLE, EFFICIENCY]
+  op: product
+  unit: Wh
+- explanation: Bounded interval calculation, explicitly selected inputs.
+  id: RUNTIME
+  inputs: [USABLE-ENERGY, TOTAL-POWER]
+  op: ratio
+  unit: h
+- explanation: Bounded interval calculation, explicitly selected inputs.
+  id: NETWORK-TOTAL
+  inputs: [NETWORK, OVERHEAD]
+  op: product
+  unit: Mbps
+- explanation: Bounded interval calculation, explicitly selected inputs.
+  id: STORAGE
+  inputs: [RECORD-RATE, DURATION]
+  op: product
+  unit: GB
+id: BUDGET-GCS
+limitations: [Synthetic design estimates; no numerical safety or certified availability claim., Storage uses decimal bytes; no compression benefit; compute fractions share one declared workload capacity basis., 'MTBF/repair steady-state model excludes transient recovery, maintenance scheduling and unmodelled common causes.']
+parameters:
+- basis: assumption
+  evidence: null
+  explanation: Illustrative assumption; no measurement or qualified rating.
+  id: HOST-PEAK
+  max: 60
+  min: 60
+  rating:
+    instance: {id: EQ-HOST, kind: instance, scope: gcs-equipment}
+    rating: PEAK
+  role: quantity
+  unit: W
+- basis: assumption
+  evidence: null
+  explanation: Illustrative assumption; no measurement or qualified rating.
+  id: SWITCH-PEAK
+  max: 12
+  min: 12
+  rating:
+    instance: {id: EQ-SWITCH, kind: instance, scope: gcs-equipment}
+    rating: PEAK
+  role: quantity
+  unit: W
+- basis: assumption
+  evidence: null
+  explanation: Illustrative assumption; no measurement or qualified rating.
+  id: LINK-PEAK
+  max: 18
+  min: 18
+  rating:
+    instance: {id: EQ-LINK, kind: instance, scope: gcs-equipment}
+    rating: PEAK
+  role: quantity
+  unit: W
+- basis: assumption
+  evidence: null
+  explanation: Illustrative assumption; no measurement or qualified rating.
+  id: ENERGY
+  max: 120
+  min: 120
+  rating:
+    instance: {id: EQ-UPS, kind: instance, scope: gcs-equipment}
+    rating: ENERGY
+  role: quantity
+  unit: Wh
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: USABLE, max: 0.8, min: 0.8, rating: null, role: fraction, unit: '1'}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: EFFICIENCY, max: 0.9, min: 0.9, rating: null, role: fraction, unit: '1'}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: POWER-LIMIT, max: 120, min: 120, rating: null, role: quantity, unit: W}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: RUNTIME-MIN, max: 0.5, min: 0.5, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: NETWORK, max: 12, min: 12, rating: null, role: quantity, unit: Mbps}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: OVERHEAD, max: 1.25, min: 1.25, rating: null, role: quantity, unit: '1'}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: NET-LIMIT, max: 100, min: 100, rating: null, role: quantity, unit: Mbps}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: LATENCY, max: 150, min: 150, rating: null, role: quantity, unit: ms}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: LATENCY-LIMIT, max: 200, min: 200, rating: null, role: quantity, unit: ms}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: CPU-DEMAND, max: 0.6, min: 0.6, rating: null, role: fraction, unit: '1'}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: CPU-LIMIT, max: 0.8, min: 0.8, rating: null, role: fraction, unit: '1'}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: RECORD-RATE, max: 8, min: 8, rating: null, role: quantity, unit: Mbps}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: DURATION, max: 2, min: 2, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: STORAGE-LIMIT, max: 16, min: 16, rating: null, role: quantity, unit: GB}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: HOST-MTBF, max: 20000, min: 20000, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: HOST-REPAIR, max: 4, min: 4, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: SWITCH-MTBF, max: 20000, min: 20000, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: SWITCH-REPAIR, max: 4, min: 4, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: LINK-MTBF, max: 20000, min: 20000, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: LINK-REPAIR, max: 4, min: 4, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: POWER-MTBF, max: 1000, min: 1000, rating: null, role: quantity, unit: h}
+- {basis: assumption, evidence: null, explanation: Illustrative assumption; no measurement or qualified rating., id: POWER-REPAIR, max: 2, min: 2, rating: null, role: quantity, unit: h}
 reliability:
-- id: AVAIL-GCS
+- evidence: null
+  explanation: 'Conditional series/repair model: independent residual device failures assumed; one shared power cause included once. No common-cause independence evidence.'
+  id: AVAIL-GCS
   independence: assumed
-  evidence:
   members:
-  - instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-HOST
+  - instance: {id: EQ-HOST, kind: instance, scope: gcs-equipment}
     mtbf: HOST-MTBF
     repair: HOST-REPAIR
-  - instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-SWITCH
+  - instance: {id: EQ-SWITCH, kind: instance, scope: gcs-equipment}
     mtbf: SWITCH-MTBF
     repair: SWITCH-REPAIR
-  - instance:
-      scope: gcs-equipment
-      kind: instance
-      id: EQ-LINK
+  - instance: {id: EQ-LINK, kind: instance, scope: gcs-equipment}
     mtbf: LINK-MTBF
     repair: LINK-REPAIR
-  sharedCause:
-    id: POWER-DOMAIN
-    mtbf: POWER-MTBF
-    repair: POWER-REPAIR
-  explanation: 'Conditional series/repair model: independent residual device failures assumed; one shared power cause included once. No common-cause independence evidence.'
-limitations:
-- Synthetic design estimates; no numerical safety or certified availability claim.
-- Storage uses decimal bytes; no compression benefit; compute fractions share one declared workload capacity basis.
-- MTBF/repair steady-state model excludes transient recovery, maintenance scheduling and unmodelled common causes.
+  sharedCause: {id: POWER-DOMAIN, mtbf: POWER-MTBF, repair: POWER-REPAIR}
+reviewedEquipmentSha256: 5e777686c35b1b54a21ba1e5341627000a4e6aa71c0b350867e4548a19b73a76

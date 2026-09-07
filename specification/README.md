@@ -34,3 +34,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [Software provenance and security](0032-software-provenance-and-security.md) — native SLSA/in-toto and CycloneDX adapters.
 
 - [Equipment and connectivity](0033-equipment-and-connectivity.md) — canonical selected parts and wiring.
+
+- [Budgets and reliability](0034-budgets-and-reliability.md) — dimensional intervals and conditional availability.

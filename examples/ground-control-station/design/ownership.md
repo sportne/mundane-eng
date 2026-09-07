@@ -2,7 +2,7 @@
 
 Accepted design direction, 2026-09-07. This document and the local draft examples
 are design evidence. Subsequent cards implement architecture, configuration, safety,
-procedures and evidence alongside the [seed](../seed/README.md). Their published
+procedures, evidence, software, equipment and budgets alongside the [seed](../seed/README.md). Their published
 contracts and registered versions are linked from the [current guide](../README.md).
 
 ## Ownership and proposed version boundaries
@@ -17,10 +17,10 @@ contracts and registered versions are linked from the [current guide](../README.
 | Configuration selections, baselines, proposed changes | Implemented configuration YAML 0.1 / compiled configuration 0.1 | Configuration owner; immutable published snapshots and separate resource resolver |
 | Procedures and planned test criteria | Implemented procedure YAML 0.1 / compiled procedure 0.1 | Verification-procedure owner; reference existing activities without embedding executions |
 | Runs, observations, raw evidence | Native runner/log formats plus a versioned evidence adapter 0.1; authored manual observations use YAML | Evidence owner records provenance and outcomes; never changes a requirement to satisfied |
-| Parts, equipment instances and connectivity | Reserve equipment YAML 0.1 / compiled equipment 0.1 | Hardware owner; native CAD retained by adapters, BOM/wiring derived |
-| Quantities, calculations and reliability models | Reserve analysis YAML 0.1 / compiled analysis 0.1 | Bounded domain evaluators, pinned inputs and assumptions; no formula language selected yet |
-| Code/build/dependency facts | Keep native code, build metadata and SBOM formats; independent adapter contracts | Software provenance owner; native files do not become YAML copies |
-| Threats, vulnerabilities and project assessments | Reserve security YAML 0.1 / compiled security 0.1 | Security owner separates native findings from project exploitability decisions |
+| Parts, equipment instances and connectivity | Implemented equipment YAML 0.1 / compiled equipment 0.1 | Hardware owner; BOM/wiring derived, native CAD adapters remain future work |
+| Quantities, calculations and reliability models | Implemented budget YAML 0.1 / compiled budget 0.1 | Bounded dimensional interval evaluator, pinned inputs and conditional reliability |
+| Code/build/dependency facts | Native code and SLSA Provenance v1/in-toto Statement v1; CycloneDX JSON 1.6 | Software provenance owner; native files do not become YAML copies |
+| Threats, vulnerabilities and project assessments | Implemented software YAML 0.1 / compiled software 0.1 | Software owner relates native CycloneDX VEX to YAML project controls and review applicability |
 | Claims, reviews, obligations and exceptions | Reserve assurance YAML 0.1 / compiled assurance 0.1 | Assurance owner; evidence adequacy and verified authority are separate checks |
 | Release/commissioning/incident records | Reserve operations YAML 0.1 / compiled operations 0.1 | Operations owner selects exact baselines and evidence; work items own corrective tasks |
 | Cross-artifact comparison and impact | Preserve current impact 0.1 semantics; independently version future semantic-change analysis | Adapters consume compiled values; no universal source parser or authoritative graph |
