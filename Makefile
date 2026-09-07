@@ -220,4 +220,5 @@ verify: gcs-seed-verify
 .PHONY: gcs-design-verify
 gcs-design-verify: yaml-schema-verify gcs-seed-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-common.py
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-architecture.py
 verify: gcs-design-verify

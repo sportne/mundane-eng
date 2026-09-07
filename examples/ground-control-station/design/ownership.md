@@ -40,6 +40,10 @@ not a vehicle identity or a project-wide magic namespace. For example, `gcs-arch
 references use a separate `gcs-req` alias. Alias changes are explicit selection changes;
 no implicit cross-project ID search or rename inference is allowed.
 
+For new local references, `self` is reserved for the containing artifact and is
+rebound to its selected alias when imported. External references use explicit aliases;
+`self` cannot select an external artifact. TC-2404 applies this local-reference rule.
+
 Current work relations retain their existing `target` field and roles. An adapter can
 normalize it to a new domain reference; this is not a source-format migration. Each
 domain owns which reference kinds and relation meanings it accepts. Typed references

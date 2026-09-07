@@ -1,0 +1,122 @@
+cases:
+- name: valid
+  changes: []
+  expected: []
+- name: unallocated-function
+  changes:
+  - path:
+    - functions
+    - 0
+    - owner
+    - id
+    value: ABSENT
+  expected:
+  - missing-allocation
+- name: incompatible-interface
+  changes:
+  - path:
+    - components
+    - 1
+    - ports
+    - 0
+    - profile
+    value: mavlink-2-common-sim/2
+  expected:
+  - interface-profile-mismatch
+- name: wrong-reference-kind
+  changes:
+  - path:
+    - functions
+    - 0
+    - owner
+    - kind
+    value: mode
+  expected:
+  - wrong-kind
+- name: missing-requirement
+  changes:
+  - path:
+    - functions
+    - 0
+    - requirements
+    - 0
+    - id
+    value: ABSENT
+  expected:
+  - missing-requirement
+- name: invalid-mode
+  changes:
+  - path:
+    - transitions
+    - 0
+    - to
+    - id
+    value: ABSENT
+  expected:
+  - missing-mode
+- name: unguarded-enable
+  changes:
+  - path:
+    - transitions
+    - 2
+    - requires
+    value: []
+  expected:
+  - unsafe-command-transition
+- name: handover-keeps-authority
+  changes:
+  - path:
+    - transitions
+    - 6
+    - effects
+    value:
+    - block-intent
+  expected:
+  - unsafe-session-transition
+- name: dimension-error
+  changes:
+  - path:
+    - interfaces
+    - 0
+    - policy
+    - freshness
+    - unit
+    value: V
+  expected:
+  - invalid-timing
+- name: missing-ack-policy
+  changes:
+  - path:
+    - interfaces
+    - 1
+    - policy
+    - completion
+    remove: true
+  expected:
+  - schema
+- name: unknown-field
+  changes:
+  - path:
+    - unused
+    value: true
+  expected:
+  - schema
+- name: duplicate-component
+  changes:
+  - path:
+    - components
+    - 1
+    - id
+    value: CMP-UAV
+  expected:
+  - duplicate-id
+- name: invalid-host
+  changes:
+  - path:
+    - deployments
+    - 0
+    - host
+    - id
+    value: CMP-UI
+  expected:
+  - invalid-deployment

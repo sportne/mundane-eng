@@ -1,0 +1,7 @@
+format: gcs-design-selection-0.1
+localScope: gcs-arch
+imports:
+- scope: gcs-req
+  kind: requirements
+  path: current.json
+  sha256: 33ce6bf9fbce9dd5def3eecb065da32510a9beaf45a3edd7ac8ce0420dec9a63

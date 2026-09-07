@@ -1,0 +1,622 @@
+format: mundane-architecture-yaml-0.1
+id: ARCH-GCS
+context:
+  id: CTX-SIM
+  mission: GCS-AP-SIM-0.1 engineering probe; no aircraft transport
+  scenarios:
+  - S01
+  - S02
+  - S03
+  - S04
+  - S05
+  - S06
+  - S07
+  - S08
+  - S09
+  - S10
+  - S11
+  - S12
+  actors:
+  - role: operator
+    authority: command
+  - role: observer
+    authority: read-only
+  - role: maintainer
+    authority: maintenance
+initialMode:
+  scope: self
+  kind: mode
+  id: OFFLINE
+modes:
+- id: OFFLINE
+  commandPolicy: inhibit
+- id: PREFLIGHT
+  commandPolicy: inhibit
+- id: MONITORING
+  commandPolicy: inhibit
+- id: COMMAND-ENABLED
+  commandPolicy: allow
+- id: DEGRADED
+  commandPolicy: inhibit
+- id: MAINTENANCE
+  commandPolicy: inhibit
+components:
+- id: CMP-UAV
+  kind: external
+  owner: software
+  ports:
+  - id: telemetry
+    direction: out
+    signal: aircraft-state
+    unit: record
+    profile: mavlink-2-common-sim/1
+  - id: commands
+    direction: in
+    signal: command
+    unit: record
+    profile: mavlink-2-common-sim/1
+  - id: heartbeat
+    direction: out
+    signal: connection
+    unit: record
+    profile: mavlink-2-common-sim/1
+- id: CMP-LINK
+  kind: software
+  owner: software
+  ports:
+  - id: telemetry
+    direction: in
+    signal: aircraft-state
+    unit: record
+    profile: mavlink-2-common-sim/1
+  - id: commands
+    direction: out
+    signal: command
+    unit: record
+    profile: mavlink-2-common-sim/1
+  - id: heartbeat
+    direction: in
+    signal: connection
+    unit: record
+    profile: mavlink-2-common-sim/1
+  - id: state
+    direction: out
+    signal: application-state
+    unit: record
+    profile: gcs-state/1
+  - id: request
+    direction: in
+    signal: command-request
+    unit: record
+    profile: gcs-request/1
+- id: CMP-GCS
+  kind: software
+  owner: software
+  ports:
+  - id: state
+    direction: in
+    signal: application-state
+    unit: record
+    profile: gcs-state/1
+  - id: display
+    direction: out
+    signal: application-state
+    unit: record
+    profile: gcs-state/1
+  - id: intent
+    direction: in
+    signal: operator-intent
+    unit: record
+    profile: gcs-intent/1
+  - id: request
+    direction: out
+    signal: command-request
+    unit: record
+    profile: gcs-request/1
+  - id: events
+    direction: out
+    signal: event
+    unit: record
+    profile: gcs-event/1
+- id: CMP-UI
+  kind: software
+  owner: software
+  ports:
+  - id: display
+    direction: in
+    signal: application-state
+    unit: record
+    profile: gcs-state/1
+  - id: intent
+    direction: out
+    signal: operator-intent
+    unit: record
+    profile: gcs-intent/1
+- id: CMP-RECORDER
+  kind: software
+  owner: software
+  ports:
+  - id: events
+    direction: in
+    signal: event
+    unit: record
+    profile: gcs-event/1
+- id: CMP-SERVER
+  kind: hardware
+  owner: hardware
+  ports:
+  - id: power
+    direction: in
+    signal: dc-power
+    unit: V
+    profile: illustrative-24vdc/1
+- id: CMP-UPS
+  kind: hardware
+  owner: hardware
+  ports:
+  - id: power
+    direction: out
+    signal: dc-power
+    unit: V
+    profile: illustrative-24vdc/1
+functions:
+- id: FUN-GATE
+  description: Determine intent eligibility and selected identity
+  owner:
+    scope: self
+    kind: component
+    id: CMP-GCS
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-START
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-AUTH
+- id: FUN-FRESH
+  description: Interpret trustworthy telemetry age
+  owner:
+    scope: self
+    kind: component
+    id: CMP-LINK
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-STALE
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-CLOCK
+- id: FUN-COMMAND
+  description: Track acknowledgement and observed outcome
+  owner:
+    scope: self
+    kind: component
+    id: CMP-GCS
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-ACK
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-RESTART
+- id: FUN-DISPLAY
+  description: Present stale/unknown state
+  owner:
+    scope: self
+    kind: component
+    id: CMP-UI
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-STALE
+- id: FUN-RECORD
+  description: Record faults and missing observations
+  owner:
+    scope: self
+    kind: component
+    id: CMP-RECORDER
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-POWER
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-CLOCK
+- id: FUN-TRUST
+  description: Exclude untrusted synthetic inputs
+  owner:
+    scope: self
+    kind: component
+    id: CMP-LINK
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-TRUST
+interfaces:
+- id: IF-TELEMETRY
+  kind: telemetry
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UAV
+    port: telemetry
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-LINK
+    port: telemetry
+  profile: mavlink-2-common-sim/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy:
+    freshness:
+      value: 500
+      unit: ms
+    clockUncertainty:
+      value: 50
+      unit: ms
+    displayLatency:
+      value: 100
+      unit: ms
+    unknownState: inhibit-new-intent
+- id: IF-COMMAND
+  kind: command
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-LINK
+    port: commands
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UAV
+    port: commands
+  profile: mavlink-2-common-sim/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy:
+    ackTimeout:
+      value: 1000
+      unit: ms
+    retryCount: 2
+    acceptedMeans: attempt-pending-observation
+    retryPolicy: idempotent-in-same-session-only
+    lateAckPolicy: quarantine-no-state-promotion
+    completion: fresh-state-observation
+    correlation: synthetic-session-request-envelope
+- id: IF-HEARTBEAT
+  kind: heartbeat
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UAV
+    port: heartbeat
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-LINK
+    port: heartbeat
+  profile: mavlink-2-common-sim/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy:
+    lossTimeout:
+      value: 3000
+      unit: ms
+- id: IF-STATE
+  kind: status
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-LINK
+    port: state
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-GCS
+    port: state
+  profile: gcs-state/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy: {}
+- id: IF-DISPLAY
+  kind: status
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-GCS
+    port: display
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UI
+    port: display
+  profile: gcs-state/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy: {}
+- id: IF-POWER
+  kind: power
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UPS
+    port: power
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-SERVER
+    port: power
+  profile: illustrative-24vdc/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy:
+    nominalVoltage:
+      value: 24
+      unit: V
+- id: IF-INTENT
+  kind: status
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-UI
+    port: intent
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-GCS
+    port: intent
+  profile: gcs-intent/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy: {}
+- id: IF-REQUEST
+  kind: status
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-GCS
+    port: request
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-LINK
+    port: request
+  profile: gcs-request/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy: {}
+- id: IF-EVENTS
+  kind: status
+  from:
+    component:
+      scope: self
+      kind: component
+      id: CMP-GCS
+    port: events
+  to:
+    component:
+      scope: self
+      kind: component
+      id: CMP-RECORDER
+    port: events
+  profile: gcs-event/1
+  decision:
+    scope: self
+    kind: decision
+    id: DEC-INTERFACES
+  policy: {}
+transitions:
+- id: TR-START
+  from:
+    scope: self
+    kind: mode
+    id: OFFLINE
+  to:
+    scope: self
+    kind: mode
+    id: PREFLIGHT
+  event: start
+  requires: &id001 []
+  effects:
+  - block-intent
+- id: TR-MONITOR
+  from:
+    scope: self
+    kind: mode
+    id: PREFLIGHT
+  to:
+    scope: self
+    kind: mode
+    id: MONITORING
+  event: identity-confirmed
+  requires:
+  - configuration-known
+  - identity-known
+  effects:
+  - block-intent
+- id: TR-ENABLE
+  from:
+    scope: self
+    kind: mode
+    id: MONITORING
+  to:
+    scope: self
+    kind: mode
+    id: COMMAND-ENABLED
+  event: operator-request
+  requires:
+  - configuration-known
+  - identity-known
+  - authority-held
+  - fresh-state
+  - trusted-time
+  effects:
+  - grant-authority
+- id: TR-STALE
+  from:
+    scope: self
+    kind: mode
+    id: COMMAND-ENABLED
+  to:
+    scope: self
+    kind: mode
+    id: DEGRADED
+  event: stale-or-unknown
+  requires: *id001
+  effects:
+  - block-intent
+  - mark-unknown
+- id: TR-LOSS
+  from:
+    scope: self
+    kind: mode
+    id: COMMAND-ENABLED
+  to:
+    scope: self
+    kind: mode
+    id: DEGRADED
+  event: mains-or-link-loss
+  requires: *id001
+  effects:
+  - block-intent
+  - mark-unknown
+- id: TR-RECOVER
+  from:
+    scope: self
+    kind: mode
+    id: DEGRADED
+  to:
+    scope: self
+    kind: mode
+    id: PREFLIGHT
+  event: reconnect
+  requires: *id001
+  effects:
+  - discard-queue
+  - revoke-authority
+  - block-intent
+- id: TR-HANDOVER
+  from:
+    scope: self
+    kind: mode
+    id: COMMAND-ENABLED
+  to:
+    scope: self
+    kind: mode
+    id: PREFLIGHT
+  event: handover
+  requires: *id001
+  effects:
+  - revoke-authority
+  - discard-queue
+  - block-intent
+- id: TR-MAINTAIN
+  from:
+    scope: self
+    kind: mode
+    id: OFFLINE
+  to:
+    scope: self
+    kind: mode
+    id: MAINTENANCE
+  event: maintenance-start
+  requires: *id001
+  effects:
+  - block-intent
+- id: TR-STOP
+  from:
+    scope: self
+    kind: mode
+    id: MAINTENANCE
+  to:
+    scope: self
+    kind: mode
+    id: OFFLINE
+  event: maintenance-complete
+  requires: *id001
+  effects:
+  - discard-queue
+decisions:
+- id: DEC-INTERFACES
+  subject:
+    scope: self
+    kind: interface
+    id: IF-TELEMETRY
+  rationale: Separate connection, upper-bound freshness, application authority and observed command
+    completion. Numeric values are simulation-only TC-2401 choices; 24 V is an illustrative interface,
+    not a selected product rating.
+  alternatives:
+  - 'Use heartbeat as freshness: rejected because live links can carry obsolete data.'
+  - 'Use ACK as achieved state: rejected because acceptance does not establish completion.'
+  - 'Treat message IDs as session authority: rejected because simulator envelope semantics are additional
+    assumptions.'
+deployments:
+- id: DEP-GCS
+  component:
+    scope: self
+    kind: component
+    id: CMP-GCS
+  host:
+    scope: self
+    kind: component
+    id: CMP-SERVER
+- id: DEP-UI
+  component:
+    scope: self
+    kind: component
+    id: CMP-UI
+  host:
+    scope: self
+    kind: component
+    id: CMP-SERVER
+- id: DEP-LINK
+  component:
+    scope: self
+    kind: component
+    id: CMP-LINK
+  host:
+    scope: self
+    kind: component
+    id: CMP-SERVER
+- id: DEP-RECORDER
+  component:
+    scope: self
+    kind: component
+    id: CMP-RECORDER
+  host:
+    scope: self
+    kind: component
+    id: CMP-SERVER

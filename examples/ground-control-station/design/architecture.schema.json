@@ -1,0 +1,583 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRAFT architecture authoring 0.1; design experiment only",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": [
+        "scope",
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "id",
+    "context",
+    "initialMode",
+    "modes",
+    "components",
+    "functions",
+    "interfaces",
+    "transitions",
+    "decisions",
+    "deployments"
+  ],
+  "properties": {
+    "format": {
+      "const": "mundane-architecture-yaml-0.1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "mission",
+        "scenarios",
+        "actors"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mission": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "role",
+              "authority"
+            ],
+            "properties": {
+              "role": {
+                "type": "string",
+                "minLength": 1
+              },
+              "authority": {
+                "enum": [
+                  "command",
+                  "read-only",
+                  "maintenance"
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "initialMode": {
+      "$ref": "#/$defs/ref"
+    },
+    "modes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "commandPolicy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "commandPolicy": {
+            "enum": [
+              "allow",
+              "inhibit"
+            ]
+          }
+        }
+      }
+    },
+    "components": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "owner",
+          "ports"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "software",
+              "hardware",
+              "external"
+            ]
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "direction",
+                "signal",
+                "unit",
+                "profile"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "direction": {
+                  "enum": [
+                    "in",
+                    "out"
+                  ]
+                },
+                "signal": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "unit": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "profile": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "functions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "description",
+          "owner",
+          "requirements"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "$ref": "#/$defs/ref"
+          },
+          "requirements": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/ref"
+            }
+          }
+        }
+      }
+    },
+    "interfaces": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "from",
+          "to",
+          "profile",
+          "decision",
+          "policy"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "enum": [
+              "telemetry",
+              "command",
+              "heartbeat",
+              "status",
+              "power"
+            ]
+          },
+          "from": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component",
+              "port"
+            ],
+            "properties": {
+              "component": {
+                "$ref": "#/$defs/ref"
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "to": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "component",
+              "port"
+            ],
+            "properties": {
+              "component": {
+                "$ref": "#/$defs/ref"
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "profile": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decision": {
+            "$ref": "#/$defs/ref"
+          },
+          "policy": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [],
+            "properties": {
+              "freshness": {
+                "$ref": "#/$defs/quantity"
+              },
+              "clockUncertainty": {
+                "$ref": "#/$defs/quantity"
+              },
+              "displayLatency": {
+                "$ref": "#/$defs/quantity"
+              },
+              "lossTimeout": {
+                "$ref": "#/$defs/quantity"
+              },
+              "ackTimeout": {
+                "$ref": "#/$defs/quantity"
+              },
+              "retryCount": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unknownState": {
+                "enum": [
+                  "inhibit-new-intent"
+                ]
+              },
+              "acceptedMeans": {
+                "enum": [
+                  "attempt-pending-observation"
+                ]
+              },
+              "retryPolicy": {
+                "enum": [
+                  "idempotent-in-same-session-only"
+                ]
+              },
+              "lateAckPolicy": {
+                "enum": [
+                  "quarantine-no-state-promotion"
+                ]
+              },
+              "completion": {
+                "enum": [
+                  "fresh-state-observation"
+                ]
+              },
+              "correlation": {
+                "enum": [
+                  "synthetic-session-request-envelope"
+                ]
+              },
+              "nominalVoltage": {
+                "$ref": "#/$defs/quantity"
+              }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "telemetry"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "policy": {
+                  "required": [
+                    "freshness",
+                    "clockUncertainty",
+                    "displayLatency",
+                    "unknownState"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "heartbeat"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "policy": {
+                  "required": [
+                    "lossTimeout"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "command"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "policy": {
+                  "required": [
+                    "ackTimeout",
+                    "retryCount",
+                    "acceptedMeans",
+                    "retryPolicy",
+                    "lateAckPolicy",
+                    "completion",
+                    "correlation"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "kind": {
+                  "const": "power"
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "policy": {
+                  "required": [
+                    "nominalVoltage"
+                  ]
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "transitions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "from",
+          "to",
+          "event",
+          "requires",
+          "effects"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "from": {
+            "$ref": "#/$defs/ref"
+          },
+          "to": {
+            "$ref": "#/$defs/ref"
+          },
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "requires": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "configuration-known",
+                "identity-known",
+                "authority-held",
+                "fresh-state",
+                "trusted-time"
+              ]
+            }
+          },
+          "effects": {
+            "type": "array",
+            "items": {
+              "enum": [
+                "block-intent",
+                "discard-queue",
+                "revoke-authority",
+                "grant-authority",
+                "mark-unknown"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "subject",
+          "rationale",
+          "alternatives"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "subject": {
+            "$ref": "#/$defs/ref"
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "alternatives": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "deployments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "component",
+          "host"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "component": {
+            "$ref": "#/$defs/ref"
+          },
+          "host": {
+            "$ref": "#/$defs/ref"
+          }
+        }
+      }
+    }
+  }
+}
