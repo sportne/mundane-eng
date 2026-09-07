@@ -86,3 +86,16 @@ hosts. Missing source, source-path escapes and delayed responses have regression
 
 The [component boundary guide](components.md) documents focused tests, isolated
 production classpaths and the retained aggregate integration gate.
+
+## Cleaning the checkout
+
+Run `make clean` from the repository root to remove generated builds, packages,
+reports, local CI logs, downloaded build/test dependencies, isolated VS Code test
+profiles and Python bytecode caches. Copy any local logs or generated deliverables
+you want to retain outside these directories first. Checked-in inputs and expected
+outputs remain available. The next build downloads its dependencies again; use
+`make verify` for a complete rebuild with the prerequisites above.
+
+Cleanup uses fixed repository-relative paths; overriding `BUILD_ROOT` or package
+variables does not redirect deletion. Do not run it concurrently with a build or
+editor test in the same checkout.

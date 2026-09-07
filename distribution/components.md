@@ -94,15 +94,15 @@ builds the requirements closure in a temporary source tree without other domains
 tests or aggregate classes, then exercises validation, formatting checks and trace.
 Existing parser-removal tests continue to verify compiled consumers at runtime.
 
-TC-1104 is complete only after those checks, the full verification gate, native
-package isolation, installed-editor verification and documentation/index checks
-pass. [Execution evidence](../research/0076-component-layout-verification.md)
+TC-1104 completed with those checks, the full verification gate, native package
+isolation, installed-editor verification and documentation/index checks passing.
+[Execution evidence](../research/0076-component-layout-verification.md)
 records results and practical limits.
 
 ## Decision and alternatives
 
 The measurable benefit is enforced production dependency selection and independent
-native-tool build prerequisites. The current global source/test compilation imposed
+native-tool build prerequisites. The previous global source/test compilation imposed
 unrelated failures on every tool despite requirements already compiling alone.
 Moving all packages into new top-level modules would create additional path churn
 without strengthening this enforcement. Moving only the editor clarifies an existing

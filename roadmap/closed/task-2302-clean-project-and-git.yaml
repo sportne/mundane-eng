@@ -1,0 +1,77 @@
+format: mundane-work-yaml-0.2
+id: TC-2302
+kind: task
+title: Clean Project Documentation Build Output and Git References
+status: Complete
+dependencies: [TC-2301, TC-1104, TC-2404, TC-2408]
+relations: []
+planning:
+  stage: "23"
+  type: Cleanup
+  condition: ""
+  unlocks: ""
+  statusNote: ""
+body: |
+  ## Outcome
+
+  Current guides reflect the completed GCS foundation and component layout.
+  Disposable builds and obsolete verification branch names no longer clutter the
+  checkout; historical verification commits remain recoverable.
+
+  ## Work
+
+  Reconcile current documentation and changelog, provide a bounded make clean
+  target, remove generated output and caches, prune stale remote tracking refs,
+  archive superseded verification snapshots before deleting their branch names,
+  and compact local Git storage without rewriting history or forcing reflog expiry.
+
+  ## Acceptance evidence
+
+  Check the task inventory, deterministic backlog rebuild, planning links and work
+  YAML schemas. Exercise make clean and confirm tracked files are intact, generated
+  paths are gone, archive refs resolve to the original commits, and git fsck passes.
+
+  ## Compatibility and affected components
+
+  Documentation and build housekeeping only; maintained tool behavior and formats
+  remain unchanged. Keep active fixtures, schemas, licenses and historical tags.
+  TC-2428 remains the later cleanup after the extended platform is implemented.
+
+  ## References
+
+  - [Build and cleanup guide](../../distribution/build-verification.md)
+  - [GCS example](../../examples/ground-control-station/README.md)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Documentation now distinguishes completed GCS decisions
+  and prototypes from pending production domains; the changelog covers the rename,
+  component layout and GCS foundation. No obsolete tracked source was found that
+  could be removed without losing current fixtures, contracts or useful evidence.
+
+  make clean removed 1,185,336 KiB of generated build output, dependencies and
+  editor test caches, plus Python bytecode. A before/after SHA-256 inventory proved
+  all tracked file bytes and the new card were preserved. A dry run with a different
+  BUILD_ROOT confirmed that deletion stays at the fixed documented paths.
+
+  After cleanup, make work-backlog-verify work-yaml-verify rebuilt the native work
+  tool and schema environment, passed all 14 maintained Java groups, verified the
+  deterministic 100-card index, planning links, YAML profiles and independent
+  schemas. Final status/index checks were repeated after closing this card. The
+  full native/editor gate was not repeated for documentation and cleanup changes.
+
+  Pruned remote tracking references and checked worktree registration: only this
+  main checkout remains. Five superseded local verification branches were moved
+  to refs/archive/codex/ with their original suffixes and commit IDs unchanged:
+  attribute-verification-evidence (bc18f9a), diagnostics-verification-evidence
+  (3a13bf1), verification-ci-evidence (1c80c24), work-item-verification-evidence
+  (0f47053), yaml-work-verification-evidence (22a4521). These are local recovery
+  refs, not branches shipped by a normal clone. For example, restore one with
+  git branch codex/verification-ci-evidence refs/archive/codex/verification-ci-evidence.
+
+  No open GitHub pull requests remained. Deleted the obsolete remote
+  codex/verification-ci-evidence branch with an expected-tip lease; its commits
+  remain in the local archive ref. Historical tags remain intact. Normal git gc
+  reduced local Git storage from about 23 MiB to 2.6 MiB, and git fsck --full
+  passed without corruption. Recent dangling objects retain Git's normal grace
+  period. Generated verification output was cleaned again after final checks.

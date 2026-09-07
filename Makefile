@@ -223,3 +223,9 @@ gcs-design-verify: yaml-schema-verify gcs-seed-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-architecture.py
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-configuration.py
 verify: gcs-design-verify
+
+# Fixed repository-relative paths: do not let build-variable overrides widen cleanup.
+.PHONY: clean
+clean:
+	rm -rf build editors/vscode/node_modules editors/vscode/.vscode-test .vscode-test
+	find scripts examples experiments -type d -name __pycache__ -prune -exec rm -rf {} +

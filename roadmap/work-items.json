@@ -98,7 +98,8 @@
     "roadmap/task-2425-deliver-engineering-review-views.yaml",
     "roadmap/task-2426-exercise-adversarial-gcs-workflows.yaml",
     "roadmap/task-2427-package-document-engineering-platform.yaml",
-    "roadmap/task-2428-clean-reference-platform-material.yaml"
+    "roadmap/task-2428-clean-reference-platform-material.yaml",
+    "roadmap/closed/task-2302-clean-project-and-git.yaml"
   ],
   "format": "mundane-work-set-0.2",
   "source": "mundane-work-yaml-0.2"

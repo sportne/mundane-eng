@@ -36,7 +36,7 @@ versioned sources and reproducible derived results:
 The example is a design probe and regression fixture. Passing it demonstrates
 support for the exercised workflows, not completeness for all UAV projects or
 regulatory acceptance. Applicability and tailoring of engineering obligations
-are outputs of TC-2401, not assumptions hidden in these sketches.
+are recorded in the [reference-system decision](decisions/reference-system.md).
 
 ## Reference system and delivery boundary
 
@@ -77,8 +77,9 @@ Responsibility boundary accepted for simulation in the
   telemetry age, clocks, reconnect and authority handover. Do not assume every
   aircraft supports the same command or a universally safe return-home action.
 
-Use MAVLink as a candidate external protocol, with a selected message/service
-profile and version. The [command protocol](https://mavlink.io/en/services/command.html)
+The simulation uses the synthetic GCS-AP-SIM-0.1 profile, with MAVLink 2 common
+message names as reference vocabulary. It does not claim wire conformance or select
+a real autopilot implementation. The [command protocol](https://mavlink.io/en/services/command.html)
 and [message signing documentation](https://mavlink.io/en/guide/message_signing.html)
 are inputs to the interface/security design. Application completion criteria and
 operator authority require explicit project decisions; wire-format support alone
@@ -86,9 +87,9 @@ is insufficient. No private signing keys belong in the example.
 
 ## Scenario coverage ledger
 
-TC-2401 resolves numeric thresholds and responsibility assumptions. TC-2402 records
-what existing tools can express. TC-2426 executes the full ledger after the new
-capabilities exist. Each scenario needs a normal case, a negative or changed case,
+The reference-system decision records numeric thresholds and responsibility
+assumptions; the runnable seed demonstrates what existing tools can express. TC-2426
+executes the full ledger after the new capabilities exist. Each scenario needs a normal case, a negative or changed case,
 expected state, input revisions, commands/review steps and retained evidence.
 
 | Scenario | Engineering question and required observable result | Main owning cards |
@@ -113,9 +114,10 @@ bounded authoring conventions. Reuse existing requirements, declarations, plans
 and work items. A requirement attribute can classify a requirement; it should not
 hide an independently identified hazard, test execution or equipment assembly.
 
-The family boundaries below are proposals. TC-2403 decides whether a family needs
-its own compiler, several record kinds in one domain, or an adapter to an existing
-native artifact. Every implemented family needs explicit selection, validation,
+The [ownership decision](design/ownership.md) defines the family boundaries below,
+including independent domain ownership and adapters for native resources. Detailed
+contracts for the remaining families still require their owning design cards.
+Every implemented family needs explicit selection, validation,
 compiled provenance, typed linking and explainable inspection. Reports and diagrams
 are derived; generated JSON remains appropriate for compiled integration.
 

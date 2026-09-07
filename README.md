@@ -71,7 +71,9 @@ and tests CI failure propagation. Individual cards and research records identify
 
 The first build downloads a checksummed YAML parser. Full verification also uses
 pinned Python schema-checking dependencies; these are not native runtime dependencies.
-Build output is disposable under `build/`. See [dependency details](dependencies/README.md).
+Build output is disposable under `build/`. `make clean` removes it and downloaded
+build/test caches; see [cleanup details](distribution/build-verification.md#cleaning-the-checkout)
+and [dependency details](dependencies/README.md).
 
 Use the [living roadmap](roadmap/0001-initial-roadmap.md) for direction and the
 [task-card workflow](roadmap/0002-task-card-index.md) for changes. Author status,

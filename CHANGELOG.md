@@ -2,11 +2,20 @@
 
 ## Unreleased
 
+- Renamed the project and repository to Mundane-Eng; existing command, format,
+  Java package and editor extension identifiers remain compatible.
+- Enforced explicit component build dependencies and moved the editor bridge and
+  its integration tests under `editors/bridge`.
+- Added the GCS reference-system decision, runnable current-tool seed, artifact
+  ownership decision and tested architecture/configuration design probes. The new
+  domain formats remain example designs pending production implementation.
+- Added `make clean` for disposable builds, downloaded dependencies and test caches;
+  refreshed current capability and completion documentation.
+
 - Removed the legacy Markdown/JSON-fence work-item source and compiled work output
   0.1 compatibility path. YAML source/selection/output remain 0.2; work CLI is 0.3.
   Current work examples and regression fixtures are YAML. Obsolete reports and
   superseded editor verification narratives were removed; Git retains their history.
-
 
 - Attribute declarations now use YAML source `mundanereq-attributes-yaml-0.1`.
   The former JSON declaration source is removed. Select the `.yaml` declaration
@@ -17,7 +26,6 @@
   Plan CLI is 0.2; the compiled plan shape remains 0.1.
 - Editor bundle 0.2.0 reads YAML declarations, including unsaved buffers. Install
   the paired bridge/VSIX. No legacy declaration or plan source adapter is retained.
-
 
 - Editor bundle 0.1.3 adds explicit compiled imports and source mappings for work-item
   relations. Imported requirement/task targets gain revision-checked navigation and

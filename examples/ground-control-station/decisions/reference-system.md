@@ -84,6 +84,7 @@ print('PASS bounded reference-system review')
 PY
 ```
 
-TC-2402 derives actual supported requirements/plans/work items from this brief.
-TC-2403 decides additional artifact ownership; TC-2404 defines concrete modes and
-interface records. Those designs must preserve these responsibility and claim limits.
+The [seed](../seed/README.md) derives supported requirements/plans/work items from
+this brief. The [ownership decision](../design/ownership.md) records additional
+artifact boundaries; the [architecture design](../design/architecture.md) defines
+concrete modes and interface records. Those designs must preserve these responsibility and claim limits.

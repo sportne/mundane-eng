@@ -20,7 +20,9 @@ The seven component records distinguish software, purchased-hardware design and
 external autopilot responsibilities. Functions own their allocations and references
 to required behavior; requirements retain their statements. Four software deployments
 select the single illustrative server for the synthetic harness. These are desired
-allocations, not evidence of actual installation. TC-2408 distinguishes that later.
+allocations, not evidence of actual installation. The
+[configuration design](configuration.md) distinguishes designed, built and deployed
+records using explicitly synthetic fixtures.
 
 Each interface owns endpoints, named port selection, profile version and semantic
 policy. Port direction, signal, units and profile must agree at both ends. The
