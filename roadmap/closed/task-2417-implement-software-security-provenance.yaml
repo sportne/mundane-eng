@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2417"
 kind: "task"
 title: "Implement Build Provenance and Security Traceability"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2416", "TC-2405", "TC-2409"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -59,9 +59,17 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2416](closed/task-2416-design-software-security-provenance.yaml)
-  - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
-  - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2416](../closed/task-2416-design-software-security-provenance.yaml)
+  - [TC-2405](../closed/task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](../closed/task-2409-implement-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. Implemented `mundane-software compile/check/analyze/query/view` with independent SLSA and CycloneDX adapters, YAML project relationships, source-linked reports and exact configuration/native resource/review checks. The [contract](../../specification/0032-software-provenance-and-security.md) and [guide](../../distribution/software.md) define the consumed standards projection and authentication limits. No custom replacement SBOM, VEX or provenance record was introduced. The deterministic fixture archive is actually built from source; advisory and reviewer data remain synthetic.
+
+  Focused Java adapter tests and the native software workflow passed. The native workflow covers a real SLSA/BOM/binary correspondence, advisory to synthetic deployed baseline and safety-control chain, no/failed/empty scan distinctions, stale review pins, changed dependency/invalid version/missing source rejection, raw-resource tampering/absence, identical clean-root rebuild and a consumer classpath with YAML removed. Compilation pins the same configuration for software and referenced safety controls. Version-resource and predecessor pins and the synthetic manual observation were explicitly updated for the new producer declarations; verification never auto-repairs these authored pins.
+
+  The design and native checks are included in `make verify`. Full batch verification will additionally exercise the combined platform after the equipment and calculation cards are implemented. Live scanning, signature verification, release authorization and further native formats remain explicitly unsupported.

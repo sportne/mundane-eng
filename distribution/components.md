@@ -144,3 +144,7 @@ interpreter; its CLI owns manual-source normalization and assessment compilation
 `test-evidence` also builds the procedure CLI and exercises simulator/evaluator
 separation. `evidence-verify` runs both native commands and adversarial provenance
 workflows; model compiler probes reject YAML/source dependencies.
+
+TC-2417 adds `software-model` (project relationships and independent SLSA/CycloneDX
+adapters), depending on compiled safety/configuration/architecture, and `software`
+for YAML/CLI wiring. Its isolated consumer requires no YAML parser.

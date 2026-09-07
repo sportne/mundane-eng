@@ -13,7 +13,7 @@ public final class Configuration implements Model.Domain {
     public String kind(){return "configuration";} public String format(){return Versions.CONFIGURATION_ARTIFACT;}
     public String source(){return Versions.CONFIGURATION_SOURCE;} public String version(){return Versions.CONFIGURATION_VERSION;} public String contract(){return Versions.CONFIGURATION_CONTRACT;}
     public static Model.Context context(Path root) {return new Model.Context(root,Map.of("architecture",new Architecture(),"configuration",new Configuration()));}
-    private static final Set<String> NATIVE=Set.of("gcs-equipment-assumption-0.1","python-source","version-declarations-json","mundanereq-yaml-0.4","mundanereq-attributes-yaml-0.1","mundane-architecture-yaml-0.1","text/plain");
+    private static final Set<String> NATIVE=Set.of("gcs-equipment-assumption-0.1","python-source","version-declarations-json","mundanereq-yaml-0.4","mundanereq-attributes-yaml-0.1","mundane-architecture-yaml-0.1","text/plain","application/zip");
     public Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {if(!kind.equals("baseline"))throw new IllegalArgumentException("wrong-kind");var baseline=map(values.get("baseline"));if(!baseline.get("id").equals(ident))throw new IllegalArgumentException("missing-target");return baseline;}
     public void validate(Map<String,Object> data,Model.Context c) {resolve(data,c);}
     public List<Map<String,Object>> resolve(Map<String,Object> data,Model.Context c) {

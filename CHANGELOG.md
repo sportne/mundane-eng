@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added native SLSA/in-toto and CycloneDX SBOM/VEX adapters with exact build,
+  configuration and security-review traceability.
+
 - Added independently built architecture, configuration, safety, procedure and
   evidence commands, with typed compiled imports and source-linked inspection.
 - Configuration publication retains exact inputs; safety analysis exposes coverage

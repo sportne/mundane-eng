@@ -283,3 +283,12 @@ verify: evidence-verify
 software-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-software-design.py
 verify: software-design-verify
+
+.PHONY: test-software native-software software-verify
+test-software: yaml-dependency version-declarations
+	python3 scripts/build-components.py test software
+native-software: test-software
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath software)" -o $(abspath $(BUILD_ROOT)/mundane-software) engineering.software.SoftwareMain
+software-verify: native-software safety-verify software-design-verify
+	build/schema-check-venv/bin/python scripts/check-software-workflow.py
+verify: software-verify

@@ -30,3 +30,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [Configuration baselines](0029-configuration-baselines.md).
 - [Safety analysis](0030-safety-analysis.md).
 - [Procedures and evidence](0031-procedures-and-evidence.md).
+
+- [Software provenance and security](0032-software-provenance-and-security.md) — native SLSA/in-toto and CycloneDX adapters.

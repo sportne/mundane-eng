@@ -5,7 +5,8 @@ artifact designs checked by local prototypes. Architecture now has
 [maintained compile/check/view commands](../../distribution/architecture.md);
 [configuration compile/resolve/compare/publish commands](../../distribution/configuration.md)
 are also maintained, alongside [safety analysis](../../distribution/safety.md)
-and [procedure/evidence tooling](../../distribution/evidence.md). The event simulator
+and [procedure/evidence tooling](../../distribution/evidence.md), plus
+[native software provenance and security](../../distribution/software.md). The event simulator
 is a bounded ground-state test harness, not a deployable GCS or aircraft simulator. The generated
 backlog records each card's current status.
 
@@ -255,8 +256,8 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2413](../../roadmap/task-2413-implement-equipment-connectivity.yaml) | Implement Equipment Selection and Wiring Views | TC-2412, TC-2405, TC-2409 |
 | [TC-2414](../../roadmap/task-2414-design-quantities-budgets-reliability.yaml) | Design Quantities Budgets and Reliability Analyses | TC-2403, TC-2408, TC-2412 |
 | [TC-2415](../../roadmap/task-2415-implement-budgets-reliability.yaml) | Implement Budget and Reliability Calculations | TC-2414, TC-2409, TC-2413 |
-| [TC-2416](../../roadmap/task-2416-design-software-security-provenance.yaml) | Design Software Provenance and Security Artifacts | TC-2403, TC-2404, TC-2408 |
-| [TC-2417](../../roadmap/task-2417-implement-software-security-provenance.yaml) | Implement Build Provenance and Security Traceability | TC-2416, TC-2405, TC-2409 |
+| [TC-2416](../../roadmap/closed/task-2416-design-software-security-provenance.yaml) | Design Software Provenance and Security Artifacts | TC-2403, TC-2404, TC-2408 |
+| [TC-2417](../../roadmap/closed/task-2417-implement-software-security-provenance.yaml) | Implement Build Provenance and Security Traceability | TC-2416, TC-2405, TC-2409 |
 | [TC-2418](../../roadmap/task-2418-design-assurance-reviews.yaml) | Design Assurance Arguments Reviews and Waivers | TC-2406, TC-2408, TC-2410, TC-2416 |
 | [TC-2419](../../roadmap/task-2419-implement-assurance-reviews.yaml) | Implement Assurance and Review Readiness Queries | TC-2418, TC-2407, TC-2411, TC-2417 |
 | [TC-2420](../../roadmap/task-2420-design-release-operations.yaml) | Design Release Commissioning and Operational Records | TC-2408, TC-2410, TC-2418 |

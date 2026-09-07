@@ -16,6 +16,8 @@ COMPONENTS = {
     'domain-source': (['domain','yaml'], [MAIN+'engineering/domainsource/*.java']),
     'architecture-model': (['domain'], [MAIN+'engineering/architecture/Architecture.java', 'build/maintained/generated/engineering/architecture/ArchitectureSchema.java']),
     'configuration-model': (['architecture-model'], [MAIN+'engineering/configuration/Configuration.java', MAIN+'engineering/configuration/Publication.java', 'build/maintained/generated/engineering/configuration/ConfigurationSchema.java']),
+    'software-model': (['safety-model'], [MAIN+'engineering/software/Slsa.java', MAIN+'engineering/software/CycloneDx.java', MAIN+'engineering/software/Software.java', 'build/maintained/generated/engineering/software/SoftwareSchema.java']),
+    'software': (['software-model','domain-source'], [MAIN+'engineering/software/SoftwareMain.java']),
     'safety-model': (['configuration-model'], [MAIN+'engineering/safety/Safety.java', 'build/maintained/generated/engineering/safety/SafetySchema.java']),
     'procedure-model': (['configuration-model'], [MAIN+'engineering/procedure/Procedure.java', 'build/maintained/generated/engineering/procedure/ProcedureSchema.java']),
     'procedure': (['procedure-model','domain-source'], [MAIN+'engineering/procedure/ProcedureMain.java']),
@@ -37,6 +39,7 @@ COMPONENTS = {
 YAML_USERS = {'yaml', 'requirements', 'work-source'}
 # Test dependencies may include collaborating components; production dependencies may not.
 TESTS = {
+    'software': ([], [TEST+'engineering/software/*.java'], ['engineering.software.SoftwareTest']),
     'evidence': (['procedure'], [TEST+'engineering/evidence/*.java'], ['engineering.evidence.EvidenceTest']),
     'safety': ([], [TEST+'engineering/safety/*.java'], ['engineering.safety.SafetyTest']),
     'configuration': ([], [TEST+'engineering/configuration/*.java'], ['engineering.configuration.ConfigurationTest']),

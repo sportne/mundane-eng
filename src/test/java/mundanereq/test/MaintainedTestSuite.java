@@ -22,6 +22,7 @@ public final class MaintainedTestSuite {
         engineering.configuration.ConfigurationTest.run();
         engineering.safety.SafetyTest.run();
         engineering.evidence.EvidenceTest.run();
-        System.out.println("Passed 18 maintained test groups.");
+        engineering.software.SoftwareTest.run();
+        System.out.println("Passed 19 maintained test groups.");
     }
 }
