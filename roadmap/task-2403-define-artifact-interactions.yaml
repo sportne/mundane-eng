@@ -69,4 +69,4 @@ body: |2
   - [GCS reference project plan](../examples/ground-control-station/README.md)
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2402](task-2402-seed-existing-tool-workflow.yaml)
+  - [TC-2402](closed/task-2402-seed-existing-tool-workflow.yaml)

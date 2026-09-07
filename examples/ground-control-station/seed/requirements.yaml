@@ -1,0 +1,73 @@
+"format": "mundanereq-yaml-0.4"
+"attributeSchema": "gcs-classification"
+"requirements":
+  -
+    "id": "GCS-START"
+    "title": "Gate startup"
+    "statement": "The simulated GCS shall inhibit new command intent until the selected configuration, vehicle, operator authority and telemetry freshness are known-good."
+    "attributes":
+      "discipline": "systems"
+      "scenario": "S01"
+  -
+    "id": "GCS-STALE"
+    "title": "Reject stale state"
+    "statement": "The simulated GCS shall inhibit new command intent when the upper bound of telemetry age is at least 500 ms or unknown, and visibly mark stale or unknown state within 100 ms."
+    "attributes":
+      "discipline": "software"
+      "scenario": "S02"
+  -
+    "id": "GCS-ACK"
+    "title": "Separate accepted and completed"
+    "statement": "The simulated GCS shall keep command acceptance distinct from observed completion and mark an unacknowledged request unknown after 1000 ms."
+    "attributes":
+      "discipline": "software"
+      "scenario": "S03"
+  -
+    "id": "GCS-RESTART"
+    "title": "Discard old intent"
+    "statement": "The simulated GCS shall discard queued intents after restart or session loss and require renewed identity, timing and operator checks."
+    "attributes":
+      "discipline": "software"
+      "scenario": "S04"
+  -
+    "id": "GCS-AUTH"
+    "title": "Exclusive authority"
+    "statement": "The simulated GCS shall permit one active command authority and reject intent from an observer or a different vehicle session."
+    "attributes":
+      "discipline": "systems"
+      "scenario": "S05"
+  -
+    "id": "GCS-POWER"
+    "title": "Record combined fault"
+    "statement": "The simulated GCS shall record concurrent mains and aircraft-link loss, inhibit new intent, and keep the assumed onboard response separate from ground delivery status."
+    "attributes":
+      "discipline": "hardware"
+      "scenario": "S06"
+  -
+    "id": "GCS-CLOCK"
+    "title": "Expose incomplete observation"
+    "statement": "The simulated GCS shall expose unknown timing or incomplete recording after overload, storage exhaustion or clock discontinuity."
+    "attributes":
+      "discipline": "software"
+      "scenario": "S07"
+  -
+    "id": "GCS-TRUST"
+    "title": "Exclude untrusted input"
+    "statement": "The simulated GCS shall exclude untrusted synthetic traffic from the selected vehicle state and record its rejection."
+    "attributes":
+      "discipline": "software"
+      "scenario": "S08"
+  -
+    "id": "GCS-CONFIG"
+    "title": "Identify evaluated configuration"
+    "statement": "The engineering project shall identify the exact software and equipment configuration evaluated after substitution, upgrade or observed deployment drift."
+    "attributes":
+      "discipline": "systems"
+      "scenario": "S09 S10 S12"
+  -
+    "id": "GCS-EVIDENCE"
+    "title": "Assess evidence adequacy"
+    "statement": "The engineering project shall distinguish observed results, evidence adequacy and release authorization, including missing or conflicting evidence and expired exceptions."
+    "attributes":
+      "discipline": "assurance"
+      "scenario": "S11"

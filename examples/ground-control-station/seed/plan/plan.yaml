@@ -1,0 +1,60 @@
+"format": "mundane-plan-yaml-0.1"
+"plans":
+  -
+    "id": "PLAN-GCS"
+    "context": "gcs-simulation"
+    "baselineScope": "baseline"
+    "currentScope": "current"
+"activities":
+  -
+    "id": "ACT-STATE"
+    "method": "test"
+    "objective": "Plan simulated startup, freshness, acknowledgement, restart, authority and trust observations."
+    "expectedEvidence": "Future revision-bound simulator observations; no run is supplied by this seed."
+  -
+    "id": "ACT-POWER"
+    "method": "analysis"
+    "objective": "Plan combined power/link and observation-completeness assessment."
+    "expectedEvidence": "Future fault observations and justified hardware assumptions."
+  -
+    "id": "ACT-CONFIG"
+    "method": "review"
+    "objective": "Plan configuration identity review for substitutions and releases."
+    "expectedEvidence": "Future exact configuration and applicability assessment."
+"coverage":
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-START"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-STALE"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-ACK"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-RESTART"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-AUTH"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-POWER"
+    "requirementId": "GCS-POWER"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-POWER"
+    "requirementId": "GCS-CLOCK"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-STATE"
+    "requirementId": "GCS-TRUST"
+  -
+    "planId": "PLAN-GCS"
+    "activityId": "ACT-CONFIG"
+    "requirementId": "GCS-CONFIG"

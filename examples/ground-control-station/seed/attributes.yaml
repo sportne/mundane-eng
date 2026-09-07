@@ -1,0 +1,16 @@
+"format": "mundanereq-attributes-yaml-0.1"
+"name": "gcs-classification"
+"attributes":
+  "discipline":
+    "type": "enum"
+    "required": true
+    "description": "Descriptive discipline, not a component allocation or acceptance decision."
+    "values":
+      - "systems"
+      - "software"
+      - "hardware"
+      - "assurance"
+  "scenario":
+    "type": "text"
+    "required": true
+    "description": "Reference-system scenario label; not a checked scenario relationship."

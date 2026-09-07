@@ -1,0 +1,8 @@
+{
+  "format": "mundane-work-set-0.2",
+  "source": "mundane-work-yaml-0.2",
+  "files": [
+    "source/gcs-task-stale.yaml",
+    "source/gcs-task-review.yaml"
+  ]
+}

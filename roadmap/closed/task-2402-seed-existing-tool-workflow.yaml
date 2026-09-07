@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2402"
 kind: "task"
 title: "Build the GCS Seed with Existing Artifact Tools"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-2401"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with reproducible example and decision evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -60,7 +60,13 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2401](closed/task-2401-bound-reference-system.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2401](task-2401-bound-reference-system.yaml)
+
+  ## Completion evidence
+
+  Completed on 2026-09-07. The maintained native workflow passed in this checkout and a fresh source export. Ten requirements, nine coverage links, four impact candidates, exact rebuilds and four negative/change checks are recorded. The evidence-adequacy gap remains deliberately uncovered.
+
+  - [Task evidence](../../examples/ground-control-station/seed/README.md)

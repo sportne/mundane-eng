@@ -1,9 +1,13 @@
 # Ground control station engineering reference project
 
 Status: reference-system decisions are recorded; subsequent deliverables follow
-the authoritative card statuses in the generated backlog. This directory does not yet contain an executable GCS or supported new
-artifact schemas. YAML sketches here are proposals for discussion through the
+the authoritative card statuses in the generated backlog. The [runnable seed](seed/README.md) uses current tools; this directory does not
+yet contain an executable GCS or maintained new artifact schemas. YAML sketches here are proposals for discussion through the
 cards, not inputs accepted by current compilers.
+
+Completed deliverables: [reference-system decision](decisions/reference-system.md)
+and [current-tool seed](seed/README.md). New artifact designs remain separate from
+maintained compiler support.
 
 ## Purpose and success criteria
 
@@ -277,7 +281,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | Card | Outcome | Prerequisites |
 | --- | --- | --- |
 | [TC-2401](../../roadmap/closed/task-2401-bound-reference-system.yaml) | Define the GCS Reference System and Engineering Obligations | None |
-| [TC-2402](../../roadmap/task-2402-seed-existing-tool-workflow.yaml) | Build the GCS Seed with Existing Artifact Tools | TC-2401 |
+| [TC-2402](../../roadmap/closed/task-2402-seed-existing-tool-workflow.yaml) | Build the GCS Seed with Existing Artifact Tools | TC-2401 |
 | [TC-2403](../../roadmap/task-2403-define-artifact-interactions.yaml) | Define Artifact Ownership and Common Interaction Contracts | TC-2402 |
 | [TC-2404](../../roadmap/task-2404-design-context-architecture-interfaces.yaml) | Design Context Architecture and Interface Artifacts | TC-2403 |
 | [TC-2405](../../roadmap/task-2405-implement-context-architecture-interfaces.yaml) | Implement Context Architecture and Interface Workflows | TC-2404 |

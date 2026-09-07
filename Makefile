@@ -211,3 +211,8 @@ plan-yaml-verify: native-plan
 version-verify work-verify work-yaml-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify yaml-verify editor-verify plan-yaml-verify: test
 
 test-editor: editor-version-declarations
+
+.PHONY: gcs-seed-verify
+gcs-seed-verify: native-compile native-plan native-link native-verification native-work native-impact
+	python3 examples/ground-control-station/seed.py
+verify: gcs-seed-verify

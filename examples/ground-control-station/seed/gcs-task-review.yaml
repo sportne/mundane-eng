@@ -1,0 +1,14 @@
+"format": "mundane-work-yaml-0.2"
+"id": "GCS-TASK-REVIEW"
+"kind": "task"
+"title": "Review simulated state activity"
+"status": "Planned"
+"dependencies":
+  - "GCS-TASK-STALE"
+"relations":
+  -
+    "relation": "addresses"
+    "scope": "plan"
+    "kind": "verification-activity"
+    "target": "ACT-STATE"
+"body": "Engineering work remains planned. This fixture does not claim a procedure was executed or evidence accepted."

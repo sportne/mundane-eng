@@ -1,0 +1,13 @@
+"format": "mundane-work-yaml-0.2"
+"id": "GCS-TASK-STALE"
+"kind": "task"
+"title": "Develop stale-state procedure"
+"status": "Planned"
+"dependencies": []
+"relations":
+  -
+    "relation": "addresses"
+    "scope": "current"
+    "kind": "requirement"
+    "target": "GCS-STALE"
+"body": "Engineering work remains planned. This fixture does not claim a procedure was executed or evidence accepted."
