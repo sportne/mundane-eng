@@ -1,0 +1,37 @@
+format: mundane-work-yaml-0.2
+id: TC-2202
+kind: task
+title: Migrate Attribute Declarations to YAML
+status: Planned
+dependencies: ["TC-2201"]
+relations: []
+planning:
+  stage: "22"
+  type: Implementation
+  condition: ""
+  unlocks: ""
+  statusNote: ""
+body: |
+  ## Outcome
+  
+  Author attribute declarations in YAML across CLI, editor, examples and verification.
+  
+  ## Work
+  
+  Implement bounded YAML parsing with token provenance, explicit booleans and duplicate/alias/tag rejection. Convert source fixtures and authoring tests; remove the JSON declaration parser path. Preserve compiled declaration values and snapshot protections.
+  
+  ## Acceptance evidence
+  
+  Run maintained JVM groups, declaration schema and public CLI parity checks, editor diagnostics/completion/hover and source mutation checks.
+  
+  ## Compatibility and affected components
+  
+  Breaking experimental authoring change authorized by the user. Compiled JSON and JSON import/editor/work manifests remain supported. Source parsers, specs, examples, tests, editor and distribution change where affected.
+  
+  ## Completion decision
+  
+  Complete only after the owning checks pass and replaced source representations are removed.
+  
+  ## References
+  
+  - [Roadmap](0001-initial-roadmap.md)

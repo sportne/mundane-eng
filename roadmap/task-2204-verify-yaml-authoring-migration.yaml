@@ -1,0 +1,37 @@
+format: mundane-work-yaml-0.2
+id: TC-2204
+kind: task
+title: Verify YAML Authoring Migration and Remove Replaced Sources
+status: Planned
+dependencies: ["TC-2202", "TC-2203"]
+relations: []
+planning:
+  stage: "22"
+  type: Implementation
+  condition: ""
+  unlocks: ""
+  statusNote: ""
+body: |
+  ## Outcome
+  
+  All maintained workflows and editor packages use the new YAML sources.
+  
+  ## Work
+  
+  Rebuild compiled fixtures and reports from converted source, update guides/version metadata, remove obsolete representations and verify the complete supported toolchain. Retain generated JSON contracts and active compatibility fixtures.
+  
+  ## Acceptance evidence
+  
+  Run the authoritative verification wrapper including native packages, installed editor, golden workflows, mutations and failure propagation; record environment and outcomes.
+  
+  ## Compatibility and affected components
+  
+  Breaking experimental authoring change authorized by the user. Compiled JSON and JSON import/editor/work manifests remain supported. Source parsers, specs, examples, tests, editor and distribution change where affected.
+  
+  ## Completion decision
+  
+  Complete only after the owning checks pass and replaced source representations are removed.
+  
+  ## References
+  
+  - [Roadmap](0001-initial-roadmap.md)

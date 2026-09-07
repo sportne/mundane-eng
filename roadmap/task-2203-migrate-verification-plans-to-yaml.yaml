@@ -1,0 +1,37 @@
+format: mundane-work-yaml-0.2
+id: TC-2203
+kind: task
+title: Migrate Verification Plans to YAML
+status: Planned
+dependencies: ["TC-2201", "TC-2202"]
+relations: []
+planning:
+  stage: "22"
+  type: Implementation
+  condition: ""
+  unlocks: ""
+  statusNote: ""
+body: |
+  ## Outcome
+  
+  Compile YAML verification plans, activities and coverage with the existing independent analysis semantics.
+  
+  ## Work
+  
+  Replace the three TSV tables with one explicit plan.yaml document per selected source directory. Convert examples and regression inputs, remove TSV parsing, retain scope/reference checks and accurate source locations.
+  
+  ## Acceptance evidence
+  
+  Test YAML syntax/shape failures, duplicate IDs/assertions, unknown references, snapshot changes, determinism and public JVM/native plan/link/verification/impact workflows.
+  
+  ## Compatibility and affected components
+  
+  Breaking experimental authoring change authorized by the user. Compiled JSON and JSON import/editor/work manifests remain supported. Source parsers, specs, examples, tests, editor and distribution change where affected.
+  
+  ## Completion decision
+  
+  Complete only after the owning checks pass and replaced source representations are removed.
+  
+  ## References
+  
+  - [Roadmap](0001-initial-roadmap.md)
