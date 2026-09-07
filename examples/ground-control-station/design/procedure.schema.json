@@ -1,0 +1,414 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "id",
+    "objective",
+    "method",
+    "activity",
+    "requirements",
+    "configuration",
+    "telemetryInterface",
+    "commandInterface",
+    "environment",
+    "clock",
+    "session",
+    "events",
+    "expected"
+  ],
+  "properties": {
+    "format": {
+      "enum": [
+        "mundane-procedure-yaml-0.1"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "method": {
+      "enum": [
+        "simulation",
+        "manual-inspection"
+      ]
+    },
+    "activity": {
+      "$ref": "#/$defs/ref"
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/ref"
+      }
+    },
+    "configuration": {
+      "$ref": "#/$defs/ref"
+    },
+    "telemetryInterface": {
+      "$ref": "#/$defs/ref"
+    },
+    "commandInterface": {
+      "$ref": "#/$defs/ref"
+    },
+    "environment": {
+      "enum": [
+        "simulation"
+      ]
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "unit",
+        "uncertaintyMs"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "synthetic-monotonic"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "ms"
+          ]
+        },
+        "uncertaintyMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000000
+        }
+      }
+    },
+    "session": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "events": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "heartbeat"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "mains-loss"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "link-loss"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "tick"
+                ]
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind",
+              "ageMs",
+              "uncertaintyMs"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "telemetry"
+                ]
+              },
+              "ageMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "uncertaintyMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind",
+              "request",
+              "session",
+              "idempotent"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "command"
+                ]
+              },
+              "request": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              },
+              "session": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              },
+              "idempotent": {
+                "type": "boolean"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind",
+              "request",
+              "session"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "ack"
+                ]
+              },
+              "request": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              },
+              "session": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "atMs",
+              "kind",
+              "session"
+            ],
+            "properties": {
+              "atMs": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              },
+              "kind": {
+                "enum": [
+                  "restart"
+                ]
+              },
+              "session": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "expected": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "afterMs",
+          "withinMs",
+          "field",
+          "equals"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          },
+          "afterMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000000
+          },
+          "withinMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000000
+          },
+          "field": {
+            "enum": [
+              "state",
+              "commandState",
+              "powerState",
+              "linkState",
+              "queueDepth",
+              "combinedFault",
+              "onboardResponse"
+            ]
+          },
+          "equals": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "ref": {
+      "type": "object",
+      "required": [
+        "scope",
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "quantity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit"
+      ],
+      "properties": {
+        "value": {
+          "type": "number"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    }
+  },
+  "title": "DRAFT procedure YAML 0.1"
+}

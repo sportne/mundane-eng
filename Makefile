@@ -253,3 +253,8 @@ verify: configuration-verify
 safety-design-verify: configuration-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-safety.py
 verify: safety-design-verify
+
+.PHONY: procedure-design-verify
+procedure-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-procedure.py
+verify: procedure-design-verify

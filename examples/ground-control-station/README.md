@@ -11,7 +11,8 @@ The completed deliverables are the [reference-system decision](decisions/referen
 [current-tool seed](seed/README.md), [ownership decision](design/ownership.md),
 [architecture/interface design](design/architecture.md), and
 [configuration/baseline design](design/configuration.md), and
-[safety analysis design](design/safety.md).
+[safety analysis design](design/safety.md), and
+[procedures and evidence design](design/procedure.md).
 
 Run `make gcs-design-verify` from the repository root to rebuild and check the seed
 and design probes. The seed reports appear under `build/gcs-seed`; allocation,
@@ -243,7 +244,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2407](../../roadmap/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
 | [TC-2408](../../roadmap/closed/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |
 | [TC-2409](../../roadmap/closed/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
-| [TC-2410](../../roadmap/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |
+| [TC-2410](../../roadmap/closed/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |
 | [TC-2411](../../roadmap/task-2411-implement-verification-evidence.yaml) | Implement Procedures Runs and Evidence Queries | TC-2410, TC-2405, TC-2409 |
 | [TC-2412](../../roadmap/task-2412-design-equipment-connectivity.yaml) | Design Equipment Parts and Wiring Artifacts | TC-2403, TC-2404, TC-2408 |
 | [TC-2413](../../roadmap/task-2413-implement-equipment-connectivity.yaml) | Implement Equipment Selection and Wiring Views | TC-2412, TC-2405, TC-2409 |

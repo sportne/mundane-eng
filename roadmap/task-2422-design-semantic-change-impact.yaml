@@ -72,7 +72,7 @@ body: |2
   - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
   - [TC-2406](closed/task-2406-design-safety-analysis.yaml)
   - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
-  - [TC-2410](task-2410-design-verification-evidence.yaml)
+  - [TC-2410](closed/task-2410-design-verification-evidence.yaml)
   - [TC-2412](task-2412-design-equipment-connectivity.yaml)
   - [TC-2414](task-2414-design-quantities-budgets-reliability.yaml)
   - [TC-2416](task-2416-design-software-security-provenance.yaml)

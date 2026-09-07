@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2410"
 kind: "task"
 title: "Design Procedures Execution Results and Evidence"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2403", "TC-2404", "TC-2408"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -64,9 +64,25 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
-  - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](../closed/task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](../closed/task-2404-design-context-architecture-interfaces.yaml)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Accepted procedure/run/manual-observation/assessment
+  schemas and ownership/interaction rules in design/procedure.md, with authored
+  stale-telemetry, combined mains/link-loss and synthetic inspection procedures.
+  The bounded timing model records milliseconds, clock provenance and uncertainty;
+  source/build/config/procedure pins and raw evidence remain independently identified.
+  Reviewer assessments remain separate from observations and do not establish approval.
+
+  The independent checker passed the three worked procedures, four closed schema
+  self-checks and nine result/timing interpretations: pass, fail, missing observation,
+  skipped, interrupted, incompatible clock, late observation, conflicting runs and
+  synthetic manual inspection. Reproducible evidence is under build/gcs-design.
+  These are design tests, not claims of actual execution. TC-2411 must implement the
+  adapters and demonstrate actual simulator faults, exact provenance and tamper checks.

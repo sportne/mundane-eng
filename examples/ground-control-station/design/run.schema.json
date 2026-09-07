@@ -1,0 +1,193 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "format",
+    "id",
+    "procedure",
+    "subjects",
+    "environment",
+    "clock",
+    "adapter",
+    "execution",
+    "observations",
+    "limitations"
+  ],
+  "properties": {
+    "format": {
+      "enum": [
+        "mundane-run-0.1"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
+    "procedure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "sha256"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "subjects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scope",
+          "sha256"
+        ],
+        "properties": {
+          "scope": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          }
+        }
+      }
+    },
+    "environment": {
+      "enum": [
+        "simulation"
+      ]
+    },
+    "clock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "unit",
+        "uncertaintyMs"
+      ],
+      "properties": {
+        "kind": {
+          "enum": [
+            "synthetic-monotonic"
+          ]
+        },
+        "unit": {
+          "enum": [
+            "ms"
+          ]
+        },
+        "uncertaintyMs": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 10000000
+        }
+      }
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version",
+        "buildSha256",
+        "runtimeSha256"
+      ],
+      "properties": {
+        "name": {
+          "enum": [
+            "gcs-event-simulator",
+            "synthetic-manual-inspection"
+          ]
+        },
+        "version": {
+          "enum": [
+            "0.1"
+          ]
+        },
+        "buildSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "runtimeSha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "execution": {
+      "enum": [
+        "completed",
+        "skipped",
+        "interrupted"
+      ]
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "atMs",
+          "field",
+          "value"
+        ],
+        "properties": {
+          "atMs": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10000000
+          },
+          "field": {
+            "enum": [
+              "state",
+              "commandState",
+              "powerState",
+              "linkState",
+              "queueDepth",
+              "combinedFault",
+              "onboardResponse"
+            ]
+          },
+          "value": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1
+              },
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 10000000
+              }
+            ]
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DRAFT native run adapter 0.1"
+}

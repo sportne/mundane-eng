@@ -1,0 +1,88 @@
+format: mundane-procedure-yaml-0.1
+id: PROC-COMBINED
+objective: Record combined mains/link loss and retain ambiguous command outcome 
+  through restart
+method: simulation
+activity:
+  scope: gcs-plan
+  kind: activity
+  id: ACT-STATE
+requirements:
+- scope: gcs-req
+  kind: requirement
+  id: GCS-POWER
+- scope: gcs-req
+  kind: requirement
+  id: GCS-ACK
+- scope: gcs-req
+  kind: requirement
+  id: GCS-RESTART
+configuration:
+  scope: gcs-config
+  kind: baseline
+  id: BL-SIM-DESIGN
+telemetryInterface:
+  scope: gcs-arch
+  kind: interface
+  id: IF-TELEMETRY
+commandInterface:
+  scope: gcs-arch
+  kind: interface
+  id: IF-COMMAND
+environment: simulation
+clock:
+  kind: synthetic-monotonic
+  unit: ms
+  uncertaintyMs: 20
+session: SESSION-1
+events:
+- atMs: 0
+  kind: telemetry
+  ageMs: 0
+  uncertaintyMs: 20
+- atMs: 0
+  kind: heartbeat
+- atMs: 100
+  kind: command
+  request: REQUEST-1
+  session: SESSION-1
+  idempotent: true
+- atMs: 200
+  kind: mains-loss
+- atMs: 201
+  kind: link-loss
+- atMs: 1200
+  kind: tick
+- atMs: 1250
+  kind: ack
+  request: REQUEST-1
+  session: SESSION-1
+- atMs: 1300
+  kind: restart
+  session: SESSION-2
+expected:
+- id: OBS-COMBINED
+  afterMs: 201
+  withinMs: 100
+  field: combinedFault
+  equals: true
+- id: OBS-TIMEOUT
+  afterMs: 1200
+  withinMs: 100
+  field: commandState
+  equals: timed-out
+- id: OBS-LATE
+  afterMs: 1250
+  withinMs: 100
+  field: commandState
+  equals: quarantined
+- id: OBS-QUEUE
+  afterMs: 1300
+  withinMs: 100
+  field: queueDepth
+  equals: 0
+- id: OBS-ONBOARD
+  afterMs: 201
+  withinMs: 100
+  field: onboardResponse
+  equals: unspecified-aircraft-local

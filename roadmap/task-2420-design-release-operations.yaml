@@ -68,5 +68,5 @@ body: |2
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
-  - [TC-2410](task-2410-design-verification-evidence.yaml)
+  - [TC-2410](closed/task-2410-design-verification-evidence.yaml)
   - [TC-2418](task-2418-design-assurance-reviews.yaml)
