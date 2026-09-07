@@ -229,3 +229,12 @@ verify: gcs-design-verify
 clean:
 	rm -rf build editors/vscode/node_modules editors/vscode/.vscode-test .vscode-test
 	find scripts examples experiments -type d -name __pycache__ -prune -exec rm -rf {} +
+
+.PHONY: test-architecture native-architecture architecture-verify
+test-architecture: yaml-dependency version-declarations
+	python3 scripts/build-components.py test architecture
+native-architecture: test-architecture
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath architecture)" -o $(abspath $(BUILD_ROOT)/mundane-architecture) engineering.architecture.ArchitectureMain
+architecture-verify: native-architecture gcs-seed-verify
+	python3 scripts/check-architecture-workflow.py
+verify: architecture-verify

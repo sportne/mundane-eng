@@ -18,6 +18,7 @@ public final class MaintainedTestSuite {
         engineering.impact.ImpactViewTest.run();
         mundanereq.editor.EditorBridgeTest.run();
         mundanereq.editor.EditorImportsTest.run();
-        System.out.println("Passed 14 maintained test groups.");
+        engineering.architecture.ArchitectureTest.run();
+        System.out.println("Passed 15 maintained test groups.");
     }
 }

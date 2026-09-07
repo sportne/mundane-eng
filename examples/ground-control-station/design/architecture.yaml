@@ -1,3 +1,4 @@
+---
 format: mundane-architecture-yaml-0.1
 id: ARCH-GCS
 context:
@@ -449,7 +450,7 @@ transitions:
     kind: mode
     id: PREFLIGHT
   event: start
-  requires: &id001 []
+  requires: []
   effects:
   - block-intent
 - id: TR-MONITOR
@@ -495,7 +496,7 @@ transitions:
     kind: mode
     id: DEGRADED
   event: stale-or-unknown
-  requires: *id001
+  requires: []
   effects:
   - block-intent
   - mark-unknown
@@ -509,7 +510,7 @@ transitions:
     kind: mode
     id: DEGRADED
   event: mains-or-link-loss
-  requires: *id001
+  requires: []
   effects:
   - block-intent
   - mark-unknown
@@ -523,7 +524,7 @@ transitions:
     kind: mode
     id: PREFLIGHT
   event: reconnect
-  requires: *id001
+  requires: []
   effects:
   - discard-queue
   - revoke-authority
@@ -538,7 +539,7 @@ transitions:
     kind: mode
     id: PREFLIGHT
   event: handover
-  requires: *id001
+  requires: []
   effects:
   - revoke-authority
   - discard-queue
@@ -553,7 +554,7 @@ transitions:
     kind: mode
     id: MAINTENANCE
   event: maintenance-start
-  requires: *id001
+  requires: []
   effects:
   - block-intent
 - id: TR-STOP
@@ -566,7 +567,7 @@ transitions:
     kind: mode
     id: OFFLINE
   event: maintenance-complete
-  requires: *id001
+  requires: []
   effects:
   - discard-queue
 decisions:
@@ -575,14 +576,14 @@ decisions:
     scope: self
     kind: interface
     id: IF-TELEMETRY
-  rationale: Separate connection, upper-bound freshness, application authority and observed command
-    completion. Numeric values are simulation-only TC-2401 choices; 24 V is an illustrative interface,
-    not a selected product rating.
+  rationale: Separate connection, upper-bound freshness, application authority and
+    observed command completion. Numeric values are simulation-only TC-2401 choices;
+    24 V is an illustrative interface, not a selected product rating.
   alternatives:
   - 'Use heartbeat as freshness: rejected because live links can carry obsolete data.'
   - 'Use ACK as achieved state: rejected because acceptance does not establish completion.'
-  - 'Treat message IDs as session authority: rejected because simulator envelope semantics are additional
-    assumptions.'
+  - 'Treat message IDs as session authority: rejected because simulator envelope semantics
+    are additional assumptions.'
 deployments:
 - id: DEP-GCS
   component:

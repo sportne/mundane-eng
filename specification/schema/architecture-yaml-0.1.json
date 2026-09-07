@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DRAFT architecture authoring 0.1; design experiment only",
+  "title": "Architecture YAML 0.1",
   "$defs": {
     "ref": {
       "type": "object",

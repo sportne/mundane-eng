@@ -26,6 +26,11 @@ def generate(values, output):
     java.parent.mkdir(parents=True, exist_ok=True)
     java.write_text('package mundanereq;\n\n/** Generated from versions.properties; do not edit. */\npublic final class Versions {\n    private Versions() {}\n'
                     + ''.join('    public static final String '+key+' = '+json.dumps(value)+';\n' for key,value in sorted(values.items()))+'}\n')
+    for domain in ['architecture']:
+        schema=Path(__file__).resolve().parents[1]/'specification/schema'/(domain+'-yaml-0.1.json')
+        target=output/'engineering'/domain/(domain.title()+'Schema.java');target.parent.mkdir(parents=True,exist_ok=True)
+        encoded=json.dumps(json.dumps(json.loads(schema.read_text()),separators=(',',':')))
+        target.write_text('package engineering.'+domain+'; public final class '+domain.title()+'Schema { private '+domain.title()+'Schema() {} public static final String JSON = '+encoded+'; }\n')
     (output/'versions.json').write_text(json.dumps(values, sort_keys=True, indent=2)+'\n')
 
 

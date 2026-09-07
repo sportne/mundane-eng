@@ -2,7 +2,7 @@
 
 Accepted bounded design on 2026-09-07. The source candidate is
 [architecture.yaml](architecture.yaml), checked by the
-[draft schema](architecture.schema.json) and
+[draft schema](../../../specification/schema/architecture-yaml-0.1.json) and
 [design probe](check-architecture.py). This is design evidence for TC-2405; no
 maintained architecture compiler, wire adapter or editor support is delivered here.
 
@@ -102,3 +102,13 @@ missing mode, unguarded enable, unsafe handover, timing dimension error, missing
 completion policy, unknown field, duplicate component and invalid deployment host.
 The probe resolved actual pinned seed requirements and generated allocation, interface
 and failure-case inspection output. Repeated runs produce identical design outputs.
+
+## Maintained implementation
+
+TC-2405 implements this representation in the independently built architecture
+compiler and compiled consumer. Use the [architecture commands](../../../distribution/architecture.md)
+and [published contract](../../../specification/0028-architecture-and-domain-boundary.md).
+The original design-case checker remains independent regression evidence, using the
+single published schema. The authored fixture now expands its former YAML aliases
+to comply with the maintained no-alias profile. Configuration pins were explicitly
+revised for that source change and the new version declarations.

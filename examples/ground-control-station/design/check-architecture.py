@@ -14,7 +14,7 @@ GROUPS={'mode':'modes','component':'components','function':'functions','interfac
 GUARDS={'configuration-known','identity-known','authority-held','fresh-state','trusted-time'}
 
 def evaluate(data,requirements):
-    schema=json.loads((HERE/'architecture.schema.json').read_text())
+    schema=json.loads((ROOT/'specification/schema/architecture-yaml-0.1.json').read_text())
     if list(Draft202012Validator(schema).iter_errors(data)):return ['schema']
     for group in GROUPS.values():
         ids=[x['id'] for x in data[group]]
@@ -74,7 +74,7 @@ def changed(data,changes):
     return d
 
 def verify():
-    schema=json.loads((HERE/'architecture.schema.json').read_text());Draft202012Validator.check_schema(schema)
+    schema=json.loads((ROOT/'specification/schema/architecture-yaml-0.1.json').read_text());Draft202012Validator.check_schema(schema)
     source=common.load(HERE/'architecture.yaml');selection=common.load(HERE/'architecture-selection.yaml')
     selected=selection['imports'][0];root=ROOT/'build/gcs-seed'
     assert common.resource(root,selected['path'],selected['sha256'])=='available','run the seed; imported requirement revision changed'

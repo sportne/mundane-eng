@@ -19,7 +19,7 @@ for name, (_, patterns) in COMPONENTS.items():
         assert source not in owned, (source, owned.get(source), name)
         owned[source] = name
 actual = set(sources(['src/main/java/**/*.java','editors/bridge/src/main/java/**/*.java',
-                     'build/maintained/generated/mundanereq/Versions.java']))
+                     'build/maintained/generated/**/*.java']))
 assert set(owned) == actual, ('unowned Java sources', actual-set(owned))
 closure(COMPONENTS)  # Reject cycles and missing component names.
 with tempfile.TemporaryDirectory(prefix='component-boundary-') as directory:
@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix='component-boundary-') as directory:
     for component, forbidden in [('requirements','engineering.work.WorkMain'),
             ('verification','engineering.verification.PlanCompiler'),
             ('impact','engineering.work.WorkCompiler'),
-            ('artifacts','mundanereq.Interpreter')]:
+            ('artifacts','mundanereq.Interpreter'), ('architecture-model','engineering.domainsource.Source'), ('architecture-model','mundane.yaml.Yaml')]:
         probe = temp/'BoundaryProbe.java'
         probe.write_text('class BoundaryProbe { '+forbidden+' forbidden; }\n')
         result = subprocess.run(['javac','--release','21','-sourcepath',str(empty),

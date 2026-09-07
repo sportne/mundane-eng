@@ -1,8 +1,9 @@
 # Ground control station engineering reference project
 
 The example now includes a runnable workflow using maintained tools and bounded
-artifact designs checked by local prototypes. It does not contain an executable GCS
-or production support for the new architecture/configuration formats. The generated
+artifact designs checked by local prototypes. Architecture now has
+[maintained compile/check/view commands](../../distribution/architecture.md);
+configuration remains a design probe. The example does not yet contain an executable GCS. The generated
 backlog records each card's current status.
 
 The completed deliverables are the [reference-system decision](decisions/reference-system.md),
@@ -235,7 +236,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2402](../../roadmap/closed/task-2402-seed-existing-tool-workflow.yaml) | Build the GCS Seed with Existing Artifact Tools | TC-2401 |
 | [TC-2403](../../roadmap/closed/task-2403-define-artifact-interactions.yaml) | Define Artifact Ownership and Common Interaction Contracts | TC-2402 |
 | [TC-2404](../../roadmap/closed/task-2404-design-context-architecture-interfaces.yaml) | Design Context Architecture and Interface Artifacts | TC-2403 |
-| [TC-2405](../../roadmap/task-2405-implement-context-architecture-interfaces.yaml) | Implement Context Architecture and Interface Workflows | TC-2404 |
+| [TC-2405](../../roadmap/closed/task-2405-implement-context-architecture-interfaces.yaml) | Implement Context Architecture and Interface Workflows | TC-2404 |
 | [TC-2406](../../roadmap/task-2406-design-safety-analysis.yaml) | Design Hazard Control and Failure Analysis Artifacts | TC-2403, TC-2404 |
 | [TC-2407](../../roadmap/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
 | [TC-2408](../../roadmap/closed/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |

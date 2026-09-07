@@ -25,3 +25,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [Editor imports and source mappings](0026-editor-imports-0.1.md) — typed targets and exact source-revision navigation.
 
 - [YAML authoring policy](0027-yaml-authoring-policy.md): shared presentation rules and YAML declaration/plan source contracts.
+
+- [Architecture and domain artifact boundary](0028-architecture-and-domain-boundary.md).

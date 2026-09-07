@@ -63,5 +63,5 @@ body: |2
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2416](task-2416-design-software-security-provenance.yaml)
-  - [TC-2405](task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
   - [TC-2409](task-2409-implement-configurations-baselines.yaml)

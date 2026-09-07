@@ -27,7 +27,9 @@ public final class Yaml {
     }
     private static Point point(Mark m){return new Point(m.getLine()+1,m.getColumn()+1);}
     private static Failure fail(String message,Node n,boolean duplicate){return new Failure(message,point(n.getStartMark().orElseThrow()),duplicate);}
-    public static Document document(byte[] bytes,int maxBytes) {
+    public static Document document(byte[] bytes,int maxBytes) { return document(bytes,maxBytes,false); }
+    /** Opt-in finite decimal numbers for engineering quantities; old profiles stay unchanged. */
+    public static Document document(byte[] bytes,int maxBytes,boolean numbers) {
         try {
             if(bytes.length>maxBytes)throw new IllegalArgumentException("YAML source exceeds byte limit");
             String source=StandardCharsets.UTF_8.newDecoder().onMalformedInput(CodingErrorAction.REPORT).onUnmappableCharacter(CodingErrorAction.REPORT).decode(ByteBuffer.wrap(bytes)).toString();
@@ -56,7 +58,7 @@ public final class Yaml {
             }
             Node root=new Compose(settings).composeString(source).orElseThrow(()->new IllegalArgumentException("expected a YAML document"));
             Map<String,Range> keys=new TreeMap<>(),values=new TreeMap<>();
-            Object value=value(root,"",keys,values);
+            Object value=value(root,"",keys,values,numbers);
             return new Document(value,Map.copyOf(keys),Map.copyOf(values));
         } catch(MarkedYamlEngineException e) {
             throw new Failure(e.getProblem(),e.getProblemMark().map(Yaml::point).orElse(new Point(1,1)),false);
@@ -66,17 +68,22 @@ public final class Yaml {
             throw new Failure(e.getMessage(),new Point(1,1),false);
         }
     }
-    private static Object value(Node node,String pointer,Map<String,Range> keys,Map<String,Range> values) {
+    private static Object value(Node node,String pointer,Map<String,Range> keys,Map<String,Range> values,boolean numbers) {
         values.put(pointer,new Range(point(node.getStartMark().orElseThrow()),point(node.getEndMark().orElseThrow())));
         if(node instanceof ScalarNode scalar) {
             if(Tag.STR.equals(scalar.getTag()))return scalar.getValue();
             if(Tag.NULL.equals(scalar.getTag()))return null;
             if(Tag.BOOL.equals(scalar.getTag())&&Set.of("true","false").contains(scalar.getValue()))return Boolean.valueOf(scalar.getValue());
+            if(numbers && (Tag.INT.equals(scalar.getTag()) || Tag.FLOAT.equals(scalar.getTag())) && scalar.getValue().matches("-?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?")) {
+                var number=new java.math.BigDecimal(scalar.getValue());
+                if(Math.abs((long)number.scale())>1000 || number.precision()>1000)throw fail("numeric range exceeds bounded decimal profile",node,false);
+                return number;
+            }
             throw fail("expected string or explicit lowercase boolean/null; quote numeric text",node,false);
         }
         if(node instanceof SequenceNode sequence) {
             List<Object> result=new ArrayList<>();int index=0;
-            for(Node child:sequence.getValue())result.add(value(child,pointer+"/"+index++,keys,values));
+            for(Node child:sequence.getValue())result.add(value(child,pointer+"/"+index++,keys,values,numbers));
             return result;
         }
         if(node instanceof MappingNode mapping) {
@@ -86,7 +93,7 @@ public final class Yaml {
                 String name=key.getValue(),p=Json.pointer(pointer,name);
                 if(name.equals("<<")||result.containsKey(name))throw fail("duplicate or merge key "+name,key,true);
                 keys.put(p,new Range(point(key.getStartMark().orElseThrow()),point(key.getEndMark().orElseThrow())));
-                result.put(name,value(tuple.getValueNode(),p,keys,values));
+                result.put(name,value(tuple.getValueNode(),p,keys,values,numbers));
             }
             return result;
         }

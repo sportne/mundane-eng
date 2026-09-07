@@ -113,3 +113,14 @@ Future GCS ownership decisions extend these source sets only when concrete code
 exists. Shared must remain bounded infrastructure; domain compilers must not be
 added to it to evade dependency rules. Any new compiler/consumer boundary requires
 an explicit dependency decision and an appropriate isolation check.
+
+## Architecture domain
+
+TC-2405 adds `domain` (artifact infrastructure, bounded structure and provenance),
+`domain-source` (YAML decoding and origin capture), `architecture-model` (compiled
+schema, semantics and views), and `architecture` (CLI/source wiring). The model uses
+only `domain`/`artifacts` and the JDK. Source wiring uses `domain-source` and its YAML
+dependency. Shared infrastructure contains no architecture-specific field meanings.
+`test-architecture` has a test-only requirements dependency to produce real imports.
+`native-architecture` builds its independently tested closure. Boundary probes reject
+YAML/source compiler dependencies from the compiled architecture model.

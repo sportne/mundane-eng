@@ -36,7 +36,7 @@ baseline:
     kind: architecture-source
     format: mundane-architecture-yaml-0.1
     path: resources/architecture.yaml
-    sha256: 45ec2676abd379dd8692803cf3ffa3169321d7218361fc2333bcfe45a74882ae
+    sha256: bbe25e4bb4470d2f18244702909e14b4c46029066042f30df177198eb64df1d8
     required: true
     appliesTo:
     - simulation
@@ -62,7 +62,7 @@ baseline:
     kind: native-resource
     format: version-declarations-json
     path: resources/versions.json
-    sha256: 0edef82f32cd0b40dfbf25e34a7432c80d7553382d3cbf507f9aeaefe92339cf
+    sha256: 06fbf3d35581cdcba71a450e588663375bb90db8067fd6a6cf07fb5dfd076355
     required: true
     appliesTo:
     - simulation
@@ -101,7 +101,7 @@ change:
       kind: baseline
       id: BL-SIM-DESIGN
     path: configuration-sim.yaml
-    sha256: 2dd18aeab943a9ace2389a64ba78a0ef961d2584ca57c8c335bd78293e9ac27b
+    sha256: ae38eea9931ddf432d7a520ca463b805900abe1829c7a9e42e155356f508a5d4
   owner: hardware
   reason: Substitute a 200 W illustrative host for the 120 W assumption; reassess power, interfaces
     and evidence.

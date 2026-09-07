@@ -12,6 +12,10 @@ COMPONENTS = {
     'yaml': (['shared'], [MAIN+'mundane/yaml/*.java']),
     'requirements': (['shared', 'yaml'], [MAIN+'mundanereq/**/*.java']),
     'artifacts': (['shared'], [MAIN+'engineering/artifacts/*.java']),
+    'domain': (['artifacts'], [MAIN+'engineering/domain/*.java']),
+    'domain-source': (['domain','yaml'], [MAIN+'engineering/domainsource/*.java']),
+    'architecture-model': (['domain'], [MAIN+'engineering/architecture/Architecture.java', 'build/maintained/generated/engineering/architecture/ArchitectureSchema.java']),
+    'architecture': (['architecture-model','domain-source'], [MAIN+'engineering/architecture/ArchitectureMain.java']),
     'plan': (['artifacts', 'yaml'], [MAIN+'engineering/verification/Plan*.java']),
     'verification': (['artifacts'], [MAIN+'engineering/verification/Verif*.java']),
     'work-model': (['artifacts'], [MAIN+'engineering/work/'+name+'.java' for name in
@@ -25,6 +29,7 @@ COMPONENTS = {
 YAML_USERS = {'yaml', 'requirements', 'work-source'}
 # Test dependencies may include collaborating components; production dependencies may not.
 TESTS = {
+    'architecture': (['requirements'], [TEST+'engineering/architecture/*.java'], ['engineering.architecture.ArchitectureTest']),
     'requirements': ([], [TEST+'mundanereq/cli/*.java'], [
         'mundanereq.cli.'+name for name in ['YamlWorkflowTest','SarifOutputTest',
         'AttributeValidationTest','AttributeFormattingTest','AttributeCompilationTest']]),

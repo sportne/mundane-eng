@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2405"
 kind: "task"
 title: "Implement Context Architecture and Interface Workflows"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2404"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -59,7 +59,29 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2404](../closed/task-2404-design-context-architecture-interfaces.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Added independently built Java architecture-model and
+  source/CLI components, numeric YAML opt-in, compiled provenance/typed imports,
+  closed schema and semantic checks, and source-linked Markdown/Mermaid views.
+  The shared structure evaluator has only bounded local contract mechanics; it does
+  not contain domain record meanings. Source profiles for existing consumers did
+  not change. Expanded the draft fixture's aliases and explicitly revised affected
+  configuration pins for its bytes and new version metadata.
+
+  make architecture-verify component-boundary-verify gcs-design-verify passed:
+  native compile/check/view; a fresh-root identical compiled rebuild; freshness
+  edit/rebuild; consumer execution without YAML/source classes; the 13 original
+  architecture cases and stricter unsupported-profile cases; all 15 Java groups;
+  compiler isolation, requirements-only operations and all existing GCS probes.
+  Snapshot changes, tampered imports, stale source navigation and output failures
+  are covered. Logs are disposable under build/ci-evidence/gcs-execution/2405.log.
+  The single published architecture schema replaces the duplicate draft schema.
+
+  The tool provides engineering analysis, not a wire protocol or vehicle runtime.
+  Architecture VS Code integration and expanded distribution remain later cards.

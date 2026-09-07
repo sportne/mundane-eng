@@ -25,6 +25,7 @@ extension identifiers remain compatible.
 | Work items | YAML task/issue records, literal narrative strings and typed relationships | [Authoring and commands](distribution/work-items.md); [repository backlog](WORK-ITEMS.md) |
 | Impact analysis | Explicit compiled requirements, plans and work-item imports | [Bounded queries and explained reports](distribution/impact.md); [logger example](examples/impact/README.md) |
 | VS Code authoring | Explicit requirement and YAML work-item selections, including unsaved buffers | [Local authoring and imported-target navigation](editors/vscode/README.md); [Linux bundle](distribution/editor-bundle.md) |
+| Architecture | YAML context, allocations, modes, interfaces and decisions; explicit compiled requirement imports | [Native compile/check/view](distribution/architecture.md) |
 | Derived reports | Compiled snapshots and explicit analysis results | [Experimental verification report](experiments/0029-verification-report/README.md); work-item views via `mundane-work view` |
 
 Compiled interfaces are versioned separately from source languages and tools.

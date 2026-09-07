@@ -36,7 +36,7 @@ baseline:
     kind: architecture-source
     format: mundane-architecture-yaml-0.1
     path: resources/architecture.yaml
-    sha256: 45ec2676abd379dd8692803cf3ffa3169321d7218361fc2333bcfe45a74882ae
+    sha256: bbe25e4bb4470d2f18244702909e14b4c46029066042f30df177198eb64df1d8
     required: true
     appliesTo:
     - simulation
@@ -62,7 +62,7 @@ baseline:
     kind: native-resource
     format: version-declarations-json
     path: resources/versions.json
-    sha256: 0edef82f32cd0b40dfbf25e34a7432c80d7553382d3cbf507f9aeaefe92339cf
+    sha256: 06fbf3d35581cdcba71a450e588663375bb90db8067fd6a6cf07fb5dfd076355
     required: true
     appliesTo:
     - simulation
@@ -98,5 +98,5 @@ previous:
     kind: baseline
     id: BL-SIM-BUILT
   path: configuration-built.yaml
-  sha256: 4aeb53195ba788f7188982b044c41e0057fb99fe9acd6e5dd3827806b5768eed
+  sha256: 506ba81fc46d1cabe97fe94a8caf81fd2531b3db3093bb9f5e34924067253aaf
 change: null
