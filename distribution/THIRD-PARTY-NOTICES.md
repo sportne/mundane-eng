@@ -26,3 +26,11 @@ licenses and updates are supplied by the target operating system.
 used for a particular package. Changing the GraalVM distribution requires
 regenerating the package from that distribution so its corresponding notices
 are included.
+
+## CycloneDX JSON schemas
+
+Offline verification uses the unmodified CycloneDX 1.6 BOM schema and its SPDX/JSF
+references from the pinned upstream revision in
+[the manifest](../dependencies/cyclonedx/manifest.json). These files are provided
+under the [Apache License 2.0](../dependencies/cyclonedx/LICENSE). They are test
+resources; the native software adapter implements a documented consumed projection.

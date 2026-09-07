@@ -1,0 +1,59 @@
+format: mundane-software-yaml-0.1
+id: SW-GCS
+configuration:
+  scope: gcs-config
+  kind: baseline
+  id: BL-SIM-DESIGN
+build:
+  binary:
+    path: host.zip
+    sha256: 5bdc08c4ca367753599c39aea8b06fe50c5b26f58366e021eeafb241fb057abf
+  source:
+    path: host-source.py
+    sha256: ee2eb8ac4d324f28d8e694ee897946685546f314927311c7f3207e7317c8cc7d
+    uri: urn:mundane-eng:fixture:host-source
+  recipe:
+    path: build-recipe.txt
+    sha256: ee36af7f8c9de1cea7eaf0c6504c0bf75cd1afa110c3f3752f959050976733ef
+    uri: urn:mundane-eng:fixture:build-recipe
+  provenance:
+    path: provenance.intoto.json
+    sha256: b9af6734dfd096c44e373c76cd8ff00a8c55c1f7446e2257cc7f933269bc9f74
+  sbom:
+    path: bom.cdx.json
+    sha256: 3028487b266999854edc048dda8bfae4cb82a4230a029b7828615f08bf76adaf
+scan:
+  state: complete
+  tool: synthetic-fixture-producer
+  version: '1'
+  result:
+    path: scan.cdx.json
+    sha256: d1b6669839ac1b419e2b01a9f8f1e42884deaa41005b86a43ea938cb12cf5128
+boundaries:
+- id: TB-LINK
+  interface:
+    scope: gcs-arch
+    kind: interface
+    id: IF-TELEMETRY
+  description: External link crosses into ground host trust domain.
+threats:
+- id: TH-REPLAY
+  boundary: TB-LINK
+  scenario: Replayed state can appear current without session checks.
+controls:
+- id: SEC-SESSION
+  threat: TH-REPLAY
+  requirement:
+    scope: gcs-req
+    kind: requirement
+    id: GCS-STALE
+  safetyControl:
+    scope: gcs-safety
+    kind: control
+    id: CTRL-FRESH
+  mitigation: Session-scoped authenticated transport, replay checking and
+    bounded freshness; illustrative design, not an implementation claim.
+reviews: []
+limitations:
+- Synthetic software and advisory; no live scan, signature verification or
+  security approval.

@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2416"
 kind: "task"
 title: "Design Software Provenance and Security Artifacts"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2403", "TC-2404", "TC-2408"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -65,9 +65,15 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
-  - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](../closed/task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](../closed/task-2404-design-context-architecture-interfaces.yaml)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. The [software decision](../../examples/ground-control-station/design/software.md), draft YAML/schema and independently run native fixture producer select SLSA Provenance v1/in-toto Statement v1 and CycloneDX JSON 1.6 SBOM/VEX. Native identities stay in their standards; project relationships and review applicability remain YAML. Exact upstream schemas, revision/hashes and Apache license are retained for offline fixture verification. SPDX and signature verification boundaries are explicit.
+
+  Ran `build/schema-check-venv/bin/python examples/ground-control-station/design/check-software-design.py`: PASS. A real deterministic source archive build agrees with its unsigned native statement and official-schema-valid BOM/VEX. Changed binary, absent source/recipe and unsupported predicate versions are rejected by the independent probe; authored selection syntax passes its closed schema. Scan states, authority limits, allowlisted producer inputs, offline identity and the future adapter/component boundary are documented. No live vulnerability or authenticated provenance claim is made. The design check is in `make verify`.

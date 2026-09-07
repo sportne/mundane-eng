@@ -278,3 +278,8 @@ native-evidence: test-evidence
 evidence-verify: native-procedure native-evidence configuration-verify procedure-design-verify
 	build/schema-check-venv/bin/python scripts/check-evidence-workflow.py
 verify: evidence-verify
+
+.PHONY: software-design-verify
+software-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-software-design.py
+verify: software-design-verify

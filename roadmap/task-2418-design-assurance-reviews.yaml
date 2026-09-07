@@ -70,4 +70,4 @@ body: |2
   - [TC-2406](closed/task-2406-design-safety-analysis.yaml)
   - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
   - [TC-2410](closed/task-2410-design-verification-evidence.yaml)
-  - [TC-2416](task-2416-design-software-security-provenance.yaml)
+  - [TC-2416](closed/task-2416-design-software-security-provenance.yaml)
