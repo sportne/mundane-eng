@@ -12,12 +12,13 @@ import mundanereq.Versions;
 /** Typed safety facts and explained gaps; no inferred risk acceptance. */
 public final class Safety implements Model.Domain {
     public String kind(){return "safety";}public String format(){return Versions.SAFETY_ARTIFACT;}public String source(){return Versions.SAFETY_SOURCE;}public String version(){return Versions.SAFETY_VERSION;}public String contract(){return Versions.SAFETY_CONTRACT;}
-    public static Model.Context context(Path root){return new Model.Context(root,Map.of("architecture",(a,c)->Model.validateSelected(a,new Architecture(),c),"configuration",(a,c)->Model.validateSelected(a,new Configuration(),c)));}
+    public static Model.Context context(Path root){return new Model.Context(root,Map.of("architecture",new Architecture(),"configuration",new Configuration()));}
     private static final Map<String,String> GROUPS=Map.of("hazard","hazards","control","controls","cause","causes","assumption","assumptions","failure-mode","failureModes");
     private static Map<String,Object> local(Object raw,String kind,Map<String,Object> d) {
         var r=Model.ref(raw,kind);if(!r.get("scope").equals("self"))throw new IllegalArgumentException("local safety ownership required");return Model.find(list(d.get(GROUPS.get(kind))),text(r.get("id")));
     }
     private static void locals(Map<String,Object> row,String field,String kind,Map<String,Object> d){for(Object r:list(row.get(field)))local(r,kind,d);}
+    public Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {if(!GROUPS.containsKey(kind))throw new IllegalArgumentException("wrong-kind");return Model.find(list(values.get(GROUPS.get(kind))),ident);}
     public void validate(Map<String,Object> d,Model.Context c) {
         var authored=new TreeMap<>(d);authored.put("format",source());Schema.validate(authored,Json.read(SafetySchema.JSON.getBytes(StandardCharsets.UTF_8)));id(d.get("id"));
         for(String group:GROUPS.values())Model.unique(list(d.get(group)));Model.unique(list(d.get("severityScale")));

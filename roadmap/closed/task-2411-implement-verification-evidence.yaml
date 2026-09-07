@@ -1,0 +1,108 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2411"
+kind: "task"
+title: "Implement Procedures Runs and Evidence Queries"
+status: Complete
+dependencies: ["TC-2410", "TC-2405", "TC-2409"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Completed with recorded acceptance evidence."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can an engineer execute or import verification and inspect trustworthy evidence for the
+  exact subject revision?
+
+  ## Outcome
+
+  Implement Procedures Runs and Evidence Queries. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement approved procedure and evidence contracts and a bounded simulator/test-runner
+  adapter. Execute deterministic simulated faults and import a manual wiring inspection
+  fixture clearly labelled synthetic. Preserve raw-result provenance and separate tool
+  observations from reviewer assessment.
+
+  ## Acceptance evidence
+
+  Compile a procedure, execute/import a run, inspect failure evidence and query support
+  for the exact requirement/configuration revision. Tampered/missing logs, wrong builds,
+  changed procedures and inconclusive outcomes do not produce supported status. Simulated
+  evidence is clearly scoped and never presented as a real hardware test. Record commands
+  or review steps, input revisions, observed results and remaining limitations in
+  repository evidence linked from this card.
+
+  ## Out of scope
+
+  Real flight tests and automatic engineering approval.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2410](../closed/task-2410-design-verification-evidence.yaml)
+  - [TC-2405](../closed/task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](../closed/task-2409-implement-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Implemented independently built procedure and evidence
+  commands with published procedure/run/manual-observation/assessment contracts.
+  The bounded event simulator derives ground-state observations from selected
+  interface policies, independently of expected criteria. Native run import retains
+  raw resource/procedure/subject/runtime/build pins. Manual YAML normalization adds
+  converter provenance; separate compiled assessments retain exact run references
+  and explicit reviewer claims without establishing approval.
+
+  Implementation refinements add an explicit heartbeat interface, a selected runtime
+  resource checked against the executing native adapter, a declared simulator fault
+  model, and a 1,000-event limit so produced observations remain within the run bound.
+  New-domain reference lookup now belongs to each model owner. Integration review
+  also tightened baseline publication capture ordering, bounded existing publication
+  comparison, and verified that a competing writer's lock is not deleted.
+
+  The native end-to-end workflow passed actual stale-telemetry and combined mains/link
+  simulations, a deliberately defective stale-display model, synthetic manual import,
+  separate/disputed/stale assessments, identical fresh-root procedures and raw runs,
+  wrong procedure/subject/build/runtime rejection, missing/tampered raw/manual resource
+  rejection, changed-procedure staleness, skipped/interrupted/inconclusive outcomes,
+  conflicting repeated runs, forged verdict rejection and YAML-free compiled consumers.
+  The independent procedure design/schema checks also passed.
+
+  A fresh staged-source export with no copied build outputs passed the entire
+  scripts/run-ci-verification.sh wrapper, exit 0: all 18 maintained Java groups,
+  compiler-isolation and requirements-only checks, existing native/golden/mutation
+  workflows, packages, nine Node tests, actual development and installed VS Code
+  hosts, every new GCS native workflow, and both deliberate CI failures with exact
+  fixture restoration. The complete output is retained as disposable local evidence
+  at build/ci-evidence/gcs-execution/fresh-verify.log. Verified native executables were
+  copied back and the four new-domain workflow checks rerun to refresh local reports.
+  Final card/index/schema checks cover the subsequent completion metadata changes.
+
+  This is simulation/synthetic evidence, not a deployable GCS, aircraft dynamics model,
+  physical hardware test or certified safety determination. Observed criterion support,
+  reviewer claims, adequacy and authorization remain separate. Equipment, security,
+  assurance, semantic impact, editor and package expansion remain their owning cards.

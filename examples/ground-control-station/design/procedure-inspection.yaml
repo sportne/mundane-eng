@@ -35,3 +35,7 @@ expected:
   withinMs: 0
   field: powerState
   equals: synthetic-wiring-observed
+heartbeatInterface:
+  scope: gcs-arch
+  kind: interface
+  id: IF-HEARTBEAT

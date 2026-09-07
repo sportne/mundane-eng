@@ -17,6 +17,10 @@ COMPONENTS = {
     'architecture-model': (['domain'], [MAIN+'engineering/architecture/Architecture.java', 'build/maintained/generated/engineering/architecture/ArchitectureSchema.java']),
     'configuration-model': (['architecture-model'], [MAIN+'engineering/configuration/Configuration.java', MAIN+'engineering/configuration/Publication.java', 'build/maintained/generated/engineering/configuration/ConfigurationSchema.java']),
     'safety-model': (['configuration-model'], [MAIN+'engineering/safety/Safety.java', 'build/maintained/generated/engineering/safety/SafetySchema.java']),
+    'procedure-model': (['configuration-model'], [MAIN+'engineering/procedure/Procedure.java', 'build/maintained/generated/engineering/procedure/ProcedureSchema.java']),
+    'procedure': (['procedure-model','domain-source'], [MAIN+'engineering/procedure/ProcedureMain.java']),
+    'evidence-model': (['procedure-model'], [MAIN+'engineering/evidence/Evidence.java', MAIN+'engineering/evidence/Simulator.java', MAIN+'engineering/evidence/Assessment.java', 'build/maintained/generated/engineering/evidence/*.java']),
+    'evidence': (['evidence-model','domain-source'], [MAIN+'engineering/evidence/EvidenceMain.java']),
     'safety': (['safety-model','domain-source'], [MAIN+'engineering/safety/SafetyMain.java']),
     'configuration': (['configuration-model','domain-source'], [MAIN+'engineering/configuration/ConfigurationMain.java']),
     'architecture': (['architecture-model','domain-source'], [MAIN+'engineering/architecture/ArchitectureMain.java']),
@@ -33,6 +37,7 @@ COMPONENTS = {
 YAML_USERS = {'yaml', 'requirements', 'work-source'}
 # Test dependencies may include collaborating components; production dependencies may not.
 TESTS = {
+    'evidence': (['procedure'], [TEST+'engineering/evidence/*.java'], ['engineering.evidence.EvidenceTest']),
     'safety': ([], [TEST+'engineering/safety/*.java'], ['engineering.safety.SafetyTest']),
     'configuration': ([], [TEST+'engineering/configuration/*.java'], ['engineering.configuration.ConfigurationTest']),
     'architecture': (['requirements'], [TEST+'engineering/architecture/*.java'], ['engineering.architecture.ArchitectureTest']),

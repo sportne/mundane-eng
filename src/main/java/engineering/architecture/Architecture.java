@@ -16,6 +16,7 @@ public final class Architecture implements Model.Domain {
     private static Map<String,Object> local(Object raw,String kind,Map<String,Object> data) {
         var r=Model.ref(raw,kind);if(!r.get("scope").equals("self"))throw new IllegalArgumentException("missing-scope: architecture ownership must be local");return Model.find(list(data.get(GROUPS.get(kind))),text(r.get("id")));
     }
+    public Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {if(!GROUPS.containsKey(kind))throw new IllegalArgumentException("wrong-kind");return Model.find(list(values.get(GROUPS.get(kind))),ident);}
     public void validate(Map<String,Object> data,Model.Context context) {
         var authored=new TreeMap<>(data);authored.put("format",source());Schema.validate(authored,Json.read(ArchitectureSchema.JSON.getBytes(StandardCharsets.UTF_8)));
         id(data.get("id"));id(map(data.get("context")).get("id"));

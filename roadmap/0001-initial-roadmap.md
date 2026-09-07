@@ -37,8 +37,9 @@ IDs remain human-authored; digests identify revisions.
 | VS Code authoring | Local extension with explicit projects, unsaved diagnostics, local and imported-target navigation, formatting and typed assistance; [guide](../editors/vscode/README.md) |
 | Contributor checks | Authoritative `make verify`, clean-checkout wrapper, compatibility/golden corpora, seeded workflows and targeted behavioral mutations; [build guide](../distribution/build-verification.md) |
 
-These capabilities establish bounded workflows. They do not establish executed
-verification, evidence adequacy, safety approval or requirement satisfaction.
+These capabilities establish bounded workflows. Executed verification now includes
+in-memory GCS simulation and synthetic manual observations. It does not establish
+evidence adequacy, safety approval or requirement satisfaction.
 Completed cards record the scope of their maintained capabilities.
 
 ## Impact-analysis workflow
@@ -146,10 +147,10 @@ The [GCS example plan](../examples/ground-control-station/README.md) defines a
 civilian, simulator-first engineering project and adversarial scenario ledger for
 additional artifact families. TC-2401 through TC-2428 separate boundary and current-tool
 seeding, representation decisions, implementation, semantic change, editor/report
-workflows, integrated verification, distribution and final cleanup. TC-2401 through
-TC-2404 and TC-2408 are complete: the boundary, runnable current-tool seed, ownership
-decision, and tested architecture/configuration designs are available. Production
-support for the new domains remains planned; the implemented foundation above
+workflows, integrated verification, distribution and final cleanup. TC-2401 through TC-2411 now provide the boundary, current-tool seed, ownership
+decisions, architecture/configuration tooling, safety traceability, procedures and
+bounded simulated evidence. Equipment, security, assurance and release domains
+remain planned; the implemented foundation above
 remains the current support statement.
 The example uses YAML for new authored engineering facts and explicit adapters for
 canonical native resources. It does not establish flight readiness or certification.

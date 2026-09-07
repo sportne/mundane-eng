@@ -11,12 +11,14 @@
     "adapter",
     "execution",
     "observations",
-    "limitations"
+    "limitations",
+    "runtime",
+    "manualSource"
   ],
   "properties": {
     "format": {
       "enum": [
-        "mundane-manual-observation-yaml-0.1"
+        "mundane-run-0.1"
       ]
     },
     "id": {
@@ -101,7 +103,8 @@
         "name",
         "version",
         "buildSha256",
-        "runtimeSha256"
+        "runtimeSha256",
+        "faultModel"
       ],
       "properties": {
         "name": {
@@ -122,6 +125,13 @@
         "runtimeSha256": {
           "type": "string",
           "pattern": "^[0-9a-f]{64}$"
+        },
+        "faultModel": {
+          "enum": [
+            "nominal",
+            "suppress-stale",
+            "manual"
+          ]
         }
       }
     },
@@ -186,8 +196,51 @@
         "type": "string",
         "minLength": 1
       }
+    },
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        }
+      }
+    },
+    "manualSource": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256"
+          ],
+          "properties": {
+            "path": {
+              "type": "string",
+              "minLength": 1
+            },
+            "sha256": {
+              "type": "string",
+              "pattern": "^[0-9a-f]{64}$"
+            }
+          }
+        }
+      ]
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DRAFT manual observations YAML 0.1"
+  "title": "run 0.1"
 }

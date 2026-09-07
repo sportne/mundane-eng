@@ -56,3 +56,7 @@ expected:
   withinMs: 100
   field: commandState
   equals: inhibited
+heartbeatInterface:
+  scope: gcs-arch
+  kind: interface
+  id: IF-HEARTBEAT

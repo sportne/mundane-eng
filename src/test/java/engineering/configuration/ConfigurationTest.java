@@ -21,6 +21,8 @@ public final class ConfigurationTest {
             Path retained=root.resolve(text(receipt.get("root")));var reread=Model.read(retained.resolve("baseline.json"),Configuration.context(retained),domain);
             if(!Json.write(a).equals(Json.write(reread)))throw new AssertionError("retained baseline differs");
             Publication.publish(a,c,"baseline.json","store");
+            Path lock=root.resolve("store").resolve(text(receipt.get("revision"))+".lock");Files.writeString(lock,"another writer");
+            reject(()->Publication.publish(a,c,"baseline.json","store"));if(!Files.readString(lock).equals("another writer"))throw new AssertionError("removed another writer's lock");Files.delete(lock);
             Files.writeString(retained.resolve("asset.txt"),"tampered\n");reject(()->Publication.publish(a,c,"baseline.json","store"));
             Files.writeString(root.resolve("asset.txt"),"changed\n");reject(()->Model.read(root.resolve("baseline.json"),Configuration.context(root),domain));
             Files.delete(root.resolve("asset.txt"));reject(()->Model.read(root.resolve("baseline.json"),Configuration.context(root),domain));

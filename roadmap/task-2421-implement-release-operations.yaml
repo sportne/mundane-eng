@@ -63,5 +63,5 @@ body: |2
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2420](task-2420-design-release-operations.yaml)
   - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
-  - [TC-2411](task-2411-implement-verification-evidence.yaml)
+  - [TC-2411](closed/task-2411-implement-verification-evidence.yaml)
   - [TC-2419](task-2419-implement-assurance-reviews.yaml)

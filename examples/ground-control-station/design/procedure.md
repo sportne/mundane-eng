@@ -1,8 +1,8 @@
 # Procedures, execution and evidence design — TC-2410
 
-The [procedure schema](procedure.schema.json), [native run schema](run.schema.json),
-[manual observation schema](manual-observation.schema.json) and
-[assessment schema](assessment.schema.json) define independent ownership boundaries.
+The [procedure schema](../../../specification/schema/procedure-yaml-0.1.json), [native run schema](../../../specification/schema/run-0.1.json),
+[manual observation schema](../../../specification/schema/manual-observation-yaml-0.1.json) and
+[assessment schema](../../../specification/schema/assessment-yaml-0.1.json) define independent ownership boundaries.
 The worked procedures are [stale telemetry](procedure-stale.yaml),
 [combined mains/link loss](procedure-combined.yaml), and
 [synthetic manual inspection](procedure-inspection.yaml).
@@ -76,3 +76,12 @@ interpretation cases: pass, fail, missing observation, skipped, interrupted, unc
 clock, late observation, conflicting repeated results and synthetic inspection.
 These are design observations, not recorded executions. Actual adapters and tamper/
 revision/publication tests belong to TC-2411.
+
+## Maintained implementation
+
+TC-2411 implements the [published contract](../../../specification/0031-procedures-and-evidence.md)
+and [native workflow](../../../distribution/evidence.md). Implementation adds an
+explicit heartbeat interface, selected runtime resource, adapter-generated manual
+provenance and a declared simulator fault model. These close concrete ambiguities in
+the draft without changing existing requirement or plan formats. The published schemas
+replace draft copies; independent design interpretation checks remain regression inputs.

@@ -23,16 +23,17 @@ public final class Publication {
                 channel.force(true);
                 // Retain exact authored source, not merely its location in the envelope.
                 for(Object raw:list(a.get("sources")))c.readPinned(map(raw));
+                var findings=new Configuration().resolve(map(a.get("values")),c);
+                if(findings.stream().anyMatch(f->!f.get("state").equals("available")))throw new IOException("publication requires available optional resources too");
                 var files=new TreeMap<String,byte[]>();for(var s:c.snapshots.captured()) {
                     var old=files.putIfAbsent(s.path(),s.bytes());if(old!=null&&!Arrays.equals(old,s.bytes()))throw new IOException("inconsistent captured revision");
                 }
-                var findings=new Configuration().resolve(map(a.get("values")),c);
-                if(findings.stream().anyMatch(f->!f.get("state").equals("available")))throw new IOException("publication requires available optional resources too");
+
                 c.snapshots.recheck();
                 Path target=directory.resolve(revision);
                 if(Files.exists(target,LinkOption.NOFOLLOW_LINKS)) {
                     if(!Files.isDirectory(target,LinkOption.NOFOLLOW_LINKS))throw new IOException("existing revision is not a directory");
-                    for(var e:files.entrySet()) {Path p=target.resolve("root").resolve(e.getKey());if(!p.toRealPath().startsWith(target.toRealPath())||!Arrays.equals(Files.readAllBytes(p),e.getValue()))throw new IOException("existing publication differs; refusing replacement");}
+                    for(var e:files.entrySet()) {Path p=target.resolve("root").resolve(e.getKey());if(!p.toRealPath().startsWith(target.toRealPath())||Files.size(p)!=e.getValue().length||!Arrays.equals(Files.readAllBytes(p),e.getValue()))throw new IOException("existing publication differs; refusing replacement");}
                 }else {
                     temporary=Files.createTempDirectory(directory,".publication-");Path retained=temporary.resolve("root");Files.createDirectory(retained);
                     for(var e:files.entrySet()){Path p=retained.resolve(e.getKey());Files.createDirectories(p.getParent());Files.write(p,e.getValue(),StandardOpenOption.CREATE_NEW);}

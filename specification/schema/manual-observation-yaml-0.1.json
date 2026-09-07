@@ -8,7 +8,6 @@
     "subjects",
     "environment",
     "clock",
-    "adapter",
     "execution",
     "observations",
     "limitations"
@@ -16,7 +15,7 @@
   "properties": {
     "format": {
       "enum": [
-        "mundane-run-0.1"
+        "mundane-manual-observation-yaml-0.1"
       ]
     },
     "id": {
@@ -94,37 +93,6 @@
         }
       }
     },
-    "adapter": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "name",
-        "version",
-        "buildSha256",
-        "runtimeSha256"
-      ],
-      "properties": {
-        "name": {
-          "enum": [
-            "gcs-event-simulator",
-            "synthetic-manual-inspection"
-          ]
-        },
-        "version": {
-          "enum": [
-            "0.1"
-          ]
-        },
-        "buildSha256": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        },
-        "runtimeSha256": {
-          "type": "string",
-          "pattern": "^[0-9a-f]{64}$"
-        }
-      }
-    },
     "execution": {
       "enum": [
         "completed",
@@ -189,5 +157,5 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DRAFT native run adapter 0.1"
+  "title": "manual-observation 0.1"
 }

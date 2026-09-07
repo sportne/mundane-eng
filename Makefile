@@ -267,3 +267,14 @@ native-safety: test-safety
 safety-verify: native-safety safety-design-verify
 	build/schema-check-venv/bin/python scripts/check-safety-workflow.py
 verify: safety-verify
+
+.PHONY: test-evidence native-procedure native-evidence evidence-verify
+test-evidence: yaml-dependency version-declarations
+	python3 scripts/build-components.py test evidence
+native-procedure: test-evidence
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath procedure)" -o $(abspath $(BUILD_ROOT)/mundane-procedure) engineering.procedure.ProcedureMain
+native-evidence: test-evidence
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath evidence)" -o $(abspath $(BUILD_ROOT)/mundane-evidence) engineering.evidence.EvidenceMain
+evidence-verify: native-procedure native-evidence configuration-verify procedure-design-verify
+	build/schema-check-venv/bin/python scripts/check-evidence-workflow.py
+verify: evidence-verify

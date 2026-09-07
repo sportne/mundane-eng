@@ -26,11 +26,21 @@ def generate(values, output):
     java.parent.mkdir(parents=True, exist_ok=True)
     java.write_text('package mundanereq;\n\n/** Generated from versions.properties; do not edit. */\npublic final class Versions {\n    private Versions() {}\n'
                     + ''.join('    public static final String '+key+' = '+json.dumps(value)+';\n' for key,value in sorted(values.items()))+'}\n')
-    for domain in ['architecture','configuration','safety']:
+    for domain in ['architecture','configuration','safety','procedure']:
         schema=Path(__file__).resolve().parents[1]/'specification/schema'/(domain+'-yaml-0.1.json')
         target=output/'engineering'/domain/(domain.title()+'Schema.java');target.parent.mkdir(parents=True,exist_ok=True)
         encoded=json.dumps(json.dumps(json.loads(schema.read_text()),separators=(',',':')))
         target.write_text('package engineering.'+domain+'; public final class '+domain.title()+'Schema { private '+domain.title()+'Schema() {} public static final String JSON = '+encoded+'; }\n')
+    import hashlib
+    repository=Path(__file__).resolve().parents[1]
+    for name,contract in [('Run','run'),('Manual','manual-observation-yaml'),('Assessment','assessment-yaml')]:
+        schema=repository/'specification/schema'/(contract+'-0.1.json')
+        target=output/'engineering/evidence'/(name+'Schema.java');target.parent.mkdir(parents=True,exist_ok=True)
+        encoded=json.dumps(json.dumps(json.loads(schema.read_text()),separators=(',',':')))
+        target.write_text('package engineering.evidence; public final class '+name+'Schema { private '+name+'Schema() {} public static final String JSON = '+encoded+'; }\n')
+    inputs=sorted([*repository.glob('src/main/java/**/*.java'),*repository.glob('specification/schema/*.json'),repository/'versions.properties'])
+    fingerprint=hashlib.sha256(b''.join(str(p.relative_to(repository)).encode()+b'\0'+hashlib.sha256(p.read_bytes()).digest() for p in inputs)).hexdigest()
+    (output/'engineering/evidence/EvidenceBuild.java').write_text('package engineering.evidence; public final class EvidenceBuild { private EvidenceBuild() {} public static final String SHA256 = "'+fingerprint+'"; }\n')
     (output/'versions.json').write_text(json.dumps(values, sort_keys=True, indent=2)+'\n')
 
 

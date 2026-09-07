@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Added independently built architecture, configuration, safety, procedure and
+  evidence commands, with typed compiled imports and source-linked inspection.
+- Configuration publication retains exact inputs; safety analysis exposes coverage
+  and review gaps. Procedures now drive bounded in-memory simulation, native result
+  import, synthetic manual observations and separate authored assessments.
+- New engineering source profiles opt into finite numeric YAML quantities. Existing
+  requirement, attribute, plan and work source contracts remain unchanged.
+
 - Renamed the project and repository to Mundane-Eng; existing command, format,
   Java package and editor extension identifiers remain compatible.
 - Enforced explicit component build dependencies and moved the editor bridge and

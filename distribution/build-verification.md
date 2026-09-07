@@ -99,3 +99,12 @@ outputs remain available. The next build downloads its dependencies again; use
 Cleanup uses fixed repository-relative paths; overriding `BUILD_ROOT` or package
 variables does not redirect deletion. Do not run it concurrently with a build or
 editor test in the same checkout.
+
+## GCS engineering domains
+
+The full gate also builds the independently versioned architecture, configuration,
+safety, procedure and evidence native commands. It exercises explicit compiled imports,
+retained baseline publication, safety queries, the deterministic event simulator,
+synthetic manual observations, assessed-result separation and adversarial provenance
+cases. New compiled-model classpaths are tested without YAML readers. Focused targets
+and limitations are documented in each domain's distribution guide.

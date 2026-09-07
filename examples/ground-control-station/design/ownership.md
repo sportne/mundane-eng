@@ -1,8 +1,9 @@
 # Artifact ownership and interaction decision — TC-2403
 
 Accepted design direction, 2026-09-07. This document and the local draft examples
-are design evidence. Only the [seed](../seed/README.md) uses maintained compilers.
-No new format is registered in `versions.properties` by this decision.
+are design evidence. Subsequent cards implement architecture, configuration, safety,
+procedures and evidence alongside the [seed](../seed/README.md). Their published
+contracts and registered versions are linked from the [current guide](../README.md).
 
 ## Ownership and proposed version boundaries
 
@@ -11,10 +12,10 @@ No new format is registered in `versions.properties` by this decision.
 | Requirements and descriptive attributes | Keep current YAML 0.3/0.4 and attribute declaration 0.1; compiled requirement 0.1/0.2 | Existing requirements tools; attributes cannot substitute for identified domain records |
 | Planned verification activities and coverage | Keep plan YAML 0.1 and compiled plan 0.1 | Existing plan/link/verify commands; execution remains separate |
 | Tasks and issues | Keep work YAML/compiled 0.2 | Existing work compiler/analyzer; corrective tasks keep these IDs |
-| Contexts, modes, functions, components, interfaces and rationale | Propose architecture YAML 0.1 / compiled architecture 0.1 | One architecture owner for the bounded first workflow; distinguish typed record kinds inside it |
-| Hazards, controls, failure analysis | Reserve safety YAML 0.1 / compiled safety 0.1 | Safety analysis owner, consuming architecture/configuration/requirement revisions |
-| Configuration selections, baselines, proposed changes | Propose configuration YAML 0.1 / compiled configuration 0.1 | Configuration owner; immutable published snapshots and separate resource resolver |
-| Procedures and planned test criteria | Reserve procedure YAML 0.1 / compiled procedure 0.1 | Verification-procedure owner; reference existing activities without embedding executions |
+| Contexts, modes, functions, components, interfaces and rationale | Implemented architecture YAML 0.1 / compiled architecture 0.1 | One architecture owner for the bounded first workflow; distinguish typed record kinds inside it |
+| Hazards, controls, failure analysis | Implemented safety YAML 0.1 / compiled safety 0.1 | Safety analysis owner, consuming architecture/configuration/requirement revisions |
+| Configuration selections, baselines, proposed changes | Implemented configuration YAML 0.1 / compiled configuration 0.1 | Configuration owner; immutable published snapshots and separate resource resolver |
+| Procedures and planned test criteria | Implemented procedure YAML 0.1 / compiled procedure 0.1 | Verification-procedure owner; reference existing activities without embedding executions |
 | Runs, observations, raw evidence | Native runner/log formats plus a versioned evidence adapter 0.1; authored manual observations use YAML | Evidence owner records provenance and outcomes; never changes a requirement to satisfied |
 | Parts, equipment instances and connectivity | Reserve equipment YAML 0.1 / compiled equipment 0.1 | Hardware owner; native CAD retained by adapters, BOM/wiring derived |
 | Quantities, calculations and reliability models | Reserve analysis YAML 0.1 / compiled analysis 0.1 | Bounded domain evaluators, pinned inputs and assumptions; no formula language selected yet |
@@ -25,10 +26,11 @@ No new format is registered in `versions.properties` by this decision.
 | Cross-artifact comparison and impact | Preserve current impact 0.1 semantics; independently version future semantic-change analysis | Adapters consume compiled values; no universal source parser or authoritative graph |
 
 “Reserve” identifies an independent version boundary, not an accepted field schema.
-The relevant domain design card must still choose its bounded record shapes. Propose
-`mundane-architecture-yaml-0.1` and `mundane-configuration-yaml-0.1` as the first source
-identifiers; their fixture schemas are explicitly draft until TC-2405/TC-2409 implement
-and publish them. Current readers must continue rejecting these unknown source formats.
+The relevant domain design card must still choose its bounded record shapes.
+Architecture/configuration/safety/procedure 0.1 schemas are now published and accepted
+by their own commands. Existing requirement/work/plan readers continue rejecting
+other domains as source. The evidence adapter preserves native JSON runs, and manual
+observations and assessments use their separately specified YAML sources.
 The existing component graph is extended with concrete domain owners when implemented;
 no empty GCS components or broad shared domain model are justified now.
 
@@ -103,8 +105,8 @@ proves selected content equality, not authenticity, adequacy or permission to de
    supporting run. Conflicting or missing evidence remains visible; a newer working copy
    cannot inherit an older approval by keeping its ID.
 
-These are interaction requirements, not invented CLI commands. TC-2405/TC-2409 must
-publish real commands and editor bridges. Reports remain generated; TC-0807 stays
+These interaction requirements now have native commands for the implemented domains.
+Their source locations provide the basis for later editor integration under TC-2424. Reports remain generated; TC-0807 stays
 conditional until authored composition is demonstrably required.
 
 ## Pressure cases and acceptance decision

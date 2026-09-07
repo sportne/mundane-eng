@@ -4,7 +4,6 @@ import static engineering.artifacts.Checks.*;
 import engineering.artifacts.*;
 import java.nio.file.*;
 import java.util.*;
-import java.util.function.BiConsumer;
 import mundanereq.Versions;
 
 /** Bounded provenance and local resource infrastructure; domain meanings stay with their owners. */
@@ -14,16 +13,17 @@ public final class Model {
         String kind(); String format(); String source(); String version(); String contract();
         void validate(Map<String,Object> values,Context context);
         String view(Map<String,Object> artifact,Context context);
+        default Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {throw new IllegalArgumentException("unsupported reference kind "+kind);}
     }
     public static final class Context {
         public final Snapshots snapshots;
         public final Path root;
         public final Map<String,Map<String,Object>> imports=new TreeMap<>();
         public final Map<String,Map<String,Object>> selections=new TreeMap<>();
-        private final Map<String,BiConsumer<Map<String,Object>,Context>> adapters;
+        private final Map<String,Domain> adapters;
         private final int depth;
-        public Context(Path root,Map<String,BiConsumer<Map<String,Object>,Context>> adapters) {this(root,adapters,new Snapshots(root),0);}
-        private Context(Path root,Map<String,BiConsumer<Map<String,Object>,Context>> adapters,Snapshots snapshots,int depth) {if(depth>16)throw new IllegalArgumentException("import depth exceeds 16");this.root=root;this.snapshots=snapshots;this.adapters=adapters;this.depth=depth;}
+        public Context(Path root,Map<String,Domain> adapters) {this(root,adapters,new Snapshots(root),0);}
+        private Context(Path root,Map<String,Domain> adapters,Snapshots snapshots,int depth) {if(depth>16)throw new IllegalArgumentException("import depth exceeds 16");this.root=root;this.snapshots=snapshots;this.adapters=adapters;this.depth=depth;}
         public Context child(){return new Context(root,adapters,snapshots,depth+1);}
         public void select(Object entries) {
             for(Object item:list(entries)) {
@@ -34,13 +34,14 @@ public final class Model {
                 if(kind.equals("requirements"))Artifacts.requirements(artifact,raw.path());
                 else if(kind.equals("verification-plan"))Artifacts.plan(artifact,raw.path());
                 else {
-                    var adapter=adapters.get(kind);if(adapter==null)throw new IllegalArgumentException("unsupported import kind "+kind);adapter.accept(artifact,this);
+                    var adapter=adapters.get(kind);if(adapter==null)throw new IllegalArgumentException("unsupported import kind "+kind);validateSelected(artifact,adapter,this);
                 }
                 imports.put(scope,artifact);
             }
         }
-        public Snapshots.Snapshot readPinned(Map<String,Object> e) {
-            String file=path(e.get("path")),pin=digest(e.get("sha256"));var s=snapshots.read(file);
+        public Snapshots.Snapshot readPinned(Map<String,Object> e) {return readPinned(e,16*1024*1024);}
+        public Snapshots.Snapshot readPinned(Map<String,Object> e,int limit) {
+            String file=path(e.get("path")),pin=digest(e.get("sha256"));var s=snapshots.read(file,limit);
             if(!s.sha256().equals(pin))throw new Problem("digest-mismatch","selected revision changed",file);return s;
         }
         public Map<String,Object> reference(Object raw,String kind) {
@@ -51,14 +52,10 @@ public final class Model {
             if(kind.equals("activity")) {
                 Artifacts.plan(a,"import");return find(list(a.get("activities")),text(r.get("id")));
             }
-            var values=map(a.get("values"));
-            if(kind.equals("baseline"))return equalId(map(values.get("baseline")),r);
-            if(kind.equals("procedure"))return equalId(values,r);
-            String group=switch(kind){case "interface"->"interfaces";case "component"->"components";case "mode"->"modes";case "hazard"->"hazards";case "control"->"controls";default->throw new IllegalArgumentException("unsupported reference kind");};
-            return find(list(values.get(group)),text(r.get("id")));
+            var owner=adapters.get(a.get("artifactKind"));if(owner==null)throw new IllegalArgumentException("unsupported imported domain");
+            return owner.lookup(map(a.get("values")),kind,text(r.get("id")));
         }
     }
-    private static Map<String,Object> equalId(Map<String,Object> v,Map<String,Object> r) {if(!v.get("id").equals(r.get("id")))throw new IllegalArgumentException("missing-target");return v;}
     public static Map<String,Object> ref(Object value,String kind) {
         var r=map(value);keys(r,"scope","kind","id");id(r.get("scope"));id(r.get("id"));
         if(!kind.equals(r.get("kind")))throw new IllegalArgumentException("wrong-kind: expected "+kind);return r;

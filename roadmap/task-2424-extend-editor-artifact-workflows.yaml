@@ -66,7 +66,7 @@ body: |2
   - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
   - [TC-2407](closed/task-2407-implement-safety-analysis.yaml)
   - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
-  - [TC-2411](task-2411-implement-verification-evidence.yaml)
+  - [TC-2411](closed/task-2411-implement-verification-evidence.yaml)
   - [TC-2413](task-2413-implement-equipment-connectivity.yaml)
   - [TC-2415](task-2415-implement-budgets-reliability.yaml)
   - [TC-2417](task-2417-implement-software-security-provenance.yaml)

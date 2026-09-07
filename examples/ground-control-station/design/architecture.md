@@ -2,9 +2,10 @@
 
 Accepted bounded design on 2026-09-07. The source candidate is
 [architecture.yaml](architecture.yaml), checked by the
-[draft schema](../../../specification/schema/architecture-yaml-0.1.json) and
-[design probe](check-architecture.py). This is design evidence for TC-2405; no
-maintained architecture compiler, wire adapter or editor support is delivered here.
+[published schema](../../../specification/schema/architecture-yaml-0.1.json) and
+[independent design probe](check-architecture.py). TC-2405 now implements the
+[native architecture commands](../../../distribution/architecture.md). Wire protocol
+execution and new-domain editor support remain outside this implementation.
 
 ## Representation and ownership
 

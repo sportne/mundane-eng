@@ -86,3 +86,7 @@ expected:
   withinMs: 100
   field: onboardResponse
   equals: unspecified-aircraft-local
+heartbeatInterface:
+  scope: gcs-arch
+  kind: interface
+  id: IF-HEARTBEAT

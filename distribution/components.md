@@ -136,3 +136,11 @@ existing requirement/plan adapters, plus `safety` for source/CLI wiring. FMEA an
 fault-tree semantics stay with this owner. `test-safety` checks graph constraints;
 `safety-verify` exercises the public native commands, GCS cases and source-free
 consumer. Compiler probes reject YAML dependencies from the safety model.
+
+TC-2411 adds `procedure-model`/`procedure` and `evidence-model`/`evidence`. Compiled
+models use bounded configuration/architecture/requirement/plan adapters without
+YAML source readers. Evidence owns the deterministic event simulator and criterion
+interpreter; its CLI owns manual-source normalization and assessment compilation.
+`test-evidence` also builds the procedure CLI and exercises simulator/evaluator
+separation. `evidence-verify` runs both native commands and adversarial provenance
+workflows; model compiler probes reject YAML/source dependencies.

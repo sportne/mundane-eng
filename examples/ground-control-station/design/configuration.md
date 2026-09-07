@@ -3,7 +3,8 @@
 Accepted bounded design on 2026-09-07. The
 [draft source schema](configuration.schema.json), five YAML manifests and
 [design probe](check-configuration.py) define a worked configuration-management
-slice. TC-2409 still owns the maintained compiler/resolver and published contracts.
+slice. TC-2409 now provides the [maintained compiler/resolver](../../../distribution/configuration.md)
+and published contracts; the earlier probe below records its design scope.
 No installation, deployment or approval occurred when these examples were authored.
 
 ## Authoritative facts and examples
