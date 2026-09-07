@@ -81,26 +81,26 @@ Items: 99.
 | [TC-2301](./roadmap/closed/task-2301-clean-current-project.yaml#L2) | task | Clean the Project for the Current YAML Design | Complete | TC-2204 | — |
 | [TC-2401](./roadmap/closed/task-2401-bound-reference-system.yaml#L2) | task | Define the GCS Reference System and Engineering Obligations | Complete | — | — |
 | [TC-2402](./roadmap/closed/task-2402-seed-existing-tool-workflow.yaml#L2) | task | Build the GCS Seed with Existing Artifact Tools | Complete | TC-2401 | — |
-| [TC-2403](./roadmap/task-2403-define-artifact-interactions.yaml#L2) | task | Define Artifact Ownership and Common Interaction Contracts | Planned | TC-2402 | — |
-| [TC-2404](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L2) | task | Design Context Architecture and Interface Artifacts | Planned | TC-2403 | TC-2403 |
+| [TC-2403](./roadmap/closed/task-2403-define-artifact-interactions.yaml#L2) | task | Define Artifact Ownership and Common Interaction Contracts | Complete | TC-2402 | — |
+| [TC-2404](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L2) | task | Design Context Architecture and Interface Artifacts | Planned | TC-2403 | — |
 | [TC-2405](./roadmap/task-2405-implement-context-architecture-interfaces.yaml#L2) | task | Implement Context Architecture and Interface Workflows | Planned | TC-2404 | TC-2404 |
-| [TC-2406](./roadmap/task-2406-design-safety-analysis.yaml#L2) | task | Design Hazard Control and Failure Analysis Artifacts | Planned | TC-2403, TC-2404 | TC-2403, TC-2404 |
+| [TC-2406](./roadmap/task-2406-design-safety-analysis.yaml#L2) | task | Design Hazard Control and Failure Analysis Artifacts | Planned | TC-2403, TC-2404 | TC-2404 |
 | [TC-2407](./roadmap/task-2407-implement-safety-analysis.yaml#L2) | task | Implement Safety Analysis and Control Traceability | Planned | TC-2405, TC-2406, TC-2409 | TC-2405, TC-2406, TC-2409 |
-| [TC-2408](./roadmap/task-2408-design-configurations-baselines.yaml#L2) | task | Design Configuration Baseline and Change Records | Planned | TC-2403 | TC-2403 |
+| [TC-2408](./roadmap/task-2408-design-configurations-baselines.yaml#L2) | task | Design Configuration Baseline and Change Records | Planned | TC-2403 | — |
 | [TC-2409](./roadmap/task-2409-implement-configurations-baselines.yaml#L2) | task | Implement Reproducible Configuration Baselines | Planned | TC-2408 | TC-2408 |
-| [TC-2410](./roadmap/task-2410-design-verification-evidence.yaml#L2) | task | Design Procedures Execution Results and Evidence | Planned | TC-2403, TC-2404, TC-2408 | TC-2403, TC-2404, TC-2408 |
+| [TC-2410](./roadmap/task-2410-design-verification-evidence.yaml#L2) | task | Design Procedures Execution Results and Evidence | Planned | TC-2403, TC-2404, TC-2408 | TC-2404, TC-2408 |
 | [TC-2411](./roadmap/task-2411-implement-verification-evidence.yaml#L2) | task | Implement Procedures Runs and Evidence Queries | Planned | TC-2405, TC-2409, TC-2410 | TC-2405, TC-2409, TC-2410 |
-| [TC-2412](./roadmap/task-2412-design-equipment-connectivity.yaml#L2) | task | Design Equipment Parts and Wiring Artifacts | Planned | TC-2403, TC-2404, TC-2408 | TC-2403, TC-2404, TC-2408 |
+| [TC-2412](./roadmap/task-2412-design-equipment-connectivity.yaml#L2) | task | Design Equipment Parts and Wiring Artifacts | Planned | TC-2403, TC-2404, TC-2408 | TC-2404, TC-2408 |
 | [TC-2413](./roadmap/task-2413-implement-equipment-connectivity.yaml#L2) | task | Implement Equipment Selection and Wiring Views | Planned | TC-2405, TC-2409, TC-2412 | TC-2405, TC-2409, TC-2412 |
-| [TC-2414](./roadmap/task-2414-design-quantities-budgets-reliability.yaml#L2) | task | Design Quantities Budgets and Reliability Analyses | Planned | TC-2403, TC-2408, TC-2412 | TC-2403, TC-2408, TC-2412 |
+| [TC-2414](./roadmap/task-2414-design-quantities-budgets-reliability.yaml#L2) | task | Design Quantities Budgets and Reliability Analyses | Planned | TC-2403, TC-2408, TC-2412 | TC-2408, TC-2412 |
 | [TC-2415](./roadmap/task-2415-implement-budgets-reliability.yaml#L2) | task | Implement Budget and Reliability Calculations | Planned | TC-2409, TC-2413, TC-2414 | TC-2409, TC-2413, TC-2414 |
-| [TC-2416](./roadmap/task-2416-design-software-security-provenance.yaml#L2) | task | Design Software Provenance and Security Artifacts | Planned | TC-2403, TC-2404, TC-2408 | TC-2403, TC-2404, TC-2408 |
+| [TC-2416](./roadmap/task-2416-design-software-security-provenance.yaml#L2) | task | Design Software Provenance and Security Artifacts | Planned | TC-2403, TC-2404, TC-2408 | TC-2404, TC-2408 |
 | [TC-2417](./roadmap/task-2417-implement-software-security-provenance.yaml#L2) | task | Implement Build Provenance and Security Traceability | Planned | TC-2405, TC-2409, TC-2416 | TC-2405, TC-2409, TC-2416 |
 | [TC-2418](./roadmap/task-2418-design-assurance-reviews.yaml#L2) | task | Design Assurance Arguments Reviews and Waivers | Planned | TC-2406, TC-2408, TC-2410, TC-2416 | TC-2406, TC-2408, TC-2410, TC-2416 |
 | [TC-2419](./roadmap/task-2419-implement-assurance-reviews.yaml#L2) | task | Implement Assurance and Review Readiness Queries | Planned | TC-2407, TC-2411, TC-2417, TC-2418 | TC-2407, TC-2411, TC-2417, TC-2418 |
 | [TC-2420](./roadmap/task-2420-design-release-operations.yaml#L2) | task | Design Release Commissioning and Operational Records | Planned | TC-2408, TC-2410, TC-2418 | TC-2408, TC-2410, TC-2418 |
 | [TC-2421](./roadmap/task-2421-implement-release-operations.yaml#L2) | task | Implement Release and Operational Traceability | Planned | TC-2409, TC-2411, TC-2419, TC-2420 | TC-2409, TC-2411, TC-2419, TC-2420 |
-| [TC-2422](./roadmap/task-2422-design-semantic-change-impact.yaml#L2) | task | Design Semantic Change and Evidence Invalidation | Planned | TC-2403, TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 | TC-2403, TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 |
+| [TC-2422](./roadmap/task-2422-design-semantic-change-impact.yaml#L2) | task | Design Semantic Change and Evidence Invalidation | Planned | TC-2403, TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 | TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 |
 | [TC-2423](./roadmap/task-2423-implement-semantic-change-impact.yaml#L2) | task | Implement Cross-Domain Change and Staleness Queries | Planned | TC-2407, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2422 | TC-2407, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2422 |
 | [TC-2424](./roadmap/task-2424-extend-editor-artifact-workflows.yaml#L2) | task | Extend Editor Authoring for the Reference Artifacts | Planned | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 |
 | [TC-2425](./roadmap/task-2425-deliver-engineering-review-views.yaml#L2) | task | Deliver Source-Linked Engineering Review Views | Planned | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 |
@@ -185,7 +185,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - TC-2301 — stage: 23; type: Cleanup
 - TC-2401 — stage: 24; type: Design; unlocks: See explicit dependent cards in the generated index.; statusNote: Completed with reproducible example and decision evidence.
 - TC-2402 — stage: 24; type: Implementation; unlocks: See explicit dependent cards in the generated index.; statusNote: Completed with reproducible example and decision evidence.
-- TC-2403 — stage: 24; type: Design; unlocks: See explicit dependent cards in the generated index.; statusNote: Planned; implementation and reference evidence are not yet delivered.
+- TC-2403 — stage: 24; type: Design; unlocks: See explicit dependent cards in the generated index.; statusNote: Completed with reproducible example and decision evidence.
 - TC-2404 — stage: 24; type: Design; unlocks: See explicit dependent cards in the generated index.; statusNote: Planned; implementation and reference evidence are not yet delivered.
 - TC-2405 — stage: 24; type: Implementation; unlocks: See explicit dependent cards in the generated index.; statusNote: Planned; implementation and reference evidence are not yet delivered.
 - TC-2406 — stage: 24; type: Design; unlocks: See explicit dependent cards in the generated index.; statusNote: Planned; implementation and reference evidence are not yet delivered.
@@ -297,7 +297,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2203 | [work:roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1) |
 | work:work-item:TC-2301 | depends-on | work:work-item:TC-2204 | [work:roadmap/closed/task-2301-clean-current-project.yaml](./roadmap/closed/task-2301-clean-current-project.yaml#L1) |
 | work:work-item:TC-2402 | depends-on | work:work-item:TC-2401 | [work:roadmap/closed/task-2402-seed-existing-tool-workflow.yaml](./roadmap/closed/task-2402-seed-existing-tool-workflow.yaml#L1) |
-| work:work-item:TC-2403 | depends-on | work:work-item:TC-2402 | [work:roadmap/task-2403-define-artifact-interactions.yaml](./roadmap/task-2403-define-artifact-interactions.yaml#L1) |
+| work:work-item:TC-2403 | depends-on | work:work-item:TC-2402 | [work:roadmap/closed/task-2403-define-artifact-interactions.yaml](./roadmap/closed/task-2403-define-artifact-interactions.yaml#L1) |
 | work:work-item:TC-2404 | depends-on | work:work-item:TC-2403 | [work:roadmap/task-2404-design-context-architecture-interfaces.yaml](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L1) |
 | work:work-item:TC-2405 | depends-on | work:work-item:TC-2404 | [work:roadmap/task-2405-implement-context-architecture-interfaces.yaml](./roadmap/task-2405-implement-context-architecture-interfaces.yaml#L1) |
 | work:work-item:TC-2406 | depends-on | work:work-item:TC-2403 | [work:roadmap/task-2406-design-safety-analysis.yaml](./roadmap/task-2406-design-safety-analysis.yaml#L1) |
@@ -450,7 +450,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2203: [work:work-item:TC-2204 (depends-on)](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1)
 - work:work-item:TC-2204: [work:work-item:TC-2301 (depends-on)](./roadmap/closed/task-2301-clean-current-project.yaml#L1)
 - work:work-item:TC-2401: [work:work-item:TC-2402 (depends-on)](./roadmap/closed/task-2402-seed-existing-tool-workflow.yaml#L1)
-- work:work-item:TC-2402: [work:work-item:TC-2403 (depends-on)](./roadmap/task-2403-define-artifact-interactions.yaml#L1), [work:work-item:TC-2426 (depends-on)](./roadmap/task-2426-exercise-adversarial-gcs-workflows.yaml#L1)
+- work:work-item:TC-2402: [work:work-item:TC-2403 (depends-on)](./roadmap/closed/task-2403-define-artifact-interactions.yaml#L1), [work:work-item:TC-2426 (depends-on)](./roadmap/task-2426-exercise-adversarial-gcs-workflows.yaml#L1)
 - work:work-item:TC-2403: [work:work-item:TC-2404 (depends-on)](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L1), [work:work-item:TC-2406 (depends-on)](./roadmap/task-2406-design-safety-analysis.yaml#L1), [work:work-item:TC-2408 (depends-on)](./roadmap/task-2408-design-configurations-baselines.yaml#L1), [work:work-item:TC-2410 (depends-on)](./roadmap/task-2410-design-verification-evidence.yaml#L1), [work:work-item:TC-2412 (depends-on)](./roadmap/task-2412-design-equipment-connectivity.yaml#L1), [work:work-item:TC-2414 (depends-on)](./roadmap/task-2414-design-quantities-budgets-reliability.yaml#L1), [work:work-item:TC-2416 (depends-on)](./roadmap/task-2416-design-software-security-provenance.yaml#L1), [work:work-item:TC-2422 (depends-on)](./roadmap/task-2422-design-semantic-change-impact.yaml#L1)
 - work:work-item:TC-2404: [work:work-item:TC-2405 (depends-on)](./roadmap/task-2405-implement-context-architecture-interfaces.yaml#L1), [work:work-item:TC-2406 (depends-on)](./roadmap/task-2406-design-safety-analysis.yaml#L1), [work:work-item:TC-2410 (depends-on)](./roadmap/task-2410-design-verification-evidence.yaml#L1), [work:work-item:TC-2412 (depends-on)](./roadmap/task-2412-design-equipment-connectivity.yaml#L1), [work:work-item:TC-2416 (depends-on)](./roadmap/task-2416-design-software-security-provenance.yaml#L1), [work:work-item:TC-2422 (depends-on)](./roadmap/task-2422-design-semantic-change-impact.yaml#L1)
 - work:work-item:TC-2405: [work:work-item:TC-2407 (depends-on)](./roadmap/task-2407-implement-safety-analysis.yaml#L1), [work:work-item:TC-2411 (depends-on)](./roadmap/task-2411-implement-verification-evidence.yaml#L1), [work:work-item:TC-2413 (depends-on)](./roadmap/task-2413-implement-equipment-connectivity.yaml#L1), [work:work-item:TC-2417 (depends-on)](./roadmap/task-2417-implement-software-security-provenance.yaml#L1), [work:work-item:TC-2424 (depends-on)](./roadmap/task-2424-extend-editor-artifact-workflows.yaml#L1), [work:work-item:TC-2425 (depends-on)](./roadmap/task-2425-deliver-engineering-review-views.yaml#L1)
@@ -479,9 +479,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 cb3fcf37eb4fd59a517b76ac730469405644a7547e9b5c3fdc63f60108473b64
+- Work artifact: build/work-backlog/items.json; SHA-256 3a710bd34a0ec22077e24610544c95212c30e351fa2b30375ba382640ae1f3bb
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 39f716b826b868277f1a17473359184b3798ea480a7627516742b5d5eef9ae61
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 2b34f5e68e63df569ec6c9aadc901c6d2581139767b49657e2fdc39196e23b28
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 58acd2e3d498227557bcc3b15beb5f17e09fcce4f93577f151f534428674d824
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -554,27 +554,27 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2301-clean-current-project.yaml](./roadmap/closed/task-2301-clean-current-project.yaml#L1); SHA-256 ff984d9f70a253e90bbd9d6a275552158b2e8d4a0af662cf751f7186c50cebec
 - Source: [roadmap/closed/task-2401-bound-reference-system.yaml](./roadmap/closed/task-2401-bound-reference-system.yaml#L1); SHA-256 5b87cba9e79b72c12f4a9ee3c38f35980eb489ac5ee05f67ed0391a69c1ea36f
 - Source: [roadmap/closed/task-2402-seed-existing-tool-workflow.yaml](./roadmap/closed/task-2402-seed-existing-tool-workflow.yaml#L1); SHA-256 480333e0df9fdb728784c9b5d271c6dfe4ed42447bfd5cf97afbdd3a5e965def
+- Source: [roadmap/closed/task-2403-define-artifact-interactions.yaml](./roadmap/closed/task-2403-define-artifact-interactions.yaml#L1); SHA-256 9d3422bb1cb1b8f3c509c9d525bc293c419fe28ecd019794e27f36183d900350
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
-- Source: [roadmap/task-2403-define-artifact-interactions.yaml](./roadmap/task-2403-define-artifact-interactions.yaml#L1); SHA-256 e7a8451d628bff64c0a8f821367c8d3ee641432e37c5cb09771abc0d337861b3
-- Source: [roadmap/task-2404-design-context-architecture-interfaces.yaml](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L1); SHA-256 6f919165c7fff93c9086efe0d07f66f79a457d6adc0d8836ee8286bdfa830f54
+- Source: [roadmap/task-2404-design-context-architecture-interfaces.yaml](./roadmap/task-2404-design-context-architecture-interfaces.yaml#L1); SHA-256 2967104c2864ee0a0e26814c1d24383ce3b33a5b63ff19ccb2631259fccec549
 - Source: [roadmap/task-2405-implement-context-architecture-interfaces.yaml](./roadmap/task-2405-implement-context-architecture-interfaces.yaml#L1); SHA-256 d085cc5635ab3d1ba5babf6f3389d73d1ba86be0f3a04059238cc1f107dc008a
-- Source: [roadmap/task-2406-design-safety-analysis.yaml](./roadmap/task-2406-design-safety-analysis.yaml#L1); SHA-256 e4a5a716866af56ce1f3af833a1ac9c9a222584b7c19ce2d5b45e461f41cff23
+- Source: [roadmap/task-2406-design-safety-analysis.yaml](./roadmap/task-2406-design-safety-analysis.yaml#L1); SHA-256 4518957344be1b925a58f86b8c697e2b3d4dd3f3b71c5fa247e090ed6ada453c
 - Source: [roadmap/task-2407-implement-safety-analysis.yaml](./roadmap/task-2407-implement-safety-analysis.yaml#L1); SHA-256 0fb4fa1333dbcbce8eacb76edc8eaa481bd626045f73e707e1f4402336054e4e
-- Source: [roadmap/task-2408-design-configurations-baselines.yaml](./roadmap/task-2408-design-configurations-baselines.yaml#L1); SHA-256 168e4438480c73547f643b1915572c18dbab381ac75c7dfc956a300e93bb8c7d
+- Source: [roadmap/task-2408-design-configurations-baselines.yaml](./roadmap/task-2408-design-configurations-baselines.yaml#L1); SHA-256 1c4745a9d25929b0fe53f5594debae1f362f13024fb218b3d0cb1de82f7c88f1
 - Source: [roadmap/task-2409-implement-configurations-baselines.yaml](./roadmap/task-2409-implement-configurations-baselines.yaml#L1); SHA-256 0fe675cd2d53cc128dae79d036cfb22f2df36cea46f5a15bed6a6f9de4e0f878
-- Source: [roadmap/task-2410-design-verification-evidence.yaml](./roadmap/task-2410-design-verification-evidence.yaml#L1); SHA-256 e38110abaf47763ebd47c786aa5e129ab91c1b28708b89b636a1fc7072765f95
+- Source: [roadmap/task-2410-design-verification-evidence.yaml](./roadmap/task-2410-design-verification-evidence.yaml#L1); SHA-256 d89e7a5e521695a62b0141bba137db24b3f911f91f7cddd6c3b1e8d75172a6ba
 - Source: [roadmap/task-2411-implement-verification-evidence.yaml](./roadmap/task-2411-implement-verification-evidence.yaml#L1); SHA-256 2eae5ff384de7423279cafb727cf561ac8f6cf20378387b6ac34ddc0ffd5e949
-- Source: [roadmap/task-2412-design-equipment-connectivity.yaml](./roadmap/task-2412-design-equipment-connectivity.yaml#L1); SHA-256 ea3811ecb7a15911a3ecd2476c5da4c91b7e34d4340b9ead5b789fd5292df917
+- Source: [roadmap/task-2412-design-equipment-connectivity.yaml](./roadmap/task-2412-design-equipment-connectivity.yaml#L1); SHA-256 cc2e6ee2127155e18ca9cdb10d4904db2a6836f6269871a59eba87485027757b
 - Source: [roadmap/task-2413-implement-equipment-connectivity.yaml](./roadmap/task-2413-implement-equipment-connectivity.yaml#L1); SHA-256 ce990165ad0987037375f078ed41f2182bff396805192b1bc07b6869a83da7cf
-- Source: [roadmap/task-2414-design-quantities-budgets-reliability.yaml](./roadmap/task-2414-design-quantities-budgets-reliability.yaml#L1); SHA-256 5500955bc1b67c67b2776c5a809fc0a53a8a2cd4417562ba94feec7afd418039
+- Source: [roadmap/task-2414-design-quantities-budgets-reliability.yaml](./roadmap/task-2414-design-quantities-budgets-reliability.yaml#L1); SHA-256 7c015d61984cfec72d176ea224245f10be61cd3470adb6b86131dfee181f6b03
 - Source: [roadmap/task-2415-implement-budgets-reliability.yaml](./roadmap/task-2415-implement-budgets-reliability.yaml#L1); SHA-256 a8d614ef57fe53788bf0d3920e71a7c5417a3ed3bb79d7ad2370b6578505b7db
-- Source: [roadmap/task-2416-design-software-security-provenance.yaml](./roadmap/task-2416-design-software-security-provenance.yaml#L1); SHA-256 04f72a0ceb56e7aad55e029a29cacb79236368b0ff4b66d5bebcdaa72eef5db3
+- Source: [roadmap/task-2416-design-software-security-provenance.yaml](./roadmap/task-2416-design-software-security-provenance.yaml#L1); SHA-256 7aaf84650f1261c8ca2ba5f31b65b6838e3e36017b6dc10858e78957463de056
 - Source: [roadmap/task-2417-implement-software-security-provenance.yaml](./roadmap/task-2417-implement-software-security-provenance.yaml#L1); SHA-256 fffc0f9dd096bc451549bcf83731ef724beeffd34108ef656eaff187c77766c6
 - Source: [roadmap/task-2418-design-assurance-reviews.yaml](./roadmap/task-2418-design-assurance-reviews.yaml#L1); SHA-256 1ea490e43a934fab4b00f889ad76c8baa9b12b81bf306554aeda9239ea4518af
 - Source: [roadmap/task-2419-implement-assurance-reviews.yaml](./roadmap/task-2419-implement-assurance-reviews.yaml#L1); SHA-256 a9ac7601b07dfd5a0d348b93335e718d2254af189cbac7dabc3ae3e9fa3a0140
 - Source: [roadmap/task-2420-design-release-operations.yaml](./roadmap/task-2420-design-release-operations.yaml#L1); SHA-256 44a03d9b880198f5ef3003db18d4d470d25adf4ffdf4a45bc866caf92ad7d8e6
 - Source: [roadmap/task-2421-implement-release-operations.yaml](./roadmap/task-2421-implement-release-operations.yaml#L1); SHA-256 fc2635ed0847e0d067e3b8f96bb72fa7a3bbaa68afa76ecb3d90b7d98ba736de
-- Source: [roadmap/task-2422-design-semantic-change-impact.yaml](./roadmap/task-2422-design-semantic-change-impact.yaml#L1); SHA-256 21e917f4eca959c66b9a128dccb7fc45b7589372e81763b374dcafea5c1ee945
+- Source: [roadmap/task-2422-design-semantic-change-impact.yaml](./roadmap/task-2422-design-semantic-change-impact.yaml#L1); SHA-256 df7ffe7487c804ff53aa916e5f5eda37a0f3fbc62845045707fff44940fed957
 - Source: [roadmap/task-2423-implement-semantic-change-impact.yaml](./roadmap/task-2423-implement-semantic-change-impact.yaml#L1); SHA-256 b40e1ae1eb8fa32036c0dcbd2d281df0a343b5339dc213f30dbdc570b3531988
 - Source: [roadmap/task-2424-extend-editor-artifact-workflows.yaml](./roadmap/task-2424-extend-editor-artifact-workflows.yaml#L1); SHA-256 1d91379c41daeb29d4366ab3c533aad3a895ec6fd8f5a5ab1e044a5d8eb4f151
 - Source: [roadmap/task-2425-deliver-engineering-review-views.yaml](./roadmap/task-2425-deliver-engineering-review-views.yaml#L1); SHA-256 5d301a8d66bac29e4cf9844055268b028cc4b555142467dade8e713682fcf871

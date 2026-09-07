@@ -68,6 +68,6 @@ body: |2
   - [GCS reference project plan](../examples/ground-control-station/README.md)
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](task-2403-define-artifact-interactions.yaml)
+  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
   - [TC-2404](task-2404-design-context-architecture-interfaces.yaml)
   - [TC-2408](task-2408-design-configurations-baselines.yaml)

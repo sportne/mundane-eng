@@ -216,3 +216,8 @@ test-editor: editor-version-declarations
 gcs-seed-verify: native-compile native-plan native-link native-verification native-work native-impact
 	python3 examples/ground-control-station/seed.py
 verify: gcs-seed-verify
+
+.PHONY: gcs-design-verify
+gcs-design-verify: yaml-schema-verify gcs-seed-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-common.py
+verify: gcs-design-verify

@@ -1,0 +1,43 @@
+format: gcs-reference-design-cases-0.1
+selections:
+- scope: gcs-arch
+  format: mundane-architecture-0.1
+  records:
+  - kind: component
+    id: CMP-SERVICE
+- scope: aircraft-arch
+  format: mundane-architecture-0.1
+  records:
+  - kind: component
+    id: CMP-SERVICE
+cases:
+- name: local-collision-resolved
+  ref:
+    scope: gcs-arch
+    kind: component
+    id: CMP-SERVICE
+  expected: resolved:gcs-arch
+- name: remote-collision-resolved
+  ref:
+    scope: aircraft-arch
+    kind: component
+    id: CMP-SERVICE
+  expected: resolved:aircraft-arch
+- name: missing-scope
+  ref:
+    scope: missing
+    kind: component
+    id: CMP-SERVICE
+  expected: missing-scope
+- name: wrong-kind
+  ref:
+    scope: gcs-arch
+    kind: interface
+    id: CMP-SERVICE
+  expected: wrong-kind
+- name: missing-id
+  ref:
+    scope: gcs-arch
+    kind: component
+    id: ABSENT
+  expected: missing-target
