@@ -192,3 +192,6 @@ A successful jump establishes a checked location, not approval or satisfaction.
 See the [editor import contract](../../specification/0026-editor-imports-0.1.md).
 `make editor-verify` compiles the checked-in import fixtures with public commands and
 exercises this workflow; `make installed-editor-verify` repeats it from the bundle.
+
+The shared Java authoring bridge lives in [editors/bridge](../bridge/README.md);
+its component build and test boundaries are documented separately from this client.

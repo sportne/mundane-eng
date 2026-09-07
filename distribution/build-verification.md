@@ -81,3 +81,8 @@ Editor checks also compile imported-target fixtures using the public JVM command
 compare JVM/native responses for invalid pins/scopes/sources/origins, and exercise
 revision-checked navigation and compiled hover/completion in development and installed
 hosts. Missing source, source-path escapes and delayed responses have regression checks.
+
+## Component builds
+
+The [component boundary guide](components.md) documents focused tests, isolated
+production classpaths and the retained aggregate integration gate.

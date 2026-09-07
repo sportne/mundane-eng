@@ -55,7 +55,6 @@ completed workflow. Its source cards retain individual completion evidence.
 | Card | Condition and decision enabled |
 | --- | --- |
 | [TC-0807: Authored views](task-0807-test-authored-views-and-specifications.yaml) | Demonstrate a composition/delivery need beyond the current generated report; compare simple ordering with a separate view artifact before selecting syntax. |
-| [TC-1104: Component layout](task-1104-establish-monorepo-component-layout.yaml) | Show a measurable navigation or dependency benefit; retain current paths when movement has no observable value. |
 
 Completed prerequisites do not remove these conditions. ReqIF interchange remains unimplemented. The three-command native archive covers
 validate/format/trace; the other maintained commands have separate build targets.
@@ -151,3 +150,11 @@ workflows, integrated verification, distribution and final cleanup. These are pl
 capabilities; the implemented foundation above remains the current support statement.
 The example uses YAML for new authored engineering facts and explicit adapters for
 canonical native resources. It does not establish flight readiness or certification.
+
+## Implemented component layout
+
+TC-1104 implements the [component boundary decision](../distribution/components.md):
+explicit production dependencies and focused native-tool builds, with the shared
+editor bridge under `editors/bridge`. The [execution evidence](../research/0076-component-layout-verification.md)
+records full working-tree and fresh-source verification. Future GCS domains extend
+these boundaries when their ownership and concrete implementation are established.

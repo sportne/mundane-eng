@@ -1,3 +1,5 @@
+# Shared build outputs require serial recipes, including under make -j.
+.NOTPARALLEL:
 BUILD_ROOT := build/maintained
 CLASS_DIR := $(BUILD_ROOT)/classes
 NATIVE_SMOKE := $(BUILD_ROOT)/native-smoke
@@ -22,8 +24,6 @@ PACKAGE_STAGE := $(PACKAGE_DIR)/$(PACKAGE_NAME)
 PACKAGE_ARCHIVE := $(PACKAGE_DIR)/$(PACKAGE_NAME).tar.gz
 PACKAGE_ARCHIVE_CHECKSUM := $(PACKAGE_ARCHIVE).sha256
 EXPECTED_PACKAGE_DIR := $(abspath build/maintained/package)
-MAIN_SOURCES := $(shell find src/main/java -type f -name '*.java' -print | LC_ALL=C sort)
-TEST_SOURCES := $(shell find src/test/java -type f -name '*.java' -print | LC_ALL=C sort)
 
 YAML_JAR := build/dependencies/snakeyaml-engine-3.1.1.jar
 CLASSPATH := $(CLASS_DIR):$(YAML_JAR)
@@ -32,56 +32,63 @@ CLASSPATH := $(CLASS_DIR):$(YAML_JAR)
 yaml-dependency:
 	scripts/fetch-yaml-parser.sh
 
-test: yaml-dependency version-declarations
-	rm -rf $(CLASS_DIR)
-	mkdir -p $(CLASS_DIR)
-	javac -cp $(YAML_JAR) --release 21 -Xlint:all -Werror -d $(CLASS_DIR) $(MAIN_SOURCES) $(GENERATED_DIR)/mundanereq/Versions.java $(TEST_SOURCES)
-	java -ea -cp $(CLASSPATH) mundanereq.test.MaintainedTestSuite
+# Component ownership and allowed classpaths live in scripts/components.py.
+.PHONY: test build-components component-boundary-verify
+build-components: yaml-dependency version-declarations
+	python3 scripts/build-components.py build all
+test: yaml-dependency editor-version-declarations
+	python3 scripts/build-components.py test all
 
+.PHONY: test-requirements test-artifacts test-plan test-verification test-work test-impact test-editor
+$(addprefix test-,requirements artifacts plan verification work impact editor): yaml-dependency version-declarations
+	python3 scripts/build-components.py test $(@:test-%=%)
+
+component-boundary-verify: test
+	python3 scripts/check-component-boundaries.py
 
 .PHONY: native-validator
-native-validator: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-validate) mundanereq.cli.ValidatorMain
+native-validator: test-requirements
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath requirements)" -o $(abspath $(BUILD_ROOT)/mundanereq-validate) mundanereq.cli.ValidatorMain
 	$(BUILD_ROOT)/mundanereq-validate --version
 
 .PHONY: native-formatter
-native-formatter: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-format) mundanereq.cli.FormatterMain
+native-formatter: test-requirements
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath requirements)" -o $(abspath $(BUILD_ROOT)/mundanereq-format) mundanereq.cli.FormatterMain
 	$(BUILD_ROOT)/mundanereq-format --version
 
 .PHONY: native-trace
-native-trace: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-trace) mundanereq.cli.TraceMain
+native-trace: test-requirements
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath requirements)" -o $(abspath $(BUILD_ROOT)/mundanereq-trace) mundanereq.cli.TraceMain
 	$(BUILD_ROOT)/mundanereq-trace --version
 
 .PHONY: native-compile
-native-compile: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundanereq-compile) mundanereq.cli.CompileMain
+native-compile: test-requirements
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath requirements)" -o $(abspath $(BUILD_ROOT)/mundanereq-compile) mundanereq.cli.CompileMain
 	$(BUILD_ROOT)/mundanereq-compile --version
 
 .PHONY: native-plan
-native-plan: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-plan) engineering.verification.PlanMain
+native-plan: test-plan
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath plan)" -o $(abspath $(BUILD_ROOT)/mundane-plan) engineering.verification.PlanMain
 	$(BUILD_ROOT)/mundane-plan --version
 
 .PHONY: native-link
-native-link: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-link) engineering.artifacts.LinkMain
+native-link: test-artifacts
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath artifacts)" -o $(abspath $(BUILD_ROOT)/mundane-link) engineering.artifacts.LinkMain
 	$(BUILD_ROOT)/mundane-link --version
 
 .PHONY: native-verification
-native-verification: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-verify) engineering.verification.VerifyMain
+native-verification: test-verification
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath verification)" -o $(abspath $(BUILD_ROOT)/mundane-verify) engineering.verification.VerifyMain
 	$(BUILD_ROOT)/mundane-verify --version
 
 .PHONY: native-work
-native-work: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
+native-work: test-work
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath work)" -o $(abspath $(BUILD_ROOT)/mundane-work) engineering.work.WorkMain
 	$(BUILD_ROOT)/mundane-work --version
 
 .PHONY: native-impact
-native-impact: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-impact) engineering.impact.ImpactMain
+native-impact: test-impact
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath impact)" -o $(abspath $(BUILD_ROOT)/mundane-impact) engineering.impact.ImpactMain
 	$(BUILD_ROOT)/mundane-impact --version
 
 native-suite: native-validator native-formatter native-trace
@@ -135,6 +142,8 @@ package-native-suite: native-suite
 .PHONY: verify native-suite package-native-suite yaml-schema-verify version-declarations version-verify work-index work-backlog-verify work-verify work-yaml-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify native-suite-verify yaml-verify
 version-declarations:
 	python3 scripts/generate-versions.py versions.properties $(GENERATED_DIR)
+.PHONY: editor-version-declarations
+editor-version-declarations: version-declarations
 	python3 scripts/editor-versions.py
 yaml-schema-verify:
 	scripts/check-yaml-schema.sh
@@ -175,14 +184,14 @@ native-suite-verify: package-native-suite
 	python3 scripts/check-native-package.py $(PACKAGE_STAGE) $(PACKAGE_ARCHIVE)
 yaml-verify: native-validator native-formatter native-trace native-compile
 	python3 scripts/check-yaml-workflow.py
-verify: yaml-schema-verify plan-yaml-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify editor-verify installed-editor-verify
+verify: component-boundary-verify yaml-schema-verify plan-yaml-verify test yaml-verify native-suite-verify version-verify work-verify work-yaml-verify work-backlog-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify editor-verify installed-editor-verify
 
 .PHONY: native-editor editor-dependencies editor-vsix editor-verify package-editor installed-editor-verify
-native-editor: test
-	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp $(CLASSPATH) -o $(abspath $(BUILD_ROOT)/mundane-editor) mundanereq.editor.EditorMain
+native-editor: test-editor
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath editor)" -o $(abspath $(BUILD_ROOT)/mundane-editor) mundanereq.editor.EditorMain
 editor-dependencies:
 	cd editors/vscode && npm ci
-editor-vsix: version-declarations editor-dependencies
+editor-vsix: editor-version-declarations editor-dependencies
 	cd editors/vscode && npm run package
 editor-verify: native-editor editor-vsix
 	python3 scripts/check-editor-bridge.py
@@ -197,3 +206,8 @@ installed-editor-verify: package-editor
 .PHONY: plan-yaml-verify
 plan-yaml-verify: native-plan
 	python3 scripts/check-plan-yaml.py
+
+# Integration checks consume the complete tested snapshot.
+version-verify work-verify work-yaml-verify attribute-validate-verify attribute-format-verify attribute-compile-verify attribute-link-verify attribute-report-verify attribute-workflow-verify impact-verify impact-workflow-verify yaml-verify editor-verify plan-yaml-verify: test
+
+test-editor: editor-version-declarations

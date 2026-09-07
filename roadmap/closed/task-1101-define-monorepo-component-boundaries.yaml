@@ -33,3 +33,12 @@ body: |
   Retained the task ID and completion status; refreshed documentation links and
   prerequisites to describe the current repository. Historical implementation
   narrative is not used as the current contract.
+
+  ## Decision refinement for TC-1104
+
+  On 2026-09-07, the [component decision](../../distribution/components.md) records
+  the concrete ownership, allowed dependencies, before/after source mapping and
+  alternatives required to execute TC-1104. This refines the completed decision;
+  TC-1104 owns implementation and fresh verification evidence. Existing domain
+  paths remain except for cross-domain editor integration; source-set classpaths
+  enforce independent production compilation.

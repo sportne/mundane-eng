@@ -12,7 +12,7 @@ Items: 99.
 | [TC-1101](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L2) | task | Define Monorepo Component Boundaries | Complete | — | — |
 | [TC-1102](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L2) | task | Define Requirement and Assertion Ownership | Complete | TC-1101 | — |
 | [TC-1103](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L2) | task | Test Compilation, Linking, and Rebuilds | Complete | TC-1102 | — |
-| [TC-1104](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L2) | task | Establish the Monorepo Component Layout | Conditional | TC-1101 | — |
+| [TC-1104](./roadmap/closed/task-1104-establish-monorepo-component-layout.yaml#L2) | task | Establish the Monorepo Component Layout | Complete | TC-1101 | — |
 | [TC-1106](./roadmap/closed/task-1106-specify-yaml-requirement-source-profile.yaml#L2) | task | Specify the YAML Requirement Source Profile | Complete | — | — |
 | [TC-1107](./roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml#L2) | task | Interpret and Validate YAML Requirement Source | Complete | TC-1106 | — |
 | [TC-1108](./roadmap/closed/task-1108-format-yaml-source-without-content-loss.yaml#L2) | task | Format YAML Source Without Content Loss | Complete | TC-1107 | — |
@@ -116,7 +116,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - TC-1101 — stage: 11; type: Decision
 - TC-1102 — stage: 11; type: Decision
 - TC-1103 — stage: 11; type: Experiment and decision
-- TC-1104 — stage: 11; type: Implementation; condition: A demonstrated current workflow need
+- TC-1104 — stage: 11; type: Implementation; statusNote: Component isolation and editor placement implemented; full gates passed.
 - TC-1106 — stage: 11; type: Design
 - TC-1107 — stage: 11; type: Implementation
 - TC-1108 — stage: 11; type: Implementation
@@ -218,7 +218,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | --- | --- | --- | --- |
 | work:work-item:TC-1102 | depends-on | work:work-item:TC-1101 | [work:roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1) |
 | work:work-item:TC-1103 | depends-on | work:work-item:TC-1102 | [work:roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1) |
-| work:work-item:TC-1104 | depends-on | work:work-item:TC-1101 | [work:roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1) |
+| work:work-item:TC-1104 | depends-on | work:work-item:TC-1101 | [work:roadmap/closed/task-1104-establish-monorepo-component-layout.yaml](./roadmap/closed/task-1104-establish-monorepo-component-layout.yaml#L1) |
 | work:work-item:TC-1107 | depends-on | work:work-item:TC-1106 | [work:roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml](./roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml#L1) |
 | work:work-item:TC-1108 | depends-on | work:work-item:TC-1107 | [work:roadmap/closed/task-1108-format-yaml-source-without-content-loss.yaml](./roadmap/closed/task-1108-format-yaml-source-without-content-loss.yaml#L1) |
 | work:work-item:TC-1109 | depends-on | work:work-item:TC-1107 | [work:roadmap/closed/task-1109-migrate-yaml-examples-and-conformance-material.yaml](./roadmap/closed/task-1109-migrate-yaml-examples-and-conformance-material.yaml#L1) |
@@ -397,7 +397,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - resource:src/main/java/engineering/work/WorkCompiler.java: [work:work-item:TC-1603 (evidence)](./roadmap/closed/task-1603-compile-and-validate-work-items.yaml#L1)
 - resource:src/main/java/engineering/work/WorkGraph.java: [work:work-item:TC-1604 (evidence)](./roadmap/closed/task-1604-link-and-analyze-work-items.yaml#L1)
 - resource:src/main/java/engineering/work/WorkView.java: [work:work-item:TC-1605 (evidence)](./roadmap/closed/task-1605-generate-derived-work-item-views.yaml#L1)
-- work:work-item:TC-1101: [work:work-item:TC-1102 (depends-on)](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1), [work:work-item:TC-1104 (depends-on)](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1)
+- work:work-item:TC-1101: [work:work-item:TC-1102 (depends-on)](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1), [work:work-item:TC-1104 (depends-on)](./roadmap/closed/task-1104-establish-monorepo-component-layout.yaml#L1)
 - work:work-item:TC-1102: [work:work-item:TC-1103 (depends-on)](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1), [work:work-item:TC-1301 (depends-on)](./roadmap/closed/task-1301-classify-project-attribute-use-cases.yaml#L1), [work:work-item:TC-1601 (depends-on)](./roadmap/closed/task-1601-define-work-item-ownership.yaml#L1)
 - work:work-item:TC-1103: [work:work-item:TC-1201 (depends-on)](./roadmap/closed/task-1201-define-requirement-semantic-output.yaml#L1)
 - work:work-item:TC-1106: [work:work-item:TC-1107 (depends-on)](./roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml#L1), [work:work-item:TC-1302 (depends-on)](./roadmap/closed/task-1302-decide-project-attribute-schemas.yaml#L1)
@@ -479,12 +479,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 7b9f42e4e05f6e5bfb9140bec9430c065ef07918f9d805cad110e6861a85aef9
+- Work artifact: build/work-backlog/items.json; SHA-256 534457843d731348c9e5fa311faedb39de01a5b2dc9c040616911b2d253d8411
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 2575e899c62c8f21d73db66e50dbb11f3b1362ea576c013681fb99462806fe10
-- Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 46903b9d8db4b222d0dd2ceab0ac0a3a89a9b598866b21c04d6d87bdefb009ad
+- Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 58acd2e3d498227557bcc3b15beb5f17e09fcce4f93577f151f534428674d824
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
+- Source: [roadmap/closed/task-1104-establish-monorepo-component-layout.yaml](./roadmap/closed/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 dddbdc908c5ba8e421443d9653ab46548e1d640b18e744d78830509048d26e17
 - Source: [roadmap/closed/task-1106-specify-yaml-requirement-source-profile.yaml](./roadmap/closed/task-1106-specify-yaml-requirement-source-profile.yaml#L1); SHA-256 34c1974b1d3add91f0af9fbd705bc568eec0e7ac9a8b69e6b4ef8bc0f0720dfb
 - Source: [roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml](./roadmap/closed/task-1107-interpret-and-validate-yaml-requirement-source.yaml#L1); SHA-256 9f0f27cf246b45e64ad9a9c1601d9eea7865eaa669181908629f27aa88e65124
 - Source: [roadmap/closed/task-1108-format-yaml-source-without-content-loss.yaml](./roadmap/closed/task-1108-format-yaml-source-without-content-loss.yaml#L1); SHA-256 f33400bdf3c323d6a85c88b2575b42ef99f66748ea7a12d305b4b23fed31bb47
@@ -552,7 +553,6 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1); SHA-256 033f4ac72631691b00adc192777df288ae358965591b0ea3506bc2bd9ad65626
 - Source: [roadmap/closed/task-2301-clean-current-project.yaml](./roadmap/closed/task-2301-clean-current-project.yaml#L1); SHA-256 ff984d9f70a253e90bbd9d6a275552158b2e8d4a0af662cf751f7186c50cebec
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
-- Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
 - Source: [roadmap/task-2401-bound-reference-system.yaml](./roadmap/task-2401-bound-reference-system.yaml#L1); SHA-256 7f710cc7c17dcb6af2872493924fa12c3af0074f5d2d72eac9c905542bde1845
 - Source: [roadmap/task-2402-seed-existing-tool-workflow.yaml](./roadmap/task-2402-seed-existing-tool-workflow.yaml#L1); SHA-256 ff00ba8af853550d63878a840821e3b2021e8030816a4cb5486c0a1d9b88fcbd
 - Source: [roadmap/task-2403-define-artifact-interactions.yaml](./roadmap/task-2403-define-artifact-interactions.yaml#L1); SHA-256 43de46d6dc4cc5939f9294a05d73ac36952a49655fd0883f2a17ef79fa2574f6

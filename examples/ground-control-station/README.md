@@ -261,10 +261,11 @@ adequacy; produce a readiness view for an exact candidate. Required negative cas
 must remain blocked or unknown until their actual missing information is supplied.
 The command vocabulary is to be designed; no new CLI is implied by this document.
 
-The existing conditional authored-view and monorepo-layout cards keep their
-conditions. Derived review views do not by themselves justify a new view language
-or a repository reorganization. Refer to the [roadmap](../../roadmap/0001-initial-roadmap.md)
-for those existing decisions.
+The existing authored-view card retains its condition: derived review views do not
+by themselves justify a new view language. TC-1104 has established the
+[component boundaries](../../distribution/components.md); new GCS implementations
+extend those boundaries when their domain ownership is decided. Refer to the
+[roadmap](../../roadmap/0001-initial-roadmap.md) for those decisions.
 
 ## Task cards
 

@@ -2,14 +2,14 @@ format: mundane-work-yaml-0.2
 id: TC-1104
 kind: task
 title: Establish the Monorepo Component Layout
-status: Conditional
+status: Complete
 dependencies:
 - TC-1101
 relations: []
 planning:
-  condition: A demonstrated current workflow need
+  condition: ''
   stage: '11'
-  statusNote: ''
+  statusNote: Component isolation and editor placement implemented; full gates passed.
   type: Implementation
   unlocks: ''
 body: |2
@@ -64,12 +64,33 @@ body: |2
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [TC-1101](closed/task-1101-define-monorepo-component-boundaries.yaml)
-  - [Current native package guide](../distribution/README.md)
-  - [Contributor verification](../distribution/build-verification.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [TC-1101](task-1101-define-monorepo-component-boundaries.yaml)
+  - [Current native package guide](../../distribution/README.md)
+  - [Contributor verification](../../distribution/build-verification.md)
 
   ## Documentation maintenance
 
   Replaced orphaned evidence labels with current owning guides. No layout movement
   has been authorized by this documentation update; the condition remains in force.
+
+  ## Planning refinement
+
+  On 2026-09-07, review demonstrated that each native target compiled all Java
+  production and test sources despite requirements compiling without other domains.
+  The condition is satisfied by that build coupling. The user authorized execution.
+  The [component decision](../../distribution/components.md) supplies the concrete
+  TC-1101 boundary mapping: explicit component classpaths, focused tests, and only
+  the cross-domain editor source/test relocation. This refines the existing scope
+  without adding a build-system migration or speculative GCS modules.
+
+  ## Completion evidence
+
+  Completed on 2026-09-07. Eleven explicit source sets enforce production classpaths;
+  native targets use focused suites. Only five editor production and three integration
+  test files moved, with their Java contents unchanged. The complete gate passed in
+  the working checkout and a fresh source export, including native packages and the
+  installed editor. Four forbidden-dependency probes and a sources-removed requirements
+  build passed. Both CI fault injections failed at the expected targets and restored
+  original files. See [execution evidence](../../research/0076-component-layout-verification.md).
+  No source/compiled contracts, CLI names or package versions changed.
