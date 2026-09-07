@@ -6,7 +6,8 @@ artifact designs checked by local prototypes. Architecture now has
 [configuration compile/resolve/compare/publish commands](../../distribution/configuration.md)
 are also maintained, alongside [safety analysis](../../distribution/safety.md)
 and [procedure/evidence tooling](../../distribution/evidence.md), plus
-[native software provenance and security](../../distribution/software.md). The event simulator
+[native software provenance and security](../../distribution/software.md) and
+[equipment/BOM/wiring](../../distribution/equipment.md). The event simulator
 is a bounded ground-state test harness, not a deployable GCS or aircraft simulator. The generated
 backlog records each card's current status.
 
@@ -252,8 +253,8 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2409](../../roadmap/closed/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
 | [TC-2410](../../roadmap/closed/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |
 | [TC-2411](../../roadmap/closed/task-2411-implement-verification-evidence.yaml) | Implement Procedures Runs and Evidence Queries | TC-2410, TC-2405, TC-2409 |
-| [TC-2412](../../roadmap/task-2412-design-equipment-connectivity.yaml) | Design Equipment Parts and Wiring Artifacts | TC-2403, TC-2404, TC-2408 |
-| [TC-2413](../../roadmap/task-2413-implement-equipment-connectivity.yaml) | Implement Equipment Selection and Wiring Views | TC-2412, TC-2405, TC-2409 |
+| [TC-2412](../../roadmap/closed/task-2412-design-equipment-connectivity.yaml) | Design Equipment Parts and Wiring Artifacts | TC-2403, TC-2404, TC-2408 |
+| [TC-2413](../../roadmap/closed/task-2413-implement-equipment-connectivity.yaml) | Implement Equipment Selection and Wiring Views | TC-2412, TC-2405, TC-2409 |
 | [TC-2414](../../roadmap/task-2414-design-quantities-budgets-reliability.yaml) | Design Quantities Budgets and Reliability Analyses | TC-2403, TC-2408, TC-2412 |
 | [TC-2415](../../roadmap/task-2415-implement-budgets-reliability.yaml) | Implement Budget and Reliability Calculations | TC-2414, TC-2409, TC-2413 |
 | [TC-2416](../../roadmap/closed/task-2416-design-software-security-provenance.yaml) | Design Software Provenance and Security Artifacts | TC-2403, TC-2404, TC-2408 |

@@ -297,3 +297,12 @@ verify: software-verify
 equipment-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-equipment.py
 verify: equipment-design-verify
+
+.PHONY: test-equipment native-equipment equipment-verify
+test-equipment: yaml-dependency version-declarations
+	python3 scripts/build-components.py test equipment
+native-equipment: test-equipment
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath equipment)" -o $(abspath $(BUILD_ROOT)/mundane-equipment) engineering.equipment.EquipmentMain
+equipment-verify: native-equipment configuration-verify equipment-design-verify
+	build/schema-check-venv/bin/python scripts/check-equipment-workflow.py
+verify: equipment-verify

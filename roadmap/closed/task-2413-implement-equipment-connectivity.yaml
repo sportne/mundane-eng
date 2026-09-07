@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2413"
 kind: "task"
 title: "Implement Equipment Selection and Wiring Views"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2412", "TC-2405", "TC-2409"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -58,9 +58,15 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2412](closed/task-2412-design-equipment-connectivity.yaml)
-  - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
-  - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2412](../closed/task-2412-design-equipment-connectivity.yaml)
+  - [TC-2405](../closed/task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](../closed/task-2409-implement-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. Implemented the [equipment contract](../../specification/0033-equipment-and-connectivity.md) and independent native compile/check/analyze/bom/wiring/view commands. Canonical instance/cable sources generate both BOM quantities and source-linked wiring, preserve selected baseline and allocation, and retain exact datasheet evidence. Selected profiles validate voltage, pin roles/mappings, directions, duplicate input feeds and network-port reuse. Analysis exposes missing required connections, unavailable grounding reference, unprotected supply paths and stale reviewed datasheets.
+
+  Focused Java topology tests and `scripts/check-equipment-workflow.py` passed. The native workflow checks eight incompatible/substitution/installation cases, same-source BOM changes and connection navigation, missing source navigation, changed datasheet rejection, identical clean-root rebuild and YAML-free consumers. Reports are retained under `build/gcs-equipment`. Version resources, predecessor baselines and synthetic manual fixture pins were explicitly updated; the independent configuration workflow also passed. Full combined platform verification follows the remaining budget cards. These checks do not establish ampacity, correct fuse sizing, procurement or electrical safety approval.

@@ -148,3 +148,6 @@ workflows; model compiler probes reject YAML/source dependencies.
 TC-2417 adds `software-model` (project relationships and independent SLSA/CycloneDX
 adapters), depending on compiled safety/configuration/architecture, and `software`
 for YAML/CLI wiring. Its isolated consumer requires no YAML parser.
+
+TC-2413 adds `equipment-model` on compiled configuration/architecture and `equipment`
+for source/CLI wiring. BOM and wiring share the same checked connectivity model.

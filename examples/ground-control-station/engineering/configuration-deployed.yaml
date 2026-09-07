@@ -35,7 +35,7 @@ baseline:
     path: versions.json
     required: true
     scope: tool-versions
-    sha256: 2782e506019d65116ad3d17749f247e03e9feb9604521a5c535578b5676f03b0
+    sha256: 3c06fa9b7f517d4d1811ea488e1e2b775eb9154e31d35179cf3e16a7a3ee2817
   - appliesTo: [simulation, field-proposed]
     format: mundanereq-yaml-0.4
     kind: native-resource
@@ -82,5 +82,5 @@ format: mundane-configuration-yaml-0.1
 previous:
   path: configuration-built.json
   ref: {id: BL-SIM-BUILT, kind: baseline, scope: previous}
-  sha256: b58d322a1c61347c2720c67b4c304781664ddb6efedf919db81dd5f99b35cb0d
+  sha256: 81b7821decfe270923cb62175f3f08df58ce7427bd100d3b77f10b56cc71f0d9
 purpose: simulation-engineering
