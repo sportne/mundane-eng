@@ -1,0 +1,3 @@
+Synthetic ground-station equipment catalog, revision 1.
+All ratings are illustrative assumptions, not manufacturer data or procurement approval.
+DC supply 24 V; fuse 24 V; UPS usable nameplate energy 120 Wh; host 60 W peak; switch 12 W peak; link 18 W peak.

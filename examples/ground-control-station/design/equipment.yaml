@@ -1,0 +1,523 @@
+format: mundane-equipment-yaml-0.1
+id: EQ-GCS
+configuration:
+  scope: gcs-config
+  kind: baseline
+  id: BL-SIM-DESIGN
+basis: design-intent
+parts:
+- id: PART-SUPPLY
+  manufacturer: Illustrative only
+  model: SUPPLY
+  role: source
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 0
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-OUT
+    signal: power
+    direction: out
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: false
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: false
+    pins:
+    - id: E
+      role: earth
+- id: PART-FUSE
+  manufacturer: Illustrative only
+  model: FUSE
+  role: protection
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 0
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-IN
+    signal: power
+    direction: in
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: true
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: PWR-OUT
+    signal: power
+    direction: out
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: false
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: E
+      role: earth
+- id: PART-UPS
+  manufacturer: Illustrative only
+  model: UPS
+  role: ups
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 0
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: ENERGY
+    value: 120
+    unit: Wh
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-IN
+    signal: power
+    direction: in
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: true
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: PWR-OUT
+    signal: power
+    direction: out
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: false
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: E
+      role: earth
+- id: PART-HOST
+  manufacturer: Illustrative only
+  model: HOST
+  role: load
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 60
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-IN
+    signal: power
+    direction: in
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: true
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: E
+      role: earth
+  - id: NET
+    signal: network
+    direction: bidirectional
+    connector: ethernet-rj45
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: D
+      role: data
+- id: PART-SWITCH
+  manufacturer: Illustrative only
+  model: SWITCH
+  role: load
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 12
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-IN
+    signal: power
+    direction: in
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: true
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: E
+      role: earth
+  - id: NET-1
+    signal: network
+    direction: bidirectional
+    connector: ethernet-rj45
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: D
+      role: data
+  - id: NET-2
+    signal: network
+    direction: bidirectional
+    connector: ethernet-rj45
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: D
+      role: data
+- id: PART-LINK
+  manufacturer: Illustrative only
+  model: LINK
+  role: load
+  evidence:
+    path: resources/equipment-datasheet.txt
+    sha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  reviewedEvidenceSha256: bf9b3d1672422e6fa565ffe4b75ccb48882a41a9b1edf90a48049cf9fc60d471
+  ratings:
+  - id: PEAK
+    value: 18
+    unit: W
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: MTBF
+    value: 20000
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  - id: REPAIR
+    value: 4
+    unit: h
+    basis: assumption
+    explanation: Illustrative catalog value; replace with selected manufacturer or measured evidence.
+  ports:
+  - id: PWR-IN
+    signal: power
+    direction: in
+    connector: dc24-two-pin
+    minV: 24
+    maxV: 24
+    required: true
+    pins:
+    - id: P
+      role: positive
+    - id: R
+      role: return
+  - id: EARTH
+    signal: ground
+    direction: bidirectional
+    connector: earth-lug
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: E
+      role: earth
+  - id: NET
+    signal: network
+    direction: bidirectional
+    connector: ethernet-rj45
+    minV: 0
+    maxV: 0
+    required: true
+    pins:
+    - id: D
+      role: data
+instances:
+- id: EQ-SUPPLY
+  part: PART-SUPPLY
+  serial: not-installed
+  allocation:
+- id: EQ-FUSE
+  part: PART-FUSE
+  serial: not-installed
+  allocation:
+- id: EQ-UPS
+  part: PART-UPS
+  serial: not-installed
+  allocation:
+- id: EQ-HOST
+  part: PART-HOST
+  serial: not-installed
+  allocation:
+    scope: gcs-arch
+    kind: component
+    id: CMP-SERVER
+- id: EQ-SWITCH
+  part: PART-SWITCH
+  serial: not-installed
+  allocation:
+- id: EQ-LINK
+  part: PART-LINK
+  serial: not-installed
+  allocation:
+cables:
+- id: CAB-P0
+  from:
+    instance: EQ-SUPPLY
+    port: PWR-OUT
+  to:
+    instance: EQ-FUSE
+    port: PWR-IN
+  conductors:
+  - fromPin: P
+    toPin: P
+  - fromPin: R
+    toPin: R
+- id: CAB-P1
+  from:
+    instance: EQ-FUSE
+    port: PWR-OUT
+  to:
+    instance: EQ-UPS
+    port: PWR-IN
+  conductors:
+  - fromPin: P
+    toPin: P
+  - fromPin: R
+    toPin: R
+- id: CAB-P2
+  from:
+    instance: EQ-UPS
+    port: PWR-OUT
+  to:
+    instance: EQ-HOST
+    port: PWR-IN
+  conductors:
+  - fromPin: P
+    toPin: P
+  - fromPin: R
+    toPin: R
+- id: CAB-P3
+  from:
+    instance: EQ-UPS
+    port: PWR-OUT
+  to:
+    instance: EQ-SWITCH
+    port: PWR-IN
+  conductors:
+  - fromPin: P
+    toPin: P
+  - fromPin: R
+    toPin: R
+- id: CAB-P4
+  from:
+    instance: EQ-UPS
+    port: PWR-OUT
+  to:
+    instance: EQ-LINK
+    port: PWR-IN
+  conductors:
+  - fromPin: P
+    toPin: P
+  - fromPin: R
+    toPin: R
+- id: CAB-E-FUSE
+  from:
+    instance: EQ-SUPPLY
+    port: EARTH
+  to:
+    instance: EQ-FUSE
+    port: EARTH
+  conductors:
+  - fromPin: E
+    toPin: E
+- id: CAB-E-UPS
+  from:
+    instance: EQ-SUPPLY
+    port: EARTH
+  to:
+    instance: EQ-UPS
+    port: EARTH
+  conductors:
+  - fromPin: E
+    toPin: E
+- id: CAB-E-HOST
+  from:
+    instance: EQ-SUPPLY
+    port: EARTH
+  to:
+    instance: EQ-HOST
+    port: EARTH
+  conductors:
+  - fromPin: E
+    toPin: E
+- id: CAB-E-SWITCH
+  from:
+    instance: EQ-SUPPLY
+    port: EARTH
+  to:
+    instance: EQ-SWITCH
+    port: EARTH
+  conductors:
+  - fromPin: E
+    toPin: E
+- id: CAB-E-LINK
+  from:
+    instance: EQ-SUPPLY
+    port: EARTH
+  to:
+    instance: EQ-LINK
+    port: EARTH
+  conductors:
+  - fromPin: E
+    toPin: E
+- id: CAB-N1
+  from:
+    instance: EQ-HOST
+    port: NET
+  to:
+    instance: EQ-SWITCH
+    port: NET-1
+  conductors:
+  - fromPin: D
+    toPin: D
+- id: CAB-N2
+  from:
+    instance: EQ-SWITCH
+    port: NET-2
+  to:
+    instance: EQ-LINK
+    port: NET
+  conductors:
+  - fromPin: D
+    toPin: D
+substitutions: []
+assumptions:
+- Synthetic 24 V DC assembly; not a wiring construction or electrical safety approval.
+- Supply EARTH is assumed bonded to a suitable reference; no physical inspection.
+- Protection presence is checked topologically; fuse sizing, fault current and cable ampacity need separate engineering evidence.

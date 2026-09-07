@@ -1,0 +1,443 @@
+{
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "mundane-equipment-yaml-0.1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+    },
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+        },
+        "kind": {
+          "const": "baseline"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+        }
+      },
+      "required": [
+        "scope",
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "basis": {
+      "type": "string",
+      "enum": [
+        "design-intent",
+        "synthetic-installation"
+      ]
+    },
+    "parts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "manufacturer": {
+            "type": "string",
+            "minLength": 1
+          },
+          "model": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "source",
+              "protection",
+              "ups",
+              "load"
+            ]
+          },
+          "evidence": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sha256": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[0-9a-f]{64}"
+              }
+            },
+            "required": [
+              "path",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "reviewedEvidenceSha256": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[0-9a-f]{64}"
+          },
+          "ratings": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                },
+                "value": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "unit": {
+                  "type": "string",
+                  "enum": [
+                    "W",
+                    "V",
+                    "Wh",
+                    "ms",
+                    "Mbps",
+                    "GB",
+                    "h"
+                  ]
+                },
+                "basis": {
+                  "type": "string",
+                  "enum": [
+                    "manufacturer-rating",
+                    "measurement",
+                    "assumption"
+                  ]
+                },
+                "explanation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "id",
+                "value",
+                "unit",
+                "basis",
+                "explanation"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 1000
+          },
+          "ports": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                },
+                "signal": {
+                  "type": "string",
+                  "enum": [
+                    "power",
+                    "network",
+                    "ground"
+                  ]
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "in",
+                    "out",
+                    "bidirectional"
+                  ]
+                },
+                "connector": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minV": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "maxV": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 1000000000
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "pins": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": [
+                          "positive",
+                          "return",
+                          "earth",
+                          "data"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "role"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "maxItems": 1000
+                }
+              },
+              "required": [
+                "id",
+                "signal",
+                "direction",
+                "connector",
+                "minV",
+                "maxV",
+                "required",
+                "pins"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 1000
+          }
+        },
+        "required": [
+          "id",
+          "manufacturer",
+          "model",
+          "role",
+          "evidence",
+          "reviewedEvidenceSha256",
+          "ratings",
+          "ports"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "instances": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "part": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "serial": {
+            "type": "string",
+            "minLength": 1
+          },
+          "allocation": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "scope": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                  },
+                  "kind": {
+                    "const": "component"
+                  },
+                  "id": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                  }
+                },
+                "required": [
+                  "scope",
+                  "kind",
+                  "id"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "part",
+          "serial",
+          "allocation"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "cables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "from": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              }
+            },
+            "required": [
+              "instance",
+              "port"
+            ],
+            "additionalProperties": false
+          },
+          "to": {
+            "type": "object",
+            "properties": {
+              "instance": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              },
+              "port": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              }
+            },
+            "required": [
+              "instance",
+              "port"
+            ],
+            "additionalProperties": false
+          },
+          "conductors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "fromPin": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                },
+                "toPin": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                }
+              },
+              "required": [
+                "fromPin",
+                "toPin"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 1000
+          }
+        },
+        "required": [
+          "id",
+          "from",
+          "to",
+          "conductors"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 1000
+    },
+    "substitutions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "instance": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "previousPart": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "instance",
+          "previousPart",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "format",
+    "id",
+    "configuration",
+    "basis",
+    "parts",
+    "instances",
+    "cables",
+    "assumptions",
+    "substitutions"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

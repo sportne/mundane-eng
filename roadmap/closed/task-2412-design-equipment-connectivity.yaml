@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2412"
 kind: "task"
 title: "Design Equipment Parts and Wiring Artifacts"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2403", "TC-2404", "TC-2408"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -65,9 +65,15 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
-  - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](../closed/task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](../closed/task-2404-design-context-architecture-interfaces.yaml)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. The [equipment decision](../../examples/ground-control-station/design/equipment.md), closed draft schema and illustrative YAML define parts, installed/design instances, exact datasheet evidence, ratings, ports/pins, cables, substitutions and assumptions. BOM and wiring have one canonical connectivity source. Native CAD remains a future explicit adapter; procurement and electrical safety are not inferred.
+
+  Ran the independent `check-equipment.py` design probe: PASS source schema and one-source BOM/wiring generation, incompatible voltage and connector rejection, missing protection route detection and stale supporting evidence after an illustrative substitution. The derived review is `build/gcs-design/equipment.md`. The implementation's additional pin, grounding, duplicate-feed and source-navigation checks are explicitly specified. `equipment-design-verify` is part of the full gate.

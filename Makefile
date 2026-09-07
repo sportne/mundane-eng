@@ -292,3 +292,8 @@ native-software: test-software
 software-verify: native-software safety-verify software-design-verify
 	build/schema-check-venv/bin/python scripts/check-software-workflow.py
 verify: software-verify
+
+.PHONY: equipment-design-verify
+equipment-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-equipment.py
+verify: equipment-design-verify

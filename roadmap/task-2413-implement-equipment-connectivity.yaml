@@ -61,6 +61,6 @@ body: |2
   - [GCS reference project plan](../examples/ground-control-station/README.md)
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2412](task-2412-design-equipment-connectivity.yaml)
+  - [TC-2412](closed/task-2412-design-equipment-connectivity.yaml)
   - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
   - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
