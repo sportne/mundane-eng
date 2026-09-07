@@ -64,8 +64,8 @@ Review candidate: [work:work-item:TASK-STORAGE](./source/review-storage.yaml#L2)
 These digests record exact input bytes; human-authored IDs retain identity.
 Provenance is not a signature or evidence of approval.
 
-- Import selection: imports.json; SHA-256 665df27d343ef1f4489dbe40ddf7c172907c6b0bf17e7444e1e05bd02f2bcedd
+- Import selection: imports.json; SHA-256 83d207c2726e7dfa6089d1374576f2d9c97414f984a3c3257e56302e4c9fdac0
 - Scope baseline: baseline.json; SHA-256 d75455f21d5d3eb4795a51e78c61336f13306abb0bc4e72c2c46de5886ecc12e
 - Scope plan: plan.json; SHA-256 342855e1caeeae3366b59f8806f7caae703eddc254d0dc445e046422a65fbf44
 - Scope req: req.json; SHA-256 d75455f21d5d3eb4795a51e78c61336f13306abb0bc4e72c2c46de5886ecc12e
-- Scope work: work.json; SHA-256 d0c42fefeb67c6dd451b518d201c9927f74ed9d28c0ef2ca9e795f354c9c01e5
+- Scope work: work.json; SHA-256 774ba905faf26031e985b308d87b031922c4648bc4d3c0f7e56741c75f15ab7b

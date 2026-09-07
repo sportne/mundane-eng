@@ -41,5 +41,35 @@ Generated JSON, JSON manifests and supported requirement profiles remain. Source
 revisions remain human-controlled; none of these checks imply verification execution,
 evidence adequacy, approval or satisfaction. Other platforms/publication are untested.
 
-The final cleanup card is created after this completed migration. Its outcome and
-verification are recorded separately below when executed.
+The final cleanup card was created after this completed migration. Its outcome
+and verification are recorded below.
+
+## Cleanup scope: TC-2301
+
+The cleanup removes the remaining Markdown/JSON-fence work-item source parser,
+selection 0.1 and compiled work output 0.1 compatibility. Work CLI advances to 0.3;
+current YAML source/selection/output stay 0.2. The existing public work regression
+matrix now uses YAML and preserves its graph, resource, scoped-import, output-failure
+and rendered-report checks. Old format pairs are explicitly rejected. Converted
+work examples retain their original decoded values and human IDs.
+
+Removed material includes the legacy work compatibility experiment, unused pilot
+result/report dumps, four superseded editor verification narratives, old VSIX files,
+a leftover migration binary and obsolete local experiment builds. Approximately
+94.7 MiB of obsolete local build output was removed. The work analysis contract is
+renamed and reconciled with YAML; current source guides and indexes are repaired.
+
+Active goldens, requirement profiles, compiled JSON, JSON manifests, licenses,
+source schemas, task history, and useful impact/performance evidence remain.
+Removed historical files are recoverable from Git. Dependency/test-runtime caches
+are retained because the supported verification workflow still uses them.
+
+## Final cleanup verification
+
+The final `scripts/run-ci-verification.sh` run completed with exit 0 on 2026-09-07
+in the same supported environment. It passed all 14 maintained JVM groups, current
+YAML work/plan public matrices, structural schemas, golden/seeded/mutation workflows,
+native CLI/package checks, nine Node tests, development and installed VS Code hosts,
+request-traffic checks, and both failure injections with exact input restoration.
+The 71-card backlog and documentation links pass. Source/profile rejection checks
+confirm that removed representations no longer have a production compatibility path.

@@ -14,7 +14,7 @@ Current contracts and evidence for the YAML engineering tools.
 - [Verification planning and review analysis 0.1](0015-verification-planning-0.1.md)
 - [Diagnostic recovery and incomplete interpretation](0016-diagnostic-recovery.md)
 - [SARIF validation output](0017-sarif-validation-output.md)
-- [Work-item source, compilation and analysis 0.1](0018-work-items-0.1.md)
+- [Work-item compilation and analysis](0018-work-item-compilation-and-analysis.md)
 - [YAML work items 0.2](0019-work-items-yaml-0.2.md)
 - [Project-defined requirement attributes: YAML 0.4](0020-project-attributes-yaml-0.4.md)
 - [Requirement semantic output 0.2](0021-requirement-semantic-output-0.2.md)

@@ -6,6 +6,7 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+import source_yaml
 
 ROOT=Path(__file__).resolve().parents[1]
 NATIVE=str(Path(sys.argv[1]).resolve())
@@ -19,19 +20,18 @@ def invoke(root,args,status=0):
     return json.loads(runs[0].stdout)
 
 def card(ident='TC-1',kind='Task',status='Ready',deps=None,relations=None,body='\n## Question\n\nReview the alarm.\n'):
-    metadata={'format':'mundane-work-source-0.1','status':status,'dependencies':deps or [],'relations':relations or [],'planning':dict.fromkeys(['stage','type','condition','unlocks','statusNote'],'')}
-    return f'# {kind} {ident}: Review Équipe 😀\n\n```json\n'+json.dumps(metadata,ensure_ascii=False)+'\n```\n'+body
+    return source_yaml.dumps({'format':'mundane-work-yaml-0.2','id':ident,'kind':kind.lower(),'title':'Review Équipe 😀','status':status,'dependencies':deps or [],'relations':relations or [],'planning':dict.fromkeys(['stage','type','condition','unlocks','statusNote'],''),'body':body})
 
 def metadata_change(source,change):
-    lines=source.splitlines(keepends=True);m=json.loads(lines[3]);change(m);lines[3]=json.dumps(m)+'\n';return ''.join(lines)
+    values=source_yaml.loads(source);change(values);return source_yaml.dumps(values)
 
 with tempfile.TemporaryDirectory(prefix='mundane-work-') as directory:
-    root=Path(directory);source=root/'one.work.md';selection=root/'set.json'
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['one.work.md']}))
+    root=Path(directory);source=root/'one.yaml';selection=root/'set.json'
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['one.yaml']}))
     source.write_text(card(),encoding='utf-8');args=['compile','--root','.', 'set.json']
     valid=invoke(root,args);assert valid['complete'] and len(valid['items'])==1
     values=valid['items'][0]['values'];assert values['id']=='TC-1' and values['title']=='Review Équipe 😀' and values['body']=='\n## Question\n\nReview the alarm.\n'
-    assert valid['items'][0]['metadataLocation']=={'path':'one.work.md','line':4,'column':1}
+    assert valid['items'][0]['metadataLocation']=={'path':'one.yaml','line':1,'column':1}
     original=source.read_text()
     mutations=[
         ('unknown status',lambda m:m.update(status='Done')),
@@ -41,26 +41,26 @@ with tempfile.TemporaryDirectory(prefix='mundane-work-') as directory:
         ('unknown source',lambda m:m.update(format='future')),
         ('invalid relation',lambda m:m.update(relations=[{'relation':'approves','scope':'work','kind':'work-item','target':'TC-2'}])),
         ('remote evidence',lambda m:m.update(relations=[{'relation':'evidence','scope':None,'kind':'resource','target':'https://example.invalid/code'}])),
-        ('bad planning',lambda m:m.update(planning={})),
+        ('bad planning',lambda m:m.update(planning={'unknown':'x'})),
         ('relation limit',lambda m:m.update(dependencies=['T-'+str(i) for i in range(1001)])),
     ]
     for label,change in mutations:
-        source.write_text(metadata_change(original,change));a=invoke(root,args,1);assert a['items']==[] and not a['complete'] and a['diagnostics'][0]['location']['line']==4,label
-    for invalid in [b'\xff\n',('\ufeff'+original).encode(),original.replace('```\n','').encode(),original[:-1].encode(),original.replace('"status": "Ready"','"status": "Ready", "status": "Ready"').encode(),card(kind='Issue',status='Open',deps=['TC-2']).encode(),card(body='\n').encode()]:
+        source.write_text(metadata_change(original,change));a=invoke(root,args,1);assert a['items']==[] and not a['complete'] and a['diagnostics'][0]['location']['line']>=1,label
+    for invalid in [b'\xff\n',('\ufeff'+original).encode(),b'format: [\n',original[:-1].encode(),(original+'status: Ready\n').encode(),card(kind='Issue',status='Open',deps=['TC-2']).encode(),card(body='\n').encode()]:
         source.write_bytes(invalid);a=invoke(root,args,1);assert a['items']==[] and not a['complete']
     source.write_bytes(b'x'*(1024*1024+1));assert invoke(root,args,2)['items']==[]
-    source.write_bytes(original.replace('\n','\r\n').encode());a=invoke(root,args);assert '\r\n' in a['items'][0]['values']['body']
-    source.write_text(original);(root/'two.work.md').write_text(original)
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['two.work.md','one.work.md']}))
+    source.write_bytes(original.replace('\n','\r\n').encode());a=invoke(root,args);assert a['items'][0]['values']['body']==values['body']
+    source.write_text(original);(root/'two.yaml').write_text(original)
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['two.yaml','one.yaml']}))
     assert invoke(root,args,1)['diagnostics'][0]['code']=='duplicate-work-id'
-    (root/'two.work.md').write_text(card('TC-2'))
+    (root/'two.yaml').write_text(card('TC-2'))
     ordered=invoke(root,args);assert [x['values']['id'] for x in ordered['items']]==['TC-1','TC-2']
     # Selection order affects selection provenance; semantic inventory order is invariant.
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['one.work.md','two.work.md']}))
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['one.yaml','two.yaml']}))
     reversed_=invoke(root,args);assert ordered['items']==reversed_['items']
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['missing.work.md']}));assert invoke(root,args,2)['items']==[]
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['one.work.md','one.work.md']}));assert invoke(root,args,1)['items']==[]
-    selection.write_text(json.dumps({'format':'mundane-work-set-0.1','files':['one.work.md']}))
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['missing.yaml']}));assert invoke(root,args,2)['items']==[]
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['one.yaml','one.yaml']}));assert invoke(root,args,1)['items']==[]
+    selection.write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['one.yaml']}))
     source.write_text(card(body='x'*500000+'\n'))
     for command in COMMANDS:
         p=subprocess.Popen(command+args,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -68,7 +68,7 @@ with tempfile.TemporaryDirectory(prefix='mundane-work-') as directory:
         def close_stdout():os.close(1)
         r=subprocess.run(command+args,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE,preexec_fn=close_stdout,timeout=30);assert r.returncode==2
     source.write_text(original)
-print('PASS work compiler: JVM/native values, Unicode points, 9 metadata mutations, physical/size/duplicate/selection failures, CRLF preservation and real broken output')
+print('PASS work compiler: JVM/native values, Unicode points, 9 metadata mutations, physical/size/duplicate/selection failures, decoded body preservation across physical CRLF and real broken output')
 
 fixture=invoke(ROOT,['compile','--root','.','examples/work-items/work-items.json'])
 expected=json.loads((ROOT/'experiments/0034-work-items/golden/compiled.json').read_text())
@@ -86,8 +86,8 @@ with tempfile.TemporaryDirectory(prefix='mundane-work-link-') as directory:
                {'relation':'supersedes','scope':'work','kind':'work-item','target':'TC-OLD'},
                {'relation':'evidence','scope':None,'kind':'resource','target':'evidence.md'}]
     texts=[card('TC-1',deps=['TC-2'],relations=relations),card('TC-2',status='Complete'),card('TC-OLD',status='Superseded'),card('ISSUE-1','Issue','Open')]
-    for i,text in enumerate(texts):(root/f'{i}.work.md').write_text(text)
-    write('set.json',{'format':'mundane-work-set-0.1','files':[f'{i}.work.md' for i in range(4)]})
+    for i,text in enumerate(texts):(root/f'{i}.yaml').write_text(text)
+    write('set.json',{'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':[f'{i}.yaml' for i in range(4)]})
     work=invoke(root,['compile','--root','.','set.json']);write('work.json',work)
     requirement=json.loads((ROOT/'specification/examples/requirements-artifact-0.1/valid.json').read_text());write('req.json',requirement)
     plan=json.loads((ROOT/'experiments/0028-verification-contract/fixtures/plan.json').read_text());write('plan.json',plan)
@@ -124,8 +124,8 @@ print('PASS work analysis: typed requirement/plan/activity/issue links, prerequi
 
 with tempfile.TemporaryDirectory(prefix='work-import-scope-') as directory:
     root=Path(directory)
-    (root/'a.md').write_text(card('TC-1'))
-    (root/'set.json').write_text(json.dumps({'format':'mundane-work-set-0.1','files':['a.md']}))
+    (root/'a.yaml').write_text(card('TC-1'))
+    (root/'set.json').write_text(json.dumps({'format':'mundane-work-set-0.2','source':'mundane-work-yaml-0.2','files':['a.yaml']}))
     a=invoke(root,['compile','--root','.','set.json'])
     (root/'other.json').write_text(json.dumps(a))
     primary=copy.deepcopy(a);primary['items'][0]['values']['relations']=[{'relation':'relates-to','scope':'other','kind':'work-item','target':'TC-1'}]

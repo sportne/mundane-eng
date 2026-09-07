@@ -1,0 +1,18 @@
+format: mundane-work-yaml-0.2
+status: Ready
+dependencies: []
+relations: []
+planning:
+  stage: '16'
+  type: Review
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+id: TC-EXAMPLE
+kind: task
+title: Review the alarm
+body: |2
+
+  ## Question
+
+  Does the selected alarm requirement explain the intended behavior?

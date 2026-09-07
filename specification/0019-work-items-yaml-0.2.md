@@ -2,9 +2,9 @@
 
 Status: Maintained normative experimental contract, implemented and verified
 through TC-1608/1609.
-This addendum replaces source authoring for new work with YAML. The work-item
+This contract defines YAML work-item authoring. The work-item
 meanings, import graph, limits, output safety and derived view rules in
-[0018](0018-work-items-0.1.md) continue except as explicitly amended here.
+[0018](0018-work-item-compilation-and-analysis.md) continue except as explicitly amended here.
 
 ## Source and data model
 
@@ -14,8 +14,7 @@ no malformed Unicode; maximum 1 MiB per selected source. YAML directives, anchor
 aliases, explicit tags, non-string mapping keys, duplicate keys (at any depth),
 merge keys and collection nesting beyond 16 are invalid. No includes or evaluation.
 Comments are allowed but are presentation, not compiled narrative or semantic facts.
-Migration never edits YAML comments because its input is the prior Markdown profile;
-no YAML formatter/re-emitter is introduced by this contract.
+No work-item formatter or source migration command is provided.
 
 Required fields: format, id, kind, title, status, body. Optional dependencies and
 relations default to empty lists. Optional planning defaults to an object containing
@@ -74,7 +73,7 @@ three layers are required for a valid linked backlog.
 
 ## Selection and compatibility
 
-New selection is explicit JSON:
+Selection is explicit JSON:
 
 ```json
 {"format":"mundane-work-set-0.2","source":"mundane-work-yaml-0.2","files":["roadmap/task-example.yaml"]}
@@ -82,12 +81,12 @@ New selection is explicit JSON:
 
 All selected files use that source profile. No extension inference, mixed profiles
 within one manifest, fallback or directory discovery. Commands are unchanged.
-Selection 0.1 (format/files only) continues to mean Markdown source 0.1. Unsupported
-source/selection combinations fail with invalid-work-set; there is no auto-migration.
+Selection 0.1 and Markdown source are unsupported. Source/selection combinations
+outside this contract fail with invalid-work-set; there is no auto-migration.
 
 YAML produces `mundane-work-items-0.2`, sourceContract `mundane-work-yaml-0.2`.
-Legacy selection still produces items 0.1 / source 0.1. Both are supported by current
-serialized consumers; mismatched output/source pairs fail. All output value fields,
+Only this output/source pair is supported by current work-item consumers; old or
+mismatched pairs fail. All output value fields,
 normalized array ordering and graph meanings remain unchanged. YAML comments,
 field order and scalar style do not affect values when decoded strings are equal;
 source digests and locations still describe each exact revision. Digests are not IDs.
@@ -95,15 +94,14 @@ source digests and locations still describe each exact revision. Digests are not
 Item location points to the YAML id value; metadataLocation points to the item
 mapping start. Both are one-based Unicode code-point coordinates. Relation/domain
 errors may point to the item declaration; syntax and node errors use actual marks.
-These are declaration points, not fabricated individual relation spans. Old output
-0.1 retains heading 1:1 and metadata 4:1 requirements. Every item still owns one
+These are declaration points, not fabricated individual relation spans. Every item owns one
 source path. Serialized validation checks positive coordinates and same-path
 membership, without claiming to reconstruct source text.
 
 Source errors use invalid-work-source and empty items, accumulating one failure per
 independent source. YAML parser diagnostics carry their problem location. Bounded
 input/output, read rechecks, stream errors and exit 0/1/2 remain as in 0018.
-Analysis stays 0.1 and validates either embedded work output version; derived views
+Analysis stays 0.1 and validates current embedded work output; derived views
 use the supplied source points. Consumers remain independent of source parsers.
 
 ## Repository authoring
@@ -114,5 +112,6 @@ Generate `WORK-ITEMS.md` with the public work-item pipeline and check it with
 `make work-backlog-verify`. Completed cards move into `roadmap/closed/` with
 recorded evidence and repaired incoming links.
 
-Markdown work-item sources remain an independent compatibility profile. The
-work-item format makes no choice for safety, BOM or other future artifacts.
+Markdown work-item sources and their compiled compatibility path are removed.
+Future human-authored artifact types should follow the shared YAML policy unless
+a concrete workflow justifies another format.

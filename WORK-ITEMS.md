@@ -78,7 +78,7 @@ Items: 71.
 | [TC-2202](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L2) | task | Migrate Attribute Declarations to YAML | Complete | TC-2201 | — |
 | [TC-2203](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L2) | task | Migrate Verification Plans to YAML | Complete | TC-2201, TC-2202 | — |
 | [TC-2204](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L2) | task | Verify YAML Authoring Migration and Remove Replaced Sources | Complete | TC-2202, TC-2203 | — |
-| [TC-2301](./roadmap/task-2301-clean-current-project.yaml#L2) | task | Clean the Project for the Current YAML Design | Planned | TC-2204 | — |
+| [TC-2301](./roadmap/closed/task-2301-clean-current-project.yaml#L2) | task | Clean the Project for the Current YAML Design | Complete | TC-2204 | — |
 
 ## Planning qualifications
 
@@ -205,7 +205,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-1606 | depends-on | work:work-item:TC-1603 | [work:roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1) |
 | work:work-item:TC-1606 | depends-on | work:work-item:TC-1604 | [work:roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1) |
 | work:work-item:TC-1606 | depends-on | work:work-item:TC-1605 | [work:roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1) |
-| work:work-item:TC-1606 | evidence | resource:specification/0018-work-items-0.1.md | [work:roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1) |
+| work:work-item:TC-1606 | evidence | resource:specification/0018-work-item-compilation-and-analysis.md | [work:roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1) |
 | work:work-item:TC-1608 | depends-on | work:work-item:TC-1607 | [work:roadmap/closed/task-1608-compile-yaml-work-items.yaml](./roadmap/closed/task-1608-compile-yaml-work-items.yaml#L1) |
 | work:work-item:TC-1609 | depends-on | work:work-item:TC-1608 | [work:roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml](./roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml#L1) |
 | work:work-item:TC-1702 | depends-on | work:work-item:TC-1701 | [work:roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml](./roadmap/closed/task-1702-assemble-scoped-impact-graph.yaml#L1) |
@@ -239,11 +239,11 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2203 | depends-on | work:work-item:TC-2202 | [work:roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1) |
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2202 | [work:roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1) |
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2203 | [work:roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1) |
-| work:work-item:TC-2301 | depends-on | work:work-item:TC-2204 | [work:roadmap/task-2301-clean-current-project.yaml](./roadmap/task-2301-clean-current-project.yaml#L1) |
+| work:work-item:TC-2301 | depends-on | work:work-item:TC-2204 | [work:roadmap/closed/task-2301-clean-current-project.yaml](./roadmap/closed/task-2301-clean-current-project.yaml#L1) |
 
 ## Reverse navigation
 
-- resource:specification/0018-work-items-0.1.md: [work:work-item:TC-1606 (evidence)](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1)
+- resource:specification/0018-work-item-compilation-and-analysis.md: [work:work-item:TC-1606 (evidence)](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1)
 - resource:src/main/java/engineering/work/WorkCompiler.java: [work:work-item:TC-1603 (evidence)](./roadmap/closed/task-1603-compile-and-validate-work-items.yaml#L1)
 - resource:src/main/java/engineering/work/WorkGraph.java: [work:work-item:TC-1604 (evidence)](./roadmap/closed/task-1604-link-and-analyze-work-items.yaml#L1)
 - resource:src/main/java/engineering/work/WorkView.java: [work:work-item:TC-1605 (evidence)](./roadmap/closed/task-1605-generate-derived-work-item-views.yaml#L1)
@@ -298,13 +298,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2201: [work:work-item:TC-2202 (depends-on)](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1), [work:work-item:TC-2203 (depends-on)](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1)
 - work:work-item:TC-2202: [work:work-item:TC-2203 (depends-on)](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1), [work:work-item:TC-2204 (depends-on)](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1)
 - work:work-item:TC-2203: [work:work-item:TC-2204 (depends-on)](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1)
-- work:work-item:TC-2204: [work:work-item:TC-2301 (depends-on)](./roadmap/task-2301-clean-current-project.yaml#L1)
+- work:work-item:TC-2204: [work:work-item:TC-2301 (depends-on)](./roadmap/closed/task-2301-clean-current-project.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 be8df55a642916a33c0fb962ef4bed964c295027bd7e9e1f1e4accbf8bfe6c1e
+- Work artifact: build/work-backlog/items.json; SHA-256 da163f5e4f9c959ab54b7e77719ac8ac9cbc243fc93bfe3b99e58384d5339fd6
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 6ed9f1f4a2b83a090818c620ceffe0f80d624069e435b9039003e11f545f4f78
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 0261d2b6485194f31b93fd81ec4939856724cc5f5d03a03d7222b5c30f038a1a
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -336,7 +336,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1603-compile-and-validate-work-items.yaml](./roadmap/closed/task-1603-compile-and-validate-work-items.yaml#L1); SHA-256 e3b5a38c7583bb00cb5ed9ceb6ebe4a670d54a2df24162c6e9d5d30de588c684
 - Source: [roadmap/closed/task-1604-link-and-analyze-work-items.yaml](./roadmap/closed/task-1604-link-and-analyze-work-items.yaml#L1); SHA-256 5d2975af7eee374b87111677bca7558e7d556faf9e921cdd83a5ea504341b311
 - Source: [roadmap/closed/task-1605-generate-derived-work-item-views.yaml](./roadmap/closed/task-1605-generate-derived-work-item-views.yaml#L1); SHA-256 449446adcb9de4727f0fd856b5b8684f7b9aa6bbfac6552ef8029bf31852f4da
-- Source: [roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1); SHA-256 2cbc3f0e788d1115223c712fa63b1afee771a272b8f726baee00f8b64ab117fc
+- Source: [roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml](./roadmap/closed/task-1606-dogfood-the-work-item-backlog.yaml#L1); SHA-256 a6c796d88095686c9e3128f51912e0b7c4ca8af80ccdb85b0abd4e461562ba36
 - Source: [roadmap/closed/task-1607-specify-yaml-work-items.yaml](./roadmap/closed/task-1607-specify-yaml-work-items.yaml#L1); SHA-256 6a2c3076f36cbd486ab3bfa26a573b3de4c3366389e7c5106b74b3f38db11221
 - Source: [roadmap/closed/task-1608-compile-yaml-work-items.yaml](./roadmap/closed/task-1608-compile-yaml-work-items.yaml#L1); SHA-256 e6db488c8d59758827e1f32d23da5ae6dc1c1df18d4558ae47464e3b35123a22
 - Source: [roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml](./roadmap/closed/task-1609-migrate-and-verify-yaml-backlog.yaml#L1); SHA-256 a913e90e52f88c4de1f63afae28f0bb40b36541b65e3b27310ffa2984517b5aa
@@ -351,32 +351,32 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-1803-navigate-requirement-definitions.yaml](./roadmap/closed/task-1803-navigate-requirement-definitions.yaml#L1); SHA-256 04e59665e14e50f8e8011dfc04fa8434069cc870d9f32ed216bcec5c2a64653a
 - Source: [roadmap/closed/task-1804-integrate-requirement-formatting.yaml](./roadmap/closed/task-1804-integrate-requirement-formatting.yaml#L1); SHA-256 b2ef129125f6796394231226e64a7a922d1b7bbed0536412ca1b2fd68ff4911c
 - Source: [roadmap/closed/task-1805-complete-project-attributes.yaml](./roadmap/closed/task-1805-complete-project-attributes.yaml#L1); SHA-256 684f17c7105dde90332a580ca2732fdb0ec29149e9d6df18613dc99a87106a3e
-- Source: [roadmap/closed/task-1806-show-attribute-hover-documentation.yaml](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L1); SHA-256 d1af87ee3467420b132a196e5355a614cca09163571ce88dece9a0bfb6c12e25
+- Source: [roadmap/closed/task-1806-show-attribute-hover-documentation.yaml](./roadmap/closed/task-1806-show-attribute-hover-documentation.yaml#L1); SHA-256 d85a35f4e760434f50f2a39cfe4cdd64b810dc68f04f535b9994ab8e55f8eba1
 - Source: [roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml](./roadmap/closed/task-1901-reconcile-editor-planning-and-setup-documentation.yaml#L1); SHA-256 20a69da8910c1690162b8b39eee44fef780ca67d03676d7c583e730060ae7681
 - Source: [roadmap/closed/task-1902-centralize-editor-version-and-protocol-declarations.yaml](./roadmap/closed/task-1902-centralize-editor-version-and-protocol-declarations.yaml#L1); SHA-256 6fcc8fbe0aa61ad7e99664481448477905b9e7be3f5b3166baee4f5fbdcf70df
 - Source: [roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml](./roadmap/closed/task-1903-reduce-redundant-editor-project-validation.yaml#L1); SHA-256 6463661870e7af3becbce1cfa4817c9ac9874f851ea581ea215f6c7f663d6393
 - Source: [roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml](./roadmap/closed/task-1904-bundle-the-linux-editor-and-native-bridge.yaml#L1); SHA-256 e7419bfdf0f608629cdb29110b4d1972837e9dee4e5915934a21055382db1023
-- Source: [roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1); SHA-256 442029aeb47d8bc28503c288b18308fb4e25af090cf60c16a5ceee3cfa905fc1
+- Source: [roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml](./roadmap/closed/task-1905-verify-installed-editor-setup-and-recovery.yaml#L1); SHA-256 bc59285243e2ed803463d7c54d89ce18157af94a2143232ee3ea7f2baec9bce6
 - Source: [roadmap/closed/task-2001-define-work-item-editor-selection.yaml](./roadmap/closed/task-2001-define-work-item-editor-selection.yaml#L1); SHA-256 e3c258790ffc520f72396f338d38b3a2fd354d8a76dbc25dc3c45f8bf746767a
 - Source: [roadmap/closed/task-2002-compile-work-item-editor-snapshots.yaml](./roadmap/closed/task-2002-compile-work-item-editor-snapshots.yaml#L1); SHA-256 42d6e4a6760999f1867587461eb4c658f732334af7a953993094ab3c24fb5b26
 - Source: [roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml](./roadmap/closed/task-2003-diagnose-work-items-in-vscode.yaml#L1); SHA-256 77cbe7a4bd0dc4e20d631cac90642ed511e1342018493c8c4cd307ab42411fc5
 - Source: [roadmap/closed/task-2004-navigate-local-task-dependencies.yaml](./roadmap/closed/task-2004-navigate-local-task-dependencies.yaml#L1); SHA-256 5ac76375c32f8bb80de435e0deb6b4cbbbe1bbeaed4673c1b9d70bb4d41995f4
 - Source: [roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml](./roadmap/closed/task-2005-complete-and-describe-work-item-fields.yaml#L1); SHA-256 1969e341534f91dfb53c95b81afed6afc65974bba82c7df1e962de000eeba434
-- Source: [roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1); SHA-256 6900e7a9ffc699912bb1f3277e09f1d6821b24e52165584d498bceb6f0bb8edd
+- Source: [roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml](./roadmap/closed/task-2006-dogfood-and-verify-work-item-authoring.yaml#L1); SHA-256 e55bb4f31cf211a9483ff9d6dabc938a395663ed9cd96ced5ffae4fde010fe8f
 - Source: [roadmap/closed/task-2101-define-editor-imports-and-source-mappings.yaml](./roadmap/closed/task-2101-define-editor-imports-and-source-mappings.yaml#L1); SHA-256 ba28f283ce8b7a8b1663fc4c0c29d37cb93823afeee422af5090b74d04085e2e
 - Source: [roadmap/closed/task-2102-validate-compiled-editor-imports.yaml](./roadmap/closed/task-2102-validate-compiled-editor-imports.yaml#L1); SHA-256 5d1940512ed6938aa795686be35085b67c64ad9c65ad1bc2fbc333365bc2c192
 - Source: [roadmap/closed/task-2103-locate-typed-work-item-references.yaml](./roadmap/closed/task-2103-locate-typed-work-item-references.yaml#L1); SHA-256 db195491e684318954221b681a13c973b682b6cf8919547d858378fa35014873
 - Source: [roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1); SHA-256 e7dc32de221ad4fbd214e1da3a41ce30983c2fb5e383120f6ff7e734446d7caa
 - Source: [roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1); SHA-256 7bf78ddb0adfb1ca72cf3883e8c9a1fafbbb55f729bee495b21b2684c6655e71
-- Source: [roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1); SHA-256 6492836f633933491f4261c404503c6d2a739de45b878ebb0bc8005589218290
+- Source: [roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1); SHA-256 d4bedd094a823824c0923bb82f6d2a4d34019baa4c43fc41eedcd4201129c74b
 - Source: [roadmap/closed/task-2201-define-common-yaml-authoring.yaml](./roadmap/closed/task-2201-define-common-yaml-authoring.yaml#L1); SHA-256 2e264837be8e9a25f329d5fc183f323dab8f12a5146ad547d6be7db433a373cf
 - Source: [roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1); SHA-256 4c8f446653670b88c02566796c5d5bb4c94b214fdf82da672866909d1c03b470
 - Source: [roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1); SHA-256 4c5eb98c3412de815acebf95d0743cbaf916efb321fc8dc8410e86e322840cf3
 - Source: [roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1); SHA-256 033f4ac72631691b00adc192777df288ae358965591b0ea3506bc2bd9ad65626
+- Source: [roadmap/closed/task-2301-clean-current-project.yaml](./roadmap/closed/task-2301-clean-current-project.yaml#L1); SHA-256 ff984d9f70a253e90bbd9d6a275552158b2e8d4a0af662cf751f7186c50cebec
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
-- Source: [roadmap/task-2301-clean-current-project.yaml](./roadmap/task-2301-clean-current-project.yaml#L1); SHA-256 9a251ea39e176d11f14eaac31d5876bec9b5c5b7a08fd41217fe51fe5ca41583
-- Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
-- Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff926fb0db9a44ea3519adb77085d021b6873e855816a87e4ffcff0c7615be3c
+- Resource: [specification/0018-work-item-compilation-and-analysis.md](./specification/0018-work-item-compilation-and-analysis.md#L1); SHA-256 55def57d8983956f7aca9768712438d36bd1c874fd3db9789575fbd6c866ac59
+- Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ef9c9ba9d4fcf9fde918fe4425e759fc4c21b3b9ee010c19722ad2e518b037bc
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 e783bf3e39ad7a00e1ab80a1de931b7a1fc3aa3baef14ecad4699aca53467bfc
 - Resource: [src/main/java/engineering/work/WorkView.java](./src/main/java/engineering/work/WorkView.java#L1); SHA-256 7d5fbe4439dca0bfed5fb442408c32b725729f5efd908824abfc99d31336ca3c

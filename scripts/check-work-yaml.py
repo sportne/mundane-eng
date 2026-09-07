@@ -59,13 +59,14 @@ with tempfile.TemporaryDirectory(prefix='work-yaml-') as folder:
     source.write_text('# Task TC-X: Legacy\n\n```json\n{}\n```\nBody\n');assert invoke(root,args,1)['items']==[]
     source.write_text(original);write(root,'set.json',{'format':'mundane-work-set-0.1','files':['source.yaml']});assert invoke(root,args,1)['items']==[]
     write(root,'set.json',selection)
-    write(root,'yaml.json',good);legacy=json.loads((ROOT/'experiments/0035-work-yaml/golden/legacy-compiled.json').read_text());write(root,'work.json',legacy)
+    write(root,'yaml.json',good);write(root,'work.json',good)
     imports={'format':'mundane-imports-0.1','imports':[{'scope':'new','kind':'work-items','path':'yaml.json','sha256':None,'dependsOn':[]}]};write(root,'imports.json',imports)
-    # The unchanged legacy primary keeps its authored work-scope relation; import YAML.
+    # Equal human IDs in independently scoped current artifacts remain distinct.
     analysis=invoke(root,['analyze','--root','.','--imports','imports.json','work.json']);assert analysis['complete']
     write(root,'analysis.json',analysis)
     for field,val in [('format','mundane-work-items-0.1'),('sourceContract','mundane-work-source-0.1')]:
         write(root,'work.json',good|{field:val});assert not invoke(root,['analyze','--root','.','--imports','imports.json','work.json'],1)['complete']
+    write(root,'work.json',good|{'format':'mundane-work-items-0.1','sourceContract':'mundane-work-source-0.1'});assert not invoke(root,['analyze','--root','.','--imports','imports.json','work.json'],1)['complete']
     write(root,'work.json',good)
     # Serialized-only analysis/view work after removing every source adapter and YAML dependency.
     isolated=root/'classes';shutil.copytree(CLASSES,isolated)
@@ -80,7 +81,7 @@ with tempfile.TemporaryDirectory(prefix='work-yaml-') as folder:
     source.write_text(prefix+'body: |-\n  '+'x'*500000+'\n')
     for command in COMMANDS:
         p=subprocess.Popen(command+args,cwd=root,stdout=subprocess.PIPE,stderr=subprocess.PIPE);assert p.stdout.read(1);p.stdout.close();assert p.wait(timeout=30) in (2,-13);p.stderr.close()
-print('PASS YAML: six scalar styles with LF/CRLF, exact decoded strings, defaults, 32 invalid profiles, marks, explicit selection, legacy imports, parser-free consumers and broken output')
+print('PASS YAML: six scalar styles with LF/CRLF, exact decoded strings, defaults, 32 invalid profiles, marks, explicit selection, current scoped imports, parser-free consumers and broken output')
 for p in (ROOT/'examples/work-items/yaml').glob('*.yaml'):validator.validate(loader.load(p.read_text()))
 # Independently enumerate structural invalid examples; compiler-only rules are not schema claims.
 base=loader.load((ROOT/'examples/work-items/yaml/task.yaml').read_text())

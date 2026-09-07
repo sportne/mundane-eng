@@ -50,4 +50,4 @@ body: |2
 
   ## Completion evidence
 
-  scripts/run-ci-verification.sh passed the full gate and both restored failure injections. Development and installed VS Code hosts passed the 60-card backlog, mixed domains, local providers, overlap/unselected-file checks and independent cache behavior. research/0073-work-item-editor-verification.md records checks, the corrected local npm environment and scope limits. Editor 0.1.2 packaging, checksums and installed recovery passed; setup and capability documentation are reconciled.
+  scripts/run-ci-verification.sh passed the full gate and both restored failure injections. Development and installed VS Code hosts passed the 60-card backlog, mixed domains, local providers, overlap/unselected-file checks and independent cache behavior. the historical verification record retained in Git records checks, the corrected local npm environment and scope limits. Editor 0.1.2 packaging, checksums and installed recovery passed; setup and capability documentation are reconciled.

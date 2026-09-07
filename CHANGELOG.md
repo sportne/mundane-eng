@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Removed the legacy Markdown/JSON-fence work-item source and compiled work output
+  0.1 compatibility path. YAML source/selection/output remain 0.2; work CLI is 0.3.
+  Current work examples and regression fixtures are YAML. Obsolete reports and
+  superseded editor verification narratives were removed; Git retains their history.
+
+
 - Attribute declarations now use YAML source `mundanereq-attributes-yaml-0.1`.
   The former JSON declaration source is removed. Select the `.yaml` declaration
   explicitly; normalized compiled definitions remain `mundanereq-attribute-schema-0.1`.

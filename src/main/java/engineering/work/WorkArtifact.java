@@ -15,8 +15,7 @@ public final class WorkArtifact {
         try {
             keys(a,"artifactKind","format","sourceContract","compiler","complete","selection","sources","items","diagnostics");
             if(!"work-items".equals(a.get("artifactKind")))throw new Problem("wrong-kind","expected work-items",file);
-            boolean legacy="mundane-work-items-0.1".equals(a.get("format"))&&"mundane-work-source-0.1".equals(a.get("sourceContract"));
-            if(!legacy&&(!Versions.WORK_ARTIFACT.equals(a.get("format"))||!Versions.WORK_SOURCE.equals(a.get("sourceContract"))))throw new Problem("unsupported-format","unsupported work-item format",file);
+            if(!Versions.WORK_ARTIFACT.equals(a.get("format"))||!Versions.WORK_SOURCE.equals(a.get("sourceContract")))throw new Problem("unsupported-format","unsupported work-item format",file);
             if(!Boolean.TRUE.equals(a.get("complete")))throw new Problem("incomplete-import","work-item artifact is incomplete",file);
             if(!list(a.get("diagnostics")).isEmpty())throw new IllegalArgumentException("complete artifact has diagnostics");
             var compiler=map(a.get("compiler"));keys(compiler,"name","version","contract");for(Object v:compiler.values())text(v);
@@ -27,7 +26,7 @@ public final class WorkArtifact {
             for(Object item:items) {
                 var r=map(item);keys(r,"values","location","metadataLocation");var v=map(r.get("values"));WorkValues.validate(v);
                 var loc=location(r.get("location"),paths);var meta=location(r.get("metadataLocation"),paths);
-                if(legacy&&(integer(loc.get("line"))!=1||integer(loc.get("column"))!=1||integer(meta.get("line"))!=4||integer(meta.get("column"))!=1)||!loc.get("path").equals(meta.get("path"))||!usedPaths.add(text(loc.get("path"))))throw new IllegalArgumentException("invalid work source locations");
+                if(!loc.get("path").equals(meta.get("path"))||!usedPaths.add(text(loc.get("path"))))throw new IllegalArgumentException("invalid work source locations");
                 if(result.put(id(v.get("id")),r)!=null)throw new IllegalArgumentException("duplicate work ID");
             }
             return result;

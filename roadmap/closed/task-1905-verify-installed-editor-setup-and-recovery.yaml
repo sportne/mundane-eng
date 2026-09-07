@@ -48,4 +48,4 @@ body: |2
 
   ## Completion evidence
 
-  The full scripts/run-ci-verification.sh wrapper passed with bundle checks and installed-editor-verify included. The isolated profile loaded the installed VSIX and extracted bridge, recovered from missing executables, mismatched protocols and invalid selections, and passed all provider workflows. An early stdin write on failed spawn was fixed and verified without the prior broken-pipe message. research/0072-installed-editor-bundle-verification.md records actual local evidence and limits.
+  The full scripts/run-ci-verification.sh wrapper passed with bundle checks and installed-editor-verify included. The isolated profile loaded the installed VSIX and extracted bridge, recovered from missing executables, mismatched protocols and invalid selections, and passed all provider workflows. An early stdin write on failed spawn was fixed and verified without the prior broken-pipe message. the historical verification record retained in Git records actual local evidence and limits.

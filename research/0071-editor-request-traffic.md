@@ -1,5 +1,9 @@
 # Editor request traffic and freshness
 
+This dated record retains useful impact/performance evidence. Current source formats
+and full-gate results are in [YAML authoring verification](0075-yaml-authoring-verification.md).
+
+
 A two-folder actual VS Code 1.109.5 Extension Host scenario measured process
 launch counts before and after TC-1903. Each folder contained the checked-in small
 requirement example. Counts measure work requested, not an assumed latency gain.

@@ -8,8 +8,8 @@ Items: 2.
 
 | ID | Kind | Title | Status | Dependencies | Unfinished prerequisites |
 | --- | --- | --- | --- | --- | --- |
-| [ISSUE-1](./examples/work-items/issue.work.md#L1) | issue | Alarm behavior is unclear | Open | — | — |
-| [TC-EXAMPLE](./examples/work-items/task.work.md#L1) | task | Review the alarm | Ready | — | — |
+| [ISSUE-1](./examples/work-items/issue.yaml#L15) | issue | Alarm behavior is unclear | Open | — | — |
+| [TC-EXAMPLE](./examples/work-items/task.yaml#L11) | task | Review the alarm | Ready | — | — |
 
 ## Planning qualifications
 
@@ -22,16 +22,16 @@ These annotations remain authored policy; prerequisite completion does not evalu
 
 | From | Relation | To | Declaration location |
 | --- | --- | --- | --- |
-| work:work-item:ISSUE-1 | relates-to | work:work-item:TC-EXAMPLE | [work:examples/work-items/issue.work.md](./examples/work-items/issue.work.md#L4) |
+| work:work-item:ISSUE-1 | relates-to | work:work-item:TC-EXAMPLE | [work:examples/work-items/issue.yaml](./examples/work-items/issue.yaml#L1) |
 
 ## Reverse navigation
 
-- work:work-item:TC-EXAMPLE: [work:work-item:ISSUE-1 (relates-to)](./examples/work-items/issue.work.md#L4)
+- work:work-item:TC-EXAMPLE: [work:work-item:ISSUE-1 (relates-to)](./examples/work-items/issue.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-example.json; SHA-256 12fea10d11d0541f51239e1590b7cffef5b50d19ccce3da448beacc01b605af1
+- Work artifact: build/work-example.json; SHA-256 66f49cd4bcf65cfe1a06cb2aec6dca2892141fbe8809bdc0a8bc26153e7eb96e
 - Import declaration: [examples/work-items/imports.json](./examples/work-items/imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [examples/work-items/work-items.json](./examples/work-items/work-items.json#L1); SHA-256 933c9191b6dbd7b2f57bc5fada24b7f702b76985697f3f9bd5156ad4164fe26e
-- Source: [examples/work-items/issue.work.md](./examples/work-items/issue.work.md#L1); SHA-256 3ad9e49b6d55fb188fb0bafd37c8d7988fcef7a2356ea6851d2de575c099c09d
-- Source: [examples/work-items/task.work.md](./examples/work-items/task.work.md#L1); SHA-256 cf38605b07494fc4c6b7fea42b0c0681a18c15ccd9c3f1d9afdb54ec3bd208dd
+- Card selection: [examples/work-items/work-items.json](./examples/work-items/work-items.json#L1); SHA-256 488777de8254452a531be490da050c5185c84097f39fd76b5e38903938d1c573
+- Source: [examples/work-items/issue.yaml](./examples/work-items/issue.yaml#L1); SHA-256 54de12f3618c9563875276ef17f6a5a8c35c90c89162ffa930084a0dbd25b9d4
+- Source: [examples/work-items/task.yaml](./examples/work-items/task.yaml#L1); SHA-256 79fc799f1df93e5eeec95386981b037ff120f8ef946ea69af535789cf47f86ab

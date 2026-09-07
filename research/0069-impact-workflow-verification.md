@@ -1,5 +1,9 @@
 # Research 0069: Cross-artifact impact workflow verification
 
+This dated record retains useful impact/performance evidence. Current source formats
+and full-gate results are in [YAML authoring verification](0075-yaml-authoring-verification.md).
+
+
 ## Result and scope
 
 TC-1701–1705 deliver the [impact contract](../specification/0023-cross-artifact-impact-0.1.md),

@@ -1,0 +1,22 @@
+format: mundane-work-yaml-0.2
+status: Open
+dependencies: []
+relations:
+- relation: relates-to
+  scope: work
+  kind: work-item
+  target: TC-EXAMPLE
+planning:
+  stage: ''
+  type: Problem report
+  condition: ''
+  unlocks: ''
+  statusNote: ''
+id: ISSUE-1
+kind: issue
+title: Alarm behavior is unclear
+body: |2
+
+  ## Observation
+
+  This illustrative issue remains open when its investigation task completes.

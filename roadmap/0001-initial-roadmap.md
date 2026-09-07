@@ -21,7 +21,8 @@ work-item source -------------------> work-item compiler ------+
 This shows component relationships, not a universal command or shared metamodel.
 Requirements, work items, plans and project attribute declarations use YAML.
 Future human-authored artifacts should follow the same syntax unless a concrete
-workflow justifies another format, including native engineering files. Requirement IDs remain human-authored; digests identify revisions.
+workflow justifies another format, including native engineering files. Requirement
+IDs remain human-authored; digests identify revisions.
 
 ## Implemented foundation
 
@@ -135,5 +136,7 @@ workflows. Order: TC-2101 → TC-2102 → TC-2103 → TC-2104 → TC-2105 → TC
 TC-2201 defines consistent YAML presentation and source contracts; TC-2202 migrates
 attribute declarations; TC-2203 replaces TSV verification sources with YAML;
 TC-2204 verifies complete workflows and removes the replaced source representations.
-Generated JSON remains the integration boundary. Follow-up cleanup is scoped after
-migration so only obsolete material is removed.
+Generated JSON remains the integration boundary. TC-2301 completes the follow-up
+cleanup, removing legacy work-item source/output compatibility and obsolete
+material. [Current verification](../research/0075-yaml-authoring-verification.md)
+records the migration and final cleanup gate.

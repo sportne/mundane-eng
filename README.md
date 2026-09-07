@@ -7,7 +7,8 @@ and analyze them. Generated artifacts and reports are rebuildable views.
 Human-authored IDs remain identity. Git records revisions and review history.
 Requirements own their statements and descriptive attributes; plans and work items
 own their assertions and workflow state. Linking does not imply approval, execution
-or requirement satisfaction. Each artifact's source format is an independent choice.
+or requirement satisfaction. Human-authored engineering artifacts use YAML by default,
+with independently owned domain fields and semantics.
 
 ## Current capabilities
 

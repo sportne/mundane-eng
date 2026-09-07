@@ -1,4 +1,0 @@
-Command: python3 experiments/0029-verification-report/run.py
-Input commit: cc987eb
-Exit status: 0
-PASS report: clean committed input archive, identical rebuild/golden, 57 assertions and 2 stale rows, rebaseline updates, invalid-input rejection, escaped prose/math, broken output

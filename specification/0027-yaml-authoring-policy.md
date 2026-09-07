@@ -10,7 +10,9 @@ Use UTF-8, one document, string mapping keys, mappings/sequences and scalar valu
 Comments, block/flow collections and quoted/plain/block strings are supported.
 Reject duplicate keys even when values agree, merge keys, anchors, aliases, explicit
 tags, directives and multiple documents. Do not coerce numbers or booleans to text.
-A field's owning contract determines whether null or a boolean is allowed. Boolean
+A field's owning contract determines whether null or a boolean is allowed. Existing
+requirement profiles retain their quoted/block-string style rules; work items,
+declarations and plans also allow plain string values. Boolean
 fields accept only unquoted lowercase `true` and `false`; text that YAML would type
 as a number, boolean or null must be quoted. Semantic text rules still apply after
 block folding. No defaults or hidden inheritance are introduced by YAML.

@@ -1,53 +1,20 @@
-# Work-item source, compilation and analysis 0.1
+# Work-item compilation and analysis
 
-Status: Maintained legacy source/output contract, implemented through TC-1603–1606.
-New authoring uses [YAML work items 0.2](0019-work-items-yaml-0.2.md); this
-contract remains the compatibility definition for Markdown source and old artifacts.
+Current source: `mundane-work-yaml-0.2`; selection: `mundane-work-set-0.2`;
+compiled output: `mundane-work-items-0.2`; analysis: `mundane-work-analysis-0.1`.
 
-Source: `mundane-work-source-0.1`; selection: `mundane-work-set-0.1`;
-compiled: `mundane-work-items-0.1`; analysis: `mundane-work-analysis-0.1`.
+## Source values and ownership
 
-## Authority and source
+Author each task or issue in YAML as specified by
+[0019](0019-work-items-yaml-0.2.md), with one explicit human ID per card.
+The literal body owns narrative; status, dependencies, relations and planning are
+structured fields. Narrative citations do not create graph edges or change status.
+See the [task example](../examples/work-items/task.yaml) and
+[issue example](../examples/work-items/issue.yaml).
 
-A task is planned work; an issue is a problem report. Each has a human-authored ID.
-Completion/closure is an authored claim, not inferred requirement satisfaction.
-Source cards are authoritative. Indices, inverse links and findings are derived.
-
-Select Markdown with exactly one structured JSON metadata fence after the heading:
-
-````text
-# Task TC-EXAMPLE: Review the alarm
-
-```json
-{"format":"mundane-work-source-0.1","status":"Ready","dependencies":[],"relations":[],"planning":{"stage":"16","type":"Review","condition":"","unlocks":"","statusNote":""}}
-```
-
-## Question
-
-Does the selected alarm requirement explain the intended behavior?
-````
-
-The outer text fence above is illustrative; the source file itself begins with the
-heading and contains only the inner JSON fence. A [complete fixture](../examples/work-items/task.work.md)
-provides exact bytes. The heading is `# Task ID: TITLE` or `# Issue ID: TITLE` and
-owns kind/ID/title. ID uses `[A-Za-z0-9][A-Za-z0-9._-]*`. Title is nonempty, unpadded,
-single-line Unicode. No repeated metadata heading copies are required.
-
-Line 2 is blank; line 3 is exactly three backticks followed by `json`. A closing
-three-backtick line terminates the metadata. The remaining Markdown is preserved
-as opaque prose, including ordinary links and code fences; it must contain nonblank
-content. Nothing in prose creates typed relationships, status changes or executable
-instructions. The compiler does not render Markdown or evaluate source code.
-
-Require UTF-8 without BOM, LF or CRLF termination, no bare CR, NUL or malformed
-Unicode. Metadata is strict JSON: duplicate/unknown keys, invalid types, comments,
-trailing commas and depth over 64 fail. Exact metadata keys are format, status,
-dependencies, relations, planning. Planning has exactly stage, type, condition,
-unlocks, statusNote; each is a string (possibly empty). These are opaque annotations,
-not another dependency/status vocabulary. Migration preserves original prerequisite
-qualifications in condition and exceptional completion wording in statusNote. Only
-structured dependencies control graph analysis. Unlocks is historical explanatory
-wording; inverse edges are derived from dependencies, never parsed from it.
+Planning contains opaque string annotations stage, type, condition, unlocks and
+statusNote. They do not define another dependency/status vocabulary. Completion
+and closure are authored claims, never inferred requirement satisfaction.
 
 Task statuses: Ready, Planned, Conditional, In progress, Complete, Superseded.
 Issue statuses: Open, Closed, Superseded. Issues have no scheduling dependencies.
@@ -77,7 +44,7 @@ invocation root; links in preserved Markdown keep their normal file-relative mea
 ## Explicit selection and compilation
 
 ```json
-{"format":"mundane-work-set-0.1","files":["roadmap/task-1603-compile-and-validate-work-items.md"]}
+{"format":"mundane-work-set-0.2","source":"mundane-work-yaml-0.2","files":["examples/work-items/task.yaml","examples/work-items/issue.yaml"]}
 ```
 
 `mundane-work compile --root DIRECTORY MANIFEST` reads exactly the files in this
@@ -96,17 +63,18 @@ artifactKind is work-items. compiler is `{name,version,contract}`. selection rec
 `{path,sha256}` for the manifest; sources is sorted `{path,sha256}` card snapshots.
 Each item is `{values,location,metadataLocation}`. values contains exactly id, kind
 (task/issue), title, status, dependencies, relations, planning, body. Dependencies
-sort by ID; relations sort by serialized tuple; items sort by ID. Body preserves
-all bytes after the metadata closing newline, decoded as Unicode, including original
-line endings. Thus prose line-ending edits change its recorded value; IDs do not.
+sort by ID; relations sort by serialized tuple; items sort by ID. Body preserves the exact decoded YAML string. Physical CRLF is normalized by YAML;
+escaped CRLF in a quoted string is retained. Comments and presentation changes can
+change source provenance without changing decoded values or human IDs.
 Locations are `{path,line,column}` with one-based code-point coordinates. Item
-location is heading start; metadataLocation is line 4 column 1. Metadata diagnostics
-and relationships use this honest declaration-level point, not fabricated value spans.
+location is the YAML ID value; metadataLocation is the mapping start. Relationship
+analysis uses the declaration-level point; editor navigation owns finer token spans.
 
 Errors are `{code,message,location}`; stable codes include invalid-work-source,
 invalid-work-set, duplicate-work-id, invalid-work-artifact, work-output-limit,
-plus existing input-unavailable/input-changed/invalid-json. Metadata type/shape errors
-point to metadata start; malformed physical input points to line 1. Independent card
+plus existing input-unavailable/input-changed/invalid-json. Semantic type/shape errors
+point to the declaration; YAML syntax/node errors use actual parser marks and
+malformed physical input points to line 1. Independent card
 errors are accumulated (one per failed card); invalid compilation emits items=[]
 with complete=false and diagnostics. Sources may describe successfully read snapshots.
 Operational failures exit 2; invalid source/manifest exit 1; valid output exits 0.
@@ -119,8 +87,8 @@ a delivered prefix is unusable. Help/version are standalone text exceptions.
 `mundane-work analyze --root DIRECTORY --imports MANIFEST COMPILED_WORK_ITEMS`
 uses a separate, explicit `mundane-imports-0.1` manifest with the existing five fields
 scope, path, kind, sha256, dependsOn. Empty imports are useful for a local backlog.
-Support only requirements output 0.1, verification plan output 0.1 and work items
-output 0.1. Existing requirement/plan validators guard those serialized boundaries;
+Support requirements output 0.1/0.2, verification plan output 0.1 with the current
+YAML source contract, and work items output 0.2. Existing requirement/plan validators guard those serialized boundaries;
 work-item validation checks every required field/type/ID/status/location/digest,
 not merely complete=true. Reject unknown kinds/formats, malformed/incomplete inputs,
 duplicate scopes, reserved work scope, bad pins and cyclic/missing build dependencies.
@@ -175,8 +143,8 @@ boundary; generated content is marked derived, never a second status authority.
 
 Use independently declared current work source/output/analysis/CLI versions. No
 existing requirement/plan/link interfaces or source selectors change. Unsupported
-formats fail exactly, without numeric-prefix guesses. Prose/header migration is
-explicit under TC-1606; historic IDs, titles, body bytes and qualifications survive.
+formats fail exactly, without numeric-prefix guesses. Markdown/JSON-fence source, selection 0.1 and compiled work output 0.1 are removed.
+Rebuild from current YAML. No legacy adapter or automatic format fallback exists.
 Replace duplicate manual status rows with generated views, preserving authored
 strategic roadmap narrative. No long-term freeze, tracker/server, attribute dependency,
 remote collaboration or automatic approval is implied.

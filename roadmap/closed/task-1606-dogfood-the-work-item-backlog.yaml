@@ -11,7 +11,7 @@ relations:
 - kind: resource
   relation: evidence
   scope:
-  target: specification/0018-work-items-0.1.md
+  target: specification/0018-work-item-compilation-and-analysis.md
 planning:
   condition: ''
   stage: '16'

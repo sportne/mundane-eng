@@ -1,4 +1,4 @@
-"""Fixture YAML I/O using the existing Ruby build prerequisite, never a production parser."""
+"""Fixture YAML reader (Ruby) and quoted YAML writer; never production parsing."""
 import json
 import subprocess
 

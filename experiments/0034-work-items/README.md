@@ -1,4 +1,10 @@
-# 0034-work-items
+# Work-item regression fixtures
 
-Retained fixtures and tools for the current YAML and compiled-artifact workflows.
-See the [specification index](../../specification/README.md) and run `make verify`.
+Current YAML [task and issue examples](../../examples/work-items/work-items.json)
+produce the compiled, analyzed and rendered golden outputs in `golden/`.
+`make work-verify` checks these alongside dependency, supersession, scoped imports,
+evidence resources, failure handling and parser-free consumers. `make work-yaml-verify`
+checks YAML presentation and the independent structural schema.
+
+Markdown/JSON-fence source and old compiled work output are unsupported. Fixtures
+are reproducible outputs, never an alternative source of task status or narrative.

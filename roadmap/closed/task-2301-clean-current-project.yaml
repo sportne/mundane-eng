@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2301
 kind: task
 title: Clean the Project for the Current YAML Design
-status: Planned
+status: Complete
 dependencies: [TC-2204]
 relations: []
 planning:
@@ -50,5 +50,9 @@ body: |
 
   ## References
 
-  - [Roadmap](0001-initial-roadmap.md)
-  - [Migration evidence](../research/0075-yaml-authoring-verification.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+  - [Migration evidence](../../research/0075-yaml-authoring-verification.md)
+
+  ## Executed evidence
+
+  The final scripts/run-ci-verification.sh passed with exit 0 after cleanup on 2026-09-07. All 14 Java groups, public YAML/source and serialized matrices, golden/seeded/mutation workflows, native packages, nine Node tests, development/installed VS Code hosts and both restored failure injections passed. The work matrix retains original example values and graph/resource/output coverage. Removed 94.7 MiB of obsolete local builds plus legacy work source/output support, unused reports and superseded editor narratives. Current evidence is in research/0075-yaml-authoring-verification.md.

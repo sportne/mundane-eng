@@ -1,1 +1,8 @@
-{"format":"mundane-work-set-0.1","files":["examples/work-items/task.work.md","examples/work-items/issue.work.md"]}
+{
+  "format": "mundane-work-set-0.2",
+  "files": [
+    "examples/work-items/task.yaml",
+    "examples/work-items/issue.yaml"
+  ],
+  "source": "mundane-work-yaml-0.2"
+}

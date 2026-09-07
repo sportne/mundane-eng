@@ -75,12 +75,11 @@ changing authored status or inferring that conditional policy is satisfied.
 
 ## Migration and compatibility
 
-Manifest 0.1 still explicitly selects the old Markdown profile; manifest 0.2 selects
-YAML. There is no extension inference or fallback. Compiled output 0.1 and 0.2 remain
-readable; YAML 0.2 adds real declaration coordinates while retaining semantic values.
-Current analysis remains 0.1. New compiled artifacts, locations and exact-revision
-hashes differ after migration, so rebuild derived imports/pins/views as appropriate.
-The work-item ID remains its identity. Source digests are revision provenance only.
+Only manifest/source/output 0.2 are supported. The Markdown/JSON-fence source,
+manifest 0.1 and compiled work output 0.1 have been removed. Rebuild from current
+YAML and update explicit import pins and derived views. Work CLI is 0.3; analysis
+remains 0.1. There is no extension inference, source adapter or fallback. Human IDs
+remain identity; source digests identify revisions.
 
 Supported typed targets remain work items, requirements and verification plans/
 activities. Evidence resources are local file snapshots, not validated code symbols

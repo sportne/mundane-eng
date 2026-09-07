@@ -37,4 +37,4 @@ body: |2
 
   ## Completion evidence
 
-  Actual VS Code hover tests passed for parsed ranges, requiredness/types/enum values, unsaved declaration documentation rendered literally, invalid declaration clearing and prose exclusion. The complete scripts/run-ci-verification.sh wrapper passed with all editor checks integrated into make verify; both injected failures were rejected and restored. vsce rebuilt the local VSIX and its inventory/link destinations were checked. See research/0070-vscode-editor-verification.md for recorded local evidence and limits.
+  Actual VS Code hover tests passed for parsed ranges, requiredness/types/enum values, unsaved declaration documentation rendered literally, invalid declaration clearing and prose exclusion. The complete scripts/run-ci-verification.sh wrapper passed with all editor checks integrated into make verify; both injected failures were rejected and restored. vsce rebuilt the local VSIX and its inventory/link destinations were checked. See the historical verification record retained in Git for recorded local evidence and limits.
