@@ -1,0 +1,252 @@
+format: gcs-reference-brief-0.1
+status: accepted-for-design-probe
+id: GCS-REFERENCE
+mission: Civilian inspection/survey ground station engineering example
+delivery: simulation-only engineering records; no physical flight, networking to aircraft or procurement
+  execution
+roles:
+  systems: Owns scope, modes, requirements and unresolved boundary decisions.
+  software: Owns GCS intent, UI, recorder and simulator profile.
+  safety: Owns hazard/control reasoning and acceptance adequacy.
+  security: Owns trust assumptions and threat assessment.
+  hardware: Owns purchased equipment, installation and resource budgets.
+  verification: Owns procedures, controlled environments and observations.
+  operations: Owns deployment, commissioning, recovery and incident records.
+context:
+  inside:
+  - operator UI
+  - GCS intent/state service
+  - event recorder
+  - link adapter design
+  - purchased server/switch/UPS assembly design
+  outside:
+  - synthetic autopilot
+  - aircraft dynamics
+  - site mains supply
+  - operator identity provider assumption
+  interfaces:
+  - operator intent and status
+  - logical aircraft telemetry/command
+  - power and purchased-equipment ports
+  - build/evidence resource import
+profile:
+  id: GCS-AP-SIM-0.1
+  implementation: planned synthetic autopilot; no PX4/ArduPilot compatibility assertion
+  protocol: MAVLink 2 common dialect as a design reference, not a wire-conformance claim
+  selected_messages:
+  - HEARTBEAT
+  - GLOBAL_POSITION_INT
+  - COMMAND_LONG
+  - COMMAND_ACK
+  transport: in-memory synthetic events only; no socket or radio backend
+  additional_envelope: fixture session and request IDs are simulator metadata, not MAVLink transaction
+    IDs
+  telemetry_rate_hz: 10
+  heartbeat_rate_hz: 1
+  onboard_loss_response: synthetic transition to LOCAL-FAILSAFE; physical maneuver deliberately unspecified
+  ground_authority: one active operator, one read-only observer, one selected vehicle
+modes:
+- OFFLINE
+- PREFLIGHT
+- MONITORING
+- COMMAND-ENABLED
+- DEGRADED
+- MAINTENANCE
+limits:
+- id: LIM-FRESH
+  value: 500
+  unit: ms
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: A 10 Hz synthetic stream permits five sample periods before freshness is lost. Age >=
+    500 ms is stale; unknown age is unknown, never fresh.
+- id: LIM-CLOCK
+  value: 50
+  unit: ms
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: Use the upper bound of timestamp age including uncertainty. Above 50 ms uncertainty,
+    age is unknown. Negative age or clock reset invalidates the session timing basis.
+- id: LIM-ANNUNCIATE
+  value: 100
+  unit: ms
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: One fixture evaluation/UI cycle to expose stale or unknown state; visibility is measured
+    separately from command gating.
+- id: LIM-HEARTBEAT
+  value: 3000
+  unit: ms
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: Three nominal 1 Hz heartbeat periods; connection health is independent of telemetry
+    freshness.
+- id: LIM-ACK
+  value: 1000
+  unit: ms
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: A deterministic fixture timeout, distinct from aircraft execution completion.
+- id: LIM-RETRIES
+  value: 2
+  unit: count
+  owner: software
+  status: accepted-for-simulation-only
+  rationale: Only for profile-declared idempotent requests within the same validated session; other
+    ambiguous commands require observation and renewed operator intent.
+- id: LIM-UPS
+  value: 600
+  unit: s
+  owner: hardware
+  status: accepted-for-simulation-only
+  rationale: Illustrative ground endurance target for orderly recovery/recording; hardware sufficiency
+    remains unproved.
+- id: LIM-SHUTDOWN
+  value: 30
+  unit: s
+  owner: operations
+  status: accepted-for-simulation-only
+  rationale: Illustrative maximum controlled shutdown after a simulated low-reserve event; reserve
+    adequacy needs hardware evidence.
+obligations:
+- id: OBL-TRACE
+  owner: systems
+  basis: project policy
+  decision: Trace each scenario to requirements, owned controls and planned verification; coverage
+    does not establish execution.
+- id: OBL-REVIEW
+  owner: safety
+  basis: project policy
+  decision: Keep observed results, evidence adequacy and authorized release decisions separate; identify
+    independent review needs.
+- id: OBL-CONFIG
+  owner: operations
+  basis: project policy
+  decision: Bind evidence and decisions to exact selected revisions; distinguish designed, built
+    and deployed configurations.
+- id: OBL-NO-FLIGHT
+  owner: systems
+  basis: delivery boundary
+  decision: No real aircraft operations are authorized by the example; jurisdiction/product-specific
+    obligations must be assessed before field use.
+- id: OBL-SECURITY
+  owner: security
+  basis: project policy
+  decision: No secrets in source; signing protocol guidance is not an implemented identity or authorization
+    service.
+unresolved:
+- id: OPEN-FIELD-LIMITS
+  owner: systems
+  blocks: any real operation
+  question: Determine aircraft envelope, operational site/jurisdiction and applicable product obligations
+    before field thresholds or approvals.
+- id: OPEN-FAILSAFE
+  owner: safety
+  blocks: physical safety claim
+  question: Select a real autopilot/version and prove vehicle-specific fault responses and ground
+    control assumptions.
+- id: OPEN-HARDWARE
+  owner: hardware
+  blocks: procurement and qualified runtime claim
+  question: Select actual parts, ratings, environmental limits, reserve/derating model and inspection
+    evidence.
+- id: OPEN-AUTH
+  owner: security
+  blocks: verified reviewer/operator authorization
+  question: Select trusted identity/role infrastructure; editable names do not prove authority.
+scenarios:
+- id: S01
+  subject: startup
+  accountable: systems
+  contributors:
+  - software
+  - operations
+  expected: Inhibit command issuance until configuration, vehicle, authority and freshness checks
+    are known-good.
+- id: S02
+  subject: stale telemetry
+  accountable: software
+  contributors:
+  - safety
+  - verification
+  expected: At the freshness boundary, inhibit new command intents and show stale/unknown state even
+    while heartbeats continue.
+- id: S03
+  subject: ambiguous command
+  accountable: software
+  contributors:
+  - verification
+  expected: Represent pending, accepted, observed-complete, rejected and unknown separately; late/duplicate
+    ACK cannot authorize another command.
+- id: S04
+  subject: restart/reconnect
+  accountable: software
+  contributors:
+  - operations
+  expected: Discard old queued intents; revalidate identity and timing before a new session can accept
+    new intent.
+- id: S05
+  subject: wrong vehicle/handover
+  accountable: systems
+  contributors:
+  - security
+  - software
+  expected: One active authority; handover revokes the previous authority before granting the new
+    one; wrong-session/vehicle traffic is excluded.
+- id: S06
+  subject: mains and link loss
+  accountable: hardware
+  contributors:
+  - safety
+  - software
+  - operations
+  expected: Ground records the joint fault and inhibits new intent. Onboard response is a separate
+    simulator assumption, not a ground delivery guarantee.
+- id: S07
+  subject: overload/disk/clock
+  accountable: software
+  contributors:
+  - hardware
+  - verification
+  expected: Unknown timing or incomplete recording is explicit; inhibit commands when required state
+    cannot be trusted. Restore never silently claims missing history.
+- id: S08
+  subject: untrusted traffic/dependency
+  accountable: security
+  contributors:
+  - software
+  - safety
+  expected: Reject untrusted synthetic inputs; track an advisory to exact builds and make unresolved
+    exploitability visible.
+- id: S09
+  subject: equipment substitution
+  accountable: hardware
+  contributors:
+  - systems
+  - verification
+  expected: Reassess compatibility, power/runtime and evidence applicability; a matching part label
+    alone does not preserve support.
+- id: S10
+  subject: upgrade/rollback
+  accountable: operations
+  contributors:
+  - software
+  - verification
+  expected: Commission the exact candidate before readiness; failed candidates and rollback compatibility
+    remain recorded.
+- id: S11
+  subject: conflicting evidence/waiver
+  accountable: safety
+  contributors:
+  - verification
+  - operations
+  expected: Missing, failed, inconclusive or stale evidence cannot count as accepted support; exceptions
+    carry exact scope and expiry.
+- id: S12
+  subject: drift/incident
+  accountable: operations
+  contributors:
+  - hardware
+  - software
+  expected: Record actual configuration differences; connect corrective work and new evidence without
+    rewriting old baseline or incident records.

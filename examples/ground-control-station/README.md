@@ -1,7 +1,7 @@
 # Ground control station engineering reference project
 
-Status: planned example and design brief. The task cards linked below are all
-planned. This directory does not yet contain an executable GCS or supported new
+Status: reference-system decisions are recorded; subsequent deliverables follow
+the authoritative card statuses in the generated backlog. This directory does not yet contain an executable GCS or supported new
 artifact schemas. YAML sketches here are proposals for discussion through the
 cards, not inputs accepted by current compilers.
 
@@ -54,7 +54,8 @@ Detailed PCB, mechanical and radio design remain external native resources if
 needed later. Map/time services are explicit external dependencies if the chosen
 scenarios require them; they must not become implicit trusted inputs.
 
-Proposed responsibility boundary to resolve in TC-2401:
+Responsibility boundary accepted for simulation in the
+[TC-2401 decision](decisions/reference-system.md):
 
 - Ground: operator authorization and command intent, vehicle/session identity,
   command lifecycle, trustworthy status presentation, event recording, updates
@@ -275,7 +276,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 
 | Card | Outcome | Prerequisites |
 | --- | --- | --- |
-| [TC-2401](../../roadmap/task-2401-bound-reference-system.yaml) | Define the GCS Reference System and Engineering Obligations | None |
+| [TC-2401](../../roadmap/closed/task-2401-bound-reference-system.yaml) | Define the GCS Reference System and Engineering Obligations | None |
 | [TC-2402](../../roadmap/task-2402-seed-existing-tool-workflow.yaml) | Build the GCS Seed with Existing Artifact Tools | TC-2401 |
 | [TC-2403](../../roadmap/task-2403-define-artifact-interactions.yaml) | Define Artifact Ownership and Common Interaction Contracts | TC-2402 |
 | [TC-2404](../../roadmap/task-2404-design-context-architecture-interfaces.yaml) | Design Context Architecture and Interface Artifacts | TC-2403 |
