@@ -140,3 +140,14 @@ Generated JSON remains the integration boundary. TC-2301 completes the follow-up
 cleanup, removing legacy work-item source/output compatibility and obsolete
 material. [Current verification](../research/0075-yaml-authoring-verification.md)
 records the migration and final cleanup gate.
+
+## Ground control station reference project
+
+The [GCS example plan](../examples/ground-control-station/README.md) defines a
+civilian, simulator-first engineering project and adversarial scenario ledger for
+additional artifact families. TC-2401 through TC-2428 separate boundary and current-tool
+seeding, representation decisions, implementation, semantic change, editor/report
+workflows, integrated verification, distribution and final cleanup. These are planned
+capabilities; the implemented foundation above remains the current support statement.
+The example uses YAML for new authored engineering facts and explicit adapters for
+canonical native resources. It does not establish flight readiness or certification.

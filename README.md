@@ -25,7 +25,10 @@ with independently owned domain fields and semantics.
 Compiled interfaces are versioned separately from source languages and tools.
 Attribute changes and whole-schema changes participate in conservative review
 analysis. Current development is incremental and experimental. ReqIF interchange and
-additional engineering artifact domains remain future work.
+additional engineering artifact domains remain future work. The
+[ground control station reference plan](examples/ground-control-station/README.md)
+uses a civilian UAV example to plan those domains and their authoring, evidence,
+review and change workflows; its task cards describe planned capabilities.
 
 ## Build and try
 

@@ -1,0 +1,64 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2409"
+kind: "task"
+title: "Implement Reproducible Configuration Baselines"
+status: "Planned"
+dependencies: ["TC-2408"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can an engineer reproduce and compare selected configurations while reliably detecting
+  changed or missing resources?
+
+  ## Outcome
+
+  Implement Reproducible Configuration Baselines. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement baseline compilation, explicit selection, pinned resource resolution and
+  configuration comparison. Create a simulator baseline and a proposed hardware baseline
+  with visibly different applicability; report unavailable resources honestly.
+
+  ## Acceptance evidence
+
+  Rebuild the same baseline in a clean checkout, detect modified content behind an
+  unchanged path, reject invalid selections and compare as-designed with as-deployed
+  drift. Existing imports remain compatible or receive an explicit independently versioned
+  migration. Record commands or review steps, input revisions, observed results and
+  remaining limitations in repository evidence linked from this card.
+
+  ## Out of scope
+
+  Automatic live infrastructure discovery and deployment orchestration.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2408](task-2408-design-configurations-baselines.yaml)

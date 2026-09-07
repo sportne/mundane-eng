@@ -1,0 +1,71 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2404"
+kind: "task"
+title: "Design Context Architecture and Interface Artifacts"
+status: "Planned"
+dependencies: ["TC-2403"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  How can engineers represent operating context, allocations and interface behavior
+  precisely enough to review stale telemetry and ambiguous commands?
+
+  ## Outcome
+
+  Design Context Architecture and Interface Artifacts. The result is demonstrated against
+  the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Work through scenarios, modes, functions, software components, deployment nodes,
+  allocations and design rationale in YAML. Specify command, telemetry and physical port
+  interface ownership, units, timing, state transitions, freshness, authentication
+  assumptions, acknowledgement versus completion, version negotiation and ground/onboard
+  responsibility. Select separate artifacts only where ownership or analysis requires
+  them. Publish draft examples and the representation/interaction decision before
+  dependent implementation. If the worked case reveals unrelated contracts, split the card
+  before implementation and preserve this decision trail.
+
+  ## Acceptance evidence
+
+  Draft schemas and positive/negative fixtures express startup, stale data with a live
+  heartbeat, late acknowledgement and operator handover. An allocation view exposes an
+  unallocated function and incompatible interface versions. Decision records explain
+  chosen fault behavior and alternatives; source records own facts shown in diagrams.
+  Record commands or review steps, input revisions, observed results and remaining
+  limitations in repository evidence linked from this card.
+
+  ## Out of scope
+
+  Implementing a flight controller or inventing a replacement for MAVLink.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2403](task-2403-define-artifact-interactions.yaml)

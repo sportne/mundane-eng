@@ -1,0 +1,68 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2411"
+kind: "task"
+title: "Implement Procedures Runs and Evidence Queries"
+status: "Planned"
+dependencies: ["TC-2410", "TC-2405", "TC-2409"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can an engineer execute or import verification and inspect trustworthy evidence for the
+  exact subject revision?
+
+  ## Outcome
+
+  Implement Procedures Runs and Evidence Queries. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement approved procedure and evidence contracts and a bounded simulator/test-runner
+  adapter. Execute deterministic simulated faults and import a manual wiring inspection
+  fixture clearly labelled synthetic. Preserve raw-result provenance and separate tool
+  observations from reviewer assessment.
+
+  ## Acceptance evidence
+
+  Compile a procedure, execute/import a run, inspect failure evidence and query support
+  for the exact requirement/configuration revision. Tampered/missing logs, wrong builds,
+  changed procedures and inconclusive outcomes do not produce supported status. Simulated
+  evidence is clearly scoped and never presented as a real hardware test. Record commands
+  or review steps, input revisions, observed results and remaining limitations in
+  repository evidence linked from this card.
+
+  ## Out of scope
+
+  Real flight tests and automatic engineering approval.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2410](task-2410-design-verification-evidence.yaml)
+  - [TC-2405](task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](task-2409-implement-configurations-baselines.yaml)

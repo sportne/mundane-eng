@@ -1,0 +1,65 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2405"
+kind: "task"
+title: "Implement Context Architecture and Interface Workflows"
+status: "Planned"
+dependencies: ["TC-2404"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can the accepted architecture and interface design support actual authoring, validation
+  and source-linked inspection of the reference station?
+
+  ## Outcome
+
+  Implement Context Architecture and Interface Workflows. The result is demonstrated
+  against the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement the approved bounded YAML contracts, compiled outputs, scoped linking and
+  domain checks; populate the reference topology and selected protocol profile. Generate
+  context, allocation and interface views with source navigation and decision rationale.
+
+  ## Acceptance evidence
+
+  Run valid reference fixtures plus incompatible ports, missing allocations, invalid mode
+  transitions and unsupported protocol profiles. Demonstrate editing freshness policy,
+  inspecting its owning interface and rebuilding views deterministically. Existing
+  requirements-only consumers still work independently. Record commands or review steps,
+  input revisions, observed results and remaining limitations in repository evidence
+  linked from this card.
+
+  ## Out of scope
+
+  General graphical architecture authoring or arbitrary protocol emulation.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2404](task-2404-design-context-architecture-interfaces.yaml)

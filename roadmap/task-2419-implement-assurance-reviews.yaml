@@ -1,0 +1,69 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2419"
+kind: "task"
+title: "Implement Assurance and Review Readiness Queries"
+status: "Planned"
+dependencies: ["TC-2418", "TC-2407", "TC-2411", "TC-2417"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can a reviewer distinguish current support, disagreement, missing evidence and expired
+  exceptions for a configuration-specific claim?
+
+  ## Outcome
+
+  Implement Assurance and Review Readiness Queries. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement argument/review/waiver contracts and bounded structural/readiness checks.
+  Populate a small safety claim with explicit reasoning and unresolved evidence needs, an
+  independent review fixture and a time-scoped exception. Preserve human decisions
+  separately from derived readiness.
+
+  ## Acceptance evidence
+
+  Report supported, unsupported, disputed, stale and waived states without collapsing them
+  into pass. Exercise changed evidence, circular support, missing identity assurance,
+  wrong configuration and expired exceptions at an explicit evaluation time. Explain every
+  blocked obligation and navigate to its source. Record commands or review steps, input
+  revisions, observed results and remaining limitations in repository evidence linked from
+  this card.
+
+  ## Out of scope
+
+  Automatic release authorization and professional judgment replacement.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2418](task-2418-design-assurance-reviews.yaml)
+  - [TC-2407](task-2407-implement-safety-analysis.yaml)
+  - [TC-2411](task-2411-implement-verification-evidence.yaml)
+  - [TC-2417](task-2417-implement-software-security-provenance.yaml)

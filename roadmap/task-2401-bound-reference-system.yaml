@@ -1,0 +1,71 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2401"
+kind: "task"
+title: "Define the GCS Reference System and Engineering Obligations"
+status: "Planned"
+dependencies: []
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Which operational boundary, responsibilities and obligations make the reference station
+  a useful and bounded engineering probe?
+
+  ## Outcome
+
+  Define the GCS Reference System and Engineering Obligations. The result is demonstrated
+  against the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Define civilian inspection/survey mission, operators, external stakeholders, system
+  boundary, operating modes and simulator-only delivery. Allocate ground and onboard
+  responsibilities, command authority and fault responses. Record assumptions about the
+  selected autopilot and protocol version, applicable obligations and explicit tailoring;
+  select concrete operating limits and acceptance thresholds with rationale. Publish draft
+  examples and the representation/interaction decision before dependent implementation. If
+  the worked case reveals unrelated contracts, split the card before implementation and
+  preserve this decision trail.
+
+  ## Acceptance evidence
+
+  A context diagram and responsibility matrix cover every scenario in the reference plan.
+  Each safety-significant threshold is justified or explicitly unresolved with an owner;
+  unresolved decisions cannot silently become accepted requirements. Document why any
+  standard applies before claiming an obligation. Record commands or review steps, input
+  revisions, observed results and remaining limitations in repository evidence linked from
+  this card.
+
+  ## Out of scope
+
+  Flight authorization, certification claims, real aircraft control and arbitrary generic
+  UAV support.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)

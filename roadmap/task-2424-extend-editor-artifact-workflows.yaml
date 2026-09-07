@@ -1,0 +1,75 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2424"
+kind: "task"
+title: "Extend Editor Authoring for the Reference Artifacts"
+status: "Planned"
+dependencies: ["TC-2405", "TC-2407", "TC-2409", "TC-2411", "TC-2413", "TC-2415", "TC-2417", "TC-2419", "TC-2421", "TC-2423"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can engineers author and navigate the additional artifacts in the installed editor with
+  accurate unsaved-state diagnostics?
+
+  ## Outcome
+
+  Extend Editor Authoring for the Reference Artifacts. The result is demonstrated against
+  the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Extend explicit project selection and editor bridges for implemented artifact families
+  with YAML diagnostics, typed completion, hover, source navigation and safe formatting
+  where supported. Use domain schemas and compiled indexes; surface exact-revision versus
+  working-copy state and links to derived views.
+
+  ## Acceptance evidence
+
+  Installed-editor scenarios author the worked chain, resolve cross-file references,
+  navigate an imported target and edit an unsaved timing/power value. Verify diagnostics
+  refresh without stale results, unavailable imports recover and formatting preserves
+  content. Publish a per-family capability table with explicit limitations. Record
+  commands or review steps, input revisions, observed results and remaining limitations in
+  repository evidence linked from this card.
+
+  ## Out of scope
+
+  A new diagram editor or mandatory all-domain installation for requirements authoring.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2405](task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2407](task-2407-implement-safety-analysis.yaml)
+  - [TC-2409](task-2409-implement-configurations-baselines.yaml)
+  - [TC-2411](task-2411-implement-verification-evidence.yaml)
+  - [TC-2413](task-2413-implement-equipment-connectivity.yaml)
+  - [TC-2415](task-2415-implement-budgets-reliability.yaml)
+  - [TC-2417](task-2417-implement-software-security-provenance.yaml)
+  - [TC-2419](task-2419-implement-assurance-reviews.yaml)
+  - [TC-2421](task-2421-implement-release-operations.yaml)
+  - [TC-2423](task-2423-implement-semantic-change-impact.yaml)

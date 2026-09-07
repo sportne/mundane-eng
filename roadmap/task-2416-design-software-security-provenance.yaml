@@ -1,0 +1,73 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2416"
+kind: "task"
+title: "Design Software Provenance and Security Artifacts"
+status: "Planned"
+dependencies: ["TC-2403", "TC-2404", "TC-2408"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  How should native software provenance and authored security judgments connect to
+  affected configurations and safety controls?
+
+  ## Outcome
+
+  Design Software Provenance and Security Artifacts. The result is demonstrated against
+  the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Define adapters for source revision, build recipes, binaries, dependencies/SBOMs and
+  test results while retaining native canonical formats. Model trust boundaries, threats,
+  controls, vulnerability assessments and mitigations, including operator authority,
+  signing/replay and update integrity. Link security findings to affected configurations
+  and safety consequences. Publish draft examples and the representation/interaction
+  decision before dependent implementation. If the worked case reveals unrelated
+  contracts, split the card before implementation and preserve this decision trail.
+
+  ## Acceptance evidence
+
+  Worked examples connect a build to its sources/dependencies and a vulnerable dependency
+  to a deployed configuration. Distinguish threat, vulnerability, exploitability judgment
+  and safety hazard. Specify offline fixtures, tool versions, unknown scan results, secret
+  exclusion and external resource identity. Record commands or review steps, input
+  revisions, observed results and remaining limitations in repository evidence linked from
+  this card.
+
+  ## Out of scope
+
+  Building a new package manager or vulnerability scanner and keeping private keys in
+  source.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2403](task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](task-2404-design-context-architecture-interfaces.yaml)
+  - [TC-2408](task-2408-design-configurations-baselines.yaml)

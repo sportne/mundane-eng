@@ -1,0 +1,72 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2403"
+kind: "task"
+title: "Define Artifact Ownership and Common Interaction Contracts"
+status: "Planned"
+dependencies: ["TC-2402"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Which artifact owns each engineering fact, and how can independent tools exchange and
+  inspect those facts without duplicating authority?
+
+  ## Outcome
+
+  Define Artifact Ownership and Common Interaction Contracts. The result is demonstrated
+  against the bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Use the worked chain to decide ownership, independent component boundaries, human IDs,
+  scoped typed references, revision pins, source locations and explicit selection. Define
+  YAML conventions, compiled envelopes, native-file adapters and diagnostic expectations.
+  Prototype author, compile, resolve, inspect, compare and report interactions on paper;
+  classify domain relationships without requiring a universal model. Publish draft
+  examples and the representation/interaction decision before dependent implementation. If
+  the worked case reveals unrelated contracts, split the card before implementation and
+  preserve this decision trail.
+
+  ## Acceptance evidence
+
+  Publish an ownership matrix and version decisions for every candidate family in the
+  plan. Show identity versus revision, two projects with colliding local IDs, missing
+  imports, a changed external resource and independent compilation. Reuse existing
+  contracts where sufficient; record rejected representations and the cost of each
+  proposed extension. Record commands or review steps, input revisions, observed results
+  and remaining limitations in repository evidence linked from this card.
+
+  ## Out of scope
+
+  Implementing a universal database, automatic discovery or parallel legacy authored
+  representations.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2402](task-2402-seed-existing-tool-workflow.yaml)

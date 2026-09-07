@@ -1,0 +1,66 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2413"
+kind: "task"
+title: "Implement Equipment Selection and Wiring Views"
+status: "Planned"
+dependencies: ["TC-2412", "TC-2405", "TC-2409"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Implementation"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Can an engineer change equipment or wiring once and obtain checked, consistent derived
+  views?
+
+  ## Outcome
+
+  Implement Equipment Selection and Wiring Views. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Implement selected equipment/connectivity contracts, checks and deterministic derived
+  BOM/wiring views. Populate the bounded ground hardware assembly and trace source
+  evidence for selected ratings; represent installation versus design where needed.
+
+  ## Acceptance evidence
+
+  Change one part or cable and rebuild both views from the same source. Fixtures detect
+  the selected incompatible port, missing connection and stale datasheet cases. Navigate
+  from a diagram connection to its authored source and from installed instance to baseline
+  selection. Record commands or review steps, input revisions, observed results and
+  remaining limitations in repository evidence linked from this card.
+
+  ## Out of scope
+
+  A full electrical CAD editor or purchasing integration.
+
+  ## Compatibility and affected components
+
+  Follow existing human-ID, explicit-import and independently versioned component
+  conventions. Human-authored engineering facts use YAML; native code, CAD, build and
+  result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Close only after the stated outcome and acceptance evidence are reproducible. Keep
+  unsupported behavior and unresolved engineering judgments explicit. Revise or split
+  scope if it needs an unapproved domain model; do not fill gaps with successful-looking
+  fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2412](task-2412-design-equipment-connectivity.yaml)
+  - [TC-2405](task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](task-2409-implement-configurations-baselines.yaml)

@@ -1,0 +1,80 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2422"
+kind: "task"
+title: "Design Semantic Change and Evidence Invalidation"
+status: "Planned"
+dependencies: ["TC-2403", "TC-2404", "TC-2406", "TC-2408", "TC-2410", "TC-2412", "TC-2414", "TC-2416", "TC-2418", "TC-2420"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  Which changes invalidate which engineering support, and how should those effects differ
+  from prospective graph reachability?
+
+  ## Outcome
+
+  Design Semantic Change and Evidence Invalidation. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Define domain-owned change classifications and impact edges for each approved artifact
+  family. Separate prospective reachability from computed stale assessments and from
+  accepted dispositions. Specify baseline diff semantics, conservative handling of unknown
+  changes and explanations for source-to-result invalidation. Publish draft examples and
+  the representation/interaction decision before dependent implementation. If the worked
+  case reveals unrelated contracts, split the card before implementation and preserve this
+  decision trail.
+
+  ## Acceptance evidence
+
+  A matrix predicts effects of changing telemetry timing, server power, a cable,
+  binary/dependency, procedure and reviewer decision. Irrelevant formatting changes have
+  documented behavior; unchanged IDs cannot conceal changed support. Keep existing
+  deterministic prospective query semantics independently available. Record commands or
+  review steps, input revisions, observed results and remaining limitations in repository
+  evidence linked from this card.
+
+  ## Out of scope
+
+  Inferring satisfaction from graph connectivity or requiring every edit to invalidate
+  everything.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2403](task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](task-2404-design-context-architecture-interfaces.yaml)
+  - [TC-2406](task-2406-design-safety-analysis.yaml)
+  - [TC-2408](task-2408-design-configurations-baselines.yaml)
+  - [TC-2410](task-2410-design-verification-evidence.yaml)
+  - [TC-2412](task-2412-design-equipment-connectivity.yaml)
+  - [TC-2414](task-2414-design-quantities-budgets-reliability.yaml)
+  - [TC-2416](task-2416-design-software-security-provenance.yaml)
+  - [TC-2418](task-2418-design-assurance-reviews.yaml)
+  - [TC-2420](task-2420-design-release-operations.yaml)

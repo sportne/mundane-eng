@@ -1,0 +1,70 @@
+format: "mundane-work-yaml-0.2"
+id: "TC-2408"
+kind: "task"
+title: "Design Configuration Baseline and Change Records"
+status: "Planned"
+dependencies: ["TC-2403"]
+relations: []
+planning:
+  condition: ""
+  stage: "24"
+  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  type: "Design"
+  unlocks: "See explicit dependent cards in the generated index."
+body: |2
+
+  ## Question
+
+  How should a baseline identify exactly what was designed, built and deployed, including
+  external resources and variant applicability?
+
+  ## Outcome
+
+  Design Configuration Baseline and Change Records. The result is demonstrated against the
+  bounded reference project rather than asserted as generic product support.
+
+  ## Work
+
+  Define selected configurations, variant applicability, immutable baseline manifests and
+  change proposals. Separate as-designed, as-built and as-deployed identities. Pin source,
+  compiled artifacts, code, native resources and tools; specify partial or unavailable
+  resources, digest scope and retention behavior. Publish draft examples and the
+  representation/interaction decision before dependent implementation. If the worked case
+  reveals unrelated contracts, split the card before implementation and preserve this
+  decision trail.
+
+  ## Acceptance evidence
+
+  Worked manifests distinguish simulated and intended field configurations, a server
+  substitution and an unchanged human ID with changed content. Define deterministic
+  baseline comparison and reject contradictory selections, stale pins and ambiguous
+  artifact versions. Explain how reviewer decisions attach to exact subjects. Record
+  commands or review steps, input revisions, observed results and remaining limitations in
+  repository evidence linked from this card.
+
+  ## Out of scope
+
+  A general asset database, secret storage and copying all binaries into Git.
+
+  ## Compatibility and affected components
+
+  This is a design task: proposed YAML and compiled contracts are non-normative until
+  implemented. Follow existing human-ID, explicit-import and independently versioned
+  component conventions. Human-authored engineering facts use YAML; native code, CAD,
+  build and result formats retain their owners through explicit adapters. Identify actual
+  source/schema, compiled-format, CLI, editor, report and distribution changes before
+  implementation; do not silently widen existing contracts.
+
+  ## Completion decision
+
+  Accept the representation and interaction design only when its positive and failure
+  examples resolve the stated question. Keep unsupported behavior and unresolved
+  engineering judgments explicit. Revise or split scope if it needs an unapproved domain
+  model; do not fill gaps with successful-looking fixture values.
+
+  ## References
+
+  - [GCS reference project plan](../examples/ground-control-station/README.md)
+  - [Strategic roadmap](0001-initial-roadmap.md)
+  - [Task-card workflow](0002-task-card-index.md)
+  - [TC-2403](task-2403-define-artifact-interactions.yaml)
