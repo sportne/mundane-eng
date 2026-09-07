@@ -1,4 +1,4 @@
-# Mundane-Req
+# Mundane-Eng
 
 A text-based engineering tooling monorepo. Requirements, work items and verification
 plans are authored in checked-in source; independent tools compile, validate, link
@@ -9,6 +9,11 @@ Requirements own their statements and descriptive attributes; plans and work ite
 own their assertions and workflow state. Linking does not imply approval, execution
 or requirement satisfaction. Human-authored engineering artifacts use YAML by default,
 with independently owned domain fields and semantics.
+
+The repository is [mundane-eng](https://github.com/sportne/mundane-eng).
+Requirement-specific commands retain the `mundanereq-*` prefix; broader engineering
+tools use `mundane-*`. Existing format identifiers, Java packages and editor
+extension identifiers remain compatible.
 
 ## Current capabilities
 

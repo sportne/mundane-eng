@@ -5,8 +5,9 @@ Status: Living, nonnormative project foundation
 ## Purpose
 
 Develop a text-based engineering tooling ecosystem whose source remains readable,
-reviewable and useful in ordinary Git workflows. Mundane-Req is the requirements
-component; verification plans and work items have separate models and tools.
+reviewable and useful in ordinary Git workflows. Mundane-Eng is the engineering
+platform; requirements, verification plans and work items have separate models
+and tools.
 Current syntax and command behavior are defined by the [specification index](README.md).
 
 ## Authority and identity

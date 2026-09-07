@@ -7,7 +7,7 @@
   "license": "BSD-3-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sportne/mundane-req.git"
+    "url": "https://github.com/sportne/mundane-eng.git"
   },
   "engines": {
     "vscode": "^1.109.0",

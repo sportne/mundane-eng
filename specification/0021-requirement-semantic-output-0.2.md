@@ -1,7 +1,7 @@
 # Requirement semantic output 0.2
 
 Normative experimental addendum to [0012](0012-requirement-semantic-output-0.1.md).
-YAML 0.4 emits mundane-req requirements output `mundanereq-requirements-0.2` and
+YAML 0.4 emits requirements output `mundanereq-requirements-0.2` and
 compile-cli-0.2. Other source profiles still emit output 0.1 and their existing
 producer/CLI metadata. Source and tool versions are independently declared.
 

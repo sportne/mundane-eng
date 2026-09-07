@@ -8,7 +8,7 @@ cards, not inputs accepted by current compilers.
 ## Purpose and success criteria
 
 Use one civilian inspection/survey UAV ground control station to develop the
-missing engineering artifact and workflow capabilities in Mundane-Req. The
+missing engineering artifact and workflow capabilities in Mundane-Eng. The
 example must connect operational intent to architecture, interfaces, safety and
 security reasoning, hardware selection, verification evidence and the exact
 configuration being reviewed or operated.
