@@ -1,0 +1,451 @@
+{
+  "type": "object",
+  "properties": {
+    "format": {
+      "const": "mundane-budget-yaml-0.1"
+    },
+    "id": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+    },
+    "configuration": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+        },
+        "kind": {
+          "const": "baseline"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+        }
+      },
+      "required": [
+        "scope",
+        "kind",
+        "id"
+      ],
+      "additionalProperties": false
+    },
+    "equipmentScope": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+    },
+    "reviewedEquipmentSha256": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "[0-9a-f]{64}"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "1",
+              "W",
+              "kW",
+              "Wh",
+              "kWh",
+              "s",
+              "ms",
+              "h",
+              "Mbps",
+              "bps",
+              "GB",
+              "MB",
+              "bit"
+            ]
+          },
+          "min": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "max": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1000000000000
+          },
+          "basis": {
+            "type": "string",
+            "enum": [
+              "assumption",
+              "manufacturer-rating",
+              "measurement"
+            ]
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[0-9a-f]{64}"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "rating": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "instance": {
+                    "type": "object",
+                    "properties": {
+                      "scope": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                      },
+                      "kind": {
+                        "const": "instance"
+                      },
+                      "id": {
+                        "type": "string",
+                        "minLength": 1,
+                        "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                      }
+                    },
+                    "required": [
+                      "scope",
+                      "kind",
+                      "id"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "rating": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                  }
+                },
+                "required": [
+                  "instance",
+                  "rating"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "unit",
+          "min",
+          "max",
+          "basis",
+          "explanation",
+          "evidence",
+          "rating"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "formulas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "op": {
+            "type": "string",
+            "enum": [
+              "sum",
+              "product",
+              "ratio",
+              "difference"
+            ]
+          },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+            },
+            "maxItems": 1000
+          },
+          "unit": {
+            "type": "string",
+            "enum": [
+              "1",
+              "W",
+              "kW",
+              "Wh",
+              "kWh",
+              "s",
+              "ms",
+              "h",
+              "Mbps",
+              "bps",
+              "GB",
+              "MB",
+              "bit"
+            ]
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "op",
+          "inputs",
+          "unit",
+          "explanation"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "capacity",
+              "minimum",
+              "peak-power"
+            ]
+          },
+          "actual": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "limit": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "relation": {
+            "type": "string",
+            "enum": [
+              "at-most",
+              "at-least"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "kind",
+          "actual",
+          "limit",
+          "relation"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "reliability": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+          },
+          "independence": {
+            "type": "string",
+            "enum": [
+              "assumed",
+              "supported",
+              "unknown"
+            ]
+          },
+          "evidence": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "path": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "sha256": {
+                    "type": "string",
+                    "minLength": 1,
+                    "pattern": "[0-9a-f]{64}"
+                  }
+                },
+                "required": [
+                  "path",
+                  "sha256"
+                ],
+                "additionalProperties": false
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "members": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "instance": {
+                  "type": "object",
+                  "properties": {
+                    "scope": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                    },
+                    "kind": {
+                      "const": "instance"
+                    },
+                    "id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                    }
+                  },
+                  "required": [
+                    "scope",
+                    "kind",
+                    "id"
+                  ],
+                  "additionalProperties": false
+                },
+                "mtbf": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                },
+                "repair": {
+                  "type": "string",
+                  "minLength": 1,
+                  "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+                }
+              },
+              "required": [
+                "instance",
+                "mtbf",
+                "repair"
+              ],
+              "additionalProperties": false
+            },
+            "maxItems": 1000
+          },
+          "sharedCause": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              },
+              "mtbf": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              },
+              "repair": {
+                "type": "string",
+                "minLength": 1,
+                "pattern": "[A-Za-z0-9][A-Za-z0-9._-]*"
+              }
+            },
+            "required": [
+              "id",
+              "mtbf",
+              "repair"
+            ],
+            "additionalProperties": false
+          },
+          "explanation": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "independence",
+          "evidence",
+          "members",
+          "sharedCause",
+          "explanation"
+        ],
+        "additionalProperties": false
+      },
+      "maxItems": 1000
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "maxItems": 1000
+    }
+  },
+  "required": [
+    "format",
+    "id",
+    "configuration",
+    "equipmentScope",
+    "reviewedEquipmentSha256",
+    "parameters",
+    "formulas",
+    "checks",
+    "reliability",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

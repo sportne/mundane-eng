@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2414"
 kind: "task"
 title: "Design Quantities Budgets and Reliability Analyses"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2403", "TC-2408", "TC-2412"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -64,9 +64,15 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
-  - [TC-2412](closed/task-2412-design-equipment-connectivity.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](../closed/task-2403-define-artifact-interactions.yaml)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+  - [TC-2412](../closed/task-2412-design-equipment-connectivity.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. The [budget decision](../../examples/ground-control-station/design/budget.md), closed draft schema and illustrative YAML define bounded quantities, evidence/basis, selected ratings, uncertainty intervals, formula evaluation, applicability, margins and conditional availability. Power, UPS usable energy/runtime, network/latency, compute fractions and storage have explicit worked cases. A shared power cause is included once; independence assumptions and unavailable judgments remain explicit.
+
+  Ran `check-budget.py`: PASS independent Decimal/dimensional reference calculations (90 W, 86.4 Wh, 0.96 h, 15 Mbps, 7.2 GB), omitted peak identification, incompatible dimensions, failed margins after a 200 W host substitution and sensitivity to shared-power repair time. Reference results are under `build/gcs-design/budget-reference.json`; the check is included in `make verify`. The compiled implementation must additionally exercise interval uncertainty, cyclic/missing inputs, provenance/staleness and parser removal. No certified hardware or numerical safety claim is made.

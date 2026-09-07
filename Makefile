@@ -306,3 +306,8 @@ native-equipment: test-equipment
 equipment-verify: native-equipment configuration-verify equipment-design-verify
 	build/schema-check-venv/bin/python scripts/check-equipment-workflow.py
 verify: equipment-verify
+
+.PHONY: budget-design-verify
+budget-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-budget.py
+verify: budget-design-verify

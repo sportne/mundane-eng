@@ -62,6 +62,6 @@ body: |2
   - [GCS reference project plan](../examples/ground-control-station/README.md)
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2414](task-2414-design-quantities-budgets-reliability.yaml)
+  - [TC-2414](closed/task-2414-design-quantities-budgets-reliability.yaml)
   - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
   - [TC-2413](closed/task-2413-implement-equipment-connectivity.yaml)
