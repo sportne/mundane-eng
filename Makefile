@@ -221,4 +221,5 @@ verify: gcs-seed-verify
 gcs-design-verify: yaml-schema-verify gcs-seed-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-common.py
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-architecture.py
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-configuration.py
 verify: gcs-design-verify

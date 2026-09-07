@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2408"
 kind: "task"
 title: "Design Configuration Baseline and Change Records"
-status: "Planned"
+status: "Complete"
 dependencies: ["TC-2403"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with reproducible example and decision evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -64,7 +64,13 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](task-2403-define-artifact-interactions.yaml)
+
+  ## Completion evidence
+
+  Completed on 2026-09-07. Five distinct stage/variant manifests, thirteen design cases, source mappings and exact revision comparisons passed. The combined workflow passed locally and the full project gate passed in a fresh source export. Physical observations, release approval and maintained baseline publication remain separate work.
+
+  - [Task evidence](../../examples/ground-control-station/design/configuration.md)

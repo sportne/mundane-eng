@@ -1,15 +1,19 @@
 # Ground control station engineering reference project
 
-Status: reference-system decisions are recorded; subsequent deliverables follow
-the authoritative card statuses in the generated backlog. The [runnable seed](seed/README.md) uses current tools; this directory does not
-yet contain an executable GCS or maintained new artifact schemas. YAML sketches here are proposals for discussion through the
-cards, not inputs accepted by current compilers.
+The example now includes a runnable workflow using maintained tools and bounded
+artifact designs checked by local prototypes. It does not contain an executable GCS
+or production support for the new architecture/configuration formats. The generated
+backlog records each card's current status.
 
-Completed deliverables: [reference-system decision](decisions/reference-system.md)
-and [current-tool seed](seed/README.md), plus the
-[artifact ownership decision](design/ownership.md) and
-[architecture/interface design](design/architecture.md). New artifact designs remain separate from
-maintained compiler support.
+The completed deliverables are the [reference-system decision](decisions/reference-system.md),
+[current-tool seed](seed/README.md), [ownership decision](design/ownership.md),
+[architecture/interface design](design/architecture.md), and
+[configuration/baseline design](design/configuration.md).
+
+Run `make gcs-design-verify` from the repository root to rebuild and check the seed
+and design probes. The seed reports appear under `build/gcs-seed`; allocation,
+interface and configuration inspection reports appear under `build/gcs-design`.
+See the linked guides for prerequisites, acceptance evidence and remaining limits.
 
 ## Purpose and success criteria
 
@@ -137,78 +141,21 @@ resource is an observable condition, never successful evidence.
 
 ## Worked representation: trustworthy telemetry
 
-These fragments deliberately have no production `format` identifier. They explore
-ownership and linking, not a prematurely fixed schema. Angle-bracket values are
-unresolved placeholders; production compilers must not accept them as evidence.
-TC-2402 will first express the requirement and plan in their actual existing schemas;
-TC-2403 and the domain design cards decide the proposed reference/revision syntax.
+The accepted [architecture design](design/architecture.md) now provides concrete
+YAML for telemetry, command and heartbeat interfaces, allocations, deployment, modes
+and rationale, with positive and negative schema/link cases. The
+[configuration design](design/configuration.md) binds source and compiled artifacts
+to exact revisions and distinguishes designed, built and deployed configurations.
 
-```yaml
-# Proposed interface record; threshold selected and justified by TC-2401.
-id: IF-TELEMETRY
-producer: {scope: aircraft, kind: component, id: CMP-AUTOPILOT}
-consumer: {scope: ground, kind: component, id: CMP-GCS}
-freshness:
-  maximum_age: {value: "<selected threshold>", unit: ms}
-  clock_basis: "<defined timestamp and clock uncertainty policy>"
-  on_unknown_age: mark-state-unknown
-rationale: {scope: ground, kind: decision, id: DEC-FRESHNESS}
-```
+Use `make gcs-design-verify` to regenerate the runnable current-tool seed and inspect
+the local draft designs. The reports distinguish planned coverage, missing support,
+invalid design records and unresolved resource availability. They do not report a
+vehicle test execution or an approved release.
 
-The requirement states the required behavior; the interface owns timestamp and
-freshness interpretation. A decision owns the rationale for the selected threshold.
-Changing that threshold should initiate reassessment of both control reasoning and
-verification criteria, even if the interface's human ID remains unchanged.
-
-```yaml
-# Proposed safety records, shown together only to illustrate relationships.
-hazard:
-  id: HAZ-STALE-STATE
-  context: operator issues intent using obsolete aircraft state
-  control: {scope: ground, kind: safety-control, id: CTL-FRESHNESS}
-control:
-  id: CTL-FRESHNESS
-  requirement: {scope: ground, kind: requirement, id: REQ-STALE-STATE}
-  interface: {scope: ground, kind: interface, id: IF-TELEMETRY}
-  verification: {scope: ground, kind: verification-procedure, id: PROC-STALE}
-```
-
-```yaml
-# Proposed authored procedure, distinct from a verification-plan activity.
-id: PROC-STALE
-verifies: {scope: ground, kind: requirement, id: REQ-STALE-STATE}
-environment: simulated-aircraft-link
-steps:
-  - action: deliver telemetry with increasing age while the session remains live
-  - action: observe displayed freshness and command eligibility
-expected:
-  - criterion: state becomes visibly stale or unknown at the selected boundary
-  - criterion: command eligibility follows the reviewed mode/control policy
-boundary_cases: [just-before-limit, at-limit, beyond-limit, unknown-clock-age]
-```
-
-```yaml
-# Proposed imported run metadata; these placeholders describe fields, not a real run.
-id: RUN-STALE-001
-procedure:
-  ref: {scope: ground, kind: verification-procedure, id: PROC-STALE}
-  digest: "<actual procedure content digest>"
-configuration:
-  ref: {scope: ground, kind: baseline, id: BL-SIM-001}
-  digest: "<actual baseline content digest>"
-producer: {tool: "<runner>", version: "<pinned version>"}
-outcome: inconclusive
-evidence:
-  - uri: "<explicit log resource>"
-    digest: "<actual log content digest>"
-limitations: [simulation-only, acceptance-threshold-not-yet-selected]
-```
-
-A reviewer inspects the observations and applicability before deciding whether they
-support a claim. The reviewer decision names exact subject/evidence revisions and
-its identity assurance; typing a person's name into YAML does not prove approval.
-A later passing run supplements the failed/inconclusive history rather than
-rewriting it. Release readiness consumes those decisions and unresolved obligations.
+Procedure/run/evidence schemas remain the responsibility of TC-2410. Their design
+must link the exact requirement, interface and configuration revisions to observations
+and an independently recorded adequacy decision. Current sketches no longer duplicate
+those future schemas here.
 
 ## Worked representation: power and substitution
 
@@ -289,7 +236,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2405](../../roadmap/task-2405-implement-context-architecture-interfaces.yaml) | Implement Context Architecture and Interface Workflows | TC-2404 |
 | [TC-2406](../../roadmap/task-2406-design-safety-analysis.yaml) | Design Hazard Control and Failure Analysis Artifacts | TC-2403, TC-2404 |
 | [TC-2407](../../roadmap/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
-| [TC-2408](../../roadmap/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |
+| [TC-2408](../../roadmap/closed/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |
 | [TC-2409](../../roadmap/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
 | [TC-2410](../../roadmap/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |
 | [TC-2411](../../roadmap/task-2411-implement-verification-evidence.yaml) | Implement Procedures Runs and Evidence Queries | TC-2410, TC-2405, TC-2409 |

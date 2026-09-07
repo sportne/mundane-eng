@@ -69,4 +69,4 @@ body: |2
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
   - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
-  - [TC-2408](task-2408-design-configurations-baselines.yaml)
+  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)

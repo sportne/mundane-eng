@@ -1,0 +1,122 @@
+cases:
+- name: valid
+  changes: []
+  expected: []
+- name: duplicate-slot
+  changes:
+  - path:
+    - configuration
+    - selections
+    - 1
+    - slot
+    value: requirements
+  expected:
+  - contradictory-selection
+- name: missing-member
+  changes:
+  - path:
+    - configuration
+    - selections
+    - 0
+    - memberScope
+    value: absent
+  expected:
+  - missing-member
+- name: ambiguous-scope
+  changes:
+  - path:
+    - baseline
+    - members
+    - 1
+    - scope
+    value: gcs-req
+  expected:
+  - ambiguous-member
+- name: unknown-format
+  changes:
+  - path:
+    - baseline
+    - members
+    - 0
+    - format
+    value: future
+  expected:
+  - unsupported-format
+- name: changed-pin
+  changes:
+  - path:
+    - baseline
+    - members
+    - 0
+    - sha256
+    value: '0000000000000000000000000000000000000000000000000000000000000000'
+  expected:
+  - digest-mismatch
+- name: missing-resource
+  changes:
+  - path:
+    - baseline
+    - members
+    - 0
+    - path
+    value: resources/absent.json
+  expected:
+  - unavailable-resource
+- name: optional-unavailable
+  changes:
+  - path:
+    - baseline
+    - members
+    - 0
+    - path
+    value: resources/absent.json
+  - path:
+    - baseline
+    - members
+    - 0
+    - required
+    value: false
+  expected:
+  - optional-resource-unavailable
+- name: unsafe-path
+  changes:
+  - path:
+    - baseline
+    - members
+    - 0
+    - path
+    value: ../outside.json
+  expected:
+  - unsafe-path
+- name: inapplicable-member
+  changes:
+  - path:
+    - configuration
+    - environment
+    value: field-proposed
+  expected:
+  - inapplicable-member
+- name: unsubstantiated-built-state
+  changes:
+  - path:
+    - configuration
+    - stage
+    value: built
+  expected:
+  - missing-prior-baseline
+  - stage-basis-mismatch
+- name: unknown-field
+  changes:
+  - path:
+    - approval
+    value: approved
+  expected:
+  - schema
+- name: missing-source-mapping
+  changes:
+  - path:
+    - baseline
+    - sourceMappings
+    value: []
+  expected:
+  - missing-source-mapping

@@ -68,6 +68,6 @@ body: |2
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
   - [TC-2406](task-2406-design-safety-analysis.yaml)
-  - [TC-2408](task-2408-design-configurations-baselines.yaml)
+  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
   - [TC-2410](task-2410-design-verification-evidence.yaml)
   - [TC-2416](task-2416-design-software-security-provenance.yaml)

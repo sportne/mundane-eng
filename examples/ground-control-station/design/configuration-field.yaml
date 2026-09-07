@@ -1,0 +1,96 @@
+format: mundane-configuration-yaml-0.1
+purpose: design-probe-only
+configuration:
+  id: CFG-FIELD-DESIGN
+  stage: designed
+  environment: field-proposed
+  observationBasis: design-intent
+  selections:
+  - slot: requirements
+    memberScope: gcs-req
+  - slot: architecture
+    memberScope: gcs-arch-source
+  - slot: host
+    memberScope: host
+  - slot: workflow-source
+    memberScope: seed-tool
+  - slot: tool-versions
+    memberScope: tool-versions
+  - slot: gcs-req-source
+    memberScope: gcs-req-source
+  - slot: gcs-attribute-source
+    memberScope: gcs-attribute-source
+baseline:
+  id: BL-FIELD-DESIGN
+  members:
+  - scope: gcs-req
+    kind: requirements
+    format: mundanereq-requirements-0.2
+    path: resources/requirements.json
+    sha256: 33ce6bf9fbce9dd5def3eecb065da32510a9beaf45a3edd7ac8ce0420dec9a63
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  - scope: gcs-arch-source
+    kind: architecture-source
+    format: mundane-architecture-yaml-0.1
+    path: resources/architecture.yaml
+    sha256: 45ec2676abd379dd8692803cf3ffa3169321d7218361fc2333bcfe45a74882ae
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  - scope: host
+    kind: native-resource
+    format: gcs-equipment-assumption-0.1
+    path: resources/server-field.yaml
+    sha256: d07f2122e584918d9f114015b61ac53ba9a8f70cb99b0c5cf98d245aed1f24f7
+    required: true
+    appliesTo:
+    - field-proposed
+  - scope: seed-tool
+    kind: native-resource
+    format: python-source
+    path: resources/seed.py
+    sha256: 3d984a8bd519a4fc039a37ac1fe52ac4069298662cd0dc897cac15cc2235b540
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  - scope: tool-versions
+    kind: native-resource
+    format: version-declarations-json
+    path: resources/versions.json
+    sha256: 0edef82f32cd0b40dfbf25e34a7432c80d7553382d3cbf507f9aeaefe92339cf
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  - scope: gcs-req-source
+    kind: native-resource
+    format: mundanereq-yaml-0.4
+    path: resources/requirement-source.yaml
+    sha256: 8f88ee036f91ec251989b0e4bf6aefd7e23cc3a8c94b210d64709d3c6ea6d825
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  - scope: gcs-attribute-source
+    kind: native-resource
+    format: mundanereq-attributes-yaml-0.1
+    path: resources/attribute-source.yaml
+    sha256: f16c8ace147a163e50ef995b8bd189cfb1d938e38fb1088dff6ef572f8c8f649
+    required: true
+    appliesTo:
+    - simulation
+    - field-proposed
+  sourceMappings:
+  - artifactScope: gcs-req
+    sourcePath: source/requirements.yaml
+    memberScope: gcs-req-source
+  - artifactScope: gcs-req
+    sourcePath: source/attributes.yaml
+    memberScope: gcs-attribute-source
+previous: null
+change: null

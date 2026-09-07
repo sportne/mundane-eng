@@ -1,0 +1,7 @@
+format: gcs-equipment-assumption-0.1
+id: HOST-ASSUMPTION
+environment: simulation
+peakPower:
+  value: 200
+  unit: W
+basis: illustrative assumption, not a selected or measured product rating

@@ -31,9 +31,10 @@ Compiled interfaces are versioned separately from source languages and tools.
 Attribute changes and whole-schema changes participate in conservative review
 analysis. Current development is incremental and experimental. ReqIF interchange and
 additional engineering artifact domains remain future work. The
-[ground control station reference plan](examples/ground-control-station/README.md)
-uses a civilian UAV example to plan those domains and their authoring, evidence,
-review and change workflows; its task cards describe planned capabilities.
+[ground control station reference example](examples/ground-control-station/README.md)
+provides a runnable workflow with current tools and tested designs for additional
+artifacts. Its task cards distinguish completed design work from planned production
+capabilities.
 
 ## Build and try
 
