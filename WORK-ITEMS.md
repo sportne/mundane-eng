@@ -4,7 +4,7 @@ Generated from authoritative source cards and explicit compiled inputs. Do not e
 status or relationships here; regenerate this view. Source links use the analysis
 root as their base. Completion and closure are authored claims, not satisfaction.
 
-Items: 70.
+Items: 71.
 
 | ID | Kind | Title | Status | Dependencies | Unfinished prerequisites |
 | --- | --- | --- | --- | --- | --- |
@@ -78,6 +78,7 @@ Items: 70.
 | [TC-2202](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L2) | task | Migrate Attribute Declarations to YAML | Complete | TC-2201 | — |
 | [TC-2203](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L2) | task | Migrate Verification Plans to YAML | Complete | TC-2201, TC-2202 | — |
 | [TC-2204](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L2) | task | Verify YAML Authoring Migration and Remove Replaced Sources | Complete | TC-2202, TC-2203 | — |
+| [TC-2301](./roadmap/task-2301-clean-current-project.yaml#L2) | task | Clean the Project for the Current YAML Design | Planned | TC-2204 | — |
 
 ## Planning qualifications
 
@@ -153,6 +154,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - TC-2202 — stage: 22; type: Implementation
 - TC-2203 — stage: 22; type: Implementation
 - TC-2204 — stage: 22; type: Implementation
+- TC-2301 — stage: 23; type: Cleanup
 
 ## Authored relationships
 
@@ -237,6 +239,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2203 | depends-on | work:work-item:TC-2202 | [work:roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1) |
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2202 | [work:roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1) |
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2203 | [work:roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1) |
+| work:work-item:TC-2301 | depends-on | work:work-item:TC-2204 | [work:roadmap/task-2301-clean-current-project.yaml](./roadmap/task-2301-clean-current-project.yaml#L1) |
 
 ## Reverse navigation
 
@@ -295,12 +298,13 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2201: [work:work-item:TC-2202 (depends-on)](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1), [work:work-item:TC-2203 (depends-on)](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1)
 - work:work-item:TC-2202: [work:work-item:TC-2203 (depends-on)](./roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml#L1), [work:work-item:TC-2204 (depends-on)](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1)
 - work:work-item:TC-2203: [work:work-item:TC-2204 (depends-on)](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1)
+- work:work-item:TC-2204: [work:work-item:TC-2301 (depends-on)](./roadmap/task-2301-clean-current-project.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 1d8a6eda35aa9d587bed9747b0ff55e6ea46362d4089ea8c23bf217b917aa339
+- Work artifact: build/work-backlog/items.json; SHA-256 be8df55a642916a33c0fb962ef4bed964c295027bd7e9e1f1e4accbf8bfe6c1e
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 fec9928c461a81c655415ec6c4216e7f61477a3b334e1568f33c9b2533c5ee0a
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 6ed9f1f4a2b83a090818c620ceffe0f80d624069e435b9039003e11f545f4f78
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -371,6 +375,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml#L1); SHA-256 033f4ac72631691b00adc192777df288ae358965591b0ea3506bc2bd9ad65626
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
+- Source: [roadmap/task-2301-clean-current-project.yaml](./roadmap/task-2301-clean-current-project.yaml#L1); SHA-256 9a251ea39e176d11f14eaac31d5876bec9b5c5b7a08fd41217fe51fe5ca41583
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9
 - Resource: [src/main/java/engineering/work/WorkCompiler.java](./src/main/java/engineering/work/WorkCompiler.java#L1); SHA-256 ff926fb0db9a44ea3519adb77085d021b6873e855816a87e4ffcff0c7615be3c
 - Resource: [src/main/java/engineering/work/WorkGraph.java](./src/main/java/engineering/work/WorkGraph.java#L1); SHA-256 e783bf3e39ad7a00e1ab80a1de931b7a1fc3aa3baef14ecad4699aca53467bfc

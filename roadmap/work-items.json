@@ -69,7 +69,8 @@
     "roadmap/closed/task-2201-define-common-yaml-authoring.yaml",
     "roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml",
     "roadmap/closed/task-2203-migrate-verification-plans-to-yaml.yaml",
-    "roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml"
+    "roadmap/closed/task-2204-verify-yaml-authoring-migration.yaml",
+    "roadmap/task-2301-clean-current-project.yaml"
   ],
   "format": "mundane-work-set-0.2",
   "source": "mundane-work-yaml-0.2"

@@ -1,0 +1,54 @@
+format: mundane-work-yaml-0.2
+id: TC-2301
+kind: task
+title: Clean the Project for the Current YAML Design
+status: Planned
+dependencies: [TC-2204]
+relations: []
+planning:
+  stage: "23"
+  type: Cleanup
+  condition: ""
+  unlocks: ""
+  statusNote: ""
+body: |
+  ## Outcome
+
+  Current documentation and maintained files describe the YAML authoring design;
+  superseded source representations and unconsumed generated records are removed.
+
+  ## Work
+
+  Remove the discovered Markdown/JSON-fence work-item source parser and legacy
+  compiled work-item compatibility branch. Convert remaining examples and their
+  owning regression matrix to current YAML, retaining graph/resource/output tests.
+  Remove the obsolete compatibility experiment, unused report/results snapshots,
+  superseded editor verification narratives and obsolete build experiment output.
+  Reconcile source/analysis contracts, indexes, examples and package documentation.
+  Retain current JSON machine interfaces, active goldens, schemas, licenses, task
+  history and useful impact/performance evidence. Git retains removed history.
+
+  ## Acceptance evidence
+
+  Run maintained JVM groups, current YAML work-item public/schema checks, golden
+  workflows, parser-free consumers and the full verification wrapper including
+  installed editor and failure propagation. Check documentation links, explicit
+  source inventory, obsolete-format rejection and tracked-file diff cleanliness.
+  Record removed material and retained boundaries in the current research record.
+
+  ## Compatibility and affected components
+
+  User-authorized removal of legacy source representations. Work YAML source and
+  compiled 0.2 shapes remain; old work source/selection/output 0.1 are rejected.
+  Work tool/CLI version advances for the reduced supported input set. Current
+  requirement profiles and generated JSON interfaces remain supported.
+
+  ## Completion decision
+
+  Complete after cleanup and the full supported gate pass. Do not replace active
+  regression coverage with fewer assertions merely to delete a fixture.
+
+  ## References
+
+  - [Roadmap](0001-initial-roadmap.md)
+  - [Migration evidence](../research/0075-yaml-authoring-verification.md)
