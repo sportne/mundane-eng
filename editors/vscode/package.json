@@ -2,7 +2,7 @@
   "name": "mundane-requirements",
   "displayName": "Mundane Authoring",
   "description": "Explicit YAML requirements and work-item projects backed by the Mundane Java tools.",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "publisher": "mundane-engineering",
   "license": "BSD-3-Clause",
   "repository": {

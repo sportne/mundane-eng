@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2202
 kind: task
 title: Migrate Attribute Declarations to YAML
-status: Planned
+status: Complete
 dependencies: ["TC-2201"]
 relations: []
 planning:
@@ -34,4 +34,8 @@ body: |
   
   ## References
   
-  - [Roadmap](0001-initial-roadmap.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+
+  ## Executed evidence
+
+  All 14 maintained JVM groups pass, including YAML feature rejection, boolean typing, duplicate-key coordinates, source/schema mutation and compiler output failures. Independent declaration/requirement structural schemas pass. Public validator matrix passes with exact JVM/native parity. All nine Node tests and the actual VS Code host pass with the YAML schema fixture, unsaved edits, completion and literal hover. Full regenerated cross-artifact goldens and installed-bundle verification are owned by TC-2204.

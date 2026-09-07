@@ -2,14 +2,14 @@
 import json,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1];CP=str(ROOT/'build/maintained/classes')+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar')
-SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_bytes();SCHEMA=(ROOT/'examples/attributes/requirement-attributes.json').read_bytes()
+SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_bytes();SCHEMA=(ROOT/'examples/attributes/requirement-attributes.yaml').read_bytes()
 def commands(tool):return [[str(ROOT/'build/maintained'/('mundanereq-'+tool.lower()))],['java','-cp',CP,'mundanereq.cli.'+{'format':'Formatter','trace':'Trace'}[tool]+'Main']]
 with tempfile.TemporaryDirectory(prefix='attribute-format-') as tmp:
- root=Path(tmp);s=root/'schema.json';s.write_bytes(SCHEMA);p=root/'source.mreq.yaml'
+ root=Path(tmp);s=root/'schema.yaml';s.write_bytes(SCHEMA);p=root/'source.mreq.yaml'
  raw=SOURCE
  # Additional comments around attribute values must survive byte-for-byte.
  raw=raw.replace(b'owner-team: "Logger firmware"',b'owner-team: "Logger firmware" # contact only').replace(b'\n',b'\r\n')
- prefix=['--source=yaml-0.4','--attribute-schema','schema.json']
+ prefix=['--source=yaml-0.4','--attribute-schema','schema.yaml']
  for cmd in commands('format'):
   p.write_bytes(raw);r=subprocess.run(cmd+prefix+['--check','source.mreq.yaml'],cwd=root,capture_output=True);assert r.returncode==1
   r=subprocess.run(cmd+prefix+['--write','source.mreq.yaml'],cwd=root,capture_output=True);assert r.returncode==0,(r.stdout,r.stderr)

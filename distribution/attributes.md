@@ -5,14 +5,14 @@ in an explicitly selected JSON project declaration. The declaration and requirem
 source are authoritative; generated artifacts are derived. Requiredness is checked
 without default values. Classifications do not establish assessment authority.
 
-Use the [declaration](../examples/attributes/requirement-attributes.json),
+Use the [declaration](../examples/attributes/requirement-attributes.yaml),
 [requirements](../examples/attributes/system.mreq.yaml), and
 [normative contract](../specification/0020-project-attributes-yaml-0.4.md).
 
 ```sh
-build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json examples/attributes/system.mreq.yaml
-build/maintained/mundanereq-format --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json --check examples/attributes/system.mreq.yaml
-build/maintained/mundanereq-trace --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.json parents SYS-001 examples/attributes/system.mreq.yaml
+build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.yaml examples/attributes/system.mreq.yaml
+build/maintained/mundanereq-format --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.yaml --check examples/attributes/system.mreq.yaml
+build/maintained/mundanereq-trace --source=yaml-0.4 --attribute-schema examples/attributes/requirement-attributes.yaml parents SYS-001 examples/attributes/system.mreq.yaml
 ```
 
 Formatting validates all values, preserves authored order/comments/quotes/indentation
@@ -31,7 +31,7 @@ not migrate. Unsupported selectors/formats fail instead of silently dropping val
 Compilation is available with an explicit source root:
 
 ```sh
-build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/requirement-attributes.json examples/attributes/system.mreq.yaml > requirements.json
+build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/requirement-attributes.yaml examples/attributes/system.mreq.yaml > requirements.json
 ```
 
 [Output 0.2](../specification/0021-requirement-semantic-output-0.2.md) preserves

@@ -1,10 +1,13 @@
 """Published output 0.2: public JVM/native parity and an independent serialized consumer."""
 import copy,json,subprocess,tempfile,hashlib
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import source_yaml
 ROOT=Path(__file__).resolve().parents[1]
 CP=str(ROOT/'build/maintained/classes')+':'+str(ROOT/'build/dependencies/snakeyaml-engine-3.1.1.jar')
 COMMANDS=[[str(ROOT/'build/maintained/mundanereq-compile')],['java','-cp',CP,'mundanereq.cli.CompileMain']]
-BASE=json.loads((ROOT/'examples/attributes/requirement-attributes.json').read_text());SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_text()
+BASE=source_yaml.loads((ROOT/'examples/attributes/requirement-attributes.yaml').read_text());SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_text()
 def invoke(root,args,status=0):
  runs=[subprocess.run(c+args,cwd=root,capture_output=True,timeout=30) for c in COMMANDS]
  for r in runs:assert r.returncode==status,(r.returncode,r.stderr,r.stdout[:500])
@@ -26,15 +29,15 @@ def consume(a):
     if d['type']=='enum':assert attrs[name] in d['values']
  return {r['values']['id']:r['values'] for r in a['requirements']}
 with tempfile.TemporaryDirectory(prefix='attribute-compile-') as tmp:
- root=Path(tmp);s=root/'schema.json';p=root/'source.mreq.yaml'
- def reset():s.write_text(json.dumps(BASE,indent=2)+'\n');p.write_text(SOURCE)
- args=['--source=yaml-0.4','--root','.','--attribute-schema','schema.json','source.mreq.yaml']
+ root=Path(tmp);s=root/'schema.yaml';p=root/'source.mreq.yaml'
+ def reset():s.write_text(source_yaml.dumps(BASE));p.write_text(SOURCE)
+ args=['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source.mreq.yaml']
  reset();a=invoke(root,args);v=consume(a);assert v['SYS-001']['attributes']=={'discipline':'software','owner-team':'Logger firmware'} and v['SYS-002']['attributes']=={'discipline':'electronics'}
- assert a['attributeSchema']['source']=={'path':'schema.json','sha256':hashlib.sha256(s.read_bytes()).hexdigest()}
+ assert a['attributeSchema']['source']=={'path':'schema.yaml','sha256':hashlib.sha256(s.read_bytes()).hexdigest()}
  assert a['attributeSchema']['definition']['attributes']['discipline']['values']==['electronics','mechanical','software']
  assert a==invoke(root,args)
  # Definitions and values survive source formatting/order changes; byte provenance changes.
- d=copy.deepcopy(BASE);d['attributes']['discipline']['values'].reverse();s.write_text(json.dumps(d)+'\n');p.write_text('# comment\n'+SOURCE);b=invoke(root,args)
+ d=copy.deepcopy(BASE);d['attributes']['discipline']['values'].reverse();s.write_text(source_yaml.dumps(d));p.write_text('# comment\n'+SOURCE);b=invoke(root,args)
  assert consume(b)==v and b['attributeSchema']['definition']==a['attributeSchema']['definition'] and b['attributeSchema']['source']!=a['attributeSchema']['source']
  for change in [lambda x:x['requirements'][0]['values']['attributes'].update(discipline='bad'),lambda x:x['requirements'][0]['values']['attributes'].pop('discipline'),lambda x:x['attributeSchema']['definition'].update(format='future')]:
   bad=copy.deepcopy(a);change(bad)
@@ -45,6 +48,6 @@ with tempfile.TemporaryDirectory(prefix='attribute-compile-') as tmp:
  reset();s.write_text('{"format":"future"}\n');bad=invoke(root,args,1);assert bad['attributeSchema'] is None and bad['requirements']==[]
  reset();s.unlink();bad=invoke(root,args,2);assert bad['attributeSchema'] is None and bad['requirements']==[]
  p.write_text('{"format":"mundanereq-yaml-0.4","requirements":[{"id":"R","title":"Title","statement":"Shall act."}]}\n');a=invoke(root,['--source=yaml-0.4','--root','.','source.mreq.yaml']);assert a['attributeSchema'] is None and consume(a)['R']['attributes']=={}
-fixture=invoke(ROOT,['--source=yaml-0.4','--root','.','--attribute-schema','examples/attributes/requirement-attributes.json','examples/attributes/system.mreq.yaml']);consume(fixture)
+fixture=invoke(ROOT,['--source=yaml-0.4','--root','.','--attribute-schema','examples/attributes/requirement-attributes.yaml','examples/attributes/system.mreq.yaml']);consume(fixture)
 expected=json.loads((ROOT/'experiments/0036-project-attributes/golden/requirements.json').read_text());assert fixture==expected
 print('PASS output 0.2: exact golden, values, declaration/locations, independent serialized checks, deterministic ordering, no-schema compatibility and failed publication')

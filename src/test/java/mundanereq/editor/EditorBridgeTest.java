@@ -24,8 +24,8 @@ public final class EditorBridgeTest {
         duplicate.put("files", List.of(file(), file())); reject(duplicate);
     }
     private static void completion() throws Exception {
-        String declaration = java.nio.file.Files.readString(java.nio.file.Path.of("editors/vscode/test/fixtures/schema.json"));
-        var schema = mundanereq.AttributeSchema.parse(new mundanereq.Interpreter.Source("schema.json", declaration.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        String declaration = java.nio.file.Files.readString(java.nio.file.Path.of("editors/vscode/test/fixtures/schema.yaml"));
+        var schema = mundanereq.AttributeSchema.parse(new mundanereq.Interpreter.Source("schema.yaml", declaration.getBytes(java.nio.charset.StandardCharsets.UTF_8)));
         String base = "format: \"mundanereq-yaml-0.4\"\nattributeSchema: \"logger-metadata\"\nrequirements:\n  - id: \"A\"\n    title: \"A title\"\n    statement: \"The system shall store data.\"\n";
         String empty = base + "    attributes:\n      ";
         assert suggest(empty, schema).size() == 2 : "required and optional names";

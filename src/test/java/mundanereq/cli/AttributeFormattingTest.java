@@ -10,7 +10,7 @@ public final class AttributeFormattingTest {
     public static void run() throws Exception {
         Path root=Files.createTempDirectory("attribute-write-");
         try {
-            Path declaration=root.resolve("schema.json");byte[] original=Files.readAllBytes(Path.of("examples/attributes/requirement-attributes.json"));Files.write(declaration,original);
+            Path declaration=root.resolve("schema.yaml");byte[] original=Files.readAllBytes(Path.of("examples/attributes/requirement-attributes.yaml"));Files.write(declaration,original);
             var schema=AttributeSchema.read(declaration,null);List<Interpreter.Source> sources=new ArrayList<>();Map<Path,byte[]> formatted=new LinkedHashMap<>();
             for(int i=0;i<3;i++) {Path p=root.resolve(i+".mreq.yaml");Files.writeString(p,"old\r\n");var a=Files.readAttributes(p,java.nio.file.attribute.BasicFileAttributes.class);sources.add(new Interpreter.Source(p.toString(),Files.readAllBytes(p),a.fileKey()));formatted.put(p,"old\n".getBytes());}
             var out=new ByteArrayOutputStream();var err=new ByteArrayOutputStream();

@@ -10,7 +10,7 @@
   ],
   "properties": {
     "format": {
-      "const": "mundanereq-attribute-schema-0.1"
+      "const": "mundanereq-attributes-yaml-0.1"
     },
     "name": {
       "type": "string",

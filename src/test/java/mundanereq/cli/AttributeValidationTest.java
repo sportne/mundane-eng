@@ -9,7 +9,7 @@ import mundane.json.Json;
 public final class AttributeValidationTest {
     private AttributeValidationTest() {}
     public static void run() throws Exception {
-        Path root=Path.of("examples/attributes");var schema=AttributeSchema.read(root.resolve("requirement-attributes.json"),null);
+        Path root=Path.of("examples/attributes");var schema=AttributeSchema.read(root.resolve("requirement-attributes.yaml"),null);
         var source=new Interpreter.Source("source.mreq.yaml",Files.readAllBytes(root.resolve("system.mreq.yaml")));
         var result=Interpreter.interpretSources(List.of(source),SourceFormat.YAML_04,schema);
         require(result.valid(),"valid attributes");require(result.byId().get("SYS-002").attributes().equals(Map.of("discipline","electronics")),"no optional synthesis");
@@ -20,7 +20,22 @@ public final class AttributeValidationTest {
         require(!Interpreter.interpretSources(List.of(merged),SourceFormat.YAML_04,schema).valid(),"no hidden merge defaults");
         Json.document(("[".repeat(16)+"0"+"]".repeat(16)).getBytes(),16);
         try {Json.document(("[".repeat(17)+"0"+"]".repeat(17)).getBytes(),16);throw new AssertionError("depth accepted");}catch(Json.Failure expected){require(expected.getMessage().contains("depth"),"depth diagnostic");}
-        String[] args={"--source=yaml-0.4","--attribute-schema",root.resolve("requirement-attributes.json").toString(),root.resolve("system.mreq.yaml").toString()};
+        String yaml=Files.readString(root.resolve("requirement-attributes.yaml"));
+        require(AttributeSchema.parse(new Interpreter.Source("schema.yaml",("# project policy\n"+yaml).getBytes(java.nio.charset.StandardCharsets.UTF_8))).valid(),"YAML comments accepted");
+        for(String invalid:List.of(
+            yaml.replace("mundanereq-attributes-yaml-0.1","mundanereq-attribute-schema-0.1"),
+            yaml.replace("required: true","required: \"true\""),
+            yaml.replace("required: true","required: TRUE"),
+            yaml.replace("type: enum","type: enum\n    type: enum"),
+            yaml.replace("attributes:","attributes: &attrs"),
+            yaml.replace("type: enum","<<: {type: enum}"),
+            yaml.replace("type: enum","type: !!str enum"),
+            yaml+"---\n{}\n",yaml.replace("name: logger-metadata","name: 123"))) {
+            require(!AttributeSchema.parse(new Interpreter.Source("schema.yaml",invalid.getBytes(java.nio.charset.StandardCharsets.UTF_8))).valid(),"reject unsupported YAML declaration: "+invalid);
+        }
+        var duplicate=AttributeSchema.parse(new Interpreter.Source("schema.yaml",yaml.replace("type: enum","type: enum\n    type: enum").getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        require(duplicate.diagnostics().getFirst().code().equals("attribute-schema-duplicate")&&duplicate.diagnostics().getFirst().column()==5,"duplicate YAML key token location");
+        String[] args={"--source=yaml-0.4","--attribute-schema",root.resolve("requirement-attributes.yaml").toString(),root.resolve("system.mreq.yaml").toString()};
         for(boolean flush:new boolean[]{false,true}) {
             PrintStream failing=new PrintStream(new OutputStream(){int written;public void write(int value)throws IOException{if(!flush&&++written>8)throw new IOException("partial stdout");}public void flush()throws IOException{if(flush)throw new IOException("flush failure");}});
             require(ValidatorMain.run(args,failing,new PrintStream(new ByteArrayOutputStream()))==2,"attribute stdout failure");

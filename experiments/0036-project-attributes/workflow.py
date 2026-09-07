@@ -1,9 +1,12 @@
 """Rebuild the checked-in small attribute example through independent public tools."""
 import hashlib,json,shutil,subprocess,sys
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
+import source_yaml
 ROOT=Path(__file__).resolve().parents[2];BIN=ROOT/'build/maintained';HERE=Path(__file__).resolve().parent
 
-def write(path,value):path.write_text(json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')
+def write(path,value):path.write_text(source_yaml.dumps(value) if path.suffix=='.yaml' else json.dumps(value,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')
 def command(root,tool,args,status=0):
     p=subprocess.run([str(BIN/tool)]+args,cwd=root,capture_output=True,timeout=30)
     assert p.returncode==status,(tool,p.returncode,p.stderr,p.stdout[-400:]);assert not p.stderr;return p.stdout
@@ -32,13 +35,13 @@ def example(root):
     root.mkdir(parents=True,exist_ok=True)
     for scope in ['baseline','current']:
         dest=root/(scope+'-source');dest.mkdir(exist_ok=True)
-        shutil.copyfile(ROOT/'examples/attributes/requirement-attributes.json',dest/'schema.json');shutil.copyfile(ROOT/'examples/attributes/system.mreq.yaml',dest/'source.mreq.yaml')
+        shutil.copyfile(ROOT/'examples/attributes/requirement-attributes.yaml',dest/'schema.yaml');shutil.copyfile(ROOT/'examples/attributes/system.mreq.yaml',dest/'source.mreq.yaml')
         if scope=='current':
             p=dest/'source.mreq.yaml';p.write_text(p.read_text().replace('Logger firmware','Controls 😀 <review>'))
-            p=dest/'schema.json';d=json.loads(p.read_text());d['attributes']['owner-team']['description']='Revised <team> description';write(p,d)
-        command(dest,'mundanereq-validate',['--source=yaml-0.4','--attribute-schema','schema.json','source.mreq.yaml'])
-        command(dest,'mundanereq-format',['--source=yaml-0.4','--attribute-schema','schema.json','--check','source.mreq.yaml'])
-        raw=command(dest,'mundanereq-compile',['--source=yaml-0.4','--root','.','--attribute-schema','schema.json','source.mreq.yaml']);(root/(scope+'.json')).write_bytes(raw)
+            p=dest/'schema.yaml';d=source_yaml.loads(p.read_text());d['attributes']['owner-team']['description']='Revised <team> description';write(p,d)
+        command(dest,'mundanereq-validate',['--source=yaml-0.4','--attribute-schema','schema.yaml','source.mreq.yaml'])
+        command(dest,'mundanereq-format',['--source=yaml-0.4','--attribute-schema','schema.yaml','--check','source.mreq.yaml'])
+        raw=command(dest,'mundanereq-compile',['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source.mreq.yaml']);(root/(scope+'.json')).write_bytes(raw)
     shutil.copytree(ROOT/'examples/attributes/plan',root/'plan',dirs_exist_ok=True)
     (root/'plan.json').write_bytes(command(root,'mundane-plan',['--root','.','plan']))
     imports(root);a=analyze(root,1)

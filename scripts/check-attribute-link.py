@@ -1,14 +1,17 @@
 """Serialized attribute boundary: actual scoped/pinned JVM/native and parser-free consumers."""
 import copy,hashlib,json,shutil,subprocess,tempfile
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+import source_yaml
 ROOT=Path(__file__).resolve().parents[1];BIN=ROOT/'build/maintained';CP=BIN/'classes';GOLD=ROOT/'experiments/0036-project-attributes/golden'
-BASE=json.loads((ROOT/'examples/attributes/requirement-attributes.json').read_text());SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_text()
-def write(p,a):p.write_text(json.dumps(a,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')
+BASE=source_yaml.loads((ROOT/'examples/attributes/requirement-attributes.yaml').read_text());SOURCE=(ROOT/'examples/attributes/system.mreq.yaml').read_text()
+def write(p,a):p.write_text(source_yaml.dumps(a) if p.suffix=='.yaml' else json.dumps(a,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n')
 def run(command,args,root,status=0):
  p=subprocess.run(command+args,cwd=root,capture_output=True,timeout=30);assert p.returncode==status,(command,p.returncode,p.stderr,p.stdout[-600:]);assert not p.stderr;return p.stdout
 with tempfile.TemporaryDirectory(prefix='attribute-link-') as temp:
- root=Path(temp);schema=root/'schema.json';source=root/'source.mreq.yaml';write(schema,BASE);source.write_text(SOURCE)
- def compile():return json.loads(run([str(BIN/'mundanereq-compile')],['--source=yaml-0.4','--root','.','--attribute-schema','schema.json','source.mreq.yaml'],root))
+ root=Path(temp);schema=root/'schema.yaml';source=root/'source.mreq.yaml';write(schema,BASE);source.write_text(SOURCE)
+ def compile():return json.loads(run([str(BIN/'mundanereq-compile')],['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source.mreq.yaml'],root))
  original=compile();write(root/'baseline.json',original);write(root/'current.json',original)
  (root/'plan').mkdir();
  (root/'plan/plan.tsv').write_text('format\tplan_id\tcontext\tbaseline_scope\tcurrent_scope\nmundane-plan-source-0.1\tPLAN-ATTR\tlogger\tbaseline\tcurrent\n')
@@ -41,12 +44,12 @@ with tempfile.TemporaryDirectory(prefix='attribute-link-') as temp:
  d=copy.deepcopy(BASE);d['attributes']['owner-team']['description']='Revised <team> description';write(schema,d);source.write_text(SOURCE.replace('Logger firmware','Controls 😀 <review>'));write(root/'current.json',compile());a=analyze(1)
  assert a==json.loads((GOLD/'verification.json').read_text())
  # Comment/order-only snapshots and changed paths are provenance, not meaning.
- d=copy.deepcopy(BASE);d['attributes']['discipline']['values'].reverse();write(schema,d);source.write_text('# comment\n'+SOURCE);a=compile();a['attributeSchema']['source']['path']='moved-schema.json'
- for span in a['attributeSchema']['locations'].values():span['path']='moved-schema.json'
+ d=copy.deepcopy(BASE);d['attributes']['discipline']['values'].reverse();write(schema,d);source.write_text('# comment\n'+SOURCE);a=compile();a['attributeSchema']['source']['path']='moved-schema.yaml'
+ for span in a['attributeSchema']['locations'].values():span['path']='moved-schema.yaml'
  write(root/'current.json',a);assert all(r['state']=='current' for r in analyze()['coverage'])
  # Required optional field in a new declaration is invalid for SYS-002 and publishes no records.
  d=copy.deepcopy(BASE);d['attributes']['owner-team']['required']=True;write(schema,d)
- invalid=json.loads(run([str(BIN/'mundanereq-compile')],['--source=yaml-0.4','--root','.','--attribute-schema','schema.json','source.mreq.yaml'],root,1));assert not invalid['complete'] and invalid['requirements']==[]
+ invalid=json.loads(run([str(BIN/'mundanereq-compile')],['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source.mreq.yaml'],root,1));assert not invalid['complete'] and invalid['requirements']==[]
  # Strict serialized rejection is independent of source validation or completeness claims.
  mutations=[lambda a:a['requirements'][0]['values']['attributes'].update(unknown='x'),lambda a:a['requirements'][0]['values']['attributes'].update(discipline='bad'),lambda a:a['requirements'][0]['values']['attributes'].pop('discipline'),lambda a:a['requirements'][0]['values']['attributes'].update(discipline=3),lambda a:a['requirements'][0]['locations']['attributes'].pop('discipline'),lambda a:a['requirements'][0]['locations']['attributes']['discipline']['value'].update(path='absent'),lambda a:a['requirements'][0]['locations']['attributes']['discipline']['name']['start'].update(line=0),lambda a:a['attributeSchema']['definition'].update(format='future'),lambda a:a['attributeSchema']['definition']['attributes']['discipline'].update(required='true'),lambda a:a['attributeSchema']['locations'].pop('discipline'),lambda a:a['attributeSchema']['source'].update(sha256='bad'),lambda a:a.update(complete=False),lambda a:a.update(sourceContract='mundanereq-yaml-0.3'),lambda a:a.pop('attributeSchema'),lambda a:a.update(attributeSchema=None)]
  for change in mutations:

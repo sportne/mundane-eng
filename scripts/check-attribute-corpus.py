@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1];BIN=ROOT/'build/maintained';GOLD=ROOT/'
 def compile(root,source,schema=None,profile='yaml-0.4',status=0):
  args=[str(BIN/'mundanereq-compile'),'--source='+profile,'--root','.']+(['--attribute-schema',schema] if schema else [])+[source]
  r=subprocess.run(args,cwd=root,capture_output=True,timeout=30);assert r.returncode==status,(r.returncode,r.stderr,r.stdout[:300]);return json.loads(r.stdout)
-old=compile(ROOT,'examples/yaml/vaccine-monitoring',profile='yaml-0.3');new=compile(ROOT,'examples/attributes/medium','examples/attributes/medium/attribute-schema.json');assert len(new['requirements'])==57
+old=compile(ROOT,'examples/yaml/vaccine-monitoring',profile='yaml-0.3');new=compile(ROOT,'examples/attributes/medium','examples/attributes/medium/attribute-schema.yaml');assert len(new['requirements'])==57
 assert [r['values'] for r in old['requirements']]==[{k:v for k,v in r['values'].items() if k!='attributes'} for r in new['requirements']]
 assert len(new['sources'])==4 and sum('owner-team' in r['values']['attributes'] for r in new['requirements'])==4
 for r in new['requirements']:
@@ -14,7 +14,7 @@ for r in new['requirements']:
   loc=pair['value'];assert loc['start']['line']==loc['end']['line'];line=(ROOT/loc['path']).read_text().splitlines()[loc['start']['line']-1]
   assert json.loads(line[loc['start']['column']-1:loc['end']['column']-1])==r['values']['attributes'][name]
 with tempfile.TemporaryDirectory(prefix='attribute-adoption-') as tmp:
- root=Path(tmp);schema=root/'schema.json';schema.write_bytes((ROOT/'examples/attributes/requirement-attributes.json').read_bytes());p=root/'source.mreq.yaml';text=(ROOT/'examples/attributes/system.mreq.yaml').read_text();p.write_text(text.replace('Logger firmware','Controls 😀 <review>'))
+ root=Path(tmp);schema=root/'schema.yaml';schema.write_bytes((ROOT/'examples/attributes/requirement-attributes.yaml').read_bytes());p=root/'source.mreq.yaml';text=(ROOT/'examples/attributes/system.mreq.yaml').read_text();p.write_text(text.replace('Logger firmware','Controls 😀 <review>'))
  a=compile(root,p.name,schema.name);r=a['requirements'][0];loc=r['locations']['attributes']['owner-team']['value'];line=p.read_text().splitlines()[loc['start']['line']-1]
  assert json.loads(line[loc['start']['column']-1:loc['end']['column']-1])=='Controls 😀 <review>'
  assert a==json.loads((GOLD/'unicode-requirements.json').read_text())

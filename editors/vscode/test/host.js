@@ -67,15 +67,15 @@ async function run() {
   console.log('PASS actual formatting provider: whole-project validation, CRLF-to-LF edits, exact preservation, idempotence and no save');
   const selection = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'editor.json'));
   const selectionText = selection.getText();
-  const schema = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'schema.json'));
+  const schema = await vscode.workspace.openTextDocument(vscode.Uri.joinPath(vscode.workspace.workspaceFolders[0].uri, 'schema.yaml'));
   const schemaText = schema.getText();
   const parentText = doc.getText();
   const withAttributes = text => text.replace('mundanereq-yaml-0.3', 'mundanereq-yaml-0.4')
     .replace('requirements:', 'attributeSchema: "logger-metadata"\nrequirements:') + '    attributes:\n      discipline: "software"\n';
-  await replace(selection, JSON.stringify({format:'mundane-editor-project-0.1', source:'yaml-0.4', files:['parent.mreq.yaml','child.mreq.yaml'], attributeSchema:'schema.json'}));
+  await replace(selection, JSON.stringify({format:'mundane-editor-project-0.1', source:'yaml-0.4', files:['parent.mreq.yaml','child.mreq.yaml'], attributeSchema:'schema.yaml'}));
   await replace(doc, withAttributes(parentText)); await replace(child, withAttributes(original));
   assert.equal((await api.validate())[0].result.valid, true);
-  await replace(schema, schemaText.replace('"software"', '"firmware"'));
+  await replace(schema, schemaText.replace('software', 'firmware'));
   await api.validate();
   assert.ok(vscode.languages.getDiagnostics(child.uri).some(d => d.code === 'attribute-value'));
   await replace(schema, '{\n'); await api.validate();
@@ -111,8 +111,7 @@ async function run() {
   assert.ok(help[0].contents[0].value.includes('software'));
   assert.equal(child.getText(help[0].range), 'discipline');
   const dangerous = '[run](command:workbench.action.openSettings) <script>bad</script> **literal**';
-  const custom = JSON.parse(schemaText); custom.attributes.discipline.description = dangerous;
-  await replace(schema, JSON.stringify(custom) + '\n');
+  await replace(schema, schemaText.replace(/description:.*$/m, 'description: ' + JSON.stringify(dangerous)));
   const escaped = await vscode.commands.executeCommand('vscode.executeHoverProvider', child.uri, child.positionAt(child.getText().indexOf('"software"') + 2));
   const contents = escaped[0].contents[0];
   assert.equal(contents.isTrusted, false); assert.equal(contents.supportHtml, false);

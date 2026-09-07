@@ -45,8 +45,8 @@ under the root BSD 3-Clause license. No external-document text, user feedback or
 interoperability result was added. Historical pilot and YAML 0.3 files are unchanged.
 
 ```sh
-build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/medium/attribute-schema.json examples/attributes/medium
-build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/medium/attribute-schema.json examples/attributes/medium > build/medium-attributes.json
+build/maintained/mundanereq-validate --source=yaml-0.4 --attribute-schema examples/attributes/medium/attribute-schema.yaml examples/attributes/medium
+build/maintained/mundanereq-compile --source=yaml-0.4 --root . --attribute-schema examples/attributes/medium/attribute-schema.yaml examples/attributes/medium > build/medium-attributes.yaml
 ```
 
 Select the small source file or the medium directory explicitly: the examples use

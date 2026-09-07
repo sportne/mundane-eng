@@ -49,7 +49,7 @@ def build():
         shutil.rmtree(OUT / 'source')
     shutil.copytree(ROOT / 'examples/impact', OUT / 'source')
     before = {str(p.relative_to(OUT)): p.read_bytes() for p in (OUT / 'source').rglob('*') if p.is_file()}
-    req = invoke('mundanereq-compile', ['--source=yaml-0.4', '--root', '.', '--attribute-schema', 'source/attributes.json', 'source/requirements.yaml'])
+    req = invoke('mundanereq-compile', ['--source=yaml-0.4', '--root', '.', '--attribute-schema', 'source/attributes.yaml', 'source/requirements.yaml'])
     (OUT / 'req.json').write_bytes(req)
     # An explicitly selected exact revision; scope identity remains distinct even with equal bytes.
     (OUT / 'baseline.json').write_bytes(req)

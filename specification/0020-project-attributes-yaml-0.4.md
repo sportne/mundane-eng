@@ -3,19 +3,18 @@
 Normative experimental source and declaration contract. This extends the built-in
 model and YAML presentation rules in [0010](0010-requirements-yaml-0.3.md) and command
 safety in [0011](0011-tool-safety-and-yaml-commands.md). Old profiles are unchanged.
-Design rationale and worked cases are Research 0052/0053; this document controls
-implemented behavior. Types describe author-supplied metadata, never assessments,
+The [YAML authoring policy](0027-yaml-authoring-policy.md) controls presentation. This document controls attribute semantics. Types describe author-supplied metadata, never assessments,
 allocation authority, test execution, requirement satisfaction or safety approval.
 
 ## Declaration
 
-Explicitly select one checked-in JSON file using `--attribute-schema PATH` with
-`--source=yaml-0.4`. This JSON object is a project declaration, not JSON Schema.
+Explicitly select one checked-in YAML file using `--attribute-schema PATH` with
+`--source=yaml-0.4`. This YAML mapping is a project declaration, not JSON Schema.
 Its [structural schema](schema/attribute-declaration-0.1.json) describes decoded
 shape; duplicate keys, byte limits/encoding and semantic lexical rules also apply.
-See the [complete example](../examples/attributes/requirement-attributes.json).
+See the [complete example](../examples/attributes/requirement-attributes.yaml).
 
-Root keys are exactly format (`mundanereq-attribute-schema-0.1`), name and attributes.
+Root keys are exactly format (`mundanereq-attributes-yaml-0.1`), name and attributes.
 Name and attribute keys match `[a-z][a-z0-9]*(?:-[a-z0-9]+)*`, maximum 64 ASCII
 characters. Reserve built-ins id/title/allocation/statement/rationale/source/decomposes,
 format/requirements/attributes/attribute-schema and names beginning mreq- or mundane-.
@@ -23,15 +22,14 @@ No overriding or aliases. The name binds a source document to an explicitly sele
 vocabulary; it is not a globally unique identity or revision pin.
 
 There are 1–128 attributes. Every declaration has type, required and description.
-Type is text or enum; required is a JSON boolean; description is nonempty, unpadded,
+Type is text or enum; required is a YAML boolean; description is nonempty, unpadded,
 single-line Unicode text using the existing title character rules. Enum declarations
 also require 1–256 unique values with the same text rules. Membership is exact and
 case-sensitive, without normalization; order has no semantic meaning. Text forbids
 values. Unknown fields, defaults, imports, inheritance, patterns and references fail.
 Only explicitly present values exist; no nulls, defaults, lists or repeated values.
 
-Require UTF-8 without BOM, final LF or CRLF, no bare CR, invalid Unicode, JSON
-comments or trailing commas. Maximum 1 MiB and 16 collection levels; duplicate keys
+Require UTF-8 without BOM, final LF or CRLF, no bare CR, invalid Unicode, unsupported YAML features. Maximum 1 MiB and 16 collection levels; duplicate keys
 at every depth fail before object construction. Limits fail rather than truncate.
 The declaration snapshot retains token locations, exact bytes and file identity.
 
@@ -95,7 +93,7 @@ the selector. Formatter/trace must validate the full selected schema and source;
 formatting may normalize CRLF only and must recheck the schema before each replacement.
 Detected schema edits stop remaining writes with attribute-schema-changed and existing
 completed/remaining-file reporting. Preserve the documented final-check/rename race.
-No JSON declaration formatting is allowed. Trace adds no attribute edges.
+No declaration formatting is allowed. Trace adds no attribute edges.
 
 Compiled output, linking, review comparison and report contracts are versioned in
 their owning addenda. ReqIF interchange remains unsupported for

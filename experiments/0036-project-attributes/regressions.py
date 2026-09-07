@@ -1,18 +1,21 @@
 """Seeded attribute workflows and compilable, behavior-changing mutations; no external services."""
 import copy,json,random,shutil,subprocess,sys,tempfile,time
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
+import source_yaml
 sys.dont_write_bytecode=True
 from workflow import ROOT,BIN,HERE,write,command,plan,imports,analyze,render
-START=time.monotonic();SCHEMA=json.loads((ROOT/'examples/attributes/requirement-attributes.json').read_text())
+START=time.monotonic();SCHEMA=source_yaml.loads((ROOT/'examples/attributes/requirement-attributes.yaml').read_text())
 
 def compile_source(root,status=0,cmd=None):
-    args=['--source=yaml-0.4','--root','.','--attribute-schema','schema.json','source']
+    args=['--source=yaml-0.4','--root','.','--attribute-schema','schema.yaml','source']
     if cmd:
         p=subprocess.run(cmd+args,cwd=root,capture_output=True,timeout=30);assert p.returncode in (0,1,2);return p.returncode,json.loads(p.stdout)
     return status,json.loads(command(root,'mundanereq-compile',args,status))
 
 def scenario(root,seed):
-    rng=random.Random(seed);schema=copy.deepcopy(SCHEMA);rng.shuffle(schema['attributes']['discipline']['values']);write(root/'schema.json',schema);(root/'source').mkdir();model={};docs=[]
+    rng=random.Random(seed);schema=copy.deepcopy(SCHEMA);rng.shuffle(schema['attributes']['discipline']['values']);write(root/'schema.yaml',schema);(root/'source').mkdir();model={};docs=[]
     for group in range(2):
         records=[]
         for n in range(rng.randint(2,12)):
@@ -20,7 +23,7 @@ def scenario(root,seed):
             if rng.choice([True,False]):attrs['owner-team']=rng.choice(['Controls 😀','Firmware <team>','Design \\ "team"','Line 1 / line 2'])
             model[id]=attrs;records.append({'id':id,'title':'Review '+id,'statement':'The logger shall record an observation.','attributes':attrs})
         doc={'format':'mundanereq-yaml-0.4','attributeSchema':schema['name'],'requirements':records};docs.append(copy.deepcopy(doc));write(root/f'source/{group}.mreq.yaml',doc)
-    args=['--source=yaml-0.4','--attribute-schema','schema.json'];_,baseline=compile_source(root)
+    args=['--source=yaml-0.4','--attribute-schema','schema.yaml'];_,baseline=compile_source(root)
     assert {r['values']['id']:r['values']['attributes'] for r in baseline['requirements']}==model
     # Physical byte normalization has an independent expected output, preserving all decoded values.
     for p in sorted((root/'source').iterdir()):
@@ -32,7 +35,7 @@ def scenario(root,seed):
     # One value edit stales only its explicit binding; a later schema-only edit stales all bindings.
     changed=copy.deepcopy(docs[0]);id=changed['requirements'][0]['id'];changed['requirements'][0]['attributes']['owner-team']='Revised team';write(root/'source/0.mreq.yaml',changed);_,current=compile_source(root);write(root/'current.json',current)
     a=analyze(root,1);assert [r['requirementId'] for r in a['coverage'] if r['state']=='review-stale']==[id]
-    schema['attributes']['owner-team']['description']='Revised optional owner description';write(root/'schema.json',schema);_,current=compile_source(root);write(root/'current.json',current);a=analyze(root,1);assert all(r['schemaChanged'] for r in a['coverage']);assert render(root)!=initial
+    schema['attributes']['owner-team']['description']='Revised optional owner description';write(root/'schema.yaml',schema);_,current=compile_source(root);write(root/'current.json',current);a=analyze(root,1);assert all(r['schemaChanged'] for r in a['coverage']);assert render(root)!=initial
     # Incomplete production cannot be laundered through the downstream resolver.
     changed['requirements'][0]['attributes']['discipline']='invalid';write(root/'source/0.mreq.yaml',changed);_,bad=compile_source(root,1);assert not bad['complete'] and bad['requirements']==[];write(root/'current.json',bad)
     result=json.loads(command(root,'mundane-verify',['--root','.','--plan','plan.json','imports.json'],2));assert not result['complete'] and not result['coverage']
@@ -48,7 +51,7 @@ print('PASS attribute workflow seeds:',','.join(map(str,seeds)))
 if sys.argv[1:]:raise SystemExit(0)
 
 with tempfile.TemporaryDirectory(prefix='attribute-mutations-') as tmp:
-    root=Path(tmp);(root/'source').mkdir();write(root/'schema.json',SCHEMA)
+    root=Path(tmp);(root/'source').mkdir();write(root/'schema.yaml',SCHEMA)
     original={'format':'mundanereq-yaml-0.4','attributeSchema':SCHEMA['name'],'requirements':[{'id':'SYS-001','title':'Logger','statement':'Shall record.','attributes':{'discipline':'software'}}]}
     cases=[('ignored-requiredness','mundanereq/YamlRequirements.java','Boolean.TRUE.equals(mundanereqValue(declaration.getValue(),"required"))','false',lambda d:d['requirements'][0]['attributes'].update({'owner-team':'x'}) or d['requirements'][0]['attributes'].pop('discipline')),
            ('invalid-enum-accepted','mundanereq/YamlRequirements.java','declaration.get("type").equals("enum")&&!((List<?>)declaration.get("values")).contains(v)','false',lambda d:d['requirements'][0]['attributes'].update(discipline='unknown'))]
@@ -61,7 +64,7 @@ with tempfile.TemporaryDirectory(prefix='attribute-mutations-') as tmp:
         d=copy.deepcopy(original);change(d);write(root/'source/a.mreq.yaml',d);code,base=compile_source(root,1);assert not base['complete'] and not base['requirements']
         cmd=mutant(name,file,old,new,'mundanereq.cli.CompileMain');code,bad=compile_source(root,cmd=cmd);assert code==0 and bad['complete'] and len(bad['requirements'])==1,(name,code,bad)
         results.append({'mutation':name,'compiled':True,'baseline':[1,False,0],'mutant':[code,bad['complete'],len(bad['requirements'])],'killed':True})
-    write(root/'source/a.mreq.yaml',original);_,before=compile_source(root);write(root/'baseline.json',before);schema=copy.deepcopy(SCHEMA);schema['attributes']['owner-team']['description']='Changed unused description';write(root/'schema.json',schema);_,after=compile_source(root);write(root/'current.json',after);plan(root,['SYS-001']);imports(root);base=analyze(root,1);assert base['coverage'][0]['schemaChanged']
+    write(root/'source/a.mreq.yaml',original);_,before=compile_source(root);write(root/'baseline.json',before);schema=copy.deepcopy(SCHEMA);schema['attributes']['owner-team']['description']='Changed unused description';write(root/'schema.yaml',schema);_,after=compile_source(root);write(root/'current.json',after);plan(root,['SYS-001']);imports(root);base=analyze(root,1);assert base['coverage'][0]['schemaChanged']
     name='ignored-schema-meaning';cmd=mutant(name,'engineering/verification/Verifier.java','!java.util.Objects.equals(schemas.get(text(edge.get("baselineScope"))),schemas.get(text(edge.get("currentScope"))))','false','engineering.verification.VerifyMain')
     p=subprocess.run(cmd+['--root','.','--plan','plan.json','imports.json'],cwd=root,capture_output=True,timeout=30);bad=json.loads(p.stdout);assert p.returncode==0 and bad['coverage'][0]['state']=='current'
     results.append({'mutation':name,'compiled':True,'baseline':[1,'review-stale'],'mutant':[p.returncode,bad['coverage'][0]['state']],'killed':True})

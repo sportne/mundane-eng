@@ -75,9 +75,9 @@ Items: 70.
 | [TC-2105](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L2) | task | Complete and Describe Imported Targets | Complete | TC-2104 | — |
 | [TC-2106](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L2) | task | Verify Cross-artifact Editor Workflows | Complete | TC-2105 | — |
 | [TC-2201](./roadmap/closed/task-2201-define-common-yaml-authoring.yaml#L2) | task | Define Consistent YAML Authoring Rules | Complete | — | — |
-| [TC-2202](./roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml#L2) | task | Migrate Attribute Declarations to YAML | Planned | TC-2201 | — |
-| [TC-2203](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L2) | task | Migrate Verification Plans to YAML | Planned | TC-2201, TC-2202 | TC-2202 |
-| [TC-2204](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L2) | task | Verify YAML Authoring Migration and Remove Replaced Sources | Planned | TC-2202, TC-2203 | TC-2202, TC-2203 |
+| [TC-2202](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L2) | task | Migrate Attribute Declarations to YAML | Complete | TC-2201 | — |
+| [TC-2203](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L2) | task | Migrate Verification Plans to YAML | Planned | TC-2201, TC-2202 | — |
+| [TC-2204](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L2) | task | Verify YAML Authoring Migration and Remove Replaced Sources | Planned | TC-2202, TC-2203 | TC-2203 |
 
 ## Planning qualifications
 
@@ -232,7 +232,7 @@ These annotations remain authored policy; prerequisite completion does not evalu
 | work:work-item:TC-2104 | depends-on | work:work-item:TC-2103 | [work:roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1) |
 | work:work-item:TC-2105 | depends-on | work:work-item:TC-2104 | [work:roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1) |
 | work:work-item:TC-2106 | depends-on | work:work-item:TC-2105 | [work:roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1) |
-| work:work-item:TC-2202 | depends-on | work:work-item:TC-2201 | [work:roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml](./roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1) |
+| work:work-item:TC-2202 | depends-on | work:work-item:TC-2201 | [work:roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1) |
 | work:work-item:TC-2203 | depends-on | work:work-item:TC-2201 | [work:roadmap/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1) |
 | work:work-item:TC-2203 | depends-on | work:work-item:TC-2202 | [work:roadmap/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1) |
 | work:work-item:TC-2204 | depends-on | work:work-item:TC-2202 | [work:roadmap/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L1) |
@@ -292,15 +292,15 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - work:work-item:TC-2103: [work:work-item:TC-2104 (depends-on)](./roadmap/closed/task-2104-navigate-imported-artifact-targets.yaml#L1)
 - work:work-item:TC-2104: [work:work-item:TC-2105 (depends-on)](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1)
 - work:work-item:TC-2105: [work:work-item:TC-2106 (depends-on)](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1)
-- work:work-item:TC-2201: [work:work-item:TC-2202 (depends-on)](./roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1), [work:work-item:TC-2203 (depends-on)](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1)
+- work:work-item:TC-2201: [work:work-item:TC-2202 (depends-on)](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1), [work:work-item:TC-2203 (depends-on)](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1)
 - work:work-item:TC-2202: [work:work-item:TC-2203 (depends-on)](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1), [work:work-item:TC-2204 (depends-on)](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L1)
 - work:work-item:TC-2203: [work:work-item:TC-2204 (depends-on)](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L1)
 
 ## Snapshot provenance
 
-- Work artifact: build/work-backlog/items.json; SHA-256 0635c5df2e6a4dd4f092c2b9388c2a36340dcace4df1fc0560a69d0181eb6d14
+- Work artifact: build/work-backlog/items.json; SHA-256 4e48e138d98e2c86dac83f45656c164fdb35814fc6e656269650153637b9073a
 - Import declaration: [roadmap/work-imports.json](./roadmap/work-imports.json#L1); SHA-256 1896f1109d5eae8a4afc9bb7fa9026533aef105821ed0cd6d1ff12123867aa85
-- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 412590a31a5aa2895776669066ca0d605957424762fb44ab58e2789efef368de
+- Card selection: [roadmap/work-items.json](./roadmap/work-items.json#L1); SHA-256 fab943f3b9b04b71a94e3cc689608adee1ea0881ca3d2e8c1494068f9c57e530
 - Source: [roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml](./roadmap/closed/task-1101-define-monorepo-component-boundaries.yaml#L1); SHA-256 18e0a48075c53c022c6bc59dc3799115532a35ec5d4cd4f6f504b09c2fe4af25
 - Source: [roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml](./roadmap/closed/task-1102-define-requirement-and-assertion-ownership.yaml#L1); SHA-256 e68817d44b0649d688100fd970b212d42afc237450d4e5cb0d7a201b73ab72a8
 - Source: [roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml](./roadmap/closed/task-1103-test-compilation-linking-and-rebuilds.yaml#L1); SHA-256 d8df3b98d3a48598a0904f9d26986b0bff62601405964439b1a32f83d08afcf9
@@ -366,9 +366,9 @@ These annotations remain authored policy; prerequisite completion does not evalu
 - Source: [roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml](./roadmap/closed/task-2105-complete-and-describe-imported-targets.yaml#L1); SHA-256 7bf78ddb0adfb1ca72cf3883e8c9a1fafbbb55f729bee495b21b2684c6655e71
 - Source: [roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml](./roadmap/closed/task-2106-verify-cross-artifact-editor-workflows.yaml#L1); SHA-256 6492836f633933491f4261c404503c6d2a739de45b878ebb0bc8005589218290
 - Source: [roadmap/closed/task-2201-define-common-yaml-authoring.yaml](./roadmap/closed/task-2201-define-common-yaml-authoring.yaml#L1); SHA-256 2e264837be8e9a25f329d5fc183f323dab8f12a5146ad547d6be7db433a373cf
+- Source: [roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml](./roadmap/closed/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1); SHA-256 4c8f446653670b88c02566796c5d5bb4c94b214fdf82da672866909d1c03b470
 - Source: [roadmap/task-0807-test-authored-views-and-specifications.yaml](./roadmap/task-0807-test-authored-views-and-specifications.yaml#L1); SHA-256 f16cdeabeeaf6d44a3400a72c034de44ab804bf557aa84c4d944500cc93a1c9d
 - Source: [roadmap/task-1104-establish-monorepo-component-layout.yaml](./roadmap/task-1104-establish-monorepo-component-layout.yaml#L1); SHA-256 c76e7172d679c7accb098d6aafb3f93d3d1a5621955f986a06bc9ec598e561f2
-- Source: [roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml](./roadmap/task-2202-migrate-attribute-declarations-to-yaml.yaml#L1); SHA-256 5cad4729b4fdb2dcec1c29439a927038219964672121095007341c144d933403
 - Source: [roadmap/task-2203-migrate-verification-plans-to-yaml.yaml](./roadmap/task-2203-migrate-verification-plans-to-yaml.yaml#L1); SHA-256 40c9c1272c90d94dc4d1aba18be557cbc74d0b2477d8dc67f192c03a95a5d978
 - Source: [roadmap/task-2204-verify-yaml-authoring-migration.yaml](./roadmap/task-2204-verify-yaml-authoring-migration.yaml#L1); SHA-256 368bbe246aca007a3c01a5bbac8610177432b65a3a8cc4cc758f6ac524a1e74e
 - Resource: [specification/0018-work-items-0.1.md](./specification/0018-work-items-0.1.md#L1); SHA-256 22a1d3f6aecffef74c1b9d64f4ba09e93da878ac9201ec045269ad437d3a47b9

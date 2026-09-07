@@ -11,8 +11,8 @@ public final class AttributeCompilationTest {
     public static void run() throws Exception {
         Path root=Files.createTempDirectory("attribute-compile-");
         try {
-            Path schema=root.resolve("schema.json"),source=root.resolve("source.mreq.yaml");
-            byte[] definition=Files.readAllBytes(Path.of("examples/attributes/requirement-attributes.json")),requirements=Files.readAllBytes(Path.of("examples/attributes/system.mreq.yaml"));
+            Path schema=root.resolve("schema.yaml"),source=root.resolve("source.mreq.yaml");
+            byte[] definition=Files.readAllBytes(Path.of("examples/attributes/requirement-attributes.yaml")),requirements=Files.readAllBytes(Path.of("examples/attributes/system.mreq.yaml"));
             String[] args={"--root",root.toString(),"--attribute-schema",schema.toString(),source.toString()};
             for(boolean changeSchema:new boolean[]{true,false}) {
                 Files.write(schema,definition);Files.write(source,requirements);var bytes=new ByteArrayOutputStream();

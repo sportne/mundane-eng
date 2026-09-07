@@ -1,0 +1,15 @@
+format: mundanereq-attributes-yaml-0.1
+name: logger-metadata
+attributes:
+  discipline:
+    type: enum
+    required: true
+    description: Descriptive engineering discipline; not approval authority.
+    values:
+    - software
+    - electronics
+    - mechanical
+  owner-team:
+    type: text
+    required: false
+    description: Author-supplied contact label; not product allocation.

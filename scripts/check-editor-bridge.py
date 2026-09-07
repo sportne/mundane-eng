@@ -38,7 +38,7 @@ print('PASS editor JVM/native request parity, incomplete semantics, rejected pro
 selection = json.loads((ROOT / 'roadmap/work-items.json').read_text())
 work = {'protocol': expected['protocol'], 'source': 'mundane-work-yaml-0.2', 'schema': None,
         'files': [{'path': name, 'text': (ROOT / name).read_text()} for name in selection['files']]}
-for case in [work, dict(work, schema={'path':'schema.json','text':'{}'}), dict(work, files=[]),
+for case in [work, dict(work, schema={'path':'schema.yaml','text':'{}'}), dict(work, files=[]),
              dict(work, cursor={'path':work['files'][0]['path'], 'line':6, 'column':10})]:
     results = [subprocess.run(command, input=json.dumps(case).encode(), capture_output=True, timeout=30) for command in commands]
     assert (results[0].returncode,results[0].stdout,results[0].stderr) == (results[1].returncode,results[1].stdout,results[1].stderr)
