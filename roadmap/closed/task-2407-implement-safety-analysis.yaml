@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2407"
 kind: "task"
 title: "Implement Safety Analysis and Control Traceability"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2406", "TC-2405", "TC-2409"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -60,9 +60,32 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2406](closed/task-2406-design-safety-analysis.yaml)
-  - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
-  - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2406](../closed/task-2406-design-safety-analysis.yaml)
+  - [TC-2405](../closed/task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2409](../closed/task-2409-implement-configurations-baselines.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Implemented the published safety YAML/compiled schema,
+  independent native compile/check/analyze/query/view commands and source-free
+  model component. Queries link actual hazards through controls to selected
+  requirements and verification activities; views include source-linked FMEA,
+  assumptions, coverage findings and a deterministic qualitative fault-tree diagram.
+  Diagram node names are allocated separately from authored IDs to avoid collisions.
+
+  Native workflow verification passed the ten accepted design cases, real selected
+  architecture/configuration/requirement/plan imports, stale configuration review,
+  identical clean rebuild and consumer execution without YAML/source classes. The
+  independent design checker passed. component-boundary-verify passed all 17 Java
+  groups and requirements-only operation; the final diagram edit was followed by
+  native rebuild and workflow verification. Version-resource and predecessor fixture
+  pins were deliberately revised for the newly declared safety domain.
+
+  Missing controls, orphan controls, unverified assumptions and residual risk remain
+  visible; no status accepts risk or authorizes deployment. The compiled model
+  rejects unsupported probability fields, broken/wrong-kind references, malformed
+  or cyclic trees and invalid selected configurations. Full editor, assurance and
+  semantic-impact workflows remain owned by their later cards.

@@ -27,6 +27,7 @@ extension identifiers remain compatible.
 | VS Code authoring | Explicit requirement and YAML work-item selections, including unsaved buffers | [Local authoring and imported-target navigation](editors/vscode/README.md); [Linux bundle](distribution/editor-bundle.md) |
 | Architecture | YAML context, allocations, modes, interfaces and decisions; explicit compiled requirement imports | [Native compile/check/view](distribution/architecture.md) |
 | Configuration baselines | YAML selections, exact resource/source pins and designed/built/deployed distinctions | [Compile, resolve, compare and retain](distribution/configuration.md) |
+| Safety analysis | YAML hazards, controls, assumptions, FMEA and qualitative fault trees | [Compile, query and inspect coverage/review gaps](distribution/safety.md) |
 | Derived reports | Compiled snapshots and explicit analysis results | [Experimental verification report](experiments/0029-verification-report/README.md); work-item views via `mundane-work view` |
 
 Compiled interfaces are versioned separately from source languages and tools.

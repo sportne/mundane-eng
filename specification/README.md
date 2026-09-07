@@ -28,3 +28,4 @@ Current contracts and evidence for the YAML engineering tools.
 
 - [Architecture and domain artifact boundary](0028-architecture-and-domain-boundary.md).
 - [Configuration baselines](0029-configuration-baselines.md).
+- [Safety analysis](0030-safety-analysis.md).

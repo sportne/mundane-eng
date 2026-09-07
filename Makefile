@@ -258,3 +258,12 @@ verify: safety-design-verify
 procedure-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-procedure.py
 verify: procedure-design-verify
+
+.PHONY: test-safety native-safety safety-verify
+test-safety: yaml-dependency version-declarations
+	python3 scripts/build-components.py test safety
+native-safety: test-safety
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath safety)" -o $(abspath $(BUILD_ROOT)/mundane-safety) engineering.safety.SafetyMain
+safety-verify: native-safety safety-design-verify
+	build/schema-check-venv/bin/python scripts/check-safety-workflow.py
+verify: safety-verify

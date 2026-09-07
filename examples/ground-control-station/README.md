@@ -241,7 +241,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2404](../../roadmap/closed/task-2404-design-context-architecture-interfaces.yaml) | Design Context Architecture and Interface Artifacts | TC-2403 |
 | [TC-2405](../../roadmap/closed/task-2405-implement-context-architecture-interfaces.yaml) | Implement Context Architecture and Interface Workflows | TC-2404 |
 | [TC-2406](../../roadmap/closed/task-2406-design-safety-analysis.yaml) | Design Hazard Control and Failure Analysis Artifacts | TC-2403, TC-2404 |
-| [TC-2407](../../roadmap/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
+| [TC-2407](../../roadmap/closed/task-2407-implement-safety-analysis.yaml) | Implement Safety Analysis and Control Traceability | TC-2406, TC-2405, TC-2409 |
 | [TC-2408](../../roadmap/closed/task-2408-design-configurations-baselines.yaml) | Design Configuration Baseline and Change Records | TC-2403 |
 | [TC-2409](../../roadmap/closed/task-2409-implement-configurations-baselines.yaml) | Implement Reproducible Configuration Baselines | TC-2408 |
 | [TC-2410](../../roadmap/closed/task-2410-design-verification-evidence.yaml) | Design Procedures Execution Results and Evidence | TC-2403, TC-2404, TC-2408 |

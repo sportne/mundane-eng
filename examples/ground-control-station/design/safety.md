@@ -1,7 +1,7 @@
 # Safety analysis representation and interaction — TC-2406
 
 Accepted bounded design for the simulation-only reference project. The
-[draft YAML schema](safety.schema.json), [worked source](safety.yaml) and
+[draft YAML schema](../../../specification/schema/safety-yaml-0.1.json), [worked source](safety.yaml) and
 [failure ledger](safety-cases.yaml) separate hazard, cause, control, failure mode,
 verification obligation and residual-risk review. These are engineering records;
 structural traceability does not accept residual risk.
@@ -66,3 +66,8 @@ real imported IDs and hashes, validates the closed schema, and exercises ten cas
 missing/broken controls, broken cause, unsupported probability, changed review
 revision, wrong kind, cycle, missing baseline, forbidden accepted-risk claim and
 visible unresolved risk. Evidence is rebuilt under `build/gcs-design/`.
+
+TC-2407 now implements this design through the [published contract](../../../specification/0030-safety-analysis.md)
+and [native safety workflow](../../../distribution/safety.md). The schema has moved
+to specification; the independent design checker and failure ledger remain regression
+inputs for the maintained implementation.

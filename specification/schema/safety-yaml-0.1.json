@@ -429,7 +429,7 @@
     }
   },
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "DRAFT safety YAML 0.1",
+  "title": "Safety YAML 0.1",
   "$defs": {
     "ref": {
       "type": "object",

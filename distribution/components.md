@@ -130,3 +130,9 @@ using architecture's compiled model, and `configuration` (source/CLI wiring).
 Nested validation shares the bounded snapshot capture and recheck infrastructure.
 `test-configuration` exercises publication and failure semantics with real files;
 `configuration-verify` exercises the native GCS workflow and independent schemas.
+
+TC-2407 adds `safety-model`, using compiled configuration/architecture models and
+existing requirement/plan adapters, plus `safety` for source/CLI wiring. FMEA and
+fault-tree semantics stay with this owner. `test-safety` checks graph constraints;
+`safety-verify` exercises the public native commands, GCS cases and source-free
+consumer. Compiler probes reject YAML dependencies from the safety model.
