@@ -248,3 +248,8 @@ configuration-verify: native-configuration architecture-verify
 	build/schema-check-venv/bin/python scripts/check-configuration-workflow.py
 configuration-verify: yaml-schema-verify
 verify: configuration-verify
+
+.PHONY: safety-design-verify
+safety-design-verify: configuration-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-safety.py
+verify: safety-design-verify

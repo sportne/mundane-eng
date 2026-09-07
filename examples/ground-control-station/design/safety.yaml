@@ -1,0 +1,222 @@
+format: mundane-safety-yaml-0.1
+id: SAFETY-GCS
+context:
+  description: Simulation-only ground supervision under stale state and combined
+    mains/link loss
+  configuration:
+    scope: gcs-config
+    kind: baseline
+    id: BL-SIM-DESIGN
+  modes:
+  - scope: gcs-arch
+    kind: mode
+    id: MONITORING
+severityScale:
+- id: minor
+  meaning: Recoverable loss of a non-command aid
+- id: major
+  meaning: Loss of trustworthy supervision or command outcome
+- id: catastrophic
+  meaning: Potential loss of aircraft or harm; requires separate operational 
+    assessment
+assumptions:
+- id: ASM-SIM
+  text: Synthetic autopilot and clocks; no actual power independence or aircraft
+    failsafe evidence
+  owner: systems
+  state: unverified
+causes:
+- id: CAUSE-DELAY
+  description: Delayed telemetry despite live heartbeat
+  commonCauseGroup:
+- id: CAUSE-POWER
+  description: Shared mains supply affects host and network equipment
+  commonCauseGroup: POWER-DOMAIN
+- id: CAUSE-ACK
+  description: Acknowledgement lost or delivered after timeout
+  commonCauseGroup:
+hazards:
+- id: HZ-STALE
+  title: Operator trusts stale telemetry
+  causes:
+  - scope: self
+    kind: cause
+    id: CAUSE-DELAY
+  - scope: self
+    kind: cause
+    id: CAUSE-POWER
+  consequence: Unsafe new intent based on unknown aircraft state
+  severity: major
+  controls:
+  - scope: self
+    kind: control
+    id: CTRL-FRESH
+  assumptions:
+  - scope: self
+    kind: assumption
+    id: ASM-SIM
+  residualRisk:
+    state: unresolved
+    owner: safety
+    reason: Simulation does not establish field thresholds or operational 
+      adequacy.
+- id: HZ-COMMAND
+  title: Ambiguous command during combined mains and link loss
+  causes:
+  - scope: self
+    kind: cause
+    id: CAUSE-POWER
+  - scope: self
+    kind: cause
+    id: CAUSE-ACK
+  consequence: Ground status misrepresents execution or intent is replayed after
+    reconnect
+  severity: major
+  controls:
+  - scope: self
+    kind: control
+    id: CTRL-ACK
+  - scope: self
+    kind: control
+    id: CTRL-POWER
+  assumptions:
+  - scope: self
+    kind: assumption
+    id: ASM-SIM
+  residualRisk:
+    state: review-required
+    owner: safety
+    reason: UPS independence and aircraft-local failsafe remain unqualified.
+controls:
+- id: CTRL-FRESH
+  description: Bound freshness and trusted time; inhibit new intent on stale or 
+    unknown state
+  hazards:
+  - scope: self
+    kind: hazard
+    id: HZ-STALE
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-STALE
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-CLOCK
+  obligations:
+  - scope: gcs-plan
+    kind: activity
+    id: ACT-STATE
+  owner: software
+- id: CTRL-ACK
+  description: Correlate session/request and distinguish acknowledgement from 
+    observed completion
+  hazards:
+  - scope: self
+    kind: hazard
+    id: HZ-COMMAND
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-ACK
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-RESTART
+  obligations:
+  - scope: gcs-plan
+    kind: activity
+    id: ACT-STATE
+  owner: software
+- id: CTRL-POWER
+  description: Provide hypothetical UPS support and orderly shutdown while 
+    preserving uncertain state
+  hazards:
+  - scope: self
+    kind: hazard
+    id: HZ-COMMAND
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-POWER
+  obligations:
+  - scope: gcs-plan
+    kind: activity
+    id: ACT-POWER
+  owner: hardware
+failureModes:
+- id: FM-HOST-POWER
+  component:
+    scope: gcs-arch
+    kind: component
+    id: CMP-SERVER
+  function: Host command and telemetry service
+  mode: Shared power is lost
+  effects:
+  - scope: self
+    kind: hazard
+    id: HZ-STALE
+  - scope: self
+    kind: hazard
+    id: HZ-COMMAND
+  causes:
+  - scope: self
+    kind: cause
+    id: CAUSE-POWER
+  detection:
+    scope: self
+    kind: control
+    id: CTRL-FRESH
+  mitigations:
+  - scope: self
+    kind: control
+    id: CTRL-POWER
+  - scope: self
+    kind: control
+    id: CTRL-ACK
+  assumptions:
+  - scope: self
+    kind: assumption
+    id: ASM-SIM
+faultTree:
+  id: FT-TRUST
+  top:
+    scope: self
+    kind: event
+    id: EV-LOSS-TRUST
+  events:
+  - id: EV-LOSS-TRUST
+    operator: or
+    inputs:
+    - scope: self
+      kind: event
+      id: EV-STALE
+    - scope: self
+      kind: event
+      id: EV-POWER
+    - scope: self
+      kind: event
+      id: EV-ACK
+    cause:
+  - id: EV-STALE
+    operator: basic
+    inputs: []
+    cause:
+      scope: self
+      kind: cause
+      id: CAUSE-DELAY
+  - id: EV-POWER
+    operator: basic
+    inputs: []
+    cause:
+      scope: self
+      kind: cause
+      id: CAUSE-POWER
+  - id: EV-ACK
+    operator: basic
+    inputs: []
+    cause:
+      scope: self
+      kind: cause
+      id: CAUSE-ACK
+reviewedAgainst:
+- scope: gcs-arch
+  sha256: 2599b2edcb0f05694b5177cd9710638e4b71d1ff4674196833c8ff68130d2fae

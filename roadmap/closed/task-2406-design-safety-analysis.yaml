@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2406"
 kind: "task"
 title: "Design Hazard Control and Failure Analysis Artifacts"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2403", "TC-2404"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -66,8 +66,24 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2403](closed/task-2403-define-artifact-interactions.yaml)
-  - [TC-2404](closed/task-2404-design-context-architecture-interfaces.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2403](../closed/task-2403-define-artifact-interactions.yaml)
+  - [TC-2404](../closed/task-2404-design-context-architecture-interfaces.yaml)
+
+  ## Executed evidence
+
+  Completed on 2026-09-07. Accepted the worked safety YAML schema, ownership and
+  interaction decision in examples/ground-control-station/design/safety.md. Two
+  hazards link three controls to actual selected requirements and verification
+  activities. The bounded host-power FMEA and qualitative fault tree preserve the
+  shared POWER-DOMAIN cause, explicit unverified assumptions and owned unresolved risk.
+  No numerical probability/risk scoring or automatic acceptance field is admitted.
+
+  The independent design checker validated the schema and actual imported identities,
+  configuration and architecture pins, then passed ten coverage/reference/change cases,
+  including missing control, broken cause, unsupported probability, stale review,
+  wrong kind, fault-tree cycle and explicit residual-risk visibility. Reproducible
+  commands and evidence paths are documented in the design guide and make target.
+  TC-2407 owns maintained source/compiled contracts and command implementation.

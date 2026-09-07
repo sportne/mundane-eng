@@ -1,0 +1,31 @@
+cases:
+- name: missing-control
+  changes: [{path: [hazards, 0, controls], value: []}]
+  expected: missing-control
+- name: broken-control
+  changes: [{path: [hazards, 0, controls, 0, id], value: ABSENT}]
+  expected: rejected
+- name: broken-cause
+  changes: [{path: [failureModes, 0, causes, 0, id], value: ABSENT}]
+  expected: rejected
+- name: unknown-probability
+  changes: [{path: [hazards, 0, probability], value: 0.00001}]
+  expected: rejected
+- name: changed-interface-revision
+  changes: [{path: [reviewedAgainst, 0, sha256], value: '0000000000000000000000000000000000000000000000000000000000000000'}]
+  expected: review-stale
+- name: wrong-kind
+  changes: [{path: [controls, 0, requirements, 0, kind], value: component}]
+  expected: rejected
+- name: cyclic-fault-tree
+  changes: [{path: [faultTree, events, 0, inputs, 0, id], value: EV-LOSS-TRUST}]
+  expected: rejected
+- name: missing-configuration
+  changes: [{path: [context, configuration, id], value: ABSENT}]
+  expected: rejected
+- name: invented-accepted-risk
+  changes: [{path: [hazards, 0, residualRisk, state], value: accepted}]
+  expected: rejected
+- name: unresolved-risk-remains-visible
+  changes: []
+  expected: residual-risk-unresolved
