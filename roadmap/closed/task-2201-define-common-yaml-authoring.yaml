@@ -2,7 +2,7 @@ format: mundane-work-yaml-0.2
 id: TC-2201
 kind: task
 title: Define Consistent YAML Authoring Rules
-status: Planned
+status: Complete
 dependencies: []
 relations: []
 planning:
@@ -34,4 +34,8 @@ body: |
   
   ## References
   
-  - [Roadmap](0001-initial-roadmap.md)
+  - [Roadmap](../0001-initial-roadmap.md)
+
+  ## Executed evidence
+
+  Reviewed shared presentation and domain scalar rules against existing YAML requirements and work items. Specification 0027 defines source identifiers, decoded output compatibility, bounded parsing, accurate locations and required failure checks before implementation.

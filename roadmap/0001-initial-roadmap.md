@@ -130,3 +130,11 @@ TC-2101 defines explicit imports and source mappings, TC-2102 validates compiled
 inputs, and TC-2103 captures typed relation spans. TC-2104 adds revision-checked
 navigation, TC-2105 adds imported completion/hover, and TC-2106 verifies installed
 workflows. Order: TC-2101 → TC-2102 → TC-2103 → TC-2104 → TC-2105 → TC-2106.
+
+## YAML authoring migration
+
+TC-2201 defines consistent YAML presentation and source contracts; TC-2202 migrates
+attribute declarations; TC-2203 replaces TSV verification sources with YAML;
+TC-2204 verifies complete workflows and removes the replaced source representations.
+Generated JSON remains the integration boundary. Follow-up cleanup is scoped after
+migration so only obsolete material is removed.

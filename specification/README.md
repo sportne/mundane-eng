@@ -23,3 +23,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [VS Code editor contract 0.1](0024-vscode-editor-0.1.md)
 - [Work-item editor contract](0025-work-item-editor-0.1.md) — explicit YAML backlog snapshots and local authoring assistance.
 - [Editor imports and source mappings](0026-editor-imports-0.1.md) — typed targets and exact source-revision navigation.
+
+- [YAML authoring policy](0027-yaml-authoring-policy.md): shared presentation rules and YAML declaration/plan source contracts.
