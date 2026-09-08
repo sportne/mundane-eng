@@ -1,0 +1,133 @@
+candidates:
+- assuranceScope: gcs-assurance
+  buildSha256: '0000000000000000000000000000000000000000000000000000000000000000'
+  commissioningPlans:
+  - PLAN-STARTUP
+  configuration:
+    id: BL-SOFTWARE-DEPLOYED
+    kind: baseline
+    scope: gcs-config
+  id: RC-INITIAL
+  predecessor: null
+  softwareScope: gcs-software
+compatibility: []
+executions: []
+format: mundane-operations-yaml-0.1
+id: OPS-GCS
+incidents: []
+limitations:
+- Synthetic GCS tabletop and simulator evidence; no actual field operations or deployment authorization.
+- Preconditions, actions and acceptance are explicit operator assertions, not authenticated operational
+  telemetry.
+- Rollback compatibility and backup contents need application/hardware-specific engineering judgment.
+plans:
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-STARTUP
+  kind: startup
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-HANDOVER
+  kind: handover
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-BACKUP
+  kind: backup
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-RESTORE
+  kind: restore
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-UPGRADE
+  kind: upgrade
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-ROLLBACK
+  kind: rollback
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-RESTART
+  kind: restart
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-REPLACEMENT
+  kind: replacement
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-MAINTENANCE
+  kind: maintenance
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator
+- expectedOutcome: Retain explicit actions and exact evidence; ambiguous queued commands are not replayed.
+  id: PLAN-RETIREMENT
+  kind: retirement
+  preconditions:
+  - description: Command outputs inhibited and aircraft response remains independently managed.
+    id: INHIBITED
+  procedure:
+    id: PROC-COMBINED
+    kind: procedure
+    scope: proc-combined
+  responsibleRole: gcs-operator

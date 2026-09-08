@@ -334,3 +334,8 @@ native-assurance: test-assurance
 assurance-verify: native-assurance software-verify evidence-verify assurance-design-verify
 	build/schema-check-venv/bin/python scripts/check-assurance-workflow.py
 verify: assurance-verify
+
+.PHONY: operations-design-verify
+operations-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-operations.py
+verify: operations-design-verify

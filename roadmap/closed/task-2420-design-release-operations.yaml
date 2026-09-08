@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2420"
 kind: "task"
 title: "Design Release Commissioning and Operational Records"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2408", "TC-2410", "TC-2418"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -64,9 +64,35 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
-  - [TC-2410](closed/task-2410-design-verification-evidence.yaml)
-  - [TC-2418](closed/task-2418-design-assurance-reviews.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+  - [TC-2410](../closed/task-2410-design-verification-evidence.yaml)
+  - [TC-2418](../closed/task-2418-design-assurance-reviews.yaml)
+
+  ## Executed evidence
+
+
+    ## Executed evidence (2026-09-07)
+
+    Published the [operations decision](../../examples/ground-control-station/design/operations.md),
+    closed draft schema and YAML plans before dependent implementation. The six-step
+    tabletop follows failed upgrade, exact rollback compatibility, selected backup
+    restore, queued-command restart, like-for-like server replacement and synthetic
+    incident/corrective-work/new-candidate closure. Each plan names selected procedure,
+    preconditions, expected outcome and responsible role. Execution and acceptance
+    remain separate observations and judgments.
+
+    Ran examples/ground-control-station/design/check-operations.py: independent schema
+    validation, ten operation kinds, six tabletop steps and seven readiness blockers
+    passed; generated evidence is build/gcs-design/operations-tabletop.json. The
+    design reuses compiled work items and evidence, native backup bytes and the
+    existing standard-backed assurance model. It defines one cohesive selected
+    operations contract and source-independent model/CLI boundary, not new native
+    build, signature or issue formats. Native TC-2421 must exercise the concrete
+    records and exact revision, history and closure failures before completion.
+
+    No field operations, aircraft control, authenticated operator identity or release
+    authority are claimed; like-for-like replacement is bounded by the existing GCS
+    configuration and simulator, and changed hardware requires new selected inputs.

@@ -264,7 +264,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2417](../../roadmap/closed/task-2417-implement-software-security-provenance.yaml) | Implement Build Provenance and Security Traceability | TC-2416, TC-2405, TC-2409 |
 | [TC-2418](../../roadmap/closed/task-2418-design-assurance-reviews.yaml) | Design Assurance Arguments Reviews and Waivers | TC-2406, TC-2408, TC-2410, TC-2416 |
 | [TC-2419](../../roadmap/closed/task-2419-implement-assurance-reviews.yaml) | Implement Assurance and Review Readiness Queries | TC-2418, TC-2407, TC-2411, TC-2417 |
-| [TC-2420](../../roadmap/task-2420-design-release-operations.yaml) | Design Release Commissioning and Operational Records | TC-2408, TC-2410, TC-2418 |
+| [TC-2420](../../roadmap/closed/task-2420-design-release-operations.yaml) | Design Release Commissioning and Operational Records | TC-2408, TC-2410, TC-2418 |
 | [TC-2421](../../roadmap/task-2421-implement-release-operations.yaml) | Implement Release and Operational Traceability | TC-2420, TC-2409, TC-2411, TC-2419 |
 | [TC-2422](../../roadmap/task-2422-design-semantic-change-impact.yaml) | Design Semantic Change and Evidence Invalidation | TC-2403, TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 |
 | [TC-2423](../../roadmap/task-2423-implement-semantic-change-impact.yaml) | Implement Cross-Domain Change and Staleness Queries | TC-2422, TC-2407, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421 |
@@ -288,3 +288,7 @@ The [assurance workflow](../../distribution/assurance.md) now executes the telem
 and command-handling case against exact software configuration and simulator runs.
 An open field-validation obligation remains visible; signed synthetic reviews and a
 time-limited waiver demonstrate local readiness without release authorization.
+
+The [release and operations design](design/operations.md) works failed upgrade,
+rollback/restore, queued-command restart, server replacement and incident closure.
+Plans, executions and acceptance decisions have distinct source records.
