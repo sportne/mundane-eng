@@ -339,3 +339,12 @@ verify: assurance-verify
 operations-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-operations.py
 verify: operations-design-verify
+
+.PHONY: test-operations native-operations operations-verify
+test-operations: yaml-dependency version-declarations
+	python3 scripts/build-components.py test operations
+native-operations: test-operations
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath operations)" -o $(abspath $(BUILD_ROOT)/mundane-operations) engineering.operations.OperationsMain
+operations-verify: native-operations assurance-verify operations-design-verify
+	build/schema-check-venv/bin/python scripts/check-operations-workflow.py
+verify: operations-verify

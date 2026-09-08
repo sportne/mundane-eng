@@ -74,7 +74,7 @@ undeclared repository sources. A failing declared dependency still fails the bui
 
 Each component writes to `build/maintained/components/COMPONENT/classes`; focused
 tests use its `test-classes` directory. `make test` assembles a disposable aggregate
-at `build/maintained/classes` for the existing integration scripts and runs all 22
+at `build/maintained/classes` for the existing integration scripts and runs all 23
 maintained test groups. This is a compatibility test view, never a component's
 production compile input. It is rebuilt from scratch, including after deletions.
 
@@ -159,3 +159,7 @@ The three new domains bring the aggregate suite to 21 maintained groups.
 TC-2419 adds `assurance-model` on compiled software and evidence and `assurance`
 for source/CLI wiring. Standard DSSE/JWK verification uses the JDK; compiled checks
 have no YAML dependency. The suite has 22 maintained groups.
+
+TC-2421 adds `operations-model` on compiled assurance and work-item models, and
+`operations` for YAML/CLI wiring. Its boundary probes forbid both work-item source
+and YAML readers. The aggregate suite now contains 23 maintained groups.

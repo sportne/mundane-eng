@@ -35,7 +35,7 @@ baseline:
     path: versions.json
     required: true
     scope: tool-versions
-    sha256: 7fd488d23a3dba5dc98dee9959e3f5bc0e290a6a1a88ca21348757bae1ece097
+    sha256: 8a83afd7a7ca115caa467b1ead4550c7009ce65312f6e60f63329b628d7939ec
   - appliesTo: [simulation, field-proposed]
     format: mundanereq-yaml-0.4
     kind: native-resource
@@ -68,7 +68,7 @@ change:
   from:
     path: configuration-sim.json
     ref: {id: BL-SIM-DESIGN, kind: baseline, scope: previous}
-    sha256: e9c9a9b1f6cb6fd43ba6302776d21c3e79e126302ceba85c8fab18446100dd1d
+    sha256: b365447324b3c9997971ebc2e2a4489996ab6f2a2ae3c882eed8c4b0671539f5
   id: CHG-HOST
   owner: hardware
   reason: Substitute a 200 W illustrative host for the 120 W assumption; 

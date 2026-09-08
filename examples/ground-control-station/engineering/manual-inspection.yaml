@@ -9,12 +9,12 @@ limitations: [Synthetic inspection fixture; no physical wiring was inspected.,
 observations:
 - {atMs: 0, field: powerState, value: synthetic-wiring-observed}
 procedure: {id: PROC-INSPECT, sha256:
-    6d10089da7acc14614a56b6266fcfe9464550805a3dbd1be2a0345aa6ba23717}
+    9fa795ccc82f7551f61a05f5280faabb41d0e964f5110e837f957aa63fd90fce}
 subjects:
 - {scope: gcs-arch, sha256:
     2599b2edcb0f05694b5177cd9710638e4b71d1ff4674196833c8ff68130d2fae}
 - {scope: gcs-config, sha256:
-    e9c9a9b1f6cb6fd43ba6302776d21c3e79e126302ceba85c8fab18446100dd1d}
+    b365447324b3c9997971ebc2e2a4489996ab6f2a2ae3c882eed8c4b0671539f5}
 - {scope: gcs-plan, sha256:
     ce5f1d455bd42c0b9d94e7051a528fdbc3813dba18a183eda73b321c25604f0b}
 - {scope: gcs-req, sha256:

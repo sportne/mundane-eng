@@ -21,6 +21,7 @@ public final class Snapshots {
     private final Path root;
     private final List<Snapshot> reads=new ArrayList<>();
     private long size;
+    private final java.util.Map<String,Snapshot> cached=new java.util.HashMap<>();
     public Snapshots(Path root) {
         try { this.root=root.toRealPath(); if(!Files.isDirectory(this.root)) throw new IOException("not a directory"); }
         catch(IOException ex) { throw new IllegalArgumentException("invalid root: "+root,ex); }
@@ -42,11 +43,13 @@ public final class Snapshots {
     public Snapshot read(String name) { return read(name,16*1024*1024); }
     public Snapshot read(String name,int limit) {
         try {
+            Snapshot prior=cached.get(name);
             Path path=resolve(name);var attributes=Files.readAttributes(path,BasicFileAttributes.class);
             byte[] bytes;try(var input=Files.newInputStream(path)) { bytes=input.readNBytes(limit+1); }
             if(bytes.length>limit) throw new IOException("input exceeds byte limit");
+            if(prior!=null&&java.util.Objects.equals(prior.key(),attributes.fileKey())&&Arrays.equals(prior.bytes,bytes))return prior;
             size+=bytes.length;if(size>128L*1024*1024) throw new IOException("aggregate input exceeds 128 MiB");
-            Snapshot snapshot=new Snapshot(name,bytes,attributes.fileKey());reads.add(snapshot);return snapshot;
+            Snapshot snapshot=new Snapshot(name,bytes,attributes.fileKey());reads.add(snapshot);cached.put(name,snapshot);return snapshot;
         } catch(IOException|IllegalArgumentException ex) { throw new Problem("input-unavailable",ex.getMessage(),name); }
     }
     /** Immutable captured inputs for explicit snapshot retention. */

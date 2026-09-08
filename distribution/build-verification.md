@@ -116,3 +116,6 @@ outputs are checked against independent Decimal reference calculations.
 
 `assurance-design-verify` and `assurance-verify` exercise signed DSSE reviews,
 explicit-time expiry, retained conflicts and exact GCS configuration evidence.
+
+`operations-design-verify` and `operations-verify` rebuild GCS commissioning and
+recovery history, retained failures, corrective closure and source-free consumers.

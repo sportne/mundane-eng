@@ -119,4 +119,4 @@ reliability:
     mtbf: LINK-MTBF
     repair: LINK-REPAIR
   sharedCause: {id: POWER-DOMAIN, mtbf: POWER-MTBF, repair: POWER-REPAIR}
-reviewedEquipmentSha256: 68493bfbc272697bd31e9375c07e16ca186cfb73cb63e14d358024db7d1e4a6b
+reviewedEquipmentSha256: 17aacda3f31731028267a0be0dafce7651f76ce09a471d3274f5933ae04f6046
