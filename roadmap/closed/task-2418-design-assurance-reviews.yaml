@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2418"
 kind: "task"
 title: "Design Assurance Arguments Reviews and Waivers"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2406", "TC-2408", "TC-2410", "TC-2416"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Design"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -64,10 +64,16 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2406](closed/task-2406-design-safety-analysis.yaml)
-  - [TC-2408](closed/task-2408-design-configurations-baselines.yaml)
-  - [TC-2410](closed/task-2410-design-verification-evidence.yaml)
-  - [TC-2416](closed/task-2416-design-software-security-provenance.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2406](../closed/task-2406-design-safety-analysis.yaml)
+  - [TC-2408](../closed/task-2408-design-configurations-baselines.yaml)
+  - [TC-2410](../closed/task-2410-design-verification-evidence.yaml)
+  - [TC-2416](../closed/task-2416-design-software-security-provenance.yaml)
+
+  ## Executed evidence
+
+  Completed 2026-09-07. The [GCS assurance decision](../../examples/ground-control-station/design/assurance.md), draft YAML/schema and independent probe work trustworthy telemetry and command supervision through real existing procedure identities. Claims, evidence adequacy, review identity, exact subjects, obligations/tool confidence, tailoring and time-scoped waivers have separate responsibilities. Standard DSSE envelopes and public JWKs reuse existing formats; organizational authorization remains external and is never inferred from editable source.
+
+  Ran `check-assurance.py`: PASS closed case schema, eight supported/unsupported/disputed/stale/waived/readiness distinctions and an actual Node Ed25519 DSSE signing/verification fixture with public-only JWK output. Temporary private signing material was deleted. `assurance-design-verify` is in the full gate. The native implementation must exercise actual GCS evidence, cycles, wrong/stale configurations, expired exceptions, signature faults and source navigation. No compliance or release authorization claim is made.

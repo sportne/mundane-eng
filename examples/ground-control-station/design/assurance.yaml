@@ -1,0 +1,79 @@
+format: mundane-assurance-yaml-0.1
+id: ASSURANCE-GCS
+configuration:
+  scope: gcs-config
+  kind: baseline
+  id: BL-SOFTWARE-DEPLOYED
+rootClaim: CLAIM-GCS
+authors:
+- gcs-author
+requiredRole: independent-safety-reviewer
+claims:
+- id: CLAIM-GCS
+  statement: Ground supervision handles stale telemetry and ambiguous command outcomes within the simulated
+    boundary.
+  reasoning: Both freshness indication and command inhibition must be supported; field adequacy remains a
+    separate obligation.
+  children:
+  - CLAIM-STATE
+  - CLAIM-COMMAND
+  procedure:
+  evidenceScopes: []
+  requirements: []
+  safetyControls: []
+  softwareScopes:
+  - gcs-software
+- id: CLAIM-STATE
+  statement: Trustworthy state handling in the selected simulated configuration.
+  reasoning: The selected procedure and all selected runs are evaluated; a passing observation is not a safety
+    adequacy decision.
+  children: []
+  procedure:
+    scope: proc-stale
+    kind: procedure
+    id: PROC-STALE
+  evidenceScopes:
+  - evidence-stale
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-STALE
+  safetyControls:
+  - scope: gcs-safety
+    kind: control
+    id: CTRL-FRESH
+  softwareScopes: []
+- id: CLAIM-COMMAND
+  statement: Trustworthy command handling in the selected simulated configuration.
+  reasoning: The selected procedure and all selected runs are evaluated; a passing observation is not a safety
+    adequacy decision.
+  children: []
+  procedure:
+    scope: proc-combined
+    kind: procedure
+    id: PROC-COMBINED
+  evidenceScopes:
+  - evidence-combined
+  requirements:
+  - scope: gcs-req
+    kind: requirement
+    id: GCS-ACK
+  safetyControls:
+  - scope: gcs-safety
+    kind: control
+    id: CTRL-ACK
+  softwareScopes: []
+obligations:
+- id: OBL-FIELD
+  claim: CLAIM-GCS
+  description: Field applicability, hardware evidence and tool confidence need independent assessment.
+  status: open
+  rationale: Simulation and fixture tooling do not establish physical behavior or tool qualification.
+  waivable: true
+  evidenceScopes: []
+reviews: []
+waivers: []
+limitations:
+- Illustrative civilian GCS assurance case; not a regulatory compliance or flight readiness claim.
+- Key-to-person binding, reviewer qualification, organizational independence and revocation are external
+  trust-policy responsibilities.

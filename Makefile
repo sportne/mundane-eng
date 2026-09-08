@@ -320,3 +320,8 @@ native-budget: test-budget
 budget-verify: native-budget equipment-verify budget-design-verify
 	build/schema-check-venv/bin/python scripts/check-budget-workflow.py
 verify: budget-verify
+
+.PHONY: assurance-design-verify
+assurance-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-assurance.py
+verify: assurance-design-verify
