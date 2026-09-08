@@ -36,3 +36,4 @@ Current contracts and evidence for the YAML engineering tools.
 - [Equipment and connectivity](0033-equipment-and-connectivity.md) — canonical selected parts and wiring.
 
 - [Budgets and reliability](0034-budgets-and-reliability.md) — dimensional intervals and conditional availability.
+- [Assurance and review readiness](0035-assurance-and-review-readiness.md) — current support, signed scoped reviews and exceptions.

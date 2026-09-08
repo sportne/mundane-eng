@@ -74,7 +74,7 @@ undeclared repository sources. A failing declared dependency still fails the bui
 
 Each component writes to `build/maintained/components/COMPONENT/classes`; focused
 tests use its `test-classes` directory. `make test` assembles a disposable aggregate
-at `build/maintained/classes` for the existing integration scripts and runs all 21
+at `build/maintained/classes` for the existing integration scripts and runs all 22
 maintained test groups. This is a compatibility test view, never a component's
 production compile input. It is rebuilt from scratch, including after deletions.
 
@@ -155,3 +155,7 @@ for source/CLI wiring. BOM and wiring share the same checked connectivity model.
 TC-2415 adds `budget-model` (dimensional interval arithmetic and conditional repair
 models) on compiled equipment/configuration, and `budget` for source/CLI wiring.
 The three new domains bring the aggregate suite to 21 maintained groups.
+
+TC-2419 adds `assurance-model` on compiled software and evidence and `assurance`
+for source/CLI wiring. Standard DSSE/JWK verification uses the JDK; compiled checks
+have no YAML dependency. The suite has 22 maintained groups.

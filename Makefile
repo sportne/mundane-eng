@@ -325,3 +325,12 @@ verify: budget-verify
 assurance-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-assurance.py
 verify: assurance-design-verify
+
+.PHONY: test-assurance native-assurance assurance-verify
+test-assurance: yaml-dependency version-declarations
+	python3 scripts/build-components.py test assurance
+native-assurance: test-assurance
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath assurance)" -o $(abspath $(BUILD_ROOT)/mundane-assurance) engineering.assurance.AssuranceMain
+assurance-verify: native-assurance software-verify evidence-verify assurance-design-verify
+	build/schema-check-venv/bin/python scripts/check-assurance-workflow.py
+verify: assurance-verify

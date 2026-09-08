@@ -70,6 +70,6 @@ body: |2
   - [TC-2413](closed/task-2413-implement-equipment-connectivity.yaml)
   - [TC-2415](closed/task-2415-implement-budgets-reliability.yaml)
   - [TC-2417](closed/task-2417-implement-software-security-provenance.yaml)
-  - [TC-2419](task-2419-implement-assurance-reviews.yaml)
+  - [TC-2419](closed/task-2419-implement-assurance-reviews.yaml)
   - [TC-2421](task-2421-implement-release-operations.yaml)
   - [TC-2423](task-2423-implement-semantic-change-impact.yaml)

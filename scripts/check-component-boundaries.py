@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix='component-boundary-') as directory:
     for component, forbidden in [('requirements','engineering.work.WorkMain'),
             ('verification','engineering.verification.PlanCompiler'),
             ('impact','engineering.work.WorkCompiler'),
-            ('artifacts','mundanereq.Interpreter'), ('architecture-model','engineering.domainsource.Source'), ('architecture-model','mundane.yaml.Yaml'), ('configuration-model','engineering.domainsource.Source'), ('safety-model','mundane.yaml.Yaml'), ('procedure-model','engineering.domainsource.Source'), ('evidence-model','mundane.yaml.Yaml'), ('software-model','engineering.domainsource.Source'), ('equipment-model','mundane.yaml.Yaml'), ('budget-model','engineering.domainsource.Source')]:
+            ('artifacts','mundanereq.Interpreter'), ('architecture-model','engineering.domainsource.Source'), ('architecture-model','mundane.yaml.Yaml'), ('configuration-model','engineering.domainsource.Source'), ('safety-model','mundane.yaml.Yaml'), ('procedure-model','engineering.domainsource.Source'), ('evidence-model','mundane.yaml.Yaml'), ('software-model','engineering.domainsource.Source'), ('equipment-model','mundane.yaml.Yaml'), ('budget-model','engineering.domainsource.Source'), ('assurance-model','engineering.domainsource.Source')]:
         probe = temp/'BoundaryProbe.java'
         probe.write_text('class BoundaryProbe { '+forbidden+' forbidden; }\n')
         result = subprocess.run(['javac','--release','21','-sourcepath',str(empty),

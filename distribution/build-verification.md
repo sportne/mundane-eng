@@ -113,3 +113,6 @@ The full gate also runs `software-design-verify`, `software-verify`,
 `equipment-design-verify`, `equipment-verify`, `budget-design-verify` and
 `budget-verify`. Native SLSA/CycloneDX fixtures use offline upstream schemas; budget
 outputs are checked against independent Decimal reference calculations.
+
+`assurance-design-verify` and `assurance-verify` exercise signed DSSE reviews,
+explicit-time expiry, retained conflicts and exact GCS configuration evidence.

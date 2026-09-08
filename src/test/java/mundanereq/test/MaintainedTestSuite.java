@@ -25,6 +25,7 @@ public final class MaintainedTestSuite {
         engineering.software.SoftwareTest.run();
         engineering.equipment.EquipmentTest.run();
         engineering.budget.BudgetTest.run();
-        System.out.println("Passed 21 maintained test groups.");
+        engineering.assurance.AssuranceTest.run();
+        System.out.println("Passed 22 maintained test groups.");
     }
 }

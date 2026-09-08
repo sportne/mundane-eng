@@ -62,7 +62,7 @@ baseline:
     kind: native-resource
     format: version-declarations-json
     path: resources/versions.json
-    sha256: ea40f1abe2588af24da3df2c9a2b2550ff61e1422edc4042df54260a84b7de25
+    sha256: 7fd488d23a3dba5dc98dee9959e3f5bc0e290a6a1a88ca21348757bae1ece097
     required: true
     appliesTo:
     - simulation
@@ -101,7 +101,7 @@ change:
       kind: baseline
       id: BL-SIM-DESIGN
     path: configuration-sim.yaml
-    sha256: 11898faf8366fd6d284b7c131c1157dbbf761f3567c5107d23e4a04694d6c71f
+    sha256: 7d7555a00614534e5fdfedd5151a802a9dcb45ccab8131d978d3687904059714
   owner: hardware
   reason: Substitute a 200 W illustrative host for the 120 W assumption; reassess power, interfaces
     and evidence.

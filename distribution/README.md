@@ -12,3 +12,5 @@ the [build guide](build-verification.md). Other tools have independent native ta
 
 Packaging is a distribution convenience; no engineering approval or long-term
 compatibility promise follows from it. Source remains authoritative.
+
+[Assurance commands](assurance.md) inspect exact evidence, signed reviews and time-scoped obligations.

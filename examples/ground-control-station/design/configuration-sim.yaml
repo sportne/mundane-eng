@@ -62,7 +62,7 @@ baseline:
     kind: native-resource
     format: version-declarations-json
     path: resources/versions.json
-    sha256: ea40f1abe2588af24da3df2c9a2b2550ff61e1422edc4042df54260a84b7de25
+    sha256: 7fd488d23a3dba5dc98dee9959e3f5bc0e290a6a1a88ca21348757bae1ece097
     required: true
     appliesTo:
     - simulation
