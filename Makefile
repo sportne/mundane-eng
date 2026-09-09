@@ -348,3 +348,8 @@ native-operations: test-operations
 operations-verify: native-operations assurance-verify operations-design-verify
 	build/schema-check-venv/bin/python scripts/check-operations-workflow.py
 verify: operations-verify
+
+.PHONY: change-design-verify
+change-design-verify: yaml-schema-verify
+	build/schema-check-venv/bin/python examples/ground-control-station/design/check-change.py
+verify: change-design-verify

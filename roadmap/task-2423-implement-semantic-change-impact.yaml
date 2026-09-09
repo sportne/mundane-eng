@@ -62,7 +62,7 @@ body: |2
   - [GCS reference project plan](../examples/ground-control-station/README.md)
   - [Strategic roadmap](0001-initial-roadmap.md)
   - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2422](task-2422-design-semantic-change-impact.yaml)
+  - [TC-2422](closed/task-2422-design-semantic-change-impact.yaml)
   - [TC-2407](closed/task-2407-implement-safety-analysis.yaml)
   - [TC-2411](closed/task-2411-implement-verification-evidence.yaml)
   - [TC-2413](closed/task-2413-implement-equipment-connectivity.yaml)

@@ -1,0 +1,10 @@
+format: mundane-change-cases-0.1
+cases:
+- {id: telemetry, family: requirements, classification: requirement-values, effect: procedure-and-safety-review}
+- {id: server-power, family: budget, classification: quantities-and-assumptions, effect: budget-reassessment}
+- {id: cable, family: equipment, classification: connectivity, effect: budget-and-inspection-review}
+- {id: binary-dependency, family: software, classification: native-software-selection, effect: assurance-and-release-review}
+- {id: procedure, family: procedure, classification: procedure-and-criteria, effect: retained-evidence-stale}
+- {id: reviewer, family: assurance, classification: review-decisions, effect: operational-readiness-review}
+- {id: formatting, family: procedure, classification: presentation-only, effect: exact-pin-mismatch-without-value-change}
+- {id: unknown, family: future-domain, classification: unknown, effect: unresolved-review}
