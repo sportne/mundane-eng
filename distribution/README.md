@@ -16,3 +16,5 @@ compatibility promise follows from it. Source remains authoritative.
 [Assurance commands](assurance.md) inspect exact evidence, signed reviews and time-scoped obligations.
 
 [Operations commands](operations.md) reconstruct commissioning, recovery and corrective-work history.
+
+- [Change commands](change.md): revision comparison and direct selected-pin staleness.

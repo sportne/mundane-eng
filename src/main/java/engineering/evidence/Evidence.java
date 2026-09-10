@@ -11,6 +11,8 @@ import mundanereq.Versions;
 
 /** Recompute evidence interpretation from selected raw bytes, never stored verdicts. */
 public final class Evidence implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.of("run","observations-and-subjects","resource","native-evidence-selection");}
+
     public String kind(){return "evidence";}public String format(){return Versions.EVIDENCE_ARTIFACT;}public String source(){return Versions.RUN_ARTIFACT;}public String version(){return Versions.EVIDENCE_VERSION;}public String contract(){return Versions.EVIDENCE_CONTRACT;}
     public static List<Map<String,Object>> subjects(Map<String,Object> procedure){return list(procedure.get("imports")).stream().map(engineering.artifacts.Checks::map).map(e->Json.object("scope",e.get("scope"),"sha256",e.get("sha256"))).sorted(Comparator.comparing(e->text(e.get("scope")))).toList();}
     public static Map<String,Object> selectedProcedure(Model.Context c){if(c.imports.size()!=1||!c.imports.containsKey("procedure"))throw new IllegalArgumentException("evidence requires exactly the procedure import");return c.imports.get("procedure");}

@@ -18,6 +18,9 @@ import mundanereq.Versions;
 
 /** Configuration-specific argument graph; observations, human decisions and authority stay distinct. */
 public final class Assurance implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("rootClaim","argument-and-obligations"),java.util.Map.entry("authors","argument-and-obligations"),java.util.Map.entry("requiredRole","argument-and-obligations"),java.util.Map.entry("claims","argument-and-obligations"),java.util.Map.entry("obligations","argument-and-obligations"),java.util.Map.entry("reviews","review-decisions"),java.util.Map.entry("waivers","review-decisions"),java.util.Map.entry("limitations","argument-and-obligations"));}
+    public Object schema(){return engineering.artifacts.Json.read(AssuranceSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "assurance";}public String format(){return Versions.ASSURANCE_ARTIFACT;}public String source(){return Versions.ASSURANCE_SOURCE;}public String version(){return Versions.ASSURANCE_VERSION;}public String contract(){return Versions.ASSURANCE_CONTRACT;}
     public static Map<String,Model.Domain> adapters() {return new HashMap<>(Map.of("architecture",new Architecture(),"configuration",new Configuration(),"safety",new Safety(),"software",new Software(),"procedure",new Procedure(),"evidence",new Evidence(),"assurance",new Assurance()));}
     public static Model.Context context(Path root){return new Model.Context(root,adapters());}

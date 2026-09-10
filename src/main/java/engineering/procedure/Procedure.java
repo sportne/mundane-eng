@@ -10,6 +10,9 @@ import java.util.*;
 import mundanereq.Versions;
 
 public final class Procedure implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("objective","procedure-and-criteria"),java.util.Map.entry("method","procedure-and-criteria"),java.util.Map.entry("activity","procedure-and-criteria"),java.util.Map.entry("requirements","procedure-and-criteria"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("telemetryInterface","procedure-and-criteria"),java.util.Map.entry("commandInterface","procedure-and-criteria"),java.util.Map.entry("environment","procedure-and-criteria"),java.util.Map.entry("clock","procedure-and-criteria"),java.util.Map.entry("session","procedure-and-criteria"),java.util.Map.entry("events","procedure-and-criteria"),java.util.Map.entry("expected","procedure-and-criteria"),java.util.Map.entry("heartbeatInterface","procedure-and-criteria"));}
+    public Object schema(){return engineering.artifacts.Json.read(ProcedureSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "procedure";}public String format(){return Versions.PROCEDURE_ARTIFACT;}public String source(){return Versions.PROCEDURE_SOURCE;}public String version(){return Versions.PROCEDURE_VERSION;}public String contract(){return Versions.PROCEDURE_CONTRACT;}
     public static Model.Context context(Path root){return new Model.Context(root,Map.of("architecture",new Architecture(),"configuration",new Configuration(),"procedure",new Procedure()));}
     public Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {if(!kind.equals("procedure")||!values.get("id").equals(ident))throw new IllegalArgumentException("missing-target or wrong-kind");return values;}

@@ -14,6 +14,17 @@ import mundanereq.Versions;
 
 /** Selected operational history, with authored acceptance distinct from derived readiness. */
 public final class Operations implements Model.Domain {
+    public List<?> dependencies(Map<String,Object> artifact){
+        var result=new ArrayList<Object>(list(artifact.get("imports")));
+        for(var incident:Model.rows(map(artifact.get("values")),"incidents")) {
+            var work=map(incident.get("correctiveWork"));
+            result.add(Json.object("kind","work-items","format",Versions.WORK_ARTIFACT,"path",work.get("path"),"sha256",work.get("sha256")));
+        }return result;
+    }
+
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("candidates","operational-history"),java.util.Map.entry("plans","operational-history"),java.util.Map.entry("executions","operational-history"),java.util.Map.entry("compatibility","operational-history"),java.util.Map.entry("incidents","operational-history"),java.util.Map.entry("limitations","operational-history"));}
+    public Object schema(){return engineering.artifacts.Json.read(OperationsSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "operations";}public String format(){return Versions.OPERATIONS_ARTIFACT;}public String source(){return Versions.OPERATIONS_SOURCE;}public String version(){return Versions.OPERATIONS_VERSION;}public String contract(){return Versions.OPERATIONS_CONTRACT;}
     public static Model.Context context(Path root){var adapters=Assurance.adapters();adapters.put("operations",new Operations());return new Model.Context(root,adapters);}
     public Map<String,Object> lookup(Map<String,Object> v,String kind,String id){if(!kind.equals("candidate"))throw new IllegalArgumentException("wrong operations reference");return Model.find(Model.rows(v,"candidates"),id);}

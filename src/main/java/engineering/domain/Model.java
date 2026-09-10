@@ -11,6 +11,9 @@ public final class Model {
     private Model() {}
     public interface Domain {
         String kind(); String format(); String source(); String version(); String contract();
+        default List<?> dependencies(Map<String,Object> artifact){return list(artifact.get("imports"));}
+        default Map<String,String> changeGroups(){return Map.of();}
+        default Object schema(){throw new IllegalArgumentException("schema assistance unsupported");}
         void validate(Map<String,Object> values,Context context);
         String view(Map<String,Object> artifact,Context context);
         default Map<String,Object> lookup(Map<String,Object> values,String kind,String ident) {throw new IllegalArgumentException("unsupported reference kind "+kind);}
@@ -22,9 +25,10 @@ public final class Model {
         public final Map<String,Map<String,Object>> selections=new TreeMap<>();
         private final Map<String,Domain> adapters;
         private final int depth;
-        public Context(Path root,Map<String,Domain> adapters) {this(root,adapters,new Snapshots(root),0);}
-        private Context(Path root,Map<String,Domain> adapters,Snapshots snapshots,int depth) {if(depth>16)throw new IllegalArgumentException("import depth exceeds 16");this.root=root;this.snapshots=snapshots;this.adapters=adapters;this.depth=depth;}
-        public Context child(){return new Context(root,adapters,snapshots,depth+1);}
+        private final Set<String> validated;
+        public Context(Path root,Map<String,Domain> adapters) {this(root,adapters,new Snapshots(root),0,new HashSet<>());}
+        private Context(Path root,Map<String,Domain> adapters,Snapshots snapshots,int depth,Set<String> validated) {if(depth>16)throw new IllegalArgumentException("import depth exceeds 16");this.root=root;this.snapshots=snapshots;this.adapters=adapters;this.depth=depth;this.validated=validated;}
+        public Context child(){return new Context(root,adapters,snapshots,depth+1,validated);}
         public void select(Object entries) {
             for(Object item:list(entries)) {
                 var e=map(item);keys(e,"scope","kind","format","path","sha256");String scope=id(e.get("scope"));
@@ -85,7 +89,15 @@ public final class Model {
         if(value instanceof Map<?,?>)for(var e:map(value).entrySet())pointers(e.getValue(),mundane.json.Json.pointer(at,e.getKey()),locs);
         else if(value instanceof List<?> a)for(int i=0;i<a.size();i++)pointers(a.get(i),at+"/"+i,locs);
     }
-    public static void validateSelected(Map<String,Object> a,Domain domain,Context parent) {envelope(a,domain);var nested=parent.child();nested.select(a.get("imports"));domain.validate(map(a.get("values")),nested);}
+    public static void validateSelected(Map<String,Object> a,Domain domain,Context parent) {
+        envelope(a,domain);
+        // Memoize only successful validation of identical compiled bytes within this
+        // command. All transitive input snapshots remain subject to final recheck.
+        String key=domain.getClass().getName()+":"+parent.depth+":"+Snapshots.hash(Json.bytes(a));
+        if(parent.validated.contains(key))return;
+        var nested=parent.child();nested.select(a.get("imports"));domain.validate(map(a.get("values")),nested);
+        parent.validated.add(key);
+    }
     public static Map<String,Object> read(Path file,Context context,Domain domain) {
         var a=map(Snapshots.json(context.snapshots.read(context.snapshots.argument(file))));envelope(a,domain);context.select(a.get("imports"));domain.validate(map(a.get("values")),context);return a;
     }

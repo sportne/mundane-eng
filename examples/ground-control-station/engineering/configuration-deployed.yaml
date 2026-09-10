@@ -35,7 +35,7 @@ baseline:
     path: versions.json
     required: true
     scope: tool-versions
-    sha256: 8a83afd7a7ca115caa467b1ead4550c7009ce65312f6e60f63329b628d7939ec
+    sha256: ba49b3cbc868bfdc9ebdb53ee15987dffa6ec4aeb849f14032d0fdb94770b6a9
   - appliesTo: [simulation, field-proposed]
     format: mundanereq-yaml-0.4
     kind: native-resource
@@ -58,11 +58,11 @@ baseline:
     scope: gcs-arch-source
     sha256: bbe25e4bb4470d2f18244702909e14b4c46029066042f30df177198eb64df1d8
   sourceMappings:
-  - {artifactScope: gcs-req, memberScope: gcs-req-source, sourcePath: 
+  - {artifactScope: gcs-req, memberScope: gcs-req-source, sourcePath:
       source/requirements.yaml}
-  - {artifactScope: gcs-req, memberScope: gcs-attribute-source, sourcePath: 
+  - {artifactScope: gcs-req, memberScope: gcs-attribute-source, sourcePath:
       source/attributes.yaml}
-  - {artifactScope: gcs-arch, memberScope: gcs-arch-source, sourcePath: 
+  - {artifactScope: gcs-arch, memberScope: gcs-arch-source, sourcePath:
       architecture.yaml}
 change: null
 configuration:
@@ -82,5 +82,5 @@ format: mundane-configuration-yaml-0.1
 previous:
   path: configuration-built.json
   ref: {id: BL-SIM-BUILT, kind: baseline, scope: previous}
-  sha256: 311cb1bce51c737e527f7c2ec20dd2c394763b2b1bc3faa29e491ed8d0799969
+  sha256: cf49ccefdd02b98d40716e11f7e1854b56d18f7fea7f13c06160e55600175d08
 purpose: simulation-engineering

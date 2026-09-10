@@ -38,3 +38,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [Budgets and reliability](0034-budgets-and-reliability.md) — dimensional intervals and conditional availability.
 - [Assurance and review readiness](0035-assurance-and-review-readiness.md) — current support, signed scoped reviews and exceptions.
 - [Release and operational traceability](0036-release-and-operational-traceability.md) — selected candidates, executed history and corrective closure.
+
+- [Semantic change and staleness](0037-semantic-change-and-staleness.md): explicit compiled inventories and owner classifications.

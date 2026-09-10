@@ -10,6 +10,16 @@ import mundanereq.Versions;
 
 /** Configuration identity, applicability and resource checks; no source readers. */
 public final class Configuration implements Model.Domain {
+    public List<?> dependencies(Map<String,Object> artifact){
+        var result=new ArrayList<Object>(list(artifact.get("imports")));var v=map(artifact.get("values"));
+        for(var member:Model.rows(map(v.get("baseline")),"members"))if(Set.of("requirements","architecture").contains(member.get("kind")))result.add(member);
+        if(v.get("previous")!=null){var p=map(v.get("previous"));result.add(Json.object("kind","configuration","format",format(),"path",p.get("path"),"sha256",p.get("sha256")));}
+        return result;
+    }
+
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("purpose","baseline-selection"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("baseline","baseline-selection"),java.util.Map.entry("previous","baseline-selection"),java.util.Map.entry("change","baseline-selection"));}
+    public Object schema(){return engineering.artifacts.Json.read(ConfigurationSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "configuration";} public String format(){return Versions.CONFIGURATION_ARTIFACT;}
     public String source(){return Versions.CONFIGURATION_SOURCE;} public String version(){return Versions.CONFIGURATION_VERSION;} public String contract(){return Versions.CONFIGURATION_CONTRACT;}
     public static Model.Context context(Path root) {return new Model.Context(root,Map.of("architecture",new Architecture(),"configuration",new Configuration()));}

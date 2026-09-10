@@ -12,6 +12,9 @@ import mundanereq.Versions;
 
 /** Canonical selected parts and connectivity. Electrical judgments stay explicit. */
 public final class Equipment implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("basis","parts-and-assumptions"),java.util.Map.entry("parts","parts-and-assumptions"),java.util.Map.entry("instances","parts-and-assumptions"),java.util.Map.entry("cables","connectivity"),java.util.Map.entry("assumptions","parts-and-assumptions"),java.util.Map.entry("substitutions","parts-and-assumptions"));}
+    public Object schema(){return engineering.artifacts.Json.read(EquipmentSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "equipment";}
     public String format(){return Versions.EQUIPMENT_ARTIFACT;}
     public String source(){return Versions.EQUIPMENT_SOURCE;}

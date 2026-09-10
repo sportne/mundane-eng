@@ -11,6 +11,9 @@ import mundanereq.Versions;
 
 /** Typed safety facts and explained gaps; no inferred risk acceptance. */
 public final class Safety implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("context","hazards-controls-and-assumptions"),java.util.Map.entry("severityScale","hazards-controls-and-assumptions"),java.util.Map.entry("assumptions","hazards-controls-and-assumptions"),java.util.Map.entry("causes","hazards-controls-and-assumptions"),java.util.Map.entry("hazards","hazards-controls-and-assumptions"),java.util.Map.entry("controls","hazards-controls-and-assumptions"),java.util.Map.entry("failureModes","hazards-controls-and-assumptions"),java.util.Map.entry("faultTree","hazards-controls-and-assumptions"),java.util.Map.entry("reviewedAgainst","selected-revision"));}
+    public Object schema(){return engineering.artifacts.Json.read(SafetySchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "safety";}public String format(){return Versions.SAFETY_ARTIFACT;}public String source(){return Versions.SAFETY_SOURCE;}public String version(){return Versions.SAFETY_VERSION;}public String contract(){return Versions.SAFETY_CONTRACT;}
     public static Model.Context context(Path root){return new Model.Context(root,Map.of("architecture",new Architecture(),"configuration",new Configuration()));}
     private static final Map<String,String> GROUPS=Map.of("hazard","hazards","control","controls","cause","causes","assumption","assumptions","failure-mode","failureModes");

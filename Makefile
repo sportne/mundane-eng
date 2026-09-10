@@ -353,3 +353,12 @@ verify: operations-verify
 change-design-verify: yaml-schema-verify
 	build/schema-check-venv/bin/python examples/ground-control-station/design/check-change.py
 verify: change-design-verify
+
+.PHONY: test-change native-change change-verify
+test-change: yaml-dependency version-declarations
+	python3 scripts/build-components.py test change
+native-change: test-change
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath change)" -o $(abspath $(BUILD_ROOT)/mundane-change) engineering.change.ChangeMain
+change-verify: native-change operations-verify budget-verify change-design-verify
+	build/schema-check-venv/bin/python scripts/check-change-workflow.py
+verify: change-verify

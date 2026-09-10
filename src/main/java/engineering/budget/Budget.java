@@ -14,6 +14,9 @@ import mundanereq.Versions;
 
 /** Bounded resource budgets and conditional repairable availability; no safety scoring. */
 public final class Budget implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("equipmentScope","selected-revision"),java.util.Map.entry("reviewedEquipmentSha256","selected-revision"),java.util.Map.entry("parameters","quantities-and-assumptions"),java.util.Map.entry("formulas","quantities-and-assumptions"),java.util.Map.entry("checks","quantities-and-assumptions"),java.util.Map.entry("reliability","quantities-and-assumptions"),java.util.Map.entry("limitations","quantities-and-assumptions"));}
+    public Object schema(){return engineering.artifacts.Json.read(BudgetSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "budget";}
     public String format(){return Versions.BUDGET_ARTIFACT;}
     public String source(){return Versions.BUDGET_SOURCE;}

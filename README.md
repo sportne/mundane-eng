@@ -101,3 +101,5 @@ The GCS reference also exercises [software provenance/security](distribution/sof
 [equipment and wiring](distribution/equipment.md), and [budgets/reliability](distribution/budget.md), and [assurance reviews](distribution/assurance.md) and [operational history](distribution/operations.md).
 Native SLSA/in-toto and CycloneDX artifacts retain their standard formats; project
 selections and judgments remain YAML.
+
+The GCS [change workflow](distribution/change.md) compares compiled revisions and explains direct staleness separately from prospective impact.

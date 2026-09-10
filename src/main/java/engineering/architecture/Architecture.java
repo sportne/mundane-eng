@@ -9,6 +9,9 @@ import mundanereq.Versions;
 
 /** Architecture meaning and compiled boundary. No YAML dependency. */
 public final class Architecture implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("context","architecture-and-interfaces"),java.util.Map.entry("initialMode","architecture-and-interfaces"),java.util.Map.entry("modes","architecture-and-interfaces"),java.util.Map.entry("components","architecture-and-interfaces"),java.util.Map.entry("functions","architecture-and-interfaces"),java.util.Map.entry("interfaces","architecture-and-interfaces"),java.util.Map.entry("transitions","architecture-and-interfaces"),java.util.Map.entry("decisions","architecture-and-interfaces"),java.util.Map.entry("deployments","architecture-and-interfaces"));}
+    public Object schema(){return engineering.artifacts.Json.read(ArchitectureSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "architecture";} public String format(){return Versions.ARCHITECTURE_ARTIFACT;}
     public String source(){return Versions.ARCHITECTURE_SOURCE;} public String version(){return Versions.ARCHITECTURE_VERSION;} public String contract(){return Versions.ARCHITECTURE_CONTRACT;}
     private static final Map<String,String> GROUPS=Map.of("mode","modes","component","components","function","functions","interface","interfaces","decision","decisions","transition","transitions","deployment","deployments");

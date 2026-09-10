@@ -1,96 +1,96 @@
-format: mundane-configuration-yaml-0.1
-purpose: design-probe-only
-configuration:
-  id: CFG-FIELD-DESIGN
-  stage: designed
-  environment: field-proposed
-  observationBasis: design-intent
-  selections:
-  - slot: requirements
-    memberScope: gcs-req
-  - slot: architecture
-    memberScope: gcs-arch-source
-  - slot: host
-    memberScope: host
-  - slot: workflow-source
-    memberScope: seed-tool
-  - slot: tool-versions
-    memberScope: tool-versions
-  - slot: gcs-req-source
-    memberScope: gcs-req-source
-  - slot: gcs-attribute-source
-    memberScope: gcs-attribute-source
 baseline:
   id: BL-FIELD-DESIGN
   members:
-  - scope: gcs-req
-    kind: requirements
+  - appliesTo:
+    - simulation
+    - field-proposed
     format: mundanereq-requirements-0.2
+    kind: requirements
     path: resources/requirements.json
+    required: true
+    scope: gcs-req
     sha256: 33ce6bf9fbce9dd5def3eecb065da32510a9beaf45a3edd7ac8ce0420dec9a63
-    required: true
-    appliesTo:
+  - appliesTo:
     - simulation
     - field-proposed
-  - scope: gcs-arch-source
-    kind: architecture-source
     format: mundane-architecture-yaml-0.1
+    kind: architecture-source
     path: resources/architecture.yaml
+    required: true
+    scope: gcs-arch-source
     sha256: bbe25e4bb4470d2f18244702909e14b4c46029066042f30df177198eb64df1d8
-    required: true
-    appliesTo:
-    - simulation
+  - appliesTo:
     - field-proposed
-  - scope: host
-    kind: native-resource
     format: gcs-equipment-assumption-0.1
+    kind: native-resource
     path: resources/server-field.yaml
+    required: true
+    scope: host
     sha256: d07f2122e584918d9f114015b61ac53ba9a8f70cb99b0c5cf98d245aed1f24f7
-    required: true
-    appliesTo:
+  - appliesTo:
+    - simulation
     - field-proposed
-  - scope: seed-tool
-    kind: native-resource
     format: python-source
+    kind: native-resource
     path: resources/seed.py
+    required: true
+    scope: seed-tool
     sha256: 3d984a8bd519a4fc039a37ac1fe52ac4069298662cd0dc897cac15cc2235b540
-    required: true
-    appliesTo:
+  - appliesTo:
     - simulation
     - field-proposed
-  - scope: tool-versions
-    kind: native-resource
     format: version-declarations-json
+    kind: native-resource
     path: resources/versions.json
-    sha256: 8a83afd7a7ca115caa467b1ead4550c7009ce65312f6e60f63329b628d7939ec
     required: true
-    appliesTo:
+    scope: tool-versions
+    sha256: ba49b3cbc868bfdc9ebdb53ee15987dffa6ec4aeb849f14032d0fdb94770b6a9
+  - appliesTo:
     - simulation
     - field-proposed
-  - scope: gcs-req-source
-    kind: native-resource
     format: mundanereq-yaml-0.4
-    path: resources/requirement-source.yaml
-    sha256: 8f88ee036f91ec251989b0e4bf6aefd7e23cc3a8c94b210d64709d3c6ea6d825
-    required: true
-    appliesTo:
-    - simulation
-    - field-proposed
-  - scope: gcs-attribute-source
     kind: native-resource
-    format: mundanereq-attributes-yaml-0.1
-    path: resources/attribute-source.yaml
-    sha256: f16c8ace147a163e50ef995b8bd189cfb1d938e38fb1088dff6ef572f8c8f649
+    path: resources/requirement-source.yaml
     required: true
-    appliesTo:
+    scope: gcs-req-source
+    sha256: 8f88ee036f91ec251989b0e4bf6aefd7e23cc3a8c94b210d64709d3c6ea6d825
+  - appliesTo:
     - simulation
     - field-proposed
+    format: mundanereq-attributes-yaml-0.1
+    kind: native-resource
+    path: resources/attribute-source.yaml
+    required: true
+    scope: gcs-attribute-source
+    sha256: f16c8ace147a163e50ef995b8bd189cfb1d938e38fb1088dff6ef572f8c8f649
   sourceMappings:
   - artifactScope: gcs-req
-    sourcePath: source/requirements.yaml
     memberScope: gcs-req-source
+    sourcePath: source/requirements.yaml
   - artifactScope: gcs-req
-    sourcePath: source/attributes.yaml
     memberScope: gcs-attribute-source
-previous: null
+    sourcePath: source/attributes.yaml
 change: null
+configuration:
+  environment: field-proposed
+  id: CFG-FIELD-DESIGN
+  observationBasis: design-intent
+  selections:
+  - memberScope: gcs-req
+    slot: requirements
+  - memberScope: gcs-arch-source
+    slot: architecture
+  - memberScope: host
+    slot: host
+  - memberScope: seed-tool
+    slot: workflow-source
+  - memberScope: tool-versions
+    slot: tool-versions
+  - memberScope: gcs-req-source
+    slot: gcs-req-source
+  - memberScope: gcs-attribute-source
+    slot: gcs-attribute-source
+  stage: designed
+format: mundane-configuration-yaml-0.1
+previous: null
+purpose: design-probe-only

@@ -13,6 +13,9 @@ import mundanereq.Versions;
 
 /** Project security relationships; native producers retain their facts and formats. */
 public final class Software implements Model.Domain {
+    public java.util.Map<String,String> changeGroups(){return java.util.Map.ofEntries(java.util.Map.entry("id","identity"),java.util.Map.entry("configuration","selected-revision"),java.util.Map.entry("build","native-software-selection"),java.util.Map.entry("scan","native-software-selection"),java.util.Map.entry("boundaries","security-model"),java.util.Map.entry("threats","security-model"),java.util.Map.entry("controls","security-model"),java.util.Map.entry("reviews","review-decisions"),java.util.Map.entry("limitations","security-model"));}
+    public Object schema(){return engineering.artifacts.Json.read(SoftwareSchema.JSON.getBytes(java.nio.charset.StandardCharsets.UTF_8));}
+
     public String kind(){return "software";}
     public String format(){return Versions.SOFTWARE_ARTIFACT;}
     public String source(){return Versions.SOFTWARE_SOURCE;}
