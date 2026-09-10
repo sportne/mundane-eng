@@ -20,6 +20,7 @@ COMPONENTS = {
     'budget': (['budget-model','domain-source'], [MAIN+'engineering/budget/BudgetMain.java']),
     'equipment-model': (['configuration-model'], [MAIN+'engineering/equipment/Equipment.java', 'build/maintained/generated/engineering/equipment/EquipmentSchema.java']),
     'equipment': (['equipment-model','domain-source'], [MAIN+'engineering/equipment/EquipmentMain.java']),
+    'review': (['change-model'], [MAIN+'engineering/review/*.java']),
     'change-model': (['operations-model','budget-model'], [MAIN+'engineering/change/Change.java', MAIN+'engineering/change/Owners.java', 'build/maintained/generated/engineering/change/ChangeSchema.java']),
     'change': (['change-model','domain-source'], [MAIN+'engineering/change/ChangeMain.java']),
     'operations-model': (['assurance-model','work-model'], [MAIN+'engineering/operations/Operations.java', 'build/maintained/generated/engineering/operations/OperationsSchema.java']),

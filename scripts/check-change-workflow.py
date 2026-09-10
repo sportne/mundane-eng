@@ -1,5 +1,5 @@
 """Real GCS mutations over retained compiled revisions; no source readers in the consumer."""
-import copy,importlib.util,json,shutil,subprocess,tempfile
+import copy,importlib.util,json,re,shutil,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 s=importlib.util.spec_from_file_location('gcs_assurance',ROOT/'scripts/check-assurance-workflow.py');a=importlib.util.module_from_spec(s);s.loader.exec_module(a)
@@ -36,7 +36,7 @@ def mutate(root,case):
  elif case=='procedure':d['expected'][0]['withinMs']+=1
  elif case=='reviewer':d['reviews'][0]['decision']='disputed' # deliberately no re-sign: preserve the invalidated old signature
  new='changed-'+case+'-'+file
- if case=='formatting':(root/new).write_text('# presentation only\n'+(root/file).read_text())
+ if case=='formatting':(root/new).write_text('# presentation only\n'+re.sub(r'(withinMs: )([0-9]+)',r'\g<1>\g<2>.0',(root/file).read_text()))
  else:yaml.dump(d,root/new)
  output=str(Path(new).with_suffix('.json'));(root/output).write_bytes(run(root,tool,'compile','--imports',imports,new));return scope,tool,output
 def verify():

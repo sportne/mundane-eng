@@ -31,23 +31,39 @@ public final class Owners {
     }
     public static Map<String,Object> origin(Map<String,Object> a,String pointer) {
         Map<String,Object> loc=null;
+        String[] tokens=pointer.split("/");
+        if(pointer.startsWith("/declarations")&&a.get("attributeSchema") instanceof Map<?,?>){
+            var declaration=map(a.get("attributeSchema"));var spans=map(declaration.get("locations"));
+            Object selected=tokens.length>3?spans.get(tokens[3].replace("~1","/").replace("~0","~")):null;
+            if(selected==null&&!spans.isEmpty())selected=spans.values().iterator().next();
+            if(selected!=null)return Json.object("source",declaration.get("source"),"location",point(map(selected)));
+        }
         if(a.containsKey("locations")){
             var locations=map(a.get("locations"));String at=pointer;
             while(!locations.containsKey(at)&&!at.isEmpty())at=at.substring(0,Math.max(0,at.lastIndexOf('/')));
             loc=map(locations.getOrDefault(at,locations.get("")));
         } else {
-            String kind=text(a.get("artifactKind"));String field=kind.equals("requirements")?"requirements":kind.equals("work-items")?"items":"plans";
+            String kind=text(a.get("artifactKind"));String field=kind.equals("requirements")?"requirements":kind.equals("work-items")?"items":tokens.length>1&&Set.of("plans","activities","coverage").contains(tokens[1])?tokens[1]:"plans";
             var rows=Model.rows(a,field);int index=0;String[] parts=pointer.split("/");
             if(parts.length>2&&parts[2].matches("[0-9]+"))index=Math.min(Integer.parseInt(parts[2]),Math.max(0,rows.size()-1));
             if(!rows.isEmpty()){
                 var row=rows.get(index);
-                if(kind.equals("requirements")){var span=map(map(row.get("locations")).get("record"));loc=Json.object("path",span.get("path"),"line",map(span.get("start")).get("line"),"column",map(span.get("start")).get("column"));}
+                if(kind.equals("requirements")){
+                    var locations=map(row.get("locations"));var span=map(locations.get("record"));
+                    if(parts.length>3){
+                        var fields=map(locations.get("fields"));Object matches=fields.get(parts[3]);
+                        if(matches instanceof List<?> list&&!list.isEmpty())span=map(list.getFirst());
+                        if(parts[3].equals("attributes")&&parts.length>4&&map(locations.get("attributes")).get(parts[4]) instanceof Map<?,?> attribute)span=map(map(attribute).get("value"));
+                    }
+                    loc=point(span);
+                }
                 else loc=map(row.get("location"));
             }
         }
         if(loc==null)return Map.of();String file=text(loc.get("path"));var source=Model.rows(a,"sources").stream().filter(x->x.get("path").equals(file)).findFirst().orElse(null);
         return source==null?Map.of():Json.object("source",source,"location",loc);
     }
+    private static Map<String,Object> point(Map<String,Object> span){return Json.object("path",span.get("path"),"line",map(span.get("start")).get("line"),"column",map(span.get("start")).get("column"));}
     public static String link(Map<String,Object> origin,Model.Context c,String label) {
         if(origin.isEmpty())return Model.escape(label)+" (source unavailable)";
         var loc=map(origin.get("location"));var source=map(origin.get("source"));

@@ -141,14 +141,14 @@ public final class EngineeringEditor {
                     var targets=targets(file,scope,kind,imports).stream().filter(t->t.id.equals(id)).toList();
                     if(targets.size()!=1)diagnostics.add(diagnostic(file.path,point(file.document,at),"engineering-reference","Unresolved typed "+scope+":"+kind+":"+id));
                     else if(scope.equals("self")){
-                        String targetPointer=findId(file.values,id,"",file.document);if(targetPointer!=null)definitions.add(Json.object("id",file.path+":"+kind+":"+id,"location",span(file.path,file.document.values().get(targetPointer)),"references",List.of(Json.object("id",file.path+":"+kind+":"+id,"location",reference))));
+                        String targetPointer=findId(file.values,id,"",targets.getFirst().value);if(targetPointer!=null)definitions.add(Json.object("id",file.path+":"+kind+":"+id,"location",span(file.path,file.document.values().get(targetPointer)),"references",List.of(Json.object("id",file.path+":"+kind+":"+id,"location",reference))));
                     }else{
-                        var target=targets.getFirst();String targetPointer=findId(Owners.values(target.artifact),id,"",null);var origin=Owners.origin(target.artifact,targetPointer==null?"":targetPointer);
+                        var target=targets.getFirst();String targetPointer=findId(Owners.values(target.artifact),id,"",target.value);var origin=Owners.origin(target.artifact,targetPointer==null?"":targetPointer);
                         if(!origin.isEmpty()){
                             var selected=map(origin.get("source"));String text=sources.get(selected.get("path"));
                             if(text!=null&&Snapshots.hash(text.getBytes(StandardCharsets.UTF_8)).equals(selected.get("sha256"))){
                                 // Refine a source point to the exact YAML ID scalar, only at the pinned source revision.
-                                try{var doc=Yaml.document(text.getBytes(StandardCharsets.UTF_8),1024*1024,true);String p=findId(doc.value(),id,"",doc);
+                                try{var doc=Yaml.document(text.getBytes(StandardCharsets.UTF_8),1024*1024,true);String p=findId(doc.value(),id,"",target.value);
                                     if(p!=null)navigation.add(Json.object("reference",reference,"target",span(text(selected.get("path")),doc.values().get(p))));
                                 }catch(IllegalArgumentException ignored){}
                             }
@@ -159,9 +159,21 @@ public final class EngineeringEditor {
             for(var e:m.entrySet())walkReferences(file,e.getValue(),mundane.json.Json.pointer(pointer,e.getKey()),imports,sources,diagnostics,definitions,navigation);
         }else if(value instanceof List<?> list)for(int i=0;i<list.size();i++)walkReferences(file,list.get(i),pointer+"/"+i,imports,sources,diagnostics,definitions,navigation);
     }
-    private static String findId(Object value,String id,String pointer,Yaml.Document doc){
-        if(value instanceof Map<?,?>){var m=map(value);if(id.equals(m.get("id"))&&!m.containsKey("scope"))return pointer+"/id";for(var e:m.entrySet()){String result=findId(e.getValue(),id,mundane.json.Json.pointer(pointer,e.getKey()),doc);if(result!=null)return result;}}
-        else if(value instanceof List<?> list)for(int i=0;i<list.size();i++){String result=findId(list.get(i),id,pointer+"/"+i,doc);if(result!=null)return result;}
-        return null;
+    private static String findId(Object value,String id,String pointer,Map<String,Object> target){
+        var all=new ArrayList<String>();var matching=new ArrayList<String>();
+        findIds(value,id,pointer,target,all,matching);
+        return matching.size()==1?matching.getFirst():all.size()==1?all.getFirst():null;
+    }
+    private static void findIds(Object value,String id,String pointer,Map<String,Object> target,List<String> all,List<String> matching){
+        if(value instanceof Map<?,?>){
+            var m=map(value);
+            if(id.equals(m.get("id"))&&!m.containsKey("scope")){
+                all.add(pointer+"/id");
+                var candidate=new TreeMap<>(m);candidate.remove("format");
+                var expected=new TreeMap<>(target);expected.remove("format");
+                if(Json.write(candidate).equals(Json.write(expected)))matching.add(pointer+"/id");
+            }
+            for(var e:m.entrySet())findIds(e.getValue(),id,mundane.json.Json.pointer(pointer,e.getKey()),target,all,matching);
+        }else if(value instanceof List<?> list)for(int i=0;i<list.size();i++)findIds(list.get(i),id,pointer+"/"+i,target,all,matching);
     }
 }

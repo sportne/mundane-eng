@@ -7,6 +7,9 @@ public final class ChangeTest {
         var differences=Change.differences(Json.object("limit",1),Json.object("limit",2),"",Map.of("limit","timing"));
         if(!differences.getFirst().get("classification").equals("timing"))throw new AssertionError();
         if(!Change.differences(Json.object("future",1),Json.object("future",2),"",Map.of()).getFirst().get("classification").equals("unknown"))throw new AssertionError();
+        if(!Change.differences(Json.object("limit",1),Json.object("limit",new java.math.BigDecimal("1.00")),"",Map.of("limit","timing")).isEmpty())throw new AssertionError("numeric spelling changed meaning");
+        var absent=Change.differences(Map.of(),Json.object("limit",null),"",Map.of("limit","timing"));
+        if(absent.size()!=1||!Boolean.FALSE.equals(absent.getFirst().get("beforePresent")))throw new AssertionError("absent versus null was lost");
         var graph=Json.object("nodes",List.of(Json.object("scope","a"),Json.object("scope","b"),Json.object("scope","c")),"edges",List.of(Json.object("from","a","to","b"),Json.object("from","b","to","a"),Json.object("from","b","to","c")));
         if(Change.paths(graph,"a",1).size()!=1||Change.paths(graph,"a",2).size()!=2)throw new AssertionError("bounded cyclic traversal");
         var root=java.nio.file.Files.createTempDirectory("change-validation-cache-");

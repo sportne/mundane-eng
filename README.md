@@ -106,3 +106,6 @@ The GCS [change workflow](distribution/change.md) compares compiled revisions an
 
 The optional [engineering editor bridge](editors/vscode/ENGINEERING.md) adds GCS
 artifact authoring, typed imported navigation and access to generated review views.
+
+[Engineering review views](distribution/review.md) combine selected GCS domain
+results, baseline/scenario filters and source-linked unresolved work.

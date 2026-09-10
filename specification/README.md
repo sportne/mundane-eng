@@ -40,3 +40,5 @@ Current contracts and evidence for the YAML engineering tools.
 - [Release and operational traceability](0036-release-and-operational-traceability.md) — selected candidates, executed history and corrective closure.
 
 - [Semantic change and staleness](0037-semantic-change-and-staleness.md): explicit compiled inventories and owner classifications.
+
+- [Engineering review views](0038-engineering-review-views.md): compiled domain composition, explicit filters and source provenance.

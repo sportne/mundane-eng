@@ -18,3 +18,5 @@ compatibility promise follows from it. Source remains authoritative.
 [Operations commands](operations.md) reconstruct commissioning, recovery and corrective-work history.
 
 - [Change commands](change.md): revision comparison and direct selected-pin staleness.
+
+- [Engineering review commands](review.md): source-linked cross-domain views with explicit baseline/scenario selection.

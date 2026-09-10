@@ -368,3 +368,11 @@ verify: change-verify
 native-engineering-editor: yaml-dependency editor-version-declarations
 	python3 scripts/build-components.py build engineering-editor
 	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath engineering-editor)" -o $(abspath $(BUILD_ROOT)/mundane-engineering-editor) engineering.editor.EngineeringEditorMain
+
+.PHONY: native-review review-verify
+native-review: yaml-dependency version-declarations
+	python3 scripts/build-components.py build review
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath review)" -o $(abspath $(BUILD_ROOT)/mundane-review) engineering.review.ReviewMain
+review-verify: native-review change-verify
+	build/schema-check-venv/bin/python scripts/check-review-workflow.py
+verify: review-verify

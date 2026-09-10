@@ -66,4 +66,4 @@ body: |2
   - [TC-2402](closed/task-2402-seed-existing-tool-workflow.yaml)
   - [TC-2423](closed/task-2423-implement-semantic-change-impact.yaml)
   - [TC-2424](closed/task-2424-extend-editor-artifact-workflows.yaml)
-  - [TC-2425](task-2425-deliver-engineering-review-views.yaml)
+  - [TC-2425](closed/task-2425-deliver-engineering-review-views.yaml)

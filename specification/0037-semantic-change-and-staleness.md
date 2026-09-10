@@ -9,7 +9,7 @@ different scopes. Duplicate, malformed or mismatched selections fail validation.
 
 Each domain owns a finite top-level classification of its compiled engineering
 values. Requirements include attribute values/declarations; plans include planned
-coverage; work includes corrective records. Array order is meaningful. Differences
+coverage; work includes corrective records. Array order is meaningful. Numerically equal decimal spellings have the same\nmeaning; an absent field remains distinct from an explicitly null field. Differences
 retain normalized values, classifications and both source origins. Imported pins
 are compared separately from values. Equal values and imports with changed source
 provenance are presentation-only; this does not make compiled bytes identical.

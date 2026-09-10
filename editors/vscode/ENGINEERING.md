@@ -43,7 +43,7 @@ The twelve additional source families are selectable in this bridge. Existing\nr
 scalars. Strings that name scopes, resource paths or related IDs are not silently
 treated as typed references. Cross-file navigation uses pinned compiled indexes;
 an unsaved target does not replace that selected revision. Matching origin bytes
-enable navigation to the exact YAML ID scalar; missing or changed origins disable
+enable navigation to the exact YAML ID scalar. When names repeat across record\nkinds, matching uses the typed record values; ambiguous matches suppress navigation; missing or changed origins disable
 the link while preserving the compiled index. Import validation checks the envelope
 and schema, not transitive native resources or reviewer signatures.
 

@@ -31,17 +31,28 @@ public final class Change implements Model.Domain {
         var result=new ArrayList<Map<String,Object>>();diff(before,after,at,groups,result,0);return result;
     }
     private static void diff(Object a,Object b,String at,Map<String,String> groups,List<Map<String,Object>> out,int depth) {
+        if(a instanceof Number&&b instanceof Number&&new java.math.BigDecimal(a.toString()).compareTo(new java.math.BigDecimal(b.toString()))==0)return;
         if(Json.write(a).equals(Json.write(b)))return;
-        if(depth>40||out.size()>10000)throw new IllegalArgumentException("change comparison limit");
+        if(depth>40||out.size()>=10000)throw new IllegalArgumentException("change comparison limit");
         if(a instanceof Map<?,?>&&b instanceof Map<?,?>) {
             var left=map(a);var right=map(b);Set<String> keys=new TreeSet<>(left.keySet());keys.addAll(right.keySet());
-            for(String key:keys)diff(left.get(key),right.get(key),mundane.json.Json.pointer(at,key),groups,out,depth+1);
+            for(String key:keys){
+                String pointer=mundane.json.Json.pointer(at,key);
+                if(!left.containsKey(key)||!right.containsKey(key)){
+                    if(out.size()>=10000)throw new IllegalArgumentException("change comparison limit");
+                    var change=difference(left.get(key),right.get(key),pointer,groups);
+                    change.put("beforePresent",left.containsKey(key));change.put("afterPresent",right.containsKey(key));out.add(change);
+                }else diff(left.get(key),right.get(key),pointer,groups,out,depth+1);
+            }
         } else if(a instanceof List<?> left&&b instanceof List<?> right&&left.size()==right.size()) {
             for(int i=0;i<left.size();i++)diff(left.get(i),right.get(i),at+"/"+i,groups,out,depth+1);
         } else {
-            String field=at.split("/",-1).length>1?at.split("/",-1)[1].replace("~1","/").replace("~0","~"):"";
-            out.add(Json.object("pointer",at,"classification",groups.getOrDefault(field,"unknown"),"before",a,"after",b));
+            out.add(difference(a,b,at,groups));
         }
+    }
+    private static Map<String,Object> difference(Object a,Object b,String at,Map<String,String> groups){
+        String field=at.split("/",-1).length>1?at.split("/",-1)[1].replace("~1","/").replace("~0","~"):"";
+        return Json.object("pointer",at,"classification",groups.getOrDefault(field,"unknown"),"before",a,"after",b);
     }
     public Map<String,Object> analyze(Map<String,Object> v,Model.Context c) {
         var before=inventory(v.get("before"),c);var after=inventory(v.get("after"),c);Set<String> scopes=new TreeSet<>(before.entries.keySet());scopes.addAll(after.entries.keySet());
