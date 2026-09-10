@@ -35,7 +35,7 @@ baseline:
     path: versions.json
     required: true
     scope: tool-versions
-    sha256: ba49b3cbc868bfdc9ebdb53ee15987dffa6ec4aeb849f14032d0fdb94770b6a9
+    sha256: 672fab0f0bfad939b327bcbb89d96c6537e5da96b79376bbdc9ccaca4cece9c6
   - appliesTo: [simulation, field-proposed]
     format: mundanereq-yaml-0.4
     kind: native-resource

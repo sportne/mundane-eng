@@ -127,4 +127,4 @@ function invoke(executable, request, signal) {
     child.once('spawn', () => { if (!settled) child.stdin.end(bytes); });
   });
 }
-module.exports = { project, snapshot, invoke, relative, PROTOCOL };
+module.exports = { project, snapshot, invoke, relative, read, PROTOCOL };

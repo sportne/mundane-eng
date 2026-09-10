@@ -2,13 +2,13 @@ format: "mundane-work-yaml-0.2"
 id: "TC-2424"
 kind: "task"
 title: "Extend Editor Authoring for the Reference Artifacts"
-status: "Planned"
+status: Complete
 dependencies: ["TC-2405", "TC-2407", "TC-2409", "TC-2411", "TC-2413", "TC-2415", "TC-2417", "TC-2419", "TC-2421", "TC-2423"]
 relations: []
 planning:
   condition: ""
   stage: "24"
-  statusNote: "Planned; implementation and reference evidence are not yet delivered."
+  statusNote: "Completed with recorded acceptance evidence."
   type: "Implementation"
   unlocks: "See explicit dependent cards in the generated index."
 body: |2
@@ -60,16 +60,38 @@ body: |2
 
   ## References
 
-  - [GCS reference project plan](../examples/ground-control-station/README.md)
-  - [Strategic roadmap](0001-initial-roadmap.md)
-  - [Task-card workflow](0002-task-card-index.md)
-  - [TC-2405](closed/task-2405-implement-context-architecture-interfaces.yaml)
-  - [TC-2407](closed/task-2407-implement-safety-analysis.yaml)
-  - [TC-2409](closed/task-2409-implement-configurations-baselines.yaml)
-  - [TC-2411](closed/task-2411-implement-verification-evidence.yaml)
-  - [TC-2413](closed/task-2413-implement-equipment-connectivity.yaml)
-  - [TC-2415](closed/task-2415-implement-budgets-reliability.yaml)
-  - [TC-2417](closed/task-2417-implement-software-security-provenance.yaml)
-  - [TC-2419](closed/task-2419-implement-assurance-reviews.yaml)
-  - [TC-2421](closed/task-2421-implement-release-operations.yaml)
-  - [TC-2423](closed/task-2423-implement-semantic-change-impact.yaml)
+  - [GCS reference project plan](../../examples/ground-control-station/README.md)
+  - [Strategic roadmap](../0001-initial-roadmap.md)
+  - [Task-card workflow](../0002-task-card-index.md)
+  - [TC-2405](task-2405-implement-context-architecture-interfaces.yaml)
+  - [TC-2407](task-2407-implement-safety-analysis.yaml)
+  - [TC-2409](task-2409-implement-configurations-baselines.yaml)
+  - [TC-2411](task-2411-implement-verification-evidence.yaml)
+  - [TC-2413](task-2413-implement-equipment-connectivity.yaml)
+  - [TC-2415](task-2415-implement-budgets-reliability.yaml)
+  - [TC-2417](task-2417-implement-software-security-provenance.yaml)
+  - [TC-2419](task-2419-implement-assurance-reviews.yaml)
+  - [TC-2421](task-2421-implement-release-operations.yaml)
+  - [TC-2423](task-2423-implement-semantic-change-impact.yaml)
+
+  ## Recorded completion evidence — 2026-09-09
+
+  Added a separately selectable engineering bridge and explicit per-file family /
+  import selections. Twelve additional YAML source families reuse owned schemas
+  and compiled typed indexes. Working-copy diagnostics and hover distinguish native
+  assessment from unsaved source. Matching source pins enable navigation; changed
+  origins suppress links, missing compiled imports diagnose and recover.
+
+  Native/JVM serialized snapshots pass for all twelve families, malformed source,
+  changed pins, duplicate selection and failed output. The installed VSIX and
+  extracted native bridges pass the existing requirements/work workflows plus
+  unsaved timing/power repair, typed completion/hover/navigation, dirty revision
+  suppression, import restoration, rapid-edit freshness and generated-view opening.
+  No engineering formatting edits are emitted; source bytes remain unchanged.
+  The checksum-verified bundle includes both independent bridges.
+
+  Reproduce with make editor-verify installed-editor-verify. See the
+  [capability table](../../editors/vscode/ENGINEERING.md) for per-family boundaries,
+  including verification-plan source authoring retained by its existing CLI.
+  Runtime evidence, transitive resource semantics, signatures and readiness remain
+  native owner checks; the requirements-only bridge keeps its existing dependencies.

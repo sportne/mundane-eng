@@ -61,3 +61,9 @@ what to repair. Formatting currently normalizes CRLF to LF while preserving layo
 notices accompany the files. Assembly from identical inputs is deterministic; this
 does not claim byte-identical native or VSIX rebuilds across toolchains. The bundle
 does not install VS Code, alter source, publish a release or contact a marketplace.
+
+The bundle also includes bin/mundane-engineering-editor. Configure its absolute
+path with mundane.engineeringExecutable and select mundane.engineeringProject to
+enable optional engineering authoring. It is not required for requirements/work.
+The [capability table](../editors/vscode/ENGINEERING.md) distinguishes schema/index
+assistance from native evidence, security and readiness checks.

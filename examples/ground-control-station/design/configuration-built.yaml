@@ -44,7 +44,7 @@ baseline:
     path: resources/versions.json
     required: true
     scope: tool-versions
-    sha256: ba49b3cbc868bfdc9ebdb53ee15987dffa6ec4aeb849f14032d0fdb94770b6a9
+    sha256: 672fab0f0bfad939b327bcbb89d96c6537e5da96b79376bbdc9ccaca4cece9c6
   - appliesTo:
     - simulation
     - field-proposed
@@ -98,5 +98,5 @@ previous:
     id: BL-SIM-DESIGN
     kind: baseline
     scope: previous
-  sha256: 1f15a48c3a833806b18312bfab5f1e17ed84f59eb2a41b17267bca3b7118daf2
+  sha256: 499a158fcde7d1feed4aefa8ee57fbedfa86c683d96b1fbc7e1b8ce905bd6b03
 purpose: design-probe-only

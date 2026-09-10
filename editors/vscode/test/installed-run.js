@@ -14,7 +14,8 @@ async function main() {
   await fs.mkdir(path.join(workspace,'.vscode'));
   await fs.cp(path.join(root,'roadmap'),path.join(workspace,'roadmap'),{recursive:true});
   await require('./stage-imports').stage(root,workspace);
-  await fs.writeFile(path.join(workspace,'.vscode/settings.json'),JSON.stringify({'mundane.project':'editor.json','mundane.executable':bridge}));
+  await require('./stage-engineering').stage(root,workspace);
+  await fs.writeFile(path.join(workspace,'.vscode/settings.json'),JSON.stringify({'mundane.project':'editor.json','mundane.engineeringExecutable':path.join(bundle,'bin/mundane-engineering-editor'),'mundane.executable':bridge}));
   const extensions=path.join(base,'extensions'),profile=path.join(base,'profile');
   const vscode=await downloadAndUnzipVSCode({version:'1.109.5',cachePath:path.join(root,'build/vscode-test')});
   const [cli,...args]=resolveCliArgsFromVSCodeExecutablePath(vscode,{reuseMachineInstall:true});

@@ -11,8 +11,10 @@ async function main() {
   await fs.cp(fixtures, workspace, { recursive: true });
   await fs.cp(path.join(root,'roadmap'),path.join(workspace,'roadmap'),{recursive:true});
   await require('./stage-imports').stage(root,workspace);
+  await require('./stage-engineering').stage(root,workspace);
   await fs.writeFile(path.join(workspace, '.vscode/settings.json'), JSON.stringify({
     'mundane.project': 'editor.json',
+    'mundane.engineeringExecutable': path.join(root,'build/maintained/mundane-engineering-editor'),
     'mundane.executable': path.join(root, 'build/maintained/mundane-editor'),
     'security.workspace.trust.enabled': false
   }));

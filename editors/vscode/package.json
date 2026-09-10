@@ -2,7 +2,7 @@
   "name": "mundane-requirements",
   "displayName": "Mundane Authoring",
   "description": "Explicit YAML requirements and work-item projects backed by the Mundane Java tools.",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "publisher": "mundane-engineering",
   "license": "BSD-3-Clause",
   "repository": {
@@ -32,6 +32,10 @@
       {
         "command": "mundane.validate",
         "title": "Mundane: Validate Selected Project"
+      },
+      {
+        "command": "mundane.openEngineeringView",
+        "title": "Mundane: Open Engineering Review View"
       }
     ],
     "languages": [
@@ -94,6 +98,27 @@
           "default": "",
           "scope": "resource",
           "description": "Optional workspace-relative editor import/source mapping JSON for typed work-item relations."
+        },
+        "mundane.engineeringProject": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Optional explicit engineering YAML selection JSON, relative to workspace."
+        },
+        "mundane.engineeringExecutable": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Absolute path to the optional mundane-engineering-editor native bridge."
+        },
+        "mundane.engineeringViews": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "scope": "resource",
+          "description": "Explicit workspace-relative generated Markdown views to open for engineering review."
         }
       }
     }

@@ -18,7 +18,7 @@ for name, (_, patterns) in COMPONENTS.items():
     for source in sources(patterns):
         assert source not in owned, (source, owned.get(source), name)
         owned[source] = name
-actual = set(sources(['src/main/java/**/*.java','editors/bridge/src/main/java/**/*.java',
+actual = set(sources(['src/main/java/**/*.java','editors/bridge/src/main/java/**/*.java','editors/engineering/src/main/java/**/*.java',
                      'build/maintained/generated/**/*.java']))
 assert set(owned) == actual, ('unowned Java sources', actual-set(owned))
 closure(COMPONENTS)  # Reject cycles and missing component names.

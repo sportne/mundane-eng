@@ -268,7 +268,7 @@ explains the planned decomposition and prerequisites, not a delivery estimate.
 | [TC-2421](../../roadmap/closed/task-2421-implement-release-operations.yaml) | Implement Release and Operational Traceability | TC-2420, TC-2409, TC-2411, TC-2419 |
 | [TC-2422](../../roadmap/closed/task-2422-design-semantic-change-impact.yaml) | Design Semantic Change and Evidence Invalidation | TC-2403, TC-2404, TC-2406, TC-2408, TC-2410, TC-2412, TC-2414, TC-2416, TC-2418, TC-2420 |
 | [TC-2423](../../roadmap/closed/task-2423-implement-semantic-change-impact.yaml) | Implement Cross-Domain Change and Staleness Queries | TC-2422, TC-2407, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421 |
-| [TC-2424](../../roadmap/task-2424-extend-editor-artifact-workflows.yaml) | Extend Editor Authoring for the Reference Artifacts | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 |
+| [TC-2424](../../roadmap/closed/task-2424-extend-editor-artifact-workflows.yaml) | Extend Editor Authoring for the Reference Artifacts | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 |
 | [TC-2425](../../roadmap/task-2425-deliver-engineering-review-views.yaml) | Deliver Source-Linked Engineering Review Views | TC-2405, TC-2407, TC-2409, TC-2411, TC-2413, TC-2415, TC-2417, TC-2419, TC-2421, TC-2423 |
 | [TC-2426](../../roadmap/task-2426-exercise-adversarial-gcs-workflows.yaml) | Exercise the Complete GCS Engineering Workflow | TC-2402, TC-2423, TC-2424, TC-2425 |
 | [TC-2427](../../roadmap/task-2427-package-document-engineering-platform.yaml) | Package and Document the Extended Engineering Workflow | TC-2426 |
@@ -304,3 +304,7 @@ separate normalized engineering changes, exact selected-revision staleness and
 prospective impact. Formatting does not silently renew old review/evidence pins.
 
 [Native change evidence](engineering/change.md) exercises eight retained-revision mutations with explicit unknown coverage.
+
+The [engineering editor capability table](../../editors/vscode/ENGINEERING.md)
+documents working-copy assistance, exact imported navigation and remaining native
+checks. The installed VSIX scenarios use this GCS artifact chain.

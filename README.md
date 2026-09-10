@@ -103,3 +103,6 @@ Native SLSA/in-toto and CycloneDX artifacts retain their standard formats; proje
 selections and judgments remain YAML.
 
 The GCS [change workflow](distribution/change.md) compares compiled revisions and explains direct staleness separately from prospective impact.
+
+The optional [engineering editor bridge](editors/vscode/ENGINEERING.md) adds GCS
+artifact authoring, typed imported navigation and access to generated review views.

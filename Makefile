@@ -193,14 +193,15 @@ editor-dependencies:
 	cd editors/vscode && npm ci
 editor-vsix: editor-version-declarations editor-dependencies
 	cd editors/vscode && npm run package
-editor-verify: native-editor editor-vsix
+editor-verify: native-editor native-engineering-editor editor-vsix change-verify
+	python3 scripts/check-engineering-editor.py
 	python3 scripts/check-editor-bridge.py
 	python3 scripts/check-editor-imports.py
 	cd editors/vscode && npm run test:unit && xvfb-run -a npm test && xvfb-run -a node test/traffic-run.js
-package-editor: native-editor editor-vsix
+package-editor: native-editor native-engineering-editor editor-vsix
 	python3 scripts/package-editor.py "$(GRAALVM_HOME)"
 	python3 scripts/check-editor-package.py "$(GRAALVM_HOME)"
-installed-editor-verify: package-editor
+installed-editor-verify: package-editor change-verify
 	cd editors/vscode && xvfb-run -a node test/installed-run.js
 
 .PHONY: plan-yaml-verify
@@ -362,3 +363,8 @@ native-change: test-change
 change-verify: native-change operations-verify budget-verify change-design-verify
 	build/schema-check-venv/bin/python scripts/check-change-workflow.py
 verify: change-verify
+
+.PHONY: native-engineering-editor
+native-engineering-editor: yaml-dependency editor-version-declarations
+	python3 scripts/build-components.py build engineering-editor
+	$(NATIVE_IMAGE) $(NATIVE_IMAGE_FLAGS) -cp "$(shell python3 scripts/build-components.py classpath engineering-editor)" -o $(abspath $(BUILD_ROOT)/mundane-engineering-editor) engineering.editor.EngineeringEditorMain

@@ -61,6 +61,16 @@ def tar_bytes(stage):
 
 def assemble(bridge, vsix, graal, output):
     expected=metadata(); inputs=inspect_inputs(bridge,vsix,expected)
+    engineering=bridge.with_name('mundane-engineering-editor')
+    actual=json.loads(subprocess.check_output([str(engineering),'--version'],timeout=30))
+    declaration=dict(line.split('=',1) for line in (ROOT/'versions.properties').read_text().splitlines() if line and not line.startswith('#'))
+    if actual != dict(version=declaration['ENGINEERING_EDITOR_VERSION'],protocol=expected['protocol'],source='mundane-engineering-editor-0.1'):
+        raise ValueError('engineering bridge metadata disagrees with declarations')
+    symbols=subprocess.check_output(['objdump','-T',str(engineering)],text=True)
+    if max(tuple(map(int,v.split('.'))) for v in re.findall(r'GLIBC_([0-9.]+)',symbols))>(2,34):
+        raise ValueError('engineering bridge exceeds glibc ceiling')
+    inputs['engineeringBridgeSha256']=digest(engineering)
+    inputs['engineeringMetadata']=actual
     if not (graal/'LICENSE_NATIVEIMAGE.txt').is_file() or not (graal/'legal').is_dir():
         raise ValueError('selected GraalVM runtime notices are unavailable')
     name=f"mundane-editor-{expected['version']}-linux-x86_64"
@@ -68,7 +78,7 @@ def assemble(bridge, vsix, graal, output):
     with tempfile.TemporaryDirectory(prefix='.assemble-',dir=output) as temporary:
         stage=Path(temporary)/name
         for folder in ['bin','extension','LICENSES']: (stage/folder).mkdir(parents=True,exist_ok=True)
-        shutil.copy2(bridge,stage/'bin/mundane-editor');shutil.copy2(vsix,stage/'extension'/vsix.name)
+        shutil.copy2(engineering,stage/'bin/mundane-engineering-editor');shutil.copy2(bridge,stage/'bin/mundane-editor');shutil.copy2(vsix,stage/'extension'/vsix.name)
         shutil.copy2(ROOT/'distribution/editor-bundle.md',stage/'README.md')
         shutil.copy2(ROOT/'LICENSE',stage/'LICENSES/mundanereq-BSD-3-Clause.txt')
         shutil.copy2(ROOT/'dependencies/SnakeYAML-Engine-LICENSE.txt',stage/'LICENSES/SnakeYAML-Engine-LICENSE.txt')
@@ -80,7 +90,7 @@ def assemble(bridge, vsix, graal, output):
         (stage/'PACKAGE-INPUTS.json').write_text(json.dumps(inputs,indent=2)+'\n')
         (stage/'BUILD-ENVIRONMENT.txt').write_bytes(subprocess.check_output([str(graal/'bin/native-image'),'--version']))
         # Copied inputs must still be the exact pair checked above.
-        if digest(stage/'bin/mundane-editor')!=inputs['bridgeSha256'] or digest(stage/'extension'/vsix.name)!=inputs['vsixSha256']:
+        if digest(stage/'bin/mundane-engineering-editor')!=inputs['engineeringBridgeSha256'] or digest(stage/'bin/mundane-editor')!=inputs['bridgeSha256'] or digest(stage/'extension'/vsix.name)!=inputs['vsixSha256']:
             raise ValueError('package inputs changed during assembly')
         inventory=''.join(f'{digest(p)}  {p.relative_to(stage).as_posix()}\n' for p in sorted(stage.rglob('*')) if p.is_file())
         (stage/'SHA256SUMS').write_text(inventory)

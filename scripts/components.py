@@ -44,6 +44,7 @@ COMPONENTS = {
                    ['WorkCompiler','WorkYaml','WorkEditor']]),
     'work': (['work-source'], [MAIN+'engineering/work/WorkMain.java']),
     'impact': (['work-model'], [MAIN+'engineering/impact/*.java']),
+    'engineering-editor': (['change-model','yaml'], ['editors/engineering/src/main/java/**/*.java']),
     'editor': (['requirements','work-source'], [BRIDGE+'main/java/**/*.java']),
 }
 YAML_USERS = {'yaml', 'requirements', 'work-source'}

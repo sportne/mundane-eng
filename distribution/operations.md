@@ -13,7 +13,7 @@ build/maintained/mundane-operations query --root build/gcs-operations operations
 and caller-selected public JWKS; `query` adds a candidate ID. Outputs and diagnostics
 use stdout/stderr. Successful blocked analysis returns 0; contract/pin failure 1;
 missing/unavailable resources 2. The [contract](../specification/0036-release-and-operational-traceability.md)
-defines the bounded records and readiness rules. Editor integration remains separate.
+defines the bounded records and readiness rules. Optional [engineering editor assistance](../editors/vscode/ENGINEERING.md) provides working-copy schema and typed-index checks.
 
 The generated `build/gcs-operations/operations.md` and `analysis.json` retain ten
 explicit tabletop executions: initial startup, backup, failed upgrade, rollback,

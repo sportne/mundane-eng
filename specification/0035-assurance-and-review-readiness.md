@@ -46,4 +46,4 @@ records and limitations. A local ready result is not certification or release
 acceptance. Structural/pin errors return 1, operational missing-resource errors 2;
 a successfully computed blocked report returns 0. YAML-free compiled consumers are
 supported. Views navigate revision-checked source points; unavailable sources do
-not invent a current link. Editor assistance is tracked separately.
+not invent a current link. Optional [editor assistance](../editors/vscode/ENGINEERING.md) provides schema and typed-index checks; native signature/readiness analysis remains explicit.

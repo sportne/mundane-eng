@@ -195,3 +195,7 @@ exercises this workflow; `make installed-editor-verify` repeats it from the bund
 
 The shared Java authoring bridge lives in [editors/bridge](../bridge/README.md);
 its component build and test boundaries are documented separately from this client.
+
+The optional [engineering bridge](ENGINEERING.md) adds schema and typed-index
+assistance for the GCS artifact families. It has a separate executable and explicit
+project selection; working-copy checks do not claim native evidence verification.

@@ -19,7 +19,7 @@ function activate(context) {
     const {snapshot,result} = state;
     if (!Array.isArray(result.diagnostics) || typeof result.valid !== 'boolean') throw new Error('Invalid diagnostic response');
     const files = [...snapshot.files, ...(snapshot.schema ? [snapshot.schema] : []),
-      ...(snapshot.imports ? [snapshot.imports.selection,snapshot.imports.manifest] : []),
+      ...(snapshot.imports?.selection ? [snapshot.imports.selection,snapshot.imports.manifest] : []),
       ...(snapshot.importError ? [{path:snapshot.importError.path,text:''}] : [])];
     const grouped = new Map();
     for (const d of [...result.diagnostics,...(result.importDiagnostics || [])]) {
@@ -60,7 +60,7 @@ function activate(context) {
   function related(project, uri) {
     if (uri.scheme !== 'file') return false;
     const name = path.relative(project.folder.uri.fsPath, uri.fsPath).split(path.sep).join('/');
-    return name === project.settings().get(project.setting) || name === project.settings().get(project.otherSetting) || (project.setting==='workProject' && name===project.settings().get('workImports')) || project.watched.has(name);
+    return name === project.settings().get(project.setting) || ['project','workProject','engineeringProject'].some(s=>name === project.settings().get(s)) || (project.setting==='workProject' && name===project.settings().get('workImports')) || project.watched.has(name);
   }
   function changed(document) {
     for (const project of projects.values()) if (related(project, document.uri)) schedule(project);
@@ -166,15 +166,15 @@ function activate(context) {
     for (const [key,project] of projects) if (!folders.some(f=>f.uri.toString()===project.folder.uri.toString())) {
       invalidate(project); project.session.dispose(); project.watcher.dispose(); projects.delete(key);
     }
-    for (const folder of folders) for (const setting of ['project','workProject']) {
+    for (const folder of folders) for (const setting of ['project','workProject','engineeringProject']) {
       const key = folder.uri.toString() + ':' + setting;
       if (projects.has(key)) continue;
       const project = {folder,setting,otherSetting:setting === 'project' ? 'workProject' : 'project',markers:[],watched:new Set(),settings:()=>vscode.workspace.getConfiguration('mundane',folder.uri)};
       project.session = new Project(
-        generation => client.snapshot(folder.uri.fsPath,project.settings().get(project.setting),vscode.workspace.textDocuments,names=>{
+        generation => (setting==='engineeringProject' ? require('./engineering').snapshot(folder.uri.fsPath,project.settings().get(setting),vscode.workspace.textDocuments,names=>{if(project.session.generation===generation)project.watched=new Set(names);},['project','workProject'].map(s=>project.settings().get(s))) : client.snapshot(folder.uri.fsPath,project.settings().get(project.setting),vscode.workspace.textDocuments,names=>{
           if(project.session.generation===generation) project.watched=new Set(names);
-        },setting === 'workProject',project.settings().get(project.otherSetting),project.settings().get('workImports')),
-        (request,signal)=>client.invoke(project.settings().get('executable'),request,signal),
+        },setting === 'workProject',project.settings().get(project.otherSetting),project.settings().get('workImports'))),
+        (request,signal)=>client.invoke(project.settings().get(setting==='engineeringProject'?'engineeringExecutable':'executable'),request,signal),
         state=>publish(project,state),error=>failure(project,error));
       project.watcher = vscode.workspace.createFileSystemWatcher(new vscode.RelativePattern(folder,'**/*'));
       const disk = uri=>{ if (related(project,uri)) schedule(project); };
@@ -184,11 +184,24 @@ function activate(context) {
   }
   context.subscriptions.push(output, diagnostics,
     vscode.commands.registerCommand('mundane.validate', validate),
+    vscode.commands.registerCommand('mundane.openEngineeringView',async()=>{
+      if(!vscode.workspace.isTrusted)return;
+      const choices=[];
+      for(const folder of vscode.workspace.workspaceFolders||[])for(const name of vscode.workspace.getConfiguration('mundane',folder.uri).get('engineeringViews',[]))choices.push({label:name,description:folder.name,folder});
+      const choice=choices.length===1?choices[0]:await vscode.window.showQuickPick(choices,{placeHolder:'Select a generated engineering review view'});
+      if(!choice)return;
+      try{
+        if(!choice.label.endsWith('.md'))throw new Error('Select a generated Markdown view');
+        await client.read(choice.folder.uri.fsPath,choice.label,[],16*1024*1024);
+        const uri=vscode.Uri.joinPath(choice.folder.uri,choice.label);
+        await vscode.commands.executeCommand('markdown.showPreview',uri);return uri;
+      }catch(error){output.appendLine(error.message);throw error;}
+    }),
     vscode.workspace.onDidChangeTextDocument(event=>changed(event.document)),
     vscode.workspace.onDidOpenTextDocument(changed),
     vscode.workspace.onDidCloseTextDocument(changed),
     vscode.workspace.onDidChangeConfiguration(event=>{
-      for (const project of projects.values()) if(['executable','project','workProject',...(project.setting==='workProject'?['workImports']:[])].some(key=>event.affectsConfiguration('mundane.'+key,project.folder.uri))) schedule(project);
+      for (const project of projects.values()) if(['executable','engineeringExecutable','engineeringProject','project','workProject',...(project.setting==='workProject'?['workImports']:[])].some(key=>event.affectsConfiguration('mundane.'+key,project.folder.uri))) schedule(project);
     }),
     vscode.workspace.onDidChangeWorkspaceFolders(synchronizeFolders),
     vscode.workspace.onDidGrantWorkspaceTrust(()=>{ for(const project of projects.values()) schedule(project); }),

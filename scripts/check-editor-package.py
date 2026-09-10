@@ -32,6 +32,8 @@ def verify(archive):
         expected=package.metadata();assert json.loads(files['VERSIONS.json'])==expected
         assert top==f"mundane-editor-{expected['version']}-linux-x86_64"
         assert tar.getmember(top+'/bin/mundane-editor').mode==0o755
+        assert tar.getmember(top+'/bin/mundane-engineering-editor').mode==0o755
+        assert hashlib.sha256(files['bin/mundane-engineering-editor']).hexdigest()==json.loads(files['PACKAGE-INPUTS.json'])['engineeringBridgeSha256']
         assert 'LICENSES/SnakeYAML-Engine-LICENSE.txt' in files
         assert files['LICENSES/YAML-DEPENDENCY.md']==(ROOT/'dependencies/README.md').read_bytes()
         assert any(n.startswith('LICENSES/GraalVM-JDK/') for n in files)
